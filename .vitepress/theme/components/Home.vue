@@ -11,20 +11,19 @@ onMounted(async () => {
 </script>
 
 <template>
-  <section id="hero">
+  <section id="hero" dir="rtl">
     <h1 class="tagline">
-      The
-      <span class="accent">Progressive</span>
-      <br />JavaScript Framework
+      إطار جافاسكريبت
+      <br />
+      <span class="accent">التقدمي</span>
     </h1>
     <p class="description">
-      An approachable, performant and versatile framework for building web
-      user interfaces.
+      .إطار عمل سهل وقوي ومتعدد الإستعمالات لبناء واجهات الويب
     </p>
     <p class="actions">
       <vue-mastery-modal />
       <a class="get-started" href="/guide/introduction.html">
-        Get Started
+        البدء
         <svg
           class="icon"
           xmlns="http://www.w3.org/2000/svg"
@@ -37,17 +36,20 @@ onMounted(async () => {
           />
         </svg>
       </a>
-      <a class="setup" href="/guide/quick-start.html">Install</a>
+      <a class="setup" href="/guide/quick-start.html">التنصيب</a>
     </p>
   </section>
 
-  <section id="special-sponsor">
-    <span class="lead">Special Sponsor</span>
+  <section id="special-sponsor" dir="rtl">
+    <span class="lead">الراعي المميز</span>
     <template v-if="data && data.special">
       <template v-for="{ url, img, name, description } of data.special">
         <a :href="url" target="_blank" rel="sponsored noopener">
           <picture v-if="img.endsWith('png')">
-            <source type="image/avif" :srcset="`${base}/images/${img.replace(/\.png$/, '.avif')}`" />
+            <source
+              type="image/avif"
+              :srcset="`${base}/images/${img.replace(/\.png$/, '.avif')}`"
+            />
             <img :src="`${base}/images/${img}`" :alt="name" />
           </picture>
           <img v-else :src="`${base}/images/${img}`" :alt="name" />
@@ -57,34 +59,33 @@ onMounted(async () => {
     </template>
   </section>
 
-  <section id="highlights" class="vt-box-container">
+  <section id="highlights" dir="rtl" class="vt-box-container">
     <div class="vt-box">
-      <h2>Approachable</h2>
+      <h2>سهل</h2>
       <p>
-        Builds on top of standard HTML, CSS and JavaScript with intuitive
-        API and world-class documentation.
+        بُني باستخدام HTML و CSS و جافاسكريبت مع واجهة برمجية سهلة وتوثيق
+        رسمي بمعايير عالمية.
       </p>
     </div>
     <div class="vt-box">
-      <h2>Performant</h2>
+      <h2>قوي</h2>
       <p>
-        Truly reactive, compiler-optimized rendering system that rarely
-        requires manual optimization.
+        تفاعلي وذو نظام عرض محسن تلقائيا قلّما يحتاج إلى التدخل اليدوي.
       </p>
     </div>
     <div class="vt-box">
-      <h2>Versatile</h2>
+      <h2>متعدد الإستعمالات</h2>
       <p>
-        A rich, incrementally adoptable ecosystem that scales between a
-        library and a full-featured framework.
+        نظام غني وقابل للتبنّي التدريجي، يمكن استعماله كمكتبة برمجية أو
+        كإطار عمل متكامل.
       </p>
     </div>
   </section>
 
-  <section id="sponsors">
-    <h2>Platinum Sponsors</h2>
+  <section id="sponsors" dir="rtl">
+    <h2>الرعاة البلاتينيون</h2>
     <SponsorsGroup tier="platinum" placement="landing" />
-    <h2>Gold Sponsors</h2>
+    <h2>الرعاة الذهبيون</h2>
     <SponsorsGroup tier="gold" placement="landing" />
   </section>
 
@@ -138,7 +139,7 @@ html:not(.dark) .accent,
 }
 
 .actions .get-started {
-  margin-right: 18px;
+  margin-left: 18px;
 }
 
 .actions .icon {
@@ -148,6 +149,7 @@ html:not(.dark) .accent,
   margin-left: 2px;
   fill: currentColor;
   transition: transform 0.2s;
+  transform: rotateY(180deg);
 }
 
 .actions .get-started:hover {
@@ -155,7 +157,7 @@ html:not(.dark) .accent,
 }
 
 .actions .get-started:hover .icon {
-  transform: translateX(2px);
+  transform: translateX(-2px) rotateY(180deg);
 }
 
 .actions .get-started,
@@ -191,7 +193,7 @@ html:not(.dark) .accent,
 }
 
 #special-sponsor span:first-child {
-  text-align: right;
+  text-align: left;
 }
 
 #special-sponsor a {
