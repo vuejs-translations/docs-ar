@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { VTLink } from '@vue/theme'
+import { VTLink } from "@vue/theme";
 </script>
 
 <template>
@@ -32,7 +32,7 @@ import { VTLink } from '@vue/theme'
               id="member_submit"
               name="member[subscribe]"
               type="submit"
-              value="SUBSCRIBE"
+              value="سجّل"
             />
           </div>
         </form>
@@ -40,15 +40,11 @@ import { VTLink } from '@vue/theme'
 
       <p class="help">
         يمكنك قراءة الأعداد السابقة والإستماع إلى البودكاست من
-        <VTLink class="link" href="https://news.vuejs.org/" no-icon
-          >news.vuejs.org</VTLink
+        <VTLink class="link" href="https://news.vuejs.org/" no-icon>news.vuejs.org</VTLink
         >. تستطيع متابعتنا على
-        <VTLink class="link" href="https://twitter.com/vuejs" no-icon
-          >Twitter</VTLink
-        >, أو الانضمام إلينا على
-        <VTLink class="link" href="https://chat.vuejs.org/" no-icon
-          >Discord</VTLink
-        >.
+        <VTLink class="link" href="https://twitter.com/vuejs" no-icon>تويتر</VTLink>, أو
+        الانضمام إلينا على
+        <VTLink class="link" href="https://chat.vuejs.org/" no-icon>ديسكورد</VTLink>.
       </p>
     </div>
   </section>
