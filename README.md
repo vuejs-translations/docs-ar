@@ -1,25 +1,28 @@
 # vuejs.org
 
-## Contributing
+## المساهمة
 
-This site is built with [VitePress](https://github.com/vuejs/vitepress) and depends on [@vue/theme](https://github.com/vuejs/vue-theme). Site content is written in Markdown format located in `src`. For simple edits, you can directly edit the file on GitHub and generate a Pull Request.
+أنشئ هذا الموقع بواسطة [VitePress](https://github.com/vuejs/vitepress) إعتمادا على [@vue/theme](https://github.com/vuejs/vue-theme). يتواجد محتوى الموقع داخل مجلد `src` على شكل ملفات مكتوبة بصيغة ماركداون (Markdown). التعديلات البسيطة يمكن إجراؤها على Github مباشرة وتُرسل بعد ذلك على شكل طلب دمج Pull Request.
 
-For local development, [pnpm](https://pnpm.io/) is preferred as package manager:
+يُفضل استخدام مدير الحزم [pnpm](https://pnpm.io/) عند التطوير المحلي.
 
 ```bash
 pnpm i
 pnpm run dev
 ```
 
-This project requires Node.js to be `v14.0.0` or higher, because we use new JavaScript features in our code, such as optional chaining.
+يحتاج هذا المشروع إلى نسخة Node.js `v14.0.0` فما فوق، وذلك لاستخدامه ميزات Javascript الجديدة، مثل التسلسل الإختياري (optional chaining).
 
+## العمل على المحتوى
 
-## Working on the content
+<div dir="rtl">
 
-- See VitePress docs on supported [Markdown Extensions](https://vitepress.vuejs.org/guide/markdown.html) and the ability to [use Vue syntax inside markdown](https://vitepress.vuejs.org/guide/using-vue.html).
+- تصفح توثيق VitePress حول [إمتدادات ماركداون](https://vitepress.vuejs.org/guide/markdown.html) المدعومة، وإمكانية [وإمكانية استخدام تراكيب Vue داخل ماركداون](https://vitepress.vuejs.org/guide/using-vue.html).
 
-- See the [Writing Guide](https://github.com/vuejs/docs/blob/main/.github/contributing/writing-guide.md) for our rules and recommendations on writing and maintaining documentation content.
+- طالع [دليل الكتابة](https://github.com/vuejs/docs/blob/main/.github/contributing/writing-guide.md) لتتعرف على القواعد المعتمدة والتوصيات حول كتابة وصيانة محتوى التوثيقات.
 
-## Working on the theme
+</div>
 
-If changes need to made for the theme, check out the [instructions for developing the theme alongside the docs](https://github.com/vuejs/vue-theme#developing-with-real-content).
+## العمل على النسق (theme)
+
+عند الحاجة لإجراء تعديلات على النسق المستعمل، الرجاء إلقاء نظرة على [توصيات حول تطوير النسق إلى جانب التوثيق](https://github.com/vuejs/vue-theme#developing-with-real-content).
