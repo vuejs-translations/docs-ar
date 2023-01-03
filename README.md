@@ -15,13 +15,9 @@ pnpm run dev
 
 ## العمل على المحتوى
 
-<div dir="rtl">
+تصفح توثيق VitePress حول [إمتدادات ماركداون](https://vitepress.vuejs.org/guide/markdown.html) المدعومة، [وإمكانية استخدام تراكيب Vue داخل ماركداون](https://vitepress.vuejs.org/guide/using-vue.html).
 
-- تصفح توثيق VitePress حول [إمتدادات ماركداون](https://vitepress.vuejs.org/guide/markdown.html) المدعومة، وإمكانية [وإمكانية استخدام تراكيب Vue داخل ماركداون](https://vitepress.vuejs.org/guide/using-vue.html).
-
-- طالع [دليل الكتابة](https://github.com/vuejs/docs/blob/main/.github/contributing/writing-guide.md) لتتعرف على القواعد المعتمدة والتوصيات حول كتابة وصيانة محتوى التوثيقات.
-
-</div>
+طالع [دليل الكتابة](https://github.com/vuejs/docs/blob/main/.github/contributing/writing-guide.md) لتتعرف على القواعد المعتمدة والتوصيات حول كتابة وصيانة محتوى التوثيقات.
 
 ## العمل على النسق (theme)
 
