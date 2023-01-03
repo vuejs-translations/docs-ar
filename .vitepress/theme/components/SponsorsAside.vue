@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import SponsorsGroup from './SponsorsGroup.vue'
-import { useData } from 'vitepress'
-const { frontmatter } = useData()
+import SponsorsGroup from "./SponsorsGroup.vue";
+import { useData } from "vitepress";
+const { frontmatter } = useData();
 </script>
 
 <template>
   <div v-if="frontmatter.sponsors !== false">
-    <a class="sponsors-aside-text" href="/sponsor/">Sponsors</a>
+  ن <a class="sponsors-aside-text" href="/sponsor/">الراعون</a>
     <SponsorsGroup tier="special" />
     <SponsorsGroup tier="platinum" />
   </div>

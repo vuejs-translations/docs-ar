@@ -80,7 +80,10 @@ const nav: ThemeConfig['nav'] = [
             text: 'GitHub نقاشات',
             link: 'https://github.com/vuejs/core/discussions'
           },
-          { text: 'DEV Community على منصة vue وسم ', link: 'https://dev.to/t/vue' }
+          {
+            text: 'DEV Community على منصة vue وسم ',
+            link: 'https://dev.to/t/vue'
+          }
         ]
       },
       {
@@ -174,7 +177,10 @@ export const sidebar: ThemeConfig['sidebar'] = {
           link: '/guide/essentials/lifecycle'
         },
         { text: 'الخصائص المراقبة', link: '/guide/essentials/watchers' },
-        { text: 'Refs مراجع القالب', link: '/guide/essentials/template-refs' },
+        {
+          text: 'Refs مراجع القالب',
+          link: '/guide/essentials/template-refs'
+        },
         {
           text: 'أساسيات المكونات',
           link: '/guide/essentials/component-basics'
@@ -235,7 +241,10 @@ export const sidebar: ThemeConfig['sidebar'] = {
     {
       text: 'الإرتقاء و التدرج',
       items: [
-        { text: '(SFC) المكونات أحادية المستند', link: '/guide/scaling-up/sfc' },
+        {
+          text: '(SFC) المكونات أحادية المستند',
+          link: '/guide/scaling-up/sfc'
+        },
         { text: 'الأدوات', link: '/guide/scaling-up/tooling' },
         { text: 'التوجيه', link: '/guide/scaling-up/routing' },
         {
@@ -629,7 +638,7 @@ export default defineConfigWithTheme<ThemeConfig>({
         link: '/translations/',
         text: 'ساعدنا في الترجمة',
         isTranslationsDesc: true
-      },
+      }
     ],
 
     algolia: {

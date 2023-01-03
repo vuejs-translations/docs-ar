@@ -1,17 +1,17 @@
 <script setup lang="ts">
-import { watch } from "vue";
+import { watch } from 'vue'
 
-const VIDEO_SOURCE = "https://player.vimeo.com/video/647441538?autoplay=1";
-let showWhyVue: boolean = $ref(false);
+const VIDEO_SOURCE = 'https://player.vimeo.com/video/647441538?autoplay=1'
+let showWhyVue: boolean = $ref(false)
 
 watch(
   () => showWhyVue,
   (value) => {
     value
-      ? (document.documentElement.style.overflow = "hidden")
-      : (document.documentElement.style.overflow = "auto");
+      ? (document.documentElement.style.overflow = 'hidden')
+      : (document.documentElement.style.overflow = 'auto')
   }
-);
+)
 </script>
 
 <template>
