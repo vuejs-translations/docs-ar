@@ -1,4 +1,4 @@
-<script lang="ts">
+<script setup lang="ts">
 import { onMounted } from 'vue'
 import NewsLetter from './NewsLetter.vue'
 import { load, data, base } from './sponsors'
