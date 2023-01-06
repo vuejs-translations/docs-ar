@@ -5,3 +5,25 @@
 | English   | العربية |
 | :-------- | ------: |
 | Component |   مكوّن |
+| Composition API |   الواجهة التكوينية لبرمجة التطبيقات|
+| Options API |   واجهة الخيارات لبرمجة التطبيقات |
+| Lifecycle Hooks |  خطافات مراحل الحياة |
+| Single file component | مكون أحادي الملف |
+| instance |   نسخة |
+| template |   قالب |
+| render function |   دالة التصيير |
+| Virtual DOM |   الواجهة الافتراضية للوثائق |
+| data |   البيانات |
+| props |   الخاصيات |
+| computed |  الخاصيةالمحسوبة |
+| method |   التابع |
+| function |   الدالة |
+| watch |  خاصية مُراقِبة |
+| logic |   شيفرة، منطق |
+| state |   حالة |
+| event |   حدث |
+| lifecycle |   مرحلة الحياة |
+| hook |   خطاف |
+| migration |   الترقية |
+
+
