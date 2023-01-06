@@ -2,31 +2,32 @@
 footer: false
 ---
 
-# Quick Start {#quick-start}
+# انطلاقة سريعة {#quick-start}
 
-## Try Vue Online {#try-vue-online}
+##  تجربة Vue على الانترنت {#try-vue-online}
 
-- To quickly get a taste of Vue, you can try it directly in our [Playground](https://sfc.vuejs.org/#eNo9j01qAzEMha+iapMWOjbdDm6gu96gG2/cjJJM8B+2nBaGuXvlpBMwtj4/JL234EfO6toIRzT1UObMexvpN6fCMNHRNc+w2AgwOXbPL/caoBC3EjcCCPU0wu6TvE/wlYqfnnZ3ae2PXHKMfiwQYArZOyYhAHN+2y9LnwLrarTQ7XeOuTFch5Am8u8WRbcoktGPbnzFOXS3Q3BZXWqKkuRmy/4L1eK4GbUoUTtbPDPnOmpdj4ee/1JVKictlSot8hxIUQ3Dd0k/lYoMtrglwfUPkXdoJg==).
+- من أجل الحصول على نظرة عامة عن Vue، يمكنك تجربته مباشرة في [حقل التجارب](https://sfc.vuejs.org/#eNo9j01qAzEMha+iapMWOjbdDm6gu96gG2/cjJJM8B+2nBaGuXvlpBMwtj4/JL234EfO6toIRzT1UObMexvpN6fCMNHRNc+w2AgwOXbPL/caoBC3EjcCCPU0wu6TvE/wlYqfnnZ3ae2PXHKMfiwQYArZOyYhAHN+2y9LnwLrarTQ7XeOuTFch5Am8u8WRbcoktGPbnzFOXS3Q3BZXWqKkuRmy/4L1eK4GbUoUTtbPDPnOmpdj4ee/1JVKictlSot8hxIUQ3Dd0k/lYoMtrglwfUPkXdoJg==).
 
-- If you prefer a plain HTML setup without any build steps, you can use this [JSFiddle](https://jsfiddle.net/yyx990803/2ke1ab0z/) as your starting point.
+- إذا كنت تفضل إعداد HTML بسيط دون أي خطوات بناء، يمكنك استخدام [JSFiddle](https://jsfiddle.net/yyx990803/2ke1ab0z/) هذا كنقطة البداية.
 
-- If you are already familiar with Node.js and the concept of build tools, you can also try a complete build setup right within your browser on [StackBlitz](https://vite.new/vue).
+- إذا كنت معتادًا على Node.js ومفهوم أدوات البناء، يمكنك أيضًا تجربة إعداد بنية كاملة داخل متصفحك على [StackBlitz](https://vite.new/vue).
 
-## Creating a Vue Application {#creating-a-vue-application}
+## إنشاء تطبيق Vue {#creating-a-vue-application}
 
-:::tip Prerequisites
+:::tip متطلبات مسبقة
 
-- Familiarity with the command line
-- Install [Node.js](https://nodejs.org/) version 16.0 or higher
+- الاعتياد على سطر الأوامر
+- تنصيب [Node.js](https://nodejs.org/) الإصدار 16.0 أو أعلى
   :::
 
-In this section we will introduce how to scaffold a Vue [Single Page Application](/guide/extras/ways-of-using-vue.html#single-page-application-spa) on your local machine. The created project will be using a build setup based on [Vite](https://vitejs.dev) and allow us to use Vue [Single-File Components](/guide/scaling-up/sfc) (SFCs).
+في هذا القسم سنقدم كيفية إنشاء [تطبيق واجهة مستخدم واحدة](/guide/extras/ways-of-using-vue.html#single-page-application-spa) Vue على جهازك المحلي. سيكون المشروع الذي أنشئ يستخدم إعداد بناء مبني على [Vite](https://vitejs.dev) ويسمح لنا باستخدام [المكونات أحادية الملف](/guide/scaling-up/sfc) Vue (SFCs).
 
-Make sure you have an up-to-date version of [Node.js](https://nodejs.org/) installed, then run the following command in your command line (without the `>` sign):
+تأكد من أن لديك إصدارًا محدثًا من [Node.js](https://nodejs.org/) مثبتًا ، ثم قم بتشغيل الأمر التالي في سطر الأوامر (بدون علامة `>`:)
+
 
 <div class="language-sh"><pre><code><span class="line"><span style="color:var(--vt-c-green);">&gt;</span> <span style="color:#A6ACCD;">npm init vue@latest</span></span></code></pre></div>
 
-This command will install and execute [create-vue](https://github.com/vuejs/create-vue), the official Vue project scaffolding tool. You will be presented with prompts for several optional features such as TypeScript and testing support:
+هذا الأمر سيقوم بتثبيت وتنفيذ [create-vue](https://github.com/vuejs/create-vue)، أداة إنشاء مشاريع Vue الرسمية. ستتلقى الأسئلة الإختيارية لعدة ميزات مثل TypeScript ودعم الاختبارات:
 
 <div class="language-sh"><pre><code><span style="color:var(--vt-c-green);">✔</span> <span style="color:#A6ACCD;">Project name: <span style="color:#888;">… <span style="color:#89DDFF;">&lt;</span><span style="color:#888;">your-project-name</span><span style="color:#89DDFF;">&gt;</span></span></span>
 <span style="color:var(--vt-c-green);">✔</span> <span style="color:#A6ACCD;">Add TypeScript? <span style="color:#888;">… <span style="color:#89DDFF;text-decoration:underline">No</span> / Yes</span></span>
@@ -41,44 +42,47 @@ This command will install and execute [create-vue](https://github.com/vuejs/crea
 <span style="color:#A6ACCD;">Scaffolding project in ./<span style="color:#89DDFF;">&lt;</span><span style="color:#888;">your-project-name</span><span style="color:#89DDFF;">&gt;</span>...</span>
 <span style="color:#A6ACCD;">Done.</span></code></pre></div>
 
-If you are unsure about an option, simply choose `No` by hitting enter for now. Once the project is created, follow the instructions to install dependencies and start the dev server:
+إذا كنت غير متأكد من خيار ، فاختر `No` بالضغط على مفتاح `Enter`. بمجرد إنشاء المشروع ، اتبع التعليمات لتثبيت الاعتماديات وبدء خادم التطوير:
 
-<div class="language-sh"><pre><code><span class="line"><span style="color:var(--vt-c-green);">&gt; </span><span style="color:#A6ACCD;">cd</span><span style="color:#A6ACCD;"> </span><span style="color:#89DDFF;">&lt;</span><span style="color:#888;">your-project-name</span><span style="color:#89DDFF;">&gt;</span></span>
+<div class="language-sh"><pre><code><span class="line"><span style="color:var(--vt-c-green);">&gt; </span><span style="color:#A6ACCD;">cd</span><span style="color:#A6ACCD;"> </span><span style="color:#89DDFF;">&lt;</span><span style="color:#888;">اسم-مشروعك</span><span style="color:#89DDFF;">&gt;</span></span>
 <span class="line"><span style="color:var(--vt-c-green);">&gt; </span><span style="color:#A6ACCD;">npm install</span></span>
 <span class="line"><span style="color:var(--vt-c-green);">&gt; </span><span style="color:#A6ACCD;">npm run dev</span></span>
 <span class="line"></span></code></pre></div>
 
-You should now have your first Vue project running! Note that the example components in the generated project are written using the [Composition API](/guide/introduction.html#composition-api) and `<script setup>`, rather than the [Options API](/guide/introduction.html#options-api). Here are some additional tips:
 
-- The recommended IDE setup is [Visual Studio Code](https://code.visualstudio.com/) + [Volar extension](https://marketplace.visualstudio.com/items?itemName=Vue.volar). If you use other editors, check out the [IDE support section](/guide/scaling-up/tooling.html#ide-support).
-- More tooling details, including integration with backend frameworks, are discussed in the [Tooling Guide](/guide/scaling-up/tooling.html).
-- To learn more about the underlying build tool Vite, check out the [Vite docs](https://vitejs.dev).
-- If you choose to use TypeScript, check out the [TypeScript Usage Guide](typescript/overview.html).
+يجب أن يكون لديك مشروع Vue الأول الآن! لاحظ أن مكونات المثال في المشروع المولدة مكتوبة باستخدام [الواجهة التكوينية](/guide/introduction.html#composition-api) و `<script setup>`، بدلاً من [واجهة الخيارات](/guide/introduction.html#options-api). إليك بعض النصائح الإضافية:
 
-When you are ready to ship your app to production, run the following:
+- محرر النصوص الموصى به هو [Visual Studio Code](https://code.visualstudio.com/) + [Volar ](https://marketplace.visualstudio.com/items?itemName=Vue.volar). إذا كنت تستخدم محررات أخرى ، فتحقق من [قسم دعم المحررات](/guide/scaling-up/tooling.html#ide-support).
+
+- المزيد من التفاصيل حول الأدوات، بما في ذلك الدمج مع إطارات الواجهة الخلفية ، يتم مناقشتها في [دليل الأدوات](/guide/scaling-up/tooling.html).
+- لكي تتعلم المزيد حول أداة البناء الأساسية Vite ،  اطلع على [توثيق Vite](https://vitejs.dev).
+- إذا اخترت استخدام TypeScript ، فاطلع [دليل استخدام TypeScript](typescript/overview.html).
+
+لما تكون جاهزاً لتوصيل تطبيقك لمرحلة الإنتاج، قم بتشغيل الأمر التالي:
 
 <div class="language-sh"><pre><code><span class="line"><span style="color:var(--vt-c-green);">&gt; </span><span style="color:#A6ACCD;">npm run build</span></span>
 <span class="line"></span></code></pre></div>
 
-This will create a production-ready build of your app in the project's `./dist` directory. Check out the [Production Deployment Guide](/guide/best-practices/production-deployment.html) to learn more about shipping your app to production.
+هذا سينشئ إصداراً جاهزاً للإنتاج من تطبيقك في مجلد `./dist` للمشروع. تحقق من [دليل نشر الانتاج](/guide/best-practices/production-deployment.html) لمعرفة المزيد حول توصيل تطبيقك إلى مرحلة الانتاج.
 
-[Next Steps >](#next-steps)
+[الخطوات الموالية >](#next-steps)
 
-## Using Vue from CDN {#using-vue-from-cdn}
 
-You can use Vue directly from a CDN via a script tag:
+## استخدام Vue  من شبكات تسليم المحتوى (CDN) {#using-vue-from-cdn}
+
+ تستطيع استخدام Vue مباشرةً من شبكات تسليم المحتوى (CDN) عبر وسم الـ`</script>`:
 
 ```html
 <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
 ```
 
-Here we are using [unpkg](https://unpkg.com/), but you can also use any CDN that serves npm packages, for example [jsdelivr](https://www.jsdelivr.com/package/npm/vue) or [cdnjs](https://cdnjs.com/libraries/vue). Of course, you can also download this file and serve it yourself.
+هنا نستخدم [unpkg](https://unpkg.com/)، لكن يمكنك أيضاً استخدام أي شبكة تسليم المحتوى (CDN) تقدم حزم npm، مثل [jsdelivr](https://www.jsdelivr.com/package/npm/vue) أو [cdnjs](https://cdnjs.com/libraries/vue). بالطبع، يمكنك أيضاً تنزيل هذا الملف وتقديمه بنفسك.
 
-When using Vue from a CDN, there is no "build step" involved. This makes the setup a lot simpler, and is suitable for enhancing static HTML or integrating with a backend framework. However, you won't be able to use the Single-File Component (SFC) syntax.
+لما تستخدم Vue من شبكة تسليم المحتوى (CDN)، لا يوجد "خطوة بناء" متضمنة. هذا يجعل الإعداد أكثر بساطة، ومناسب لتعزيز HTML ثابت أو دمجه مع إطار الواجهة الخلفية. ومع ذلك، لن تتمكن من استخدام صيغة المكونات أحادية الملف (SFC).
 
-### Using the Global Build {#using-the-global-build}
+### استخدام عملية بناء عامة {#using-the-global-build}
 
-The above link loads the *global build* of Vue, where all top-level APIs are exposed as properties on the global `Vue` object. Here is a full example using the global build:
+الرابط اعلاه يحمل *عملية البناء العامة* لـ Vue، حيث يتم تعريض جميع واجهات برمجة التطبيقات (API) على المستوى الأعلى كخاصيات على الكائن العام `Vue`. هنا مثال كامل لاستخدام عملية البناء العامة:
 
 ```html
 <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
@@ -91,18 +95,18 @@ The above link loads the *global build* of Vue, where all top-level APIs are exp
   createApp({
     data() {
       return {
-        message: 'Hello Vue!'
+        message: 'السلام عليكم!'
       }
     }
   }).mount('#app')
 </script>
 ```
 
-[JSFiddle demo](https://jsfiddle.net/yyx990803/nw1xg8Lj/)
+[عرض مثال على JSFiddle](https://jsfiddle.net/5arqghdL/)
 
-### Using the ES Module Build {#using-the-es-module-build}
+### استخدام عملية البناء بوحدات الـES {#using-the-es-module-build}
 
-Throughout the rest of the documentation, we will be primarily using [ES modules](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules) syntax. Most modern browsers now support ES modules natively, so we can use Vue from a CDN via native ES modules like this:
+فيما تبقى من التوثيق، سنستخدم أساساً صيغة [وحدات ES](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules). تدعم معظم المتصفحات الحديثة وحدات الـES الآن بشكل أصلي، لذا يمكننا استخدام Vue من شبكة تسليم المحتوى (CDN) عبر وحدات ES الأصلية مثل هذا المثال:
 
 ```html{3,4}
 <div id="app">{{ message }}</div>
@@ -113,26 +117,25 @@ Throughout the rest of the documentation, we will be primarily using [ES modules
   createApp({
     data() {
       return {
-        message: 'Hello Vue!'
+        message: 'السلام عليكم'
       }
     }
   }).mount('#app')
 </script>
 ```
+لاحظ أننا نستخدم `<script type="module">`, والرابط المستورد من شبكة تسليم المحتوى (CDN) يشير إلى **عملية البناء بوحدات الـES** بدلا من كائن Vue.
 
-Notice that we are using `<script type="module">`, and the imported CDN URL is pointing to the **ES modules build** of Vue instead.
+[عرض مثال على JSFiddle](https://jsfiddle.net/yyx990803/vo23c470/)
 
-[JSFiddle demo](https://jsfiddle.net/yyx990803/vo23c470/)
+### تمكين خرائط الاستيراد {#enabling-import-maps1}
 
-### Enabling Import maps {#enabling-import-maps}
-
-In the above example, we are importing from the full CDN URL, but in the rest of the documentation you will see code like this:
+في المثال أعلاه، استوردنا الواجهات من الرابط الكامل لشبكة تسليم المحتوى (CDN)، لكن في باقي التوثيق سترى الشفرة مثل هذا المثال:
 
 ```js
 import { createApp } from 'vue'
 ```
 
-We can teach the browser where to locate the `vue` import by using [Import Maps](https://caniuse.com/import-maps):
+نستطيع اعلام المتصفح أين يجب العثور على استيراد `vue` عبر استخدام [خرائط الاستيراد](https://caniuse.com/import-maps):
 
 ```html{1-7,12}
 <script type="importmap">
@@ -151,32 +154,32 @@ We can teach the browser where to locate the `vue` import by using [Import Maps]
   createApp({
     data() {
       return {
-        message: 'Hello Vue!'
+        message: 'السلام عليكم'
       }
     }
   }).mount('#app')
 </script>
 ```
 
-[JSFiddle demo](https://jsfiddle.net/yyx990803/2ke1ab0z/)
+[عرض مثال على JSFiddle](https://jsfiddle.net/yyx990803/2ke1ab0z/)
 
-You can also add entries for other dependencies to the import map - but make sure they point to the ES modules version of the library you intend to use.
+تستطيع أيضاً إضافة مدخلات للاعتماديات الأخرى إلى خريطة الاستيراد - لكن تأكد من أنها تشير إلى الإصدار الأصلي لوحدات الـES للمكتبة التي تنوي استخدامها.
 
-:::tip Import Maps Browser Support
-Import maps are supported by default in Chromium-based browsers, so we recommend using Chrome or Edge during the learning process.
+:::tip دعم خرائط الاستيراد في المتصفحات 
+خرائط الاستيراد مدعومة بشكل أصلي في المتصفحات المرتكزة على Chromium، لذا ننصح باستخدام Chrome أو Edge أثناء عملية التعلم.
 
-If using Firefox, it is only supported in version 102+ and currently needs to be enabled via the `dom.importMaps.enabled` option in `about:config`.
+إذا كنت تستخدم Firefox، فهي مدعومة فقط في الإصدار 102+ ويجب تمكينها حالياً عبر خيار `dom.importMaps.enabled` في `about:config`.
 
-If your preferred browser does not support import maps yet, you can polyfill it with [es-module-shims](https://github.com/guybedford/es-module-shims).
+إذا كان متصفحك المفضل لا يدعم خرائط الاستيراد حتى الآن، يمكنك تعويضها باستخدام [es-module-shims](https://github.com/guybedford/es-module-shims).
 :::
 
-:::warning Notes on Production Use
-The examples so far are using the development build of Vue - if you intend to use Vue from a CDN in production, make sure to check out the [Production Deployment Guide](/guide/best-practices/production-deployment.html#without-build-tools).
+:::warning ملاحظات عن الاستخدام في الإنتاج
+الأمثلة السابقة تستخدم الإصدار التطويري لـVue - إذا كنت تنوي استخدام Vue من شبكة تسليم المحتوى (CDN) في الإنتاج، تأكد من مراجعة [دليل نشر الإنتاج](/guide/best-practices/production-deployment.html#without-build-tools).
 :::
 
-### Splitting Up the Modules {#splitting-up-the-modules}
+### تقسيم وحدات الـES {#splitting-up-the-modules}
 
-As we dive deeper into the guide, we may need to split our code into separate JavaScript files so that they are easier to manage. For example:
+بينما نتعمق في الدليل، قد نحتاج إلى تقسيم الشفرة إلى ملفات الـJavaScript منفصلة لتسهيل إدارتها. على سبيل المثال:
 
 ```html
 <!-- index.html -->
@@ -197,32 +200,33 @@ export default {
   template: `<div>count is {{ count }}</div>`
 }
 ```
+إذا فتحت الملف `index.html` المذكور أعلاه مباشرةً في المتصفح، ستجد أنه يطلب منك تحميل ملف `my-component.js`، ولكن يبدو أنه لا يستطيع العثور عليه. هذا لأن الوحدات الـES لا تعمل على بروتوكول `file://`، لذا ستحتاج إلى تشغيل ملف `index.html` عبر بروتوكول `http://` باستخدام خادم HTTP محلي.
+ 
+لبدء خادم HTTP محلي، قم أولاً بتثبيت [Node.js](https://nodejs.org/en/) ثم قم بتشغيل `npx serve` من خلال سطر الأوامر في نفس المجلد الذي يحتوي على ملف HTML الخاص بك. يمكنك أيضاً استخدام أي خادم HTTP آخر يمكنه تقديم الملفات الثابتة مع أنواع MIME الصحيحة.
 
-If you directly open the above `index.html` in your browser, you will find that it throws an error because ES modules cannot work over the `file://` protocol. In order for this to work, you need to serve your `index.html` over the `http://` protocol, with a local HTTP server.
+ربما لاحظت أن قالب العنصر المستورد مضمن كسلسلة JavaScript. إذا كنت تستخدم VSCode، يمكنك تثبيت إضافة [es6-string-html](https://marketplace.visualstudio.com/items?itemName=Tobermory.es6-string-html) وإضافة تعليق `/*html*/` قبل السلاسل لابراز الصيغة البرمجية
 
-To start a local HTTP server, first install [Node.js](https://nodejs.org/en/) and then run `npx serve` from the command line in the same directory where your HTML file is. You can also use any other HTTP server that can serve static files with the correct MIME types.
+### استخدام الواجهة التركيبية دون خطوة بناء {#using-composition-api-without-a-build-step}
 
-You may have noticed that the imported component's template is inlined as a JavaScript string. If you are using VSCode, you can install the [es6-string-html](https://marketplace.visualstudio.com/items?itemName=Tobermory.es6-string-html) extension and prefix the strings with a `/*html*/` comment to get syntax highlighting for them.
+الكثير من أمثلة الواجهة التركيبية ستستخدم صياغة `<script setup>` . إذا كنت تنوي استخدام واجهة التركيب دون خطوة بناء، فتحقق من استخدام [خيار `()setup` ](/api/composition-api-setup.html).
 
-### Using Composition API without a Build Step {#using-composition-api-without-a-build-step}
 
-Many of the examples for Composition API will be using the `<script setup>` syntax. If you intend to use Composition API without a build step, consult the usage of the [`setup()` option](/api/composition-api-setup.html).
 
-## Next Steps {#next-steps}
+## الخطوات الموالية {#next-steps}
 
-If you skipped the [Introduction](/guide/introduction), we strongly recommend reading it before moving on to the rest of the documentation.
+إذا تخطيت [المقدمة](/guide/introduction)، ننصحك بشدة بقراءتها قبل الانتقال إلى باقي التوثيق.
 
 <div class="vt-box-container next-steps">
   <a class="vt-box" href="/guide/essentials/application.html">
-    <p class="next-steps-link">Continue with the Guide</p>
-    <p class="next-steps-caption">The guide walks you through every aspect of the framework in full detail.</p>
+    <p class="next-steps-link">واصل مع الدليل</p>
+    <p class="next-steps-caption">يرشدك الدليل عبر كل جانب من جوانب إطار العمل بالتفصيل الكامل.</p>
   </a>
   <a class="vt-box" href="/tutorial/">
-    <p class="next-steps-link">Try the Tutorial</p>
-    <p class="next-steps-caption">For those who prefer learning things hands-on.</p>
+    <p class="next-steps-link">جرب الدرس التعليمي</p>
+    <p class="next-steps-caption">بالنسبة لأولئك الذين يفضلون تعلم الأشياء بشكل تطبيقي.</p>
   </a>
   <a class="vt-box" href="/examples/">
-    <p class="next-steps-link">Check out the Examples</p>
-    <p class="next-steps-caption">Explore examples of core features and common UI tasks.</p>
+    <p class="next-steps-link">اطلع على الأمثلة</p>
+    <p class="next-steps-caption">استكشف أمثلة على الميزات الأساسية ومهام واجهة المستخدم الشائعة.</p>
   </a>
 </div>
