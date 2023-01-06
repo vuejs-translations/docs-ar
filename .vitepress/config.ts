@@ -242,7 +242,7 @@ export const sidebar: ThemeConfig['sidebar'] = {
       text: 'الإرتقاء و التدرج',
       items: [
         {
-          text: '(SFC) المكونات أحادية المستند',
+          text: '(SFC) المكونات أحادية الملف',
           link: '/guide/scaling-up/sfc'
         },
         { text: 'الأدوات', link: '/guide/scaling-up/tooling' },
@@ -284,11 +284,11 @@ export const sidebar: ThemeConfig['sidebar'] = {
       items: [
         { text: 'نظرة شاملة', link: '/guide/typescript/overview' },
         {
-          text: 'و واجهة برمجة التطبيقات بالتكوين TS',
+          text: 'و الواجهة التكوينية لبرمجة التطبيقات TS',
           link: '/guide/typescript/composition-api'
         },
         {
-          text: 'و واجهة برمجة التطبيقات بالخيارات TS',
+          text: 'و واجهة الخيارات لبرمجة التطبيقات TS',
           link: '/guide/typescript/options-api'
         }
       ]
@@ -301,7 +301,7 @@ export const sidebar: ThemeConfig['sidebar'] = {
           link: '/guide/extras/ways-of-using-vue'
         },
         {
-          text: 'الأسئلة الشائعة عن برمجة واجهة التطبيقات بالتكوين',
+          text: 'الأسئلة الشائعة عن الواجهة التكوينية لبرمجة التطبيقات',
           link: '/guide/extras/composition-api-faq'
         },
         {
@@ -352,7 +352,7 @@ export const sidebar: ThemeConfig['sidebar'] = {
       ]
     },
     {
-      text: 'واجهة برمجة التطبيقات بالتكوين',
+      text: 'الواجهة التكوينية لبرمجة التطبيقات',
       items: [
         { text: 'setup()دالةال', link: '/api/composition-api-setup' },
         {
@@ -378,7 +378,7 @@ export const sidebar: ThemeConfig['sidebar'] = {
       ]
     },
     {
-      text: 'واجهة برمجة التطبيقات بالخيارات',
+      text: 'واجهة الخيارات لبرمجة التطبيقات',
       items: [
         { text: 'الخيارات : الحالة', link: '/api/options-state' },
         { text: 'الخيارات : التصيير', link: '/api/options-rendering' },
@@ -413,7 +413,7 @@ export const sidebar: ThemeConfig['sidebar'] = {
       ]
     },
     {
-      text: 'المكونات أحادية المستند',
+      text: 'المكونات أحادية الملف',
       items: [
         { text: 'مواصفات الصيغة', link: '/api/sfc-spec' },
         { text: '<script setup>', link: '/api/sfc-script-setup' },
