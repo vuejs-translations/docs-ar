@@ -215,14 +215,14 @@ export const sidebar: ThemeConfig['sidebar'] = {
       text: 'إعادة الإستخدام',
       items: [
         {
-          text: 'التركيبات',
+          text: 'المُركَّبات',
           link: '/guide/reusability/composables'
         },
         {
           text: 'سمات مُوجهة مخصصة',
           link: '/guide/reusability/custom-directives'
         },
-        { text: 'الإضافات', link: '/guide/reusability/plugins' }
+        { text: 'الملحقات', link: '/guide/reusability/plugins' }
       ]
     },
     {
@@ -284,7 +284,7 @@ export const sidebar: ThemeConfig['sidebar'] = {
       items: [
         { text: 'نظرة شاملة', link: '/guide/typescript/overview' },
         {
-          text: 'و الواجهة التكوينية لبرمجة التطبيقات TS',
+          text: 'و الواجهة التركيبية لبرمجة التطبيقات TS',
           link: '/guide/typescript/composition-api'
         },
         {
@@ -301,7 +301,7 @@ export const sidebar: ThemeConfig['sidebar'] = {
           link: '/guide/extras/ways-of-using-vue'
         },
         {
-          text: 'الأسئلة الشائعة عن الواجهة التكوينية لبرمجة التطبيقات',
+          text: 'الأسئلة الشائعة عن الواجهة التركيبية لبرمجة التطبيقات',
           link: '/guide/extras/composition-api-faq'
         },
         {
@@ -352,7 +352,7 @@ export const sidebar: ThemeConfig['sidebar'] = {
       ]
     },
     {
-      text: 'الواجهة التكوينية لبرمجة التطبيقات',
+      text: 'الواجهة التركيبية لبرمجة التطبيقات',
       items: [
         { text: 'setup()دالةال', link: '/api/composition-api-setup' },
         {

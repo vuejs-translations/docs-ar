@@ -50,7 +50,7 @@ footer: false
 <span class="line"></span></code></pre></div>
 
 
-يجب أن يكون لديك مشروع Vue الأول الآن! لاحظ أن مكونات المثال في المشروع المولدة مكتوبة باستخدام [الواجهة التكوينية](/guide/introduction.html#composition-api) و `<script setup>`، بدلاً من [واجهة الخيارات](/guide/introduction.html#options-api). إليك بعض النصائح الإضافية:
+يجب أن يكون لديك مشروع Vue الأول الآن! لاحظ أن مكونات المثال في المشروع المولدة مكتوبة باستخدام [الواجهة التركيبية](/guide/introduction.html#composition-api) و `<script setup>`، بدلاً من [واجهة الخيارات](/guide/introduction.html#options-api). إليك بعض النصائح الإضافية:
 
 - محرر النصوص الموصى به هو [Visual Studio Code](https://code.visualstudio.com/) + [Volar ](https://marketplace.visualstudio.com/items?itemName=Vue.volar). إذا كنت تستخدم محررات أخرى ، فتحقق من [قسم دعم المحررات](/guide/scaling-up/tooling.html#ide-support).
 
@@ -222,7 +222,7 @@ export default {
     <p class="next-steps-caption">يرشدك الدليل عبر كل جانب من جوانب إطار العمل بالتفصيل الكامل.</p>
   </a>
   <a class="vt-box" href="/tutorial/">
-    <p class="next-steps-link">جرب الدرس التعليمي</p>
+    <p class="next-steps-link">جرب الدرس التوجيهي</p>
     <p class="next-steps-caption">بالنسبة لأولئك الذين يفضلون تعلم الأشياء بشكل تطبيقي.</p>
   </a>
   <a class="vt-box" href="/examples/">

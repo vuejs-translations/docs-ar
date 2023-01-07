@@ -44,8 +44,6 @@ pre {
 }
 
 .vt-doc .header-anchor {
-  float: right;
   position: absolute;
-  right: -36px;
-  top: 0;
+  right: -24px;
 }
