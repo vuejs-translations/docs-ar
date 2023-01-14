@@ -50,3 +50,10 @@
 | deep                  |                               عميق |
 | raw                   |                                خام |
 | composable function   |                      دالة مُركَّبة |
+| parent component      |                      مكوّن أب/أصلي |
+| child component       |                     مكوّن فرعي/ابن |
+| mount                 |                                وصل |
+| unmount               |                                فصل |
+| container             |                           مُستوعِب |
+| CSS selector          |                        مُحدِّد CSS |
+| assets                |                             ملحقات |

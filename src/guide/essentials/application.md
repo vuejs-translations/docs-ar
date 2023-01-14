@@ -1,35 +1,35 @@
-# Creating a Vue Application {#creating-a-vue-application}
+# إنشاء تطبيق باستخدام Vue {#creating-a-vue-application}
 
-## The application instance {#the-application-instance}
+## نسخة التطبيق {#the-application-instance}
 
-Every Vue application starts by creating a new **application instance** with the [`createApp`](/api/application#createapp) function:
+ كل تطبيق Vue ينشأ باستحداث **نسخة تطبيق** جديد عن طريق استخدام دالة  [`createApp`](/api/application#createapp) : 
 
 ```js
 import { createApp } from 'vue'
 
 const app = createApp({
-  /* root component options */
+  /* التوابع الجذرية للمكون */
 })
 ```
 
 ## The Root Component {#the-root-component}
 
-The object we are passing into `createApp` is in fact a component. Every app requires a "root component" that can contain other components as its children.
+الكائن الذي نمرره إلى دالة `createApp` هو في الأصل مكون. يتطلب كل تطبيق "مكوِّنًا جذريًا" الذي بدوره يمكن أن يحتوي على مكونات أخرى مثل مكوناته الفرعية.
 
-If you are using Single-File Components, we typically import the root component from another file:
+إذا كنت تستخدم المكونات أحادية الملف، فعادة ما نستورد المكون الجذر من ملف آخر:
 
 ```js
 import { createApp } from 'vue'
-// import the root component App from a single-file component.
+// استيراد  المكون الجذر App كمكون أحادي الملف. 
 import App from './App.vue'
 
 const app = createApp(App)
 ```
 
-While many examples in this guide only need a single component, most real applications are organized into a tree of nested, reusable components. For example, a Todo application's component tree might look like this:
+في حين نحتاج في العديد من الأمثلة عبر هذا الدليل إلى مكون واحد فقط، فإن معظم التطبيقات الحقيقية منظمة عبر ملفات بشكل شجري تحتوي على العديد من المكونات المتداخلة والقابلة لإعادة الاستخدام. على سبيل المثال ، قد تبدو مكونات تطبيق Todo  (تطبيق قائمة المهام) كما يلي:
 
 ```
-App (root component)
+App (المكون الجذر)
 ├─ TodoList
 │  └─ TodoItem
 │     ├─ TodoDeleteButton
@@ -39,11 +39,11 @@ App (root component)
    └─ TodoStatistics
 ```
 
-In later sections of the guide, we will discuss how to define and compose multiple components together. Before that, we will focus on what happens inside a single component.
+في أجزاء قادمة من الدليل، سنناقش كيفية تعريف مكونات متعددة وتركيبها مع بعض. لكن قبل ذلك، سنركز على ما يحدث داخل مكون واحد.
 
-## Mounting the App {#mounting-the-app}
+## وصل التطبيق {#mounting-the-app}
 
-An application instance won't render anything until its `.mount()` method is called. It expects a "container" argument, which can either be an actual DOM element or a selector string:
+لا تُصيَّر نسخة التطبيق أي شيء حتى يتم استدعاء الدالة `()mount.`. و التي تأخذ عنصر "مُستوعِب" كوسيط و الذي يكون إما عنصر من عقد الـDOM أو أيِّ مُحدِّد CSS :
 
 ```html
 <div id="app"></div>
@@ -52,14 +52,12 @@ An application instance won't render anything until its `.mount()` method is cal
 ```js
 app.mount('#app')
 ```
+سيُصيَّر محتوى المكون الجذر للتطبيق داخل العنصر المُستوعِب الذي بدوره لا يُعتبر جزءًا من التطبيق.
 
-The content of the app's root component will be rendered inside the container element. The container element itself is not considered part of the app.
+لا يجب استدعاء دالة `()mount.`. إلا بعد الانتهاء من جميع اعدادات التطبيق وتسجيل الملحقات. كما نلاحظ أيضًا أن قيمة إرجاع هذه الدالة، هي نسخة المكون الجذر بدلاً من نسخة التطبيق التي تكون من دالة تسجيل الملحقات.
+### قالب المكون الجذر في عنصر الـDOM المُستوعِب {#in-dom-root-component-template}
 
-The `.mount()` method should always be called after all app configurations and asset registrations are done. Also note that its return value, unlike the asset registration methods, is the root component instance instead of the application instance.
-
-### In-DOM Root Component Template {#in-dom-root-component-template}
-
-When using Vue without a build step, we can write our root component's template directly inside the mount container:
+عند استخدام Vue دون عملية بناء ، يمكننا كتابة قالب المكون الجذر مباشرة داخل العنصر المُستوعِب:
 
 ```html
 <div id="app">
@@ -81,31 +79,34 @@ const app = createApp({
 app.mount('#app')
 ```
 
-Vue will automatically use the container's `innerHTML` as the template if the root component does not already have a `template` option.
+سيستخدم Vue تلقائيًا التابع `innerHTML` من المستوعب كقالب إذا لم يكن المكون الجذر للتطبيق يحتوي بالفعل على خيار القالب ( `template`).
 
-## App Configurations {#app-configurations}
 
-The application instance exposes a `.config` object that allows us to configure a few app-level options, for example, defining an app-level error handler that captures errors from all descendant components:
+## تهيئة التطبيق {#app-configurations}
+
+تعرض نسخة التطبيق  الكائن  `config.` كخاصية التي تسمح لنا بتهيئة بعض الخيارات على مستوى جذر التطبيق، على سبيل المثال، التصريح بـ"معالج الأخطاء" على مستوى جذر التطبيق الذي يلتقط الأخطاء من جميع المكونات الفرعية :
+
 
 ```js
 app.config.errorHandler = (err) => {
-  /* handle error */
+  /* هنا يُعالج الخطأ */
 }
 ```
 
-The application instance also provides a few methods for registering app-scoped assets. For example, registering a component:
+نسخة التطبيق توفر لنا أيضًا بعض التوابع لتسجيل الملحقات على مستوى جذر التطبيق. على سبيل المثال، تسجيل مكون:
 
 ```js
 app.component('TodoDeleteButton', TodoDeleteButton)
 ```
 
-This makes the `TodoDeleteButton` available for use anywhere in our app. We will discuss registration for components and other types of assets in later sections of the guide. You can also browse the full list of application instance APIs in its [API reference](/api/application).
+تسجيل مكون `TodoDeleteButton` بهذه الطريقة يجعله متاحًا للاستخدام في أي مكان في التطبيق. سنناقش تسجيل المكونات وباقي الملحقات في أجزاء قادمة من الدليل. يمكنك أيضًا استعراض قائمة كاملة من واجهات نسخة التطبيق في [مرجع واجهة برمجة التطبيقات](/api/application).
 
-Make sure to apply all app configurations before mounting the app!
 
-## Multiple application instances {#multiple-application-instances}
+تأكد من تطبيق جميع تهيئات التطبيق قبل توصيله!
 
-You are not limited to a single application instance on the same page. The `createApp` API allows multiple Vue applications to co-exist on the same page, each with its own scope for configuration and global assets:
+## نسخ متعددة من التطبيق {#multiple-application-instances}
+
+لا يقتصر التطبيق على نسخة واحدة فقط في نفس الصفحة. تسمح الواجهة البرمجية للدالة `createApp` بوجود تطبيقات Vue متعددة في نفس الصفحة، كل تطبيق له نطاقه الخاص للتهيئة والملحقات العامة :
 
 ```js
 const app1 = createApp({
@@ -119,4 +120,5 @@ const app2 = createApp({
 app2.mount('#container-2')
 ```
 
-If you are using Vue to enhance server-rendered HTML and only need Vue to control specific parts of a large page, avoid mounting a single Vue application instance on the entire page. Instead, create multiple small application instances and mount them on the elements they are responsible for.
+
+إذا كنت تستخدم Vue لتحسين  HTML مُصيَّر من الخادم وتحتاجها فقط للتحكم في أجزاء معينة من الصفحة الكبيرة، فتجنب توصيل نسخة واحدة من تطبيق Vue على الصفحة بأكملها. بدلاً من ذلك، قم بإنشاء تطبيقات صغيرة متعددة وتوصيلها على العناصر المسؤولة عنها.
