@@ -33,7 +33,7 @@
 | style                 |             (في حالة الـCSS) تنسيق |
 | style                 |                         نمط/ اسلوب |
 | binding               |                                ربط |
-| interpolation         |                              تفسير |
+| interpolation         |                              اقحام |
 | expression            |                              تعبير |
 | conditional           |                               شرطي |
 | list                  |                              قائمة |
