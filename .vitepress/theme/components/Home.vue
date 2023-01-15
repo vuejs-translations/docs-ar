@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { onMounted } from 'vue'
-import NewsLetter from './NewsLetter.vue'
+import SiteMap from './SiteMap.vue';
+// import NewsLetter from './NewsLetter.vue'
 import { load, data, base } from './sponsors'
 import SponsorsGroup from './SponsorsGroup.vue'
 import VueMasteryModal from './VueMasteryModal.vue'
@@ -89,7 +90,8 @@ onMounted(async () => {
     <SponsorsGroup tier="gold" placement="landing" />
   </section>
 
-  <NewsLetter />
+  <SiteMap />
+  <!-- <NewsLetter /> -->
 </template>
 
 <style scoped>
@@ -255,6 +257,7 @@ html:not(.dark) .accent,
     font-size: 64px;
     letter-spacing: -0.5px;
   }
+
   .description {
     font-size: 18px;
     margin-bottom: 48px;
@@ -272,26 +275,33 @@ html:not(.dark) .accent,
   #hero {
     padding: 64px 32px;
   }
+
   .description {
     font-size: 16px;
     margin: 18px 0 30px;
   }
+
   #special-sponsor {
     flex-direction: column;
   }
+
   #special-sponsor img {
     height: 36px;
     margin: 8px 0;
   }
+
   #special-sponsor span {
     text-align: center !important;
   }
+
   #highlights h3 {
     margin-bottom: 0.6em;
   }
+
   #highlights .vt-box {
     padding: 20px 36px;
   }
+
   .actions a {
     margin: 0.5em 0;
   }

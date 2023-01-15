@@ -32,7 +32,7 @@ import { VTLink } from '@vue/theme'
               id="member_submit"
               name="member[subscribe]"
               type="submit"
-              value="SUBSCRIBE"
+              value="سجّل"
             />
           </div>
         </form>
@@ -44,10 +44,10 @@ import { VTLink } from '@vue/theme'
           >news.vuejs.org</VTLink
         >. تستطيع متابعتنا على
         <VTLink class="link" href="https://twitter.com/vuejs" no-icon
-          >Twitter</VTLink
+          >تويتر</VTLink
         >, أو الانضمام إلينا على
         <VTLink class="link" href="https://chat.vuejs.org/" no-icon
-          >Discord</VTLink
+          >ديسكورد</VTLink
         >.
       </p>
     </div>
