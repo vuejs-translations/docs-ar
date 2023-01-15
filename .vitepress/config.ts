@@ -1,10 +1,9 @@
+import fs from 'fs'
+import path from 'path'
+import { defineConfigWithTheme } from 'vitepress'
 import type { Config as ThemeConfig } from '@vue/theme'
 import baseConfig from '@vue/theme/config'
-import { defineConfigWithTheme } from 'vitepress'
-import fs from 'fs'
 import { headerPlugin } from './headerMdPlugin'
-import { jobsPlugin } from './jobsMdPlugin'
-import path from 'path'
 
 const nav: ThemeConfig['nav'] = [
   {
@@ -90,9 +89,9 @@ const nav: ThemeConfig['nav'] = [
         text: 'المستجدات',
         items: [
           { text: 'المدونة', link: 'https://blog.vuejs.org/' },
-          { text: 'المدونة', link: 'https://twitter.com/vuejs' },
-          { text: 'النشرة البريدية', link: 'https://news.vuejs.org/' },
-          { text: 'الفعاليات', link: 'https://events.vuejs.org/' }
+          { text: 'تويتر', link: 'https://twitter.com/vuejs' },
+          { text: 'الفعاليات', link: 'https://events.vuejs.org/' },
+          { text: 'النشرة البريدية', link: 'https://news.vuejs.org' }
         ]
       }
     ]
@@ -196,6 +195,7 @@ export const sidebar: ThemeConfig['sidebar'] = {
         },
         { text: 'الخاصيات', link: '/guide/components/props' },
         { text: 'الأحداث', link: '/guide/components/events' },
+        { text: 'الخاصية v-model', link: '/guide/components/v-model' },
         {
           text: 'السمات الإحتياطية',
           link: '/guide/components/attrs'
@@ -677,7 +677,7 @@ export default defineConfigWithTheme<ThemeConfig>({
 
   markdown: {
     config(md) {
-      md.use(headerPlugin).use(jobsPlugin)
+      md.use(headerPlugin)
     }
   },
 
