@@ -1,0 +1,49 @@
+.VPSidebar,
+.vt-doc.guide,
+.VPContentDocOutline,
+.edit-link {
+  direction: rtl;
+}
+
+pre {
+  direction: ltr;
+}
+.vt-doc .custom-block {
+  padding: 22px 24px 4px 20px !important;
+}
+.vt-doc .custom-block:before {
+  content: 'ⓘ';
+  position: absolute;
+  font-weight: 600;
+  font-size: 15px;
+  top: 28px;
+  right: 12px;
+}
+
+.vt-doc .custom-block-title {
+  margin-right: 14px;
+}
+
+.vt-doc ul {
+  padding-left: auto;
+  padding-right: 1.25rem;
+}
+
+.vt-doc ul > li:before {
+  content: '•';
+  right: -1.25rem;
+}
+
+.ar.vue-mastery-link .description {
+  margin-right: 16px;
+}
+
+.vt-doc a[href^="https://sfc.vuejs.org"]:before
+{
+  padding-right: 2.5px;
+}
+
+.vt-doc .header-anchor {
+  position: absolute;
+  right: -24px;
+}
