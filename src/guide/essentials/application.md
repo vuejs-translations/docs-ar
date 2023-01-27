@@ -12,7 +12,7 @@ const app = createApp({
 })
 ```
 
-## The Root Component {#the-root-component}
+## المكون الجذر {#the-root-component}
 
 الكائن الذي نمرره إلى دالة `createApp` هو في الأصل مكون. يتطلب كل تطبيق "مكوِّنًا جذريًا" الذي بدوره يمكن أن يحتوي على مكونات أخرى مثل مكوناته الفرعية.
 
