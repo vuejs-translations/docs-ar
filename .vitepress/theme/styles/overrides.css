@@ -47,3 +47,16 @@ pre {
   position: absolute;
   right: -24px;
 }
+
+.vt-doc ol > li:before {
+  left: auto;
+  right: 2px;
+}
+
+.vt-doc ol > li p {
+  padding-right: 1.25rem;
+}
+
+.vt-badge.experimental:before {
+  content: 'تجريبي';
+}
