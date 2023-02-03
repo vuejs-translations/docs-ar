@@ -57,6 +57,6 @@
 | container             |                           مُستوعِب |
 | CSS selector          |                        مُحدِّد CSS |
 | assets                |                             ملحقات |
-| modifier             |                             مُعدِّل |
-| tick                 |                                نبضة |
-| unwrap               |                               / فك |
+| modifier              |                            مُعدِّل |
+| tick                  |                               نبضة |
+| unwrap                |                                 فك |

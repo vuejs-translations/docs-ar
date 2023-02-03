@@ -1,9 +1,9 @@
-import fs from 'fs'
-import path from 'path'
-import { defineConfigWithTheme } from 'vitepress'
 import type { Config as ThemeConfig } from '@vue/theme'
 import baseConfig from '@vue/theme/config'
+import { defineConfigWithTheme } from 'vitepress'
+import fs from 'fs'
 import { headerPlugin } from './headerMdPlugin'
+import path from 'path'
 
 const nav: ThemeConfig['nav'] = [
   {
@@ -154,7 +154,7 @@ export const sidebar: ThemeConfig['sidebar'] = {
           link: '/guide/essentials/reactivity-fundamentals'
         },
         {
-          text: 'الخصائص المحسوبة',
+          text: 'الخاصيات المحسوبة',
           link: '/guide/essentials/computed'
         },
         {
@@ -175,7 +175,7 @@ export const sidebar: ThemeConfig['sidebar'] = {
           text: 'خطافات دورة الحياة',
           link: '/guide/essentials/lifecycle'
         },
-        { text: 'الخصائص المراقبة', link: '/guide/essentials/watchers' },
+        { text: 'الخاصيات المراقبة', link: '/guide/essentials/watchers' },
         {
           text: 'Refs مراجع القالب',
           link: '/guide/essentials/template-refs'
