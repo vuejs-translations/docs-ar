@@ -60,3 +60,4 @@
 | modifier              |                            مُعدِّل |
 | tick                  |                               نبضة |
 | unwrap                |                                 فك |
+| lazy                 |                               خامل |
