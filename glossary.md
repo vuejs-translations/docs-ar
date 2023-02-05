@@ -60,4 +60,5 @@
 | modifier              |                            مُعدِّل |
 | tick                  |                               نبضة |
 | unwrap                |                                 فك |
-| lazy                 |                               خامل |
+| lazy                  |                               خامل |
+| index                 |                               مؤشر |
