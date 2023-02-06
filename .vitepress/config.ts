@@ -170,7 +170,7 @@ export const sidebar: ThemeConfig['sidebar'] = {
           text: 'معالجة الأحداث',
           link: '/guide/essentials/event-handling'
         },
-        { text: 'ربط مداخل النموذج', link: '/guide/essentials/forms' },
+        { text: 'ربط إدخالات النموذج', link: '/guide/essentials/forms' },
         {
           text: 'خطافات دورة الحياة',
           link: '/guide/essentials/lifecycle'

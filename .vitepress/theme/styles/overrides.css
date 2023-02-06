@@ -60,3 +60,13 @@ pre {
 .vt-badge.experimental:before {
   content: 'تجريبي';
 }
+
+.demo label {
+  margin: 0 0.3em 0 1em;
+}
+.vt-doc blockquote {
+  border-left:none!important;
+  border-right: 0.2rem solid var(--vt-c-divider);
+  padding-right: 1rem;
+}
+
