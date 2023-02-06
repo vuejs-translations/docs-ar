@@ -154,7 +154,7 @@ export const sidebar: ThemeConfig['sidebar'] = {
           link: '/guide/essentials/reactivity-fundamentals'
         },
         {
-          text: 'الخصائص المحسوبة',
+          text: 'الخاصيات المحسوبة',
           link: '/guide/essentials/computed'
         },
         {
@@ -170,12 +170,12 @@ export const sidebar: ThemeConfig['sidebar'] = {
           text: 'معالجة الأحداث',
           link: '/guide/essentials/event-handling'
         },
-        { text: 'ربط مداخل النموذج', link: '/guide/essentials/forms' },
+        { text: 'ربط إدخالات النموذج', link: '/guide/essentials/forms' },
         {
           text: 'خطافات دورة الحياة',
           link: '/guide/essentials/lifecycle'
         },
-        { text: 'الخصائص المراقبة', link: '/guide/essentials/watchers' },
+        { text: 'الخاصيات المراقبة', link: '/guide/essentials/watchers' },
         {
           text: 'Refs مراجع القالب',
           link: '/guide/essentials/template-refs'

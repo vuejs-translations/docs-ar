@@ -1,8 +1,7 @@
-# Class and Style Bindings {#class-and-style-bindings}
+# ربط التنسيقات و الأصناف {#class-and-style-bindings}
 
-A common need for data binding is manipulating an element's class list and inline styles. Since `class` and `style` are both attributes, we can use `v-bind` to assign them a string value dynamically, much like with other attributes. However, trying to generate those values using string concatenation can be annoying and error-prone. For this reason, Vue provides special enhancements when `v-bind` is used with `class` and `style`. In addition to strings, the expressions can also evaluate to objects or arrays.
-
-## Binding HTML Classes {#binding-html-classes}
+احتياج شائع لربط البيانات هو التحكم في قائمة الأصناف وتنسيقات العنصر. بما أن `class` و `style` عبارة عن سمتين، يمكننا استخدام `v-bind` لاعطائهما سلسلة نصية كقيمة بشكل ديناميكي، على غرار السمات الأخرى. ومع ذلك، يمكن أن يكون توليد هذه القيم عن طريق ربط سلاسل مزعجًا ومُحتملًا للأخطاء. لهذا السبب، توفر Vue تحسينات خاصة عند استخدام `v-bind` مع `class` و `style`. بالإضافة إلى السلاسل النصية، يمكن أن تُقيّم العبارات أيضًا إلى كائنات أو مصفوفات.
+## ربط أصناف الـHTML {#binding-html-classes}
 
 <div class="options-api">
   <VueSchoolLink href="https://vueschool.io/lessons/dynamic-css-classes-with-vue-3" title="Free Vue.js Dynamic CSS Classes Lesson"/>
@@ -12,17 +11,18 @@ A common need for data binding is manipulating an element's class list and inlin
   <VueSchoolLink href="https://vueschool.io/lessons/vue-fundamentals-capi-dynamic-css-classes-with-vue" title="Free Vue.js Dynamic CSS Classes Lesson"/>
 </div>
 
-### Binding to Objects {#binding-to-objects}
+### الربط بالكائنات {#binding-to-objects}
 
-We can pass an object to `:class` (short for `v-bind:class`) to dynamically toggle classes:
+يمكننا تمرير كائن إلى `:class` (الإختصار لـ `v-bind:class`) لتبديل الأصناف بشكل ديناميكي:
 
 ```vue-html
 <div :class="{ active: isActive }"></div>
 ```
 
-The above syntax means the presence of the `active` class will be determined by the [truthiness](https://developer.mozilla.org/en-US/docs/Glossary/Truthy) of the data property `isActive`.
 
-You can have multiple classes toggled by having more fields in the object. In addition, the `:class` directive can also co-exist with the plain `class` attribute. So given the following state:
+الصيغة أعلاه تعني أن وجود الصنف `active` سيتم تحديده بواسطة [صحة](https://developer.mozilla.org/en-US/docs/Glossary/Truthy) الخاصية `isActive` من البيانات.
+
+يمكن أن يكون لديك عدة أصناف تتبدل بواسطة وجود العديد من الخاصيات في الكائن. بالإضافة إلى ذلك، يمكن للسمة المربوطة `:class` أيضًا أن تكون موجودة بجانب السمة `class` العادية. لذا، بالنظر إلى الحالة التالية:
 
 <div class="composition-api">
 
@@ -46,7 +46,7 @@ data() {
 
 </div>
 
-And the following template:
+و القالب الموالي:
 
 ```vue-html
 <div
@@ -55,15 +55,15 @@ And the following template:
 ></div>
 ```
 
-It will render:
+سيتم تصيير العنصر التالي:
 
 ```vue-html
 <div class="static active"></div>
 ```
 
-When `isActive` or `hasError` changes, the class list will be updated accordingly. For example, if `hasError` becomes `true`, the class list will become `"static active text-danger"`.
+عند تغيير `isActive` أو `hasError`، سيتم تحديث قائمة الصنف بناءً على ذلك. على سبيل المثال، إذا أصبح `hasError` `true`، فسيصبح قائمة الصنف `"static active text-danger"`.
 
-The bound object doesn't have to be inline:
+الكائن المربوط لا يحتاج أن يكون مُضمَّنا:
 
 <div class="composition-api">
 
@@ -95,7 +95,7 @@ data() {
 <div :class="classObject"></div>
 ```
 
-This will render the same result. We can also bind to a [computed property](./computed) that returns an object. This is a common and powerful pattern:
+سيقوم هذا الربط بتصيير نفس النتيجة. يمكننا أيضًا الربط بخاصية [محسوبة](./computed) تعيد كائنًا. و هو نمط شائع وقوي:
 
 <div class="composition-api">
 
@@ -136,9 +136,9 @@ computed: {
 <div :class="classObject"></div>
 ```
 
-### Binding to Arrays {#binding-to-arrays}
+### الربط بالمصفوفات {#binding-to-arrays}
 
-We can bind `:class` to an array to apply a list of classes:
+يمكننا ربط `:class` بمصفوفة لتطبيق قائمة من الأصناف:
 
 <div class="composition-api">
 
@@ -166,90 +166,91 @@ data() {
 <div :class="[activeClass, errorClass]"></div>
 ```
 
-Which will render:
+نتيجة التصيير : 
 
 ```vue-html
 <div class="active text-danger"></div>
 ```
 
-If you would like to also toggle a class in the list conditionally, you can do it with a ternary expression:
+إذا كنت ترغب أيضًا في تبديل صنف في القائمة بشكل شرطي، يمكنك القيام بذلك باستخدام تعبير ثلاثي:
 
 ```vue-html
 <div :class="[isActive ? activeClass : '', errorClass]"></div>
 ```
 
-This will always apply `errorClass`, but `activeClass` will only be applied when `isActive` is truthy.
+هذا الربط سيطبق دائمًا `errorClass`، ولكن `activeClass` سيتم تطبيقه فقط عندما يكون `isActive` صحيحًا.
 
-However, this can be a bit verbose if you have multiple conditional classes. That's why it's also possible to use the object syntax inside array syntax:
+لكن قد يكون هذا طويلا نوعا ما إذا كان لديك أصناف شرطية متعددة. لهذا السبب، يمكنك أيضًا استخدام صيغة الكائن داخل صيغة المصفوفة :
 
 ```vue-html
 <div :class="[{ active: isActive }, errorClass]"></div>
 ```
 
-### With Components {#with-components}
+### مع المكونات {#with-components}
 
-> This section assumes knowledge of [Components](/guide/essentials/component-basics). Feel free to skip it and come back later.
+> هذا القسم يفترض أن لديك معرفة [بالمكونات](/guide/essentials/component-basics). لا تتردد في تخطيه والعودة إليه لاحقًا.
 
-When you use the `class` attribute on a component with a single root element, those classes will be added to the component's root element, and merged with any existing class already on it.
+لما تستخدم السمة `class` على مكون يحتوي على عنصر واحد فقط، سيتم إضافة هذه الصنف إلى العنصر الجذري للمكون، وسيتم دمجها مع أي صنف موجود عليه من قبل.
 
-For example, if we have a component named `MyComponent` with the following template:
+على سبيل المثال، إذا كان لدينا مكون يسمى `MyComponent` مع القالب التالي:
 
 ```vue-html
-<!-- child component template -->
-<p class="foo bar">Hi!</p>
+<!--  قالب المكون الابن -->
+<p class="foo bar">مرحبا!</p>
 ```
 
-Then add some classes when using it:
+ثم اضف بعض الأصناف عند استخدامه:
 
 ```vue-html
-<!-- when using the component -->
+<!-- عند استخدام المكون -->
 <MyComponent class="baz boo" />
 ```
 
-The rendered HTML will be:
+الـHTML المصيّر سيكون بالشكل الموالي :
 
 ```vue-html
-<p class="foo bar baz boo">Hi</p>
+<p class="foo bar baz boo">مرحبا</p>
 ```
 
-The same is true for class bindings:
+نفس الشيء ينطبق على ربط الصنف:
 
 ```vue-html
 <MyComponent :class="{ active: isActive }" />
 ```
 
-When `isActive` is truthy, the rendered HTML will be:
+لما يكون `isActive` صحيحًا، سيكون الـHTML المصيّر بالشكل الموالي :
 
 ```vue-html
-<p class="foo bar active">Hi</p>
+<p class="foo bar active">مرحبا</p>
 ```
 
-If your component has multiple root elements, you would need to define which element will receive this class. You can do this using the `$attrs` component property:
+إذا كان لديك مكون يحتوي على عناصر جذرية متعددة، ستحتاج إلى تحديد أي عنصر سيتلقى هذا الصنف. يمكنك القيام بذلك باستخدام خاصية المكون `attrs$`:
 
 ```vue-html
-<!-- MyComponent template using $attrs -->
-<p :class="$attrs.class">Hi!</p>
-<span>This is a child component</span>
+<!-- قالب MyComponent باستخدام $attrs -->
+<p :class="$attrs.class">مرحبا!</p>
+<span>هذا هو المكون الابن</span>
 ```
 
 ```vue-html
 <MyComponent class="baz" />
 ```
 
-Will render:
+النتيجة المصيرة ستكون:
 
 ```html
-<p class="baz">Hi!</p>
-<span>This is a child component</span>
+<p class="baz">مرحبا!</p>
+<span>هذا هو المكون الابن</span>
 ```
 
 You can learn more about component attribute inheritance in [Fallthrough Attributes](/guide/components/attrs.html) section.
 
-## Binding Inline Styles {#binding-inline-styles}
+يمكنك معرفة المزيد عن توريث سمات المكون في قسم [Fallthrough Attributes](/guide/components/attrs.html).
+## ربط التنسيقات السطرية {#binding-inline-styles}
 
-### Binding to Objects
+### الربط بالكائنات
 
-`:style` supports binding to JavaScript object values - it corresponds to an [HTML element's `style` property](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/style):
+`:style` يدعم ربط قيم كائنات JavaScript - يُوافق مع [خاصية `style` لعنصر HTML](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/style):
 
 <div class="composition-api">
 
@@ -277,13 +278,15 @@ data() {
 <div :style="{ color: activeColor, fontSize: fontSize + 'px' }"></div>
 ```
 
-Although camelCase keys are recommended, `:style` also supports kebab-cased CSS property keys (corresponds to how they are used in actual CSS) - for example:
+
+رغم أن الأسماء المكتوبة باستخدام نمط سنام الجمل camelCase موصى بها، إلا أن `style:` يدعم أيضًا أسماء الخاصيات CSS مكتوبة باستخدام نمط أسياخ الشواء kebab-case (وهي ما يتم استخدامه في CSS الفعلي) - على سبيل المثال:
+
 
 ```vue-html
 <div :style="{ 'font-size': fontSize + 'px' }"></div>
 ```
 
-It is often a good idea to bind to a style object directly so that the template is cleaner:
+غالبا ما يكون من الأفضل ربط كائن التنسيقات مباشرة حتى يكون محتوى القالب أنقى:
 
 <div class="composition-api">
 
@@ -315,26 +318,27 @@ data() {
 <div :style="styleObject"></div>
 ```
 
-Again, object style binding is often used in conjunction with computed properties that return objects.
+مرة أخرى، يتم استخدام ربط كائن التنسيقات عادةً مع خاصيات محسوبة تُعيد كائنات.
 
-### Binding to Arrays
+### الربط بالمصفوفات
 
-We can bind `:style` to an array of multiple style objects. These objects will be merged and applied to the same element:
+يمكننا ربط `:style` بمصفوفة من كائنات متعددة من التنسيقات . سيتم دمج هذه الكائنات وتطبيقها على نفس العنصر:
 
 ```vue-html
 <div :style="[baseStyles, overridingStyles]"></div>
 ```
 
-### Auto-prefixing {#auto-prefixing}
+### البادئة التلقائية {#auto-prefixing}
 
-When you use a CSS property that requires a [vendor prefix](https://developer.mozilla.org/en-US/docs/Glossary/Vendor_Prefix) in `:style`, Vue will automatically add the appropriate prefix. Vue does this by checking at runtime to see which style properties are supported in the current browser. If the browser doesn't support a particular property then various prefixed variants will be tested to try to find one that is supported.
+لما تستخدم خاصية CSS والتي تتطلب [بادئة](https://developer.mozilla.org/en-US/docs/Glossary/Vendor_Prefix) في `:style`، ستُضِيف Vue البادئة المناسبة تلقائيًا. تقوم Vue بذلك من خلال التحقق في وقت التشغيل لمعرفة أي خاصيات النمط المدعومة في المتصفح الحالي. إذا لم يدعم المتصفح خاصية معينة سيختبر بعدها مختلف أنواع البادئات للحصول على أحد البادئات المدعومة.
 
-### Multiple Values {#multiple-values}
+### قيم متعددة {#multiple-values}
 
-You can provide an array of multiple (prefixed) values to a style property, for example:
+يمكنك امداد مصفوفة من القيم المتعددة (ذات بادئة) إلى خاصية التنسيق، على سبيل المثال:
 
 ```vue-html
 <div :style="{ display: ['-webkit-box', '-ms-flexbox', 'flex'] }"></div>
 ```
+هذه الشيفرة ستصير القيمة الأخيرة فقط في المصفوفة التي يدعمها المتصفح. في هذا المثال، ستقوم بتصيير `display: flex` للمتصفحات التي تدعم نسخة بدون بادئة من flexbox.
 
-This will only render the last value in the array which the browser supports. In this example, it will render `display: flex` for browsers that support the unprefixed version of flexbox.
+

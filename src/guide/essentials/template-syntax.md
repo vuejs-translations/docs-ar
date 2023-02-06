@@ -1,84 +1,92 @@
-# Template Syntax {#template-syntax}
+# صيغة القالب {#template-syntax}
 
-Vue uses an HTML-based template syntax that allows you to declaratively bind the rendered DOM to the underlying component instance's data. All Vue templates are syntactically valid HTML that can be parsed by spec-compliant browsers and HTML parsers.
+Vue تستخدم صيغة القالب المستند على الـHTML التي تسمح لك بربط شجرة الـDOM المصيّرة بشكل تصريحي مع بيانات و دوال شيفرة المكوّن. كل قوالب Vue هي عبارة عن عناصر HTML صحيحة يمكن تحليلها بواسطة المتصفّحات و مصرفي الـHTML الخاضعة للمواصفات.
 
-Under the hood, Vue compiles the templates into highly-optimized JavaScript code. Combined with the reactivity system, Vue can intelligently figure out the minimal number of components to re-render and apply the minimal amount of DOM manipulations when the app state changes.
 
-If you are familiar with Virtual DOM concepts and prefer the raw power of JavaScript, you can also [directly write render functions](/guide/extras/render-function.html) instead of templates, with optional JSX support. However, do note that they do not enjoy the same level of compile-time optimizations as templates.
+خلف الستار، يقوم Vue بتحويل القوالب إلى شيفرة JavaScript محسّنة بشكل كبير مقترنة مع المنظومة التفاعلية، يمكن لـVue تحديد عدد أدنى من المكوّنات من أجل إعادة التصيير و تطبيق حد أدنى من التعديلات على شجرة الـDOM عند تغيير حالة التطبيق.
 
-## Text Interpolation {#text-interpolation}
 
-The most basic form of data binding is text interpolation using the "Mustache" syntax (double curly braces):
+
+إذا كنت معتادًا على مفاهيم الـDOM الافتراضي و تفضّل القوة الخام لـJavaScript، يمكنك أيضًا [كتابة دوال التصيير ](/guide/extras/render-function.html)  مباشرة بدلاً من القوالب، مع دعم اختياري للـJSX . ومع ذلك، يرجى ملاحظة أنها لا تتمتع بنفس مستوى التحسينات في وقت التصيير مثل القوالب.
+
+## الاقحام النصي {#text-interpolation}
+
+أسهل شكل لربط البيانات هو الاقحام النصي باستخدام صيغة "الشارب" (الأقواس المعقوفة):
 
 ```vue-html
-<span>Message: {{ msg }}</span>
+<span>رسالة : {{ msg }}</span>
 ```
 
-The mustache tag will be replaced with the value of the `msg` property from the corresponding component instance. It will also be updated whenever the `msg` property changes.
+سيتم استبدال وسم الأقواس بقيمة الخاصية `msg` من شيفرة المكوّن الموافق. و سيتم تحديثها كلما تغيرت قيمة `msg`.
 
-## Raw HTML {#raw-html}
+##  الـHTML الخام {#raw-html}
 
-The double mustaches interpret the data as plain text, not HTML. In order to output real HTML, you will need to use the [`v-html` directive](/api/built-in-directives.html#v-html):
+تقوم الأقواس المعقوفة بترجمة البيانات كنصّ بدون تصييرها كـHTML. لتصيير HTML حقيقي، ستحتاج إلى استخدام [السمة الموجهة `v-html`](/api/built-in-directives.html#v-html):
+
+
+
 
 ```vue-html
-<p>Using text interpolation: {{ rawHtml }}</p>
-<p>Using v-html directive: <span v-html="rawHtml"></span></p>
+<p>باستخدام الاقحام النصي: {{ rawHtml }}</p>
+<p>باستخدام الموجهة v-html : <span v-html="rawHtml"></span></p>
 ```
 
 <script setup>
-  const rawHtml = '<span style="color: red">This should be red.</span>'
+  const rawHtml = '<span style="color: red">هذا النص يكون بلون أحمر</span>'
 </script>
 
 <div class="demo">
-  <p>Using text interpolation: {{ rawHtml }}</p>
-  <p>Using v-html directive: <span v-html="rawHtml"></span></p>
+   <p> باستخدام الاقحام النصي : {{ rawHtml }}</p>
+   <p>باستخدام الموجهة v-html : <span v-html="rawHtml"></span></p>
 </div>
 
-Here we're encountering something new. The `v-html` attribute you're seeing is called a **directive**. Directives are prefixed with `v-` to indicate that they are special attributes provided by Vue, and as you may have guessed, they apply special reactive behavior to the rendered DOM. Here, we're basically saying "keep this element's inner HTML up-to-date with the `rawHtml` property on the current active instance."
 
-The contents of the `span` will be replaced with the value of the `rawHtml` property, interpreted as plain HTML - data bindings are ignored. Note that you cannot use `v-html` to compose template partials, because Vue is not a string-based templating engine. Instead, components are preferred as the fundamental unit for UI reuse and composition.
+هنا قابلنا شيئًا جديدًا و هو السمة  `v-html` أو ما يسمى بـ **المُوجِّهة**. تبدأ تسمية الموجهات بـ `v-` لتشير إلى أنها سمات خاصة مقدمة من Vue، و كما هو متوقع، فإنها تطبق سلوكًا تفاعليًا خاصًا على شجرة الـDOM المصيّرة. هنا، نقول لل "أبقِ هذا العنصر HTML الداخلي محدّثًا مع قيمة الخاصية `rawHtml` من شيفرة المكوّن النشط الحالي".
 
-:::warning Security Warning
-Dynamically rendering arbitrary HTML on your website can be very dangerous because it can easily lead to [XSS vulnerabilities](https://en.wikipedia.org/wiki/Cross-site_scripting). Only use `v-html` on trusted content and **never** on user-provided content.
+
+محتوى العنصر `span` سيتم استبداله بقيمة الخاصية `rawHtml`، و تم ترجمتها كـHTML خام - و يُهمل الربط مع البيانات. يرجى ملاحظة أنه لا يمكنك استخدام `v-html` لتركيب جزء من قالب مع ربط البيانات و معالجة الأحدات، لأن Vue ليست محرك  مبني على قوالب السلاسل النصية. بدلاً من ذلك، يفضل استخدام المكوّنات كوحدة أساسية لإعادة استخدام و تركيب واجهة المستخدم.
+
+
+:::warning تحذير أمني
+تصيير HTML عشوائي بشكل ديناميكي على موقعك على الويب قد يكون له خطرًا كبيرًا لأنه يمكن أن يؤدي بسهولة إلى [ثغرات XSS](https://en.wikipedia.org/wiki/Cross-site_scripting). استخدم `v-html` فقط على المحتوى الموثوق به و لا تستخدمه **أبدًا** على المحتوى المدخل من قبل المستخدم.
 :::
+## ربط السمات {#attribute-bindings}
 
-## Attribute Bindings {#attribute-bindings}
+لا يمكن استخدام الأقواس المعقوفة داخل سمات الـHTML لربطها بالبيانات. بدلاً من ذلك، استخدم [الموجهة `v-bind`](/api/built-in-directives.html#v-bind):
 
-Mustaches cannot be used inside HTML attributes. Instead, use a [`v-bind` directive](/api/built-in-directives.html#v-bind):
 
 ```vue-html
 <div v-bind:id="dynamicId"></div>
 ```
 
-The `v-bind` directive instructs Vue to keep the element's `id` attribute in sync with the component's `dynamicId` property. If the bound value is `null` or `undefined`, then the attribute will be removed from the rendered element.
+السمة المُوجِّهة `v-bind` تُعلم Vue بأنه يجب أن تبقى السمة `id` متزامنة مع المتغير `dynamicId` للمكوّن النشط. إذا كانت قيمة المتغير المربوط `null` أو `undefined`، فسيتم إزالة السمة من العنصر المُصيّر.
+### الإختصار {#shorthand}
 
-### Shorthand {#shorthand}
-
-Because `v-bind` is so commonly used, it has a dedicated shorthand syntax:
+بما أن `v-bind` مستخدمة بشكل متكرر، فاختصرت بـ  `:`  :
 
 ```vue-html
 <div :id="dynamicId"></div>
 ```
 
-Attributes that start with `:` may look a bit different from normal HTML, but it is in fact a valid character for attribute names and all Vue-supported browsers can parse it correctly. In addition, they do not appear in the final rendered markup. The shorthand syntax is optional, but you will likely appreciate it when you learn more about its usage later.
+السمات التي تبدأ بـ `:` قد تبدو مختلفة عن الـHTML العادي، لكنها في الحقيقة رمز صالح لتسمية السمات و يمكن لجميع المتصفحات المدعومة من Vue تحليلها بشكل صحيح. بالإضافة إلى ذلك، فإنها لا تظهر في العناصر النهائية المصيّرة. هذه الصيغة تبقى اختيارية، لكنك ستقدر قيمتها عندما تتعلم المزيد عن استخدامها في وقت لاحق.
 
-> For the rest of the guide, we will be using the shorthand syntax in code examples, as that's the most common usage for Vue developers.
+> فيما يلي من الدليل، سنستخدم الصيغة المختصرة في أمثلة الشيفرة، لأنها هي الأكثر استخدامًا من طرف مطوري Vue.
 
-### Boolean Attributes {#boolean-attributes}
+### السمات المنطقية {#boolean-attributes}
 
-[Boolean attributes](https://html.spec.whatwg.org/multipage/common-microsyntaxes.html#boolean-attributes) are attributes that can indicate true / false values by their presence on an element. For example, [`disabled`](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/disabled) is one of the most commonly used boolean attributes.
+[السمات المنطقية](https://html.spec.whatwg.org/multipage/common-microsyntaxes.html#boolean-attributes) هي السمات التي يمكن أن تشير إلى قيم صحيحة/خاطئة من خلال وجودها على عنصر. على سبيل المثال، [`disabled`](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/disabled) هي أحد أكثر السمات المنطقية استخدامًا.
 
-`v-bind` works a bit differently in this case:
+في هذه الحالة، تعمل المُوجِّهة `v-bind` بشكل مختلف:
 
 ```vue-html
-<button :disabled="isButtonDisabled">Button</button>
+<button :disabled="isButtonDisabled">زر</button>
 ```
 
-The `disabled` attribute will be included if `isButtonDisabled` has a [truthy value](https://developer.mozilla.org/en-US/docs/Glossary/Truthy). It will also be included if the value is an empty string, maintaining consistency with `<button disabled="">`. For other [falsy values](https://developer.mozilla.org/en-US/docs/Glossary/Falsy) the attribute will be omitted.
+السمة `disabled` ستُصيَّر على وسم العنصر إذا كانت قيمة المتغير المربوط `isButtonDisabled` [صحيحة](https://developer.mozilla.org/en-US/docs/Glossary/Truthy). أو إذا كانت قيمة المتغير عبارة عن نص فارغ، بحيث تكون متوافقة مع `<button disabled="">...</button>`. للقيم [الخاطئة](https://developer.mozilla.org/en-US/docs/Glossary/Falsy) الأخرى، تُحذف السمة.
 
-### Dynamically Binding Multiple Attributes {#dynamically-binding-multiple-attributes}
+### ربط سمات متعددة بشكل ديناميكي {#dynamically-binding-multiple-attributes}
 
-If you have a JavaScript object representing multiple attributes that looks like this:
+إذا كان لديك كائن JavaScript و خاصياته تمثل سمات متعددة مثل المثال الموالي:
 
 <div class="composition-api">
 
@@ -105,50 +113,52 @@ data() {
 
 </div>
 
-You can bind them to a single element by using `v-bind` without an argument:
+يمكنك ربطها بعنصر واحد باستخدام `v-bind` بدون تمرير وسيط:
 
 ```vue-html
 <div v-bind="objectOfAttrs"></div>
 ```
+## استخدام تعبيرات الـJavascript {#using-javascript-expressions}
 
-## Using JavaScript Expressions {#using-javascript-expressions}
 
-So far we've only been binding to simple property keys in our templates. But Vue actually supports the full power of JavaScript expressions inside all data bindings:
+حتى الآن، لم نربط سوى الخاصيات البسيطة في قوالبنا. لكن Vue في الواقع يدعم قوة تعبيرات الـJavaScript كاملة داخل جميع حالات ربط البيانات:
+
 
 ```vue-html
 {{ number + 1 }}
 
-{{ ok ? 'YES' : 'NO' }}
+{{ ok ? 'لا' : 'نعم' }}
 
 {{ message.split('').reverse().join('') }}
 
 <div :id="`list-${id}`"></div>
 ```
 
-These expressions will be evaluated as JavaScript in the data scope of the current component instance.
+هذه التعبيرات ستُقيَّم كـشيفرة JavaScript في نطاق البيانات في نسخة العنصر الحالي.
 
-In Vue templates, JavaScript expressions can be used in the following positions:
+في قوالب Vue، يمكن استخدام تعبيرات JavaScript في الأماكن التالية:
 
-- Inside text interpolations (mustaches)
-- In the attribute value of any Vue directives (special attributes that start with `v-`)
 
-### Expressions Only {#expressions-only}
+- كنص مقحم داخل الأقواس المزدوجة  
+- كقيمة لأي سمة مُوجهة مربوطة (السمات الخاصة التي تبدأ بـ`-v`)
 
-Each binding can only contain **one single expression**. An expression is a piece of code that can be evaluated to a value. A simple check is whether it can be used after `return`.
+### التعبيرات فقط {#expressions-only}
 
-Therefore, the following will **NOT** work:
+كل ربط يمكنه أن يحتوي على **تعبير واحد فقط**. بحيث يمكن تحويله إلى قيمة. يمكن استخدام التعبيرات بعد `return` للتحقق من صحتها.
+
+و بالتالي الشيفرة الموالية **لن** تشتغل:
 
 ```vue-html
-<!-- this is a statement, not an expression: -->
+<!-- : هاته تعليمة و ليست تعبيرا  -->
 {{ var a = 1 }}
 
-<!-- flow control won't work either, use ternary expressions -->
+<!-- التحكم في انسياب التعليمات لن يشتغل  أيضا، بدلا من ذلك استخدم التعبير الثلاثي-->
 {{ if (ok) { return message } }}
 ```
 
-### Calling Functions {#calling-functions}
+### استدعاء الدوال {#calling-functions}
 
-It is possible to call a component-exposed method inside a binding expression:
+ من الممكن استدعاء دالة مُعرَّفة في الشيفرة الخاصة بالمكون داخل تعبير ربط : 
 
 ```vue-html
 <span :title="toTitleDate(date)">
@@ -157,113 +167,112 @@ It is possible to call a component-exposed method inside a binding expression:
 ```
 
 :::tip
-Functions called inside binding expressions will be called every time the component updates, so they should **not** have any side effects, such as changing data or triggering asynchronous operations.
+ تستدعى الدوال داخل تعبيرات الربط كل مرة يُحدَّثُ فيها المكون، لذا يجب أن **لا تكون** لها أي تأثيرات جانبية مثل تغيير البيانات أو تشغيل عمليات غير متزامنة.
 :::
 
-### Restricted Globals Access {#restricted-globals-access}
+### الوصول المحدود للعوامل العامة {#restricted-globals-access}
 
-Template expressions are sandboxed and only have access to a [restricted list of globals](https://github.com/vuejs/core/blob/main/packages/shared/src/globalsWhitelist.ts#L3). The list exposes commonly used built-in globals such as `Math` and `Date`.
+التعبيرات في القوالب متاحة بشكل مُحدَّد و لها إمكانية الوصول فقط إلى [قائمة محدودة من العوامل العامة](https://github.com/vuejs/core/blob/main/packages/shared/src/globalsWhitelist.ts#L3). تعرض القائمة العوامل الأساسية العامة المستخدمة بشكل شائع مثل `Math` و `Date`.
 
-Globals not explicitly included in the list, for example user-attached properties on `window`, will not be accessible in template expressions. You can, however, explicitly define additional globals for all Vue expressions by adding them to [`app.config.globalProperties`](/api/application.html#app-config-globalproperties).
 
-## Directives {#directives}
 
-Directives are special attributes with the `v-` prefix. Vue provides a number of [built-in directives](/api/built-in-directives.html), including `v-html` and `v-bind` which we have introduced above.
+العوامل العامة ليست مضمنة بشكل صريح في القائمة، مثل الخاصيات المرفقة من قبل المستخدم على `window`، لن تكون متاحة في تعبيرات القالب. ومع ذلك، يمكنك تعريف العوامل العامة بشكل صريح لجميع تعبيرات Vue عن طريق إضافتها إلى [`app.config.globalProperties`](/api/application.html#app-config-globalproperties).
 
-Directive attribute values are expected to be single JavaScript expressions (with the exception of `v-for`, `v-on` and `v-slot`, which will be discussed in their respective sections later). A directive's job is to reactively apply updates to the DOM when the value of its expression changes. Take [`v-if`](/api/built-in-directives.html#v-if) as an example:
+## السمات المُوجِّهة {#directives}
+
+السمات الموجهة هي سمات خاصة تبدأ بـ`v-`،  تقدم Vue مجموعة من [السمات الأساسية](/api/built-in-directives.html) بما في ذلك `v-html` و `v-bind` التي سردناهما سابقا.
+
+ الموجهات تكون قِيَّمُها عبارة عن تعبيرات JavaScript واحدة (باستثناء `v-for` و `v-on` و `v-slot`، والتي سنتحدث عنها في الأقسام المخصصة لها في وقت لاحق). وظيفة الموجهة هي تطبيق التحديثات الديناميكية على شجرة الـDOM عندما تتغير قيمة التعبير الخاص بها. اختر [`v-if`](/api/built-in-directives.html#v-if) كمثال:
 
 ```vue-html
-<p v-if="seen">Now you see me</p>
+<p v-if="seen">الآن يمكنك رؤيتي</p>
 ```
 
-Here, the `v-if` directive would remove / insert the `<p>` element based on the truthiness of the value of the expression `seen`.
+هنا، سيقوم الموجه `v-if` بإزالة / إدراج عنصر `<p>` بناءً على صحة قيمة التعبير `seen`.
+### الوسائط {#arguments}
 
-### Arguments {#arguments}
-
-Some directives can take an "argument", denoted by a colon after the directive name. For example, the `v-bind` directive is used to reactively update an HTML attribute:
+بعض الموجهات يمكنها أخذ "وسيط"، والذي يُعرَف بـ`:` بعد اسم الموجه. على سبيل المثال، يُستخدم الموجه `v-bind` لتحديث السمة HTML بشكل تفاعلي:
 
 ```vue-html
 <a v-bind:href="url"> ... </a>
 
-<!-- shorthand -->
+<!-- اختصار -->
 <a :href="url"> ... </a>
 ```
 
-Here, `href` is the argument, which tells the `v-bind` directive to bind the element's `href` attribute to the value of the expression `url`. In the shorthand, everything before the argument (i.e., `v-bind:`) is condensed into a single character, `:`.
+هنا، `href` هو الوسيط، و الذي يخبر الموجه `v-bind` بربط السمة `href` للعنصر بقيمة التعبير `url`. اختصارا، كل شيء قبل الوسيط (أي، `:v-bind`) يُختصر إلى رمز النقطتين `:`.
 
-Another example is the `v-on` directive, which listens to DOM events:
+مثال آخر هو الموجه `v-on`، الذي يستمع إلى أحداث الـDOM:
 
 ```vue-html
 <a v-on:click="doSomething"> ... </a>
 
-<!-- shorthand -->
+<!-- اختصار -->
 <a @click="doSomething"> ... </a>
 ```
+هنا، الوسيط هو اسم الحدث الذي سيُستمع إليه: `click`. يمتلك الموجه `v-on` اختصارا مقابل، وهو الرمز `@`. سنتحدث عن معالجة الأحداث أيضا بشكل أكثر تفصيلا.
 
-Here, the argument is the event name to listen to: `click`. `v-on` has a corresponding shorthand, namely the `@` character. We will talk about event handling in more detail too.
+### الوسائط الديناميكية {#dynamic-arguments}
 
-### Dynamic Arguments {#dynamic-arguments}
-
-It is also possible to use a JavaScript expression in a directive argument by wrapping it with square brackets:
+من الممكن أيضا استخدام تعبيرات الـJavaScript في وسيط الموجه بواسطة إحاطته بأقواس مربعة:
 
 ```vue-html
-<!--
-Note that there are some constraints to the argument expression,
-as explained in the "Dynamic Argument Value Constraints" and "Dynamic Argument Syntax Constraints" sections below.
+<!-- 
+تجدر الملاحظة أن هناك بعض القيود على تعبير الوسيط،
+كما هو موضح في الأقسام "قيود قيمة الوسيط الديناميكي" و "قيود صيغة الوسيط الديناميكي" أدناه.
 -->
+
 <a v-bind:[attributeName]="url"> ... </a>
 
-<!-- shorthand -->
+<!-- اختصار -->
 <a :[attributeName]="url"> ... </a>
 ```
+هنا، سيتم تقييم `attributeName` بشكل ديناميكي كتعبير JavaScript، وسيتم استخدام حالة التقييم النهائية كقيمة للوسيط. على سبيل المثال، إذا كان لديك نسخة مكون لديها خاصية بإسم  `attributeName`، والذي يحتوي على القيمة النصية `"href"`، فإن هذا الربط سيكون مطابقا لـ`v-bind:href`.
 
-Here, `attributeName` will be dynamically evaluated as a JavaScript expression, and its evaluated value will be used as the final value for the argument. For example, if your component instance has a data property, `attributeName`, whose value is `"href"`, then this binding will be equivalent to `v-bind:href`.
-
-Similarly, you can use dynamic arguments to bind a handler to a dynamic event name:
+بشكل مماثل، يمكنك استخدام الوسائط الديناميكية لربط معالج لاسم حدث ديناميكي:
 
 ```vue-html
 <a v-on:[eventName]="doSomething"> ... </a>
 
-<!-- shorthand -->
+<!-- اختصار -->
 <a @[eventName]="doSomething">
 ```
 
-In this example, when `eventName`'s value is `"focus"`, `v-on:[eventName]` will be equivalent to `v-on:focus`.
+في هذا المثال، عندما تكون قيمة `eventName` هي `"focus"`، فإن `v-on:[eventName]` سيكون مطابقا لـ`v-on:focus`.
+#### قيود قيمة الوسيط الديناميكي {#dynamic-argument-value-constraints}
 
-#### Dynamic Argument Value Constraints {#dynamic-argument-value-constraints}
+الوسائط الديناميكية يُتوقع أن تكون قيمها عبارة عن سلسلة نصية، ما عدا `null`. يمكن استخدام القيمة الخاصة `null` لإزالة الربط بشكل صريح. أي قيمة غير نصية ستُظهر تحذيرا.
 
-Dynamic arguments are expected to evaluate to a string, with the exception of `null`. The special value `null` can be used to explicitly remove the binding. Any other non-string value will trigger a warning.
+#### قيود صيغة الوسيط الديناميكي {#dynamic-argument-syntax-constraints}
 
-#### Dynamic Argument Syntax Constraints {#dynamic-argument-syntax-constraints}
-
-Dynamic argument expressions have some syntax constraints because certain characters, such as spaces and quotes, are invalid inside HTML attribute names. For example, the following is invalid:
+الوسائط الديناميكية لها بعض القيود  في كتابة صيغها لأن بعض الرموز مثل المسافات والعلامات التنصيصية، غير صالحة كأسماء سمات في  HTML. على سبيل المثال، العبارة التالية غير صالحة:
 
 ```vue-html
-<!-- This will trigger a compiler warning. -->
+<!-- هذا سيسبب تحذيرا من المصرف. -->
 <a :['foo' + bar]="value"> ... </a>
 ```
 
-If you need to pass a complex dynamic argument, it's probably better to use a [computed property](./computed.html), which we will cover shortly.
+إذا كنت  تحتاج  تمرير وسيط ديناميكي معقد، فمن المحتمل أن يكون من الأفضل استخدام [خاصية محسوبة](./computed.html)، والتي سنتحدث عنها باختصار.
 
-When using in-DOM templates (templates directly written in an HTML file), you should also avoid naming keys with uppercase characters, as browsers will coerce attribute names into lowercase:
+عند استخدام قوالب  الـDOM (القوالب المكتوبة مباشرة في ملف HTML)، يجب عليك أيضا تجنب تسمية المفاتيح بحروف كبيرة، لأن المتصفحات ستقوم بتحويل أسماء السمات إلى حروف صغيرة:
 
 ```vue-html
 <a :[someAttr]="value"> ... </a>
 ```
 
-The above will be converted to `:[someattr]` in in-DOM templates. If your component has a `someAttr` property instead of `someattr`, your code won't work. Templates inside Single-File Components are **not** subject to this constraint.
+التسمية اعلاه ستُحول إلى `:[someattr]` في قوالب الـDOM، إذا كان لديك خاصية `someAttr` بدلا من `someattr`، فلن تعمل شيفرتك. القوالب الموجودة داخل المكونات أحادية الملف ستكون **غير** خاضعة لهاته القيود.
 
-### Modifiers {#modifiers}
+### المُعدِّلات {#modifiers}
 
-Modifiers are special postfixes denoted by a dot, which indicate that a directive should be bound in some special way. For example, the `.prevent` modifier tells the `v-on` directive to call `event.preventDefault()` on the triggered event:
+المُعدِّلات هي لاحقات خاصة يُشار إليها بواسطة نقطة، والتي تُشير إلى أن السمة يجب ربطها بطريقة معينة. على سبيل المثال، المُعدِّل `prevent.` يُخبر الاتجاه `v-on` بإستدعاء `()event.preventDefault` على الحدث المُشغّل:
 
 ```vue-html
 <form @submit.prevent="onSubmit">...</form>
 ```
 
-You'll see other examples of modifiers later, [for `v-on`](./event-handling.html#event-modifiers) and [for `v-model`](./forms.html#modifiers), when we explore those features.
+سنرى أمثلة أخرى للمُعدِّلات في وقت لاحق، عندما نتطرق إلى هذه الميزات، على سبيل المثال [`v-on`](./event-handling.html#event-modifiers) و [`v-model`](./forms.html#modifiers).
 
-And finally, here's the full directive syntax visualized:
+و أخيرا، هاته هي صيغة المُعدِّل موضحة بالكامل: 
 
 ![directive syntax graph](./images/directive.png)
 

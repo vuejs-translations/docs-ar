@@ -2,17 +2,19 @@
 outline: deep
 ---
 
-# Reactivity Fundamentals {#reactivity-fundamentals}
+# أساسيات التفاعلية {#reactivity-fundamentals}
 
-:::tip API Preference
-This page and many other chapters later in the guide contain different content for Options API and Composition API. Your current preference is <span class="options-api">Options API</span><span class="composition-api">Composition API</span>. You can toggle between the API styles using the "API Preference" switches at the top of the left sidebar.
+:::tip تفضيلات واجهة البرمجة
+هاته الصفحة والعديد من المحاور الأخرى في المرجع تحتوي على محتوى مختلف بواجهة الخيارات و  الواجهة التركيبية. تفضيلك الحاليل هو <span class="options-api">واجهة الخيارات</span><span class="composition-api">الواجهة التركيبية</span>. يمكنك التبديل بين نمطي الواجهتين باستخدام مفاتيح التبديل "تفضيلات واجهة البرمجة" في أعلى جانب الشريط الجانبي الأيسر.
 :::
 
-## Declaring Reactive State {#declaring-reactive-state}
+## التصريح بحالة تفاعلية {#declaring-reactive-state}
 
 <div class="options-api">
 
-With Options API, we use the `data` option to declare reactive state of a component. The option value should be a function that returns an object. Vue will call the function when creating a new component instance, and wrap the returned object in its reactivity system. Any top-level properties of this object are proxied on the component instance (`this` in methods and lifecycle hooks):
+مع واجهة الخيارات، نستخدم خيار `data` للتصريح بحالة تفاعلية داخل المكون. قيمة الخيار يجب أن تكون دالة تعيد كائن `{}`. ستقوم Vue باستدعاء الدالة عند إنشاء نسخة جديدة من المكون، وتغليف الكائن المعاد في نظام تفاعليته. أي خاصيات من المستوى الأعلى من المكونات الأم أو من جذر التطبيق لهذا الكائن متاحة على مستوى نسخة المكون (this في التوابع وخطافات دورة الحياة) :
+
+
 
 ```js{2-6}
 export default {
@@ -22,28 +24,28 @@ export default {
     }
   },
 
-  // `mounted` is a lifecycle hook which we will explain later
+  // `mounted` هي خطاف دورة حياة سنشرحها لاحقا
   mounted() {
-    // `this` refers to the component instance.
+    // `this` يشير إلى نسخة المكون
     console.log(this.count) // => 1
 
-    // data can be mutated as well
+    // الخاصيات من الكائن المعاد يمكن تغييرها
     this.count = 2
   }
 }
 ```
 
-[Try it in the Playground](https://sfc.vuejs.org/#eyJBcHAudnVlIjoiPHNjcmlwdD5cbmV4cG9ydCBkZWZhdWx0IHtcbiAgZGF0YSgpIHtcbiAgICByZXR1cm4ge1xuICAgICAgY291bnQ6IDFcbiAgICB9XG4gIH0sXG5cbiAgLy8gYG1vdW50ZWRgIGlzIGEgbGlmZWN5Y2xlIGhvb2sgd2hpY2ggd2Ugd2lsbCBleHBsYWluIGxhdGVyXG4gIG1vdW50ZWQoKSB7XG4gICAgLy8gYHRoaXNgIHJlZmVycyB0byB0aGUgY29tcG9uZW50IGluc3RhbmNlLlxuICAgIGNvbnNvbGUubG9nKHRoaXMuY291bnQpIC8vID0+IDFcblxuICAgIC8vIGRhdGEgY2FuIGJlIG11dGF0ZWQgYXMgd2VsbFxuICAgIHRoaXMuY291bnQgPSAyXG4gIH1cbn1cbjwvc2NyaXB0PlxuXG48dGVtcGxhdGU+XG4gIENvdW50IGlzOiB7eyBjb3VudCB9fVxuPC90ZW1wbGF0ZT4iLCJpbXBvcnQtbWFwLmpzb24iOiJ7XG4gIFwiaW1wb3J0c1wiOiB7XG4gICAgXCJ2dWVcIjogXCJodHRwczovL3NmYy52dWVqcy5vcmcvdnVlLnJ1bnRpbWUuZXNtLWJyb3dzZXIuanNcIlxuICB9XG59In0=)
+[اختبره في حقل التجارب](https://sfc.vuejs.org/#eNp9kl1qAjEQx68y5ElBd2kfRYXeIw9uNX7hZpck2oL40PpZ79EuFayIlmJPMrlNJ7u6QguFXTL/SeY3k5mM2V0ce6OhYBVW1U3Vi02dS/EYR8pAS7SD4cDAmEuAVmCCQjGzAZQwQyUvCqAZDaWpwE2mJ26ZlLh0q+9DI3TbotUAu7RrwA/8wsQ+Ae7sCvf4Dri1a0yccbALPJJva5eYgJ2Rd2ufMXGkM+VahUObbk8Td41H+veAr3ZmX4AoB0pDwIT03E7tyi6yoGYkdTQQ3iDqFFywl9ZedLBa3d0gZ7tYgiT4mVa3AQItMuKU9NtFzPFEckdFpJnIu8FvElSPu0XGu6aCGtymDeKSvqqft52EEWE8CIwglaU/4c6xKzAeZ02GSRqUH2Ql1gvduMphEHt9HUkaZdofft7QnFF4VgVnNGunOesaE+uK7+t20z2AvvYi1fHJ8hSl6YXCEzos36voQQtFYM5ooDnDJ+dIqLISsiWUUP8xfx39w700g01+ACxIF8Y=)
 
-These instance properties are only added when the instance is first created, so you need to ensure they are all present in the object returned by the `data` function. Where necessary, use `null`, `undefined` or some other placeholder value for properties where the desired value isn't yet available.
+هاته الخاصيات التابعة لنسخة المكون تُضاف فقط عند إنشاء النسخة لأول مرة، لذا يجب التأكد من وجود كلها في الكائن المعاد من الدالة `data`. حين تقتضي الضرورة، استخدم `null`، `undefined` أو بعض القيم المؤقتة للخاصيات التي لا تتوفر قيمها الحقيقية عندئذ.
 
-It is possible to add a new property directly to `this` without including it in `data`. However, properties added this way will not be able to trigger reactive updates.
+من الممكن إضافة خاصية جديدة مباشرة إلى `this` دون تضمينها في `data`. لكن لن تتمكن الخصائص المضافة بهذه الطريقة من تشغيل تحديثات تفاعلية.
 
-Vue uses a `$` prefix when exposing its own built-in APIs via the component instance. It also reserves the prefix `_` for internal properties. You should avoid using names for top-level `data` properties that start with either of these characters.
+Vue تستخدم البادئة `$` لتوفير واجهات برمجة للخاصيات الجذرية داخل نسخة المكون. كما أنها تحجز البادئة `_` للخاصيات الداخلية. يجب عليك تجنب استخدام أسماء لخاصيات الـ`data` الرئيسية التي تبدأ بأحد هذه الرموز.
 
-### Reactive Proxy vs. Original \* {#reactive-proxy-vs-original}
+### الوسيط التفاعلي مقابل الأصلي \* {#reactive-proxy-vs-original}
 
-In Vue 3, data is made reactive by leveraging [JavaScript Proxies](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy). Users coming from Vue 2 should be aware of the following edge case:
+في Vue 3، يتم جعل البيانات تفاعلية عن طريق استخدام [JavaScript وسائط](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy). يجب على المستخدمين القادمين من Vue 2 أن يكونوا على علم بالحالة المحددة التالية:
 
 ```js
 export default {
@@ -61,13 +63,13 @@ export default {
 }
 ```
 
-When you access `this.someObject` after assigning it, the value is a reactive proxy of the original `newObject`. **Unlike in Vue 2, the original `newObject` is left intact and will not be made reactive: make sure to always access reactive state as a property of `this`.**
+عندما تصل إلى `this.someObject` بعد تعيينه، فإن القيمة هي وسيط تفاعلي لـ `newObject` الأصلي. **على عكس Vue 2، فإن `newObject` الأصلي يبقى غير متغير ولن يتم جعله تفاعليًا: تأكد  دائمًا من الوصول إلى الحالة التفاعلية كخاصية لـ `this`.**
 
 </div>
 
 <div class="composition-api">
 
-We can create a reactive object or array with the [`reactive()`](/api/reactivity-core.html#reactive) function:
+يمكننا إنشاء كائن تفاعلي أو مصفوفة باستخدام دالة [`()reactive`](/api/reactivity-core.html#reactive):
 
 ```js
 import { reactive } from 'vue'
@@ -75,21 +77,21 @@ import { reactive } from 'vue'
 const state = reactive({ count: 0 })
 ```
 
-Reactive objects are [JavaScript Proxies](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy) and behave just like normal objects. The difference is that Vue is able to track the property access and mutations of a reactive object. If you are curious about the details, we explain how Vue's reactivity system works in [Reactivity in Depth](/guide/extras/reactivity-in-depth.html) - but we recommend reading it after you have finished the main guide.
+الكائنات التفاعلية هي [وسائط JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy) وتتصرف مثل الكائنات العادية. الفرق هو أن Vue قادرة على تتبع الوصول إلى خاصيات وتغييرات الكائن التفاعلي. إذا كنت ترغب في معرفة التفاصيل، سنشرح كيفية عمل نظام التفاعلية في Vue  في قسم [التفاعل بالتفصيل](/guide/extras/reactivity-in-depth.html) - لكننا نوصي بقراءته بعد إتمام الدليل الرئيسي.
 
-See also: [Typing Reactive](/guide/typescript/composition-api.html#typing-reactive) <sup class="vt-badge ts" />
+الق نظرة على: [إضافة النوع لـReactive](/guide/typescript/composition-api.html#typing-reactive) <sup class="vt-badge ts" />
 
-To use reactive state in a component's template, declare and return them from a component's `setup()` function:
+لاستخدام الحالة التفاعلية في قالب المكون، قم بتعريفها وارجاعها من دالة `()setup` للمكون:
 
 ```js{5,9-11}
 import { reactive } from 'vue'
 
 export default {
-  // `setup` is a special hook dedicated for composition API.
+  // `setup` هو خطافة خاصة مخصصة للواجهة التركيبية API.
   setup() {
     const state = reactive({ count: 0 })
 
-    // expose the state to the template
+    // اعرض الحالة في القالب
     return {
       state
     }
@@ -101,7 +103,7 @@ export default {
 <div>{{ state.count }}</div>
 ```
 
-Similarly, we can declare functions that mutate reactive state in the same scope and expose them as methods alongside the state:
+بشكل مماثل، يمكننا إعلان الدوال التي تغير الحالة التفاعلية في نفس النطاق وتعرضها كتوابع جنبًا إلى جنب مع الحالة:
 
 ```js{7-9,14}
 import { reactive } from 'vue'
@@ -114,7 +116,7 @@ export default {
       state.count++
     }
 
-    // don't forget to expose the function as well.
+    // لا تنسى عرض الدالة أيضًا.
     return {
       state,
       increment
@@ -122,8 +124,7 @@ export default {
   }
 }
 ```
-
-Exposed methods are typically used as event listeners:
+التوابع المعروضة عادة ما تستخدم كمستمعات للأحداث:
 
 ```vue-html
 <button @click="increment">
@@ -131,9 +132,9 @@ Exposed methods are typically used as event listeners:
 </button>
 ```
 
-### `<script setup>` \*\* {#script-setup}
+### صيغة `<script setup>`  \*\* {#script-setup}
 
-Manually exposing state and methods via `setup()` can be verbose. Luckily, it is only necessary when not using a build step. When using Single-File Components (SFCs), we can greatly simplify the usage with `<script setup>`:
+عرض الحالة يدويا والدوال عبر `()setup` يمكن أن يكون مطولا. لحسن الحظ، فإنه مطلوب فقط عند عدم استخدام عملية بناء. عند استخدام مكونات أحادية الملف (SFCs)، يمكننا تبسيط الاستخدام بشكل كبير باستخدام صيغة `<script setup>`:
 
 ```vue
 <script setup>
@@ -153,21 +154,21 @@ function increment() {
 </template>
 ```
 
-[Try it in the Playground](https://sfc.vuejs.org/#eyJBcHAudnVlIjoiPHNjcmlwdCBzZXR1cD5cbmltcG9ydCB7IHJlYWN0aXZlIH0gZnJvbSAndnVlJ1xuXG5jb25zdCBzdGF0ZSA9IHJlYWN0aXZlKHsgY291bnQ6IDAgfSlcblxuZnVuY3Rpb24gaW5jcmVtZW50KCkge1xuICBzdGF0ZS5jb3VudCsrXG59XG48L3NjcmlwdD5cblxuPHRlbXBsYXRlPlxuICA8YnV0dG9uIEBjbGljaz1cImluY3JlbWVudFwiPlxuICAgIHt7IHN0YXRlLmNvdW50IH19XG4gIDwvYnV0dG9uPlxuPC90ZW1wbGF0ZT4iLCJpbXBvcnQtbWFwLmpzb24iOiJ7XG4gIFwiaW1wb3J0c1wiOiB7XG4gICAgXCJ2dWVcIjogXCJodHRwczovL3NmYy52dWVqcy5vcmcvdnVlLnJ1bnRpbWUuZXNtLWJyb3dzZXIuanNcIlxuICB9XG59In0=)
+[اختبر الشيفرة في حقل التجارب](https://sfc.vuejs.org/#eyJBcHAudnVlIjoiPHNjcmlwdCBzZXR1cD5cbmltcG9ydCB7IHJlYWN0aXZlIH0gZnJvbSAndnVlJ1xuXG5jb25zdCBzdGF0ZSA9IHJlYWN0aXZlKHsgY291bnQ6IDAgfSlcblxuZnVuY3Rpb24gaW5jcmVtZW50KCkge1xuICBzdGF0ZS5jb3VudCsrXG59XG48L3NjcmlwdD5cblxuPHRlbXBsYXRlPlxuICA8YnV0dG9uIEBjbGljaz1cImluY3JlbWVudFwiPlxuICAgIHt7IHN0YXRlLmNvdW50IH19XG4gIDwvYnV0dG9uPlxuPC90ZW1wbGF0ZT4iLCJpbXBvcnQtbWFwLmpzb24iOiJ7XG4gIFwiaW1wb3J0c1wiOiB7XG4gICAgXCJ2dWVcIjogXCJodHRwczovL3NmYy52dWVqcy5vcmcvdnVlLnJ1bnRpbWUuZXNtLWJyb3dzZXIuanNcIlxuICB9XG59In0=)
 
-Top-level imports and variables declared in `<script setup>` are automatically usable in the template of the same component.
+الاستيرادات ذات المستوى الأعلى والمتغيرات المعرفة في `<script setup>` متاحة تلقائيًا في قالب في نفس المكون.
 
-> For the rest of the guide, we will be primarily using SFC + `<script setup>` syntax for Composition API code examples, as that is the most common usage for Vue developers.
+> بالنسبة لبقية الدليل، سنستخدم أساسًا صيغة`<script setup>`  + المكونات أحادية الملف في  أمثلة شيفرة الواجهة التركيبية وهي الطريقة الشائعة المتبعة من طرف المطورين بـVue.
 
 </div>
 
 <div class="options-api">
 
-## Declaring Methods \* {#declaring-methods}
+## التصريح بالتوابع \* {#declaring-methods}
 
 <VueSchoolLink href="https://vueschool.io/lessons/methods-in-vue-3" title="Free Vue.js Methods Lesson"/>
 
-To add methods to a component instance we use the `methods` option. This should be an object containing the desired methods:
+لإضافة التوابع إلى نسخة المكون ، نستخدم خيار `methods`. يجب أن يكون هذا كائنًا يحتوي على التوابع المطلوبة:
 
 ```js{7-11}
 export default {
@@ -182,41 +183,40 @@ export default {
     }
   },
   mounted() {
-    // methods can be called in lifecycle hooks, or other methods!
+    // التوابع يمكن استدعاؤها في خطافات دورة الحياة أو في توابع أخرى!
     this.increment()
   }
 }
 ```
 
-Vue automatically binds the `this` value for `methods` so that it always refers to the component instance. This ensures that a method retains the correct `this` value if it's used as an event listener or callback. You should avoid using arrow functions when defining `methods`, as that prevents Vue from binding the appropriate `this` value:
+تربط Vue قيمة الـ`this` تلقائيًا مع التوابع حتى تُشير دائمًا إلى نسخة المكون. يؤكد هذا من أن التابع يحافظ على القيمة `this` الصحيحة إذا كان مستخدمًا كمستمع للأحداث أو رد نداء. يُحبَّذ تجنب استخدام الدوال السهمية عند تعريف الـ`methods`، حيث يمنع ذلك Vue من ربط قيمة الـ`this` المناسبة:
 
 ```js
 export default {
   methods: {
     increment: () => {
-      // BAD: no `this` access here!
+      //`this`  هنا لا يمكن الوصول إلى  !
     }
   }
 }
 ```
-
-Just like all other properties of the component instance, the `methods` are accessible from within the component's template. Inside a template they are most commonly used as event listeners:
+تمامًا مثل جميع الخاصيات الأخرى في نسخة المكون ، يمكن الوصول إلى `methods` من داخل قالب المكون. والتي تُستخدم عادة كمستمعات للأحداث:
 
 ```vue-html
 <button @click="increment">{{ count }}</button>
 ```
 
-[Try it in the Playground](https://sfc.vuejs.org/#eyJBcHAudnVlIjoiPHNjcmlwdD5cbmV4cG9ydCBkZWZhdWx0IHtcbiAgZGF0YSgpIHtcbiAgICByZXR1cm4ge1xuICAgICAgY291bnQ6IDBcbiAgICB9XG4gIH0sXG4gIG1ldGhvZHM6IHtcbiAgICBpbmNyZW1lbnQoKSB7XG4gICAgICB0aGlzLmNvdW50KytcbiAgICB9XG4gIH0sXG4gIG1vdW50ZWQoKSB7XG4gICAgdGhpcy5pbmNyZW1lbnQoKVxuICB9XG59XG48L3NjcmlwdD5cblxuPHRlbXBsYXRlPlxuICA8YnV0dG9uIEBjbGljaz1cImluY3JlbWVudFwiPnt7IGNvdW50IH19PC9idXR0b24+XG48L3RlbXBsYXRlPiIsImltcG9ydC1tYXAuanNvbiI6IntcbiAgXCJpbXBvcnRzXCI6IHtcbiAgICBcInZ1ZVwiOiBcImh0dHBzOi8vc2ZjLnZ1ZWpzLm9yZy92dWUucnVudGltZS5lc20tYnJvd3Nlci5qc1wiXG4gIH1cbn0ifQ==)
+[اختبرها في حقل التجارب](https://sfc.vuejs.org/#eyJBcHAudnVlIjoiPHNjcmlwdD5cbmV4cG9ydCBkZWZhdWx0IHtcbiAgZGF0YSgpIHtcbiAgICByZXR1cm4ge1xuICAgICAgY291bnQ6IDBcbiAgICB9XG4gIH0sXG4gIG1ldGhvZHM6IHtcbiAgICBpbmNyZW1lbnQoKSB7XG4gICAgICB0aGlzLmNvdW50KytcbiAgICB9XG4gIH0sXG4gIG1vdW50ZWQoKSB7XG4gICAgdGhpcy5pbmNyZW1lbnQoKVxuICB9XG59XG48L3NjcmlwdD5cblxuPHRlbXBsYXRlPlxuICA8YnV0dG9uIEBjbGljaz1cImluY3JlbWVudFwiPnt7IGNvdW50IH19PC9idXR0b24+XG48L3RlbXBsYXRlPiIsImltcG9ydC1tYXAuanNvbiI6IntcbiAgXCJpbXBvcnRzXCI6IHtcbiAgICBcInZ1ZVwiOiBcImh0dHBzOi8vc2ZjLnZ1ZWpzLm9yZy92dWUucnVudGltZS5lc20tYnJvd3Nlci5qc1wiXG4gIH1cbn0ifQ==)
 
-In the example above, the method `increment` will be called when the `<button>` is clicked.
+في المثال أعلاه ، سيتم استدعاء التابع `increment`  عند النقر فوق الزر `<button>`.
 
 </div>
 
-### DOM Update Timing {#dom-update-timing}
+### توقيت تحديثات الـDOM {#dom-update-timing}
 
-When you mutate reactive state, the DOM is updated automatically. However, it should be noted that the DOM updates are not applied synchronously. Instead, Vue buffers them until the "next tick" in the update cycle to ensure that each component updates only once no matter how many state changes you have made.
+عندما تقوم بتغيير الحالة التفاعلية، يتم تحديث DOM تلقائيًا. ومع ذلك ، يجب أن يُذكر أن تحديثات DOM لا تُطبق بشكل متزامن. بدلاً من ذلك ، تُخزن Vue تحديثاتها في الذاكرة المؤقتة حتى يتم تطبيقها في "النبضة الموالية" في دورة التحديث لضمان أن يتم تحديث كل مكون مرة واحدة فقط بغض النظر عن عدد التغييرات في الحالة التي قمت بها.
 
-To wait for the DOM update to complete after a state change, you can use the [nextTick()](/api/general.html#nexttick) global API:
+لانتظار اكتمال تحديث DOM بعد تغيير الحالة ، يمكنك استخدام الواجهة البرمجية العامة [()nextTick](/api/general.html#nexttick) :
 
 <div class="composition-api">
 
@@ -226,7 +226,7 @@ import { nextTick } from 'vue'
 function increment() {
   state.count++
   nextTick(() => {
-    // access updated DOM
+    // الوصول إلى DOM المحدث
   })
 }
 ```
@@ -242,7 +242,7 @@ export default {
     increment() {
       this.count++
       nextTick(() => {
-        // access updated DOM
+        // الوصول إلى DOM المحدث
       })
     }
   }
@@ -251,9 +251,9 @@ export default {
 
 </div>
 
-### Deep Reactivity {#deep-reactivity}
+### التفاعلية العميقة {#deep-reactivity}
 
-In Vue, state is deeply reactive by default. This means you can expect changes to be detected even when you mutate nested objects or arrays:
+في Vue ، تكون الحالة تفاعلية بشكل عميق افتراضيًا. وهذا يعني أنه يمكنك توقع اكتشاف التغييرات لما تغير خاصية عميقة في  الكائنات أو الجداول المتداخلة :
 
 <div class="options-api">
 
@@ -269,7 +269,7 @@ export default {
   },
   methods: {
     mutateDeeply() {
-      // these will work as expected.
+      // هذا سيعمل كما هو متوقع
       this.obj.nested.count++
       this.obj.arr.push('baz')
     }
@@ -290,7 +290,7 @@ const obj = reactive({
 })
 
 function mutateDeeply() {
-  // these will work as expected.
+  // هذا سيعمل كما هو متوقع
   obj.nested.count++
   obj.arr.push('baz')
 }
@@ -298,35 +298,35 @@ function mutateDeeply() {
 
 </div>
 
-It is also possible to explicitly create [shallow reactive objects](/api/reactivity-advanced.html#shallowreactive) where the reactivity is only tracked at the root-level, but these are typically only needed in advanced use cases.
+من الممكن أيضًا إنشاء [كائنات تفاعلية سطحية](/api/reactivity-advanced.html#shallowreactive) بشكل صريح حيث يتم تتبع التفاعلية فقط في المستوى القاعدي، ولكن هذه عادة ما تكون مطلوبة فقط في حالات الاستخدام المتقدمة.
 
 <div class="composition-api">
 
-### Reactive Proxy vs. Original \*\* {#reactive-proxy-vs-original-1}
+### الوسيط التفاعلي مقابل الأصلي \*\* {#reactive-proxy-vs-original-1}
 
-It is important to note that the returned value from `reactive()` is a [Proxy](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy) of the original object, which is not equal to the original object:
+من المهم ملاحظة أن القيمة الراجعة من `()reactive` هي عبارة عن وسيط [Proxy](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy) للكائن الأصلي ، وهو ليس مساويًا له :
 
 ```js
 const raw = {}
 const proxy = reactive(raw)
 
-// proxy is NOT equal to the original.
+// الوسيط ليس مساويًا للأصلي
 console.log(proxy === raw) // false
 ```
+فقط الوسيط هو المتفاعل - تغيير الكائن الأصلي لن يتسبب في تحديثه. لذلك ، أفضل ممارسة عند العمل مع نظام التفاعلية في Vue هي استخدام **النسخ الوسيطة فقط من الحالات**.
 
-Only the proxy is reactive - mutating the original object will not trigger updates. Therefore, the best practice when working with Vue's reactivity system is to **exclusively use the proxied versions of your state**.
+من أجل ضمان الوصول المستمر إلى الوسيط،  استدعاء `()reactive` على نفس الكائن يعيد دائمًا نفس الوسيط ، و استدعاء `()reactive` على وسيط موجود يعيد أيضًا نفس الوسيط:
 
-To ensure consistent access to the proxy, calling `reactive()` on the same object always returns the same proxy, and calling `reactive()` on an existing proxy also returns that same proxy:
 
 ```js
-// calling reactive() on the same object returns the same proxy
+// استدعاء reactive() على نفس الكائن يعيد نفس الوسيط
 console.log(reactive(raw) === proxy) // true
 
-// calling reactive() on a proxy returns itself
+// استدعاء reactive() على وسيط موجود يعيد نفس الوسيط
 console.log(reactive(proxy) === proxy) // true
 ```
 
-This rule applies to nested objects as well. Due to deep reactivity, nested objects inside a reactive object are also proxies:
+تُطبق هذه القاعدة أيضًا على الكائنات المتداخلة. بسبب التفاعل العميق، تصبح الكائنات المتداخلة داخل كائن تفاعلي أيضًا عبارة عن وسائط:
 
 ```js
 const proxy = reactive({})
@@ -337,45 +337,52 @@ proxy.nested = raw
 console.log(proxy.nested === raw) // false
 ```
 
-### Limitations of `reactive()` \*\* {#limitations-of-reactive}
+### محدودية `()reactive` \*\* {#limitations-of-reactive}
 
-The `reactive()` API has two limitations:
+الواجهة البرمجية لـ`()reactive`  لها محدوديتين:
 
-1. It only works for object types (objects, arrays, and [collection types](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects#keyed_collections) such as `Map` and `Set`). It cannot hold [primitive types](https://developer.mozilla.org/en-US/docs/Glossary/Primitive) such as `string`, `number` or `boolean`.
+1.  يعمل فقط مع أنواع الكائنات (الكائنات والمصفوفات و [أنواع المجموعات](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects#keyed_collections) مثل `Map` و `Set`). لا يمكن أن يحتوي على [أنواع البيانات الأولية](https://developer.mozilla.org/en-US/docs/Glossary/Primitive) مثل `string` ، `number` أو `boolean`.
 
-2. Since Vue's reactivity tracking works over property access, we must always keep the same reference to the reactive object. This means we can't easily "replace" a reactive object because the reactivity connection to the first reference is lost:
+
+2. بما أن تتبع التفاعل في Vue يعمل على مستوى الوصول إلى الخاصية أي تحديثه لابد أن يتم بواسطة خاصية، يجب أن نبقى دائمًا على نفس المرجع للكائن التفاعلي. وهذا يعني أننا لا يمكننا بسهولة "استبدال" كائن تفاعلي لأن الاتصال التفاعلي مع المرجع الأول قد فُقِد:
+
 
    ```js
    let state = reactive({ count: 0 })
 
-   // the above reference ({ count: 0 }) is no longer being tracked (reactivity connection is lost!)
+   // المرجع أعلاه ({ count: 0 }) لم يعد يتم تتبعه (فقد الاتصال التفاعلي!)
    state = reactive({ count: 1 })
    ```
 
-   It also means that when we assign or destructure a reactive object's property into local variables, or when we pass that property into a function, we will lose the reactivity connection:
+   و هذا يعني أيضا أنه عندما نعين أو نفك الخاصية من الكائن المتفاعل إلى متغيرات محلية ، أو عندما نمرر هذه الخاصية إلى دالة ، فسنفقد الاتصال التفاعلي:
 
    ```js
    const state = reactive({ count: 0 })
 
-   // n is a local variable that is disconnected
-   // from state.count.
+   // n
+   // هي متغير محلي مفصول
+   // من 
+   // state.count.
    let n = state.count
-   // does not affect original state
+   // لا يؤثر على الحالة الأصلية
    n++
 
-   // count is also disconnected from state.count.
+   // count
+   // هو ايضا مفصول عن 
+   // state.count
    let { count } = state
-   // does not affect original state
+   // لا يؤثر على الحالة الأصلية
    count++
 
-   // the function receives a plain number and
-   // won't be able to track changes to state.count
+   // الدالة تستقبل رقمًا عاديًا و
+   // لن تتمكن من تتبع التغييرات في 
+   // state.count
    callSomeFunction(state.count)
    ```
 
-## Reactive Variables with `ref()` \*\* {#reactive-variables-with-ref}
+## المتغيرات التفاعلية باستخدام `()ref` \*\* {#reactive-variables-with-ref}
 
-To address the limitations of `reactive()`, Vue also provides a [`ref()`](/api/reactivity-core.html#ref) function which allows us to create reactive **"refs"** that can hold any value type:
+لمعالجة محدودية `()reactive`، توفر Vue أيضًا دالة [`()ref`](/api/reactivity-core.html#ref) التي تسمح لنا بإنشاء متغيرات تفاعلية **"refs"** يمكنها الاحتفاظ بأي نوع من أنواع القيم:
 
 ```js
 import { ref } from 'vue'
@@ -383,7 +390,7 @@ import { ref } from 'vue'
 const count = ref(0)
 ```
 
-`ref()` takes the argument and returns it wrapped within a ref object with a `.value` property:
+`()ref` تأخذ الوسيط وتعيده مغلفًا داخل كائن مرجع مع خاصية `value.`:
 
 ```js
 const count = ref(0)
@@ -395,20 +402,22 @@ count.value++
 console.log(count.value) // 1
 ```
 
-See also: [Typing Refs](/guide/typescript/composition-api.html#typing-ref) <sup class="vt-badge ts" />
+الق نظرة على: [إضافة النوع إلى Refs](/guide/typescript/composition-api.html#typing-ref) <sup class="vt-badge ts" />
 
-Similar to properties on a reactive object, the `.value` property of a ref is reactive. In addition, when holding object types, ref automatically converts its `.value` with `reactive()`.
+
+بشكل مماثل لخاصيات الكائن المتفاعل ، فإن الخاصية `value.` للمتغير ref تفاعلية بدورها. بالإضافة إلى ذلك ، عند الحصول على أنواع الكائن ، يحول المتغير ref تلقائيًا الخاصية `value.` بواسطة الدالة `()reactive`.
 
 A ref containing an object value can reactively replace the entire object:
+
+ref المحتوي على قيمة كائن يمكنه استبدال كامل الكائن بشكل تفاعلي:
 
 ```js
 const objectRef = ref({ count: 0 })
 
-// this works reactively
+// سيعمل بشكل تفاعلي
 objectRef.value = { count: 1 }
 ```
-
-Refs can also be passed into functions or destructured from plain objects without losing reactivity:
+الـRefs يمكن أيضًا تمريرها كوسائط عبر الدوال أو فكها من الكائنات العادية دون فقدان التفاعلية:
 
 ```js
 const obj = {
@@ -416,20 +425,23 @@ const obj = {
   bar: ref(2)
 }
 
-// the function receives a ref
-// it needs to access the value via .value but it
-// will retain the reactivity connection
+// تمرير 
+// ref
+// للدالة
+// تحتاج  للوصول إلى القيمة عبر
+// .value
+// لكن ستبقي محافظة على بالتفاعلية
 callSomeFunction(obj.foo)
 
-// still reactive
+// تحافظ على التفاعلية
 const { foo, bar } = obj
 ```
 
-In other words, `ref()` allows us to create a "reference" to any value and pass it around without losing reactivity. This capability is quite important as it is frequently used when extracting logic into [Composable Functions](/guide/reusability/composables.html).
+بشكل أخر ، يسمح لنا `()ref` بإنشاء "مرجع" إلى أي قيمة وتمريرها دون فقدان التفاعلية. هذه القدرة مهمة جدًا لأنها مستخدمة بانتظام عند استخراج الشيفرة إلى [الدوال التركيبية](/guide/reusability/composables.html).
 
-### Ref Unwrapping in Templates \*\* {#ref-unwrapping-in-templates}
+### فك الـref في القالب \*\* {#ref-unwrapping-in-templates}
 
-When refs are accessed as top-level properties in the template, they are automatically "unwrapped" so there is no need to use `.value`. Here's the previous counter example, using `ref()` instead:
+عند الوصول إلى الـRefs كخاصيات في القالب ، يتم تلقائيًا "فك" الـRefs بحيث لا تحتاج إلى استخدام `value.`. هذا مثال *العداد* السابق ، باستخدام `()ref`   :
 
 ```vue{13}
 <script setup>
@@ -444,28 +456,30 @@ function increment() {
 
 <template>
   <button @click="increment">
-    {{ count }} <!-- no .value needed -->
+    <!-- لا حاجة لاستخدام -->
+    <!-- .value -->
+    {{ count }} 
   </button>
 </template>
 ```
 
-[Try it in the Playground](https://sfc.vuejs.org/#eyJBcHAudnVlIjoiPHNjcmlwdCBzZXR1cD5cbmltcG9ydCB7IHJlZiB9IGZyb20gJ3Z1ZSdcblxuY29uc3QgY291bnQgPSByZWYoMClcblxuZnVuY3Rpb24gaW5jcmVtZW50KCkge1xuICBjb3VudC52YWx1ZSsrXG59XG48L3NjcmlwdD5cblxuPHRlbXBsYXRlPlxuICA8YnV0dG9uIEBjbGljaz1cImluY3JlbWVudFwiPnt7IGNvdW50IH19PC9idXR0b24+XG48L3RlbXBsYXRlPiIsImltcG9ydC1tYXAuanNvbiI6IntcbiAgXCJpbXBvcnRzXCI6IHtcbiAgICBcInZ1ZVwiOiBcImh0dHBzOi8vc2ZjLnZ1ZWpzLm9yZy92dWUucnVudGltZS5lc20tYnJvd3Nlci5qc1wiXG4gIH1cbn0ifQ==)
+[اختبره في حقل التجارب](https://sfc.vuejs.org/#eyJBcHAudnVlIjoiPHNjcmlwdCBzZXR1cD5cbmltcG9ydCB7IHJlZiB9IGZyb20gJ3Z1ZSdcblxuY29uc3QgY291bnQgPSByZWYoMClcblxuZnVuY3Rpb24gaW5jcmVtZW50KCkge1xuICBjb3VudC52YWx1ZSsrXG59XG48L3NjcmlwdD5cblxuPHRlbXBsYXRlPlxuICA8YnV0dG9uIEBjbGljaz1cImluY3JlbWVudFwiPnt7IGNvdW50IH19PC9idXR0b24+XG48L3RlbXBsYXRlPiIsImltcG9ydC1tYXAuanNvbiI6IntcbiAgXCJpbXBvcnRzXCI6IHtcbiAgICBcInZ1ZVwiOiBcImh0dHBzOi8vc2ZjLnZ1ZWpzLm9yZy92dWUucnVudGltZS5lc20tYnJvd3Nlci5qc1wiXG4gIH1cbn0ifQ==)
 
-Note that the unwrapping only applies if the ref is a top-level property on the template render context. As an example, `foo` is a top-level property, but `object.foo` is not.
 
-So, given the following object:
+تجدر الملاحظة إلى أن الفك ينطبق فقط إذا كان الـRefs خاصية على المستوى الأعلى في سياق تصيير القالب. على سبيل المثال ، `foo` هي خاصية على المستوى الأعلى ، ولكن `object.foo` ليست كذلك.
+
+إذا، ليكن لدينا الكائن التالي:
 
 ```js
 const object = { foo: ref(1) }
 ```
 
-The following expression will **NOT** work as expected:
+ التعبير التالي **لن** يعمل كما هو متوقع :
 
 ```vue-html
 {{ object.foo + 1 }}
 ```
-
-The rendered result will be `[object Object]` because `object.foo` is a ref object. We can fix that by making `foo` a top-level property:
+النتيجة المصيرة ستكون `[object Object]` لأن `object.foo` هو كائن ref. يمكننا إصلاح ذلك من خلال جعل `foo` خاصية على المستوى الأعلى:
 
 ```js
 const { foo } = object
@@ -474,20 +488,19 @@ const { foo } = object
 ```vue-html
 {{ foo + 1 }}
 ```
+الآن ، ستكون نتيجة التصيير `2`.
 
-Now the render result will be `2`.
-
-One thing to note is that a ref will also be unwrapped if it is the final evaluated value of a text interpolation (i.e. a <code v-pre>{{ }}</code> tag), so the following will render `1`:
+شيء آخر يجب الإشارة إليه هو أن الـref سيُفكَّك أيضًا إذا كان عبارة عن آخر قيمة مقدرة كنص مُقحم (أي علامة <code v-pre>{{ }}</code>) ، المثال الموالي سيُصيِّر القيمة `1`:
 
 ```vue-html
 {{ object.foo }}
 ```
 
-This is just a convenience feature of text interpolation and is equivalent to <code v-pre>{{ object.foo.value }}</code>.
+هذه مجرد ميزة مناسبة في الاقحام النصي بدل استعمال <code v-pre>{{ object.foo.value }}</code>.
 
-### Ref Unwrapping in Reactive Objects \*\* {#ref-unwrapping-in-reactive-objects}
+### فك Ref داخل كائنات تفاعلية {#ref-unwrapping-in-reactive-objects}
 
-When a `ref` is accessed or mutated as a property of a reactive object, it is also automatically unwrapped so it behaves like a normal property:
+عند الوصول إلى `ref` أو تغييره كخاصية لكائن تفاعلي، تُفك العبارة أيضًا تلقائيًا حتى تتصرف كخاصية عادية:
 
 ```js
 const count = ref(0)
@@ -500,31 +513,36 @@ console.log(state.count) // 0
 state.count = 1
 console.log(count.value) // 1
 ```
-
-If a new ref is assigned to a property linked to an existing ref, it will replace the old ref:
+إذا تم تعيين ref جديدة لخاصية مرتبطة بـref موجودة ، فسَتَسْبدل الـref القديمة:
 
 ```js
 const otherCount = ref(2)
 
 state.count = otherCount
 console.log(state.count) // 2
-// original ref is now disconnected from state.count
+// ref 
+// الأصلية الآن غير متصلة بـ 
+// state.count
 console.log(count.value) // 1
 ```
 
-Ref unwrapping only happens when nested inside a deep reactive object. It does not apply when it is accessed as a property of a [shallow reactive object](/api/reactivity-advanced.html#shallowreactive).
+فك الـref يحدث فقط عند الوصول إلى الـref داخل كائن تفاعلي عميق. لا ينطبق ذلك عند الوصول إلى الـref كخاصية لـ [كائن تفاعلي سطحي](/api/reactivity-advanced.html#shallowreactive).
 
-### Ref Unwrapping in Arrays and Collections {#ref-unwrapping-in-arrays-and-collections}
 
-Unlike reactive objects, there is no unwrapping performed when the ref is accessed as an element of a reactive array or a native collection type like `Map`:
+
+### فك Ref في المجموعات و المصفوفات {#ref-unwrapping-in-arrays-and-collections}
+
+على عكس الكائنات التفاعلية ، لا يتم تنفيذ أي فك عند الوصول إلى الـref كعنصر في مصفوفة تفاعلية أو أي نوع مجموعة أصلي مثل `Map`:
 
 ```js
 const books = reactive([ref('Vue 3 Guide')])
-// need .value here
+// يجب إضافة 
+// .value
 console.log(books[0].value)
 
 const map = reactive(new Map([['count', ref(0)]]))
-// need .value here
+// يجب إضافة 
+// .value
 console.log(map.get('count').value)
 ```
 
@@ -532,41 +550,42 @@ console.log(map.get('count').value)
 
 <div class="options-api">
 
-### Stateful Methods \* {#stateful-methods}
+### التوابع ذوات الحالة \* {#stateful-methods}
 
-In some cases, we may need to dynamically create a method function, for example creating a debounced event handler:
+
+في بعض الحالات ، قد نحتاج إلى إنشاء دالة تابعة ديناميكية ، على سبيل المثال إنشاء معالج حدث مؤجل:
 
 ```js
 import { debounce } from 'lodash-es'
 
 export default {
   methods: {
-    // Debouncing with Lodash
+    //  تأجيل معالجة الحدث مع Lodash
     click: debounce(function () {
-      // ... respond to click ...
+      //  ... الرد على النقر ...
     }, 500)
   }
 }
 ```
 
-However, this approach is problematic for components that are reused because a debounced function is **stateful**: it maintains some internal state on the elapsed time. If multiple component instances share the same debounced function, they will interfere with one another.
+ومع ذلك ، فإن هذا النهج يشكل معضلة للمكونات القابلة لإعادة الاستخدام لأنها دالة مؤجلة هي دالة **ذات حالة**: إذا كانت عدة نسخ من المكونات تشارك نفس الدالة المؤجلة ، فسيكون تعارض بينهم.
 
-To keep each component instance's debounced function independent of the others, we can create the debounced version in the `created` lifecycle hook:
+من أجل الحفاظ على استقلال دالة مؤجلة لكل نسخة من المكون عن الآخرين ، يمكننا إنشاء الإصدار المؤجل في مرحلة الحياة `created`:
 
 ```js
 export default {
   created() {
-    // each instance now has its own copy of debounced handler
+    //  كل نسخة مكون الآن لديها نسخة من المعالج المؤجل
     this.debouncedClick = _.debounce(this.click, 500)
   },
   unmounted() {
-    // also a good idea to cancel the timer
-    // when the component is removed
+    // إلغاء المؤقت أيضًا هو فكرة جيدة
+    // عند إزالة المكون  
     this.debouncedClick.cancel()
   },
   methods: {
     click() {
-      // ... respond to click ...
+      // ... الرد على النقر ...
     }
   }
 }
@@ -576,16 +595,16 @@ export default {
 
 <div class="composition-api">
 
-## Reactivity Transform <sup class="vt-badge experimental" /> \*\* {#reactivity-transform}
+## التحويلات التفاعلية <sup class="vt-badge experimental" /> \*\* {#reactivity-transform}
 
-Having to use `.value` with refs is a drawback imposed by the language constraints of JavaScript. However, with compile-time transforms we can improve the ergonomics by automatically appending `.value` in appropriate locations. Vue provides a compile-time transform that allows us to write the earlier "counter" example like this:
-
+الحاجة لاستخدام `.value` مع الـrefs هو أحد العيوب المفروضة من قبل قيود  الـ JavaScript. لكن مع تحويلات وقت التصريف، يمكننا تحسين الأداء من خلال إضافة `.value` تلقائيًا في المواقع المناسبة. يوفر Vue تحويلًا في وقت التصريف يسمح لنا بكتابة مثال "العداد" السابق كما يلي:
 ```vue
 <script setup>
 let count = $ref(0)
 
 function increment() {
-  // no need for .value
+  //لا تحتاج ل 
+  // .value
   count++
 }
 </script>
@@ -594,7 +613,6 @@ function increment() {
   <button @click="increment">{{ count }}</button>
 </template>
 ```
-
-You can learn more about [Reactivity Transform](/guide/extras/reactivity-transform.html) in its dedicated section. Do note that it is currently still experimental and may change before being finalized.
+يمكنك الاطلاع على المزيد حول [تحويل التفاعلية](/guide/extras/reactivity-transform.html) في القسم المخصص لها. تجدر الملاحظة إلى أنه ما زال في طور التجريب وقد يتغير قبل الانتهاء منه.
 
 </div>

@@ -61,38 +61,38 @@ function useToggleFn(
   <div v-if="show" class="preference-switch">
     <button
       class="toggle"
-      aria-label="preference switches toggle"
+      aria-label="تفضيلات زر التبديل"
       aria-controls="preference-switches"
       :aria-expanded="isOpen"
       @click="toggleOpen"
       @mousedown="removeOutline"
       @blur="restoreOutline"
     >
-      <span>API Preference</span>
+      <span>تفضيلات واجهة البرمجة</span>
       <VTIconChevronDown class="vt-link-icon" :class="{ open: isOpen }" />
     </button>
     <div id="preference-switches" :hidden="!isOpen" :aria-hidden="!isOpen">
       <div class="switch-container">
         <label class="options-label" @click="toggleCompositionAPI(false)"
-          >Options</label
+          >الخيارات</label
         >
         <VTSwitch
           class="api-switch"
-          aria-label="prefer composition api"
+          aria-label="تفضيل الواجهة التركيبية"
           :aria-checked="preferComposition"
           @click="toggleCompositionAPI()"
         />
         <label
           class="composition-label"
           @click="toggleCompositionAPI(true)"
-          >Composition</label
+          >التركيبية</label
         >
         <a
           class="switch-link"
-          title="About API preference"
+          title="حول تفضيلات الواجهة البرمجية"
           href="/guide/introduction.html#api-styles"
           @click="closeSideBar"
-          >?</a
+          >؟</a
         >
       </div>
       <div class="switch-container" v-if="showSFC">
@@ -169,6 +169,7 @@ function useToggleFn(
 .switch-container {
   display: flex;
   align-items: center;
+  direction: ltr ;
 }
 
 .switch-container:nth-child(2) {

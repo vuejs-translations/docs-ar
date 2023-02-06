@@ -1,26 +1,26 @@
-# Event Handling {#event-handling}
+# معالجة الأحداث {#event-handling}
 
 <div class="options-api">
-  <VueSchoolLink href="https://vueschool.io/lessons/user-events-in-vue-3" title="Free Vue.js Events Lesson"/>
+  <VueSchoolLink href="https://vueschool.io/lessons/user-events-in-vue-3" title="درس Vue.js مجاني حول معالجة الأحداث "/>
 </div>
 
 <div class="composition-api">
-  <VueSchoolLink href="https://vueschool.io/lessons/vue-fundamentals-capi-user-events-in-vue-3" title="Free Vue.js Events Lesson"/>
+  <VueSchoolLink href="https://vueschool.io/lessons/vue-fundamentals-capi-user-events-in-vue-3" title="درس Vue.js مجاني حول معالجة الأحداث "/>
 </div>
 
-## Listening to Events {#listening-to-events}
+## الاستماع للأحداث {#listening-to-events}
 
-We can use the `v-on` directive, which we typically shorten to the `@` symbol, to listen to DOM events and run some JavaScript when they're triggered. The usage would be `v-on:click="handler"` or with the shortcut, `@click="handler"`.
+يمكننا استخدام السمة المُوجهة `v-on` ،والتي نختصرها عادة بالرمز `@` ،للإستماع إلى أحداث DOM وتنفيذ بعض شيفرات الـJavaScript عندما يتم تشغيل تلك الأحداث. يكون استخدامها على شكل `v-on:click="handler"` أو باختصار،`@click="handler"` .
 
-The handler value can be one of the following:
+قيمة المعالج يمكن أن تكون أحد الأشكال التالية:
 
-1. **Inline handlers:** Inline JavaScript to be executed when the event is triggered (similar to the native `onclick` attribute).
+1. **مُعالِجات سطرية:** شيفرة JavaScript ليتم تنفيذها عند تشغيل الحدث (مماثلة لسمة `onclick` الأصلية).
 
-2. **Method handlers:** A property name or path that points to a method defined on the component.
+2. **مُعالِجات  عبر دوال:** اسم خاصية أو مسار يشير إلى دالة معرفة في المكون.
 
-## Inline Handlers {#inline-handlers}
+## مُعالِجات سطرية {#inline-handlers}
 
-Inline handlers are typically used in simple cases, for example:
+المعالجات السطرية عادة ما تُستخدم في الحالات البسيطة، على سبيل المثال:
 
 <div class="composition-api">
 
@@ -33,35 +33,36 @@ const count = ref(0)
 
 ```js
 data() {
-  return {
-    count: 0
-  }
+    return {
+        count: 0
+    }
 }
 ```
 
 </div>
 
 ```vue-html
-<button @click="count++">Add 1</button>
-<p>Count is: {{ count }}</p>
+<button @click="count++">اضف 1</button>
+<p>العداد: {{ count }}</p>
+
 ```
 
 <div class="composition-api">
 
-[Try it in the Playground](https://sfc.vuejs.org/#eyJBcHAudnVlIjoiPHNjcmlwdCBzZXR1cD5cbmltcG9ydCB7IHJlZiB9IGZyb20gJ3Z1ZSdcblxuY29uc3QgY291bnRlciA9IHJlZigwKVxuPC9zY3JpcHQ+XG5cbjx0ZW1wbGF0ZT5cblx0PGJ1dHRvbiBAY2xpY2s9XCJjb3VudGVyKytcIj5BZGQgMTwvYnV0dG9uPlxuXHQ8cD5UaGUgYnV0dG9uIGFib3ZlIGhhcyBiZWVuIGNsaWNrZWQge3sgY291bnRlciB9fSB0aW1lcy48L3A+XG48L3RlbXBsYXRlPiIsImltcG9ydC1tYXAuanNvbiI6IntcbiAgXCJpbXBvcnRzXCI6IHtcbiAgICBcInZ1ZVwiOiBcImh0dHBzOi8vc2ZjLnZ1ZWpzLm9yZy92dWUucnVudGltZS5lc20tYnJvd3Nlci5qc1wiXG4gIH1cbn0ifQ==)
+[اختبرها في حقل التجارب](https://sfc.vuejs.org/#eNp9kE1OAzEMha9iZVNQ2wlsR9MK7uFNGzwwpfmRkymLURZI3IVld0jcZHobHKZCCKTu8p6fP9sZ1H0I1aEnVasmGu5CgkipD2t0nQ2eEwzA1EKGlr2FmURn6NAZ72IC43uXYFUSVzfX6Bo9MaRbRCIb9ptEopptn5J3cGf2nXleofrunM9Rrcf38eP0CreNnjIlHcQ9vY2f41GqxxqG4Twq50aX3Rr9A1cLNW26tJtQ7aJ3csuADgDPhYhKEMUpnlxQNKqnlEKstY6tKT+wi5XnRy2vimVUZ6miaJdb9i+RWMCoFr8YWswD8ZLJPRATX2L+if7jFmxGl1X+Av7TkqA=)
 
 </div>
 <div class="options-api">
 
-[Try it in the Playground](https://sfc.vuejs.org/#eyJBcHAudnVlIjoiPHNjcmlwdD5cbmV4cG9ydCBkZWZhdWx0IHtcbiAgZGF0YSgpIHtcblx0ICByZXR1cm4ge1xuICAgIFx0Y291bnRlcjogMFxuICBcdH1cblx0fVxufVxuPC9zY3JpcHQ+XG5cbjx0ZW1wbGF0ZT5cblx0PGJ1dHRvbiBAY2xpY2s9XCJjb3VudGVyKytcIj5BZGQgMTwvYnV0dG9uPlxuXHQ8cD5UaGUgYnV0dG9uIGFib3ZlIGhhcyBiZWVuIGNsaWNrZWQge3sgY291bnRlciB9fSB0aW1lcy48L3A+XG48L3RlbXBsYXRlPiIsImltcG9ydC1tYXAuanNvbiI6IntcbiAgXCJpbXBvcnRzXCI6IHtcbiAgICBcInZ1ZVwiOiBcImh0dHBzOi8vc2ZjLnZ1ZWpzLm9yZy92dWUucnVudGltZS5lc20tYnJvd3Nlci5qc1wiXG4gIH1cbn0ifQ==)
+[اختبرها في حقل التجارب](https://sfc.vuejs.org/#eNp9kEFOwzAQRa8y8grUNoZtFCq4hzdpOoWUxLHGk4IUZQGiIM7BooJdWSBxE+c22E0UIZAqWdb87/Gz5zfiyphoU6OIRWIzyg3PlcZ7UxHDEldpXTA0SgMsU05PTkOtGICQa9L9CYDirKo1I8VwFhzFbWjzm1+JHLleMJamSBmD4mRRM1caLrMiz24vlBgwk4kSc7dzX90DnCey7+pvmLn76Lbgdt1T99w9uj24b1++Hhz3GfRbcLx8gaYZgG0L3dbt3XuUSONBiRz/IaYiL8O4szI10dpW2kdxmEsNB1aJeJxU+KyCVuKG2dhYSrvKQoBrG1V0LX0VkX8zLzFCW84WVN1ZJA9WYvqLIb25QZoR6iUS0jHmn9Z/3IANWYv2B2TQtCQ=)
 
 </div>
 
-## Method Handlers {#method-handlers}
+## المعالجات بالدوال {#method-handlers}
 
-The logic for many event handlers will be more complex though, and likely isn't feasible with inline handlers. That's why `v-on` can also accept the name or path of a component method you'd like to call.
+الشيفرة في العديد من معالجات الأحداث ستكون أكثر تعقيدًا، ومن المحتمل أن لا تكون ممكنة مع المعالجات السطرية. هذا هو السبب في أن `v-on`  يستطيع أيضًا قبول اسم أو مسار لدالة مكون حيث يمكنك استدعائها عند اطلاق الحدث.
 
-For example:
+مثال:
 
 <div class="composition-api">
 
@@ -69,8 +70,10 @@ For example:
 const name = ref('Vue.js')
 
 function greet(event) {
-  alert(`Hello ${name.value}!`)
-  // `event` is the native DOM event
+  alert(`مرحبا ${name.value}!`)
+  //`event`
+  // هو الحدث الأصلي من 
+  //  DOM
   if (event) {
     alert(event.target.tagName)
   }
@@ -82,60 +85,64 @@ function greet(event) {
 
 ```js
 data() {
-  return {
-    name: 'Vue.js'
-  }
-},
-methods: {
-  greet(event) {
-    // `this` inside methods points to the current active instance
-    alert(`Hello ${this.name}!`)
-    // `event` is the native DOM event
-    if (event) {
-      alert(event.target.tagName)
+        return {
+            name: 'Vue.js'
+        }
+    },
+    methods: {
+        greet(event) {
+            //`this`
+            // داخل الدوال تشير إلى النسخة النشطة الحالية
+            alert(`مرحبا ${this.name}!`)
+            //`event`
+            // هو الحدث الأصلي من 
+            //  DOM
+            if (event) {
+                alert(event.target.tagName)
+            }
+        }
     }
-  }
-}
 ```
 
 </div>
 
 ```vue-html
-<!-- `greet` is the name of the method defined above -->
+<!--  `greet` 
+هو اسم الدالة المعرفة أعلاه -->
 <button @click="greet">Greet</button>
+
 ```
 
 <div class="composition-api">
 
-[Try it in the Playground](https://sfc.vuejs.org/#eyJBcHAudnVlIjoiPHNjcmlwdCBzZXR1cD5cbmltcG9ydCB7IHJlZiB9IGZyb20gJ3Z1ZSdcblxuY29uc3QgbmFtZSA9IHJlZignVnVlLmpzJylcblxuZnVuY3Rpb24gZ3JlZXQoZXZlbnQpIHtcbiAgYWxlcnQoYEhlbGxvICR7bmFtZS52YWx1ZX0hYClcbiAgLy8gYGV2ZW50YCBpcyB0aGUgbmF0aXZlIERPTSBldmVudFxuICBpZiAoZXZlbnQpIHtcbiAgICBhbGVydChldmVudC50YXJnZXQudGFnTmFtZSlcbiAgfVxufVxuPC9zY3JpcHQ+XG5cbjx0ZW1wbGF0ZT5cblx0PGJ1dHRvbiBAY2xpY2s9XCJncmVldFwiPkdyZWV0PC9idXR0b24+XG48L3RlbXBsYXRlPiIsImltcG9ydC1tYXAuanNvbiI6IntcbiAgXCJpbXBvcnRzXCI6IHtcbiAgICBcInZ1ZVwiOiBcImh0dHBzOi8vc2ZjLnZ1ZWpzLm9yZy92dWUucnVudGltZS5lc20tYnJvd3Nlci5qc1wiXG4gIH1cbn0ifQ==)
+[اختبرها في حقل التجارب](https://sfc.vuejs.org/#eNp9Uc1Kw0AQfpVxEVqhzd5LWhS8qjdPe2gaJzW12YTdST2E3FoVD6LP4KGCiIj4Ltm3cZK04g8ICzuz8833zXxbiIMs8xY5ioHwbWjijMAi5dlI6TjJUkNQgMEISohMmkCHoR2llQ5TbQl0kCAMa0C3c5qjN7Odvboa5TqkONUwNYjUxQVq2oNCaYBgjoa6Y7eq3qqX6qlaw25R03iLYJ5juTNmAgApx03TuE3AXbsbqNZuyT2v1XMbPlYfbuluwa3cFWyAcHhyVIdxBD9kt8LNm0eBmWJ9TY9ZulEslebjy9YEXp8TwiSbB4R1Rv4kJ+KV9sN5HF4MlWh2U2JUvbs7nuPB3buVL1sUd/jyq130RGtmPwkyNinVbHczltoUrBKD7aBKsMl1rsQ5UWYHUtoorD9pZr3UTCVHnsk1xewa2qQ/MemlRcPESvS+cUh+XKDpG9RnaND8x/kL+od3a5EoPwHZEdT+)
 
 </div>
 <div class="options-api">
 
-[Try it in the Playground](https://sfc.vuejs.org/#eyJBcHAudnVlIjoiPHNjcmlwdD5cbmV4cG9ydCBkZWZhdWx0IHtcbiAgZGF0YSgpIHtcbiAgICByZXR1cm4ge1xuICAgICAgbmFtZTogJ1Z1ZS5qcydcbiAgICB9XG4gIH0sXG4gIG1ldGhvZHM6IHtcbiAgICBncmVldChldmVudCkge1xuICAgICAgLy8gYHRoaXNgIGluc2lkZSBtZXRob2RzIHBvaW50cyB0byB0aGUgY3VycmVudCBhY3RpdmUgaW5zdGFuY2VcbiAgICAgIGFsZXJ0KGBIZWxsbyAke3RoaXMubmFtZX0hYClcbiAgICAgIC8vIGBldmVudGAgaXMgdGhlIG5hdGl2ZSBET00gZXZlbnRcbiAgICAgIGlmIChldmVudCkge1xuICAgICAgICBhbGVydChldmVudC50YXJnZXQudGFnTmFtZSlcbiAgICAgIH1cbiAgICB9XG4gIH1cbn1cbjwvc2NyaXB0PlxuXG48dGVtcGxhdGU+XG5cdDxidXR0b24gQGNsaWNrPVwiZ3JlZXRcIj5HcmVldDwvYnV0dG9uPlxuPC90ZW1wbGF0ZT4iLCJpbXBvcnQtbWFwLmpzb24iOiJ7XG4gIFwiaW1wb3J0c1wiOiB7XG4gICAgXCJ2dWVcIjogXCJodHRwczovL3NmYy52dWVqcy5vcmcvdnVlLnJ1bnRpbWUuZXNtLWJyb3dzZXIuanNcIlxuICB9XG59In0=)
+[اختبرها في حقل التجارب](https://sfc.vuejs.org/#eNp9UsFu00AQ/ZVhhdRUarz3yFQgcQVunPZgN5kkLvHa2h0HpCi3pJQeEHwDQqEgGlUt4ldm/6a7dmypTVXL8sy8nXn7PDML8aoso3mFYiBiOzRZScdK46eyMAQjHKfVjGChNMAopbR32PgABqkyuo0AdJrjAA7eVxid2oMGXQazPArfHGlajOygLZgYROrhHDV1lLtHyoSmmU3ugR4F3vKGr9wKeONWvHXnwQL/5lt3wdfAP93KfakP3Rnf8BVftsEt/98F/LeGLvjyPn06Q0O9xK352qf84g08XwQVUfiv5bPk8KGapNa+L9J9duftTVv+07g/+F+4FNzancFeCbx+96YFszE80pVGXY1HlJoJBjN566V1uupety1X2r+x7MbpA8K8nKWEIaL4pCIqNLwczrLhhxdK1ONQ4phv3Fev9Lv75taxbLJ8RSy7cnEksjwsRz9PSz/qQvvFqaWq3YFVohuzEn6zQqzElKi0AynteBjW7dRGhZlI70Wm0pTlGKHN+yem+GjReGIl6sXZcUgPztH0DeoRGjRPcT5I3eNtWySWd48cH0E=)
 
 </div>
 
-A method handler automatically receives the native DOM Event object that triggers it - in the example above, we are able to access the element dispatching the event via `event.target.tagName`.
+الدالة المعالجة تتلقى تلقائيًا كائن حدث الـDOM الأصلي الذي يتم تشغيله - في المثال أعلاه ، نستطيع الوصول إلى العنصر الذي يقوم باطلاق الحدث عبر `event.target.tagName`.
 
 <div class="composition-api">
 
-See also: [Typing Event Handlers](/guide/typescript/composition-api.html#typing-event-handlers) <sup class="vt-badge ts" />
+اطلع على : [إضافة الأنواع لمعالجات الأحداث](/guide/typescript/composition-api.html#typing-event-handlers) <sup class="vt-badge ts" />
 
 </div>
 <div class="options-api">
 
-See also: [Typing Event Handlers](/guide/typescript/options-api.html#typing-event-handlers) <sup class="vt-badge ts" />
+اطلع على : [إضافة الأنواع لمعالجات الأحداث](/guide/typescript/options-api.html#typing-event-handlers) <sup class="vt-badge ts" />
 
 </div>
 
-### Method vs. Inline Detection {#method-vs-inline-detection}
+### الكشف عن نوع المعالج، الدالة مقابل السطري {#method-vs-inline-detection}
 
-The template compiler detects method handlers by checking whether the `v-on` value string is a valid JavaScript identifier or property access path. For example, `foo`, `foo.bar` and `foo['bar']` are treated as method handlers, while `foo()` and `count++` are treated as inline handlers.
+مصرف القالب يكشف عن معالجات الأحداث من خلال التحقق ما إذا كانت  قيمة `v-on` سلسلة نصية عبارة عن مُعرَّف JavaScript صالح أو مسار وصول إلى الخاصية. على سبيل المثال ،`foo` ،`foo.bar` و `foo['bar']` يتم معاملتها كدوال معالجة الأحداث، بينما `()foo` و `++count` يتم معاملتها كمعالجات سطرية.
+## استدعاء الدوال في المعالجات السطرية {#calling-methods-in-inline-handlers}
 
-## Calling Methods in Inline Handlers {#calling-methods-in-inline-handlers}
-
-Instead of binding directly to a method name, we can also call methods in an inline handler. This allows us to pass the method custom arguments instead of the native event:
+بدلا من الربط مباشرة باسم تابع/دالة، يمكننا أيضا استدعاء دوال في المعالجات السطرية، هذا يسمح لنا بتمرير بعض الوسائط المخصصة للدالة بدلا من كائن الحدث الأصلي
 
 <div class="composition-api">
 
@@ -150,43 +157,46 @@ function say(message) {
 
 ```js
 methods: {
-  say(message) {
-    alert(message)
-  }
+    say(message) {
+        alert(message)
+    }
 }
 ```
 
 </div>
 
 ```vue-html
-<button @click="say('hello')">Say hello</button>
-<button @click="say('bye')">Say bye</button>
+<button @click="say('مرحبا')">قل مرحبا</button>
+<button @click="say('إلى اللقاء')">قل إلى اللقاء</button>
+
 ```
 
 <div class="composition-api">
 
-[Try it in the Playground](https://sfc.vuejs.org/#eNp9kN1uwjAMhV8l8g1Dos191aHtGXabm7QzUNb8yHaYKtR3X0KnCoHEnY/j88XHV/iMsb4khAZa7mmIohglxb3xh+R7GYJXbKc3h8z2iFt1NV4pOyLJ2jN+Nr7Viz0bsxB0cbSCRUnbJZHM+ejHof95N1CAmxOOY9hsDey/7KRuqtXL5AtXN+HqyfWdo9Xrp7CDwcVAUjkb6zMHn+PdFjf/D2ygWaKUXs5ftIGTSORGaz705ShnrgMdda5qSl4GhzWyqzoKv4yUwQZ2dwydmxekitB/IyG9Yj6MPnELNl91hvkPugmTrw==)
+[اختبرها في حقل التجارب](https://sfc.vuejs.org/#eNp9kUFOwzAQRa9ieVMqNfE+ChXcw5s0TEtK7FieSRGqsqnCgmOwQGHDgtvYt2FCUFsB6sqeP/5Pnj97eetcumtBZjLH0leOBAK1bqnturUlVY0VWDxdGUAsNjAXe22FKGrwdNS07bTN1WRnIxcExtUFAVdC5KuWiDk3ZV2VD9dajsBZfA6f4SO8h2E213IZD7EXJy1Xk+kCILzFPr6IMPDRx0MYwuuJ9E/zDJmr4wflQlbGNZ4SU7h0i43lKL6H1D8N1DKbxh41zmqstbwncpgphetyDHCLaeM3im+pby1VBlJAk6x884jgGazl4oyhWNyBTzzYO/DgLzF/Pf3DHbG8gU52X9B0t6M=)
 
 </div>
 <div class="options-api">
 
-[Try it in the Playground](https://sfc.vuejs.org/#eyJBcHAudnVlIjoiPHNjcmlwdD5cbmV4cG9ydCBkZWZhdWx0IHtcbiAgbWV0aG9kczoge1xuXHQgIHNheShtZXNzYWdlKSB7XG4gICAgXHRhbGVydChtZXNzYWdlKVxuICBcdH1cblx0fVxufVxuPC9zY3JpcHQ+XG5cbjx0ZW1wbGF0ZT5cblx0PGJ1dHRvbiBAY2xpY2s9XCJzYXkoJ2hpJylcIj5TYXkgaGk8L2J1dHRvbj5cbiAgPGJ1dHRvbiBAY2xpY2s9XCJzYXkoJ3doYXQnKVwiPlNheSB3aGF0PC9idXR0b24+XG48L3RlbXBsYXRlPiIsImltcG9ydC1tYXAuanNvbiI6IntcbiAgXCJpbXBvcnRzXCI6IHtcbiAgICBcInZ1ZVwiOiBcImh0dHBzOi8vc2ZjLnZ1ZWpzLm9yZy92dWUucnVudGltZS5lc20tYnJvd3Nlci5qc1wiXG4gIH1cbn0ifQ==)
+[اختبرها في حقل التجارب](https://sfc.vuejs.org/#eNp9kU1OwzAQha9ieVMqtfE+ChXcwxs3mbYp8Y/sSQFV3VRhwTFYoLBhwW3s22CnKK2gQrJsz/PMN/bznt4bk+1aoDktXGlrgwuu4Mloi6SClWgbJHuuCJGAG125PEUcCXHi+UaCc2IN01MGIRxFAxZHPakcD6kgTnEUbOwRAwRpGoGQIiyWLaJW5K5s6vLhltPUYBJe/Jf/9B++n0w5XYRj6MhZK9ipKALI9Xr/HrrwSnwfly4cfe/fzqArhxfEgo33ozNay2TJXAqTbZ1W0a7hzfznwHE6ODO4QKOfKeZ0g2hczphblcnkrcu0XbO4y2yrsJaQgZPzpdWPDmwEczq7YLAo7sDOLagKLNj/mL9S/3ATNv0BPXwD+BTEqQ==)
 
 </div>
 
-## Accessing Event Argument in Inline Handlers {#accessing-event-argument-in-inline-handlers}
+##   الوصول إلى وسيط الحدث الأصلي في المعالجات السطرية{#accessing-event-argument-in-inline-handlers}
 
-Sometimes we also need to access the original DOM event in an inline handler. You can pass it into a method using the special `$event` variable, or use an inline arrow function:
+في بعض الأحيان نحتاج أيضا إلى الوصول إلى وسيط الحدث الأصلي في معالج سطري. يمكنك تمريره إلى دالة باستخدام المتغير الخاص `event$` ، أو استخدام دالة سهم سطرية:
 
 ```vue-html
-<!-- using $event special variable -->
-<button @click="warn('Form cannot be submitted yet.', $event)">
-  Submit
+<!--  باستخدام المتغير الخاص 
+$event
+-->
+<button @click="warn('لا يمكن إرسال النموذج.', $event)">
+  إرسال
 </button>
 
-<!-- using inline arrow function -->
-<button @click="(event) => warn('Form cannot be submitted yet.', event)">
-  Submit
+<!--  باستخدام دالة سهم سطرية -->
+<button @click="(event) => warn('لا يمكن إرسال النموذج.', event)">
+  إرسال
 </button>
 ```
 
@@ -194,11 +204,11 @@ Sometimes we also need to access the original DOM event in an inline handler. Yo
 
 ```js
 function warn(message, event) {
-  // now we have access to the native event
-  if (event) {
-    event.preventDefault()
-  }
-  alert(message)
+    // الآن لدينا وصول إلى الحدث الأصلي
+    if (event) {
+        event.preventDefault()
+    }
+    alert(message)
 }
 ```
 
@@ -207,152 +217,164 @@ function warn(message, event) {
 
 ```js
 methods: {
-  warn(message, event) {
-    // now we have access to the native event
-    if (event) {
-      event.preventDefault()
+    warn(message, event) {
+       // الآن لدينا وصول إلى الحدث الأصلي
+        if (event) {
+            event.preventDefault()
+        }
+        alert(message)
     }
-    alert(message)
-  }
 }
 ```
 
 </div>
 
-## Event Modifiers {#event-modifiers}
+## مُعدِّلات الأحداث {#event-modifiers}
 
-It is a very common need to call `event.preventDefault()` or `event.stopPropagation()` inside event handlers. Although we can do this easily inside methods, it would be better if the methods can be purely about data logic rather than having to deal with DOM event details.
+حاجة شائعة جدا هي استدعاء `event.preventDefault()` أو `event.stopPropagation()` داخل معالجات الأحداث. على الرغم من أننا يمكننا القيام بذلك بسهولة داخل التوابع/الدوال ، سيكون من الأفضل إذا كانت التوابع تتعامل فقط مع شيفرة البيانات بدلاً من تفاصيل حدث الـDOM.
 
-To address this problem, Vue provides **event modifiers** for `v-on`. Recall that modifiers are directive postfixes denoted by a dot.
+لمعالجة هذه المشكلة، توفر Vue **مُعدِّلات الأحداث** لـ `v-on` . تذكر أن المُعدِّلات هي بادئات المُوجهات التي يشار إليها بنقطة.
 
-- `.stop`
-- `.prevent`
-- `.self`
-- `.capture`
-- `.once`
-- `.passive`
+* `stop.`
+* `prevent.`
+* `self.`
+* `capture.`
+* `once.`
+* `passive.`
+
 
 ```vue-html
-<!-- the click event's propagation will be stopped -->
+<!-- حدث النقر سيوقف انتشاره -->
 <a @click.stop="doThis"></a>
 
-<!-- the submit event will no longer reload the page -->
+<!-- حدث الإرسال لن يعيد تحميل الصفحة -->
 <form @submit.prevent="onSubmit"></form>
 
-<!-- modifiers can be chained -->
+<!-- المُعدِّلات يمكن أن تكون متسلسلة -->
 <a @click.stop.prevent="doThat"></a>
 
-<!-- just the modifier -->
+<!-- المُعدِّل فقط -->
 <form @submit.prevent></form>
 
-<!-- only trigger handler if event.target is the element itself -->
-<!-- i.e. not from a child element -->
+<!-- شغل المعالج فقط إذا كان 
+event.target 
+هو العنصر نفسه -->
+<!-- أي ليس من عنصر ابن -->
 <div @click.self="doThat">...</div>
+
 ```
 
-::: tip
-Order matters when using modifiers because the relevant code is generated in the same order. Therefore using `@click.prevent.self` will prevent **click's default action on the element itself and its children**, while `@click.self.prevent` will only prevent click's default action on the element itself.
+::: tip ملاحظة
+ترتيب المُعدِّلات مهم لأن الشيفرة المتعلقة بها تُنشأ بنفس الترتيب. لذا، إذا استخدمنا `click.prevent.self@`،فسيتم منع **إجراء النقر الافتراضي على العنصر نفسه وأبنائه**، بينما إذا استخدمنا `click.self.prevent@`، فسيتم منع إجراء النقر الافتراضي على العنصر نفسه فقط.
 :::
 
-The `.capture`, `.once`, and `.passive` modifiers mirror the [options of the native `addEventListener` method](https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener#options):
+المُعدِّلات `.capture`، `.once`، و `.passive` توافق [خيارات الدالة الأصلية `addEventListener`](https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener#options) :
+
 
 ```vue-html
-<!-- use capture mode when adding the event listener -->
-<!-- i.e. an event targeting an inner element is handled here before being handled by that element -->
+<!--  استخدم وضع الالتقاط عند إضافة مستمع الحدث -->
+<!-- مثال: يتم معالجة الحدث الهدف لعنصر داخلي هنا قبل أن يتم معالجته من قبل العنصر ذاته -->
 <div @click.capture="doThis">...</div>
 
-<!-- the click event will be triggered at most once -->
+<!-- حدث النقر على الأكثر مرة واحدة -->
 <a @click.once="doThis"></a>
 
-<!-- the scroll event's default behavior (scrolling) will happen -->
-<!-- immediately, instead of waiting for `onScroll` to complete  -->
-<!-- in case it contains `event.preventDefault()`                -->
+<!--   سيحدث السلوك الافتراضي لحدث  التمرير فورا-->
+<!-- بدل من الانتظار لإكمال 
+`onScroll` -->
+<!-- في حالة احتوائه على 
+`event.preventDefault()` -->
 <div @scroll.passive="onScroll">...</div>
 ```
 
-The `.passive` modifier is typically used with touch event listeners for [improving performance on mobile devices](https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener#improving_scrolling_performance_with_passive_listeners).
+المُعدِّل `.passive` عادة ما يُستخدم مع مستمعي الأحداث اللمسية ل[تحسين أداء الأجهزة المحمولة](https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener#improving_scrolling_performance_with_passive_listeners).
 
-::: tip
-Do not use `.passive` and `.prevent` together, because `.passive` already indicates to the browser that you _do not_ intend to prevent the event's default behavior, and you will likely see a warning from the browser if you do so.
+::: tip ملاحظة
+لا تستخدم المُعدِّلات `.passive` و `.prevent` معاً، لأن المُعدِّل `.passive` يخبر المتصفح بأنك لا تُريد منع السلوك الافتراضي للحدث،  ومن المحتمل أن ترى تحذيراً من المتصفح إذا قمت بذلك.
 :::
 
-## Key Modifiers {#key-modifiers}
+## مُعدِّلات المفتاح {#key-modifiers}
 
-When listening for keyboard events, we often need to check for specific keys. Vue allows adding key modifiers for `v-on` or `@` when listening for key events:
+عند الاستماع لأحداث لوحة المفاتيح، نحتاج في كثير من الأحيان إلى التحقق من مفاتيح معينة. تسمح لنا Vue بإضافة مُعدِّلات المفاتيح لـ `v-on` أو `@` عند الاستماع لأحداث المفاتيح:
 
 ```vue-html
-<!-- only call `submit` when the `key` is `Enter` -->
+<!-- استدع الدالة 
+`submit` 
+فقط عندما ينقر على المفتاح 
+`Enter` -->
 <input @keyup.enter="submit" />
+
 ```
 
-You can directly use any valid key names exposed via [`KeyboardEvent.key`](https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/key/Key_Values) as modifiers by converting them to kebab-case.
+يمكنك استخدام أي أسماء مفاتيح صالحة معروضة عبر [`KeyboardEvent.key`](https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/key/Key_Values) كمُعدِّلات مباشرة بتحويلها إلى صيغة اسياخ الشواء kebab-case.
 
 ```vue-html
 <input @keyup.page-down="onPageDown" />
 ```
 
-In the above example, the handler will only be called if `$event.key` is equal to `'PageDown'`.
+في المثال أعلاه، سيتم استدعاء المُعدِّل فقط إذا كان `event.key$` يساوي `'PageDown'` .
 
-### Key Aliases {#key-aliases}
+### الأسماء البديلة للمفاتيح {#key-aliases}
 
-Vue provides aliases for the most commonly used keys:
+Vue توفر أسماء بديلة للمفاتيح الأكثر استخداماً:
 
-- `.enter`
-- `.tab`
-- `.delete` (captures both "Delete" and "Backspace" keys)
-- `.esc`
-- `.space`
-- `.up`
-- `.down`
-- `.left`
-- `.right`
+* `enter.`
+* `tab.`
+* `delete.` (يلتقط كلاً من مفتاحي "Delete" و "Backspace")
+* `esc.`
+* `space.`
+* `up.`
+* `down.`
+* `left.`
+* `right.`
 
-### System Modifier Keys {#system-modifier-keys}
+### مُعدِّلات مفاتيح النظام {#system-modifier-keys}
 
-You can use the following modifiers to trigger mouse or keyboard event listeners only when the corresponding modifier key is pressed:
+يمكنك استخدام المُعدِّلات التالية لتشغيل مستمعي أحداث الفأرة أو لوحة المفاتيح فقط عند الضغط على مفتاح المُعدِّل المطابق:
 
-- `.ctrl`
-- `.alt`
-- `.shift`
-- `.meta`
+* `ctrl.`
+* `alt.`
+* `shift.`
+* `meta.`
 
-::: tip Note
-On Macintosh keyboards, meta is the command key (⌘). On Windows keyboards, meta is the Windows key (⊞). On Sun Microsystems keyboards, meta is marked as a solid diamond (◆). On certain keyboards, specifically MIT and Lisp machine keyboards and successors, such as the Knight keyboard, space-cadet keyboard, meta is labeled “META”. On Symbolics keyboards, meta is labeled “META” or “Meta”.
+::: tip ملاحظة
+على  لوحة المفاتيح في نظام Macintosh، يكون الميتا مفتاح الأمر (⌘). على  لوحة المفاتيح لنظام Windows، يكون الميتا مفتاح الويندوز (⊞). على  لوحة المفاتيح لنظام Sun Microsystems، يكون الميتا معلَّماً بمعين مملوء (◆). على بعض لوحات المفاتيح، وخاصة لوحات  المفاتيح MIT و Lisp machine والمتبعين لها، مثل لوحة  Knight keyboard ولوحة space-cadet keyboard، يكون الميتا مسمّى "META". على لوحات المفاتيح لنظام Symbolics،يكون الميتا مسمّى "META" أو "Meta".
 :::
 
-For example:
+على سبيل :
 
 ```vue-html
 <!-- Alt + Enter -->
 <input @keyup.alt.enter="clear" />
 
 <!-- Ctrl + Click -->
-<div @click.ctrl="doSomething">Do something</div>
+<div @click.ctrl="doSomething">قم بعمل ما</div>
+
 ```
 
-::: tip
-Note that modifier keys are different from regular keys and when used with `keyup` events, they have to be pressed when the event is emitted. In other words, `keyup.ctrl` will only trigger if you release a key while holding down `ctrl`. It won't trigger if you release the `ctrl` key alone.
+::: tip ملاحظة
+تجدر الملاحظة أن مفاتيح المُعدِّلات مختلفة عن المفاتيح العادية وعند استخدامها مع أحداث `keyup`، يجب الضغط عليها عند إصدار الحدث. بعبارة أخرى، سيُشغل `keyup.ctrl` فقط إذا قمت بتحرير مفتاح معين مع استمرار الضغط على `ctrl`. لن يتم تشغيله إذا قمت بتحرير مفتاح `ctrl` بمفرده.
 :::
 
-### `.exact` Modifier {#exact-modifier}
+### المُعدِّل `exact.`  {#exact-modifier}
 
-The `.exact` modifier allows control of the exact combination of system modifiers needed to trigger an event.
+المُعدِّل `exact.` يسمح بالتحكم في التركيبة الدقيقة لمُعدّلات النظام اللازمة لتشغيل حدث ما.
 
 ```vue-html
-<!-- this will fire even if Alt or Shift is also pressed -->
-<button @click.ctrl="onClick">A</button>
+<!-- هذا سيشغل حتى إذا كان Alt أو Shift مضغوطاً أيضاً -->
+<button @click.ctrl="onClick">أ</button>
 
-<!-- this will only fire when Ctrl and no other keys are pressed -->
-<button @click.ctrl.exact="onCtrlClick">A</button>
+<!-- هذا سيشغل فقط إذا كان Ctrl ولا مفتاح آخر مضغوطاً -->
+<button @click.ctrl.exact="onCtrlClick">أ</button>
 
-<!-- this will only fire when no system modifiers are pressed -->
-<button @click.exact="onClick">A</button>
+<!-- هذا سيشغل فقط إذا لم يتم الضغط على أي مُعدِّلات نظام -->
+<button @click.exact="onClick">أ</button>
 ```
 
-## Mouse Button Modifiers {#mouse-button-modifiers}
+## مُعدِّلات أزرار الفأرة {#mouse-button-modifiers}
 
-- `.left`
-- `.right`
-- `.middle`
+* `.left`
+* `.right`
+* `.middle`
 
-These modifiers restrict the handler to events triggered by a specific mouse button.
+هذه المُعدِّلات تقيد المُعالِج بالأحداث التي تم تشغيلها بواسطة زر فأرة معين.
