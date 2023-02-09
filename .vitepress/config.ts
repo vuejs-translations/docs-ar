@@ -662,7 +662,7 @@ export default defineConfigWithTheme<ThemeConfig>({
     ],
 
     editLink: {
-      repo: 'vuejs/docs-ar',
+      repo: 'Abdelaziz18003/vuejs-docs-ar',//TODO - change to vuejs/docs-ar when ready
       text: 'عدل هذه الصفحة على GitHub'
     },
 

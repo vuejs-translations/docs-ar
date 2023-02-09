@@ -38,7 +38,7 @@
 | conditional           |                               شرطي |
 | list                  |                              قائمة |
 | key                   |                              مفتاح |
-| slot                  |                               مدخل |
+| slot                  |                          منفذ/مدخل |
 | ref                   |                               مرجع |
 | dependency            |                           اعتمادية |
 | reactivity            |             (كإسم للمفهوم) تفاعلية |
@@ -62,3 +62,5 @@
 | unwrap                |                                 فك |
 | lazy                  |                               خامل |
 | index                 |                               مؤشر |
+| layout                |                        نسق / تخطيط |
+| placeholder           |                    عنصر/محتوى نائب |
