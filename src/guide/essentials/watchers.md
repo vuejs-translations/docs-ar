@@ -1,23 +1,26 @@
-# Watchers {#watchers}
+# الخاصيات المُراقبة {#watchers}
 
-## Basic Example {#basic-example}
+## مثال أساسي {#basic-example}
 
-Computed properties allow us to declaratively compute derived values. However, there are cases where we need to perform "side effects" in reaction to state changes - for example, mutating the DOM, or changing another piece of state based on the result of an async operation.
+الخاصيات المحسوبة تسمح لنا بحساب القيم المشتقة بشكل تصريحي. ومع ذلك، هناك حالات حيث نحتاج إلى تنفيذ "تأثيرات جانبية" بالرد على تغييرات الحالة - على سبيل المثال، تعديل DOM، أو تغيير جزء آخر من الحالة بناءً على نتيجة عملية غير متزامنة.
+
 
 <div class="options-api">
 
-With the Options API, we can use the [`watch` option](/api/options-state.html#watch) to trigger a function whenever a reactive property changes:
+مع واجهة الخيارات، يمكننا استخدام خيار [`watch`](/api/options-state.html#watch) لتشغيل دالة عند تغيير خاصية تفاعلية :
 
 ```js
 export default {
   data() {
     return {
       question: '',
-      answer: 'Questions usually contain a question mark. ;-)'
+      answer: 'عادة ما تحتوي الأسئلة على علامة استفهام. ;-)'
     }
   },
   watch: {
-    // whenever question changes, this function will run
+    // عندما تتغير الخاصية 
+    // `question`
+    // سيتم تشغيل هذه الدالة
     question(newQuestion, oldQuestion) {
       if (newQuestion.includes('?')) {
         this.getAnswer()
@@ -26,12 +29,12 @@ export default {
   },
   methods: {
     async getAnswer() {
-      this.answer = 'Thinking...'
+      this.answer = 'قيد التفكير ...'
       try {
         const res = await fetch('https://yesno.wtf/api')
         this.answer = (await res.json()).answer
       } catch (error) {
-        this.answer = 'Error! Could not reach the API. ' + error
+        this.answer = 'خطأ! تعذر الوصول إلى الخادم. ' + error
       }
     }
   }
@@ -40,20 +43,20 @@ export default {
 
 ```vue-html
 <p>
-  Ask a yes/no question:
+  اطرح سؤال نعم/لا:
   <input v-model="question" />
 </p>
 <p>{{ answer }}</p>
 ```
 
-[Try it in the Playground](https://sfc.vuejs.org/#eyJBcHAudnVlIjoiPHNjcmlwdD5cbmV4cG9ydCBkZWZhdWx0IHtcbiAgZGF0YSgpIHtcbiAgICByZXR1cm4ge1xuICAgICAgcXVlc3Rpb246ICcnLFxuICAgICAgYW5zd2VyOiAnUXVlc3Rpb25zIHVzdWFsbHkgY29udGFpbiBhIHF1ZXN0aW9uIG1hcmsuIDstKSdcbiAgICB9XG4gIH0sXG4gIHdhdGNoOiB7XG4gICAgLy8gd2hlbmV2ZXIgcXVlc3Rpb24gY2hhbmdlcywgdGhpcyBmdW5jdGlvbiB3aWxsIHJ1blxuICAgIHF1ZXN0aW9uKG5ld1F1ZXN0aW9uLCBvbGRRdWVzdGlvbikge1xuICAgICAgaWYgKG5ld1F1ZXN0aW9uLmluZGV4T2YoJz8nKSA+IC0xKSB7XG4gICAgICAgIHRoaXMuZ2V0QW5zd2VyKClcbiAgICAgIH1cbiAgICB9XG4gIH0sXG4gIG1ldGhvZHM6IHtcbiAgICBhc3luYyBnZXRBbnN3ZXIoKSB7XG4gICAgICB0aGlzLmFuc3dlciA9ICdUaGlua2luZy4uLidcbiAgICAgIHRyeSB7XG4gICAgICAgIGNvbnN0IHJlcyA9IGF3YWl0IGZldGNoKCdodHRwczovL3llc25vLnd0Zi9hcGknKVxuICAgICAgICB0aGlzLmFuc3dlciA9IChhd2FpdCByZXMuanNvbigpKS5hbnN3ZXJcbiAgICAgIH0gY2F0Y2ggKGVycm9yKSB7XG4gICAgICAgIHRoaXMuYW5zd2VyID0gJ0Vycm9yISBDb3VsZCBub3QgcmVhY2ggdGhlIEFQSS4gJyArIGVycm9yXG4gICAgICB9XG4gICAgfVxuICB9XG59XG48L3NjcmlwdD5cblxuPHRlbXBsYXRlPlxuICA8cD5cbiAgICBBc2sgYSB5ZXMvbm8gcXVlc3Rpb246XG4gICAgPGlucHV0IHYtbW9kZWw9XCJxdWVzdGlvblwiIC8+XG4gIDwvcD5cbiAgPHA+e3sgYW5zd2VyIH19PC9wPlxuPC90ZW1wbGF0ZT4iLCJpbXBvcnQtbWFwLmpzb24iOiJ7XG4gIFwiaW1wb3J0c1wiOiB7XG4gICAgXCJ2dWVcIjogXCJodHRwczovL3NmYy52dWVqcy5vcmcvdnVlLnJ1bnRpbWUuZXNtLWJyb3dzZXIuanNcIlxuICB9XG59In0=)
+[اختبرها في حقل التجارب](https://sfc.vuejs.org/#eNp9U91u0zAUfpVDbpyIxhG3pSniCRD3uQmZw1I1TrCdhqrKBdDC2GsMqFZpGxNCU9/EfhuO42SCTeKmrs/P5+9838nGe1nXdNUwb+rNZCaKWoFkqqnnCS/KuhIKNiBYPoE2VdkpdJCLqgSCHSThCc8qLhW8a5hURcUhtrU+IcGYSblsmRjj+qj3+kZfgtnpPeiDvtIHc2bOQe/NVl/oX/oHnpegj2ZrvvYHZnY2ssfkwXwwX2yAwvMwsI8kvKfljwQmkMo1z8DnrH09xAKI57BJOECR/5OgBT9h718hrxckgDmEzwJXBwNtukqXDUPyxHw05/rG0bQsPuH1FiilKIKtV2I9tgK4yQWT2Jm2aaEgZ5YkOVWqltMoWjPJK9qqPErrwo7h+h486rtexKELWXE/CKircPUdZL0jPhOiEvfMH8EA0df6Tl88sXof9U/kbccwZ/o3Sr8F/d1pbUe7tvZYeQk8hR53eMse+NMh11nk1gQXBC+KlfUyVQxvADO7NY4EAt3pW30FaNs3iw3mM9q5i6yjU1c1K3jdKFiFZXXClnHijS4mHkQOMBoQEXmzGSaL45iggmiagyRTYkEJdJ2rn0X3rLyJ57Y4LNO6lxH3vFcqGRIy8aajdomHa23viTdaJfPMfh0LSSvxNsJ/VDRcFSWjTJbhG1G1ErVeIMrkL4wIgysmQsFwwwQ69h/MB6WPcEfpve4PlnZ0Dg==)
 
-The `watch` option also supports a dot-delimited path as the key:
+خيار `watch` يدعم أيضًا مسارًا مفصولًا بنقطة كمفتاح (خاصية):
 
 ```js
 export default {
   watch: {
-    // Note: only simple paths. Expressions are not supported.
+    // ملاحظة: مسارات بسيطة فقط. لا يتم دعم التعبيرات.
     'some.nested.key'(newValue) {
       // ...
     }
@@ -65,24 +68,23 @@ export default {
 
 <div class="composition-api">
 
-With Composition API, we can use the [`watch` function](/api/reactivity-core.html#watch) to trigger a callback whenever a piece of reactive state changes:
+مع الواجهة التركيبية، يمكننا استخدام الدالة [`watch`](/api/reactivity-core.html#watch) لتشغيل دالة عند تغيير حالة تفاعلية :
 
 ```vue
 <script setup>
 import { ref, watch } from 'vue'
 
 const question = ref('')
-const answer = ref('Questions usually contain a question mark. ;-)')
+const answer = ref('عادة ما تحتوي الأسئلة على علامة استفهام. ;-)')
 
-// watch works directly on a ref
-watch(question, async (newQuestion, oldQuestion) => {
+watch(question, async (newQuestion) => {
   if (newQuestion.indexOf('?') > -1) {
-    answer.value = 'Thinking...'
+    answer.value = 'قيد التفكير ...'
     try {
       const res = await fetch('https://yesno.wtf/api')
       answer.value = (await res.json()).answer
     } catch (error) {
-      answer.value = 'Error! Could not reach the API. ' + error
+      answer.value =  'خطأ! تعذر الوصول إلى الخادم. ' + error
     }
   }
 })
@@ -90,57 +92,58 @@ watch(question, async (newQuestion, oldQuestion) => {
 
 <template>
   <p>
-    Ask a yes/no question:
+      اطرح سؤال نعم/لا:
     <input v-model="question" />
   </p>
-  <p>{{ answer }}</p>
+  <p>{{ answer==='yes'?'نعم':'لا' }}</p>
 </template>
 ```
 
-[Try it in the Playground](https://sfc.vuejs.org/#eyJBcHAudnVlIjoiPHNjcmlwdCBzZXR1cD5cbmltcG9ydCB7IHJlZiwgd2F0Y2ggfSBmcm9tICd2dWUnXG5cbmNvbnN0IHF1ZXN0aW9uID0gcmVmKCcnKVxuY29uc3QgYW5zd2VyID0gcmVmKCdRdWVzdGlvbnMgdXN1YWxseSBjb250YWluIGEgcXVlc3Rpb24gbWFyay4gOy0pJylcblxud2F0Y2gocXVlc3Rpb24sIGFzeW5jIChuZXdRdWVzdGlvbikgPT4ge1xuICBpZiAobmV3UXVlc3Rpb24uaW5kZXhPZignPycpID4gLTEpIHtcbiAgICBhbnN3ZXIudmFsdWUgPSAnVGhpbmtpbmcuLi4nXG4gICAgdHJ5IHtcbiAgICAgIGNvbnN0IHJlcyA9IGF3YWl0IGZldGNoKCdodHRwczovL3llc25vLnd0Zi9hcGknKVxuICAgICAgYW5zd2VyLnZhbHVlID0gKGF3YWl0IHJlcy5qc29uKCkpLmFuc3dlclxuICAgIH0gY2F0Y2ggKGVycm9yKSB7XG4gICAgICBhbnN3ZXIudmFsdWUgPSAnRXJyb3IhIENvdWxkIG5vdCByZWFjaCB0aGUgQVBJLiAnICsgZXJyb3JcbiAgICB9XG4gIH1cbn0pXG48L3NjcmlwdD5cblxuPHRlbXBsYXRlPlxuICA8cD5cbiAgICBBc2sgYSB5ZXMvbm8gcXVlc3Rpb246XG4gICAgPGlucHV0IHYtbW9kZWw9XCJxdWVzdGlvblwiIC8+XG4gIDwvcD5cbiAgPHA+e3sgYW5zd2VyIH19PC9wPlxuPC90ZW1wbGF0ZT4iLCJpbXBvcnQtbWFwLmpzb24iOiJ7XG4gIFwiaW1wb3J0c1wiOiB7XG4gICAgXCJ2dWVcIjogXCJodHRwczovL3NmYy52dWVqcy5vcmcvdnVlLnJ1bnRpbWUuZXNtLWJyb3dzZXIuanNcIlxuICB9XG59In0=)
+[اختبرها في حقل التجارب](https://sfc.vuejs.org/#eNp9U91u0zAUfpVDbpyIxhG3pSniCRD3uQmZw1I1TrCdhqrKBdDC2GsMqFZpGxNCU9/EfhuO42SCTeKmrs/P5+9838nGe1nXdNUwb+rNZCaKWoFkqqnnCS/KuhIKNiBYPoE2VdkpdJCLqgSCHSThCc8qLhW8a5hURcUhtrU+IcGYSblsmRjj+qj3+kZfgtnpPeiDvtIHc2bOQe/NVl/oX/oHnpegj2ZrvvYHZnY2ssfkwXwwX2yAwvMwsI8kvKfljwQmkMo1z8DnrH09xAKI57BJOECR/5OgBT9h718hrxckgDmEzwJXBwNtukqXDUPyxHw05/rG0bQsPuH1FiilKIKtV2I9tgK4yQWT2Jm2aaEgZ5YkOVWqltMoWjPJK9qqPErrwo7h+h486rtexKELWXE/CKircPUdZL0jPhOiEvfMH8EA0df6Tl88sXof9U/kbccwZ/o3Sr8F/d1pbUe7tvZYeQk8hR53eMse+NMh11nk1gQXBC+KlfUyVQxvADO7NY4EAt3pW30FaNs3iw3mM9q5i6yjU1c1K3jdKFiFZXXClnHijS4mHkQOMHKICLzZDIPFcUxQQPTMIZIpsZgEus6Vz6J7Ut7Ec0sclmndq4hr3guVDAmZeNNRusTDrbb3xBudknlmP46FpJV4G+E/KhquipJRJsvwjahaiVIvEGXyF0aEwRUToWC4YAIN+w/mg9JHuKPyXvcHXvNz7g==)
 
-### Watch Source Types {#watch-source-types}
+### أنواع مصادر الدالة المُراقبة {#watch-source-types}
 
-`watch`'s first argument can be different types of reactive "sources": it can be a ref (including computed refs), a reactive object, a getter function, or an array of multiple sources:
+الوسيط الأول للدالة `watch` يمكن أن يكون أنواع مختلفة من  "المصادر" التفاعلية : يمكن أن يكون ref (بما في ذلك الخاصيات المحسوبة)، كائن تفاعلي ، دالة مُحصِّلة، أو مصفوفة من مصادر متعددة :
 
 ```js
 const x = ref(0)
 const y = ref(0)
 
-// single ref
+// ref وحيد
 watch(x, (newX) => {
-  console.log(`x is ${newX}`)
+  console.log(`x يساوي ${newX}`)
 })
 
-// getter
+// دالة مُحصِّلة
 watch(
   () => x.value + y.value,
   (sum) => {
-    console.log(`sum of x + y is: ${sum}`)
+    console.log(`مجموع x + y يساوي: ${sum}`)
   }
 )
 
-// array of multiple sources
+// مصفوفة من مصادر متعددة
 watch([x, () => y.value], ([newX, newY]) => {
-  console.log(`x is ${newX} and y is ${newY}`)
+  console.log(`x يساوي ${newX} و y يساوي ${newY}`)
 })
 ```
 
-Do note that you can't watch a property of a reactive object like this:
+تجدر الإشارة إلى أنه لا يمكنك مراقبة خاصية من كائن تفاعلي كهذا المثال :
 
 ```js
 const obj = reactive({ count: 0 })
 
-// this won't work because we are passing a number to watch()
+//  لن يشتغل هذا لأننا نمرر رقمًا إلى
+// watch()
 watch(obj.count, (count) => {
-  console.log(`count is: ${count}`)
+  console.log(`العداد: ${count}`)
 })
 ```
 
-Instead, use a getter:
+بدلاً من ذلك استعمل دالة مُحصِّلة لارجاع الخاصية: 
 
 ```js
-// instead, use a getter:
+// بدلاً من ذلك استعمل دالة مُحصِّلة لارجاع الخاصية:
 watch(
   () => obj.count,
   (count) => {
@@ -151,20 +154,23 @@ watch(
 
 </div>
 
-## Deep Watchers {#deep-watchers}
+## الخاصيات المُراقبة العميقة {#deep-watchers}
 
 <div class="options-api">
 
-`watch` is shallow by default: the callback will only trigger when the watched property has been assigned a new value - it won't trigger on nested property changes. If you want the callback to fire on all nested mutations, you need to use a deep watcher:
+الدالة `watch` سطحية افتراضيًا: ستُشغَّل الدالة المُراقبة فقط عندما  تُعيَّن  قيمة جديدة للخاصية المُراقَبة - لن تُشغَّل عند تغيير الخاصية المتداخلة. إذا كنت تريد أن تشغل الدالة المُراقِبة على جميع التغييرات المتداخلة، فستحتاج إلى استخدام دالة مُراقبة عميقة :
 
 ```js
 export default {
   watch: {
     someObject: {
       handler(newValue, oldValue) {
-        // Note: `newValue` will be equal to `oldValue` here
-        // on nested mutations as long as the object itself
-        // hasn't been replaced.
+        // ملاحظة: هنا
+        //`newValue` 
+        // سيكون مساويًا لـ 
+        // `oldValue` 
+        // على التغييرات المتداخلة طالما لم يتم استبدال الكائن نفسه.
+        
       },
       deep: true
     }
@@ -176,15 +182,15 @@ export default {
 
 <div class="composition-api">
 
-When you call `watch()` directly on a reactive object, it will implicitly create a deep watcher - the callback will be triggered on all nested mutations:
+عندما تستدعي `()watch` مباشرةً على كائن تفاعلي، سيُنشئ تلقائيًا دالة مُراقبة عميقة  - ستُشغَّل دالة رد النداء على جميع التغييرات المتداخلة :
 
 ```js
 const obj = reactive({ count: 0 })
 
 watch(obj, (newValue, oldValue) => {
-  // fires on nested property mutations
-  // Note: `newValue` will be equal to `oldValue` here
-  // because they both point to the same object!
+  // تشغل عند التغييرات المتداخلة للخاصية 
+  // ملاحظة: `newValue` سيكون مساويًا لـ `oldValue` هنا
+  // لأنهما يشيران إلى نفس الكائن!
 })
 
 obj.count++
@@ -192,23 +198,25 @@ obj.count++
 
 This should be differentiated with a getter that returns a reactive object - in the latter case, the callback will only fire if the getter returns a different object:
 
+
+
 ```js
 watch(
   () => state.someObject,
   () => {
-    // fires only when state.someObject is replaced
+    // تشغل فقط عند استبدال state.someObject
   }
 )
 ```
 
-You can, however, force the second case into a deep watcher by explicitly using the `deep` option:
+ومع ذلك، يمكنك فرض الحالة الثانية داخل  دالة مراقبة عميقة عن طريق استخدام الخيار "deep" بشكل صريح :
 
 ```js
 watch(
   () => state.someObject,
   (newValue, oldValue) => {
-    // Note: `newValue` will be equal to `oldValue` here
-    // *unless* state.someObject has been replaced
+    // ملاحظة: `newValue` سيكون مساويًا لـ `oldValue` هنا
+    // *إلا إذا* تم استبدال state.someObject
   },
   { deep: true }
 )
@@ -216,17 +224,18 @@ watch(
 
 </div>
 
-:::warning Use with Caution
-Deep watch requires traversing all nested properties in the watched object, and can be expensive when used on large data structures. Use it only when necessary and beware of the performance implications.
+
+:::warning استخدمها بحذر
+تتطلب المراقبة العميقة مراجعة جميع الخصائص المتداخلة في الكائن المُراقَب، ويمكن أن تكون مكلفة عند استخدامها على بنية بيانات كبيرة. استخدمها فقط عند الضرورة وتأكد من تأثيرات الأداء. 
 :::
 
-## Eager Watchers {#eager-watchers}
+## الدوال المُراقِبة الفورية {#eager-watchers}
 
-`watch` is lazy by default: the callback won't be called until the watched source has changed. But in some cases we may want the same callback logic to be run eagerly - for example, we may want to fetch some initial data, and then re-fetch the data whenever relevant state changes.
+الدالة `watch` خاملة افتراضيًا: لن تُستدعى دالة رد النداء حتى يُغيَّر المصدر المراقَب. ولكن في بعض الحالات قد نرغب في تشغيل نفس شيفرة رد النداء بشكل فوري - على سبيل المثال، قد نرغب في جلب بعض البيانات الأولية ثم إعادة جلبها عند تغيير الحالة المرتبطة بها.
 
 <div class="options-api">
 
-We can force a watcher's callback to be executed immediately by declaring it using an object with a `handler` function and the `immediate: true` option:
+يمكننا فرض تشغيل دالة رد النداء للخاصية المُراقبة فورًا عن طريق التصريح بها باستخدام كائن يحتوي على دالة المعالجة `handler` لتنفيذ الشيفرة المستندة على تغير المصدر المُراقَب وخيار `immediate: true`:
 
 ```js
 export default {
@@ -234,9 +243,9 @@ export default {
   watch: {
     question: {
       handler(newQuestion) {
-        // this will be run immediately on component creation.
+      // سيتم تشغيله فورًا عند إنشاء المكون.   
       },
-      // force eager callback execution
+      // فرض تشغيل دالة رد النداء فورًا
       immediate: true
     }
   }
@@ -244,17 +253,18 @@ export default {
 }
 ```
 
-The initial execution of the handler function will happen just before the `created` hook. Vue will have already processed the `data`, `computed`, and `methods` options, so those properties will be available on the first invocation.
-  
+التنفيذ الأولي لدالة المعالجة سيحدث قبل مرحلة `created`. ستكون Vue قد قام عالجت خيارات `data` و `computed` و `methods`، لذا ستكون هذه الخاصيات متاحة في الاستدعاء الأول.
+
 </div>
 
 <div class="composition-api">
 
-We can force a watcher's callback to be executed immediately by passing the `immediate: true` option:
+يمكننا فرض تشغيل دالة رد النداء للخاصية المُراقبة فورًا عن طريق التصريح بها باستخدام كائن يحتوي على دالة المعالجة `handler` لتنفيذ الشيفرة المستندة على تغير المصدر المُراقَب وخيار `immediate: true`:
 
 ```js
 watch(source, (newValue, oldValue) => {
-  // executed immediately, then again when `source` changes
+  // سيتم تشغيله فورًا ثم مرة أخرى عند تغيير المصدر 
+  // `source`
 }, { immediate: true })
 ```
 
@@ -262,9 +272,9 @@ watch(source, (newValue, oldValue) => {
 
 <div class="composition-api">
 
-## `watchEffect()` \*\* {#watcheffect}
+## `()watchEffect` \*\* {#watcheffect}
 
-It is common for the watcher callback to use exactly the same reactive state as the source. For example, consider the following code, which uses a watcher to load a remote resource whenever the `todoId` ref changes:
+من الشائع أن تستخدم دالة رد النداء نفس الحالة المرتبطة بالمصدر المُراقَب. على سبيل المثال، فإن الشيفرة التالية تستخدم مُراقِب لتحميل مورد عن بعد عند تعيين المتغير التفاعلي `todoId`:
 
 ```js
 const todoId = ref(1)
@@ -278,9 +288,9 @@ watch(todoId, async () => {
 }, { immediate: true })
 ```
 
-In particular, notice how the watcher uses `todoId` twice, once as the source and then again inside the callback. 
+على وجه الخصوص، تجدر الإشارة إلى أن الدالة المُراقِبة تستخدم `todoId` مرتين، مرة كمصدر ومرة أخرى داخل الدالة المُعالجة.
 
-This can be simplified with [`watchEffect()`](/api/reactivity-core.html#watcheffect). `watchEffect()` allows us to track the callback's reactive dependencies automatically. The watcher above can be rewritten as:
+يمكن تبسيط هذا باستخدام [`()watchEffect`](/api/reactivity-core.html#watcheffect). يسمح لنا `()watchEffect` بتتبع الاعتماديات التفاعلية للدالة المعالجة تلقائيًا. يمكن إعادة كتابة المُراقِب أعلاه كما يلي:
 
 ```js
 watchEffect(async () => {
@@ -291,33 +301,33 @@ watchEffect(async () => {
 })
 ```
 
-Here, the callback will run immediately, there's no need to specify `immediate: true`. During its execution, it will automatically track `todoId.value` as a dependency (similar to computed properties). Whenever `todoId.value` changes, the callback will be run again. With `watchEffect()`, we no longer need to pass `todoId` explicitly as the source value.
+هنا، ستُشغَّل الدالة المُعالِجة فورًا، لا تحتاج إلى تحديد `immediate: true`. خلال تنفيذها، سيتم تتبع `todoId.value` تلقائيًا كاعتمادية (مماثلة للخاصيات المحسوبة). عندما يتغير `todoId.value`، سيتم تشغيل الدالة المعالجة مرة أخرى. مع `()watchEffect`، لم نعد نحتاج  إلى تمرير `todoId` بشكل صريح كقيمة مصدرية.
 
-You can check out [this example](/examples/#fetching-data) of `watchEffect()` and reactive data-fetching in action.
+يمكنك التحقق من [هذا المثال](/examples/#fetching-data) لـ `()watchEffect` و كيفية تحميل البيانات التفاعلية داخل دالتها المعالجة.
 
-For examples like these, with only one dependency, the benefit of `watchEffect()` is relatively small. But for watchers that have multiple dependencies, using `watchEffect()` removes the burden of having to maintain the list of dependencies manually. In addition, if you need to watch several properties in a nested data structure, `watchEffect()` may prove more efficient than a deep watcher, as it will only track the properties that are used in the callback, rather than recursively tracking all of them.
+بالنسبة للأمثلة مثل هذه، مع اعتمادية واحدة فقط، فإن فائدة `()watchEffect` غير ملموسة نسبيا. ولكن hلدوال المُراقِبة التي لديها عدة اعتماديات، فإن استخدام `()watchEffect` يزيل قائمة الاعتماديات المضافة يدويًا. بالإضافة إلى ذلك، إذا كنت بحاجة إلى مراقبة عدة خاصيات في سلسلة بيانات متداخلة، فقد تثبت الدالة `()watchEffect`  فعاليتها مقارنة بالدالة المُراقِبة العميقة، حيث سيتم تتبع الخاصيات المستخدمة فقط في الدالة المعالجة، بدلاً من تتبعها جميعا بشكل تكراري .
 
-:::tip
-`watchEffect` only tracks dependencies during its **synchronous** execution. When using it with an async callback, only properties accessed before the first `await` tick will be tracked.
+:::tip ملاحظة
+`()watchEffect` يتتبع الاعتماديات فقط خلال تنفيذها **المتزامن**. عند استخدامه مع دالة مُعالِجة غير متزامنة، وحدها الخاصيات التي يتم الوصول إليها قبل النبضة الأولى لـ`await` ستُتبَّع .
 :::
 
-### `watch` vs. `watchEffect` {#watch-vs-watcheffect}
+### `watch` مقابل `watchEffect` {#watch-vs-watcheffect}
 
-`watch` and `watchEffect` both allow us to reactively perform side effects. Their main difference is the way they track their reactive dependencies:
+`watch` و `watchEffect` كلتاهما تسمحان لنا بتنفيذ تأثير جانبية بشكل تفاعلي. الفرق الرئيسي بينهما هو طريقة تتبع اعتمادياتهما التفاعلية :
 
-- `watch` only tracks the explicitly watched source. It won't track anything accessed inside the callback. In addition, the callback only triggers when the source has actually changed. `watch` separates dependency tracking from the side effect, giving us more precise control over when the callback should fire.
+- `watch` تتبع فقط المصدر المراقب بشكل صريح. لن يتم تتبع أي شيء يتم الوصول إليه داخل الدالة المُعالجة. بالإضافة إلى ذلك، فإن الدالة المعالجة تتفاعل فقط عندما يتغير المصدر بالفعل. `watch` تفصل التتبع الاعتمادي عن التأثير الجانبي، مما يمنحنا مزيدًا من التحكم الدقيق في متى يجب تشغيل الدالة المعالجة.
 
-- `watchEffect`, on the other hand, combines dependency tracking and side effect into one phase. It automatically tracks every reactive property accessed during its synchronous execution. This is more convenient and typically results in terser code, but makes its reactive dependencies less explicit.
+- `watchEffect`, من ناحية أخرى، تجمع التتبع الاعتمادي والتأثير الجانبي في طور واحد. تتبع كل الخاصيات التفاعلية التي يتم الوصول إليها خلال تنفيذها بشكل متزامن.هذه الدالة تعتبر أكثر ملاءمة وعادة ما يؤدي ذلك إلى تقليل الشيفرة، ولكنه يجعل اعتمادياته التفاعلية أقل وضوحًا.
 
 </div>
 
-## Callback Flush Timing {#callback-flush-timing}
+## توقيت تنفيذ الدالة المعالجة {#callback-flush-timing}
 
-When you mutate reactive state, it may trigger both Vue component updates and watcher callbacks created by you.
+لما تُعدل حالة تفاعلية، فإنها قد تُشغل كل من تحديثات مكونات Vue والدوال المراقِبة المُنشأة من قبلك.
 
-By default, user-created watcher callbacks are called **before** Vue component updates. This means if you attempt to access the DOM inside a watcher callback, the DOM will be in the state before Vue has applied any updates.
+افتراضيا، تُشغل الدوال المراقِبة المُنشأة من قبل المستخدم **قبل** تحديثات مكونات Vue. هذا يعني أنه إذا حاولت الوصول إلى DOM داخل دالة مراقبة، فإن DOM سيكون عبارة عن حالة قبل أن تقوم Vue بتطبيق أي تحديثات.
 
-If you want to access the DOM in a watcher callback **after** Vue has updated it, you need to specify the `flush: 'post'` option:
+إذا كنت ترغب في الوصول إلى DOM في دالة مراقبة **بعد** تحديث Vue، فيجب عليك تحديد خيار `flush: 'post'`:
 
 <div class="options-api">
 
@@ -346,14 +356,14 @@ watchEffect(callback, {
   flush: 'post'
 })
 ```
-
-Post-flush `watchEffect()` also has a convenience alias, `watchPostEffect()`:
+تمتلك `()watchEffect` مسمى ملائم أيضًا لخاصية التنفيذ بعد التحديث، وهي الدالة `()watchPostEffect`:
 
 ```js
 import { watchPostEffect } from 'vue'
 
 watchPostEffect(() => {
-  /* executed after Vue updates */
+  /* تم تنفيذها بعد تحديثات 
+    Vue */
 })
 ```
 
@@ -361,9 +371,9 @@ watchPostEffect(() => {
 
 <div class="options-api">
 
-## `this.$watch()` \* {#this-watch}
+## الدالة `()this.$watch`  \* {#this-watch}
 
-It's also possible to imperatively create watchers using the [`$watch()` instance method](/api/component-instance.html#watch):
+من الممكن أيضًا إنشاء دوال مُراقِبة بشكل مباشر باستخدام [دالة النسخة `()watch$`](/api/component-instance.html#watch):
 
 ```js
 export default {
@@ -375,22 +385,20 @@ export default {
 }
 ```
 
-This is useful when you need to conditionally set up a watcher, or only watch something in response to user interaction. It also allows you to stop the watcher early.
-
+هذا مفيد عندما تحتاج إلى إعداد دالة مراقِبة بشكل شرطي، أو مراقبة شيء ما فقط كاستجابة لتفاعل المستخدم. ويسمح لك أيضًا بإيقاف المراقبة في وقت مبكر.
 </div>
 
-## Stopping a Watcher {#stopping-a-watcher}
+## إيقاف خاصية مراقِبة {#stopping-a-watcher}
 
 <div class="options-api">
 
-Watchers declared using the `watch` option or the `$watch()` instance method are automatically stopped when the owner component is unmounted, so in most cases you don't need to worry about stopping the watcher yourself.
+الخاصيات المُراقِبة المُنشأة من خلال خاصية `watch` أو دالة `()this.$watch` تُوقف تلقائيًا عند إزالة المكون الحامل لها، لذا في معظم الحالات لا تهتم بشأن إيقاف الخاصية المراقِبة بنفسك.
 
-In the rare case where you need to stop a watcher before the owner component unmounts, the `$watch()` API returns a function for that:
+في حالات نادرة، قد تحتاج إلى إيقاف خاصية مراقِبة قبل إزالة المكون الحامل لها. حيث يمكنك القيام بذلك بواسطة الدالة المُرجَعة من الواجهة البرمجية لـ `()this.$watch` :
 
 ```js
 const unwatch = this.$watch('foo', callback)
-
-// ...when the watcher is no longer needed:
+// ...عندما لا تحتاج إلى المراقبة بعد ذلك:
 unwatch()
 ```
 
@@ -398,42 +406,42 @@ unwatch()
 
 <div class="composition-api">
 
-Watchers declared synchronously inside `setup()` or `<script setup>` are bound to the owner component instance, and will be automatically stopped when the owner component is unmounted. In most cases, you don't need to worry about stopping the watcher yourself.
+الخاصيات المراقِبة المصرحة بشكل تزامني داخل `setup()` أو `<script setup>` مرتبطة بنسخة المكون الحامل لها، وسيتم إيقافها تلقائيًا عند فصله. في معظم الحالات، لا تهتم بشأن إيقاف الخاصية المراقِبة بنفسك.
 
-The key here is that the watcher must be created **synchronously**: if the watcher is created in an async callback, it won't be bound to the owner component and must be stopped manually to avoid memory leaks. Here's an example:
+الجوهر هنا هو أن الخاصية المراقِبة يجب أن تُنشأ **بشكل متزامن** : إذا تم إنشاء الخاصية المراقِبة في دالة رد نداء غير متزامنة، فلن تكون مرتبطة بالمكون الحامل لها ويجب إيقافها يدويًا لتجنب التسريبات في الذاكرة. هنا مثال:
 
 ```vue
 <script setup>
 import { watchEffect } from 'vue'
 
-// this one will be automatically stopped
+// هذا سيتم إيقافه تلقائيًا
 watchEffect(() => {})
 
-// ...this one will not!
+//هذا لن يتم إيقافه تلقائيًا!
 setTimeout(() => {
   watchEffect(() => {})
 }, 100)
 </script>
 ```
 
-To manually stop a watcher, use the returned handle function. This works for both `watch` and `watchEffect`:
+من أجل إيقاف الخاصية المراقِبة يدويًا، استخدم الدالة المُرجَعة. هذا يعمل لكل من `watch` و `watchEffect`:
 
 ```js
 const unwatch = watchEffect(() => {})
 
-// ...later, when no longer needed
+// ... في وقت لاحق، عندما لا تعود محتاجا إلى المراقبة  
 unwatch()
 ```
 
-Note that there should be very few cases where you need to create watchers asynchronously, and synchronous creation should be preferred whenever possible. If you need to wait for some async data, you can make your watch logic conditional instead:
+تجدر الإشارة إلى أن هناك حالات نادرة جدًا حيث تحتاج إلى إنشاء مراقِبين بشكل غير متزامن، ويجب تفضيل الإنشاء المتزامن في أي وقت ممكن. إذا كنت بحاجة إلى الانتظار لبعض البيانات غير المتزامنة، يمكنك جعل شيفرة الدالة المراقبة شرطية بدلاً من ذلك :
 
 ```js
-// data to be loaded asynchronously
+// بيانات ستُحمّل بشكل غير متزامن 
 const data = ref(null)
 
 watchEffect(() => {
   if (data.value) {
-    // do something when data is loaded
+    // قم ببعض المعالجة عندما يتم تحميل البيانات 
   }
 })
 ```

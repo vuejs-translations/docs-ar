@@ -197,7 +197,7 @@ export const sidebar: ThemeConfig['sidebar'] = {
         { text: 'الأحداث', link: '/guide/components/events' },
         { text: 'الخاصية v-model', link: '/guide/components/v-model' },
         {
-          text: 'السمات الإحتياطية',
+          text: 'السمات المستترة',
           link: '/guide/components/attrs'
         },
         { text: 'الفتحات', link: '/guide/components/slots' },
@@ -662,7 +662,7 @@ export default defineConfigWithTheme<ThemeConfig>({
     ],
 
     editLink: {
-      repo: 'vuejs/docs-ar',
+      repo: 'Abdelaziz18003/vuejs-docs-ar',//TODO - change to vuejs/docs-ar when ready
       text: 'عدل هذه الصفحة على GitHub'
     },
 
