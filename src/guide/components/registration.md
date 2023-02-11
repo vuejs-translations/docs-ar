@@ -1,14 +1,14 @@
-# Component Registration {#component-registration}
+# تسجيل المكون {#component-registration}
 
-<VueSchoolLink href="https://vueschool.io/lessons/vue-3-global-vs-local-vue-components" title="Free Vue.js Component Registration Lesson"/>
+<VueSchoolLink href="https://vueschool.io/lessons/vue-3-global-vs-local-vue-components" title="درس Vue.js مجاني حول تسجيل المكونات"/>
 
-> This page assumes you've already read the [Components Basics](/guide/essentials/component-basics). Read that first if you are new to components.
+> لقراءة هذه الصفحة يجب عليك أولا الاطلاع على [أساسيات المكونات](/guide/essentials/component-basics).  ثم العودة إلى هنا.
 
-A Vue component needs to be "registered" so that Vue knows where to locate its implementation when it is encountered in a template. There are two ways to register components: global and local.
+أي مكون Vue يحتاج إلى أن يكون "مسجلا" لكي تتمكن Vue من تحديد شيفرته التنفيذية عندما يُعثر عليه في قالب. هناك طريقتان لتسجيل المكونات: عامة ومحلية.
 
-## Global Registration {#global-registration}
+## التسجيل العام {#global-registration}
 
-We can make components available globally in the current [Vue application](/guide/essentials/application.html) using the `app.component()` method:
+يمكننا جعل المكونات متاحة بشكل عام في [تطبيق Vue](/guide/essentials/application.html) الحالي باستخدام التابع `()app.component`:
 
 ```js
 import { createApp } from 'vue'
@@ -16,16 +16,17 @@ import { createApp } from 'vue'
 const app = createApp({})
 
 app.component(
-  // the registered name
+  // الاسم المسجل
   'MyComponent',
-  // the implementation
+  // الشيفرة التنفيذية
   {
     /* ... */
   }
 )
 ```
 
-If using SFCs, you will be registering the imported `.vue` files:
+
+إذا كنت تستخدم المكونات أحادية الملف، ستقوم بتسجيل الملفات المستوردة ذات الامتداد  `.vue`:
 
 ```js
 import MyComponent from './App.vue'
@@ -33,7 +34,7 @@ import MyComponent from './App.vue'
 app.component('MyComponent', MyComponent)
 ```
 
-The `app.component()` method can be chained:
+التابع `()app.component` يمكن استدعاؤه بشكل متسلسل:
 
 ```js
 app
@@ -42,30 +43,30 @@ app
   .component('ComponentC', ComponentC)
 ```
 
-Globally registered components can be used in the template of any component within this application:
+المكونات المسجلة بشكل عام يمكن استخدامها في قالب أي مكون داخل هذا التطبيق:
 
 ```vue-html
-<!-- this will work in any component inside the app -->
+<!-- سيشتغل هذا في أي مكون داخل التطبيق -->
 <ComponentA/>
 <ComponentB/>
 <ComponentC/>
 ```
 
-This even applies to all subcomponents, meaning all three of these components will also be available _inside each other_.
+هذا ينطبق حتى على المكونات الفرعية، مما يعني أن جميع  المكونات الثلاثة ستكون متاحة _داخل بعضها_.
 
-## Local Registration {#local-registration}
+## التسجيل المحلي {#local-registration}
 
-While convenient, global registration has a few drawbacks:
+بالرغم من أن التسجيل العام ملائم، إلا أن لديه بعض العيوب:
 
-1. Global registration prevents build systems from removing unused components (a.k.a "tree-shaking"). If you globally register a component but end up not using it anywhere in your app, it will still be included in the final bundle.
+1. التسجيل العام يمنع أنظمة البناء من إزالة المكونات غير المستخدمة (أي "التجزئة الشجرية"). إذا قمت بتسجيل المكون بشكل عام ولكن لم تستخدمه في أي مكان في التطبيق، فسيتم تضمينه في الحزمة النهائية.
+  
+2. التسجيل العام يجعل العلاقات بين الاعتماديات أقل وضوحًا في التطبيقات الكبيرة. يجعل من الصعب العثور على شيفرة المكون الابن من طرف المكون الأب الذي يستخدمه. يمكن أن يؤثر ذلك على الصيانة على المدى الطويل و هو نفس حالة استخدام عدد كبير من المتغيرات العامة.
 
-2. Global registration makes dependency relationships less explicit in large applications. It makes it difficult to locate a child component's implementation from a parent component using it. This can affect long-term maintainability similar to using too many global variables.
-
-Local registration scopes the availability of the registered components to the current component only. It makes the dependency relationship more explicit, and is more tree-shaking friendly.
+التسجيل المحلي يحدد نطاق توفر المكونات المسجلة داخل المكون الحالي فقط. يجعل العلاقة بين الاعتماديات أكثر وضوحًا، ويكون أكثر ملاءمة للتجزئة الشجرية.
 
 <div class="composition-api">
 
-When using SFC with `<script setup>`, imported components can be locally used without registration:
+عند استخدام المكونات أحادية الملف (SFC) مع `<script setup>`، يمكن استخدام المكونات المستوردة بشكل محلي دون الحاجة لتسجيلها:
 
 ```vue
 <script setup>
@@ -77,7 +78,7 @@ import ComponentA from './ComponentA.vue'
 </template>
 ```
 
-In non-`<script setup>`, you will need to use the `components` option:
+في الحالات التي لا تستخدم فيها صيغة `<script setup>`، ستحتاج إلى استخدام خيار `components`:
 
 ```js
 import ComponentA from './ComponentA.js'
@@ -95,7 +96,7 @@ export default {
 </div>
 <div class="options-api">
 
-Local registration is done using the `components` option:
+التسجيل المحلي يتم عن طريق استخدام خيار `components`:
 
 ```vue
 <script>
@@ -115,7 +116,7 @@ export default {
 
 </div>
 
-For each property in the `components` object, the key will be the registered name of the component, while the value will contain the implementation of the component. The above example is using the ES2015 property shorthand and is equivalent to:
+لكل خاصية في كائن `components`، سيكون المفتاح (اسم الخاصية على يسار `:` ) هو اسم المكون المسجل، بينما ستحتوي القيمة على الشيفرة التنفيذية للمكون. المثال أعلاه يستخدم اختصار الخاصية من مواصفات ES2015 ويعادل:
 
 ```js
 export default {
@@ -126,16 +127,19 @@ export default {
 }
 ```
 
-Note that **locally registered components are _not_ also available in descendant components**. In this case, `ComponentA` will be made available to the current component only, not any of its child or descendant components.
+تجدر الإشارة إلى أن **المكونات المسجلة محليًا _غير_ متوفرة  في المكونات الأبناء**. في هذه الحالة، سيتاح المكون `ComponentA`  للمكون الحالي فقط، وليس لأي من المكونات الأبناء في شجرة التطبيق.
 
-## Component Name Casing {#component-name-casing}
+## طريقة تسمية المكونات {#component-name-casing}
 
-Throughout the guide, we are using PascalCase names when registering components. This is because:
+على  طول الدليل، نستخدم أسماء بنمط باسكال PascalCase عند تسجيل المكونات. هذا لأن:
 
-1. PascalCase names are valid JavaScript identifiers. This makes it easier to import and register components in JavaScript. It also helps IDEs with auto-completion.
 
-2. `<PascalCase />` makes it more obvious that this is a Vue component instead of a native HTML element in templates. It also differentiates Vue components from custom elements (web components).
+1. الأسماء المكتوبة بنمط باسكال PascalCase هي مُعرِّفات JavaScript صالحة. يسهل ذلك استيراد وتسجيل المكونات في JavaScript. ويساعد أيضًا المحررات IDEs في التكملة التلقائية.
 
-This is the recommended style when working with SFC or string templates. However, as discussed in [DOM Template Parsing Caveats](/guide/essentials/component-basics.html#dom-template-parsing-caveats), PascalCase tags are not usable in DOM templates.
+2. `<PascalCase />` يجعل المسألة أكثر وضوحًا أن هذا الوسم هو مكون Vue بدلاً من عنصر HTML أصلي في القوالب. ويفر"ق أيضًا مكونات Vue عن العناصر المخصصة (مكونات الويب).
 
-Luckily, Vue supports resolving kebab-case tags to components registered using PascalCase. This means a component registered as `MyComponent` can be referenced in the template via both `<MyComponent>` and `<my-component>`. This allows us to use the same JavaScript component registration code regardless of template source.
+
+هذا هو النمط الموصى به عند العمل مع المكونات أحادية الملف SFC أو القوالب النصية. ومع ذلك، كما تم بحثه في [ تنبيهات حول تحليل قالب الـDOM](/guide/essentials/component-basics.html#dom-template-parsing-caveats), الوسوم الكتوبة بنمط باسكال PascalCase لا يمكن استخدامها في قوالب DOM.
+
+لحسن الحظ، يدعم Vue تحليل الوسوم المكتوبة بنمط أسياخ الشواء kebab-case للمكونات المسجلة باستخدام نمط باسكال PascalCase. وهذا يعني أن المكون المسجل باسم `MyComponent` يمكن استدعاؤه في القالب عبر `<MyComponent>` و `<my-component>` . ويسمح لنا هذا باستخدام نفس شيفرة تسجيل مكون الـJavaScript بغض النظر عن مصدر القالب.
+

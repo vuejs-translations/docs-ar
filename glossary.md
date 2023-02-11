@@ -64,3 +64,7 @@
 | index                 |                               مؤشر |
 | layout                |                        نسق / تخطيط |
 | placeholder           |                    عنصر/محتوى نائب |
+| implementation        |                  الشيفرة التنفيذية |
+| tree-shaking          |                    التجزئة الشجرية |
+| macro                 |                        تعليمة عامة |
+| bus                  |                               ناقل |

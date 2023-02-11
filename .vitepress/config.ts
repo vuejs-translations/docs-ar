@@ -197,7 +197,7 @@ export const sidebar: ThemeConfig['sidebar'] = {
         { text: 'الأحداث', link: '/guide/components/events' },
         { text: 'الخاصية v-model', link: '/guide/components/v-model' },
         {
-          text: 'السمات الإحتياطية',
+          text: 'السمات المستترة',
           link: '/guide/components/attrs'
         },
         { text: 'الفتحات', link: '/guide/components/slots' },
