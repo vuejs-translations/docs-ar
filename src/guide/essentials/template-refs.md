@@ -249,7 +249,7 @@ defineExpose({
 
 عندما يحصل المكون الأب على نسخة من هذا المكون عبر مراجع القالب، سيكون المكون المسترجع على الشكل `{ a: number, b: number }` (المراجع تُفك تلقائياً مثل المكونات العادية).
 
-اطلع أيضا على [إضافة الأنواع إلى مراجع القالب](/guide/component-provide-inject.html#private-components) <sup class="vt-badge ts" />
+اطلع أيضا على [إضافة الأنواع إلى مراجع القالب](/guide/typescript/composition-api.html#typing-component-template-refs) <sup class="vt-badge ts" />
 
 </div>
 <div class="options-api">
