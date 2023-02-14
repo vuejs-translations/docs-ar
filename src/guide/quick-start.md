@@ -171,7 +171,7 @@ import { createApp } from 'vue'
 :::tip دعم خرائط الاستيراد في المتصفحات 
 خرائط الاستيراد مدعومة بشكل أصلي في المتصفحات المرتكزة على Chromium، لذا ننصح باستخدام Chrome أو Edge أثناء عملية التعلم.
 
-إذا كنت تستخدم Firefox، فهي مدعومة فقط في الإصدار 102+ ويجب تمكينها حالياً عبر خيار `dom.importMaps.enabled` في `about:config`.
+إذا كنت تستخدم Firefox، فهي مدعومة بشكل افتراضي في الإصدار 108+ أو عن طريق تفعيل الخيار `dom.importMaps.enabled` في `about:config` في النسخ الأخرى 102+
 
 إذا كان متصفحك المفضل لا يدعم خرائط الاستيراد حتى الآن، يمكنك تعويضها باستخدام [es-module-shims](https://github.com/guybedford/es-module-shims).
 :::
@@ -186,6 +186,8 @@ import { createApp } from 'vue'
 
 ```html
 <!-- index.html -->
+<div id="app"></div>
+
 <script type="module">
   import { createApp } from 'vue'
   import MyComponent from './my-component.js'

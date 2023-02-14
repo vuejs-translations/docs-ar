@@ -409,7 +409,7 @@ For radio, checkbox and select options, the `v-model` binding values are usually
 
 لكن في بعض الأحيان قد نرغب في ربط القيمة بخاصية ديناميكية من نسخة المكون الحالي. يمكننا استخدام `v-bind` لبلوغه. على غرار ذلك ، يسمح لنا استخدام `v-bind` بربط قيمة الإدخال بقيم غير السلاسل النصية.
 
-### خانة الاختيار
+### خانة الاختيار {#checkbox-1}
 
 ```vue-html
 <input
@@ -434,7 +434,7 @@ For radio, checkbox and select options, the `v-model` binding values are usually
 لا تؤثر السمات `true-value` و `false-value` على سمة `value` للإدخال ، لأن المتصفحات لا تضم الخانات غير المحددة عند إرسال النماذج. لضمان إرسال أحد القيمتين في النموذج (على سبيل المثال ، "نعم" أو "لا") ، استخدم إدخالات زر الانتقاء بدلاً من ذلك.
 :::
 
-### زر الانتقاء
+### زر الانتقاء {#radio-1}
 
 ```vue-html
 <input type="radio" v-model="pick" :value="first" />
