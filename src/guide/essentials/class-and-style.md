@@ -248,7 +248,7 @@ You can learn more about component attribute inheritance in [Fallthrough Attribu
 يمكنك معرفة المزيد عن توريث سمات المكون في قسم [Fallthrough Attributes](/guide/components/attrs.html).
 ## ربط التنسيقات السطرية {#binding-inline-styles}
 
-### الربط بالكائنات
+### الربط بالكائنات {#binding-to-objects-1}
 
 `:style` يدعم ربط قيم كائنات JavaScript - يُوافق مع [خاصية `style` لعنصر HTML](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/style):
 
@@ -320,7 +320,7 @@ data() {
 
 مرة أخرى، يتم استخدام ربط كائن التنسيقات عادةً مع خاصيات محسوبة تُعيد كائنات.
 
-### الربط بالمصفوفات
+### الربط بالمصفوفات {#binding-to-arrays-1}
 
 يمكننا ربط `:style` بمصفوفة من كائنات متعددة من التنسيقات . سيتم دمج هذه الكائنات وتطبيقها على نفس العنصر:
 
