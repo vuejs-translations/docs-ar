@@ -1,24 +1,26 @@
-# Async Components {#async-components}
+# المكونات الغير متزامنة {#async-components}
 
-## Basic Usage {#basic-usage}
+## الاستخدام الأساسي {#basic-usage}
 
-In large applications, we may need to divide the app into smaller chunks and only load a component from the server when it's needed. To make that possible, Vue has a [`defineAsyncComponent`](/api/general.html#defineasynccomponent) function:
+في التطبيقات الكبيرة ، قد نحتاج إلى تقسيم التطبيق إلى أجزاء أصغر وتحميل مكون من الخادم عند الحاجة. لجعل ذلك ممكنًا ، تحتوي Vue على دالة 
+[`defineAsyncComponent`](/api/general.html#defineasynccomponent) من أجل إنشاء مكون جديد
 
 ```js
 import { defineAsyncComponent } from 'vue'
 
 const AsyncComp = defineAsyncComponent(() => {
   return new Promise((resolve, reject) => {
-    // ...load component from server
-    resolve(/* loaded component */)
+    // ... تحميل المكون من الخادم
+    resolve(/* المكون المُحمل */)
   })
 })
-// ... use `AsyncComp` like a normal component
+// ... استخدم `AsyncComp` مثل مكون عادي
 ```
+كما تري , `defineAsyncComponent` يقبل وظيفة أداة التحميل (Loader Function) والتي ترجع وعداً (Promise) . رد الوعد `resolve` يجب استدعائه عندما يتم استرجاع المكون الخاص بك من الخادم . يمكنك ايضاً إستدعاء الرفض `reject(reason)` للإشارة إلي فشل التحميل
 
-As you can see, `defineAsyncComponent` accepts a loader function that returns a Promise. The Promise's `resolve` callback should be called when you have retrieved your component definition from the server. You can also call `reject(reason)` to indicate the load has failed.
 
-[ES module dynamic import](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/import) also returns a Promise, so most of the time we will use it in combination with `defineAsyncComponent`. Bundlers like Vite and webpack also support the syntax (and will use it as bundle split points), so we can use it to import Vue SFCs:
+[ES module dynamic import](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/import) أيضاً يرجع وعداً (Promise), لذالك سنستحدمه في معظم الأوقات مع `defineAsyncComponent` . تدعم حزم مثل Vite و Webpack البنية أيضًا (وستستخدمها كنقاط تقسيم للحزمة), حتى نتمكن من استخدامه لاستيراد Vue SFCs:
+
 
 ```js
 import { defineAsyncComponent } from 'vue'
@@ -27,10 +29,11 @@ const AsyncComp = defineAsyncComponent(() =>
   import('./components/MyComponent.vue')
 )
 ```
+النتيجة `AsyncComp` هو عبارة عن مكون مُغلف يستدعي وظيفة أداة التحميل فقط عندما يتم عرضها فعليًا على الصفحة. بالإضافة إلي ذالك , سيتم تمرير أي الخاصيات (Props) او منافذ (Slots) إلي المكون الداخلي , لذالك يمكنك استخدام الغُلاف غير المتزامن (Async Wrapper) لأستبدال المكون الأب أثناء التحميل البطئ (Lazy Loading) بسلاسة.
 
-The resulting `AsyncComp` is a wrapper component that only calls the loader function when it is actually rendered on the page. In addition, it will pass along any props and slots to the inner component, so you can use the async wrapper to seamlessly replace the original component while achieving lazy loading.
 
-As with normal components, async components can be [registered globally](/guide/components/registration.html#global-registration) using `app.component()`:
+ المكونات الغير متزامنة يمكن ان يتم تسجيلها [بشكل عام](/guide/components/registration.html#global-registration) مثل المكونات العادية , بإستخدام `app.component()`:
+
 
 ```js
 app.component('MyComponent', defineAsyncComponent(() =>
@@ -40,7 +43,7 @@ app.component('MyComponent', defineAsyncComponent(() =>
 
 <div class="options-api">
 
-You can also use `defineAsyncComponent` when [registering a component locally](/guide/components/registration.html#local-registration):
+يمكنك أيضاً إستخدام `defineAsyncComponent` عند [تسجيل المكون بشكل محلي](/guide/components/registration.html#local-registration):
 
 ```vue
 <script>
@@ -64,7 +67,7 @@ export default {
 
 <div class="composition-api">
 
-They can also be defined directly inside their parent component:
+يمكن أيضًا تعريفها مباشرة داخل المكون الرئيسي الخاص بها:
 
 ```vue
 <script setup>
@@ -82,32 +85,36 @@ const AdminPage = defineAsyncComponent(() =>
 
 </div>
 
-## Loading and Error States {#loading-and-error-states}
+## حالات التحميل و الخطأ {#loading-and-error-states}
 
-Asynchronous operations inevitably involve loading and error states - `defineAsyncComponent()` supports handling these states via advanced options:
+تتضمن العمليات غير المتزامنة حتمًا حالات التحميل والخطأ `defineAsyncComponent()`
+يدعم التعامل مع هذه الحالات عبر الخيارات المتقدمة:
 
 ```js
 const AsyncComp = defineAsyncComponent({
-  // the loader function
+  // وظيفة أداة التحميل
   loader: () => import('./Foo.vue'),
 
-  // A component to use while the async component is loading
+  // مكون لكي يتم إستخدامه أثناء تحميل المكون غير المتزامن (Async Component)
   loadingComponent: LoadingComponent,
-  // Delay before showing the loading component. Default: 200ms.
+
+  // التأخير قبل إظهار مكون التحميل. الافتراضي: 200 مللي ثانية.
   delay: 200,
 
-  // A component to use if the load fails
+  // مكون لاستخدامه في حالة فشل التحميل
   errorComponent: ErrorComponent,
-  // The error component will be displayed if a timeout is
-  // provided and exceeded. Default: Infinity.
+  // سيتم عرض مكون الخطأ إذا كانت المهلة المقدمة تجاوزت
+  // الافتراضي: ما لا نهاية
   timeout: 3000
 })
 ```
 
-If a loading component is provided, it will be displayed first while the inner component is being loaded. There is a default 200ms delay before the loading component is shown - this is because on fast networks, an instant loading state may get replaced too fast and end up looking like a flicker.
+إذا تم توفير مكون التحميل (Loading Component) ، فسيتم عرضه أولاً أثناء تحميل المكون الداخلي. يوجد تأخير افتراضي يبلغ 200 مللي ثانية قبل عرض مكون التحميل - وهذا لأنه في الأنترنت السريع ، قد يتم استبدال حالة التحميل بسرعة كبيرة وينتهي بها الأمر وكأنها وميض.
 
-If an error component is provided, it will be displayed when the Promise returned by the loader function is rejected. You can also specify a timeout to show the error component when the request is taking too long.
+إذا تم توفير مكون خطأ (Error Component)، فسيتم عرضه عند رفض الوعد الذي أرجعته وظيفة أداة التحميل . يمكنك أيضًا تحديد مهلة (Timeout) لعرض مكون الخطأ عندما يستغرق الطلب وقتًا طويلاً.
 
-## Using with Suspense {#using-with-suspense}
+## الاستخدام مع Suspense {#using-with-suspense}
 
-Async components can be used with the `<Suspense>` built-in component. The interaction between `<Suspense>` and async components is documented in the [dedicated chapter for `<Suspense>`](/guide/built-ins/suspense.html).
+المكونات غير متزامنة يمكن ان تستخدم مع المكون المدمج `<Suspense>` .  تم توثيق التفاعل بين 
+`<Suspense>` و المكونات الغير متزامنة في [الفصل المخصص `<Suspense>`](/guide/built-ins/suspense.html).
+
