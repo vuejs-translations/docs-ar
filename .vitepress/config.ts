@@ -195,12 +195,12 @@ export const sidebar: ThemeConfig['sidebar'] = {
         },
         { text: 'الخاصيات', link: '/guide/components/props' },
         { text: 'الأحداث', link: '/guide/components/events' },
-        { text: 'الخاصية v-model', link: '/guide/components/v-model' },
+        { text: 'المُوجِّهة v-model', link: '/guide/components/v-model' },
         {
           text: 'السمات المستترة',
           link: '/guide/components/attrs'
         },
-        { text: 'الفتحات', link: '/guide/components/slots' },
+        { text: 'المنافذ', link: '/guide/components/slots' },
         {
           text: 'تزويد/حقن',
           link: '/guide/components/provide-inject'
