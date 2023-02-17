@@ -1,25 +1,19 @@
 # تزويد / حقن {#provide-inject}
 
-> هذه الصفحة تفترض انك قرأت أو تعلم عن أساسيات المُكونات [أساسيات المُكونات](/guide/essentials/component-basics). أقرأ عنها أولاً إذا كنت لا تعلم عنها
-<!-- > This page assumes you've already read the [Components Basics](/guide/essentials/component-basics). Read that first if you are new to components. -->
+> لقراءة هذه الصفحة يجب عليك أولا الاطلاع على [أساسيات المُكونات](/guide/essentials/component-basics) . ثم العودة إلى هنا.
 
-## التمرير العميق للخصائص{#prop-drilling}
+## التمرير العميق للخاصيات{#prop-drilling}
 
 
-عادةً , عندما نحتاج إلي تمرير بيانات من المُكون الأب إلي المُكون الإبن . نستخدم [الخصائص (Props)](/guide/components/props). لكن تخيل اننا لدينا شجرة كبيرة من المُكونات , و المُكون الحفيد يحتاج إلي بيانات من المُكون الجد الأعلي منه . بأستخدام الخصائص (Props) فقط , سوف نتمكن من تمرير نفس الخاصية إلي سلسلة الآباء كاملةً لكي ننقلها من المُكون الجد إلي المُكون الحفيد
-<!-- Usually, when we need to pass data from the parent to a child component, we use [props](/guide/components/props). However, imagine the case where we have a large component tree, and a deeply nested component needs something from a distant ancestor component. With only props, we would have to pass the same prop across the entire parent chain: -->
+عادةً , عندما نحتاج إلي تمرير بيانات من المُكون الأب إلي المُكون الإبن . نستخدم [الخاصيات (Props)](/guide/components/props). لكن تخيل اننا لدينا شجرة كبيرة من المُكونات , و المُكون الحفيد يحتاج إلي بيانات من المُكون الجد الأعلي منه . بإستخدام الخاصيات (Props) فقط , سوف نتمكن من تمرير نفس الخاصية إلي سلسلة الآباء كاملةً لكي ننقلها من المُكون الجد إلي المُكون الحفيد
 
-![مُخطط التمرير العميق للخصائص](./images/prop-drilling.png)
+![مُخطط التمرير العميق للخاصيات](./images/prop-drilling.png)
 
 <!-- https://www.figma.com/file/yNDTtReM2xVgjcGVRzChss/prop-drilling -->
 
-لاحظ ان علي الرغم من ان المُكون `<Footer>` لا يحتاج هذه الخصائص علي الإطلاق , ولكن لا يزال بحاجة إلي تعريفها و تمريرها حتي يتمكن المُكون `<DeepChild>` من الوصول إليها . إذا كان هناك سلسلة من الآباء أطول مُكونات اكثر سيتم تمرير الخصائص إليها و هي ليس بحاجة لها . و هذا يسمي "التمرير العميق للخصائص" وبالتأكيد ليس من الجيد فعله
+لاحظ ان علي الرغم من ان المُكون `<Footer>` لا يحتاج هذه الخاصيات علي الإطلاق , ولكن لا يزال بحاجة إلي تعريفها و تمريرها حتي يتمكن المُكون `<DeepChild>` من الوصول إليها . إذا كان هناك سلسلة من الآباء أطول مُكونات اكثر سيتم تمرير الخاصيات إليها و هي ليس بحاجة لها . و هذا يسمي "التمرير العميق للخاصيات" وبالتأكيد ليس من الجيد فعله
 
-<!-- Notice although the `<Footer>` component may not care about these props at all, it still needs to declare and pass them along just so `<DeepChild>` can access them. If there is a longer parent chain, more components would be affected along the way. This is called "props drilling" and definitely isn't fun to deal with. -->
-
-يمكننا حل مشكلة التمرير العميق للخصائص (Props Drilling) عن طريق إستخدام التزويد و الحقن `provide` و `inject` . ان يكون المُكون الأب هو **مُزود التبعية (dependency provider)** لكل المُكونات الأحفاد له . يمكن ان يتم حقن **inject** أي مُكون في شجرة الأحفاد و الأبناء بغض النظر عن مدي عمق هذا المُكون بالتباعيات المقدمة من المُكونات الأعلي (الآباء او الجدود) في هذه السلسلة
-
-<!-- We can solve props drilling with `provide` and `inject`. A parent component can serve as a **dependency provider** for all its descendants. Any component in the descendant tree, regardless of how deep it is, can **inject** dependencies provided by components up in its parent chain. -->
+يمكننا حل مشكلة التمرير العميق للخاصيات (Props Drilling) عن طريق إستخدام التزويد و الحقن `provide` و `inject` . ان يكون المُكون الأب هو **مُزود التبعية (dependency provider)** لكل المُكونات الأحفاد له . يمكن ان يتم حقن **inject** أي مُكون في شجرة الأحفاد و الأبناء بغض النظر عن مدي عمق هذا المُكون بالتباعيات المقدمة من المُكونات الأعلي (الآباء او الجدود) في هذه السلسلة
 
 ![مُخطط التزويد / الحقن](./images/provide-inject.png)
 
@@ -53,7 +47,6 @@ export default {
 يتم إستخدام مفتاح الحقن بواسطة المُكونات الأحفاد للبحث عن القيمة المرغوب الوصول لها . كما يستطيع المُكون الأحادي ان يستدعي الدالة `()provide` عدة مرات لمفاتيح حقن مختلفة لتوفير قيم عديدة يمكن حقنها من قبل المُكونات الأحفاد
 
 الوسيط الثاني هو القيمة المُقدمة . يمكن لهذه القيمة ان تكون من اي نوع , تشمل الحالة التفاعلية مثل refs
-<!-- The second argument is the provided value. The value can be of any type, including reactive state such as refs: -->
 
 ```js
 import { ref, provide } from 'vue'
@@ -176,7 +169,7 @@ export default {
 
 ### الاسماء المميزة للحقن \* {#injection-aliasing}
 
-في حالة استخدام هيئة المصفوفة لكلمة `inject` , تكون الخصائص المُحقنة مُعرضة لإستخدام نفس المفتاح الموجودة في نسخة المُكون (Component Instance) . في المثال السابق , تم تقديم الخاصية بمفتاح يسمي `"message"` , و تم حقنها ك `this.message` . المفتاح المحلي هو نفسه مفتاح الحقن .
+في حالة استخدام هيئة المصفوفة لكلمة `inject` , تكون الخاصيات المُحقنة مُعرضة لإستخدام نفس المفتاح الموجودة في نسخة المُكون (Component Instance) . في المثال السابق , تم تقديم الخاصية بمفتاح يسمي `"message"` , و تم حقنها ك `this.message` . المفتاح المحلي هو نفسه مفتاح الحقن .
 
 إذا كنا نريد ان نحقن هذه الخاصية بإستخدام اسم مفتاح مختلف , نحتاج في هذه الحالة إلي إستخدام هيئة الكائن للخاصية `inject`:
 
@@ -198,7 +191,7 @@ export default {
 
 بشكل أفتراضي , يفترض `inject` ان المفتاح المحقون تم تزويده في مكانً ما في سلسلة الاَباء . لذالك في حالة عدم تزويده سيتم إظهار رسالة تحذير وقت التشغيل
 
-في حالة اننا نريد ان نجعل خاصية الحقن تعمل بشكل اختياري في حالة تم تزويدها أو لا . يجب تعريف قيمة إبتدائية مثل التي في الخصائص (Props):
+في حالة اننا نريد ان نجعل خاصية الحقن تعمل بشكل اختياري في حالة تم تزويدها أو لا . يجب تعريف قيمة إبتدائية مثل التي في الخاصيات (Props):
 
 <div class="composition-api">
 
