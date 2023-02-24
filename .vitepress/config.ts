@@ -200,7 +200,7 @@ export const sidebar: ThemeConfig['sidebar'] = {
           text: 'السمات المستترة',
           link: '/guide/components/attrs'
         },
-        { text: 'الفتحات', link: '/guide/components/slots' },
+        { text: 'المنافذ', link: '/guide/components/slots' },
         {
           text: 'تزويد/حقن',
           link: '/guide/components/provide-inject'
