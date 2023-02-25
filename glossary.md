@@ -67,4 +67,8 @@
 | implementation        |                  الشيفرة التنفيذية |
 | tree-shaking          |                    التجزئة الشجرية |
 | macro                 |                        تعليمة عامة |
-| bus                  |                               ناقل |
+| bus                   |                               ناقل |
+| stateful              |                     شيفرة ذات حالة |
+| url                   |                 عنوان محدد الموارد |
+| mixin                 |                              مخلوط |
+| renderless            |                        عديمة تصيير |
