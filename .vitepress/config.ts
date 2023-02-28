@@ -215,7 +215,7 @@ export const sidebar: ThemeConfig['sidebar'] = {
       text: 'إعادة الإستخدام',
       items: [
         {
-          text: 'المُركَّبات',
+          text: 'الدوال التركيبية',
           link: '/guide/reusability/composables'
         },
         {

@@ -1,25 +1,25 @@
-# Composables {#composables}
+# الدوال التركيبية {#composables}
 
 <script setup>
 import { useMouse } from './mouse'
 const { x, y } = useMouse()
 </script>
 
-:::tip
-This section assumes basic knowledge of Composition API. If you have been learning Vue with Options API only, you can set the API Preference to Composition API (using the toggle at the top of the left sidebar) and re-read the [Reactivity Fundamentals](/guide/essentials/reactivity-fundamentals.html) and [Lifecycle Hooks](/guide/essentials/lifecycle.html) chapters.
+:::tip ملاحظة
+نفترض في هذا القسم أنه لديك معرفة أساسية بالواجهة التركيبية. إذا كنت تتعلم Vue باستخدام واجهة الخيارات فقط ، يمكنك تعيين تفضيل الواجهة التركيبية (باستخدام زر التبديل في أعلى الشريط الجانبي على اليسار) وإعادة قراءة الفصول [أساسيات التفاعل](/guide/essentials/reactivity-fundamentals.html) و [خطافات دورة الحياة](/guide/essentials/lifecycle.html).
 :::
 
-## What is a "Composable"? {#what-is-a-composable}
+##  ماهي الدالة "التركيبية"؟ {#what-is-a-composable}
 
-In the context of Vue applications, a "composable" is a function that leverages Vue's Composition API to encapsulate and reuse **stateful logic**.
+في سياق تطبيقات Vue ، تُعتبر الدالة "التركيبية" دالة تستخدم الواجهة التركيبية لـVue لتشكيل وإعادة استخدام **شيفرة ذات حالة**.    
 
-When building frontend applications, we often need to reuse logic for common tasks. For example, we may need to format dates in many places, so we extract a reusable function for that. This formatter function encapsulates **stateless logic**: it takes some input and immediately returns expected output. There are many libraries out there for reusing stateless logic - for example [lodash](https://lodash.com/) and [date-fns](https://date-fns.org/), which you may have heard of.
+  عند بناء تطبيقات الواجهة الأمامية، نحتاج في كثير من الأحيان إلى إعادة استخدام الشيفرة في المهام الشائعة. على سبيل المثال ، قد نحتاج إلى تنسيق التواريخ في العديد من الأماكن ، لذلك نقوم باستخراج دالة مستخدمة مرة أخرى لذلك. تشمل هذه الدالة المنسقة **الشيفرة ذات الحالة**: تأخذ بعض المدخلات وتعيد الناتج المتوقع على الفور. هناك العديد من المكتبات المتاحة لإعادة استخدام الشيفرة ذات الحالة - على سبيل المثال [lodash](https://lodash.com/) و [date-fns](https://date-fns.org/) ، والتي ربما قد سمعت بها من قبل.
 
-By contrast, stateful logic involves managing state that changes over time. A simple example would be tracking the current position of the mouse on a page. In real-world scenarios, it could also be more complex logic such as touch gestures or connection status to a database.
+على النقيض من ذلك، تشتمل الشيفرة ذات الحالة على إدارة الحالة التي تتغير مع مرور الوقت. مثال بسيط على ذلك هو تتبع الموقع الحالي للفأرة على صفحة. في السيناريوهات  الحقيقية على أرض الواقع، يمكن أن تكون  الشيفرة أكثر تعقيدًا مثل الحركات اللمسية أو حالة الاتصال بقاعدة البيانات.
 
-## Mouse Tracker Example {#mouse-tracker-example}
+## مثال تتبع حركة مؤشر الفأرة {#mouse-tracker-example}
 
-If we were to implement the mouse tracking functionality using the Composition API directly inside a component, it would look like this:
+إذا كنا نقوم بتنفيذ وظيفة تتبع الماوس باستخدام الواجهة التركيبية  مباشرة داخل مكون، فسيبدو كما يلي:
 
 ```vue
 <script setup>
@@ -37,38 +37,39 @@ onMounted(() => window.addEventListener('mousemove', update))
 onUnmounted(() => window.removeEventListener('mousemove', update))
 </script>
 
-<template>Mouse position is at: {{ x }}, {{ y }}</template>
+<template>موضع مؤشر الفأرة في: {{ x }}, {{ y }}</template>
 ```
 
-But what if we want to reuse the same logic in multiple components? We can extract the logic into an external file, as a composable function:
+لكن ماذا لو أردنا إعادة استخدام نفس الشيفرة في عدة مكونات؟ يمكننا استخراج الشيفرة إلى ملف خارجي ، كدالة تركيبية:
 
 ```js
-// mouse.js
+// mouse.js ملف
 import { ref, onMounted, onUnmounted } from 'vue'
 
-// by convention, composable function names start with "use"
+// اصطلاحا، تبدأ أسماء الدوال التركيبية بـ 
+// "use"
 export function useMouse() {
-  // state encapsulated and managed by the composable
+  // حالة محصورة ومدارة من قبل الدالة التركيبية
   const x = ref(0)
   const y = ref(0)
 
-  // a composable can update its managed state over time.
+  // يمكن للدالة التركيبية تحديث حالتها المدارة عبر مرور الوقت.
   function update(event) {
     x.value = event.pageX
     y.value = event.pageY
   }
 
-  // a composable can also hook into its owner component's
-  // lifecycle to setup and teardown side effects.
+  // يمكن للدالة التركيبية أيضًا الربط بدورة حياة
+  // مكونها الأصلي لإعداد وتدمير الآثار الجانبية.
   onMounted(() => window.addEventListener('mousemove', update))
   onUnmounted(() => window.removeEventListener('mousemove', update))
 
-  // expose managed state as return value
+  // عرض الحالة المدارة كقيمة مُرجعة
   return { x, y }
 }
 ```
 
-And this is how it can be used in components:
+و هكذا يمكن استخدامه في المكونات:
 
 ```vue
 <script setup>
@@ -77,34 +78,34 @@ import { useMouse } from './mouse.js'
 const { x, y } = useMouse()
 </script>
 
-<template>Mouse position is at: {{ x }}, {{ y }}</template>
+<template>موضع مؤشر الفأرة: {{ x }}, {{ y }}</template>
 ```
 
 <div class="demo">
-  Mouse position is at: {{ x }}, {{ y }}
+  موضع مؤشر الفأرة: {{ x }}, {{ y }}
 </div>
 
-[Try it in the Playground](https://sfc.vuejs.org/#eyJBcHAudnVlIjoiPHNjcmlwdCBzZXR1cD5cbmltcG9ydCB7IHVzZU1vdXNlIH0gZnJvbSAnLi9tb3VzZS5qcydcblxuY29uc3QgeyB4LCB5IH0gPSB1c2VNb3VzZSgpXG48L3NjcmlwdD5cblxuPHRlbXBsYXRlPlxuICBNb3VzZSBwb3NpdGlvbiBpcyBhdDoge3sgeCB9fSwge3sgeSB9fVxuPC90ZW1wbGF0ZT4iLCJpbXBvcnQtbWFwLmpzb24iOiJ7XG4gIFwiaW1wb3J0c1wiOiB7XG4gICAgXCJ2dWVcIjogXCJodHRwczovL3NmYy52dWVqcy5vcmcvdnVlLnJ1bnRpbWUuZXNtLWJyb3dzZXIuanNcIlxuICB9XG59IiwibW91c2UuanMiOiJpbXBvcnQgeyByZWYsIG9uTW91bnRlZCwgb25Vbm1vdW50ZWQgfSBmcm9tICd2dWUnXG5cbmV4cG9ydCBmdW5jdGlvbiB1c2VNb3VzZSgpIHtcbiAgY29uc3QgeCA9IHJlZigwKVxuICBjb25zdCB5ID0gcmVmKDApXG5cbiAgZnVuY3Rpb24gdXBkYXRlKGV2ZW50KSB7XG4gICAgeC52YWx1ZSA9IGV2ZW50LnBhZ2VYXG4gICAgeS52YWx1ZSA9IGV2ZW50LnBhZ2VZXG4gIH1cblxuICBvbk1vdW50ZWQoKCkgPT4gd2luZG93LmFkZEV2ZW50TGlzdGVuZXIoJ21vdXNlbW92ZScsIHVwZGF0ZSkpXG4gIG9uVW5tb3VudGVkKCgpID0+IHdpbmRvdy5yZW1vdmVFdmVudExpc3RlbmVyKCdtb3VzZW1vdmUnLCB1cGRhdGUpKVxuXG4gIHJldHVybiB7IHgsIHkgfVxufSJ9)
+[Try it in the Playground](https://sfc.vuejs.org/#eNqNks9Kw0AQxl9lyaUR0o3nogUP3vQoKOQSm2lNaWaX3U3aUnIQFHwPBfFYEME32b6NM0kb6x/ESzIzO/vLfPNlFZxoLasSgkFwZEcm105YcKUeJpgXWhknVqK0cK7oIWoxNqoQPRkXnMup7SWY4Eih5b5FJJbUc9xdCA8SPIpbLAEpcVDoWeqAMiE295sH/+bfKfBP/tWvhX/e3G1u/aNf+5eBWBFS1HXEAYFrhnWAIAraAftFqmkShSRhxdhke2CTgBhc4Rpp5DwJbpzTdhDHdjxi4VMrlZnEFElTossLkGCL/rVRcwuGwEkQ7TFiKlZg+gYwAwPmL+a31h9cxpKomqTs9kkaurUbGEdCIW0SHWQcXiD1cdI5QR9rLIBFc2lc4sjlCvccaDfQWrQgb4gaHpIvu9pyr8bVT4TOaM8hVIBuSxFiIat0VgLdaepSpxO4bI+WvxxdbSXyq1MS0lDHQzHPMVNzmWbZKfef5dYBggl7zS4KVUEv2g5x0My7p/8rwjTd/6Iwx9D/bbD7X9mA+gMimhdI)
 
-As we can see, the core logic remains identical - all we had to do was move it into an external function and return the state that should be exposed. Just like inside a component, you can use the full range of [Composition API functions](/api/#composition-api) in composables. The same `useMouse()` functionality can now be used in any component.
+كما نلاحظ، تبقى الشيفرة الرئيسية متطابقة- كل ما علينا القيام به هو نقله إلى دالة خارجية وإرجاع الحالة التي يجب عرضها. تمامًا كما هو الحال داخل المكون، يمكنك استخدام مجموعة كاملة من [دوال الواجهة التركيبية](/api/#composition-api) في الدوال التركيبية. يمكن استخدام نفس دالة `()useMouse` الآن في أي مكون.
 
-The cooler part about composables though, is that you can also nest them: one composable function can call one or more other composable functions. This enables us to compose complex logic using small, isolated units, similar to how we compose an entire application using components. In fact, this is why we decided to call the collection of APIs that make this pattern possible Composition API.
+الجزء الأكثر جاذبية حول الدوال التركيبية هو أنه يمكنك أيضًا جعلها متداخلة: يمكن لدالة تركيبية واحدة استدعاء دالة تركيبية أخرى أو أكثر. وهذا يتيح لنا تركيب شيفرة عميقة باستخدام وحدات صغيرة ومنفصلة، مماثلة لكيفية تركيب تطبيق كامل باستخدام المكونات. في الواقع، هذا هو السبب في اختيارنا للتعبير عن مجموعة الواجهة البرمجية التي تجعل هذا النمط ممكنًا باسم الواجهة التركيبية.
 
-For example, we can extract the logic of adding and removing a DOM event listener into its own composable:
+على سبيل المثال، يمكننا استخراج شيفرة إضافة وإزالة مستمع حدث الـDOM إلى دالة تركيبية منفصلة:
 
 ```js
 // event.js
 import { onMounted, onUnmounted } from 'vue'
 
 export function useEventListener(target, event, callback) {
-  // if you want, you can also make this
-  // support selector strings as target
+  // إذا أردت ، يمكنك أيضًا جعل هذا
+  // يدعم محدد السلاسل النصية كهدف
   onMounted(() => target.addEventListener(event, callback))
   onUnmounted(() => target.removeEventListener(event, callback))
 }
 ```
 
-And now our `useMouse()` composable can be simplified to:
+والآن يمكن تبسيط `()useMouse` التركيبية إلى:
 
 ```js{3,9-12}
 // mouse.js
@@ -124,13 +125,13 @@ export function useMouse() {
 }
 ```
 
-:::tip
-Each component instance calling `useMouse()` will create its own copies of `x` and `y` state so they won't interfere with one another. If you want to manage shared state between components, read the [State Management](/guide/scaling-up/state-management.html) chapter.
+:::tip ملاحظة
+يمكن لكل نسخة مكون استدعاء `()useMouse` إنشاء نسخه من الحالة `x` و `y` لذلك لن يتداخلوا مع بعضهم البعض. إذا كنت ترغب في إدارة الحالة المشتركة بين المكونات ، قراءة فصل [إدارة الحالة](/guide/scaling-up/state-management.html).
 :::
 
-## Async State Example {#async-state-example}
+## مثال عن حالة لاتزامنية {#async-state-example}
 
-The `useMouse()` composable doesn't take any arguments, so let's take a look at another example that makes use of one. When doing async data fetching, we often need to handle different states: loading, success, and error:
+الدالة التركيبية `()useMouse` لا تأخذ أي وسائط، لذلك دعونا ننظر إلى مثال آخر يستخدم وسيط. عند القيام بجلب البيانات غير المتزامنة ، نحن عادة نحتاج إلى معالجة حالات مختلفة: التحميل ، النجاح ، والخطأ:
 
 ```vue
 <script setup>
@@ -146,16 +147,16 @@ fetch('...')
 </script>
 
 <template>
-  <div v-if="error">Oops! Error encountered: {{ error.message }}</div>
+  <div v-if="error">هناك خطأ ما: {{ error.message }}</div>
   <div v-else-if="data">
-    Data loaded:
+    حُملت البيانات:
     <pre>{{ data }}</pre>
   </div>
-  <div v-else>Loading...</div>
+  <div v-else>تحميل...</div>
 </template>
 ```
 
-It would be tedious to have to repeat this pattern in every component that needs to fetch data. Let's extract it into a composable:
+قد يكون مزعجًا إعادة هذا النمط في كل مكون يحتاج إلى جلب البيانات. دعونا نستخرجه إلى دالة تركيبية:
 
 ```js
 // fetch.js
@@ -174,7 +175,7 @@ export function useFetch(url) {
 }
 ```
 
-Now in our component we can just do:
+الآن في مكوننا يمكننا فقط القيام بـ:
 
 ```vue
 <script setup>
@@ -184,7 +185,7 @@ const { data, error } = useFetch('...')
 </script>
 ```
 
-`useFetch()` takes a static URL string as input - so it performs the fetch only once and is then done. What if we want it to re-fetch whenever the URL changes? We can achieve that by also accepting refs as an argument:
+`()useFetch` تأخذ عنوان (URL) كسلسلة نصية ثابتة كإدخال - لذلك يقوم بجلب البيانات مرة واحدة فقط وينتهي ذلك. ماذا لو أردنا أن يقوم بجلب البيانات مرة أخرى عند تغيير العنوان؟ يمكننا الوصول إلى ذلك من خلال قبول المراجع التفاعلية refs أيضًا كوسيط:
 
 ```js
 // fetch.js
@@ -195,10 +196,11 @@ export function useFetch(url) {
   const error = ref(null)
 
   function doFetch() {
-    // reset state before fetching..
+    // إعادة تعيين الحالة قبل البحث .. 
     data.value = null
     error.value = null
-    // unref() unwraps potential refs
+    // unref()
+    //  يفك المراجع التفاعلية المحتملة
     fetch(unref(url))
       .then((res) => res.json())
       .then((json) => (data.value = json))
@@ -206,92 +208,100 @@ export function useFetch(url) {
   }
 
   if (isRef(url)) {
-    // setup reactive re-fetch if input URL is a ref
+    //تهيئة إعادة البحث التفاعلية إذا كان عنوان 
+    // URL 
+    // الإدخال مرجعًا تفاعليا
     watchEffect(doFetch)
   } else {
-    // otherwise, just fetch once
-    // and avoid the overhead of a watcher
+    // وإلا فقط اجلب البيانات مرة واحدة
+    // وتجنب التكلفة الإضافية للدالة المراقبة
     doFetch()
   }
 
   return { data, error }
 }
 ```
+ 
+ هذه النسخة من `()useFetch` تقبل الآن كل من السلاسل النصية  ثابتة ومراجع refs كعنوان URL. عندما يكjشف  أن عنوان URL هو مرجع تفاعلي باستخدام [`isRef()`](/api/reactivity-utilities.html#isref) ، فإنه يضبط تأثيرًا تفاعليًا باستخدام [`watchEffect()`](/api/reactivity-core.html#watcheffect). سيُشغَّل التأثير على الفور وسيتم تتبع مرجع الـURL كإعتمادية أيضًا. عندما يتغير مرجع URL ، سيتم إعادة تعيين البيانات وجلبها مرة أخرى.
 
-This version of `useFetch()` now accepts both static URL strings and refs of URL strings. When it detects that the URL is a dynamic ref using [`isRef()`](/api/reactivity-utilities.html#isref), it sets up a reactive effect using [`watchEffect()`](/api/reactivity-core.html#watcheffect). The effect will run immediately and will also track the URL ref as a dependency. Whenever the URL ref changes, the data will be reset and fetched again.
 
-Here's [the updated version of `useFetch()`](https://sfc.vuejs.org/#eyJBcHAudnVlIjoiPHNjcmlwdCBzZXR1cD5cbmltcG9ydCB7IHJlZiwgY29tcHV0ZWQgfSBmcm9tICd2dWUnXG5pbXBvcnQgeyB1c2VGZXRjaCB9IGZyb20gJy4vdXNlRmV0Y2guanMnXG5cbmNvbnN0IGJhc2VVcmwgPSAnaHR0cHM6Ly9qc29ucGxhY2Vob2xkZXIudHlwaWNvZGUuY29tL3RvZG9zLydcbmNvbnN0IGlkID0gcmVmKCcxJylcbmNvbnN0IHVybCA9IGNvbXB1dGVkKCgpID0+IGJhc2VVcmwgKyBpZC52YWx1ZSlcblxuY29uc3QgeyBkYXRhLCBlcnJvciwgcmV0cnkgfSA9IHVzZUZldGNoKHVybClcbjwvc2NyaXB0PlxuXG48dGVtcGxhdGU+XG4gIExvYWQgcG9zdCBpZDpcbiAgPGJ1dHRvbiB2LWZvcj1cImkgaW4gNVwiIEBjbGljaz1cImlkID0gaVwiPnt7IGkgfX08L2J1dHRvbj5cblxuXHQ8ZGl2IHYtaWY9XCJlcnJvclwiPlxuICAgIDxwPk9vcHMhIEVycm9yIGVuY291bnRlcmVkOiB7eyBlcnJvci5tZXNzYWdlIH19PC9wPlxuICAgIDxidXR0b24gQGNsaWNrPVwicmV0cnlcIj5SZXRyeTwvYnV0dG9uPlxuICA8L2Rpdj5cbiAgPGRpdiB2LWVsc2UtaWY9XCJkYXRhXCI+RGF0YSBsb2FkZWQ6IDxwcmU+e3sgZGF0YSB9fTwvcHJlPjwvZGl2PlxuICA8ZGl2IHYtZWxzZT5Mb2FkaW5nLi4uPC9kaXY+XG48L3RlbXBsYXRlPiIsImltcG9ydC1tYXAuanNvbiI6IntcbiAgXCJpbXBvcnRzXCI6IHtcbiAgICBcInZ1ZVwiOiBcImh0dHBzOi8vc2ZjLnZ1ZWpzLm9yZy92dWUucnVudGltZS5lc20tYnJvd3Nlci5qc1wiXG4gIH1cbn0iLCJ1c2VGZXRjaC5qcyI6ImltcG9ydCB7IHJlZiwgaXNSZWYsIHVucmVmLCB3YXRjaEVmZmVjdCB9IGZyb20gJ3Z1ZSdcblxuZXhwb3J0IGZ1bmN0aW9uIHVzZUZldGNoKHVybCkge1xuICBjb25zdCBkYXRhID0gcmVmKG51bGwpXG4gIGNvbnN0IGVycm9yID0gcmVmKG51bGwpXG5cbiAgYXN5bmMgZnVuY3Rpb24gZG9GZXRjaCgpIHtcbiAgICAvLyByZXNldCBzdGF0ZSBiZWZvcmUgZmV0Y2hpbmcuLlxuICAgIGRhdGEudmFsdWUgPSBudWxsXG4gICAgZXJyb3IudmFsdWUgPSBudWxsXG4gICAgXG4gICAgLy8gcmVzb2x2ZSB0aGUgdXJsIHZhbHVlIHN5bmNocm9ub3VzbHkgc28gaXQncyB0cmFja2VkIGFzIGFcbiAgICAvLyBkZXBlbmRlbmN5IGJ5IHdhdGNoRWZmZWN0KClcbiAgICBjb25zdCB1cmxWYWx1ZSA9IHVucmVmKHVybClcbiAgICBcbiAgICB0cnkge1xuICAgICAgLy8gYXJ0aWZpY2lhbCBkZWxheSAvIHJhbmRvbSBlcnJvclxuICBcdCAgYXdhaXQgdGltZW91dCgpXG4gIFx0ICAvLyB1bnJlZigpIHdpbGwgcmV0dXJuIHRoZSByZWYgdmFsdWUgaWYgaXQncyBhIHJlZlxuXHQgICAgLy8gb3RoZXJ3aXNlIHRoZSB2YWx1ZSB3aWxsIGJlIHJldHVybmVkIGFzLWlzXG4gICAgXHRjb25zdCByZXMgPSBhd2FpdCBmZXRjaCh1cmxWYWx1ZSlcblx0ICAgIGRhdGEudmFsdWUgPSBhd2FpdCByZXMuanNvbigpXG4gICAgfSBjYXRjaCAoZSkge1xuICAgICAgZXJyb3IudmFsdWUgPSBlXG4gICAgfVxuICB9XG5cbiAgaWYgKGlzUmVmKHVybCkpIHtcbiAgICAvLyBzZXR1cCByZWFjdGl2ZSByZS1mZXRjaCBpZiBpbnB1dCBVUkwgaXMgYSByZWZcbiAgICB3YXRjaEVmZmVjdChkb0ZldGNoKVxuICB9IGVsc2Uge1xuICAgIC8vIG90aGVyd2lzZSwganVzdCBmZXRjaCBvbmNlXG4gICAgZG9GZXRjaCgpXG4gIH1cblxuICByZXR1cm4geyBkYXRhLCBlcnJvciwgcmV0cnk6IGRvRmV0Y2ggfVxufVxuXG4vLyBhcnRpZmljaWFsIGRlbGF5XG5mdW5jdGlvbiB0aW1lb3V0KCkge1xuICByZXR1cm4gbmV3IFByb21pc2UoKHJlc29sdmUsIHJlamVjdCkgPT4ge1xuICAgIHNldFRpbWVvdXQoKCkgPT4ge1xuICAgICAgaWYgKE1hdGgucmFuZG9tKCkgPiAwLjMpIHtcbiAgICAgICAgcmVzb2x2ZSgpXG4gICAgICB9IGVsc2Uge1xuICAgICAgICByZWplY3QobmV3IEVycm9yKCdSYW5kb20gRXJyb3InKSlcbiAgICAgIH1cbiAgICB9LCAzMDApXG4gIH0pXG59In0=), with an artificial delay and randomized error for demo purposes.
+هنا [النسخة المحدثة من `()useFetch`](https://sfc.vuejs.org/#eNp1Vs1u20YQfpUFL6JRmXQR9CLIQntIbwWKou2JF5paxlTFH+wu5RqCDnFs11X6FkZqR4njuG1gqE+yfJt8s0tStOz4oCV3Z775ZuabpefOd0XhzUruDJyhjERSKCa5KotRkCVpkQvF5kzwuM+iPC1KxcdswWKRp6wHp17HqJT8e66iw/bc85stbyJhGWRRnknFDkLJfxFTts96h0oVcuD7E5lnxTSM+GE+HXPhqeMiifIx9xDUV/k4lz4ArHsyhicYub2vezvNZmnwGoquu8P2R22gr+DjzcJpyWHfeMzZOFRhn3EhctEHoBLHoL7f5uECE/ZD31YF9cCL4il4Ko43plf6pjqrltUp01fVKR5PaGX6Y3VR7+i1vqteDmDMhgelUnnGZrtxLvYDJ2FJxr4JHPZtNE2i32iHEksCZzSfs4QtFkPfupjIgRqOkxm8kximhjQsCRjQxQjBTvQt05/0lb6tXlbn+spQ0B/0vb4cMEAaHy/lUoYvuIGnHhv/mlrLxBQD8ABbE6rN5QbrBSDfdojB2Qcv+2QJ8qnkliUV2KDA6bpaYgUtvWrxUDGgsQESEJyyJgfLDO9PAo82Rfc8rzEZ+m1fnL5jFbmbhgV0l2cQ9pxQUGBzIAMH9bCZBw5ETO+B00hRxhGNw0R6uXjh48kTZaaSlHtcprsHIj+SEOgEKP0Oho/NGRe7gmfQL0dvvoy5ZfoIl2AXQbZAKp0BQhoP5zGRP9FSZubtKITZ8zjmkdoa0CDjvxu/uMwilaDPDxRuS2FnwtTfDldWTkn9zYkRz8MjOgzlcRZtgMe5xa1B8ef7TL+BiKBKdBrNW6N1y+rcipMURQqAdq/rKdLX2H3HPI9ZBKJkZxfRKbLdtmJ+vG9/KeoNACGylf4fyruz2OvqvLogGZr7AqH+q141Zv9g/wwnkOYSuxf0SPO7wu8tzl4zuJ9Wf1ISl/pdC4rjO6zIQL+10dsb6deanmlRfZ1sSNJ905TJMCbcDwYXmJ/0PaZljW0zwQgOsuCu/66WRs0K1T8KE8VIm3mpXANO24T1L3BQagyvDb6DGiOvM2pCQ/q9XlNzPuKqqF6Z4VxRZHNQvaYL5K8OPQR/gxJil7BRFfIlW9wRFrMJgOqdEeYf1bLJNVC2KIJL1MPyjhsJmjKRoMB9q+HWEl5mkm2KGA4WkdqZyzdC21IEry3rWaIliZlrZsZ0ovV8pNDunf7w2rK12khqIydjCxlABPcWtjOPbj0Whv2C0TXWDX6JrwVu7BN9z/R7CmmbgDpSu2+IVj0KzXR1ksJNXYrsyY/ZoHEwlwmZf0lkQdZOcCsmy7CGz/gR+xFXSiK566Ib+XTGKcoE2ZkvbZ0O/nH4uQawX+C2O1T8H0J16IkwG+cpTkdsz3vW6R8FM8BNl7drZU0opEt8nlOqbu+J8ejtbBBqGfTZs709Wzf8LpzFZ86Rxgk=), مع تأخير مصطنع وخطأ عشوائي لأغراض التجربة.
 
-## Conventions and Best Practices {#conventions-and-best-practices}
+## اصطلاحات و ممارسات جيدة {#conventions-and-best-practices}
 
-### Naming {#naming}
+### التسمية {#naming}
 
-It is a convention to name composable functions with camelCase names that start with "use".
+من المصطلح عليه استخدام أسماء دالة تركيبية بنمط سنام الجمل camelCase والتي تبدأ بـ "use".
 
-### Input Arguments {#input-arguments}
+### وسائط الإدخال {#input-arguments}
 
-A composable can accept ref arguments even if it doesn't rely on them for reactivity. If you are writing a composable that may be used by other developers, it's a good idea to handle the case of input arguments being refs instead of raw values. The [`unref()`](/api/reactivity-utilities.html#unref) utility function will come in handy for this purpose:
+الدالة التركيبية يمكنها قبول المراجع التفاعلية كوسائط حتى لو لم تعتمد عليها بهدف التفاعل. إذا كنت تكتب دالة تركيبية قد يستخدمها مطورون آخرون، فإنه من الممارسات الجيدة معالجة حالة وسائط الإدخال الخاصة بالمطورين كمراجع بدلاً من قيم خام. ستكون [`()unref`](/api/reactivity-utilities.html#unref) مفيدة لهذا الغرض:
 
 ```js
 import { unref } from 'vue'
 
 function useFeature(maybeRef) {
-  // if maybeRef is indeed a ref, its .value will be returned
-  // otherwise, maybeRef is returned as-is
+  // إذا كان 
+  // maybeRef
+  // مرجعًا فستعاد قيمته، وإلا فستعاد 
+  // maybeRef
+  // كما هو
   const value = unref(maybeRef)
 }
 ```
 
-If your composable creates reactive effects when the input is a ref, make sure to either explicitly watch the ref with `watch()`, or call `unref()` inside a `watchEffect()` so that it is properly tracked.
+إذا كانت الدالة التركيبية تنشئ تأثيرات تفاعلية عندما يكون الإدخال مرجعًا تقاعليا ref، فتأكد من مراقبة المرجع بشكل صريح باستخدام `()watch`، أو استدع `()unref` داخل `()watchEffect` حتى يُتتبع بشكل صحيح.
 
-### Return Values {#return-values}
+### قيم الإرجاع {#return-values}
 
-You have probably noticed that we have been exclusively using `ref()` instead of `reactive()` in composables. The recommended convention is for composables to always return a plain, non-reactive object containing multiple refs. This allows it to be destructured in components while retaining reactivity:
+ربما لاحظت أننا استخدمنا `()ref` بدلاً من `()reactive` في الدوال التركيبية. الممارسة الموصى بها هي استخدام دوال تركيبية لإرجاع كائن بسيط وغير تفاعلي يحتوي على مراجع تفاعلية متعددة. هذا يسمح بتفكيك الكائن في المكونات بينما يبقى تفاعلياً:
 
 ```js
-// x and y are refs
+// x و y 
+// هما مرجعان تفاعليان
 const { x, y } = useMouse()
 ```
 
-Returning a reactive object from a composable will cause such destructures to lose the reactivity connection to the state inside the composable, while the refs will retain that connection.
+ارجاع كائن تفاعلي من دالة تركيبية سيؤدي إلى فقدان تفاعلية الكائن المفكك بينما ستبقى المراجع متصلة بالحالة داخل الدالة التركيبية.
 
-If you prefer to use returned state from composables as object properties, you can wrap the returned object with `reactive()` so that the refs are unwrapped. For example:
+إذا كنت تفضل استخدام الحالة المرجعة من الدوال التركيبية كخاصيات للكائن، يمكنك تغليف الكائن المرجع بـ `()reactive` حتى يُفَك تغليف المراجع. على سبيل المثال:
 
 ```js
 const mouse = reactive(useMouse())
-// mouse.x is linked to original ref
+//mouse.x 
+// مرتبط بالمرجع الأصلي
 console.log(mouse.x)
 ```
 
 ```vue-html
-Mouse position is at: {{ mouse.x }}, {{ mouse.y }}
+موضع مؤشر الفأرة: {{ mouse.x }}, {{ mouse.y }}
 ```
 
-### Side Effects {#side-effects}
+### التأثيرات الجانبية {#side-effects}
 
-It is OK to perform side effects (e.g. adding DOM event listeners or fetching data) in composables, but pay attention to the following rules:
+من الممكن تنفيذ الآثار الجانبية (مثل إضافة مستمعين لحدث DOM أو جلب البيانات) في الدوال المُركَّبة، لكن يجب الانتباه إلى القواعد التالية:
 
-- If you are working on an application that uses [Server-Side Rendering](/guide/scaling-up/ssr.html) (SSR), make sure to perform DOM-specific side effects in post-mount lifecycle hooks, e.g. `onMounted()`. These hooks are only called in the browser, so you can be sure that code inside them has access to the DOM.
+- إذا كنت تعمل على تطبيق يستخدم [تصيير من جانب الخادم](/guide/scaling-up/ssr.html) (SSR)، فتأكد من تنفيذ الآثار الجانبية المتعلقة بـ DOM في مراحل حياة ما بعد الوصل، على سبيل المثال `()onMounted`. تُستدعي هذه الخطافات فقط في المتصفح، لذا يمكنك التأكد من أن الشيفرة الموجودة داخلها لديها وصول إلى DOM.
 
-- Remember to clean up side effects in `onUnmounted()`. For example, if a composable sets up a DOM event listener, it should remove that listener in `onUnmounted()` as we have seen in the `useMouse()` example. It can be a good idea to use a composable that automatically does this for you, like the `useEventListener()` example.
+- تذكر تنظيف الآثار الجانبية في `()onUnmounted`. على سبيل المثال، إذا كانت الدالة التركيبية تضبط مستمعًا لحدث DOM، فيجب أن تزيل هذا المستمع في `()onUnmounted` كما رأيناه في مثال `()useMouse`. قد يكون من الجيد استخدام دالة تركيبية تقوم بذلك تلقائيًا بالنسبة لك، مثل `()useEventListener`.
 
-### Usage Restrictions {#usage-restrictions}
+### قيود الاستخدام {#usage-restrictions}
 
-Composables should only be called **synchronously** in `<script setup>` or the `setup()` hook. In some cases, you can also call them in lifecycle hooks like `onMounted()`.
+الدوال التركيبية يجب استدعاؤها **بشكل متزامن** في `<script setup>` أو في خطاف `()setup`. في بعض الحالات، يمكنك أيضًا استدعاؤها في خطافات حياة مثل `()onMounted`.
 
-These are the contexts where Vue is able to determine the current active component instance. Access to an active component instance is necessary so that:
+هذه هي السياقات حيث يمكن لـ Vue تحديد الحالة النشطة الحالية لنسخة المكون. يجب أن يكون لديك وصول إلى الحالة النشطة للمكون حتى:
 
-1. Lifecycle hooks can be registered to it.
+1. يمكن تسجيل خطافات مراحل الحياة فيها.
 
-2. Computed properties and watchers can be linked to it, so that they can be disposed when the instance is unmounted to prevent memory leaks.
+2. الخاصيات المحسوبة والمراقبة يمكن ربطهم بها، حتى يمكن تفريغها عند إلغاء تثبيت الحالة لمنع التسربات في الذاكرة.
 
-:::tip
-`<script setup>` is the only place where you can call composables **after** using `await`. The compiler automatically restores the active instance context for you after the async operation.
+:::tip ملاحظة
+`<script setup>` هي المكان الوحيد الذي يمكنك من استدعاء الدوال المركَّبة **بعد** استخدام `await`. يقوم المصرف بإعادة تعيين سياق الحالة النشطة تلقائيًا بعد العملة اللاتزامنية.
 :::
 
-## Extracting Composables for Code Organization {#extracting-composables-for-code-organization}
+## استخراج الدوال التركيبية لتنظيم الشيفرة {#extracting-composables-for-code-organization}
 
-Composables can be extracted not only for reuse, but also for code organization. As the complexity of your components grow, you may end up with components that are too large to navigate and reason about. Composition API gives you the full flexibility to organize your component code into smaller functions based on logical concerns:
+الدوال التركيبية المستخدمة يمكن استخراجها إلى ملفات مستقلة ليس فقط من أجل إعادة الاستخدام، بل أيضًا لتنظيم الشيفرة. مع نمو تعقيدات مكوناتك، قد ينتهي بك الأمر بمكونات كبيرة جدًا بحيث لا يمكن التنقل بينها وفهمها. تمنحك الواجهة التركيبية الحرية الكاملة لتنظيم شيفرة مكونك إلى دوال أصغر حجمًا بناءً على اهتمامات منطقية:
 
 ```vue
 <script setup>
@@ -305,11 +315,11 @@ const { qux } = useFeatureC(baz)
 </script>
 ```
 
-To some extent, you can think of these extracted composables as component-scoped services that can talk to one another.
+إلى حد ما، يمكنك اعتبار هذه الدوال التركيبية المستخرجة كخدمات في نطاق المكونات التي يمكنها التواصل فيما بينها.
 
-## Using Composables in Options API {#using-composables-in-options-api}
+## استخدام الدوال التركيبية في واجهة الخيارات {#using-composables-in-options-api}
 
-If you are using Options API, composables must be called inside `setup()`, and the returned bindings must be returned from `setup()` so that they are exposed to `this` and the template:
+إذا كنت تستخدم واجهة الخيارات، يجب استدعاء الدوال التركيبية داخل `()setup`, ويجب إرجاع الخاصيات المربوطة المرجعة من `()setup` حتى يتم استعراضها على `this` والقالب:
 
 ```js
 import { useMouse } from './mouse.js'
@@ -322,42 +332,45 @@ export default {
     return { x, y, data, error }
   },
   mounted() {
-    // setup() exposed properties can be accessed on `this`
+    // يمكن الوصول إلى خاصيات 
+    // setup() 
+    //على
+    // `this`
     console.log(this.x)
   }
   // ...other options
 }
 ```
 
-## Comparisons with Other Techniques {#comparisons-with-other-techniques}
+## المقارنة مع تقنيات أخرى {#comparisons-with-other-techniques}
 
-### vs. Mixins {#vs-mixins}
+### المقارنة مع المخلوطات (mixins) {#vs-mixins}
 
-Users coming from Vue 2 may be familiar with the [mixins](/api/options-composition.html#mixins) option, which also allows us to extract component logic into reusable units. There are three primary drawbacks to mixins:
+المستخدمون القادمون من Vue 2 قد يكونون على دراية بخيار [mixins](/api/options-composition.html#mixins)، الذي يسمح أيضًا باستخراج شيفرة مكون إلى وحدات قابلة للإعادة الاستخدام. هناك ثلاثة عيوب رئيسية للمخلوطات:
 
-1. **Unclear source of properties**: when using many mixins, it becomes unclear which instance property is injected by which mixin, making it difficult to trace the implementation and understand the component's behavior. This is also why we recommend using the refs + destructure pattern for composables: it makes the property source clear in consuming components.
+1. **مصدر غير واضح**: عند استخدام العديد من المخلوطات، يصبح غير واضحًا أي خاصية مثبتة من قبل المخلوط، مما يجعل من الصعب تتبع التنفيذ وفهم سلوك المكون. هذا هو السبب في أننا نوصي باستخدام المراجع التفاعلية + تفكيك الخاصيات للدوال التركيبية: تجعل مصدر الخاصية واضحًا في المكونات المُستهلِكة.
 
-2. **Namespace collisions**: multiple mixins from different authors can potentially register the same property keys, causing namespace collisions. With composables, you can rename the destructured variables if there are conflicting keys from different composables.
+2. **تداخلات الفضاءات الإسمية**: يمكن لمخلوطات متعددة  من مطورين مختلفين تسجيل نفس مفاتيح لخاصيات مختلفة، مما يسبب تداخلات الفضاءات الإسمية. مع الدوال التركيبية، يمكنك إعادة تسمية المتغيرات المفككة إذا كانت هناك مفاتيح متعارضة من الدوال التركيبية المختلفة.
 
-3. **Implicit cross-mixin communication**: multiple mixins that need to interact with one another have to rely on shared property keys, making them implicitly coupled. With composables, values returned from one composable can be passed into another as arguments, just like normal functions.
+3. **التواصل الضمني عبر المخلوطات**: يجب على المخلوطات المتعددة التي تحتاج إلى التفاعل مع بعضها البعض أن تعتمد على مفاتيح الخاصية المشتركة، مما يجعلها مرتبطة بشكل ضمني. مع الدوال التركيبية، يمكنك إرسال القيم التي تم إرجاعها من دالة تركيبية إلى دالة تركيبية أخرى كوسيط، مثل الدوال العادية.
 
-For the above reasons, we no longer recommend using mixins in Vue 3. The feature is kept only for migration and familiarity reasons.
+للأسباب المذكورة أعلاه، لا نوصي بعد الآن باستخدام المخلوطات في Vue 3.  احتفظ بالميزة فقط من أجل الترقية و تعود الكثير من المطورين عليها.
 
-### vs. Renderless Components {#vs-renderless-components}
+### المقارنة مع المكونات عديمة التصيير {#vs-renderless-components}
 
-In the component slots chapter, we discussed the [Renderless Component](/guide/components/slots.html#renderless-components) pattern based on scoped slots. We even implemented the same mouse tracking demo using renderless components.
+في فصل منافذ المكونات، تحدثنا عن نمط [المكون عديم التصيير](/guide/components/slots.html#renderless-components) بناءً على المنافذ ذات النطاق، حتى أننا قمنا بتطبيق نفس العرض التوضيحي لتتبع مؤشر الفأرة باستخدام المكونات عديمة التصيير.
 
-The main advantage of composables over renderless components is that composables do not incur the extra component instance overhead. When used across an entire application, the amount of extra component instances created by the renderless component pattern can become a noticeable performance overhead.
+الميزة الرئيسية للدوال التركيبية على المكونات عديمة التصيير هي أن الدوال التركيبية لا تزيد تكلفة إضافية إلى نسخة المكون. عند استخدامها على مستوى كامل التطبيق، يمكن أن تصبح كمية نسخ المكونات الإضافية المنشأة من خلال نمط المكونات عديمة التصيير ذات تكلفة أداء ملحوظة.
 
-The recommendation is to use composables when reusing pure logic, and use components when reusing both logic and visual layout.
+التوصية هي استخدام الدوال التركيبية عند إعادة استخدام الشيفرة البحتة، واستخدام المكونات عند إعادة استخدام الشيفرة والنسق البصري (محتوى القالب).
 
-### vs. React Hooks {#vs-react-hooks}
+### المقارنة مع خطافات Reactjs {#vs-react-hooks}
 
-If you have experience with React, you may notice that this looks very similar to custom React hooks. Composition API was in part inspired by React hooks, and Vue composables are indeed similar to React hooks in terms of logic composition capabilities. However, Vue composables are based on Vue's fine-grained reactivity system, which is fundamentally different from React hooks' execution model. This is discussed in more detail in the [Composition API FAQ](/guide/extras/composition-api-faq#comparison-with-react-hooks).
+إذا كان لديك خبرة في React، فقد تلاحظ أن هذا يبدو مماثلاً لخطافات React المخصصة. تم إستلهام الواجهة التركيبية من قبل خطافات React، والدوال التركيبية في Vue هي مماثلة للخطافات React من حيث قدرات تركيب الشيفر. ومع ذلك، تعتمد الدوال التركيبية في Vue على نظام التفاعلية الدقيق لـ Vue، وهو مختلف بشكل أساسي عن نموذج تنفيذ خطافات React. يتم مناقشة ذلك بشكل أكثر تفصيلاً في [أسئلة وأجوبة حول الواجهة التركيبية](/guide/extras/composition-api-faq#comparison-with-react-hooks).
 
-## Further Reading {#further-reading}
+## للمزيد من الاطلاع {#further-reading}
 
-- [Reactivity In Depth](/guide/extras/reactivity-in-depth.html): for a low-level understanding of how Vue's reactivity system works.
-- [State Management](/guide/scaling-up/state-management.html): for patterns of managing state shared by multiple components.
-- [Testing Composables](/guide/scaling-up/testing.html#testing-composables): tips on unit testing composables.
-- [VueUse](https://vueuse.org/): an ever-growing collection of Vue composables. The source code is also a great learning resource.
+- [نظام التفاعلية بالتفصيل](/guide/extras/reactivity-in-depth.html): لفهم كيفية عمل نظام التفاعلية في Vue  بشكل معمق.
+- [إدارة الحالة](/guide/scaling-up/state-management.html): لإدارة الحالة المشتركة بين عدة مكوّنات.
+- [اختبار الدوال التركيبية](/guide/scaling-up/testing.html#testing-composables): نصائح لاختبار الوحدات في الدوال التركيبية.
+- [VueUse مكتبة](https://vueuse.org/): مجموعة متنامية من الدوال التركيبية لـVue.  الشيفرة المصدرية هي أيضا مصدر تعلم رائع.
