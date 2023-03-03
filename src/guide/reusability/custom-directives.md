@@ -1,4 +1,4 @@
-# Custom Directives {#custom-directives}
+# المُوجِّهات المخصصة {#custom-directives}
 
 <script setup>
 const vFocus = {
@@ -8,19 +8,19 @@ const vFocus = {
 }
 </script>
 
-## Introduction {#introduction}
+## مقدمة {#introduction}
 
-In addition to the default set of directives shipped in core (like `v-model` or `v-show`), Vue also allows you to register your own custom directives.
+بالإضافة إلى مجموعة من الموجهات الافتراضية المتوفرة المدمجة مع الإطار (مثل `v-model` أو `v-show`) ، تسمح لك Vue أيضًا بتسجيل موجهات مخصصة خاصة بك.
 
-We have introduced two forms of code reuse in Vue: [components](/guide/essentials/component-basics.html) and [composables](./composables). Components are the main building blocks, while composables are focused on reusing stateful logic. Custom directives, on the other hand, are mainly intended for reusing logic that involves low-level DOM access on plain elements.
+لقد أدرجنا شكلين من أشكال إعادة استخدام الشيفرة في Vue: [المكونات](/guide/essentials/component-basics.html) و [composables](./composables). المكونات هي البنية الرئيسية ، في حين أن composables متميزة في إعادة استخدام منطق حالة المكون. الموجهات المخصصة ، بدورها، تهدف في الغالب إلى إعادة استخدام منطق يتضمن وصول متدني المستوى إلى الـDOM  على عناصر عادية.
 
-A custom directive is defined as an object containing lifecycle hooks similar to those of a component. The hooks receive the element the directive is bound to. Here is an example of a directive that focuses an input when the element is inserted into the DOM by Vue:
+مُوجهة مخصصة تُعرَّف ككائن يحتوي على مراحل حياة مشابهة لما تحتويه المكونات. تتلقى دوال مراحل الحياة  العنصر الذي عُينت الموجهة عليه. هذا مثال على موجهة تركز على  إدخال عندما يُدرج العنصر في DOM بواسطة Vue:
 
 <div class="composition-api">
 
 ```vue
 <script setup>
-// enables v-focus in templates
+//تمكين v-focus في القوالب
 const vFocus = {
   mounted: (el) => el.focus()
 }
@@ -42,7 +42,7 @@ const focus = {
 
 export default {
   directives: {
-    // enables v-focus in template
+    //تمكين v-focus في القوالب
     focus
   }
 }
@@ -55,16 +55,16 @@ export default {
 </div>
 
 <div class="demo">
-  <input v-focus placeholder="This should be focused" />
+  <input v-focus placeholder="هذا العنصر سيركز عليه" />
 </div>
 
-Assuming you haven't clicked elsewhere on the page, the input above should be auto-focused. This directive is more useful than the `autofocus` attribute because it works not just on page load - it also works when the element is dynamically inserted by Vue.
+في حالة عدم النقر في أي مكان آخر على الصفحة ، يجب أن يكون الإدخال أعلاه مركزًا عليه تلقائيًا. هذه الموجهة أكثر فائدة من السمة `autofocus` لأنها تعمل ليس فقط عند تحميل الصفحة - بل تعمل أيضًا عند إدراج العنصر بشكل ديناميكي من قبل Vue.
 
 <div class="composition-api">
 
-In `<script setup>`, any camelCase variable that starts with the `v` prefix can be used as a custom directive. In the example above, `vFocus` can be used in the template as `v-focus`.
+في `<script setup>` ، يمكن استخدام أي متغير camelCase يبدأ بالبادئة `v` كموجهة مخصصة. في المثال أعلاه ، يمكن استخدام `vFocus` في القالب كـ `v-focus`.
 
-If not using `<script setup>`, custom directives can be registered using the `directives` option:
+في حالة عدم استخدام `<script setup>` ، يمكن تسجيل الموجهات المخصصة باستخدام خيار `directives`:
 
 ```js
 export default {
@@ -72,7 +72,7 @@ export default {
     /*...*/
   },
   directives: {
-    // enables v-focus in template
+    //تمكين v-focus في القوالب
     focus: {
       /* ... */
     }
@@ -84,103 +84,102 @@ export default {
 
 <div class="options-api">
 
-Similar to components, custom directives must be registered so that they can be used in templates. In the example above, we are using local registration via the `directives` option.
+مثل المكونات ، يجب تسجيل الموجهات المخصصة حتى يمكن استخدامها في القوالب. في المثال أعلاه ، نستخدم التسجيل المحلي عبر خيار `directives`.
 
 </div>
 
-It is also common to globally register custom directives at the app level:
+من الشائع أيضًا تسجيل الموجهات المخصصة على مستوى التطبيق بشكل عام:
 
 ```js
 const app = createApp({})
 
-// make v-focus usable in all components
+// جعل v-focus متاحًا في جميع المكونات
 app.directive('focus', {
   /* ... */
 })
 ```
 
-:::tip
-Custom directives should only be used when the desired functionality can only be achieved via direct DOM manipulation. Prefer declarative templating using built-in directives such as `v-bind` when possible because they are more efficient and server-rendering friendly.
+:::tip ملاحظة
+يجب استخدام الموجهات المخصصة فقط عندما يمكن الوصول إلى الوظائف المطلوبة فقط عن طريق التحكم المباشر في DOM. يجب تفضيل القوالب التصريحية باستخدام الموجهات المدمجة مثل `v-bind` عند الإمكان لأنها أكثر كفاءة و ملاءمة للتصيير من جانب الخادم.
 :::
 
-## Directive Hooks {#directive-hooks}
+## خطافات الموجهة {#directive-hooks}
 
-A directive definition object can provide several hook functions (all optional):
+يمكن لكائن تعريف الموجهة توفير عدة دوال خطافة (كلها اختيارية):
 
 ```js
 const myDirective = {
-  // called before bound element's attributes
-  // or event listeners are applied
+  //تستدعى قبل تطبيق سمات العنصر المرتبطة أو مستمعي الحدث
   created(el, binding, vnode, prevVnode) {
-    // see below for details on arguments
+    // انظر أدناه للحصول على تفاصيل الوسيط
   },
-  // called right before the element is inserted into the DOM.
+  // تستدعى مباشرة قبل إدراج العنصر في DOM.
   beforeMount(el, binding, vnode, prevVnode) {},
-  // called when the bound element's parent component
-  // and all its children are mounted.
+  // تستدعى عندما يوصَّل المكون الأب وجميع أبنائه المرتبطين بالعنصر.
   mounted(el, binding, vnode, prevVnode) {},
-  // called before the parent component is updated
+  // تستدعى قبل تحديث المكون الأب
   beforeUpdate(el, binding, vnode, prevVnode) {},
-  // called after the parent component and
-  // all of its children have updated
+  // تستدعى بعد تحديث المكون الأب وجميع أبنائه
   updated(el, binding, vnode, prevVnode) {},
-  // called before the parent component is unmounted
+  // تستدعى قبل فصل المكون الأب
   beforeUnmount(el, binding, vnode, prevVnode) {},
-  // called when the parent component is unmounted
+  // تستدعى عند فصل المكون الأب
   unmounted(el, binding, vnode, prevVnode) {}
 }
 ```
 
-### Hook Arguments {#hook-arguments}
+### وسائط دوال الخطافات {#hook-arguments}
 
-Directive hooks are passed these arguments:
+مررت دوال الخطافات الوسائط التالية:
 
-- `el`: the element the directive is bound to. This can be used to directly manipulate the DOM.
+- `el`: العنصر المرتبط بالموجهة. يمكن استخدامه للتحكم المباشر في DOM. 
 
-- `binding`: an object containing the following properties.
+- `binding`: كائن يحتوي على الخصائص التالية.
 
-  - `value`: The value passed to the directive. For example in `v-my-directive="1 + 1"`, the value would be `2`.
-  - `oldValue`: The previous value, only available in `beforeUpdate` and `updated`. It is available whether or not the value has changed.
-  - `arg`: The argument passed to the directive, if any. For example in `v-my-directive:foo`, the arg would be `"foo"`.
-  - `modifiers`: An object containing modifiers, if any. For example in `v-my-directive.foo.bar`, the modifiers object would be `{ foo: true, bar: true }`.
-  - `instance`: The instance of the component where the directive is used.
-  - `dir`: the directive definition object.
+  - `value`: القيمة الممررة إلى الموجهة. على سبيل المثال في `"v-my-directive="1 + 1`, ستكون القيمة `2`. 
+  - `oldValue`: القيمة السابقة، متاحة فقط في `beforeUpdate` و `updated`. متاحة سواء تغيرت القيمة أم لا. 
+  -  `arg`: الوسيط الممرر إلى الموجهة، إذا كان موجودًا. على سبيل المثال في `v-my-directive:foo`, سيكون الوسيط `"foo"`.
+  - `modifiers`: كائن يحتوي على المعدلات، إذا كانت موجودة. على سبيل المثال في `v-my-directive.foo.bar`, سيكون كائن المعدلات `{ foo: true, bar: true }`.
+  - `instance`:  نسخة المكون حيث تستخدم الموجهة.
+  - `dir`: كائن تعريف الموجهة.
 
-- `vnode`: the underlying VNode representing the bound element.
-- `prevNode`: the VNode representing the bound element from the previous render. Only available in the `beforeUpdate` and `updated` hooks.
+- `vnode`: VNode الأساسي يمثل العنصر المرتبط.
 
-As an example, consider the following directive usage:
+- `prevNode`: VNode يمثل العنصر المرتبط من التصيير السابق. متاح فقط في `beforeUpdate` و `updated`.
+
+كمثال، لنعتبر استخدام الموجهة التالي:
 
 ```vue-html
 <div v-example:foo.bar="baz">
 ```
 
-The `binding` argument would be an object in the shape of:
+سيكون كائن الوسيط `binding` بالشكل التالي:
 
 ```js
 {
   arg: 'foo',
   modifiers: { bar: true },
-  value: /* value of `baz` */,
-  oldValue: /* value of `baz` from previous update */
+  value: /* قيمة `baz` */,
+  oldValue: /* قيمة `baz` من التحديث السابق */
+
 }
 ```
 
-Similar to built-in directives, custom directive arguments can be dynamic. For example:
+مثل الموجهات المدمجة، يمكن أن تكون وسائط الموجهات المخصصة ديناميكية. على سبيل المثال:
 
 ```vue-html
 <div v-example:[arg]="value"></div>
 ```
 
-Here the directive argument will be reactively updated based on `arg` property in our component state.
+سيُحدَّث وسيط الموجهة بشكل تفاعلي وفقًا لخاصية `arg` في حالة المكون.
 
-:::tip Note
-Apart from `el`, you should treat these arguments as read-only and never modify them. If you need to share information across hooks, it is recommended to do so through element's [dataset](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/dataset).
+:::tip ملاحظة 
+باستثناء `el`، يجب عليك التعامل مع هذه الوسائط كقراءة فقط ولا تقم بتعديلها. إذا كنت بحاجة إلى مشاركة المعلومات عبر الخطافات، فننصحك بالقيام بذلك من خلال [dataset](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/dataset) للعنصر.
 :::
 
-## Function Shorthand {#function-shorthand}
+## اختصار الدالة {#function-shorthand}
 
-It's common for a custom directive to have the same behavior for `mounted` and `updated`, with no need for the other hooks. In such cases we can define the directive as a function:
+من الشائع أن يكون للموجهة المخصصة نفس السلوك فقط بخطافات `mounted` و `updated`، بدون حاجة للخطافات الأخرى. في هذه الحالات، يمكننا تعريف الموجهة كدالة:
 
 ```vue-html
 <div v-color="color"></div>
@@ -188,14 +187,14 @@ It's common for a custom directive to have the same behavior for `mounted` and `
 
 ```js
 app.directive('color', (el, binding) => {
-  // this will be called for both `mounted` and `updated`
+  // هذا سيستدعى لكل من `mounted` و `updated`
   el.style.color = binding.value
 })
 ```
 
-## Object Literals {#object-literals}
+##  الكائنات المجردة {#object-literals}
 
-If your directive needs multiple values, you can also pass in a JavaScript object literal. Remember, directives can take any valid JavaScript expression.
+إذا كانت الموجهة الخاصة بك تحتاج إلى عدة قيم، يمكنك أيضًا إرسال كائن مجرد JavaScript. تذكر أنه يمكن للموجهات أن تأخذ أي تعبير JavaScript سليم.
 
 ```vue-html
 <div v-demo="{ color: 'white', text: 'hello!' }"></div>
@@ -208,20 +207,20 @@ app.directive('demo', (el, binding) => {
 })
 ```
 
-## Usage on Components {#usage-on-components}
+## الاستخدام على المكونات {#usage-on-components}
 
-When used on components, custom directives will always apply to a component's root node, similar to [Fallthrough Attributes](/guide/components/attrs.html).
+عند استخدامها على المكونات، ستطبق الموجهات المخصصة دائمًا على العنصر الجذري للمكون، مثل [السمات المستترة](/guide/components/attrs.html).
 
 ```vue-html
 <MyComponent v-demo="test" />
 ```
 
 ```vue-html
-<!-- template of MyComponent -->
+<!-- قالب MyComponent -->
 
-<div> <!-- v-demo directive will be applied here -->
-  <span>My component content</span>
+<div><!-- سيتم تطبيق الموجهة v-demo هنا -->
+  <span>محتوى المكون</span>
 </div>
 ```
 
-Note that components can potentially have more than one root node. When applied to a multi-root component, a directive will be ignored and a warning will be thrown. Unlike attributes, directives can't be passed to a different element with `v-bind="$attrs"`. In general, it is **not** recommended to use custom directives on components.
+تجدر الملاحظة أن المكونات قد تحتوي على أكثر من عنصر جذري. عند تطبيقها على مكون متعدد الأجزاء، سيتجاهل المصرف الموجهة وسيطلق تحذير. على عكس السمات، لا يمكن تمرير الموجهات إلى عنصر مختلف باستخدام `v-bind="$attrs"`. عمومًا، **لا** ينصح باستخدام الموجهات المخصصة على المكونات.
