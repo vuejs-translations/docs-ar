@@ -3,7 +3,7 @@ let count = $ref(0)
 </script>
 
 <template>
-  <p>Current component: A</p>
-  <span style="margin-right: 20px">count: {{ count }}</span>
+  <p>المكون الحالي: A</p>
+  <span style="margin-right: 20px">العداد: {{ count }}</span>
   <button @click="count++">+</button>
 </template>
