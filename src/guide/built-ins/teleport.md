@@ -1,27 +1,27 @@
-# Teleport {#teleport}
+# المكون Teleport {#teleport}
 
- <VueSchoolLink href="https://vueschool.io/lessons/vue-3-teleport" title="Free Vue.js Teleport Lesson"/>
+ <VueSchoolLink href="https://vueschool.io/lessons/vue-3-teleport" title="فيديو حول المكون Teleport"/>
 
-`<Teleport>` is a built-in component that allows us to "teleport" a part of a component's template into a DOM node that exists outside the DOM hierarchy of that component.
+`<Teleport>` هو مكون مدمج يسمح لنا بـ "نقل" جزء من قالب مكون معين إلى عنصر DOM موجودة خارج التسلسل المتداخل للـDOM لهذا المكون.
 
-## Basic Usage {#basic-usage}
+## الاستخدام الأساسي {#basic-usage}
 
-Sometimes we may run into the following scenario: a part of a component's template belongs to it logically, but from a visual standpoint, it should be displayed somewhere else in the DOM, outside of the Vue application.
+في بعض الأحيان ، قد نواجه السيناريو التالي: جزء من قالب مكون معين ينتمي من ناحية منطقية إلى المكون ، ولكن من ناحية مظهرية ، يجب عرضه في مكان آخر في DOM ، خارج تطبيق Vue.
 
-The most common example of this is when building a full-screen modal. Ideally, we want the modal's button and the modal itself to live within the same component, since they are both related to the open / close state of the modal. But that means the modal will be rendered alongside the button, deeply nested in the application's DOM hierarchy. This can create some tricky issues when positioning the modal via CSS.
+المثال الأكثر شيوعا لهذا هو عند بناء نافذة منبثقة تغطي الشاشة. من المفضل أن نريد أن ينتمي زر النافذة المنبثقة والنافذة نفسها في نفس المكون، لأنهما يتعلقان بحالة الفتح / الإغلاق للنافذة المنبثقة. ولكن هذا يعني أن النافذة ستعرض مع زرها، وهي عميقة في تسلسل التداخل في DOM التطبيق. يمكن أن تنشأ بعض المشاكل الصعبة عند تحديد موضع للنافذة من خلال CSS.
 
-Consider the following HTML structure.
+لنعتبر هيكل  الـ HTML التالي:
 
 ```vue-html
 <div class="outer">
-  <h3>Vue Teleport Example</h3>
+  <h3>مثال للمكون Teleport  في Vue</h3>
   <div>
     <MyModal />
   </div>
 </div>
 ```
 
-And here is the implementation of `<MyModal>`:
+وهنا الشيفرةالتنفيذية للمكون `<MyModal>`:
 
 <div class="composition-api">
 
@@ -33,11 +33,11 @@ const open = ref(false)
 </script>
 
 <template>
-  <button @click="open = true">Open Modal</button>
+  <button @click="open = true">فتح النافذة المنبثقة</button>
 
   <div v-if="open" class="modal">
-    <p>Hello from the modal!</p>
-    <button @click="open = false">Close</button>
+     <p>مرحبا من داخل النافذة المنبثقة</p>
+    <button @click="open = false">غلق</button>
   </div>
 </template>
 
@@ -68,11 +68,11 @@ export default {
 </script>
 
 <template>
-  <button @click="open = true">Open Modal</button>
+  <button @click="open = true"> افتح النافذة المنبثقة</button>
 
   <div v-if="open" class="modal">
-    <p>Hello from the modal!</p>
-    <button @click="open = false">Close</button>
+    <p>مرحبا من داخل النافذة المنبثقة</p>
+    <button @click="open = false">غلق</button>
   </div>
 </template>
 
@@ -90,42 +90,41 @@ export default {
 
 </div>
 
-The component contains a `<button>` to trigger the opening of the modal, and a `<div>` with a class of `.modal`, which will contain the modal's content and a button to self-close.
+المكون يحتوي على زر `<button>` لتشغيل فتح النافذة المنبثقة ، وعنصر `<div>` مع اسم الصنف `modal.` ، والذي سيحتوي على محتوى النافذة المنبثقة وزر لإغلاقها.
 
-When using this component inside the initial HTML structure, there are a number of potential issues:
+عند استخدام هذا المكون داخل الهيكل الأولي للـ HTML ، فإنه يوجد عدد من المشاكل المحتملة:
 
-- `position: fixed` only places the element relative to the viewport when no ancestor element has `transform`, `perspective` or `filter` property set. If, for example, we intend to animate the ancestor `<div class="outer">` with a CSS transform, it would break the modal layout!
+- `position: fixed` يحدد فقط وضعية العنصر بالنسبة لإطار الصفحة المعروض عندما لا يحتوي أي عنصر أب على خاصية `transform` ، `perspective` أو `filter`. إذا، مثلا، كنا ننوي تحريك العنصر الأصلي `<"div class="outer>` مع خاصية التحويل الخاصة بـCSS ، فسيؤدي ذلك إلى فشل تحديد نسق النافذة المنبثقة!
 
-- The modal's `z-index` is constrained by its containing elements. If there is another element that overlaps with `<div class="outer">` and has a higher `z-index`, it would cover our modal.
 
-`<Teleport>` provides a clean way to work around these, by allowing us to break out of the nested DOM structure. Let's modify `<MyModal>` to use `<Teleport>`:
+- `z-index` الخاص بالنافذة المنبثقة محدود بواسطة عناصرها الحاوية. إذا كان هناك عنصر آخر يتداخل مع `<"div class="outer>` وله `z-index` أعلى ، فسيغطي العنصر الآخر النافذة المنبثقة.
+
+يوفر المكون `<Teleport>` طريقة نظيفة لحل هذه المشاكل ، حيث يسمح لنا بالخروج من الهيكل DOM المتداخل. دعونا نعدل `<MyModal>` لاستخدام `<Teleport>`:
 
 ```vue-html{3,8}
-<button @click="open = true">Open Modal</button>
+<button @click="open = true"> افتح النافذة المنبثقة</button>
 
-<Teleport to="body">
-  <div v-if="open" class="modal">
-    <p>Hello from the modal!</p>
-    <button @click="open = false">Close</button>
-  </div>
-</Teleport>
+<div v-if="open" class="modal">
+  <p>مرحبا من داخل النافذة المنبثقة</p>
+  <button @click="open = false">غلق</button>
+</div>
 ```
 
-The `to` target of `<Teleport>` expects a CSS selector string or an actual DOM node. Here, we are essentially telling Vue to "**teleport** this template fragment **to** the **`body`** tag".
+قيمة الخاصية `to` للمكون Teleport هي عبارة عن سلسلة نصية تحتوي على محدد CSS أو عنصر HTML ، هنا نقول بشكل أساسي لـVue  "**انقل**  (teleport) هذا الجزء من القالب و قم بوصله بعنصر Body"
 
-You can click the button below and inspect the `<body>` tag via your browser's devtools:
+يمكنك الضغط على الزر أدناه وفحص عنصر `<body>` عبر أدوات التطوير و التحكم في المتصفح:
 
 <script setup>
 let open = $ref(false)
 </script>
 
 <div class="demo">
-  <button @click="open = true">Open Modal</button>
+  <button @click="open = true"> افتح النافذة المنبثقة</button>
   <ClientOnly>
     <Teleport to="body">
       <div v-if="open" class="demo modal-demo">
-        <p style="margin-bottom:20px">Hello from the modal!</p>
-        <button @click="open = false">Close</button>
+        <p style="margin-bottom:20px">مرحبا من داخل النافذة المنبثقة</p>
+        <button @click="open = false">غلق</button>
       </div>
     </Teleport>
   </ClientOnly>
@@ -146,21 +145,21 @@ let open = $ref(false)
 }
 </style>
 
-You can combine `<Teleport>` with [`<Transition>`](./transition) to create animated modals - see [Example here](/examples/#modal).
+يمكن دمج `<Teleport>` مع [`<Transition>`](./transition) لإنشاء نوافذ منبثقة متحركة - انظر [المثال هنا](/examples/#modal).
 
-:::tip
-The teleport `to` target must be already in the DOM when the `<Teleport>` component is mounted. Ideally, this should be an element outside the entire Vue application. If targeting another element rendered by Vue, you need to make sure that element is mounted before the `<Teleport>`.
+:::tip ملاحظة 
+قيمة الخاصية `to` للمكون Teleport يجب أن تكون موجودة بالفعل في DOM عند وصل المكون `<Teleport>` . من المفضل أن تكون عنصر HTML خارج تطبيق Vue بأكمله. إذا كنت تستهدف عنصر آخر مصير من قبل Vue ، فيجب عليك التأكد من أن العنصر موصول قبل وصل `<Teleport>`.
 :::
 
-## Using with Components {#using-with-components}
+## الاستخدام مع المكونات {#using-with-components}
 
-`<Teleport>` only alters the rendered DOM structure - it does not affect the logical hierarchy of the components. That is to say, if `<Teleport>` contains a component, that component will remain a logical child of the parent component containing the `<Teleport>`. Props passing and event emitting will continue to work the same way.
+`<Teleport>` تغير فقط الهيكل DOM المعروض - و لا يؤثر على الترتيب المنطقي للمكونات. و هذا يعني أنه إذا كان `<Teleport>` يحتوي على مكون ، فسيبقى هذا المكون ابنا منطقياً للمكون الأب الذي يحتوي على `<Teleport>`. سيظل تمرير الخصائص و إرسال الأحداث على نفس الطريقة.
 
-This also means that injections from a parent component work as expected, and that the child component will be nested below the parent component in the Vue Devtools, instead of being placed where the actual content moved to.
+هذا يعني أيضاً أن عملية الحقن من المكون الأب تعمل كما هو متوقع، و أن المكون الابن سيكون مدرجا تحت المكون الأب مباشرة في أدوات التطوير و التحكم لـVue ، بدلاً من وضعه حيث يُنقل المحتوى الفعلي إليه.
 
-## Disabling Teleport {#disabling-teleport}
+## تعطيل المكون Teleport {#disabling-teleport}
 
-In some cases, we may want to conditionally disable `<Teleport>`. For example, we may want to render a component as an overlay for desktop, but inline on mobile. `<Teleport>` supports the `disabled` prop which can be dynamically toggled:
+في بعض الحالات ، قد نرغب في تعطيل `<Teleport>` بشكل شرطي. على سبيل المثال ، قد نرغب في تقديم مكون كطبقة تغطية لسطح المكتب ، ولكن مضمنًا على الهاتف المحمول. يدعم `<Teleport>` خاصية `disabled` التي يمكن تبديلها بشكل ديناميكي:
 
 ```vue-html
 <Teleport :disabled="isMobile">
@@ -168,13 +167,13 @@ In some cases, we may want to conditionally disable `<Teleport>`. For example, w
 </Teleport>
 ```
 
-Where the `isMobile` state can be dynamically updated by detecting media query changes.
+حيث يمكن تحديث حالة `isMobile` بشكل ديناميكي عن طريق تتبع تغييرات استعلامات الوسائط.
 
-## Multiple Teleports on the Same Target {#multiple-teleports-on-the-same-target}
+## مكونات Teleport على نفس العنصر {#multiple-teleports-on-the-same-target}
 
-A common use case would be a reusable `<Modal>` component, with the potential for multiple instances to be active at the same time. For this kind of scenario, multiple `<Teleport>` components can mount their content to the same target element. The order will be a simple append - later mounts will be located after earlier ones within the target element.
+حالة استخدام شائعة قد تكون عبارة عن مكون `<Modal>` قابل لإعادة الاستخدام، مع إمكانية وجود عدة نسخ نشطة منه في نفس الوقت. في هذا السيناريو، يمكن لعدة مكونات `<Teleport>` وصل محتوياتها على نفس العنصر الهدف. سيكون الترتيب ببساطة عبارة عن تذييل للمكونات داخله- ستكون الوصلات الأحدث موجودة بعد الوصلات الأقدم داخل العنصر الهدف.
 
-Given the following usage:
+ليكن الاستخدام الموالي
 
 ```vue-html
 <Teleport to="#modals">
@@ -185,7 +184,8 @@ Given the following usage:
 </Teleport>
 ```
 
-The rendered result would be:
+
+ستكون النتيجة المصيرة كالتالي:
 
 ```html
 <div id="modals">
@@ -196,7 +196,7 @@ The rendered result would be:
 
 ---
 
-**Related**
+**ذات علاقة**
 
-- [`<Teleport>` API reference](/api/built-in-components.html#teleport)
-- [Handling Teleports in SSR](/guide/scaling-up/ssr.html#teleports)
+- [`<Teleport>` مرجع الواجهة البرمجية للمكون](/api/built-in-components.html#teleport)
+- [معالجة Teleports  في حالة التصيير من جانب الخادم SSR](/guide/scaling-up/ssr.html#teleports)
