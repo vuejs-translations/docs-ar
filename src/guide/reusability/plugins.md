@@ -1,8 +1,8 @@
-﻿# Plugins {#plugins}
+﻿# الملحقات {#plugins}
 
-## Introduction {#introduction}
+## مقدمة {#introduction}
 
-Plugins are self-contained code that usually add app-level functionality to Vue. This is how we install a plugin:
+الملحقات هي عبارة عن شيفرة مستقة تضيف عادةً وظائف على مستوى التطبيق إلى Vue. هذه هي طريقة تثبيت ملحق:
 
 ```js
 import { createApp } from 'vue'
@@ -10,61 +10,61 @@ import { createApp } from 'vue'
 const app = createApp({})
 
 app.use(myPlugin, {
-  /* optional options */
+  /* خيارات اختيارية */
 })
 ```
 
-A plugin is defined as either an object that exposes an `install()` method, or simply a function that acts as the install function itself. The install function receives the [app instance](/api/application.html) along with additional options passed to `app.use()`, if any:
+يُعرَّف الملحق على أنه إما كائن يعرض التابع  `()install` أو مجرد دالة تتصرف بنفسها كدالة تثبيت. تتلقى دالة التثبيت [نسخة التطبيق](/api/application.html) بالإضافة إلى خيارات إضافية مرسلة إلى `()app.use` ، إذا توفرت:
 
 ```js
 const myPlugin = {
   install(app, options) {
-    // configure the app
+    // تهيئة التطبيق
   }
 }
 ```
 
-There is no strictly defined scope for a plugin, but common scenarios where plugins are useful include:
+لا يوجد نطاق محدد بالضبط للملحق، ولكن السيناريوهات الشائعة التي تكون الملحقات مفيدة فيها تشمل:
 
-1. Register one or more global components or custom directives with [`app.component()`](/api/application.html#app-component) and [`app.directive()`](/api/application.html#app-directive).
+1. تسجيل مكون أو مجموعة مكونات أو موجهات مخصصة باستخدام [`app.component()`](/api/application.html#app-component) و [`app.directive()`](/api/application.html#app-directive).
 
-2. Make a resource [injectable](/guide/components/provide-inject.html) throughout the app by calling [`app.provide()`](/api/application.html#app-provide).
+2. جعل مورد ما [قابلاً للحقن](/guide/components/provide-inject.html) في جميع أنحاء التطبيق من خلال استدعاء [`()app.provide`](/api/application.html#app-provide).
 
-3. Add some global instance properties or methods by attaching them to [`app.config.globalProperties`](/api/application.html#app-config-globalproperties).
+3. إضافة بعض الخاصيات أو التوابع العامة لنسخة التطبيق من خلال إرفاقها بـ [`app.config.globalProperties`](/api/application.html#app-config-globalproperties).
 
-4. A library that needs to perform some combination of the above (e.g. [vue-router](https://github.com/vuejs/vue-router-next)).
+4. مكتبة تحتاج إلى تنفيذ بعض التركيبات المذكورة أعلاه (على سبيل المثال [vue-router](https://github.com/vuejs/vue-router-next)).
 
-## Writing a Plugin {#writing-a-plugin}
+## كتابة ملحق {#writing-a-plugin}
 
-In order to better understand how to create your own Vue.js plugins, we will create a very simplified version of a plugin that displays `i18n` (short for [Internationalization](https://en.wikipedia.org/wiki/Internationalization_and_localization)) strings.
+من أجل فهم أفضل لكيفية إنشاء ملحقات Vue.js الخاصة بك، سنقوم بإنشاء إصدار مبسط جدًا من ملحق يعرض السلاسل النصية لـ`i18n` (الإختصار لـ [تدويل (Internationalization)](https://en.wikipedia.org/wiki/Internationalization_and_localization)).
 
-Let's begin by setting up the plugin object. It is recommended to create it in a separate file and export it, as shown below to keep the logic contained and separate.
+لنبدأ بإعداد كائن الملحق. يُفضَّل إنشاءه في ملف منفصل وتصديره، كما هو موضح أدناه للحفاظ على تجميع الشيفرة والفصل بينها.
 
 ```js
 // plugins/i18n.js
 export default {
   install: (app, options) => {
-    // Plugin code goes here
+    // هنا شيفرة الملحق 
   }
 }
 ```
 
-We want to create a translation function. This function will receive a dot-delimited `key` string, which we will use to look up the translated string in the user-provided options. This is the intended usage in templates:
+نريد إنشاء دالة ترجمة. ستتلقى هذه الدالة سلسلة نصية `key` مفصولة بنقطة، والتي سنستخدمها للبحث عن السلسلة المترجمة في خيارات المستخدم. هذا هو الاستخدام المقصود في القوالب:
 
 ```vue-html
 <h1>{{ $translate('greetings.hello') }}</h1>
 ```
 
-Since this function should be globally available in all templates, we will make it so by attaching it to `app.config.globalProperties` in our plugin:
+نظرًا لأن هذه الدالة يجب أن تكون متاحة على جميع القوالب، سنجعلها متاحة على مستوى النسخة من خلال إرفاقها بـ `app.config.globalProperties` في ملحقنا:
 
 ```js{4-11}
 // plugins/i18n.js
 export default {
   install: (app, options) => {
-    // inject a globally available $translate() method
+    // احقن بشكل عام دالة $translate()
     app.config.globalProperties.$translate = (key) => {
-      // retrieve a nested property in `options`
-      // using `key` as the path
+      // استرجاع خاصية متداخلة في `options`
+      // باستخدام `key` كمسار
       return key.split('.').reduce((o, i) => {
         if (o) return o[i]
       }, options)
@@ -73,31 +73,31 @@ export default {
 }
 ```
 
-Our `$translate` function will take a string such as `greetings.hello`, look inside the user provided configuration and return the translated value.
+الدالة `translate$` ستأخذ سلسلة نصية مثل `greetings.hello`، وستبحث في الإعدادات الموفرة  وستعيد القيمة المترجمة.
 
-The object containing the translated keys should be passed to the plugin during installation via additional parameters to `app.use()`:
+يجب إرسال كائن يحتوي على مفاتيح الترجمة إلى الملحق خلال التثبيت عبر وسائط إضافية لـلتابع `()app.use`:
 
 ```js
 import i18nPlugin from './plugins/i18n'
 
 app.use(i18nPlugin, {
   greetings: {
-    hello: 'Bonjour!'
+    hello: 'مرحبا!'
   }
 })
 ```
 
-Now, our initial expression `$translate('greetings.hello')` will be replaced by `Bonjour!` at runtime.
+الآن، سيستبدل التعبير الأولي `translate('greetings.hello')$` بـ `مرحبا!` عند تشغيل التطبيق.
 
-See also: [Augmenting Global Properties](/guide/typescript/options-api.html#augmenting-global-properties) <sup class="vt-badge ts" />
+اطلع أيضا على: [تعزيز الخاصيات العامة](/guide/typescript/options-api.html#augmenting-global-properties) <sup class="vt-badge ts" />
 
-:::tip
-Use global properties scarcely, since it can quickly become confusing if too many global properties injected by different plugins are used throughout an app.
+:::tip ملاحظة
+استخدم الخاصيات العامة في حالة الضرورة فقط، لأنه يمكن أن يصبح الأمر مربكًا بسرعة إذا استخدمت العديد من الخاصيات العامة المدخلة من قبل ملحقات مختلفة مستخدمة عبر التطبيق.
 :::
 
-### Provide / Inject with Plugins {#provide-inject-with-plugins}
+### الحقن/التزويد عبر الملحقات {#provide-inject-with-plugins}
 
-Plugins also allow us to use `inject` to provide a function or attribute to the plugin's users. For example, we can allow the application to have access to the `options` parameter to be able to use the translations object.
+الملحقات تسمح لنا أيضًا باستخدام `inject` لتزويد دالة أو سمة لمستخدمي الملحق. على سبيل المثال، يمكننا السماح للتطبيق بالوصول إلى الوسيط `options` لكي يتمكن من استخدام كائن الترجمات.
 
 ```js{10}
 // plugins/i18n.js
@@ -114,7 +114,7 @@ export default {
 }
 ```
 
-Plugin users will now be able to inject the plugin options into their components using the `i18n` key:
+سيتمكن مستخدمو الملحق الآن من إدخال خيارات الملحق في مكوناتهم باستخدام مفتاح `i18n`:
 
 <div class="composition-api">
 

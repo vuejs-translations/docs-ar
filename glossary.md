@@ -72,3 +72,6 @@
 | url                   |                 عنوان محدد الموارد |
 | mixin                 |                              مخلوط |
 | renderless            |                        عديمة تصيير |
+| argument              |                               وسيط |
+| parameter             |                              معامل |
+| suspense              |                               تعليق |
