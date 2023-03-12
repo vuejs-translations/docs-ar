@@ -2,76 +2,78 @@
 
 هذه قائمة ترجمات المصطلحات التقنية التي اتفق عليها فريق الترجمة. تعتبر هذه القائمة المرجع الأساسي للمصطلحات في هذا الموقع.
 
-| English               |                            العربية |
-| :-------------------- | ---------------------------------: |
-| Component             |                              مكوّن |
-| Composition API       | الواجهة التركيبية لبرمجة التطبيقات |
-| Options API           |    واجهة الخيارات لبرمجة التطبيقات |
-| Lifecycle Hooks       |                خطافات مراحل الحياة |
-| Single file component |                   مكون أحادي الملف |
-| instance              |                               نسخة |
-| template              |                               قالب |
-| render function       |                       دالة التصيير |
-| data                  |                           البيانات |
-| props                 |                           الخاصيات |
-| computed              |                    الخاصيةالمحسوبة |
-| method                |                             التابع |
-| function              |                             الدالة |
-| watch                 |                     خاصية مُراقِبة |
-| logic                 |                        شيفرة، منطق |
-| state                 |                               حالة |
-| event                 |                                حدث |
-| lifecycle             |                       مرحلة الحياة |
-| hook                  |                               خطاف |
-| migration             |                            الترقية |
-| plugin                |                               ملحق |
-| mixin                 |                               مزيج |
-| tag                   |                                وسم |
-| directive             |               مُوجِّه/سمة مُوجِّهة |
-| attribute             |                                سمة |
-| class                 |                                صنف |
-| style                 |             (في حالة الـCSS) تنسيق |
-| style                 |                         نمط/ اسلوب |
-| binding               |                                ربط |
-| interpolation         |                              اقحام |
-| expression            |                              تعبير |
-| conditional           |                               شرطي |
-| list                  |                              قائمة |
-| key                   |                              مفتاح |
-| slot                  |                          منفذ/مدخل |
-| ref                   |                               مرجع |
-| dependency            |                           اعتمادية |
-| reactivity            |             (كإسم للمفهوم) تفاعلية |
-| reactive              |              (كصفة للمتغير) تفاعلي |
-| effect                |                              تأثير |
-| getter                |                            مُحصِّل |
-| setter                |                            مُعيِّن |
-| shallow               |                               سطحي |
-| deep                  |                               عميق |
-| raw                   |                                خام |
-| composable function   |                      دالة مُركَّبة |
-| parent component      |                      مكوّن أب/أصلي |
-| child component       |                     مكوّن فرعي/ابن |
-| mount                 |                                وصل |
-| unmount               |                                فصل |
-| container             |                           مُستوعِب |
-| CSS selector          |                        مُحدِّد CSS |
-| assets                |                             ملحقات |
-| modifier              |                            مُعدِّل |
-| tick                  |                               نبضة |
-| unwrap                |                                 فك |
-| lazy                  |                               خامل |
-| index                 |                               مؤشر |
-| layout                |                        نسق / تخطيط |
-| placeholder           |                    عنصر/محتوى نائب |
-| implementation        |                  الشيفرة التنفيذية |
-| tree-shaking          |                    التجزئة الشجرية |
-| macro                 |                        تعليمة عامة |
-| bus                   |                               ناقل |
-| stateful              |                     شيفرة ذات حالة |
-| url                   |                 عنوان محدد الموارد |
-| mixin                 |                              مخلوط |
-| renderless            |                        عديمة تصيير |
-| argument              |                               وسيط |
-| parameter             |                              معامل |
-| suspense              |                               تعليق |
+| English               | متّفق عليه |                            العربية |
+| :--------------------- | ------------- | -------------------------------: |
+| Component             | ليس بعد |                              مكوّن |
+| Composition API       | ليس بعد | الواجهة التركيبية لبرمجة التطبيقات |
+| Options API           | ليس بعد |    واجهة الخيارات لبرمجة التطبيقات |
+| Lifecycle Hooks       | ليس بعد |                خطافات مراحل الحياة |
+| Single file component | ليس بعد |                   مكون أحادي الملف |
+| instance              | ليس بعد |                               نسخة |
+| template              | ليس بعد |                               قالب |
+| render function       | ليس بعد |                       دالة التصيير |
+| data                  | ليس بعد |                           البيانات |
+| props                 | ليس بعد |                           الخاصيات |
+| computed              | ليس بعد |                    الخاصيةالمحسوبة |
+| method                | ليس بعد |                             التابع |
+| function              | ليس بعد |                             الدالة |
+| watch                 | ليس بعد |                     خاصية مُراقِبة |
+| logic                 | ليس بعد |                        شيفرة، منطق |
+| state                 | ليس بعد |                               حالة |
+| event                 | ليس بعد |                                حدث |
+| lifecycle             | ليس بعد |                       مرحلة الحياة |
+| hook                  | ليس بعد |                               خطاف |
+| migration             | ليس بعد |                            الترقية |
+| plugin                | ليس بعد |                               ملحق |
+| mixin                 | ليس بعد |                               مزيج |
+| tag                   | ليس بعد |                                وسم |
+| directive             | ليس بعد |               مُوجِّه/سمة مُوجِّهة |
+| attribute             | ليس بعد |                                سمة |
+| class                 | ليس بعد |                                صنف |
+| style                 | ليس بعد |             (في حالة الـCSS) تنسيق |
+| style                 | ليس بعد |                         نمط/ اسلوب |
+| binding               | ليس بعد |                                ربط |
+| interpolation         | ليس بعد |                              اقحام |
+| expression            | ليس بعد |                              تعبير |
+| conditional           | ليس بعد |                               شرطي |
+| list                  | ليس بعد |                              قائمة |
+| key                   | ليس بعد |                              مفتاح |
+| slot                  | ليس بعد |                          منفذ/مدخل |
+| ref                   | ليس بعد |                               مرجع |
+| dependency            | ليس بعد |                           اعتمادية |
+| reactivity            | ليس بعد |             (كإسم للمفهوم) تفاعلية |
+| reactive              | ليس بعد |              (كصفة للمتغير) تفاعلي |
+| effect                | ليس بعد |                              تأثير |
+| getter                | ليس بعد |                            مُحصِّل |
+| setter                | ليس بعد |                            مُعيِّن |
+| shallow               | ليس بعد |                               سطحي |
+| deep                  | ليس بعد |                               عميق |
+| raw                   | ليس بعد |                                خام |
+| composable function   | ليس بعد |                      دالة مُركَّبة |
+| parent component      | ليس بعد |                      مكوّن أب/أصلي |
+| child component       | ليس بعد |                     مكوّن فرعي/ابن |
+| mount                 | ليس بعد |                                وصل |
+| unmount               | ليس بعد |                                فصل |
+| container             | ليس بعد |                           مُستوعِب |
+| CSS selector          | ليس بعد |                        مُحدِّد CSS |
+| assets                | ليس بعد |                             ملحقات |
+| modifier              | ليس بعد |                            مُعدِّل |
+| tick                  | ليس بعد |                               نبضة |
+| unwrap                | ليس بعد |                                 فك |
+| lazy                  | ليس بعد |                               خامل |
+| index                 | ليس بعد |                               مؤشر |
+| layout                | ليس بعد |                        نسق / تخطيط |
+| placeholder           | ليس بعد |                    عنصر/محتوى نائب |
+| implementation        | ليس بعد |                  الشيفرة التنفيذية |
+| tree-shaking          | ليس بعد |                    التجزئة الشجرية |
+| macro                 | ليس بعد |                        تعليمة عامة |
+| bus                   | ليس بعد |                               ناقل |
+| stateful              | ليس بعد |                     شيفرة ذات حالة |
+| url                   | ليس بعد |                 عنوان محدد الموارد |
+| mixin                 | ليس بعد |                              مخلوط |
+| renderless            | ليس بعد |                        عديمة تصيير |
+| argument              | ليس بعد |                               وسيط |
+| parameter             | ليس بعد |                              معامل |
+| suspense              | ليس بعد |                               تعليق |
+
+ 
