@@ -9,71 +9,71 @@ sponsors: false
 import SponsorsGroup from '@theme/components/SponsorsGroup.vue'
 </script>
 
-# Become a Vue.js Sponsor {#become-a-vue-js-sponsor}
+# كن أحد رعاة Vue.js {#become-a-vue-js-sponsor}
 
-Vue.js is an MIT licensed open source project and completely free to use.
-The tremendous amount of effort needed to maintain such a large ecosystem and develop new features for the project is only made sustainable thanks to the generous financial backing of our sponsors.
+Vue.js هو مشروع مفتوح المصدر مرخص من معهد ماساتشوستس للتكنولوجيا وهو مجاني تمامًا للاستخدام.
+إن القدر الهائل من الجهد اللازم للحفاظ على مثل هذا النظام البيئي الكبير وتطوير ميزات جديدة للمشروع أصبح مستدامًا فقط بفضل الدعم المالي السخي من الرعاة.
 
-## How to Sponsor {#how-to-sponsor}
+## كيف ترعى {#how-to-sponsor}
 
-Sponsorships can be done via [GitHub Sponsors](https://github.com/sponsors/yyx990803) or [OpenCollective](https://opencollective.com/vuejs). Invoices can be obtained via GitHub's payment system. Both monthly-recurring sponsorships and one-time donations are accepted. Recurring sponsorships are entitled to logo placements as specified in [Sponsorship Tiers](#tier-benefits).
+يمكن القيام بالرعاية عبر [رعاة GitHub](https://github.com/sponsors/yyx990803) أو [OpenCollective](https://opencollective.com/vuejs). يمكن الحصول على الفواتير عبر نظام الدفع الخاص بـ GitHub. يتم قبول كل من الرعاية الشهرية المتكررة والتبرعات لمرة واحدة. الرعاية المتكررة مخولة لمواضع الشعار كما هو محدد في [مستويات الرعاية](#tier-benefits).
 
-If you have questions regarding tiers, payment logistics, or sponsor exposure data, please reach out to [sponsor@vuejs.org](mailto:sponsor@vuejs.org).
+إذا كانت لديك أسئلة بخصوص المستويات أو لوجستيات الدفع أو بيانات تعرض الراعي ، فيرجى التواصل مع [sponsor@vuejs.org](mailto:sponsor@vuejs.org).
 
-## Sponsoring Vue as a Business {#sponsoring-vue-as-a-business}
+## رعاية Vue كعمل تجاري {#sponsoring-vue-as-a-business}
 
-Sponsoring Vue gives you great exposure to over **1.7 million** Vue developers around the world through our website and GitHub project READMEs. In addition, supporting OSS improves the reputation of your brand, which is an important asset for any company that interacts with developers.
+تمنحك رعاية Vue عرضًا رائعًا لأكثر من **1.7 مليون** من مطوري Vue حول العالم من خلال موقعنا على الويب ومشروع GitHub READMEs. بالإضافة إلى ذلك ، يعمل دعم OSS على تحسين سمعة علامتك التجارية ، والتي تعد من الأصول المهمة لأي شركة تتفاعل مع المطورين.
 
-If you are using Vue to build a revenue-generating product, it makes business sense to sponsor Vue's development: **it ensures the project that your product relies on stays healthy and actively maintained.** The exposure and positive brand image in the Vue community also makes it easier to attract and recruit Vue developers.
+إذا كنت تستخدم Vue لبناء منتج مدر للإيرادات ، فمن المنطقي من الناحية التجارية رعاية تطوير Vue: **يضمن أن يظل المشروع الذي يعتمد عليه منتجك في حالة جيدة ويتم صيانته بنشاط.** التعرض وصورة العلامة التجارية الإيجابية في مجتمع Vue يسهل أيضًا جذب مطوري Vue وتوظيفهم.
 
-If you are building a product where your target customers are developers, you will gain high quality traffic through the sponsorship exposure, since all our visitors are developers. The sponsorship also builds brand recognition and improves conversion.
+إذا كنت تقوم ببناء منتج يكون فيه عملاؤك المستهدفون مطورين ، فستحصل على حركة مرور عالية الجودة من خلال عرض الرعاية ، لأن جميع زوارنا هم مطورين. تبني الرعاية أيضًا تمييزًا للعلامة التجارية وتحسن التحويل.
 
-## Sponsoring Vue as an Individual {#sponsoring-vue-as-an-individual}
+## رعاية Vue كفرد {#sponsoring-vue-as-an-individual}
 
-If you are an individual user and have enjoyed the productivity of using Vue, consider donating as a sign of appreciation - like buying us coffee once in a while. Many of our team members accept sponsorships and donations via GitHub Sponsors. Look for the "Sponsor" button on each team member's profile on our [team page](/about/team).
+إذا كنت مستخدمًا فرديًا واستمتعت بإنتاجية استخدام Vue ، ففكر في التبرع كدليل على التقدير - مثل شراء القهوة لنا من حين لآخر. يقبل العديد من أعضاء فريقنا الرعاية والتبرعات عبر رعاة GitHub. ابحث عن زر "الراعي" في الملف الشخصي لكل عضو في الفريق على موقعنا [صفحة الفريق](/about/team).
 
-You can also try to convince your employer to sponsor Vue as a business. This may not be easy, but business sponsorships typically make a much larger impact on the sustainability of OSS projects than individual donations, so you will help us much more if you succeed.
+يمكنك أيضًا محاولة إقناع صاحب العمل الخاص بك برعاية Vue كعمل تجاري. قد لا يكون هذا سهلاً ، لكن رعاية الأعمال عادةً ما يكون لها تأثير أكبر على استدامة مشاريع OSS أكثر من التبرعات الفردية ، لذلك ستساعدنا كثيرًا إذا نجحت.
 
-## Tier Benefits {#tier-benefits}
+## مزايا الطبقة {#tier-benefits}
 
-- **Global Special**:
-  - Limited to one sponsor globally (currently filled).
-  - Exclusive above the fold logo placement on the front page of [vuejs.org](/).
-  - Most prominent logo placement in all locations from tiers below.
-- **Platinum (USD$2,000/mo)**:
-  - Prominent logo placement on the front page of [vuejs.org](/).
-  - Prominent logo placement in sidebar of all content pages.
-  - Prominent logo placement in the README of [`vuejs/core`](https://github.com/vuejs/core) and [`vuejs/vue`](https://github.com/vuejs/core).
-- **Gold (USD$500/mo)**:
-  - Large logo placement on the front page of [vuejs.org](/).
-  - Large logo placement in the README of `vuejs/core` and `vuejs/vue`.
-- **Silver (USD$250/mo)**:
-  - Medium logo placement in the `BACKERS.md` file of `vuejs/core` and `vuejs/vue`.
-- **Bronze (USD$100/mo)**:
-  - Small logo placement in the `BACKERS.md` file of `vuejs/core` and `vuejs/vue`.
-- **Generous Backer (USD$50/mo)**:
-  - Name listed in the `BACKERS.md` file of `vuejs/core` and `vuejs/vue`, above other individual backers.
-- **Individual Backer (USD$5/mo)**:
-  - Name listed in the `BACKERS.md` file of `vuejs/core` and `vuejs/vue`.
+- **العالمية الخاصة**:
+  - يقتصر على راع واحد عالميًا (محجوز حاليًا).
+  - وضع شعار حصري فوق الجزء المرئي من الصفحة على الصفحة الأولى من [vuejs.org](/).
+  - وضع الشعار الأبرز في جميع المواقع من الطبقات أدناه.
+- **البلاتينيوم (2000 دولار أمريكي / شهريا)**:
+  - وضع شعار بارز على الصفحة الأولى من [vuejs.org](/).
+  - وضع شعار بارز في الشريط الجانبي لجميع صفحات المحتوى.
+  - وضع شعار بارز في README لـ [`vuejs/core`](https://github.com/vuejs/core) and [`vuejs/vue`](https://github.com/vuejs/core).
+- **الذهبي (500 دولار أمريكي / شهريا)**:
+  - وضع شعار كبير على الصفحة الأولى من [vuejs.org](/).
+  - وضع شعار كبير في الملف التمهيدي لـ `vuejs/core` و `vuejs/vue`.
+- **الفضي (250 دولار أمريكي / شهريا)**:
+  - وضع شعار متوسط في ملف `BACKERS.md` الخاص بـ `vuejs/core` و `vuejs/vue`.
+- **برونزي (100 دولار أمريكي / شهريا)**:
+  - وضع شعار صغير في ملف `BACKERS.md` الخاص بـ `vuejs/core` و `vuejs/vue`.
+- **الداعم الكريم (50 دولار أمريكي / شهريا)**:
+  - الاسم مُدرج في ملف `BACKERS.md` الخاص بـ `vuejs/core` و `vuejs/vue`, فوق الداعمين الفرديين الآخرين.
+- **الداعم الفردي (5 دولار أمريكي / شهريا)**:
+  - الاسم مُدرج في ملف `BACKERS.md` الخاص بـ `vuejs/core` و `vuejs/vue`.
 
-## Current Sponsors {#current-sponsors}
+## الرعاة الحاليون {#current-sponsors}
 
-### Special Global Sponsor {#special-global-sponsor}
+### الراعي العالمي الخاص {#special-global-sponsor}
 
 <SponsorsGroup tier="special" placement="page" />
 
-### Platinum {#platinum}
+### البلاتينيوم {#platinum}
 
 <SponsorsGroup tier="platinum" placement="page" />
 
-### Platinum (China) {#platinum-china}
+### البلاتينيوم (الصين) {#platinum-china}
 
 <SponsorsGroup tier="platinum_china" placement="page" />
 
-### Gold {#gold}
+### الذهبي {#gold}
 
 <SponsorsGroup tier="gold" placement="page" />
 
-### Silver {#silver}
+### الفضي {#silver}
 
 <SponsorsGroup tier="silver" placement="page" />
