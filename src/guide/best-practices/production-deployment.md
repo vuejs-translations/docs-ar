@@ -1,44 +1,44 @@
-# Production Deployment {#production-deployment}
+# نشر الإنتاج {#production-deployment}
 
-## Development vs. Production {#development-vs-production}
+## التطوير مقابل الإنتاج {#development-vs-production}
 
-During development, Vue provides a number of features to improve the development experience:
+أثناء التطوير ، يوفر Vue عددًا من الميزات لتحسين تجربة التطوير:
 
-- Warning for common errors and pitfalls
-- Props / events validation
-- [Reactivity debugging hooks](/guide/extras/reactivity-in-depth.html#reactivity-debugging)
-- Devtools integration
+- العطف بين الأخطاء و العثرات الشائعة
+- الخاصيات / التحقق من صحة الأحداث
+- [خطافات تصحيح الأخطاء التفاعلية](/guide/extras/reactivity-in-depth.html#reactivity-debugging)
+- أدوات التطوير المدمجة
 
-However, these features become useless in production. Some of the warning checks can also incur a small amount of performance overhead. When deploying to production, we should drop all the unused, development-only code branches for smaller payload size and better performance.
+ومع ذلك ، تصبح هذه الميزات عديمة الفائدة في الإنتاج. يمكن أن تتحمل بعض فحوصات التحذير أيضًا قدرًا صغيرًا من نفقات الأداء. عند النشر في الإنتاج ، يجب أن نتخلى عن جميع فروع التعليمات البرمجية غير المستخدمة، والمصممة للتطوير فقط للحصول على حجم حمولة أصغر وأداء أفضل.
 
-## Without Build Tools {#without-build-tools}
+## بدون أدوات البناء {#without-build-tools}
 
-If you are using Vue without a build tool by loading it from a CDN or self-hosted script, make sure to use the production build (dist files that end in `.prod.js`) when deploying to production. Production builds are pre-minified with all development-only code branches removed.
+إذا كنت تستخدم Vue بدون أداة بناء عن طريق تحميلها من CDN أو برنامج نصي مستضاف ذاتيًا ، فتأكد من استخدام بنية الإنتاج (ملفات dist التي تنتهي بـ `.prod.js`) عند النشر في الإنتاج. تُصغر إصدارات الإنتاج مسبقًا مع إزالة جميع فروع التعليمات البرمجية المخصصة للتطوير فقط.
 
-- If using global build (accessing via the `Vue` global): use `vue.global.prod.js`.
-- If using ESM build (accessing via native ESM imports): use `vue.esm-browser.prod.js`.
+- في حالة استخدام عملية بناء عامة (بواسطة الكائن العام لـ `Vue`): استخدم`vue.global.prod.js`.
+- في حالة استخدام إصدار ESM (بواسطة عمليات استيراد ESM الأصلية): استخدم `vue.esm-browser.prod.js`.
 
-Consult the [dist file guide](https://github.com/vuejs/core/tree/main/packages/vue#which-dist-file-to-use) for more details.
+راجع [دليل ملف dist](https://github.com/vuejs/core/tree/main/packages/vue#which-dist-file-to-use) لمزيد من التفاصيل.
 
-## With Build Tools {#with-build-tools}
+## مع أدوات البناء {#with-build-tools}
 
-Projects scaffolded via `create-vue` (based on Vite) or Vue CLI (based on webpack) are pre-configured for production builds.
+المشاريع المنشأة عبر `create-vue` (المستند على Vite) أو Vue CLI (المستند على webpack) مهيأة مسبقًا لإصدارات الإنتاج.
 
-If using a custom setup, make sure that:
+إذا كنت تستخدم إعدادًا مخصصًا ، فتأكد من:
 
-1. `vue` resolves to `vue.runtime.esm-bundler.js`.
-2. The [compile time feature flags](https://github.com/vuejs/core/tree/main/packages/vue#bundler-build-feature-flags) are properly configured.
-3. <code>process.env<wbr>.NODE_ENV</code> is replaced with `"production"` during build.
+1. ينتقل `vue` إلى `vue.runtime.esm-bundler.js`.
+2. تهيئة [أعلام ميزة وقت التصريف](https://github.com/vuejs/core/tree/main/packages/vue#bundler-build-feature-flags) بشكل صحيح.
+3. <code>process.env<wbr>.NODE_ENV</code> يستبدل بـ `"production"` أثناء البناء.
 
-Additional references:
+مراجع إضافية:
 
-- [Vite production build guide](https://vitejs.dev/guide/build.html)
-- [Vite deployment guide](https://vitejs.dev/guide/static-deploy.html)
-- [Vue CLI deployment guide](https://cli.vuejs.org/guide/deployment.html)
+- [دليل عملية البناء للانتاج في Vite](https://vitejs.dev/guide/build.html)
+- [دليل النشر في Vite](https://vitejs.dev/guide/static-deploy.html)
+- [دليل النشر في Vue CLI](https://cli.vuejs.org/guide/deployment.html)
 
-## Tracking Runtime Errors {#tracking-runtime-errors}
+## تتبع أخطاء وقت التشغيل {#tracking-runtime-errors}
 
-The [app-level error handler](/api/application.html#app-config-errorhandler) can be used to report errors to tracking services:
+يمكن استخدام [معالج الأخطاء على مستوى التطبيق](/api/application.html#app-config-errorhandler) للإبلاغ عن الأخطاء لخدمات التتبع:
 
 ```js
 import { createApp } from 'vue'
@@ -46,8 +46,8 @@ import { createApp } from 'vue'
 const app = createApp(...)
 
 app.config.errorHandler = (err, instance, info) => {
-  // report error to tracking services
+  // الإبلاغ عن خطأ لخدمات التتبع
 }
 ```
 
-Services such as [Sentry](https://docs.sentry.io/platforms/javascript/guides/vue/) and [Bugsnag](https://docs.bugsnag.com/platforms/javascript/vue/) also provide official integrations for Vue.
+توفر خدمات مثل [Sentry](https://docs.sentry.io/platforms/javascript/guides/vue/) و [Bugsnag](https://docs.bugsnag.com/platforms/javascript/vue/) أيضًا اندماجات رسمية لـ Vue.
