@@ -20,7 +20,7 @@ import ListStagger from './transition-demos/ListStagger.vue'
 
 - ستُطبّق فئات انتقالات CSS على العناصر الفردية في القائمة ، **وليس** على مجموعة العناصر/العنصر الحاوي نفسه.
 
-:::tip
+:::tip ملاحظة
 عند استخدامها في [قوالب DOM](/guide/essentials/component-basics.html#dom-template-parsing-caveats), يجب الإشارة إليها كـ `<transition-group>`.
 :::
 
