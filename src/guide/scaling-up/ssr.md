@@ -2,64 +2,64 @@
 outline: deep
 ---
 
-# Server-Side Rendering (SSR) {#server-side-rendering-ssr}
+# التصيير من جانب الخادوم (SSR) {#server-side-rendering-ssr}
 
-## Overview {#overview}
+## نظرة عامة {#overview}
 
-### What is SSR? {#what-is-ssr}
+### ماهو التصيير من جانب الخادوم؟ {#what-is-ssr}
 
-Vue.js is a framework for building client-side applications. By default, Vue components produce and manipulate DOM in the browser as output. However, it is also possible to render the same components into HTML strings on the server, send them directly to the browser, and finally "hydrate" the static markup into a fully interactive app on the client.
+Vue.js هي إطار عمل لبناء تطبيقات من جانب المستخدم. افتراضيًا،  مكوّنات Vue تنتج الـDOM وتعمل عليه في المتصفح كناتج. ومع ذلك، من الممكن أيضًا تصيير نفس المكوّنات إلى سلاسل نصية HTML على الخادوم، ثم إرسالها مباشرة إلى المتصفح، وأخيرًا "إنعاش" الـHTML الساكن بالبيانات التفاعلية وتحويله إلى تطبيق تفاعلي بالكامل على جهة المستخدم.
 
-A server-rendered Vue.js app can also be considered "isomorphic" or "universal", in the sense that the majority of your app's code runs on both the server **and** the client.
+يعتبر تطبيق Vue.js مصيّر من جانب الخادوم أيضًا "مُتَمَاثِل" أو "عالمي"، حيث تعمل معظم الشيفرة للتطبيق على الخادوم **و** على المستخدم.
 
-### Why SSR? {#why-ssr}
+### لماذا التصيير من جانب الخادوم؟ {#why-ssr}
 
-Compared to a client-side Single-Page Application (SPA), the advantage of SSR primarily lies in:
+بالمقارنة مع تطبيق أحادي الصفحة من جانب المستخدم (SPA)، فإن ميزة التصيير من جانب الخادوم تكمن أساسا في:
 
-- **Faster time-to-content**: this is more prominent on slow internet or slow devices. Server-rendered markup doesn't need to wait until all JavaScript has been downloaded and executed to be displayed, so your user will see a fully-rendered page sooner. In addition, data fetching is done on the server-side for the initial visit, which likely has a faster connection to your database than the client. This generally results in improved [Core Web Vitals](https://web.dev/vitals/) metrics, better user experience, and can be critical for applications where time-to-content is directly associated with conversion rate.
+- **أسرع زمن للوصول إلى المحتوى**: هذا أكثر وضوحًا على الإنترنت البطيء أو الأجهزة البطيئة. لا يحتاج الـHTML المصيّر من جانب الخادوم إلى الانتظار حتى تنزل وتنفذ شيفرة الـJavascript كامل, ليُعرض، لذا سيرى المستخدم صفحة مصيّرة بالكامل بشكل أسرع. بالإضافة إلى ذلك، تجلب البيانات من جانب الخادوم في اللزيارة الأولى، والتي ربما لديها اتصال أسرع بقاعدة البيانات من جانب المستخدم. وهذا يؤدي عادة إلى تحسين مقاييس [Core Web Vitals](https://web.dev/vitals/)، وتجربة مستخدم أفضل، ويمكن أن يكون مهمًا للتطبيقات التي يوصل فيها  زمن الوصول إلى المحتوى مباشرة بمعدل التحويل.
 
-- **Unified mental model**: you get to use the same language and the same declarative, component-oriented mental model for developing your entire app, instead of jumping back and forth between a backend templating system and a frontend framework.
+- **نموذج ذهني موحد**: يمكنك استخدام نفس اللغة ونفس النموذج الذهني التصريحي والموجه بالمكونات لتطوير تطبيقك بأكمله، بدلاً من القفز بين أنظمة القولبة الخلفية وإطار عمل للواجهة الأمامية.
 
-- **Better SEO**: the search engine crawlers will directly see the fully rendered page.
+- **أفضل تهيئة لمحركات البحث**:  سترى معالجات محركات البحث الصفحة بالكامل مصيّرة من جانب الخادوم مباشرة.
 
-  :::tip
-  As of now, Google and Bing can index synchronous JavaScript applications just fine. Synchronous being the key word there. If your app starts with a loading spinner, then fetches content via Ajax, the crawler will not wait for you to finish. This means if you have content fetched asynchronously on pages where SEO is important, SSR might be necessary.
+  ::: tip ملاحظة  
+  حتى الآن، يمكن لـGoogle وـBing فهم تطبيقات JavaScript المتزامنة بشكل جيد. المتزامنة هي الكلمة المفتاحية هنا. إذا بدأ تطبيقك بمؤشر تحميل، ثم جلب المحتوى عبر Ajax، فلن ينتظر معالج محرك البحث أن تنهي التحميل. وهذا يعني أنه إذا كان لديك محتوى يجلب لاتزامنيا على الصفحات التي تكون فيها التهيئة لمحركات البحث مهمة، فقد يكون التصيير من جانب الخادوم ضروريًا. 
   :::
 
-There are also some trade-offs to consider when using SSR:
+يوجد أيضًا بعض القيود التي يجب أخذها بعين الاعتبار عند استخدام التصيير من جانب الخادوم:
 
-- Development constraints. Browser-specific code can only be used inside certain lifecycle hooks; some external libraries may need special treatment to be able to run in a server-rendered app.
+- قيود التطوير. يمكن استخدام الشيفرة المخصصة للمتصفح داخل بعض مراحل الدورة الحياة فقط؛ قد تحتاج بعض المكتبات الخارجية إلى معاملة خاصة لتتمكن من التشغيل في تطبيق مصيّر من جانب الخادوم.
 
-- More involved build setup and deployment requirements. Unlike a fully static SPA that can be deployed on any static file server, a server-rendered app requires an environment where a Node.js server can run.
+- الكثير من الإعدادات ومتطلبات التوزيع المعقدة. على عكس تطبيق ساكن أحادي الصفحة بالكامل الذي يمكن توزيعه على أي خادوم للملفات الساكنة، يتطلب تطبيق مصيّر من جانب الخادوم بيئة تتيح تشغيل خادوم Node.js.
 
-- More server-side load. Rendering a full app in Node.js is going to be more CPU-intensive than just serving static files, so if you expect high traffic, be prepared for corresponding server load and wisely employ caching strategies.
+- الكثير من التحميل على جانب الخادوم. سيكون تصيير تطبيق كامل في Node.js أكثر تعقيدًا من تقديم الملفات الساكنة فقط، لذا إذا كنت تتوقع حركة طلبات كبيرة، فاستعد للحمل المتناسق على جانب الخادوم واستخدم بصورة ذكية استراتيجيات التخزين المؤقت.
 
-Before using SSR for your app, the first question you should ask is whether you actually need it. It mostly depends on how important time-to-content is for your app. For example, if you are building an internal dashboard where an extra few hundred milliseconds on initial load doesn't matter that much, SSR would be an overkill. However, in cases where time-to-content is absolutely critical, SSR can help you achieve the best possible initial load performance.
+قبل استخدام التصيير من جانب الخادوم لتطبيقك، يجب أن تسأل نفسك أولاً ما إذا كنت بحاجة إليه حقًا. ويعتمد ذلك في الغالب على مدى أهمية زمن الوصول للمحتوى في تطبيقك. على سبيل المثال، إذا كنت تبني لوحة تحكم داخلية حيث لا يهمك كثيرا بضع مئات من أجزاء الثانية الإضافية عند التحميل الأولي، فإن التصيير من جانب الخادوم سيكون خيارا مبالغا فيه. ومع ذلك، في حالات حيث يكون زمن الوصول للمحتوى مهمًا للغاية، يمكن للتصيير من جانب الخادوم مساعدتك على تحقيق أفضل أداء ممكن للتحميل الأولي.
 
-### SSR vs. SSG {#ssr-vs-ssg}
+### التصيير من جانب الخادوم مقابل توليد الموقع الساكن {#ssr-vs-ssg}
 
-**Static Site Generation (SSG)**, also referred to as pre-rendering, is another popular technique for building fast websites. If the data needed to server-render a page is the same for every user, then instead of rendering the page every time a request comes in, we can render it only once, ahead of time, during the build process. Pre-rendered pages are generated and served as static HTML files.
+**توليد الموقع الساكن (SSG)**، والذي يعرف أيضًا باسم التصيير المسبق، هو تقنية أخرى شهيرة لبناء مواقع سريعة. إذا كانت البيانات المطلوبة لتصيير صفحة من جانب الخادوم هي نفسها لكل مستخدم، فبدلاً من تصيير الصفحة كل مرة يصل فيها طلب، يمكننا تصييرها مرة واحدة فقط مسبقًا أثناء عملية البناء. تنشأ لصفحات المصيّرة مسبقًا وتقدم كملفات HTML ساكنة.
 
-SSG retains the same performance characteristics of SSR apps: it provides great time-to-content performance. At the same time, it is cheaper and easier to deploy than SSR apps because the output is static HTML and assets. The keyword here is **static**: SSG can only be applied to pages consuming static data, i.e. data that is known at build time and does not change between deploys. Every time the data changes, a new deployment is needed.
+يحافظ توليد الموقع الساكن على نفس مؤشرات أداء التصيير من جانب الخادوم: يوفر أداءً ممتازًا للوصول إلى المحتوى. في نفس الوقت، فإنه أرخص وأسهل للتوزيع من التطبيقات التي تصيّر من جانب الخادوم لأن المخرجات هي HTML وأصول ساكنة. الكلمة المفتاحية هنا هي **ساكنة**: لا يمكن تطبيق توليد الموقع الساكن إلا على الصفحات التي تستهلك بيانات ساكنة، أي بيانات معروفة في وقت البناء ولا تتغير بين التوزيعات. في كل مرة تتغير فيها البيانات، يلزم توزيع جديد.
 
-If you're only investigating SSR to improve the SEO of a handful of marketing pages (e.g. `/`, `/about`, `/contact`, etc.), then you probably want SSG instead of SSR. SSG is also great for content-based websites such as documentation sites or blogs. In fact, this website you are reading right now is statically generated using [VitePress](https://vitepress.vuejs.org/), a Vue-powered static site generator.
+إذا كنت تستكشف التصيير من جانب الخادوم فقط من أجل تحسين التهيئة لمحركات البحث لعدد قليل من الصفحات التسويقية (على سبيل المثال `/`، `/about`، `/contact`، إلخ.)، فمن المحتمل أنك تريد توليد موقع ساكن بدلاً من التصيير من جانب الخادوم. توليد الموقع الساكن أيضًا ممتاز لمواقع الويب المستندة إلى المحتوى مثل مواقع التوثيق أو المدونات. في الواقع، هذا الموقع الذي تقرأه حاليًا يُولد بشكل ساكن باستخدام [VitePress](https://vitepress.vuejs.org/)، وهو مولد مواقع ساكنة مدعوم من طرف Vue.
 
-## Basic Tutorial {#basic-tutorial}
+## دليل تطبيقي أساسي {#basic-tutorial}
 
-### Rendering an App {#rendering-an-app}
+### تصيير تطبيق {#rendering-an-app}
 
-Let's take a look at the most bare-bones example of Vue SSR in action.
+لنلق نظرة على أدنى مثال ممكن لتصيير Vue من جانب الخادوم.
 
-1. Create a new directory and `cd` into it
-2. Run `npm init -y`
-3. Add `"type": "module"` in `package.json` so that Node.js runs in [ES modules mode](https://nodejs.org/api/esm.html#modules-ecmascript-modules).
-4. Run `npm install vue`
-5. Create an `example.js` file:
+1. أنشأ مجلد جديد وانتقل إليه باستخدام `cd`
+2. قم بتشغيل `npm init -y`
+3. أضف `"type": "module"` في `package.json` حتى يعمل Node.js في [وضع وحدات ES](https://nodejs.org/api/esm.html#modules-ecmascript-modules).
+4. قم بتشغيل `npm install vue`
+5. أنشئ ملف `example.js`:
 
 ```js
-// this runs in Node.js on the server.
+//يعمل هذا في Node.js على الخادوم.
 import { createSSRApp } from 'vue'
-// Vue's server-rendering API is exposed under `vue/server-renderer`.
+// تصدر واجهة برمجة تطبيقات Vue لتصيير من جانب الخادوم تحت `vue/server-renderer`.
 import { renderToString } from 'vue/server-renderer'
 
 const app = createSSRApp({
@@ -72,24 +72,24 @@ renderToString(app).then((html) => {
 })
 ```
 
-Then run:
+ثم شغل:
 
 ```sh
 > node example.js
 ```
 
-It should print the following to the command line:
+يجب أن يطبع الأمر التالي في سطر الأوامر:
 
 ```
 <button>1</button>
 ```
 
-[`renderToString()`](/api/ssr.html#rendertostring) takes a Vue app instance and returns a Promise that resolves to the rendered HTML of the app. It is also possible to stream rendering using the [Node.js Stream API](https://nodejs.org/api/stream.html) or [Web Streams API](https://developer.mozilla.org/en-US/docs/Web/API/Streams_API). Check out the [SSR API Reference](/api/ssr.html) for full details.
+[الدالة `()renderToString`](/api/ssr.html#rendertostring) تأخذ نسخة تطبيق Vue كوسيط وتعيد وعد يُعطي بعد استيفائه محتوى HTML خاص بالتطبيق. من الممكن أيضًا بث التصيير باستخدام [الواجهة البرمجية Node.js Stream](https://nodejs.org/api/stream.html) أو [الواجهة البرمجية لتدفقات الويب](https://developer.mozilla.org/en-US/docs/Web/API/Streams_API). اطلع على [مرجع الواجهة البرمجية للتصيير من جانب الخادوم](/api/ssr.html) للحصول على التفاصيل الكاملة.
 
-We can then move the Vue SSR code into a server request handler, which wraps the application markup with the full page HTML. We will be using [`express`](https://expressjs.com/) for the next steps:
+يمكننا بعد ذلك نقل شيفرة تصيير Vue من جانب الخادوم إلى معالج الطلبات، والذي يغلف تمثيل التطبيق مع محتوى HTML الصفحة الكاملة. سنستخدم [`express`](https://expressjs.com/) في الخطوات الموالية:
 
-- Run `npm install express`
-- Create the following `server.js` file:
+- شغل `npm install express`
+- انشئ ملف باسم `server.js`:
 
 ```js
 import express from 'express'
@@ -109,7 +109,7 @@ server.get('/', (req, res) => {
     <!DOCTYPE html>
     <html>
       <head>
-        <title>Vue SSR Example</title>
+        <title>مثال للتصيير من جانب الخادوم</title>
       </head>
       <body>
         <div id="app">${html}</div>
@@ -124,40 +124,39 @@ server.listen(3000, () => {
 })
 ```
 
-Finally, run `node server.js` and visit `http://localhost:3000`. You should see the page working with the button.
+في النهاية، قم بتشغيل `node server.js` وقم بزيارة `http://localhost:3000`. يجب أن ترى الصفحة تعمل مع الزر.
 
-[Try it on StackBlitz](https://stackblitz.com/fork/vue-ssr-example-basic?file=index.js)
+[جربه على StackBlitz](https://stackblitz.com/fork/vue-ssr-example-basic?file=index.js)
 
-### Client Hydration {#client-hydration}
+### الإنعاش من جانب المستخدم {#client-hydration}
 
-If you click the button, you'll notice the number doesn't change. The HTML is completely static on the client since we are not loading Vue in the browser.
+إذا نقرت على الزر، ستلاحظ أن الرقم لا يتغير. يكون محتوى HTML ثابتًا تمامًا على جانب المستخدم لأننا لا نحمل Vue في المتصفح.
 
-To make the client-side app interactive, Vue needs to perform the **hydration** step. During hydration, it creates the same Vue application that was run on the server, matches each component to the DOM nodes it should control, and attaches DOM event listeners.
+من أجل جعل التطبيق من جانب المستخدم تفاعليًا، تحتاج Vue إلى إجراء عملية **الإنعاش**. خلال الإنعاش، و تنشئ التطبيق نفسه على جانب المستخدم الذي اشتغل على جانب الخادوم، يتطابق كل مكون مع عناصر الـDOM التي يجب أن تتحكم فيها، بالإضافة إلى ربط مستمعي الأحداث.
 
-To mount an app in hydration mode, we need to use [`createSSRApp()`](/api/application.html#createssrapp) instead of `createApp()`:
+من أجل وصل التطبيق في وضع الإنعاش، نحتاج إلى استخدام [`createSSRApp()`](/api/application.html#createssrapp) بدلاً من `createApp()`:
 
 ```js{2}
-// this runs in the browser.
+// يشتغل في المتصفح
 import { createSSRApp } from 'vue'
 
 const app = createSSRApp({
-  // ...same app as on server
+  // ...نفس التطبيق كما في الخادوم
 })
-
-// mounting an SSR app on the client assumes
-// the HTML was pre-rendered and will perform
-// hydration instead of mounting new DOM nodes.
+// يفترض وصل تطبيق من جانب الخادوم على جانب المستخدم أن
+// يصير HTML مسبقًا وسيقوم بالإنعاش بدلاً من وصل
+// عناصر جديدة للـDOM.
 app.mount('#app')
 ```
 
-### Code Structure {#code-structure}
+### هيكلية الشيفرة {#code-structure}
 
-Notice how we need to reuse the same app implementation as on the server. This is where we need to start thinking about code structure in an SSR app - how do we share the same application code between the server and the client?
+لاحظ كيف نحتاج إلى إعادة استخدام نفس الشيفرة التنفيذية كما في جانب الخادوم. هذه هي البداية للتفكير في هيكلية الشيفرة في تطبيق مصيّر من جانب الخادوم - كيف نشارك نفس شيفرة التطبيق بين الخادوم والمستخدم؟
 
-Here we will demonstrate the most bare-bones setup. First, let's split the app creation logic into a dedicated file, `app.js`:
+سنعرض هنا أساسيات الإعداد. أولاً، دعونا نقسم شيفرة إنشاء التطبيق إلى ملف مستقل، `app.js`:
 
 ```js
-// app.js (shared between server and client)
+// app.js (مشتركة بين الخادوم والمستخدم)
 import { createSSRApp } from 'vue'
 
 export function createApp() {
@@ -168,9 +167,9 @@ export function createApp() {
 }
 ```
 
-This file and its dependencies are shared between the server and the client - we call them **universal code**. There are a number of things you need to pay attention to when writing universal code, as we will [discuss below](#writing-ssr-friendly-code).
+هذا الملف والتبعيات الخاصة به مشتركة بين الخادوم والمستخدم - نسميها **الشيفرة الشاملة**. هناك عدد من الأشياء التي يجب عليك الاهتمام بها عند كتابة الشيفرة المتنوعة، كما سنتحدث [بالتفصيل أدناه](#writing-ssr-friendly-code).
 
-Our client entry imports the universal code, creates the app, and performs the mount:
+يقوم الملف من جانب المستخدم باستيراد الشيفرة الشاملة، إنشاء التطبيق، وتنفيذ الوصل:
 
 ```js
 // client.js
@@ -179,10 +178,11 @@ import { createApp } from './app.js'
 createApp().mount('#app')
 ```
 
-And the server uses the same app creation logic in the request handler:
+ويستخدم الخادوم نفس شيفرة إنشاء التطبيق في معالج الطلب:
+
 
 ```js{2,5}
-// server.js (irrelevant code omitted)
+// server.js (حذفت الشيفرة غير ذي صلة)
 import { createApp } from './app.js'
 
 server.get('/', (req, res) => {
@@ -193,142 +193,141 @@ server.get('/', (req, res) => {
 })
 ```
 
-In addition, in order to load the client files in the browser, we also need to:
+بالإضافة إلى ذلك، من أجل تحميل ملفات المستخدم في المتصفح، نحتاج أيضًا إلى:
 
-1. Serve client files by adding `server.use(express.static('.'))` in `server.js`.
-2. Load the client entry by adding `<script type="module" src="/client.js"></script>` to the HTML shell.
-3. Support usage like `import * from 'vue'` in the browser by adding an [Import Map](https://github.com/WICG/import-maps) to the HTML shell.
+1. تحميل ملفات المستخدم من خلال إضافة `server.use(express.static('.'))` في `server.js`.
+2. تحميل مدخل المستخدم من خلال إضافة `<script type="module" src="/client.js"></script>` إلى شيفرة HTML.
+3. دعم استخدام شيفرة مثل `import * from 'vue'` في المتصفح من خلال إضافة [خريطة الاستيراد](https://github.com/WICG/import-maps) إلى شيفرة HTML.
 
-[Try the completed example on StackBlitz](https://stackblitz.com/fork/vue-ssr-example?file=index.js). The button is now interactive!
+[جرب تطبيق النموذج المكتمل على StackBlitz](https://stackblitz.com/fork/vue-ssr-example?file=index.js). الزر الآن يعمل بشكل تفاعلي!
 
-## Higher Level Solutions {#higher-level-solutions}
+## حلول ذات مستوى عالي {#higher-level-solutions}
 
-Moving from the example to a production-ready SSR app involves a lot more. We will need to:
+يتطلب الانتقال من النموذج إلى تطبيق SSR جاهز للإنتاج الكثير من الأشياء. سنحتاج إلى:
 
-- Support Vue SFCs and other build step requirements. In fact, we will need to coordinate two builds for the same app: one for the client, and one for the server.
+- دعم  المكونات أحادية الملف ومتطلبات عملية البناء الأخرى. في الواقع، سنحتاج إلى تنسيق بنيتين لنفس التطبيق: واحد للمستخدم، وواحد للخادوم.
 
-  :::tip
-  Vue components are compiled differently when used for SSR - templates are compiled into string concatenations instead of Virtual DOM render functions for more efficient rendering performance.
+  ::: tip ملاحظة
+    تُصرّف مكونات Vue بشكل مختلف عند استخدامها من أجل التصيير من جانب الخادوم - تُصرف القوالب إلى نص متسلسل بدلاً من دالات تصيير الـDOM الافتراضي من أجل أداء تصيير فعال.
   :::
 
-- In the server request handler, render the HTML with the correct client-side asset links and optimal resource hints. We may also need to switch between SSR and SSG mode, or even mix both in the same app.
+- في معالج الطلب من جانب الخادوم، يُصيّر HTML مع الروابط الصحيحة للموارد من جانب المستخدم وتلميحات الموارد المثلى. قد نحتاج أيضًا إلى التبديل بين وضع التصيير من جانب الخادوم ووضع التصيير من جانب المستخدم، أو حتى دمجهما في نفس التطبيق.
 
-- Manage routing, data fetching, and state management stores in a universal manner.
+- إدارة التوجيه، جلب البيانات، وتخزين الحالة من خلال طريقة شاملة.
 
-A complete implementation would be quite complex and depends on the build toolchain you have chosen to work with. Therefore, we highly recommend going with a higher-level, opinionated solution that abstracts away the complexity for you. Below we will introduce a few recommended SSR solutions in the Vue ecosystem.
+سيكون التنفيذ الكامل معقدًا جدًا ويعتمد على سلسلة أدوات البناء التي اخترت العمل بها. لذا، ننصح بشدة بالذهاب إلى حلول مُعتدّ بها ذات مستوى عالي، وتخفي الكثير من التعقيدات عنك. سنقدم أدناه بعض الحلول الموصى بها لتصيير من جانب الخادوم في نظام Vue.
 
-### Nuxt {#nuxt}
+### إطار Nuxt {#nuxt}
 
-[Nuxt](https://nuxt.com/) is a higher-level framework built on top of the Vue ecosystem which provides a streamlined development experience for writing universal Vue applications. Better yet, you can also use it as a static site generator! We highly recommend giving it a try.
+[Nuxt](https://nuxt.com/) هو إطار عالي المستوى مبني على نظام Vue ويوفر تجربة تطوير انسيابية لكتابة تطبيقات Vue شاملة. أفضل من ذلك، يمكنك أيضًا استخدامه كمولد لمواقع ساكنة! ننصح بشدة بتجربته.
 
-### Quasar {#quasar}
+### إطار Quasar {#quasar}
 
-[Quasar](https://quasar.dev) is a complete Vue-based solution that allows you to target SPA, SSR, PWA, mobile app, desktop app, and browser extension all using one codebase. It not only handles the build setup, but also provides a full collection of Material Design compliant UI components.
+[Quasar](https://quasar.dev) هو حل كامل يستند على Vue يسمح لك باستهداف SPA، SSR، PWA، تطبيقات الهاتف المحمول، تطبيقات سطح المكتب، وإضافات المتصفح باستخدام نفس  الشيفرة الأساسية. لا يتعامل مع إعدادات البناء فقط، بل يوفر مجموعة كاملة من مكونات واجهة المستخدم المتوافقة مع تصميم Material من Google.
 
 ### Vite SSR {#vite-ssr}
 
-Vite provides built-in [support for Vue server-side rendering](https://vitejs.dev/guide/ssr.html), but it is intentionally low-level. If you wish to go directly with Vite, check out [vite-plugin-ssr](https://vite-plugin-ssr.com/), a community plugin that abstracts away many challenging details for you.
+Vite يوفر [دعمًا مدمجًا لتصيير من جانب الخادوم لـVue](https://vitejs.dev/guide/ssr.html)، ولكنه منخفض المستوى بشكل مقصود. إذا كنت ترغب في اعتماد ـVite، فاطلع على [vite-plugin-ssr](https://vite-plugin-ssr.com/)، وهو إضافة من مجتمع Vite تخفي الكثير من التعقيدات عنك.
 
-You can also find an example Vue + Vite SSR project using manual setup [here](https://github.com/vitejs/vite-plugin-vue/tree/main/playground/ssr-vue), which can serve as a base to build upon. Note this is only recommended if you are experienced with SSR / build tools and really want to have complete control over the higher-level architecture.
+يمكنك أيضًا العثور على مثال لـVue + Vite SSR باستخدام إعداد يدوي [هنا](https://github.com/vitejs/vite-plugin-vue/tree/main/playground/ssr-vue)، والذي يمكن أن يكون أساسًا للبناء عليه. تجدر الملاحظة أنه يُوصى به فقط إذا كنت متقنًا للتصيير من جانب الخادوم / أدوات البناء وترغب حقًا في الحصول على تحكم كامل في هيكلية عالية المستوى.
 
-## Writing SSR-friendly Code {#writing-ssr-friendly-code}
+## كتابة شيفرة متوافقة مع التصيير من جانب الخادوم{#writing-ssr-friendly-code}
 
-Regardless of your build setup or higher-level framework choice, there are some principles that apply in all Vue SSR applications.
+بغض النظر عن إعدادات البناء أو اختيار إطار عالي المستوى، فهناك بعض المبادئ التي تنطبق على جميع تطبيقات المصيرة من جانب الخادوم.
 
-### Reactivity on the Server {#reactivity-on-the-server}
+### التفاعلية على مستوى الخادوم {#reactivity-on-the-server}
 
-During SSR, each request URL maps to a desired state of our application. There is no user interaction and no DOM updates, so reactivity is unnecessary on the server. By default, reactivity is disabled during SSR for better performance.
+أثناء التصيير من جانب الخادوم، يعين كل طلب عبر عنوان URL  يعبر عن حالة مطلوبة من التطبيق. لا يوجد تفاعل للمستخدم ولا تحديثات DOM، لذلك لا يلزم التفاعل على الخادوم. افتراضيًا، يتم يعطل التفاعل خلال التصيير من جانب الخادوم لتحسين الأداء.
+### خطافات دورة حياة المكون {#component-lifecycle-hooks}
 
-### Component Lifecycle Hooks {#component-lifecycle-hooks}
+نظرًا لعدم وجود تحديثات ديناميكية، فلن تستدعى خطافات دورة حياة المكون مثل <span class="options-api">`mounted`</span><span class="composition-api">`onMounted`</span> أو <span class="options-api">`updated`</span><span class="composition-api">`onUpdated`</span> خلال التصيير من جانب الخادوم وستنفذ فقط على المتصفح.<span class="options-api">  الخطافات الوحيدة التي تستدعى خلال التصيير من جانب الخادوم هي `beforeCreate` و `created`</span>
 
-Since there are no dynamic updates, lifecycle hooks such as <span class="options-api">`mounted`</span><span class="composition-api">`onMounted`</span> or <span class="options-api">`updated`</span><span class="composition-api">`onUpdated`</span> will **NOT** be called during SSR and will only be executed on the client.<span class="options-api"> The only hooks that are called during SSR are `beforeCreate` and `created`</span>
+يجب عليك تجنب الشيفرة التي تنتج تأثيرات جانبية تحتاج إلى تنظيفها في <span class="options-api">`beforeCreate` و `created`</span><span class="composition-api">`setup()` أو نطاق الجذر `<script setup>`</span>. مثال على تلك التأثيرات الجانبية هو إعداد المؤقتات باستخدام `setInterval`. في الشيفرة المخصصة للمتصفح فقط، يمكننا إعداد المؤقت ومن ثم إزالته في <span class="options-api">`beforeUnmount`</span><span class="composition-api">`onBeforeUnmount`</span> أو <span class="options-api">`unmounted`</span><span class="composition-api">`onUnmounted`</span>. ومع ذلك، لأن خطافات إزالة التثبيت لن تستدعى أبدًا خلال التصيير من جانب الخادوم، فستبقى المؤقتات هناك إلى الأبد. لتجنب ذلك، نقل الشيفرة التي تنتج تأثيرات جانبية إلى <span class="options-api">`mounted`</span><span class="composition-api">`onMounted`</span> بدلاً من ذلك.
 
-You should avoid code that produces side effects that need cleanup in <span class="options-api">`beforeCreate` and `created`</span><span class="composition-api">`setup()` or the root scope of `<script setup>`</span>. An example of such side effects is setting up timers with `setInterval`. In client-side only code we may setup a timer and then tear it down in <span class="options-api">`beforeUnmount`</span><span class="composition-api">`onBeforeUnmount`</span> or <span class="options-api">`unmounted`</span><span class="composition-api">`onUnmounted`</span>. However, because the unmount hooks will never be called during SSR, the timers will stay around forever. To avoid this, move your side-effect code into <span class="options-api">`mounted`</span><span class="composition-api">`onMounted`</span> instead.
+### الوصول إلى الواجهات البرمجية الخاصة بالمنصة {#access-to-platform-specific-apis}
 
-### Access to Platform-Specific APIs {#access-to-platform-specific-apis}
+لا يمكن للشيفرة الشاملة الوصول إلى واجهات برمجية خاصة بالمنصة، لذلك إذا كانت الشيفرة الخاصة تستخدم الكائنات العامة المخصصة للمتصفح مثل `window` أو `document`، فستطلق أخطاء عند تنفيذها في Node.js، أو العكس.
 
-Universal code cannot assume access to platform-specific APIs, so if your code directly uses browser-only globals like `window` or `document`, they will throw errors when executed in Node.js, and vice-versa.
+للمهام المشتركة بين الخادوم والمستخدم ولكن مع اختلاف الواجهات برمجية للمنصة، ينصح بتغليف الشيفرات التنفيذية المخصصة للمنصة داخل واجهة برمجية شاملة، أو استخدام المكتبات التي تفعل ذلك نيابة لك. على سبيل المثال، يمكنك استخدام [`node-fetch`](https://github.com/node-fetch/node-fetch) لاستخدام نفس الواجهة البرمجية لجلب البيانات على الخادوم والمستخدم.
 
-For tasks that are shared between server and client but with different platform APIs, it's recommended to wrap the platform-specific implementations inside a universal API, or use libraries that do this for you. For example, you can use [`node-fetch`](https://github.com/node-fetch/node-fetch) to use the same fetch API on both server and client.
+بالنسبة للواجهات البرمجية الخاصة بالمتصفح فقط، فإن النهج الشائع هو الوصول إليهم بشكل كسول داخل خطافات دورة حياة المخصصة للمستخدم مثل <span class="options-api">`mounted`</span><span class="composition-api">`onMounted`</span>.
 
-For browser-only APIs, the common approach is to lazily access them inside client-only lifecycle hooks such as <span class="options-api">`mounted`</span><span class="composition-api">`onMounted`</span>.
+تجدر الإشارة إلى أنه إذا لم يكنت المكتبة الخارجية مكتوبة بنظرة شاملة للاستخدام، فقد يكون من الصعب تكاملها في تطبيق تصيير من جانب الخادوم. قد تتمكن من الحصول على العمل عن طريق تقليد بعض الكائنات العامة، ولكن سيكون ذلك مختلفًا وقد يتداخل مع رمز التحديد البيئي للمكتبات الأخرى.
 
-Note that if a third-party library is not written with universal usage in mind, it could be tricky to integrate it into a server-rendered app. You _might_ be able to get it working by mocking some of the globals, but it would be hacky and may interfere with the environment detection code of other libraries.
+### تلوث الحالة عبر الطلبات {#cross-request-state-pollution}
 
-### Cross-Request State Pollution {#cross-request-state-pollution}
+في محور إدارة الحالة، قدمنا [نمط إدارة حالة بسيط باستخدام الواجهات البرمجية التفاعلية](state-management.html#simple-state-management-with-reactivity-api). في سياق تصيير من جانب الخادوم، يتطلب هذا النمط بعض التعديلات إضافية.
 
-In the State Management chapter, we introduced a [simple state management pattern using Reactivity APIs](state-management.html#simple-state-management-with-reactivity-api). In an SSR context, this pattern requires some additional adjustments.
+يعين النمط الحالة المشتركة في نطاق جذر وحدة الـJavaScript. يجعل هذا النمط **نسخة واحد** - أي وجود نسخة واحدة فقط من الكائن التفاعلي عبر جميع دورات حياة التطبيق. يعمل هذا كما هو متوقع في تطبيق Vue الخاص بالمتصفح فقط، لأن الوحدات في التطبيق تتم تهيئتها بشكل جديد لكل زيارة لصفحة المتصفح.
 
-The pattern declares shared state in a JavaScript module's root scope. This makes them **singletons** - i.e. there is only one instance of the reactive object throughout the entire lifecycle of our application. This works as expected in a pure client-side Vue application, since the modules in our application are initialized fresh for each browser page visit.
+ومع ذلك، في سياق تصيير من جانب الخادوم، تهيأ وحدات التطبيق مرة واحدة فقط على الخادوم عند تشغيله. ستُستخدم نفس وحدات التطبيق عبر عدة طلبات من جانب الخادوم، وبالتالي ستستخدم الحالة المشتركة النسخة الواحدة. إذا غيرنا الحالة المشتركة النسخة واحدة ببيانات مخصصة لمستخدم واحد، فقد تُسرَّب بشكل عرضي إلى طلب من مستخدم آخر. نسمي هذا **تلوث الحالة عبر الطلبات**.
 
-However, in an SSR context, the application modules are typically initialized only once on the server, when the server boots up. The same module instances will be reused across multiple server requests, and so will our singleton state objects. If we mutate the shared singleton state with data specific to one user, it can be accidentally leaked to a request from another user. We call this **cross-request state pollution.**
+يمكننا تقنيًا إعادة تهيئة جميع وحدات الـJavaScript على كل طلب، مثل ما نفعله في المتصفحات. ومع ذلك، يمكن أن تكون تهيئة وحدات الـJavaScript مكلفة، لذا سيؤثر هذا على أداء الخادوم بشكل كبير.
 
-We can technically re-initialize all the JavaScript modules on each request, just like we do in browsers. However, initializing JavaScript modules can be costly, so this would significantly affect server performance.
-
-The recommended solution is to create a new instance of the entire application - including the router and global stores - on each request. Then, instead of directly importing it in our components, we provide the shared state using [app-level provide](/guide/components/provide-inject.html#app-level-provide) and inject it in components that need it:
+الحل الموصى به هو إنشاء نسخة جديدة من التطبيق بأكمله - بما في ذلك الموجه والمخازن العامة - على كل طلب. ثم، بدلاً من استيراده مباشرة في مكوناتنا، نقدم الحالة المشتركة باستخدام [الدالة provide على مستوى جذر التطبيق](/guide/components/provide-inject.html#app-level-provide) ونحقنه في المكونات التي تحتاج إليها:
 
 ```js
-// app.js (shared between server and client)
+// app.js (مشتركة بين الخادوم والمستخدم)
 import { createSSRApp } from 'vue'
 import { createStore } from './store.js'
 
-// called on each request
+// تستدعى في كل طلب
 export function createApp() {
   const app = createSSRApp(/* ... */)
-  // create new instance of store per request
+  // انشاء نسخة جديدة من المخزن لكل طلب
   const store = createStore(/* ... */)
-  // provide store at the app level
+  // تقديم المخزن على مستوى جذر التطبيق
   app.provide('store', store)
-  // also expose store for hydration purposes
+  // تعريف المخزن أيضًا لأغراض الانعاش
   return { app, store }
 }
 ```
 
-State Management libraries like Pinia are designed with this in mind. Consult [Pinia's SSR guide](https://pinia.vuejs.org/ssr/) for more details.
+مكتبات إدارة الحالة مثل Pinia مصممة لذلك. اطلع على [دليل Pinia لتصيير من جانب الخادوم](https://pinia.vuejs.org/ssr/) لمزيد من التفاصيل.
 
-### Hydration Mismatch {#hydration-mismatch}
+### عدم توافق الإنعاش {#hydration-mismatch}
 
-If the DOM structure of the pre-rendered HTML does not match the expected output of the client-side app, there will be a hydration mismatch error. Hydration mismatch is most commonly introduced by the following causes:
+إذا لم يتطابق تركيب الـ DOM للـ HTML المصير مسبقًا مع الناتج المتوقع للتطبيق من جانب المستخدم، فسيحدث خطأ في عملية الإنعاش. ينتج عدم توافق الإنعاش بشكل شائع للأسباب التالية:
 
-1. The template contains invalid HTML nesting structure, and the rendered HTML got "corrected" by the browser's native HTML parsing behavior. For example, a common gotcha is that [`<div>` cannot be placed inside `<p>`](https://stackoverflow.com/questions/8397852/why-cant-the-p-tag-contain-a-div-tag-inside-it):
+1. يحتوي القالب على تركيب HTML غير صالح للتداخل، و أُصلح الـ HTML المصير من قبل سلوك تحليل HTML الأصلي للمتصفح. على سبيل المثال، يمكن أن يكون الخطأ الشائع هو أن [`<div>` لا يمكن وضعه داخل `<p>`](https://stackoverflow.com/questions/8397852/why-cant-the-p-tag-contain-a-div-tag-inside-it):
 
    ```html
-   <p><div>hi</div></p>
+   <p><div>مرحبا</div></p>
    ```
 
-   If we produce this in our server-rendered HTML, the browser will terminate the first `<p>` when `<div>` is encountered and parse it into the following DOM structure:
+      إذا أنتجنا هذا في الـHTML المصير من الخادوم، سيقوم المتصفح بإنهاء `<p>` الأول عندما يُتعرف على `<div>` ويحلله إلى تركيب الـ DOM التالي:
 
    ```html
    <p></p>
-   <div>hi</div>
+   <div>مرحبا</div>
    <p></p>
    ```
 
-2. The data used during render contains randomly generated values. Since the same application will run twice - once on the server, and once on the client - the random values are not guaranteed to be the same between the two runs. There are two ways to avoid random-value-induced mismatches:
+2. تحتوي البيانات المستخدمة أثناء التصيير على قيم عشوائية. لأن نفس التطبيق سيشغل مرتين - مرة واحدة على الخادوم، ومرة واحدة على المستخدم - لا تُضمن أن القيم العشوائية هي نفسها في الجانبين. هناك طريقتان لتجنب عدم توافق القيم العشوائية:
 
-   1. Use `v-if` + `onMounted` to render the part that depends on random values only on the client. Your framework may also have built-in features to make this easier, for example the `<ClientOnly>` component in VitePress.
+   1. استخدم `v-if` + `onMounted` لتصيير الجزء الذي يعتمد على القيم العشوائية فقط على جانب المستخدم. قد يكون لديك إطار عمل يوفر ميزات مبنية لتسهيل هذا، على سبيل المثال المكون `<ClientOnly>`  في VitePress.
 
-   2. Use a random number generator library that supports generating with seeds, and guarantee the server run and the client run are using the same seed (e.g. by including the seed in serialized state and retrieving it on the client).
+    2. استخدم مكتبة مولد الأرقام العشوائية التي تدعم الإنتاج مع توليد البيانات، وضمان استخدام الجانبين لنفس البيانات (على سبيل المثال، بتضمين البيانات في الحالة المتسلسلة واسترجاعها على جانب المستخدم).
 
-3. The server and the client are in different time zones. Sometimes, we may want to convert a timestamp into the user's local time. However, the timezone during the server run and the timezone during the client run are not always the same, and we may not reliably know the user's timezone during the server run. In such cases, the local time conversion should also be performed as a client-only operation.
+3. الخادوم والمستخدم في مناطق زمنية مختلفة. في بعض الأحيان، قد نرغب في تحويل الطابع الزمني إلى الوقت المحلي للمستخدم. ومع ذلك، لا تكون المنطقة الزمنية خلال تشغيل الخادوم والمنطقة الزمنية خلال تشغيل المستخدم دائمًا نفسها، وقد لا نعرف بشكل موثوق المنطقة الزمنية للمستخدم خلال تشغيل الخادوم. في هذه الحالات، يجب أيضًا تنفيذ تحويل الوقت المحلي كعملية مستخدم فقط.
 
-When Vue encounters a hydration mismatch, it will attempt to automatically recover and adjust the pre-rendered DOM to match the client-side state. This will lead to some rendering performance loss due to incorrect nodes being discarded and new nodes being mounted, but in most cases, the app should continue to work as expected. That said, it is still best to eliminate hydration mismatches during development.
+عند تعرض Vue لعدم توافق التصيير، سيحاول إصلاحه وتعديل الـ DOM المصير من الخادوم ليتوافق مع حالة جانب المستخدم. سيؤدي هذا إلى تضييع بعض أداء التصيير بسبب تجاهل العقد الخاطئة وتثبيت العقد الجديدة، ولكن في معظم الحالات، يجب أن يواصل التطبيق العمل كما هو متوقع. ومع ذلك، فإنه من الأفضل إزالة عدم توافق التصيير خلال التطوير.
 
-### Custom Directives {#custom-directives}
+### الموجهات المخصصة {#custom-directives}
 
-Since most custom directives involve direct DOM manipulation, they are ignored during SSR. However, if you want to specify how a custom directive should be rendered (i.e. what attributes it should add to the rendered element), you can use the `getSSRProps` directive hook:
+بما أن معظم الموجهات المخصصة تتضمن التحكم المباشر بالـ DOM، فإنها متجاهلة خلال التصيير. ومع ذلك، إذا كنت ترغب في تحديد كيفية تصيير الموجهة المخصصة (على سبيل المثال، ما هي السمات التي يجب إضافتها إلى العنصر المصير)، يمكنك استخدام مرشح `getSSRProps` للموجهة:
 
 ```js
 const myDirective = {
   mounted(el, binding) {
-    // client-side implementation:
-    // directly update the DOM
+    // التنفيذ على جانب المستخدم:
+    // تحديث الـ DOM مباشرة
     el.id = binding.value
   },
   getSSRProps(binding) {
-    // server-side implementation:
-    // return the props to be rendered.
-    // getSSRProps only receives the directive binding.
+    // التنفيذ على جانب الخادوم:
+    // إرجاع الخصائص المصيرة.
+    // يتلقى getSSRProps مجرد الربط للموجهة.
     return {
       id: binding.value
     }
@@ -336,23 +335,23 @@ const myDirective = {
 }
 ```
 
-### Teleports {#teleports}
+### مكونات الـTeleports {#teleports}
 
-Teleports require special handling during SSR. If the rendered app contains Teleports, the teleported content will not be part of the rendered string. An easier solution is to conditionally render the Teleport on mount.
+تتطلب مكونات الـ Teleports معالجة خاصة خلال التصيير. إذا كان التطبيق المصير يحتوي على مكونات Teleports، فلن يكون المحتوى المنقول جزءًا من السلسلة المصيرة. يمكنك استخدام حل أسهل عن طريق تقديم الـ Teleport بشكل شرطي عند التثبيت.
 
-If you do need to hydrate teleported content, they are exposed under the `teleports` property of the ssr context object:
+إذا كنت بحاجة إلى تصيير المحتوى المنقول، فسيتوفر بالخاصية `teleports` لكائن سياق التصيير:
 
 ```js
 const ctx = {}
 const html = await renderToString(app, ctx)
 
-console.log(ctx.teleports) // { '#teleported': 'teleported content' }
+console.log(ctx.teleports) // { '#teleported': 'المحتوى المنقول' }
 ```
 
-You need to inject the teleport markup into the correct location in your final page HTML similar to how you need to inject the main app markup.
+تحتاج إلى حقن المحتوى المنقول في الموقع الصحيح في HTML الصفحة النهائية مثلما تحتاج إلى حقن محتوى التطبيق الرئيسي.
 
-:::tip
-Avoid targeting `body` when using Teleports and SSR together - usually, `<body>` will contain other server-rendered content which makes it impossible for Teleports to determine the correct starting location for hydration.
+:::tip ملاحظة
+تجنب تحديد `body` عند استخدام Teleports والتصيير معًا - عادةً ما يحتوي `<body>` على محتوى أخر صُير من الخادوم والذي يجعل من غير الممكن للـ Teleports تحديد الموقع الصحيح لبدء التصيير.
 
-Instead, prefer a dedicated container, e.g. `<div id="teleported"></div>` which contains only teleported content.
+بدلاً من ذلك، استخدم عنصر حاوي مخصص، على سبيل المثال `<div id="teleported"></div>` الذي يحتوي فقط على المحتوى المنقول.
 :::

@@ -1,29 +1,28 @@
-# Routing {#routing}
+# التوجيه {#routing}
 
-## Client-Side vs. Server-Side Routing {#client-side-vs-server-side-routing}
+## التوجيه من جانب الخادوم مقابل التوجيه من جانب المستخدم {#client-side-vs-server-side-routing}
 
-Routing on the server side means the server sending a response based on the URL path that the user is visiting. When we click on a link in a traditional server-rendered web app, the browser receives an HTML response from the server and reloads the entire page with the new HTML.
+التوجيه من جانب الخادوم يعني أن الخادوم يرسل إجابة استنادًا إلى مسار URL الذي يزوره المستخدم. عندما ننقر على رابط في تطبيق ويب معروض من قبل الخادوم التقليدي ، يتلقى المتصفح إجابة HTML من الخادوم ويعيد تحميل الصفحة بأكملها مع HTML الجديد.
 
-In a [Single-Page Application](https://developer.mozilla.org/en-US/docs/Glossary/SPA) (SPA), however, the client-side JavaScript can intercept the navigation, dynamically fetch new data, and update the current page without full page reloads. This typically results in a more snappy user experience, especially for use cases that are more like actual "applications", where the user is expected to perform many interactions over a long period of time.
+لكن في [التطبيق أحادي الصفحة](https://developer.mozilla.org/en-US/docs/Glossary/SPA) (SPA) ، يمكن لـ JavaScript من جانب المستخدم اعتراض التنقل بين الصفحات، جلب البيانات الجديدة بشكل ديناميكي ، وتحديث الصفحة الحالية دون إعادة تحميلها بالكامل. وعادة ما يؤدي هذا إلى تجربة مستخدم أسرع، خصوصًا لحالات الاستخدام التي تشبه  "التطبيقات" الحقيقية، حيث يُتوقع من المستخدم أن يقوم بالعديد من التفاعلات على مدى فترة طويلة من الوقت.
 
-In such SPAs, the "routing" is done on the client side, in the browser. A client-side router is responsible for managing the application's rendered view using browser APIs such as [History API](https://developer.mozilla.org/en-US/docs/Web/API/History) or the [`hashchange` event](https://developer.mozilla.org/en-US/docs/Web/API/Window/hashchange_event).
-
-## Official Router {#official-router}
+في هذه التطبيقات أحادية الصفحة، يكون "التوجيه" على جانب المستخدم في المتصفح. يتولى موجه من جانب المستخدم إدارة عرض التطبيق المُصيّر باستخدام واجهات برمجة التطبيقات للمتصفح مثل [ واجهة History ](https://developer.mozilla.org/en-US/docs/Web/API/History) أو [الحدث `hashchange`](https://developer.mozilla.org/en-US/docs/Web/API/Window/hashchange_event).
+## الموجه الرسمي {#official-router}
 
 <!-- TODO update links -->
 <div>
-  <VueSchoolLink href="https://vueschool.io/courses/vue-router-4-for-everyone" title="Free Vue Router Course">
-    Watch a Free Video Course on Vue School
+  <VueSchoolLink href="https://vueschool.io/courses/vue-router-4-for-everyone" title="درس مجاني حول الموجه">
+    شاهد درس فيديو مجاني على Vue School
   </VueSchoolLink>
 </div>
 
-Vue is well-suited for building SPAs. For most SPAs, it's recommended to use the officially-supported [Vue Router library](https://github.com/vuejs/router). For more details, see Vue Router's [documentation](https://router.vuejs.org/).
+ Vue ملائم بشكل جيد لبناء التطبيقات أحادية الصفحة. و التي يُوصى فيها باستخدام [مكتبة الموجه الرسمية](https://github.com/vuejs/router). لمزيد من التفاصيل ، اطلع على [توثيق](https://router.vuejs.org/) موجه Vue.
 
-## Simple Routing from Scratch {#simple-routing-from-scratch}
+## توجيه بسيط من الصفر {#simple-routing-from-scratch}
 
-If you only need very simple routing and do not wish to involve a full-featured router library, you can do so with [Dynamic Components](/guide/essentials/component-basics.html#dynamic-components) and update the current component state by listening to browser [`hashchange` events](https://developer.mozilla.org/en-US/docs/Web/API/Window/hashchange_event) or using the [History API](https://developer.mozilla.org/en-US/docs/Web/API/History).
+إذا كنت بحاجة فقط إلى توجيه بسيط جدًا ولا ترغب في تضمين مكتبة موجه متكاملة الوظائف ، يمكنك القيام بذلك باستخدام [المكونات الديناميكية](/guide/essentials/component-basics.html#dynamic-components) وتحديث حالة المكون الحالي عن طريق استماع إلى [الأحداث من جانب المستخدم](https://developer.mozilla.org/en-US/docs/Web/API/Window/hashchange_event) أو باستخدام [واجهة History](https://developer.mozilla.org/en-US/docs/Web/API/History).
 
-Here's a bare-bone example:
+  هنا مثال بسيط:
 
 <div class="composition-api">
 
@@ -51,14 +50,14 @@ const currentView = computed(() => {
 </script>
 
 <template>
-  <a href="#/">Home</a> |
-  <a href="#/about">About</a> |
-  <a href="#/non-existent-path">Broken Link</a>
+  <a href="#/">الرئيسية</a> |
+  <a href="#/about">حول</a> |
+  <a href="#/non-existent-path">رابط غير موجود</a>
   <component :is="currentView" />
 </template>
 ```
 
-[Try it in the Playground](https://sfc.vuejs.org/#eyJBcHAudnVlIjoiPHNjcmlwdCBzZXR1cD5cbmltcG9ydCB7IHJlZiwgY29tcHV0ZWQgfSBmcm9tICd2dWUnXG5pbXBvcnQgSG9tZSBmcm9tICcuL0hvbWUudnVlJ1xuaW1wb3J0IEFib3V0IGZyb20gJy4vQWJvdXQudnVlJ1xuaW1wb3J0IE5vdEZvdW5kIGZyb20gJy4vTm90Rm91bmQudnVlJ1xuXG5jb25zdCByb3V0ZXMgPSB7XG4gICcvJzogSG9tZSxcbiAgJy9hYm91dCc6IEFib3V0XG59XG5cbmNvbnN0IGN1cnJlbnRQYXRoID0gcmVmKHdpbmRvdy5sb2NhdGlvbi5oYXNoKVxuXG53aW5kb3cuYWRkRXZlbnRMaXN0ZW5lcignaGFzaGNoYW5nZScsICgpID0+IHtcbiAgY3VycmVudFBhdGgudmFsdWUgPSB3aW5kb3cubG9jYXRpb24uaGFzaFxufSlcblxuY29uc3QgY3VycmVudFZpZXcgPSBjb21wdXRlZCgoKSA9PiB7XG4gIHJldHVybiByb3V0ZXNbY3VycmVudFBhdGgudmFsdWUuc2xpY2UoMSkgfHwgJy8nXSB8fCBOb3RGb3VuZFxufSlcbjwvc2NyaXB0PlxuXG48dGVtcGxhdGU+XG4gIDxhIGhyZWY9XCIjL1wiPkhvbWU8L2E+IHxcbiAgPGEgaHJlZj1cIiMvYWJvdXRcIj5BYm91dDwvYT4gfFxuICA8YSBocmVmPVwiIy9ub24tZXhpc3RlbnQtcGF0aFwiPkJyb2tlbiBMaW5rPC9hPlxuICA8Y29tcG9uZW50IDppcz1cImN1cnJlbnRWaWV3XCIgLz5cbjwvdGVtcGxhdGU+IiwiaW1wb3J0LW1hcC5qc29uIjoie1xuICBcImltcG9ydHNcIjoge1xuICAgIFwidnVlXCI6IFwiaHR0cHM6Ly9zZmMudnVlanMub3JnL3Z1ZS5ydW50aW1lLmVzbS1icm93c2VyLmpzXCJcbiAgfVxufSIsIkhvbWUudnVlIjoiPHRlbXBsYXRlPlxuICA8aDE+SG9tZTwvaDE+XG48L3RlbXBsYXRlPiIsIkFib3V0LnZ1ZSI6Ijx0ZW1wbGF0ZT5cbiAgPGgxPkFib3V0PC9oMT5cbjwvdGVtcGxhdGU+IiwiTm90Rm91bmQudnVlIjoiPHRlbXBsYXRlPlxuICA8aDE+NDA0PC9oMT5cbjwvdGVtcGxhdGU+In0=)
+[اختبرها في حقل التجارب](https://sfc.vuejs.org/#eNp9U81q20AQfpVhe5ANtraBnIxtyKGlh1J66qXbw0ZaRwrWrthd2QXbh0IKoQ/SNNBQTCmFPMnqbTIryYp/RA7Cntnv+2b2m9kVucjzcFEIMiJjE+k0t2CELfIpk2mWK21hBVrMBhCpLC+siGEDM60yCJAUtKB3KhNNPqQ+8JrPxxeXqrDteRUdAj4o+1YVMm4xu0QDYzJS0ljQyBQGJrBiEiCgwagqPagj7oUxVRVgcvPMiwqthbQfuU2QjBfqLVMZq2U4VxG3qZJhwk3S94TmgMfxmwVS3qfGCil0L/CIKOHySgQD6PVhMq272NMOF3xeCKzQpY4NVQUOOvqUiiXid+729nQ1zkHL5sqfT6qEZp5GonfWh/XaO/HF/+5sq2uNaT1SHCYGVmT5nFuBEcCYQ4I2TBh5RRmZurvyxm3dz/KH+4vf/ZjyKayPgZW/Hv1Q3pY33Rip5FB8rUyzwxy79fitu3O/3H9wjyi+hfJ7eet+4/fHa1QK3gAlkQOj1KDQnj2MAEXQmLYXIANS780w43l4bZTE9a08Y82BYWRUu+hzuEM+ZiSxNjcjSs0s8ot1bUKlryj+C3UhbYprK0w2vNRqaYRGYUaqzWo0KCYXQg+xsVhooV/SPIKe6HpZ3M8NXmX3XPwTPJxRclYP5l/5zT24ezidEiKOnWlfV7deM7oO4v6T6+Sevz7vIG6eAOSulMs=)
 
 </div>
 
@@ -95,13 +94,13 @@ export default {
 </script>
 
 <template>
-  <a href="#/">Home</a> |
-  <a href="#/about">About</a> |
-  <a href="#/non-existent-path">Broken Link</a>
+  <a href="#/">الرئيسية</a> |
+  <a href="#/about">حول</a> |
+  <a href="#/non-existent-path">رابط غير موجود</a>
   <component :is="currentView" />
 </template>
 ```
 
-[Try it in the Playground](https://sfc.vuejs.org/#eyJBcHAudnVlIjoiPHNjcmlwdD5cbmltcG9ydCBIb21lIGZyb20gJy4vSG9tZS52dWUnXG5pbXBvcnQgQWJvdXQgZnJvbSAnLi9BYm91dC52dWUnXG5pbXBvcnQgTm90Rm91bmQgZnJvbSAnLi9Ob3RGb3VuZC52dWUnXG5cbmNvbnN0IHJvdXRlcyA9IHtcbiAgJy8nOiBIb21lLFxuICAnL2Fib3V0JzogQWJvdXRcbn1cblxuZXhwb3J0IGRlZmF1bHQge1xuICBkYXRhKCkge1xuICAgIHJldHVybiB7XG4gICAgICBjdXJyZW50UGF0aDogd2luZG93LmxvY2F0aW9uLmhhc2hcbiAgICB9XG4gIH0sXG4gIGNvbXB1dGVkOiB7XG4gICAgY3VycmVudFZpZXcoKSB7XG4gICAgICByZXR1cm4gcm91dGVzW3RoaXMuY3VycmVudFBhdGguc2xpY2UoMSkgfHwgJy8nXSB8fCBOb3RGb3VuZFxuICAgIH1cbiAgfSxcbiAgbW91bnRlZCgpIHtcbiAgICB3aW5kb3cuYWRkRXZlbnRMaXN0ZW5lcignaGFzaGNoYW5nZScsICgpID0+IHtcblx0XHQgIHRoaXMuY3VycmVudFBhdGggPSB3aW5kb3cubG9jYXRpb24uaGFzaFxuXHRcdH0pXG4gIH1cbn1cbjwvc2NyaXB0PlxuXG48dGVtcGxhdGU+XG4gIDxhIGhyZWY9XCIjL1wiPkhvbWU8L2E+IHxcbiAgPGEgaHJlZj1cIiMvYWJvdXRcIj5BYm91dDwvYT4gfFxuICA8YSBocmVmPVwiIy9ub24tZXhpc3RlbnQtcGF0aFwiPkJyb2tlbiBMaW5rPC9hPlxuICA8Y29tcG9uZW50IDppcz1cImN1cnJlbnRWaWV3XCIgLz5cbjwvdGVtcGxhdGU+IiwiaW1wb3J0LW1hcC5qc29uIjoie1xuICBcImltcG9ydHNcIjoge1xuICAgIFwidnVlXCI6IFwiaHR0cHM6Ly9zZmMudnVlanMub3JnL3Z1ZS5ydW50aW1lLmVzbS1icm93c2VyLmpzXCJcbiAgfVxufSIsIkhvbWUudnVlIjoiPHRlbXBsYXRlPlxuICA8aDE+SG9tZTwvaDE+XG48L3RlbXBsYXRlPiIsIkFib3V0LnZ1ZSI6Ijx0ZW1wbGF0ZT5cbiAgPGgxPkFib3V0PC9oMT5cbjwvdGVtcGxhdGU+IiwiTm90Rm91bmQudnVlIjoiPHRlbXBsYXRlPlxuICA8aDE+NDA0PC9oMT5cbjwvdGVtcGxhdGU+In0=)
+[اختبرها في حقل التجارب](https://sfc.vuejs.org/#eNp9U81q20AQfpVhe5ANtraBnIRsyKGlh1J66qXbw0ZaRwrWrthd2YHYtxRCH6RpoaWYHgp9EultOrv6ieOIHvQzu9988/PN3JKLsgw3lSARiU2i89IumcyLUmkLb1QhYKVVAUFIneGAwXB9cakqO9x76yngnbKvVSXTAdMfdDAmEyWNBY2ewsACbpkECGgQ+dCz1uKOGI98ACb3zk/c+ACpWPFqbVu/lFs+mbb/AFrYSsveAkgqrYW077nNItjmMlXbcK0SbnMlw4ybrAUiO7585EQVJeaVRj1JR/EhF9vHOEOktoiPNstNeBQsNOs8EZOzKex2rrRP7tv34VnMAk8x5CN9lylP01cbZHybGyuk0JPApZxkXF6JYAaIXyydC7PMApzmgJ0dr9jB91Mf3jc2psMIoGFFUa65FWgBxBwyLVYLRl5QRpb1Q3NXH+qvzZf6Nz7fY8qXsDsFeukc+mdz39yNY6SSc3Hj67LzErN1+EP9UH+r/0D9F8kP0Hxu7usf+PxyHJ7BqaMk+kCUGyQ6EocRoAiK6VAAmZF2JOcFL8NroySOu+8w6y4MI4POjOB4OpuRzNrSRJSaVeJm9tqESl9R/As1CpXjRghTzC+12hqhkZgRL2PHQfFwI/QcE0uFFvp/nCfQZ7y9SFhKv4luZZ9qlJ2NCIOHp80YdnWcolNrxPF4gUd9z1+ejzju/wFCT5Y/)
 
 </div>
