@@ -1,166 +1,169 @@
-# Tooling {#tooling}
+# الأدوات {#tooling}
 
-## Try It Online {#try-it-online}
+## التجربة عبر النت {#try-it-online}
 
-You don't need to install anything on your machine to try out Vue SFCs - there are online playgrounds that allow you to do so right in the browser:
+لا تحتاج إلى تثبيت أي شيء على جهازك لتجربة المكونات أحادية الملف  - هناك حقول تجارب عبر الإنترنت تسمح لك بالقيام بذلك مباشرة في المتصفح:
 
-- [Vue SFC Playground](https://sfc.vuejs.org)
-  - Always deployed from latest commit
-  - Designed for inspecting component compilation results
-- [Vue + Vite on StackBlitz](https://vite.new/vue)
-  - IDE-like environment running actual Vite dev server in the browser
-  - Closest to local setup
+- [حقل تجارب المكونات أحادية الملف](https://sfc.vuejs.org)
+  - دائما تنشر مع أحدث تعديل  لـVue
+  - مصمم لفحص نتائج تصريف المكون
+- [Vue + Vite على منصة StackBlitz](https://vite.new/vue)
+  - بيئة عمل مشابهة لـلمحررات المألوفة تتشغل بخادوم تطوير Vite الفعلي داخل المتصفح
+  - قريبة من الإعداد المحلي داخل جهازك
 
-It is also recommended to use these online playgrounds to provide reproductions when reporting bugs.
+من المستحسن أيضًا استخدام هذه الحقول عبر الإنترنت لتقديم استنساخ للمشاكل عند إبلاغ عن الأخطاء.
 
-## Project Scaffolding {#project-scaffolding}
+## تهيئة المشروع {#project-scaffolding}
 
-### Vite {#vite}
+### أداة Vite {#vite}
 
-[Vite](https://vitejs.dev/) is a lightweight and fast build tool with first-class Vue SFC support. It is created by Evan You, who is also the author of Vue!
+[Vite](https://vitejs.dev/) هي أداة بناء خفيفة وسريعة مع دعم المكونات أحادية الملف بالدرجة الأولى. أنشئ من قبل Evan You، والذي بدوره أنشأ Vue!
 
-To get started with Vite + Vue, simply run:
+للبدء مع Vite + Vue، قم بتشغيل الأمر التالي:
 
 <div class="language-sh"><pre><code><span class="line"><span style="color:var(--vt-c-green);">$</span> <span style="color:#A6ACCD;">npm init vue@latest</span></span></code></pre></div>
 
-This command will install and execute [create-vue](https://github.com/vuejs/create-vue), the official Vue project scaffolding tool.
+هذا الأمر سيقوم بتثبيت وتنفيذ [create-vue](https://github.com/vuejs/create-vue), وهي الأداة الرسمية لتهيئة مشاريع Vue.
 
-- To learn more about Vite, check out the [Vite docs](https://vitejs.dev).
-- To configure Vue-specific behavior in a Vite project, for example passing options to the Vue compiler, check out the docs for [@vitejs/plugin-vue](https://github.com/vitejs/vite-plugin-vue/tree/main/packages/plugin-vue#readme).
+- لمعرفة المزيد حول Vite، قم بزيارة [Vite توثيق](https://vitejs.dev).
+- لتهيئة السلوك الخاص بـVue في مشروع Vite، على سبيل المثال تمرير خيارات إلى مصرف Vue، قم بزيارة [ توثيق ملحق Vue في Vite](https://github.com/vitejs/vite-plugin-vue/tree/main/packages/plugin-vue#readme)
 
-Both online playgrounds mentioned above also support downloading files as a Vite project.
+كلا الحقلين عبر الإنترنت المذكورين أعلاه يدعمان تنزيل الملفات كمشروع Vite.
 
-### Vue CLI {#vue-cli}
+### أداة Vue CLI  {#vue-cli}
 
-[Vue CLI](https://cli.vuejs.org/) is the official webpack-based toolchain for Vue. It is now in maintenance mode and we recommend starting new projects with Vite unless you rely on specific webpack-only features. Vite will provide superior developer experience in most cases.
+[Vue CLI](https://cli.vuejs.org/) هي سلسلة الأدوات الرسمية المبنية على webpack لـVue. وهي الآن في وضع الصيانة ونوصي ببدء المشاريع الجديدة مع Vite ما لم تكن تعتمد على ميزات webpack فقط. ستوفر Vite تجربة تطوير أفضل في معظم الحالات.
 
-For information on migrating from Vue CLI to Vite:
+لمعرفة المزيد حول الترحيل من Vue CLI إلى Vite:
 
-- [Vue CLI -> Vite Migration Guide from VueSchool.io](https://vueschool.io/articles/vuejs-tutorials/how-to-migrate-from-vue-cli-to-vite/)
-- [Tools / Plugins that help with auto migration](https://github.com/vitejs/awesome-vite#vue-cli)
+- [دليل الترحيل من Vue CLI إلى Vite من VueSchool.io](https://vueschool.io/articles/vuejs-tutorials/how-to-migrate-from-vue-cli-to-vite/)
+- [أدوات / ملحقات تساعد على الترحيل التلقائي](https://github.com/vitejs/awesome-vite#vue-cli)
 
-### Note on In-Browser Template Compilation {#note-on-in-browser-template-compilation}
+### ملاحظة حول تصريف القوالب في المتصفح {#note-on-in-browser-template-compilation}
 
-When using Vue without a build step, component templates are written either directly in the page's HTML or as inlined JavaScript strings. In such cases, Vue needs to ship the template compiler to the browser in order to perform on-the-fly template compilation. On the other hand, the compiler would be unnecessary if we pre-compile the templates with a build step. To reduce client bundle size, Vue provides [different "builds"](https://unpkg.com/browse/vue@3/dist/) optimized for different use cases.
+عند استخدام Vue دون عملية بناء، تُكتب قوالب المكونات إما مباشرة في صفحة الـHTML  أو كسلاسل نصية مضمنة في الـJavaScript. في هذه الحالات، يحتاج Vue إلى شحن مصرف القوالب إلى المتصفح لإجراء تصريف قوالب في وقت التشغيل. من ناحية أخرى، لن يكون المصرف ضروريًا إذا قمنا بترجمة القوالب مسبقًا بعملية بناء. لتقليل حجم الحزمة المبنية، توفر Vue [بنيات متعددة](https://unpkg.com/browse/vue@3/dist/) محسنة لحالات الاستخدام المختلفة.
 
-- Build files that start with `vue.runtime.*` are **runtime-only builds**: they do not include the compiler. When using these builds, all templates must be pre-compiled via a build step.
+- بنية ملفات  تبدأ بـ `vue.runtime.*` و التي هي **بنيات وقت التشغيل فقط**: لا تتضمن المصرف. عند استخدام هذه البنيات، يجب تصريف جميع القوالب مسبقًا عبر عملية بناء.
 
-- Build files that do not include `.runtime` are **full builds**: they include the compiler and support compiling templates directly in the browser. However, they will increase the payload by ~14kb.
+- بنية ملفات لا تتضمن `.runtime` هي **بنيات كاملة**: تتضمن المصرف وتدعم ترجمة القوالب مباشرة في المتصفح. ومع ذلك، ستزيد حمولة البنية بحوالي 14 كيلوبايت.
 
-Our default tooling setups use the runtime-only build since all templates in SFCs are pre-compiled. If, for some reason, you need in-browser template compilation even with a build step, you can do so by configuring the build tool to alias `vue` to `vue/dist/vue.esm-bundler.js` instead.
+تستخدم الإعدادات الافتراضية للأدوات لدينا بنية وقت التشغيل فقط لأن جميع القوالب في ملفات SFC مصرفة مسبقًا. إذا كنت بحاجة إلى تصريف القوالب في المتصفح حتى مع عملية بناء لأي سبب، يمكنك القيام بذلك عن طريق إعداد أداة البناء لتعيين الاسم البديل  إلى `vue/dist/vue.esm-bundler.js` بدلاً من `vue`.
 
-If you are looking for a lighter-weight alternative for no-build-step usage, check out [petite-vue](https://github.com/vuejs/petite-vue).
+إذا كنت تبحث عن بديل خفيف الوزن للاستخدام بدون عملية بناء، اطلع على [petite-vue](https://github.com/vuejs/petite-vue).
 
-## IDE Support {#ide-support}
+## دعم المحررات {#ide-support}
 
-- The recommended IDE setup is [VSCode](https://code.visualstudio.com/) + the [Vue Language Features (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.volar) extension. The extension provides syntax highlighting, TypeScript support, and intellisense for template expressions and component props.
+ إعداد المحرر الموصى به هو [VSCode](https://code.visualstudio.com/) + إضافة [Vue Language Features (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.volar) . توفر الإضافة ابراز الصيغة ودعم TypeScript والتحسس الذكي لتعبيرات القالب وخاصيات المكون.
 
-  :::tip
-  Volar replaces [Vetur](https://marketplace.visualstudio.com/items?itemName=octref.vetur), our previous official VSCode extension for Vue 2. If you have Vetur currently installed, make sure to disable it in Vue 3 projects.
+  :::tip ملاحظة
+  Volar يحل محل [Vetur](https://marketplace.visualstudio.com/items?itemName=octref.vetur)، الإضافة الرسمية السابقة لـ VSCode لـ Vue 2. إذا كنت تستخدم Vetur حاليًا، تأكد من تعطيلها في مشاريع Vue 3.
   :::
 
-- [WebStorm](https://www.jetbrains.com/webstorm/) also provides great built-in support for Vue SFCs.
 
-- Other IDEs that support the [Language Service Protocol](https://microsoft.github.io/language-server-protocol/) (LSP) can also leverage Volar's core functionalities via LSP:
+- [محرر WebStorm](https://www.jetbrains.com/webstorm/) يوفر أيضًا دعمًا رائعًا مدمجًا للمكونات أحادية الملف.
 
-  - Sublime Text support via [LSP-Volar](https://github.com/sublimelsp/LSP-volar).
 
-  - vim / Neovim support via [coc-volar](https://github.com/yaegassy/coc-volar).
+- المحررات الأخرى التي تدعم [ بروتوكول خدمة اللغة Language Service Protocol](https://microsoft.github.io/language-server-protocol/)  يمكنها أيضًا الاستفادة من الميزات الأساسية لـVolar عبر LSP:
 
-  - emacs support via [lsp-mode](https://emacs-lsp.github.io/lsp-mode/page/lsp-volar/)
+  - دعم محرر Sublime Text عبر [LSP-Volar](https://github.com/sublimelsp/LSP-volar).
 
-## Browser Devtools {#browser-devtools}
+  - دعم vim / Neovim عبر [coc-volar](
+
+  - دعم emacs عبر [lsp-mode](https://emacs-lsp.github.io/lsp-mode/page/lsp-volar/)
+
+## أدوات التطوير و التحكم في المتصفح {#browser-devtools}
 
 <VueSchoolLink href="https://vueschool.io/lessons/using-vue-dev-tools-with-vuejs-3" title="Free Vue.js Devtools Lesson"/>
 
-The Vue browser devtools extension allows you to explore a Vue app's component tree, inspect the state of individual components, track state management events, and profile performance.
+تتيح لك إضافة أدوات Vue للتطوير في المتصفح  تصفح شجرة مكونات تطبيق Vue وفحص حالة المكونات الفردية وتتبع أحداث إدارة الحالة وتحليل أداء التطبيق.
 
 ![devtools screenshot](https://raw.githubusercontent.com/vuejs/devtools/main/media/screenshot-shadow.png)
 
-- [Documentation](https://devtools.vuejs.org/)
-- [Chrome Extension](https://chrome.google.com/webstore/detail/vuejs-devtools/nhdogjmejiglipccpnnnanhbledajbpd)
-- [Firefox Addon](https://addons.mozilla.org/en-US/firefox/addon/vue-js-devtools/)
-- [Standalone Electron app](https://devtools.vuejs.org/guide/installation.html#standalone)
+- [التوثيق](https://devtools.vuejs.org/)
+- [إضافة كروم](https://chrome.google.com/webstore/detail/vuejs-devtools/nhdogjmejiglipccpnnnanhbledajbpd)
+- [إضافة فايرفوكس](https://addons.mozilla.org/en-US/firefox/addon/vue-js-devtools/)
+- [تطبيق إلكترون مستقل](https://devtools.vuejs.org/guide/installation.html#standalone)
 
 ## TypeScript {#typescript}
 
-Main article: [Using Vue with TypeScript](/guide/typescript/overview).
+الصفحة الرئيسية: [استخدام Vue مع TypeScript](/guide/typescript/overview).
 
-- [Volar](https://github.com/johnsoncodehk/volar) provides type checking for SFCs using `<script lang="ts">` blocks, including template expressions and cross-component props validation.
+- [Volar](https://github.com/johnsoncodehk/volar) توفر التحقق من النوع للمكونات أحادية الملف باستخدام تكتيل `<"script lang="ts>`، بما في ذلك تعبيرات القالب والتحقق من صحة الخاصيات بين المكونات.
 
-- Use [`vue-tsc`](https://github.com/johnsoncodehk/volar/tree/master/vue-language-tools/vue-tsc) for performing the same type checking from the command line, or for generating `d.ts` files for SFCs.
+- استخدم [`vue-tsc`](https://github.com/johnsoncodehk/volar/tree/master/vue-language-tools/vue-tsc) لتنفيذ نفس التحقق من النوع من خلال سطر الأوامر أو لإنشاء ملفات `d.ts` للمكونات أحادية الملف.
 
-## Testing {#testing}
+## الاختبار {#testing}
 
-Main article: [Testing Guide](/guide/scaling-up/testing).
+الصفحة الرئيسية: [دليل الاختبار](/guide/scaling-up/testing).
 
-- [Cypress](https://www.cypress.io/) is recommended for E2E tests. It can also be used for component testing for Vue SFCs via the [Cypress Component Test Runner](https://docs.cypress.io/guides/component-testing/introduction).
+- [إطار Cypress](https://www.cypress.io/) موصى به للاختبارات E2E. يمكن استخدامه أيضًا لاختبار المكونات  أحادية الملف لـVue عبر [Cypress Component Test Runner](https://docs.cypress.io/guides/component-testing/introduction).
 
-- [Vitest](https://vitest.dev/) is a test runner created by Vue / Vite team members that focuses on speed. It is specifically designed for Vite-based applications to provide the same instant feedback loop for unit / component testing.
+- [Vitest](https://vitest.dev/) هو مشغل اختبارات أنشئ من قبل أعضاء فريق Vue / Vite ويركز على السرعة. صُمم خصيصًا للتطبيقات المبنية بـVite لتوفير نفس حلقة الملاحظات الفورية لاختبار الوحدات / المكونات.
 
-- [Jest](https://jestjs.io/) can be made to work with Vite via [vite-jest](https://github.com/sodatea/vite-jest). However, this is only recommended if you have existing Jest-based test suites that you need to migrate over to a Vite-based setup, as Vitest provides similar functionalities with a much more efficient integration.
+- يمكن جعل [Jest](https://jestjs.io/) يعمل مع Vite عبر [vite-jest](https://github.com/sodatea/vite-jest). ومع ذلك، فإن هذا ينصح به فقط إذا كان لديك مجموعات اختبارات Jest موجودة من قبل وتحتاج إلى ترحيلها إلى إعداد Vite المبني على Vite، حيث يوفر Vitest وظائف مماثلة مع تكامل أكثر فعالية.
 
-## Linting {#linting}
+## تدقيق الشيفرة {#linting}
 
-The Vue team maintains [eslint-plugin-vue](https://github.com/vuejs/eslint-plugin-vue), an [ESLint](https://eslint.org/) plugin that supports SFC-specific linting rules.
+فريق Vue يواصل التطوير على [eslint-plugin-vue](https://github.com/vuejs/eslint-plugin-vue)، وهو ملحق [ESLint](https://eslint.org/) يدعم قواعد التدقيق الخاصة بالمكونات أحادية الملف.
 
-Users previously using Vue CLI may be used to having linters configured via webpack loaders. However when using a Vite-based build setup, our general recommendation is:
+يمكن للمطورين الذين استخدموا Vue CLI سابقًا أن يكونوا على دراية بتكوين مدققي الشيفرة عبر محملات webpack. ومع ذلك، عند استخدام إعداد عملية بناء مرتكزة على Vite، فإننا نوصي بشكل عام بـ:
 
-1. `npm install -D eslint eslint-plugin-vue`, then follow `eslint-plugin-vue`'s [configuration guide](https://eslint.vuejs.org/user-guide/#usage).
+1. تنفيذ الأمور `npm install -D eslint eslint-plugin-vue`، ثم اتباع دليل [الإعداد](https://eslint.vuejs.org/user-guide/#usage) لـ`eslint-plugin-vue`.
 
-2. Setup ESLint IDE extensions, for example [ESLint for VSCode](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint), so you get linter feedback right in your editor during development. This also avoids unnecessary linting cost when starting the dev server.
+2. إعداد إضافات ESLint للمحرر، على سبيل المثال [ESLint الداعم لـVSCode](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)، حتى تحصل على ملاحظات التدقيق مباشرة في المحرر خلال التطوير. وهذا يجنب أيضًا تكلفة التدقيق غير الضرورية عند بدء خادوم التطوير.
 
-3. Run ESLint as part of the production build command, so you get full linter feedback before shipping to production.
+3. تشغيل ESLint كجزء من أمر إنشاء الإنتاج، حتى تحصل على ملاحظات التدقيق الكاملة قبل الانتقال إلى مرحلة الإنتاج.
 
-4. (Optional) Setup tools like [lint-staged](https://github.com/okonet/lint-staged) to automatically lint modified files on git commit.
+4. (اختياري) إعداد الأدوات مثل [lint-staged](https://github.com/okonet/lint-staged) لتدقيق الملفات المعدلة تلقائيًا عند الإيداع عبر git.
 
-## Formatting {#formatting}
+## تنسيق الشيفرة {#formatting}
 
-- The [Volar](https://github.com/johnsoncodehk/volar) VSCode extension provides formatting for Vue SFCs out of the box.
+- إضافة [Volar](https://github.com/johnsoncodehk/volar) لـVSCode توفر تنسيق لمكونات Vue أحادية الملف.
 
-- Alternatively, [Prettier](https://prettier.io/) provides built-in Vue SFC formatting support.
+- كبديل آخر، يوفر [Prettier](https://prettier.io/) دعمًا مدمجًا لتنسيق مكونات Vue أحادية الملف.
 
-## SFC Custom Block Integrations {#sfc-custom-block-integrations}
+## دمج كتل مخصصة في الـSFC {#sfc-custom-block-integrations}
 
-Custom blocks are compiled into imports to the same Vue file with different request queries. It is up to the underlying build tool to handle these import requests.
+الكتل المخصصة تُصرف إلى استيرادات لنفس ملف Vue مع استعلامات طلب مختلفة. يعتمد الأمر على أداة البناء الأساسية لمعالجة طلبات الاستيراد هذه.
 
-- If using Vite, a custom Vite plugin should be used to transform matched custom blocks into executable JavaScript. [Example](https://github.com/vitejs/vite-plugin-vue/tree/main/packages/plugin-vue#example-for-transforming-custom-blocks)
+- إذا كنت تستخدم Vite، فإنه يجب استخدام ملحق Vite لتحويل الكتل المخصصة المطابقة إلى شيفرة JavaScript قابلة للتنفيذ. [مثال](https://github.com/vitejs/vite-plugin-vue/tree/main/packages/plugin-vue#example-for-transforming-custom-blocks)
 
-- If using Vue CLI or plain webpack, a webpack loader should be configured to transform the matched blocks. [Example](https://vue-loader.vuejs.org/guide/custom-blocks.html)
+- إذا كنت تستخدم Vue CLI أو تهيئة webpack خام، فإنه يجب إعداد محمل webpack لتحويل الكتل الموجودة. [مثال](https://vue-loader.vuejs.org/guide/custom-blocks.html)
 
-## Lower-Level Packages {#lower-level-packages}
+## الحزم متدنية المستوى {#lower-level-packages}
 
 ### `@vue/compiler-sfc` {#vue-compiler-sfc}
 
-- [Docs](https://github.com/vuejs/core/tree/main/packages/compiler-sfc)
+- [التوثيق](https://github.com/vuejs/core/tree/main/packages/compiler-sfc)
 
-This package is part of the Vue core monorepo and is always published with the same version as the main `vue` package. It is included as a dependency of the main `vue` package and proxied under `vue/compiler-sfc` so you don't need to install it individually.
+هذه الحزمة جزء من مشروع Vue الرئيسي وتُنشر دائمًا مع نفس الإصدار مع الحزمة الرئيسية `vue`. ويتم تُضمن كاعتمادية للحزمة الرئيسية `vue` وتمرر تحت مسمى `vue/compiler-sfc` حتى لا تحتاج إلى تثبيتها بشكل منفرد.
 
-The package itself provides lower-level utilities for processing Vue SFCs and is only meant for tooling authors that need to support Vue SFCs in custom tools.
+هذه الحزمة توفر أدوات متدنية المستوى لمعالجة مكونات Vue أحادية الملف وهي مخصصة لمطور الأدوات التي تحتاج إلى دعم مكونات Vue أحادية الملف في أدوات مخصصة.
 
-:::tip
-Always prefer using this package via the `vue/compiler-sfc` deep import since this ensures its version is in sync with the Vue runtime.
+
+:::tip ملاحظة
+ دائمًا فضل استخدام هذه الحزمة عبر استيراد عميق `vue/compiler-sfc` لأنه يضمن أن إصداره متزامن مع وحدة تشغيل Vue.
 :::
 
 ### `@vitejs/plugin-vue` {#vitejs-plugin-vue}
 
-- [Docs](https://github.com/vitejs/vite-plugin-vue/tree/main/packages/plugin-vue)
+- [التوثيق](https://github.com/vitejs/vite-plugin-vue/tree/main/packages/plugin-vue)
 
-Official plugin that provides Vue SFC support in Vite.
+الملحق الرسمي الذي يوفر دعمًا لمكونات Vue أحادية الملف في Vite.
 
 ### `vue-loader` {#vue-loader}
 
-- [Docs](https://vue-loader.vuejs.org/)
+- [التوثيق](https://vue-loader.vuejs.org/)
 
-The official loader that provides Vue SFC support in webpack. If you are using Vue CLI, also see [docs on modifying `vue-loader` options in Vue CLI](https://cli.vuejs.org/guide/webpack.html#modifying-options-of-a-loader).
+المحمل الرسمي الذي يوفر دعمًا لمكونات Vue أحادية الملف في webpack. إذا كنت تستخدم Vue CLI، يرجى الاطلاع أيضًا على [التوثيقات حول تعديل خيارات `vue-loader` في Vue CLI](https://cli.vuejs.org/guide/webpack.html#modifying-options-of-a-loader).
 
-## Other Online Playgrounds {#other-online-playgrounds}
+## حقول تجارب أخرى {#other-online-playgrounds}
 
-- [VueUse Playground](https://play.vueuse.org)
-- [Vue + Vite on Repl.it](https://replit.com/@templates/VueJS-with-Vite)
-- [Vue on CodeSandbox](https://codesandbox.io/s/vue-3)
-- [Vue on Codepen](https://codepen.io/pen/editor/vue)
-- [Vue on Components.studio](https://components.studio/create/vue3)
-- [Vue on WebComponents.dev](https://webcomponents.dev/create/cevue)
+- [ حقل تجارب مكتبة VueUse](https://play.vueuse.org)
+- [Vue + Vite على مستوى موقع Repl.it](https://replit.com/@templates/VueJS-with-Vite)
+- [Vue على موقع CodeSandbox](https://codesandbox.io/s/vue-3)
+- [Vue على موقع  Codepen](https://codepen.io/pen/editor/vue)
+- [Vue على موقع  Components.studio](https://components.studio/create/vue3)
+- [Vue على موقع  WebComponents.dev](https://webcomponents.dev/create/cevue)
 
 <!-- TODO ## Backend Framework Integrations -->

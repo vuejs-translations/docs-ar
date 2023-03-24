@@ -248,7 +248,7 @@ export const sidebar: ThemeConfig['sidebar'] = {
         { text: 'الأدوات', link: '/guide/scaling-up/tooling' },
         { text: 'التوجيه', link: '/guide/scaling-up/routing' },
         {
-          text: 'تسيير الحالة',
+          text: 'إدارة الحالة',
           link: '/guide/scaling-up/state-management'
         },
         { text: 'الإختبار', link: '/guide/scaling-up/testing' },
@@ -568,8 +568,9 @@ export const sidebar: ThemeConfig['sidebar'] = {
 export default defineConfigWithTheme<ThemeConfig>({
   extends: baseConfig,
 
-  lang: 'en-US',
-  title: 'Vue.js',
+  lang: 'ar',
+  dir:'rtl',
+  title: 'Vue.js إطار',
   description: ' الإطار التقدمي للـJavascript  -Vue.js',
   srcDir: 'src',
   srcExclude: ['tutorial/**/description.md'],

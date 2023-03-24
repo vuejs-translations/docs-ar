@@ -2,41 +2,41 @@
 import TestingApiSwitcher from './TestingApiSwitcher.vue'
 </script>
 
-# Testing {#testing}
+# الاختبار {#testing}
 
-## Why Test? {#why-test}
+## لماذا الحاجة للاختبار؟ {#why-test}
 
-Automated tests help you and your team build complex Vue applications quickly and confidently by preventing regressions and encouraging you to break apart your application into testable functions, modules, classes, and components. As with any application, your new Vue app can break in many ways, and it's important that you can catch these issues and fix them before releasing.
+الاختبارات الآلية تساعدك أنت و فريقك على بناء تطبيقات Vue معقدة بسرعة و بثقة عن طريق منع الإعادات و تشجيعك على تقسيم التطبيق الخاص بك إلى دوال، وحدات، أصناف، ومكونات قابلة للاختبار. كما هو الحال مع أي تطبيق، يمكن أن يتعطل تطبيق Vue الجديد الخاص بك بعدة طرق، و من المهم أن تتمكن من الكشف عن هذه المشاكل و إصلاحها قبل الإصدار.
 
-In this guide, we'll cover basic terminology and provide our recommendations on which tools to choose for your Vue 3 application.
+في هذا الدليل، سنغطي المصطلحات الأساسية و نوفر لك أدوات معينة موصى بها لاختيارها في انشاء تطبيق Vue 3 الخاص بك.
 
-There is one Vue-specific section covering composables. See [Testing Composables](#testing-composables) below for more details.
+هناك قسم خاص ب Vue يتحدث عن الدوال التركيبية. انظر إلى قسم [اختبار الدوال التركيبية](#testing-composables) أدناه لمزيد من التفاصيل.
 
-## When to Test {#when-to-test}
+## متى تختبر؟ {#when-to-test}
 
-Start testing early! We recommend you begin writing tests as soon as you can. The longer you wait to add tests to your application, the more dependencies your application will have, and the harder it will be to start.
+ابدأ الاختبار في وقت مبكر! نوصيك بالبدء في كتابة الاختبارات في أقرب وقت ممكن من بدء التطوير. كلما انتظرت أكثر لإضافة الاختبارات إلى التطبيق الخاص بك، كلما كان التطبيق الخاص بك لديه الكثير من الاعتمادبات، و كلما كان من الصعب البدء في اعتماد الاختبارات.
 
-## Testing Types {#testing-types}
+## أنواع الاختبارات {#testing-types}
 
-When designing your Vue application's testing strategy, you should leverage the following testing types:
+لما تصمم استراتيجية لاختبار تطبيق Vue الخاص بك، يجب عليك استخدام أنواع الاختبارات التالية:
 
-- **Unit**: Checks that inputs to a given function, class, or composable are producing the expected output or side effects.
-- **Component**: Checks that your component mounts, renders, can be interacted with, and behaves as expected. These tests import more code than unit tests, are more complex, and require more time to execute.
-- **End-to-end**: Checks features that span multiple pages and make real network requests against your production-built Vue application. These tests often involve standing up a database or other backend.
+- **الوحدة**: يتحقق من أن الادخلات إلى دالة معينة، صنف، أو دالة تركيبية تنتج المخرج المتوقع أو الآثار الجانبية.
+- **المكون**: تحقق من أن المكون الخاص بك قد وُصل، يُصير، يمكن التفاعل معه، و يتصرف كما هو متوقع منه. هذه الاختبارات تستورد الكثير من الشيفرات أكثر من اختبارات الوحدات، و هي أكثر تعقيدا، و تستغرق وقت أكثر للتنفيذ.
+- **الشامل**: يتحقق من الميزات التي تمتد عبر عدة صفحات و تقوم بطلبات شبكة حقيقية مع تطبيق Vue الخاص بك. هذه الاختبارات تشمل عادة تشغيل قاعدة بيانات أو التعامل مع واجهة خلفية أخرى.
 
-Each testing type plays a role in your application's testing strategy and each will protect you against different types of issues.
+كل نوع من أنواع الاختبارات يلعب دورا في استراتيجية اختبار التطبيق الخاص بك، و كل نوع منها سيحميك من أنواع مختلفة من المشاكل.
 
-## Overview {#overview}
+## نظرة عامة {#overview}
 
-We will briefly discuss what each of these are, how they can be implemented for Vue applications, and provide some general recommendations.
+سنتحدث باختصار عن كل واحدة منها، و كيف يمكنك تنفيذها في تطبيقات Vue، و نوفر بعض التوصيات العامة.
 
-## Unit Testing {#unit-testing}
+## اختبار الوحدات {#unit-testing}
 
-Unit tests are written to verify that small, isolated units of code are working as expected. A unit test usually covers a single function, class, composable, or module. Unit tests focus on logical correctness and only concern themselves with a small portion of the application's overall functionality. They may mock large parts of your application's environment (e.g. initial state, complex classes, 3rd party modules, and network requests).
+اختبارات الوحدات تكتب للتحقق من أن الوحدات الصغيرة و المستقلة من الشيفرة تعمل كما هو متوقع منها. اختبار وحدة يغطي عادة دالة واحدة، صنف، دالة تركيبية، أو وحدة. اختبارات الوحدات تركز على الصحة المنطقية و تهتم فقط بجزء صغير من وظائف التطبيق بشكل عام. قد يقومون بتجاهل أجزاء كبيرة من بيئة التطبيق الخاص بك (مثل الحالة الأولية، الأصناف الكبيرة، وحدات الطرف الثالث، و طلبات الشبكة).
 
-In general, unit tests will catch issues with a function's business logic and logical correctness.
+بصفة عامة، ستكتشف اختبارات الوحدات المشاكل في شيفرة العمل و الصحة المنطقية للدالة.
 
-Take for example this `increment` function:
+لننظر إلى هذه الدالة `increment` على سبيل المثال:
 
 ```js
 // helpers.js
@@ -48,85 +48,87 @@ export function increment (current, max = 10) {
 }
 ```
 
-Because it's very self-contained, it'll be easy to invoke the increment function and assert that it returns what it's supposed to, so we'll write a Unit Test.
+لأنها مستقلة جدا، سيكون من السهل استدعاء دالة الزيادة و التأكد من أنها تعيد ما هو متوقع، لذلك سنكتب اختبار وحدة.
 
-If any of these assertions fail, it's clear that the issue is contained within the `increment` function.
+إذا فشل أي من هذه الإدعاءات، فإنه من الواضح أن المشكلة محدودة في دالة `increment`.
 
 ```js{4-16}
 // helpers.spec.js
 import { increment } from './helpers'
 
 describe('increment', () => {
-  test('increments the current number by 1', () => {
+  test('زيادة الرقم الحالي بـ1', () => {
     expect(increment(0, 10)).toBe(1)
   })
 
-  test('does not increment the current number over the max', () => {
+  test('لا يقوم الزيادة فوق الحد الأقصى', () => {
     expect(increment(10, 10)).toBe(10)
   })
 
-  test('has a default max of 10', () => {
+  test('لديه الحد الأقصى الافتراضي', () => {
     expect(increment(10)).toBe(10)
   })
 })
 ```
 
-As mentioned previously, unit testing is typically applied to self-contained business logic, components, classes, modules, or functions that do not involve UI rendering, network requests, or other environmental concerns.
+كما ذكرنا سابقا، يُطبق عادة اختبار الوحدات على شيفرة العمل، المكونات، الأصناف، و الوحدات، أو الدوال التي لا تتضمن تصيير واجهة المستخدم، طلبات الشبكة، أو أي مشاكل بيئية أخرى.
 
-These are typically plain JavaScript / TypeScript modules unrelated to Vue. In general, writing unit tests for business logic in Vue applications does not differ significantly from applications using other frameworks.
+هذه عادة وحدات JavaScript / TypeScript عادية و غير مرتبطة بـ Vue. بشكل عام، كتابة اختبارات الوحدات لشيفرة العمل في تطبيقات Vue لا تختلف بشكل كبير عن تطبيقات تستخدم أطر عمل أخرى.
 
-There are two instances where you DO unit test Vue-specific features:
+هناك حالتين تستخدم فيهما اختبارالوحدات لميزات Vue:
 
-1. Composables
-2. Components
+1. الدوال التركيبية
+2. المكونات
 
-### Composables {#composables}
+### الدوال التركيبية {#composables}
 
-One category of functions specific to Vue applications are [Composables](/guide/reusability/composables.html), which may require special handling during tests.
-See [Testing Composables](#testing-composables) below for more details.
+فئة من الدوال المخصصة لتطبيقات Vue هي [الدوال التركيبية](/guide/reusability/composables.html)، و التي قد تحتاج إلى معالجة خاصة أثناء الاختبارات.
 
-### Unit Testing Components {#unit-testing-components}
+اطلع على [اختبار الدوال التركيبية](#testing-composables) أدناه لمزيد من التفاصيل.
 
-A component can be tested in two ways:
+### اختبار الوحدات للمكونات {#unit-testing-components}
 
-1. Whitebox: Unit Testing
+يمكن اختبار المكون بطريقتين:
 
-   Tests that are "Whitebox tests" are aware of the implementation details and dependencies of a component. They are focused on **isolating** the component under test. These tests will usually involve mocking some, if not all of your component's children, as well as setting up plugin state and dependencies (e.g. Vuex).
+1. اختبارات الصندوق الأبيض: اختبار الوحدات
 
-2. Blackbox: Component Testing
+   الاختبارات المعروفة بـ "اختبارات الصندوق الأبيض" تهتم بتفاصيل تنفيذ و اعتماديات المكون. تركز على **عزل**  المكون تحت الاختبار. هذه الاختبارات عادة ما تشمل محاكاة بعض المكونات الأبناء أو كلهم، و إعداد حالة اللواحق و الاعتماديات (مثل Vuex).
 
-   Tests that are "Blackbox tests" are unaware of the implementation details of a component. These tests mock as little as possible to test the integration of your component and the entire system. They usually render all child components and are considered more of an "integration test". See the [Component Testing recommendations](#component-testing) below.
+2. اختبارات الصندوق الأسود: اختبار المكون
 
-### Recommendation {#recommendation}
+        الاختبارات المعروفة بـ"اختبارات الصندوق الأسود" لا تهتم بتفاصيل التنفيذ للمكون. هذه الاختبارات تحاكي بأقل قدر ممكن لاختبار التكامل بين المكون و النظام بأكمله. عادة ما تصير جميع المكونات الأبناء و تعتبر أكثر من "اختبار تكامل". اطلع على [التوصيات لاختبار المكون](#component-testing) أدناه.
 
-- [Vitest](https://vitest.dev/)
+### التوصية {#recommendation}
 
-  Since the official setup created by `create-vue` is based on [Vite](https://vitejs.dev/), we recommend using a unit testing framework that can leverage the same configuration and transform pipeline directly from Vite. [Vitest](https://vitest.dev/) is a unit testing framework designed specifically for this purpose, created and maintained by Vue / Vite team members. It integrates with Vite-based projects with minimal effort, and is blazing fast.
+- [إطار Vitest](https://vitest.dev/)
 
-### Other Options {#other-options}
+  بما أن الإعداد الرسمي الذي أنشئ بواسطة `create-vue` يعتمد على [Vite](https://vitejs.dev/)، نوصي باستخدام إطار اختبار الوحدات الذي يمكنه الاستفادة من نفس التهيئة و نفق التحويل مباشرة من Vite. أداة [Vitest](https://vitest.dev/) هي إطار اختبار الوحدات المصمم خصيصا لهذا الغرض، و قد أنشئ و طُور من قبل أعضاء فريق Vue / Vite. يتكامل مع مشاريع Vite بأقل جهد،  و يعتبر سريعا جدا.
 
-- [Peeky](https://peeky.dev/) is another fast unit test runner with first-class Vite integration. It is also created by a Vue core team member and offers a GUI-based testing interface.
+### خيارات أخرى {#other-options}
 
-- [Jest](https://jestjs.io/) is a popular unit testing framework, and can be made to work with Vite via the [vite-jest](https://github.com/sodatea/vite-jest) package. However, we only recommend Jest if you have an existing Jest test suite that needs to be migrated over to a Vite-based project, as Vitest offers a more seamless integration and better performance.
+- [أداة Peeky](https://peeky.dev/) هي مشغل اختبار الوحدات الآخر سريع  يعتمد على Vite بدرجة أولى. أيضا أنشأها عضو من فريق Vue الأساسي و تقدم واجهة رسومية للاختبار GUI.
 
-## Component Testing {#component-testing}
+- [أداة Jest](https://jestjs.io/) هي إطار اختبار الوحدات مشهور، و يمكن جعله يعمل مع Vite عبر حزمة [vite-jest](https://github.com/sodatea/vite-jest). ومع ذلك، نوصي باستخدام أداة Jest إذا كان لديك مجموعة اختبارات Jest حالية التي تحتاج إلى الترحيل إلى مشروع Vite، لأن Vitest تقدم تكامل أكثر سلاسة و أداء أفضل.
 
-In Vue applications, components are the main building blocks of the UI. Components are therefore the natural unit of isolation when it comes to validating your application's behavior. From a granularity perspective, component testing sits somewhere above unit testing and can be considered a form of integration testing. Much of your Vue Application should be covered by a component test and we recommend that each Vue component has its own spec file.
+## اختبار المكون {#component-testing}
 
-Component tests should catch issues relating to your component's props, events, slots that it provides, styles, classes, lifecycle hooks, and more.
+في تطبيقات Vue، المكونات هي الكتل الرئيسية لواجهة المستخدم. لذلك، المكونات هي الوحدة الطبيعية للفصل عند التحقق من سلوك التطبيق. من ناحية تفصيلية، اختبار المكون يقع في مكان ما فوق اختبار الوحدة و يمكن اعتباره نوع من اختبار التكامل. يجب أن يشمل اختبلر المكونات معظم تطبيق Vue و نوصي بأن يكون لكل مكون ملف مواصفاته الخاص.
 
-Component tests should not mock child components, but instead test the interactions between your component and its children by interacting with the components as a user would. For example, a component test should click on an element like a user would instead of programmatically interacting with the component.
+اختبارات المكونات يجب أن تكشف المشاكل المتعلقة بخاصيات المكون، الأحداث، المنافذ التي يوفرها، التنسيقات، الفئات، خطافات دورة الحياة، و أكثر.
 
-Component tests should focus on the component's public interfaces rather than internal implementation details. For most components, the public interface is limited to: events emitted, props, and slots. When testing, remember to **test what a component does, not how it does it**.
+اختبارات المكونات لا يجب أن تقوم بمحاكاة المكونات الأبناء، بل يجب أن تختبر التفاعلات بين المكون و المكونات الأبناء الخاصة به من خلال التفاعل مع المكونات كما يفعل المستخدم. على سبيل المثال، يجب أن يقوم اختبار المكون بالنقر على عنصر مثل ما يفعل المستخدم بدلا من التفاعل بشكل برمجي مع المكون.
 
-**DO**
+اختبارات المكونات يجب أن تركز على واجهات المكون العامة بدلا من التفاصيل الداخلية للشيفرة التنفيذية. بالنسبة لمعظم المكونات، الواجهة العامة محدودة إلى: الأحداث المنشورة، الخاصية، و المنافذ. عند الاختبار، تذكر أن **تختبر ما يفعله المكون، وليس كيف يفعله**.
 
-- For **Visual** logic: assert correct render output based on inputted props and slots.
-- For **Behavioral** logic: assert correct render updates or emitted events in response to user input events.
+**قم بـ**
 
-  In the below example, we demonstrate a Stepper component that has a DOM element labeled "increment" and can be clicked. We pass a prop called `max` that prevents the Stepper from being incremented past `2`, so if we click the button 3 times, the UI should still say `2`.
+- بالنسبة للمنطق **البصري**: تأكد من الناتج الصحيح للتصيير بناءً على الخاصيات و المنافذ المدخلة.
+- بالنسبة للمنطق **السلوكي**: تأكد من تحديثات الناتج الصحيح للتصيير أو الأحداث المنشورة بشكل صحيح بالرد على أحداث مدخلات المستخدم.
 
-  We know nothing about the implementation of Stepper, only that the "input" is the `max` prop and the "output" is the state of the DOM as the user will see it.
+
+  في المثال أدناه، نظهر مكون Stepper يحتوي على عنصر DOM مسمى "increment" و يمكن النقر عليه. نمرر خاصية تسمى `max` التي تمنع Stepper من التزايد بعد `2`، لذلك إذا قمنا بالنقر على الزر 3 مرات، يجب أن تبقى واجهة المستخدم تظهر `2` فقط.
+
+  لا نعرف شيئا عن الشيفرة التنفيذية Stepper، فقط أن "المدخل" هو خاصية `max` و "المخرج" هو حالة DOM كما سيراها المستخدم.
 
 <TestingApiSwitcher>
 
@@ -139,11 +141,11 @@ const { getByText } = render(Stepper, {
   }
 })
 
-getByText('0') // Implicit assertion that "0" is within the component
+getByText('0') //الإدعاء الضمني الذي يقول "0" موجود داخل المكون
 
 const button = getByText('increment')
 
-// Dispatch a click event to our increment button.
+// نشر حدث النقر على زر للزيادة.
 await fireEvent.click(button)
 
 getByText('1')
@@ -195,97 +197,100 @@ cy.get(valueSelector).should('be.visible').and('contain.text', '0')
 
 </TestingApiSwitcher>
 
-- **DON'T**
+- **لا تقم بـ**
 
-  Don't assert the private state of a component instance or test the private methods of a component. Testing implementation details makes the tests brittle, as they are more likely to break and require updates when the implementation changes.
+    لا تقم باختبار التوابع و الحالة خاصة (private) بنسخة المكون. اختبار التفاصيل التنفيذية تجعل الاختبارات غير متينة، لأنها أكثر عرضة للكسر و تتطلب التحديثات عند تغيير الشيفرة التنفيذية.
 
-  The component's ultimate job is rendering the correct DOM output, so tests focusing on the DOM output provide the same level of correctness assurance (if not more) while being more robust and resilient to change.
+   وظيفة المكون النهائية هي تصيير الناتج الصحيح للـDOM، لذلك الاختبارات التي تركز على ناتج ال DOM توفر نفس مستوى التأكد من الصحة (إذا لم تكن أكثر) بينما هي أكثر صلابة و تحمل التغيير.
 
-  Don't rely exclusively on snapshot tests. Asserting HTML strings does not describe correctness. Write tests with intentionality.
+    لا تعتمد على لقطات الاختبارات فقط. تأكيد السلسلة النصية للـHTML المصير لا يصف الحقيقة. اكتب الاختبارات بقصد معين.
 
-  If a method needs to be tested thoroughly, consider extracting it into a standalone utility function and write a dedicated unit test for it. If it cannot be extracted cleanly, it may be tested as a part of a component, integration, or end-to-end test that covers it.
+    إذا كان تابع معين يحتاج إلى اختبار دقيق، ففكر في استخراجه إلى دالة مستقلة و كتابة اختبار وحدة لها. إذا لم يمكن استخراجها بشكل نظيف، فقد تُختبر كجزء من اختبار المكون أو اختبار التكامل أو الاختبار الشامل الذي يغطيها.
+### التوصية {#recommendation-1}
 
-### Recommendation {#recommendation-1}
 
-- [Vitest](https://vitest.dev/) for components or composables that render headlessly (e.g. the [`useFavicon`](https://vueuse.org/core/useFavicon/#usefavicon) function in VueUse). Components and DOM can be tested using [@testing-library/vue](https://testing-library.com/docs/vue-testing-library/intro).
+- [مكتبة Vitest](https://vitest.dev/) للمكونات أو الدوال التركيبية التي تُصير بدون تصميم مرئي  (مثل دالة [`useFavicon`](https://vueuse.org/core/useFavicon/#usefavicon) في VueUse). يمكن اختبار المكونات و الـDOM باستخدام [@testing-library/vue](https://testing-library.com/docs/vue-testing-library/intro).
 
-- [Cypress Component Testing](https://on.cypress.io/component) for components whose expected behavior depends on properly rendering styles or triggering native DOM events. Can be used with Testing Library via [@testing-library/cypress](https://testing-library.com/docs/cypress-testing-library/intro).
 
-The main differences between Vitest and browser-based runners are speed and execution context. In short, browser-based runners, like Cypress, can catch issues that node-based runners, like Vitest, cannot (e.g. style issues, real native DOM events, cookies, local storage, and network failures), but browser-based runners are *orders of magnitude slower than Vitest* because they do open a browser, compile your stylesheets, and more. Cypress is a browser-based runner that supports component testing. Please read [Vitest's comparison page](https://vitest.dev/guide/comparisons.html#cypress) for the latest information comparing Vitest and Cypress.
+- [اختبار المكونات في Cypress](https://on.cypress.io/component) للمكونات التي يتوقع أن تعمل بشكل صحيح بعد تصيير التنسيقات بشكل صحيح أو تفعيل الأحداث الأصلية للـDOM. يمكن استخدامه مع مكتبة الاختبارات عبر ملحق [@testing-library/cypress](https://testing-library.com/docs/cypress-testing-library/intro).
 
-### Mounting Libraries {#mounting-libraries}
+  الفروق الرئيسية بين Vitest و مشغلات الاختبار في المتصفح هي السرعة و سياق التنفيذ. ببساطة، مشغلات المتصفح، مثل Cypress، يمكنها الكشف عن المشاكل التي لا يمكن لمشغلات Node، مثل Vitest، الكشف عنها (مثل مشاكل التنسيقات، الأحداث الأصلية الحقيقية للـDOM، وملفات تعريف الارتباط، والتخزين المحلي، وفشل الشبكة)، ولكن مشغلات المتصفح أبطأ بكثير من Vitest لأنها تفتح متصفحاً، و تصرف ملفات التنسيقات، وأكثر من ذلك. Cypress هو مشغل متصفح يدعم اختبار المكونات. يرجى قراءة [صفحة مقارنة Vitest](https://vitest.dev/guide/comparisons.html#cypress) للحصول على المعلومات الأخيرة حول مقارنة Vitest و Cypress.
 
-Component testing often involves mounting the component being tested in isolation, triggering simulated user input events, and asserting on the rendered DOM output. There are dedicated utility libraries that make these tasks simpler.
+### وصل المكتبات {#mounting-libraries}
 
-- [`@testing-library/vue`](https://github.com/testing-library/vue-testing-library) is a Vue testing library focused on testing components without relying on implementation details. Built with accessibility in mind, its approach also makes refactoring a breeze. Its guiding principle is that the more tests resemble the way software is used, the more confidence they can provide.
+  يتضمن اختبار المكونات عادةً وصل المكون الذي يُختبر بشكل مستقل، وتشغيل أحداث إدخال المستخدم المحاكية، وتأكيد على الناتج المُصيّر للـDOM. هناك مكتبات مساعدة مخصصة تجعل هذه المهام أسهل.
 
-- [`@vue/test-utils`](https://github.com/vuejs/test-utils) is the official low-level component testing library that was written to provide users access to Vue specific APIs. It's also the lower-level library `@testing-library/vue` is built on top of.
+- [`@testing-library/vue`](https://github.com/testing-library/vue-testing-library) هي مكتبة اختبارات Vue متخصصة في اختبار المكونات دون الاعتماد على التفاصيل التنفيذية. تأخذ بعين الاعتبار سهولة الوصول، يجعل نهجها أيضًا إعادة هيكلة البرمجيات بسهولة. يتبنى مبدؤها أنه كلما كانت الاختبارات أكثر تشابهًا مع طريقة استخدام البرمجيات، زادت الثقة التي تمنحها.
 
-We recommend using `@testing-library/vue` for testing components in applications, as its focus aligns better with the testing priorities of applications. Use `@vue/test-utils` only if you are building advanced components that require testing Vue-specific internals.
+- [`@vue/test-utils`](https://github.com/vuejs/test-utils) هي المكتبة الرسمية لاختبار المكونات على المستوى الأدنى التي كتبت لتوفر للمستخدمين الوصول إلى الواجهات البرمجبة الخاصة بـVue. كما أنها المكتبة ذات المستوى الأدنى التي بنيت عليها `@testing-library/vue`.
 
-### Other Options {#other-options-1}
+ نوصي باستخدام `testing-library/vue@` لاختبار المكونات في التطبيقات، لأن تركيزها يتوافق أفضل مع أولويات اختبار التطبيقات. استخدم `vue/test-utils@` فقط إذا كنت تبني مكونات متقدمة تتطلب اختبار الواجهات البرمجية الخاصة بـVue.
+
+### خيارات أخرى {#other-options-1}
 
 - [Nightwatch](https://v2.nightwatchjs.org/) is an E2E test runner with Vue Component Testing support. ([Example Project](https://github.com/nightwatchjs-community/todo-vue) in Nightwatch v2)
 
-## E2E Testing {#e2e-testing}
+- [Nightwatch](https://v2.nightwatchjs.org/) هو مشغل اختبارات E2E مع دعم اختبار مكونات Vue. ([مشروع مثال]((https://github.com/nightwatchjs-community/todo-vue) في Nightwatch v2)
 
-While unit tests provide developers with some degree of confidence, unit and component tests are limited in their abilities to provide holistic coverage of an application when deployed to production. As a result, end-to-end (E2E) tests provide coverage on what is arguably the most important aspect of an application: what happens when users actually use your applications.
+## الاختبارات الشاملة {#e2e-testing}
 
-End-to-end tests focus on multi-page application behavior that makes network requests against your production-built Vue application. They often involve standing up a database or other backend and may even be run against a live staging environment.
+على الرغم من أن اختبارات الوحدات توفر للمطورين بعض الدرجة من الثقة، إلا أن اختبارات الوحدات واختبارات للمكونات محدودة في قدرتها على توفير تغطية شاملة للتطبيق عند النشر إلى الإنتاج. بالتالي، توفر الاختبارات الشاملة (E2E) التغطية على ما يمكن أن يعتبر أهم جانب من التطبيق: ماذا يحدث عندما يستخدم المستخدمون تطبيقاتك بشكل فعلي.
 
-End-to-end tests will often catch issues with your router, state management library, top-level components (e.g. an App or Layout), public assets, or any request handling. As stated above, they catch critical issues that may be impossible to catch with unit tests or component tests.
+تركز الاختبارات الشاملة على سلوك التطبيقات متعددة الصفحات التي تقوم بطلبات شبكة في تطبيق Vue الذي صار في مرحلة الإنتاج. وتشمل عادةً تشغيل قاعدة بيانات أو خلفية أخرى وقد  تشغل حتى في بيئة تجريبية مباشرة.
 
-End-to-end tests do not import any of your Vue application's code, but instead rely completely on testing your application by navigating through entire pages in a real browser.
+الاختبارات الشاملة تلتقط عادةً مشاكل مع موجه التطبيق، مكتبة إدارة الحالة، المكونات على المستوى الأعلى (على سبيل المثال، مكونات App أو Layout)، الملحقات العامة أو أي معالجة للطلب. كما ذكرنا أعلاه، فإنها تلتقط المشاكل الحرجة التي قد تكون مستحيلة الالتقاط مع اختبارات الوحدات أو اختبارات المكونات.
 
-End-to-end tests validate many of the layers in your application. They can either target your locally built application, or even a live Staging environment. Testing against your Staging environment not only includes your frontend code and static server, but all associated backend services and infrastructure.
+لا تقوم الاختبارات الشاملة باستيراد أي شيء من شيفرة تطبيق Vue، بل تعتمد بالكامل على اختبار التطبيق عن طريق التنقل بين الصفحات بالكامل في متصفح حقيقي.
 
-> The more your tests resemble the way your software is used, the more confidence they can give you. - [Kent C. Dodds](https://twitter.com/kentcdodds/status/977018512689455106) - Author of the Testing Library
+تقوم الاختبارات الشاملة بتحقق من العديد من الطبقات في التطبيق. يمكنها أن تستهدف التطبيق المبني محليًا، أو حتى بيئة تجريبية مباشرة. اختبار بيئة تجريبية مباشرة لا تتضمن فقط شيفرة واجهة المستخدم الأمامية والخادم الثابت، بل تشمل جميع خدمات الخلفية والبنية المرتبطة.
 
-By testing how user actions impact your application, E2E tests are often the key to higher confidence in whether an application is functioning properly or not.
+> كلما كانت اختباراتك مشابهة لطريقة استخدام البرمجيات الخاصة بك، كلما أعطتك المزيد من الثقة. - [Kent C. Dodds](https://twitter.com/kentcdodds/status/977018512689455106) - مؤلف Testing Library
 
-### Choosing an E2E Testing Solution {#choosing-an-e2e-testing-solution}
+باختبار كيف تؤثر عمليات المستخدمين على التطبيق، فإن الاختبارات الشاملة هي غالبًا مفتاح الثقة الأعلى في ما إذا كان التطبيق يعمل بشكل صحيح أم لا.
 
-While end-to-end (E2E) testing on the web has gained a negative reputation for unreliable (flaky) tests and slowing down development processes, modern E2E tools have made strides forward to create more reliable, interactive, and useful tests. When choosing an E2E testing framework, the following sections provide some guidance on things to keep in mind when choosing a testing framework for your application.
+### إختيار أداة الاختبارات الشاملة {#choosing-an-e2e-testing-solution}
 
-#### Cross-browser testing {#cross-browser-testing}
+على الرغم من أن الاختبارات الشاملة على الويب حصلت على سمعة سلبية بسبب اختبارات غير موثوق بها (غير مستقرة) وتبطئ عملية التطوير، إلا أن أدوات الاختبارات الشاملة الحديثة قد أجرت خطوات متقدمة لإنشاء اختبارات أكثر ثباتًا  تفاعلًا وفائدة. عند اختيار إطار عمل اختبارات شاملة، فإن الأقسام التالية توفر بعض الإرشادات حول الأشياء التي يجب أخذها بعين الاعتبار عند اختيار إطار عمل اختبارات لتطبيقك.
 
-One of the primary benefits that end-to-end (E2E) testing is known for is its ability to test your application across multiple browsers. While it may seem desirable to have 100% cross-browser coverage, it is important to note that cross browser testing has diminishing returns on a team's resources due the additional time and machine power required to run them consistently. As a result, it is important to be mindful of this trade-off when choosing the amount of cross-browser testing your application needs.
+#### الاختبار عبر عدة متصفحات {#cross-browser-testing}
 
-#### Faster feedback loops {#faster-feedback-loops}
+واحدة من الفوائد الرئيسية المعروفة عن الاختبارات الشاملة هي قدرتها على اختبار التطبيق عبر عدة متصفحات. على الرغم من أنه قد يبدو مرغوبًا أن يكون لديك تغطية متصفح متعددة 100٪، إلا أنه من المهم ملاحظة أن اختبار المتصفحات المتعددة لديها عوائد تناقصية على موارد الفريق بسبب الوقت الإضافي وقوة الجهاز المطلوبة لتشغيلها بشكل مستمر. بالتالي، من المهم أن تكون على وعي بهذه التنازلات عند اختيار مقدار اختبار المتصفحات المتعددة التي تحتاجها لتطبيقك.
 
-One of the primary problems with end-to-end (E2E) tests and development is that running the entire suite takes a long time. Typically, this is only done in continuous integration and deployment (CI/CD) pipelines. Modern E2E testing frameworks have helped to solve this by adding features like parallelization, which allows for CI/CD pipelines to often run magnitudes faster than before. In addition, when developing locally, the ability to selectively run a single test for the page you are working on while also providing hot reloading of tests can help to boost a developer's workflow and productivity.
+#### حلقات رد أسرع {#faster-feedback-loops}
 
-#### First-class debugging experience {#first-class-debugging-experience}
+واحدة من المشاكل الرئيسية للاختبارات الشاملة والتطوير هي أن تشغيل الجملة بأكملها يستغرق وقتًا طويلاً. عادة ما يتم فعل ذلك فقط في الدورات المستمرة للدمج والتسليم (CI / CD). قدمت إطارات الاختبارات الشاملة الحديثة مساعدة لحل هذه المشكلة من خلال إضافة ميزات مثل التوازي، والتي تسمح لدورات CI / CD بتشغيل أسرع بكثير من السابق. بالإضافة إلى ذلك، عند التطوير محليًا، يمكن أن تساعد القدرة على تشغيل اختبار واحد للصفحة التي تعمل عليها بينما توفر إعادة التحميل النشطة للاختبارات على تعزيز سير عمل المطور وإنتاجيته.
 
-While developers have traditionally relied on scanning logs in a terminal window to help determine what went wrong in a test, modern end-to-end (E2E) test frameworks allow developers to leverage tools that they are already familiar with, e.g. browser developer tools.
+#### تجربة تنقيح الأخطاء بدرجة أولى {#first-class-debugging-experience}
 
-#### Visibility in headless mode {#visibility-in-headless-mode}
+بالرغم من أن المطورين عادة ما يعتمدون على قراءة السجلات في نافذة الطرفية للمساعدة في تحديد ما هو الخطأ في الاختبار، إلا أن إطارات الاختبارات الشاملة الحديثة تسمح للمطورين بالاستفادة من الأدوات المتعودين، على سبيل المثال، أدوات التطوير في المتصفح.
 
-When end-to-end (E2E) tests are run in continuous integration / deployment pipelines, they are often run in headless browsers (i.e., no visible browser is opened for the user to watch). A critical feature of modern E2E testing frameworks is the ability to see snapshots and/or videos of the application during testing, providing some insight into why errors are happening. Historically, it was tedious to maintain these integrations.
+#### الاستظهار في الوضع غير الرسومي {#visibility-in-headless-mode}
 
-### Recommendation {#recommendation-2}
+عند تشغيل الاختبارات الشاملة في الدورات المستمرة للدمج والتسليم، تشغل في المتصفحات بدون واجهة رسومية (أي، لا يُفتح متصفح مرئي للمستخدم لمشاهدته). وهي ميزة هامة لإطارات الاختبارات الشاملة الحديثة هي القدرة على رؤية لقطات و / أو مقاطع فيديو للتطبيق أثناء الاختبار، مما يوفر بعض الإطلاع على سبب حدوث الأخطاء. تاريخيًا، كان من الصعب الحفاظ على عمليات الدمج هذه.
 
-- [Cypress](https://www.cypress.io/)
+### التوصية {#recommendation-2}
 
-  Overall, we believe Cypress provides the most complete E2E solution with features like an informative graphical interface, excellent debuggability, built-in assertions and stubs, flake-resistance, parallelization, and snapshots. As mentioned above, it also provides support for [Component Testing](https://docs.cypress.io/guides/component-testing/introduction). However, it only supports Chromium-based browsers and Firefox.
+- [cypress](https://www.cypress.io/)
 
-### Other Options {#other-options-2}
+  إجمالا، نعتقد أن Cypress يوفر أفضل حل للاختبارات الشاملة مع ميزات مثل واجهة رسومية ثرية بالمعلومات، وممتازة في التصحيح، والتأكيدات المدمجة والمحاكيات، والقدرة على التحمل، والتوازي، واللقطات. كما ذكرنا أعلاه، فإنه يوفر أيضًا دعمًا ل[اختبار المكونات](https://docs.cypress.io/guides/component-testing/introduction). ومع ذلك، فإنه يدعم فقط المتصفحات المستندة على Chromium و Firefox.
 
-- [Playwright](https://playwright.dev/) is also a great E2E testing solution with a wider range of browser support (mainly WebKit). See [Why Playwright](https://playwright.dev/docs/why-playwright) for more details.
+### خيارات أخرى {#other-options-2}
 
-- [Nightwatch v2](https://v2.nightwatchjs.org/) is an E2E testing solution based on [Selenium WebDriver](https://www.npmjs.com/package/selenium-webdriver). This gives it the widest browser support range.
+- [Playwright](https://playwright.dev/)  هو أيضًا حل ممتاز للاختبارات الشاملة مع نطاق أوسع من دعم المتصفحات (بشكل رئيسي WebKit). انظر [لماذا Playwright](https://playwright.dev/docs/why-playwright) لمزيد من التفاصيل.
 
-## Recipes {#recipes}
+- [Nightwatch v2](https://v2.nightwatchjs.org/)  هو حل للاختبارات الشاملة مبني على [Selenium WebDriver](https://www.npmjs.com/package/selenium-webdriver). وهذا يعطيه نطاقًا أوسع في دعم المتصفحات.
 
-### Adding Vitest to a Project {#adding-vitest-to-a-project}
+## وصفات {#recipes}
 
-In a Vite-based Vue project, run:
+### إضافة Vitest إلى مشروع {#adding-vitest-to-a-project}
+
+في مشروع Vue المستند على Vite، قم بتشغيل:
 
 ```sh
 > npm install -D vitest happy-dom @testing-library/vue
 ```
 
-Next, update the Vite configuration to add the `test` option block:
+بعد ذلك، قم بتحديث إعدادات Vite لإضافة كتلة خيار `test`:
 
 ```js{6-12}
 // vite.config.js
@@ -294,17 +299,17 @@ import { defineConfig } from 'vite'
 export default defineConfig({
   // ...
   test: {
-    // enable jest-like global test APIs
+    //تمكين الواجهة البرمجية العامة للاختبار مثل jest
     globals: true,
-    // simulate DOM with happy-dom
-    // (requires installing happy-dom as a peer dependency)
+    // محاكاة DOM مع happy-dom
+    // (يتطلب تثبيت happy-dom كإعتمادية مساوية)
     environment: 'happy-dom'
   }
 })
 ```
 
 :::tip
-If you are using TypeScript, add `vitest/globals` to the `types` field in your `tsconfig.json`.
+إذا كنت تستخدم TypeScript، قم بإضافة `vitest/globals` إلى حقل `types` في ملف `tsconfig.json` الخاص بك.
 
 ```json
 // tsconfig.json
@@ -317,7 +322,7 @@ If you are using TypeScript, add `vitest/globals` to the `types` field in your `
 ```
 :::
 
-Then create a file ending in `*.test.js` in your project. You can place all test files in a test directory in project root, or in test directories next to your source files. Vitest will automatically search for them using the naming convention.
+ ثم أنشئ ملفًا بامتداد `test.js.*` في مشروعك. يمكنك وضع جميع ملفات الاختبار في  مجلد الاختبار في جذر المشروع، أو في مجلدات اختبار بجوار ملفات المصدر الخاصة بك. سيبحث Vitest عنها تلقائيًا باستخدام الترتيب المصطلح عليه.
 
 ```js
 // MyComponent.test.js
@@ -331,12 +336,12 @@ test('it should work', () => {
     }
   })
 
-  // assert output
+  // تأكيد الناتج
   getByText('...')
 })
 ```
 
-Finally, update `package.json` to add the test script and run it:
+أخيرًا، قم بتحديث `package.json` لإضافة نص أمر الاختبار وتشغيله:
 
 ```json{4}
 {
@@ -351,18 +356,18 @@ Finally, update `package.json` to add the test script and run it:
 > npm test
 ```
 
-### Testing Composables {#testing-composables}
+### اختبار الدوال التركيبية {#testing-composables}
 
-> This section assumes you have read the [Composables](/guide/reusability/composables.html) section.
+> قبل قراءة هذا القسم يجب أولا أن تكون قد اطلعت على قسم [الدوال التركيبية](/guide/reusability/composables.html).
 
-When it comes to testing composables, we can divide them into two categories: composables that do not rely on a host component instance, and composables that do.
+عندما يتعلق الأمر باختبارات الدوال التركيبية، يمكننا تقسيمها إلى فئتين: الدوال التركيبية التي لا تعتمد على نسخة مكون مضيفة، والدوال التركيبية التي تعتمد عليه.
 
-A composable depends on a host component instance when it uses the following APIs:
+تعتمد الدالة التركيبية على نسخة مكون مضيفة عند استخدامها للواجهات التالية:
 
-- Lifecycle hooks
-- Provide / Inject
+- خطافات دورة الحياة
+- دوال أو خيارات Provide / Inject
 
-If a composable only uses Reactivity APIs, then it can be tested by directly invoking it and asserting its returned state / methods:
+إذا كانت الدالة التركيبية تستخدم فقط الواجهات البرمجية التفاعلية ، فإنه يمكن أن يتم اختبارها عن طريق استدعاءها مباشرة وتأكيد الحالة / التوابع التي أُرجعت:
 
 ```js
 // counter.js
@@ -392,7 +397,7 @@ test('useCounter', () => {
 })
 ```
 
-A composable that relies on lifecycle hooks or Provide / Inject needs to be wrapped in a host component to be tested. We can create a helper like the following:
+الدالة التركيبية التي تعتمد على خطافات دورة الحياة أو Provide / Inject يجب تغليفها في مكون مضيف لتُختبر. يمكننا إنشاء دالة مساعدة مثل ما يلي:
 
 ```js
 // test-utils.js
@@ -403,13 +408,13 @@ export function withSetup(composable) {
   const app = createApp({
     setup() {
       result = composable()
-      // suppress missing template warning
+      // حذف تحذير القالب المفقود
       return () => {}
     }
   })
   app.mount(document.createElement('div'))
-  // return the result and the app instance
-  // for testing provide / unmount
+  // إرجاع النتيجة ونسخة التطبيق
+  // لاختبار provide / unmount
   return [result, app]
 }
 ```
@@ -419,16 +424,16 @@ import { useFoo } from './foo'
 
 test('useFoo', () => {
   const [result, app] = withSetup(() => useFoo(123))
-  // mock provide for testing injections
+  // محاكاة provide لاختبار الحقن
   app.provide(...)
-  // run assertions
+  // تشغيل التأكيدات
   expect(result.foo.value).toBe(1)
-  // trigger onUnmounted hook if needed
+  // تشغيل خطاف onUnmounted إذا لزم الأمر
   app.unmount()
 })
 ```
 
-For more complex composables, it could also be easier to test it by writing tests against the wrapper component using [Component Testing](#component-testing) techniques.
+بالنسبة للدوال التركيبية المعقدة أكثر، يمكن أن يكون من الأسهل أيضًا اختبارها عن طريق كتابة اختبارات للمكون المغلف باستخدام تقنيات [اختبار المكون](#component-testing).
 
 <!--
 TODO more testing recipes can be added in the future e.g.
