@@ -1,8 +1,8 @@
-# State Management {#state-management}
+#  إدارة الحالة{#state-management}
 
-## What is State Management? {#what-is-state-management}
+## ما هي إدارة الحالة؟ {#what-is-state-management}
 
-Technically, every Vue component instance already "manages" its own reactive state. Take a simple counter component as an example:
+تقنيا، "تدير" كل نسخة مكون  Vue حالتها التفاعلية. اختر مثالا بسيطا مثل مكون العداد:
 
 <div class="composition-api">
 
@@ -10,16 +10,16 @@ Technically, every Vue component instance already "manages" its own reactive sta
 <script setup>
 import { ref } from 'vue'
 
-// state
+// الحالة
 const count = ref(0)
 
-// actions
+// الأحداث
 function increment() {
   count.value++
 }
 </script>
 
-<!-- view -->
+<!-- الواجهة -->
 <template>{{ count }}</template>
 ```
 
@@ -29,13 +29,13 @@ function increment() {
 ```vue
 <script>
 export default {
-  // state
+  // الحالة
   data() {
     return {
       count: 0
     }
   },
-  // actions
+  // الأحداث
   methods: {
     increment() {
       this.count++
@@ -44,44 +44,43 @@ export default {
 }
 </script>
 
-<!-- view -->
+<!-- الواجهة -->
 <template>{{ count }}</template>
 ```
 
 </div>
 
-It is a self-contained unit with the following parts:
+إنها وحدة مستقلة تحتوي على الأجزاء التالية:
 
-- The **state**, the source of truth that drives our app;
-- The **view**, a declarative mapping of the **state**;
-- The **actions**, the possible ways the state could change in reaction to user inputs from the **view**.
+- **الحالة**، مصدر الحقيقة الذي يوجه التطبيق;
+- **الواجهة**، تجسيد تصريحي لل**الحالة**;
+- **الأحداث**، الطرق الممكنة التي يمكن أن تغير الحالة بالرد على إدخالات المستخدم من **الواجهة**.
 
-This is a simple representation of the concept of "one-way data flow":
+هذا تمثيل بسيط لمفهوم "التدفق أحادي الإتجاه للبيانات ":
 
 <p style="text-align: center">
   <img alt="state flow diagram" src="./images/state-flow.png" width="252px" style="margin: 40px auto">
 </p>
 
-However, the simplicity starts to break down when we have **multiple components that share a common state**:
+ومع ذلك ، تبدأ البساطة في الانهيار عندما يكون لدينا ** مكونات متعددة تشترك في حالة مشتركة **:
 
-1. Multiple views may depend on the same piece of state.
-2. Actions from different views may need to mutate the same piece of state.
+1. أكثر من واجهة قد تعتمد على نفس الحالة.
+2. قد تحتاج الأحداث من واجهات مختلفة إلى تغيير نفس الحالة.
 
-For case one, a possible workaround is by "lifting" the shared state up to a common ancestor component, and then pass it down as props. However, this quickly gets tedious in component trees with deep hierarchies, leading to another problem known as [Prop Drilling](/guide/components/provide-inject.html#prop-drilling).
+بالنسبة للحالة الأولى ، يمكن أن يكون الحل هو محاولة "رفع" الحالة المشتركة إلى المكون الجذري ، ثم تمريرها إلى الأسفل كخاصيات. ومع ذلك ، يصبح هذا مملًا بسرعة في شجرة المكونات مع هرميات عميقة ، مما يؤدي إلى مشكلة أخرى معروفة باسم [التمرير العميق](/guide/components/provide-inject.html#prop-drilling).
 
-For case two, we often find ourselves resorting to solutions such as reaching for direct parent / child instances via template refs, or trying to mutate and synchronize multiple copies of the state via emitted events. Both of these patterns are brittle and quickly lead to unmaintainable code.
+بالنسبة للحالة الثانية ، نجد أنفسنا نتعامل مع بعض الحلول مثل الوصول إلى نسخ المكون الأب / الإبن المباشرة عبر مرجع القالب، أو محاولة تغيير ومزامنة نسخ متعددة من الحالة عبر الأحداث المنشورة. كلا هذين النموذجين غير متينين ويؤديان بسرعة إلى شيفرة غير قابلة للصيانة.
 
-A simpler and more straightforward solution is to extract the shared state out of the components, and manage it in a global singleton. With this, our component tree becomes a big "view", and any component can access the state or trigger actions, no matter where they are in the tree!
+حل أبسط وأكثر وضوحًا هو استخراج الحالة المشتركة من المكونات ، وإدارتها في نسخة واحدة عامة. مع هذا، تصبح شجرة المكونات لدينا "كواجهة كبيرة" ، ويمكن لأي مكون الوصول إلى الحالة أو تشغيل الأحداث، بغض النظر عن تموضعم في الشجرة!
 
-## Simple State Management with Reactivity API {#simple-state-management-with-reactivity-api}
+## إدارة بسيطة للحالة عبر الواجهة التفاعلية {#simple-state-management-with-reactivity-api}
 
 <div class="options-api">
 
-In Options API, reactive data is declared using the `data()` option. Internally, the object returned by `data()` is made reactive via the [`reactive()`](/api/reactivity-core.html#reactive) function, which is also available as a public API.
-
+في واجهة الخيارات،  تُعرف البيانات التفاعلية باستخدام خيار `()data`. داخليًا، يُجعل الكائن المعاد من `()data`  تفاعليا عبر دالة [`()reactive`](/api/reactivity-core.html#reactive) ، والتي أيضًا متاحة كواجهة برمجية عامة.
 </div>
 
-If you have a piece of state that should be shared by multiple instances, you can use [`reactive()`](/api/reactivity-core.html#reactive) to create a reactive object, and then import it into multiple components:
+إذا كان لديك جزء من الحالة يجب مشاركته بين عدة نسخ ، يمكنك استخدام [`()reactive`](/api/reactivity-core.html#reactive) لإنشاء كائن تفاعلي ، ثم استيراده إلى عدة مكونات:
 
 ```js
 // store.js
@@ -100,7 +99,7 @@ export const store = reactive({
 import { store } from './store.js'
 </script>
 
-<template>From A: {{ store.count }}</template>
+<template>من المكون A: {{ store.count }}</template>
 ```
 
 ```vue
@@ -109,7 +108,7 @@ import { store } from './store.js'
 import { store } from './store.js'
 </script>
 
-<template>From B: {{ store.count }}</template>
+<template>من المكون B: {{ store.count }}</template>
 ```
 
 </div>
@@ -129,7 +128,7 @@ export default {
 }
 </script>
 
-<template>From A: {{ store.count }}</template>
+<template>من المكون A: {{ store.count }}</template>
 ```
 
 ```vue
@@ -146,24 +145,24 @@ export default {
 }
 </script>
 
-<template>From B: {{ store.count }}</template>
+<template>من المكون B: {{ store.count }}</template>
 ```
 
 </div>
 
-Now whenever the `store` object is mutated, both `<ComponentA>` and `<ComponentB>` will update their views automatically - we have a single source of truth now.
+الآن عندما يتم تغيير كائن `()store` ، سيتم تحديث وجهات نظر `<ComponentA>` و `<ComponentB>` تلقائيًا - لدينا مصدر واحد للحقيقة الآن.
 
-However, this also means any component importing `store` can mutate it however they want:
+ومع ذلك ، يعني هذا أيضًا أن أي مكون يستورد `()store` يمكنه تغييره كما يريد:
 
 ```vue-html{2}
 <template>
   <button @click="store.count++">
-    From B: {{ store.count }}
+     B من المكون: {{ store.count }}
   </button>
 </template>
 ```
 
-While this works in simple cases, global state that can be arbitrarily mutated by any component is not going to be very maintainable in the long run. To ensure the state-mutating logic is centralized like the state itself, it is recommended to define methods on the store with names that express the intention of the actions:
+على الرغم من أن هذا يعمل في الحالات البسيطة، إلا أن الحالة العامة التي يمكن تغييرها عشوائيًا بواسطة أي مكون لن تكون قابلة للصيانة بشكل مستدام. لضمان مركزية منطق تغيير الحالة مثل مركزية الحالة نفسها، ينصح بتعريف التوابع على المخزن المركزي بأسماء تعبر عن المراد من الأحداث:
 
 ```js{6-8}
 // store.js
@@ -180,36 +179,36 @@ export const store = reactive({
 ```vue-html{2}
 <template>
   <button @click="store.increment()">
-    From B: {{ store.count }}
+    من المكون B: {{ store.count }}
   </button>
 </template>
 ```
 
 <div class="composition-api">
 
-[Try it in the Playground](https://sfc.vuejs.org/#eyJBcHAudnVlIjoiPHNjcmlwdCBzZXR1cD5cbmltcG9ydCBDb21wb25lbnRBIGZyb20gJy4vQ29tcG9uZW50QS52dWUnXG5pbXBvcnQgQ29tcG9uZW50QiBmcm9tICcuL0NvbXBvbmVudEIudnVlJ1xuPC9zY3JpcHQ+XG5cbjx0ZW1wbGF0ZT5cbiAgPENvbXBvbmVudEEgLz5cbiAgPENvbXBvbmVudEIgLz5cbjwvdGVtcGxhdGU+IiwiaW1wb3J0LW1hcC5qc29uIjoie1xuICBcImltcG9ydHNcIjoge1xuICAgIFwidnVlXCI6IFwiaHR0cHM6Ly9zZmMudnVlanMub3JnL3Z1ZS5ydW50aW1lLmVzbS1icm93c2VyLmpzXCJcbiAgfVxufSIsIkNvbXBvbmVudEEudnVlIjoiPHNjcmlwdCBzZXR1cD5cbmltcG9ydCB7IHN0b3JlIH0gZnJvbSAnLi9zdG9yZS5qcydcbjwvc2NyaXB0PlxuXG48dGVtcGxhdGU+XG4gIDxkaXY+XG4gICAgPGJ1dHRvbiBAY2xpY2s9XCJzdG9yZS5pbmNyZW1lbnQoKVwiPlxuICAgICAgRnJvbSBBOiB7eyBzdG9yZS5jb3VudCB9fVxuICAgIDwvYnV0dG9uPlxuICA8L2Rpdj5cbjwvdGVtcGxhdGU+IiwiQ29tcG9uZW50Qi52dWUiOiI8c2NyaXB0IHNldHVwPlxuaW1wb3J0IHsgc3RvcmUgfSBmcm9tICcuL3N0b3JlLmpzJ1xuPC9zY3JpcHQ+XG5cbjx0ZW1wbGF0ZT5cbiAgPGRpdj5cbiAgICA8YnV0dG9uIEBjbGljaz1cInN0b3JlLmluY3JlbWVudCgpXCI+XG4gICAgICBGcm9tIEI6IHt7IHN0b3JlLmNvdW50IH19XG4gICAgPC9idXR0b24+XG4gIDwvZGl2PlxuPC90ZW1wbGF0ZT4iLCJzdG9yZS5qcyI6ImltcG9ydCB7IHJlYWN0aXZlIH0gZnJvbSAndnVlJ1xuXG5leHBvcnQgY29uc3Qgc3RvcmUgPSByZWFjdGl2ZSh7XG4gIGNvdW50OiAwLFxuICBpbmNyZW1lbnQoKSB7XG4gICAgdGhpcy5jb3VudCsrXG4gIH1cbn0pIn0=)
+[اختبرها في حقل التجارب](https://sfc.vuejs.org/#eNq1U0tOwzAQvcrIG1q1jVlHLaLhGt60qUtdGtuynYAUZcVH3IQrkdswsdP0EwGVENlkZjzz3rzxuCRzraMi5yQmU5saoR1Y7nJ9w6TItDIO7hT+JZduDmujMriK6CHUlF71U5N+atKmTmmgQQJ0HM/0buE4egDTIyp6Fkl8ZEq7AjImgXWSLXS0tUqihLIpYu2BZSQGH2liyN74jGyc0zam1K7TpqWtjZS5p2hFJpdOZDziNpssjXq03CAwI+MjDIrBgpuJ4XLFDTc/YZ6l9nAb2IrJCqWcTvT7yyjBOmU4VN2AvY9wv4x2JQrwFtrL3DklYSXMjBHjdozAbboT6QO6AU7I1PAM2xkMGWnLoGzJo1ThoKCqIIb6tX6Dz4/6BY3n+h2deUtCA0tgp0jfu77T1fgfzX+UHL7LhCcXC9+3j5I7iYYvUieKg8rwWpjkTz4jVdLiZPwgZl32wK+3byuGa7+nRzr2y+82wobeR6P9zg1J9QUKe2ej)
 
 </div>
 <div class="options-api">
 
-[Try it in the Playground](https://sfc.vuejs.org/#eyJBcHAudnVlIjoiPHNjcmlwdD5cbmltcG9ydCBDb21wb25lbnRBIGZyb20gJy4vQ29tcG9uZW50QS52dWUnXG5pbXBvcnQgQ29tcG9uZW50QiBmcm9tICcuL0NvbXBvbmVudEIudnVlJ1xuICBcbmV4cG9ydCBkZWZhdWx0IHtcbiAgY29tcG9uZW50czoge1xuICAgIENvbXBvbmVudEEsXG4gICAgQ29tcG9uZW50QlxuICB9XG59XG48L3NjcmlwdD5cblxuPHRlbXBsYXRlPlxuICA8Q29tcG9uZW50QSAvPlxuICA8Q29tcG9uZW50QiAvPlxuPC90ZW1wbGF0ZT4iLCJpbXBvcnQtbWFwLmpzb24iOiJ7XG4gIFwiaW1wb3J0c1wiOiB7XG4gICAgXCJ2dWVcIjogXCJodHRwczovL3NmYy52dWVqcy5vcmcvdnVlLnJ1bnRpbWUuZXNtLWJyb3dzZXIuanNcIlxuICB9XG59IiwiQ29tcG9uZW50QS52dWUiOiI8c2NyaXB0PlxuaW1wb3J0IHsgc3RvcmUgfSBmcm9tICcuL3N0b3JlLmpzJ1xuXG5leHBvcnQgZGVmYXVsdCB7XG4gIGRhdGEoKSB7XG4gICAgcmV0dXJuIHtcbiAgICAgIHN0b3JlXG4gICAgfVxuICB9XG59XG48L3NjcmlwdD5cblxuPHRlbXBsYXRlPlxuICA8ZGl2PlxuICAgIDxidXR0b24gQGNsaWNrPVwic3RvcmUuaW5jcmVtZW50KClcIj5cbiAgICAgIEZyb20gQToge3sgc3RvcmUuY291bnQgfX1cbiAgICA8L2J1dHRvbj5cbiAgPC9kaXY+XG48L3RlbXBsYXRlPiIsIkNvbXBvbmVudEIudnVlIjoiPHNjcmlwdD5cbmltcG9ydCB7IHN0b3JlIH0gZnJvbSAnLi9zdG9yZS5qcydcblxuZXhwb3J0IGRlZmF1bHQge1xuICBkYXRhKCkge1xuICAgIHJldHVybiB7XG4gICAgICBzdG9yZVxuICAgIH1cbiAgfVxufVxuPC9zY3JpcHQ+XG5cbjx0ZW1wbGF0ZT5cbiAgPGRpdj5cbiAgICA8YnV0dG9uIEBjbGljaz1cInN0b3JlLmluY3JlbWVudCgpXCI+XG4gICAgICBGcm9tIEI6IHt7IHN0b3JlLmNvdW50IH19XG4gICAgPC9idXR0b24+XG4gIDwvZGl2PlxuPC90ZW1wbGF0ZT4iLCJzdG9yZS5qcyI6ImltcG9ydCB7IHJlYWN0aXZlIH0gZnJvbSAndnVlJ1xuXG5leHBvcnQgY29uc3Qgc3RvcmUgPSByZWFjdGl2ZSh7XG4gIGNvdW50OiAwLFxuICBpbmNyZW1lbnQoKSB7XG4gICAgdGhpcy5jb3VudCsrXG4gIH1cbn0pIn0=)
+[اختبرها في حقل التجارب](https://sfc.vuejs.org/#eNrdVEtu4zAMvQqhTRO0sWZtpINJ5hrauLIyVSeWDIpOCwRe9YPepFdqblPakt18iiLrGgasR1PUe4+StmJR19mmMSIX86DR1vRbOVvVHgn+ev4642gBK/QVXGTyM9RNujhNXZ6mLlMqgHLmoU8vzapo1gTbLqqHxJDHAOytfHUUWHa4VY7fuRwJMyBT1euCDCOA+R51eRRZ9pG5HCeIKxFVzKqizu6Cd2xGT0SlH0GJkZoSrKbDStwS1SGXMqx0J/EuZB7/SR5l2DiylclMqGY36O+DQS6sRFLT15Ac3BicoXGlQYPf1TxKPak7mMJSDjv0VVu3EMijgXZsVY+5EDfp6xaVBRWT6WABGmrQDQhiuQiYxDntKe2mH/DwpiHyDkqL10ogrZWAP3pt9X+GkZd1Gk3FiiZTJdK09GyTlkx7dhzaFnLYPe9e4P1t98SDx90rg0VaSsa1IgUZORzug8M9+4PNO8+4/rCdZdxgAls2GoWm0GQ3n17Fa2A0SXsXKNl5PWZP0p3AtHL41R+YPQ2Db3RrQ+R+eTm4NhXtB9GtrPA=)
 
 </div>
 
-:::tip
-Note the click handler uses `store.increment()` with parentheses - this is necessary to call the method with the proper `this` context since it's not a component method.
+:::tip ملاحظة
+تجدر الملاحظة أن معالج النقر يستخدم `()store.increment` مع الأقواس - هذا ضروري لاستدعاء الدالة في سياق `this` المناسب لأنها ليست دالة تابعة للمكون.
 :::
 
-Although here we are using a single reactive object as a store, you can also share reactive state created using other [Reactivity APIs](/api/reactivity-core.html) such as `ref()` or `computed()`, or even return global state from a [Composable](/guide/reusability/composables.html):
+على الرغم من أننا نستخدم هنا كائنًا متغيرًا واحدًا كمخزن، يمكنك أيضًا مشاركة الحالة المتغيرة التي أنشئت باستخدام واجهات [التفاعلية](/api/reactivity-core.html) الأخرى مثل `()ref` أو `()computed`، أو حتى إرجاع الحالة العامة من [الدالة التركيبية](/guide/reusability/composables.html):
 
 ```js
 import { ref } from 'vue'
 
-// global state, created in module scope
+//حالة عامة، أنشئت في نطاق الوحدة
 const globalCount = ref(1)
 
 export function useCount() {
-  // local state, created per-component
+  //حالة محلية، أنشئت لكل مكون
   const localCount = ref(1)
 
   return {
@@ -219,25 +218,25 @@ export function useCount() {
 }
 ```
 
-The fact that Vue's reactivity system is decoupled from the component model makes it extremely flexible.
+حقيقة أن نظام التفاعلية في Vue مفصول عن نموذج المكون يجعله مرنًا للغاية.
 
-## SSR Considerations {#ssr-considerations}
+## اعتبارات التصيير من جانب الخادوم {#ssr-considerations}
 
-If you are building an application that leverages [Server-Side Rendering (SSR)](./ssr), the above pattern can lead to issues due to the store being a singleton shared across multiple requests. This is discussed in [more details](./ssr#cross-request-state-pollution) in the SSR guide.
+إذا كنت تبني تطبيقًا يستفيد من [التصيير من جانب الخادوم (SSR)](./ssr)، فقد يؤدي النمط أعلاه إلى مشاكل بسبب المخزن الذي يكون متغيرًا واحدًا مشتركًا عبر عدة طلبات. يُناقش هذا [بالتفصيل](./ssr#cross-request-state-pollution) في دليل SSR.
 
-## Pinia {#pinia}
+## مكتبة Pinia  {#pinia}
 
-While our hand-rolled state management solution will suffice in simple scenarios, there are many more things to consider in large-scale production applications:
+على الرغم من أن حلنا لإدارة الحالة سيكفي في السيناريوهات البسيطة، إلا أنه يوجد العديد من الأمور التي يجب اعتبارها في التطبيقات الإنتاجية الكبيرة:
 
-- Stronger conventions for team collaboration
-- Integrating with the Vue DevTools, including timeline, in-component inspection, and time-travel debugging
-- Hot Module Replacement
-- Server-Side Rendering support
+- اصطلاحات متينة للتعاون بين الفريق
+- الدمج مع أدوات تطوير Vue، بما في ذلك الجدول الزمني وفحص المكون وتصحيح الأخطاء في الوقت الحقيقي
+- الاستبدال النشط للوحدات
+- دعم التصيير من جانب الخادوم
 
-[Pinia](https://pinia.vuejs.org) is a state management library that implements all of the above. It is maintained by the Vue core team, and works with both Vue 2 and Vue 3.
+[Pinia](https://pinia.vuejs.org) هي مكتبة إدارة الحالة تقوم كل ما سبق. و هي تحت التطوير و الصيانة من طرف فريق Vue الأساسي، وتععمل مع  إصداري Vue 2 و Vue 3.
 
-Existing users may be familiar with [Vuex](https://vuex.vuejs.org/), the previous official state management library for Vue. With Pinia serving the same role in the ecosystem, Vuex is now in maintenance mode. It still works, but will no longer receive new features. It is recommended to use Pinia for new applications.
+يمكن أن يكون المستخدمون الحاليون معتادين على [Vuex](https://vuex.vuejs.org/)، مكتبة إدارة الحالة الرسمية السابقة لـ Vue. مع هذا Pinia تقوم بنفس الدور في النظام البيئي،  Vuex الآن في وضع الصيانة. لا تزال يعمل، ولكن لن تتلقى المزيد من الميزات الجديدة. ينصح باستخدام Pinia للتطبيقات الجديدة.
 
-Pinia started out as an exploration of what the next iteration of Vuex could look like, incorporating many ideas from core team discussions for Vuex 5. Eventually, we realized that Pinia already implements most of what we wanted in Vuex 5, and decided to make it the new recommendation instead.
+بدأ Pinia كاستكشاف لما يمكن أن يبدو كمرحلة تالية من Vuex، وتضمين العديد من الأفكار من مناقشات الفريق الأساسي لـ Vuex 5. في النهاية، وجدنا أن Pinia تنفذ بالفعل معظم ما نريده في Vuex 5، وقررنا جعلها الاقتراح الجديد بدلاً من ذلك.
 
-Compared to Vuex, Pinia provides a simpler API with less ceremony, offers Composition-API-style APIs, and most importantly, has solid type inference support when used with TypeScript.
+بالمقارنة مع Vuex، يوفر Pinia واجهة برمجية أبسط مع أقل تعقيدات، و التي تعتبر متطابقة مع الواجهة التركيبية، والأمر الأكثر أهمية، هو توفير دعم استدلال متين للأنواع عند استخدامه مع TypeScript.
