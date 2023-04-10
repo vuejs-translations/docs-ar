@@ -297,7 +297,7 @@ export const sidebar: ThemeConfig['sidebar'] = {
       text: 'مواضيع اضافية',
       items: [
         {
-          text: 'Vue طرق استخام',
+          text: 'Vue طرق استخدام',
           link: '/guide/extras/ways-of-using-vue'
         },
         {
