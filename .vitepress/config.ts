@@ -284,11 +284,11 @@ export const sidebar: ThemeConfig['sidebar'] = {
       items: [
         { text: 'نظرة شاملة', link: '/guide/typescript/overview' },
         {
-          text: 'و الواجهة التركيبية لبرمجة التطبيقات TS',
+          text: 'TS و الواجهة التركيبية',
           link: '/guide/typescript/composition-api'
         },
         {
-          text: 'و واجهة الخيارات لبرمجة التطبيقات TS',
+          text: ' TS و واجهة الخيارات ',
           link: '/guide/typescript/options-api'
         }
       ]
@@ -301,7 +301,7 @@ export const sidebar: ThemeConfig['sidebar'] = {
           link: '/guide/extras/ways-of-using-vue'
         },
         {
-          text: 'الأسئلة الشائعة عن الواجهة التركيبية لبرمجة التطبيقات',
+          text: 'الأسئلة الشائعة عن الواجهة التركيبية ',
           link: '/guide/extras/composition-api-faq'
         },
         {
@@ -352,7 +352,7 @@ export const sidebar: ThemeConfig['sidebar'] = {
       ]
     },
     {
-      text: 'الواجهة التركيبية لبرمجة التطبيقات',
+      text: 'الواجهة التركيبية ',
       items: [
         { text: 'setup()دالةال', link: '/api/composition-api-setup' },
         {
@@ -378,7 +378,7 @@ export const sidebar: ThemeConfig['sidebar'] = {
       ]
     },
     {
-      text: 'واجهة الخيارات لبرمجة التطبيقات',
+      text: 'واجهة الخيارات ',
       items: [
         { text: 'الخيارات : الحالة', link: '/api/options-state' },
         { text: 'الخيارات : التصيير', link: '/api/options-rendering' },

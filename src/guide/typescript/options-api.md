@@ -1,20 +1,20 @@
-# TypeScript with Options API {#typescript-with-options-api}
+# TypeScript مع واجهات الخيارات {#typescript-with-options-api}
 
-> This page assumes you've already read the overview on [Using Vue with TypeScript](./overview).
+> لقراءة هذه الصفحة يجب عليك أولا الاطلاع على  [استخدام Vue مع TypeScript](./overview).
 
-:::tip
-While Vue does support TypeScript usage with Options API, it is recommended to use Vue with TypeScript via Composition API as it offers simpler, more efficient and more robust type inference.
+:::tip ملاحظة
+على الرغم من أن Vue تدعم استخدام TypeScript مع واجهات الخيارات ، إلا أنه يفضل استخدام Vue مع TypeScript عبر الواجهة التركيبية لأنه تقدم استنباط أكثر بساطة وفعالية وأكثر صلابة للأنواع.
 :::
 
-## Typing Component Props {#typing-component-props}
+## تحديد النوع للخاصيات {#typing-component-props}
 
-Type inference for props in Options API requires wrapping the component with `defineComponent()`. With it, Vue is able to infer the types for the props based on the `props` option, taking additional options such as `required: true` and `default` into account:
+استنباط النوع للخاصيات في واجهة الخيارات يتطلب تغليف المكون بالدالة `()defineComponent`. بالاعتماد على ذلك، يمكن لـ Vue استنباط أنواع الخاصيات بناءً على خيار `props` ، وذلك بالاعتماد على خيارات إضافية مثل `required: true` و `default`:
 
 ```ts
 import { defineComponent } from 'vue'
 
 export default defineComponent({
-  // type inference enabled
+  //  تمكين استنباط النوع
   props: {
     name: String,
     id: [Number, String],
@@ -30,9 +30,9 @@ export default defineComponent({
 })
 ```
 
-However, the runtime `props` options only support using constructor functions as a prop's type - there is no way to specify complex types such as objects with nested properties or function call signatures.
+ومع ذلك ، لا تدعم خيارات `props` الوقت التشغيلي استخدام دوال المنشئات كنوع خاصية - لا توجد طريقة لتحديد أنواع معقدة مثل الكائنات مع الخاصيات المتداخلة أو توقيعات استدعاء الدوال.
 
-To annotate complex props types, we can use the `PropType` utility type:
+لتوصيف أنواع خاصيات معقدة ، يمكننا استخدام نوع `PropType`:
 
 ```ts
 import { defineComponent } from 'vue'
@@ -47,27 +47,27 @@ interface Book {
 export default defineComponent({
   props: {
     book: {
-      // provide more specific type to `Object`
+      // توفير نوع أكثر تحديدًا لـ `Object`
       type: Object as PropType<Book>,
       required: true
     },
-    // can also annotate functions
+    // يمكنك أيضًا توصيف الدوال
     callback: Function as PropType<(id: number) => void>
   },
   mounted() {
     this.book.title // string
     this.book.year // number
 
-    // TS Error: argument of type 'string' is not
-    // assignable to parameter of type 'number'
+    //  خطأ TS: لا يمكن تعيين نوع الوسيط 
+    // 'string' إلى نوع الوسيط 'number'
     this.callback?.('123')
   }
 })
 ```
 
-### Caveats {#caveats}
+### تنبيهات {#caveats}
 
-If your TypeScript version is less than `4.7`, you have to be careful when using function values for `validator` and `default` prop options - make sure to use arrow functions:
+إذا كان إصدار TypeScript الخاص بك أقل من `4.7` ، فيجب عليك الانتباه عند استخدام قيم الدوال لخيارات خاصية `validator` و `default` - تأكد من استخدام الدوال السهمية:
 
 ```ts
 import { defineComponent } from 'vue'
@@ -82,7 +82,7 @@ export default defineComponent({
   props: {
     bookA: {
       type: Object as PropType<Book>,
-      // Make sure to use arrow functions if your TypeScript version is less than 4.7
+      // تأكد من استخدام الدوال السهمية إذا كان إصدار TypeScript الخاص بك أقل من 4.7
       default: () => ({
         title: 'Arrow Function Expression'
       }),
@@ -92,11 +92,11 @@ export default defineComponent({
 })
 ```
 
-This prevents TypeScript from having to infer the type of `this` inside these functions, which, unfortunately, can cause the type inference to fail. It was a previous [design limitation](https://github.com/microsoft/TypeScript/issues/38845), and now has been improved in [TypeScript 4.7](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-4-7.html#improved-function-inference-in-objects-and-methods).
+هذا يمنع TypeScript من تحديد نوع `this` داخل هذه الدوال ، وللأسف ، يمكن أن يؤدي ذلك إلى فشل استنباط النوع. كانت [قيود التصميم](https://github.com/microsoft/TypeScript/issues/38845) سابقة, والآن قد حسنت في الإصدار [TypeScript 4.7](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-4-7.html#improved-function-inference-in-objects-and-methods).
 
-## Typing Component Emits {#typing-component-emits}
+## تحديد النوع للإرسالات {#typing-component-emits}
 
-We can declare the expected payload type for an emitted event using the object syntax of the `emits` option. Also, all non-declared emitted events will throw a type error when called:
+يمكننا تعريف نوع بيانات الحمولة المتوقع للحدث المرسل باستخدام صيغة الكائن لخيار `emits`. كما يمكن أن ترسل جميع الأحداث غير المعرفة بالإعلان عن خطأ في النوع عند الاستدعاء:
 
 ```ts
 import { defineComponent } from 'vue'
@@ -104,25 +104,25 @@ import { defineComponent } from 'vue'
 export default defineComponent({
   emits: {
     addBook(payload: { bookName: string }) {
-      // perform runtime validation
+      // تنفيذ التحقق من الصحة في الوقت التشغيلي
       return payload.bookName.length > 0
     }
   },
   methods: {
     onSubmit() {
       this.$emit('addBook', {
-        bookName: 123 // Type error!
+        bookName: 123 // خطأ في النوع
       })
 
-      this.$emit('non-declared-event') // Type error!
+      this.$emit('non-declared-event')// خطأ في النوع
     }
   }
 })
 ```
 
-## Typing Computed Properties {#typing-computed-properties}
+## تحديد النوع للخاصيات المحسوبة {#typing-computed-properties}
 
-A computed property infers its type based on its return value:
+تحدد الخاصية المحسوبة نوعها بناءً على قيمة الإرجاع:
 
 ```ts
 import { defineComponent } from 'vue'
@@ -144,7 +144,7 @@ export default defineComponent({
 })
 ```
 
-In some cases, you may want to explicitly annotate the type of a computed property to ensure its implementation is correct:
+في بعض الحالات ، قد ترغب في توصيف نوع خاصية محسوبة بشكل صريح لضمان صحة تنفيذها:
 
 ```ts
 import { defineComponent } from 'vue'
@@ -156,12 +156,12 @@ export default defineComponent({
     }
   },
   computed: {
-    // explicitly annotate return type
+    // توصيف نوع الإرجاع بشكل صريح
     greeting(): string {
       return this.message + '!'
     },
 
-    // annotating a writable computed property
+    // توصيف خاصية محسوبة قابلة للكتابة
     greetingUppercased: {
       get(): string {
         return this.greeting.toUpperCase()
@@ -174,11 +174,11 @@ export default defineComponent({
 })
 ```
 
-Explicit annotations may also be required in some edge cases where TypeScript fails to infer the type of a computed property due to circular inference loops.
+قد تكون التوصيفات الصريحة مطلوبة أيضًا في بعض الحالات الحدودية التي يفشل TypeScript في تحديد نوع خاصية محسوبة بسبب حلقات استنباط دائرية.
 
-## Typing Event Handlers {#typing-event-handlers}
+## تحديد النوع لمعالجات الأحداث {#typing-event-handlers}
 
-When dealing with native DOM events, it might be useful to type the argument we pass to the handler correctly. Let's take a look at this example:
+عند التعامل مع أحداث DOM الأصلية ، قد يكون من المفيد تحديد النوع الصحيح للوسيط الذي نمرره إليه. دعونا نلقي نظرة على هذا المثال:
 
 ```vue
 <script lang="ts">
@@ -187,7 +187,7 @@ import { defineComponent } from 'vue'
 export default defineComponent({
   methods: {
     handleChange(event) {
-      // `event` implicitly has `any` type
+      // الوسيط `event` يحتوي على نوع `any` بشكل ضمني
       console.log(event.target.value)
     }
   }
@@ -199,7 +199,7 @@ export default defineComponent({
 </template>
 ```
 
-Without type annotation, the `event` argument will implicitly have a type of `any`. This will also result in a TS error if `"strict": true` or `"noImplicitAny": true` are used in `tsconfig.json`. It is therefore recommended to explicitly annotate the argument of event handlers. In addition, you may need to explicitly cast properties on `event`:
+بدون توصيف النوع ، سيكون الوسيط `event` ضمنيًا بنوع `any`. سيؤدي هذا أيضًا إلى خطأ TS إذا كان `"strict": true` أو `"noImplicitAny": true` يتم استخدامهما في `tsconfig.json`. لذلك ، يُوصى بتوصيف الوسيط الوارد من معالجات الأحداث بشكل صريح. بالإضافة إلى ذلك ، قد تحتاج إلى تحويل صريح للخاصيات على `event`:
 
 ```ts
 import { defineComponent } from 'vue'
@@ -213,9 +213,9 @@ export default defineComponent({
 })
 ```
 
-## Augmenting Global Properties {#augmenting-global-properties}
+## توسيع الخاصيات العامة {#augmenting-global-properties}
 
-Some plugins install globally available properties to all component instances via [`app.config.globalProperties`](/api/application.html#app-config-globalproperties). For example, we may install `this.$http` for data-fetching or `this.$translate` for internationalization. To make this play well with TypeScript, Vue exposes a `ComponentCustomProperties` interface designed to be augmented via [TypeScript module augmentation](https://www.typescriptlang.org/docs/handbook/declaration-merging.html#module-augmentation):
+بعض الملحقات تثبت خاصيات متاحة على المستوى العام لجميع نسخ المكونات عبر [`app.config.globalProperties`](/api/application.html#app-config-globalproperties). على سبيل المثال ، قد نثبت `this.$http` لجلب البيانات أو `this.$translate` للترجمة التوطينية. لجعل هذا يعمل بشكل جيد مع TypeScript ، يوفر Vue واجهة `ComponentCustomProperties` المصممة للتوسيع عبر [توسيع وحدة TypeScript](https://www.typescriptlang.org/docs/handbook/declaration-merging.html#module-augmentation):
 
 ```ts
 import axios from 'axios'
@@ -228,18 +228,18 @@ declare module 'vue' {
 }
 ```
 
-See also:
+اطلع أيضا على
 
-- [TypeScript unit tests for component type extensions](https://github.com/vuejs/core/blob/main/packages/dts-test/componentTypeExtensions.test-d.tsx)
+- [ اختبار  الوحدات لـTypeScript لامتدادات أنواع المكونات](https://github.com/vuejs/core/blob/main/packages/dts-test/componentTypeExtensions.test-d.tsx)
 
-### Type Augmentation Placement {#type-augmentation-placement}
+### موضع توسيع النوع {#type-augmentation-placement}
 
-We can put this type augmentation in a `.ts` file, or in a project-wide `*.d.ts` file. Either way, make sure it is included in `tsconfig.json`. For library / plugin authors, this file should be specified in the `types` property in `package.json`.
+يمكننا وضع توسيع النوع في ملف `ts.` ، أو في ملف `d.ts.*` على مستوى المشروع. بأي طريقة من الطرق ، تأكد من تضمينه في `tsconfig.json`. لمؤلفي  الملحقات / المكتبات ، يجب تحديد هذا الملف في خاصية `types` في `package.json`.
 
-In order to take advantage of module augmentation, you will need to ensure the augmentation is placed in a [TypeScript module](https://www.typescriptlang.org/docs/handbook/modules.html). That is to say, the file needs to contain at least one top-level `import` or `export`, even if it is just `export {}`. If the augmentation is placed outside of a module, it will overwrite the original types rather than augmenting them!
+للاستفادة من توسيع الوحدة ، ستحتاج إلى التأكد من وضع التوسيع في [وحدة TypeScript](https://www.typescriptlang.org/docs/handbook/modules.html). أي أن الملف يحتاج إلى أن يحتوي على `import` أو `export` على المستوى الأعلى واحد على الأقل ، حتى لو كان مجرد `export {}`. إذا وُضع التوسيع خارج الوحدة، فسيقوم بالكتابة فوق أصل الأنواع بدلاً من توسيعها!
 
 ```ts
-// Does not work, overwrites the original types.
+// لا يعمل ، يكتب فوق أصل الأنواع.
 declare module 'vue' {
   interface ComponentCustomProperties {
     $translate: (key: string) => string
@@ -248,7 +248,7 @@ declare module 'vue' {
 ```
 
 ```ts
-// Works correctly
+// يعمل بشكل صحيح
 export {}
 
 declare module 'vue' {
@@ -258,9 +258,9 @@ declare module 'vue' {
 }
 ```
 
-## Augmenting Custom Options {#augmenting-custom-options}
+## توسيع الخيارات المخصصة {#augmenting-custom-options}
 
-Some plugins, for example `vue-router`, provide support for custom component options such as `beforeRouteEnter`:
+بعض الملحقات ، على سبيل المثال `vue-router` ، توفر دعم خيارات المكونات المخصصة مثل `beforeRouteEnter`:
 
 ```ts
 import { defineComponent } from 'vue'
@@ -272,7 +272,7 @@ export default defineComponent({
 })
 ```
 
-Without proper type augmentation, the arguments of this hook will implicitly have `any` type. We can augment the `ComponentCustomOptions` interface to support these custom options:
+بدون توسيع نوع صحيح ، ستكون وسائط هذا الخطاف ذات نوع `any` بشكل ضمني. يمكننا توسيع واجهة `ComponentCustomOptions` لدعم هذه الخيارات المخصصة:
 
 ```ts
 import { Route } from 'vue-router'
@@ -284,10 +284,10 @@ declare module 'vue' {
 }
 ```
 
-Now the `beforeRouteEnter` option will be properly typed. Note this is just an example - well-typed libraries like `vue-router` should automatically perform these augmentations in their own type definitions.
+الآن سيكون خيار `beforeRouteEnter` محدد النوع بشكل صحيح. لاحظ أن هذا مجرد مثال - يجب أن تقوم المكتبات محددة الأنواع بشكل جيد مثل `vue-router` بتنفيذ هذه التوسيعات بشكل تلقائي في تعريفات أنواعها الخاصة.
 
-The placement of this augmentation is subject the [same restrictions](#type-augmentation-placement) as global property augmentations.
+موضع هذا التوسيع يعتمد على [نفس القيود](#type-augmentation-placement) مثل توسيع الخاصيات العامة.
 
-See also:
+اطلع أيضا على
 
-- [TypeScript unit tests for component type extensions](https://github.com/vuejs/core/blob/main/packages/dts-test/componentTypeExtensions.test-d.tsx)
+- [ اختبار  الوحدات لـTypeScript لامتدادات أنواع المكونات](https://github.com/vuejs/core/blob/main/packages/dts-test/componentTypeExtensions.test-d.tsx)
