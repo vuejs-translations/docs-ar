@@ -2,150 +2,150 @@
 outline: deep
 ---
 
-# Composition API FAQ {#composition-api-faq}
+# الأسئلة الشائعة حول الواجهة التركيبية {#composition-api-faq}
 
-:::tip
-This FAQ assumes prior experience with Vue - in particular, experience with Vue 2 while primarily using Options API.
+:::tip ملاحظة
+نفترض في هذا الدليل أن يكون لديك خبرة سابقة مع Vue - وبالتحديد، خبرة مع Vue 2 أثناء استخدام واجهة  الخيارات بشكل أساسي.
 :::
 
-## What is Composition API? {#what-is-composition-api}
+## ماهي الواجهة التركيبية؟ {#what-is-composition-api}
 
-<VueSchoolLink href="https://vueschool.io/lessons/introduction-to-the-vue-js-3-composition-api" title="Free Composition API Lesson"/>
+<VueSchoolLink href="https://vueschool.io/lessons/introduction-to-the-vue-js-3-composition-api" title="درس مجاني حول الواجهة التركيبية"/>
 
-Composition API is a set of APIs that allows us to author Vue components using imported functions instead of declaring options. It is an umbrella term that covers the following APIs:
+الواجهة التركيبية هي مجموعة من الواجهات البرمجية التي تسمح لنا بكتابة مكونات Vue باستخدام دوال مستوردة بدلاً من التصريح بالخيارات. وهي مصطلح  يغطي الواجهات البرمجية التالية:
 
-- [Reactivity API](/api/reactivity-core.html), e.g. `ref()` and `reactive()`, that allows us to directly create reactive state, computed state, and watchers.
+- [الواجهة البرمجية التفاعلية](/api/reactivity-core.html)، على سبيل المثال `()ref` و `()reactive`، والتي تسمح لنا مباشرة بإنشاء حالة تفاعلية، حالة محسوبة، ودوال مراقبة.
 
-- [Lifecycle Hooks](/api/composition-api-lifecycle.html), e.g. `onMounted()` and `onUnmounted()`, that allow us to programmatically hook into the component lifecycle.
+- [خطافات دورة الحياة](/api/composition-api-lifecycle.html)، على سبيل المثال `()onMounted` و `()onUnmounted`، والتي تسمح لنا بربط الدوال بشكل برمجي مع دورة حياة المكون.
 
-- [Dependency Injection](/api/composition-api-dependency-injection.html), i.e. `provide()` and `inject()`, that allow us to leverage Vue's dependency injection system while using Reactivity APIs.
+- [حقن الاعتمادية](/api/composition-api-dependency-injection.html)، أي `()provide` و `()inject`، والتي تسمح لنا بالاستفادة من نظام حقن الاعتمادية في Vue أثناء استخدام الواجهات البرمجية التفاعلية.
 
-Composition API is a built-in feature of Vue 3 and [Vue 2.7](https://blog.vuejs.org/posts/vue-2-7-naruto.html). For older Vue 2 versions, use the officially maintained [`@vue/composition-api`](https://github.com/vuejs/composition-api) plugin. In Vue 3, it is also primarily used together with the [`<script setup>`](/api/sfc-script-setup.html) syntax in Single-File Components. Here's a basic example of a component using Composition API:
+لواجهة التركيبية هي ميزة مدمجة في Vue 3 و [Vue 2.7](https://blog.vuejs.org/posts/vue-2-7-naruto.html). لإصدارات Vue 2 الأقدم،  استخدم الملحق [`vue/composition-api@`](https://github.com/vuejs/composition-api). في Vue 3، يستخدم أيضًا بشكل أساسي مع صيغة [`<script setup>`](/api/sfc-script-setup.html) في المكونات أحادية الملف. هنا مثال أساسي لمكون يستخدم الواجهة التركيبية:
 
 ```vue
 <script setup>
 import { ref, onMounted } from 'vue'
 
-// reactive state
+// حالة تفاعلية
 const count = ref(0)
 
-// functions that mutate state and trigger updates
+// دوال تغيير الحالة وتحفيز التحديثات
 function increment() {
   count.value++
 }
 
-// lifecycle hooks
+// خطافات دورة الحياة
 onMounted(() => {
-  console.log(`The initial count is ${count.value}.`)
+  console.log(`العداد الأولي هو ${count.value}.`)
 })
 </script>
 
 <template>
-  <button @click="increment">Count is: {{ count }}</button>
+  <button @click="increment">قيمة العداد: {{ count }}</button>
 </template>
 ```
 
-Despite an API style based on function composition, **Composition API is NOT functional programming**. Composition API is based on Vue's mutable, fine-grained reactivity paradigm, whereas functional programming emphasizes immutability.
+على الرغم من أن الواجهة التركيبية تعتمد على أسلوب وظيفي يعتمد على تركيب الدوال، **إلا أن الواجهة التركيبية ليست برمجة وظيفية**. تعتمد الواجهة التركيبية على نموذج التفاعلية الدقيقة والقابلة للتغيير في Vue، بينما ترتكز البرمجة الوظيفية على عدم التغيير.
 
-If you are interested in learning how to use Vue with Composition API, you can set the site-wide API preference to Composition API using the toggle at the top of the left sidebar, and then go through the guide from the beginning.
+إذا كنت مهتمًا بتعلم كيفية استخدام Vue مع الواجهة التركيبية، يمكنك تعيين تفضيل   الواجهة التركيبية في كامل الموقع باستخدام مفتاح التبديل في أعلى الشريط الجانبي الأيسر، ثم الانتقال إلى الدليل من البداية.
 
-## Why Composition API? {#why-composition-api}
+## لماذا الواجهة التركيبية {#why-composition-api}
 
-### Better Logic Reuse {#better-logic-reuse}
+### إعادة استخدام الشيفرة البرمجية بشكل أفضل {#better-logic-reuse}
 
-The primary advantage of Composition API is that it enables clean, efficient logic reuse in the form of [Composable functions](/guide/reusability/composables.html). It solves [all the drawbacks of mixins](/guide/reusability/composables.html#vs-mixins), the primary logic reuse mechanism for Options API.
+الميزة الأساسية للواجهة التركيبية هي أنها تمكن إعادة استخدام الشيفرة البرمجية النظيفة والفعالة في شكل [دوال تركيبية](/guide/reusability/composables.html). وهي تحل [جميع عيوب المخلوطات](/guide/reusability/composables.html#vs-mixins)، والتي تعتبر آلية إعادة استخدام الشيفرة البرمجية الأساسية في واجهة الخيارات.
 
-Composition API's logic reuse capability has given rise to impressive community projects such as [VueUse](https://vueuse.org/), an ever-growing collection of composable utilities. It also serves as a clean mechanism for easily integrating stateful third-party services or libraries into Vue's reactivity system, for example [immutable data](/guide/extras/reactivity-in-depth.html#immutable-data), [state machines](/guide/extras/reactivity-in-depth.html#state-machines), and [RxJS](https://vueuse.org/rxjs/readme.html#vueuse-rxjs).
+قدرة إعادة استخدام الشيفرة البرمجية في الواجهة التركيبية أدت إلى ظهور مشاريع مجتمعية مثيرة مثل [VueUse](https://vueuse.org/)، وهي مجموعة من الأدوات التركيبية المتنامية باستمرار. كما أنها تعمل كآلية نظيفة لدمج الخدمات أو المكتبات الخارجية ذات الحالة في نظام التفاعلية في Vue بسهولة، على سبيل المثال [البيانات غير القابلة للتغيير](/guide/extras/reactivity-in-depth.html#immutable-data)، [الآلات الحالية](/guide/extras/reactivity-in-depth.html#state-machines)، و [RxJS](https://vueuse.org/rxjs/readme.html#vueuse-rxjs).
 
-### More Flexible Code Organization {#more-flexible-code-organization}
+### تنظيم أكثر مرونة للشيفرات {#more-flexible-code-organization}
 
-Many users love that we write organized code by default with Options API: everything has its place based on the option it falls under. However, Options API poses serious limitations when a single component's logic grows beyond a certain complexity threshold. This limitation is particularly prominent in components that need to deal with multiple **logical concerns**, which we have witnessed first hand in many production Vue 2 apps.
+يحب العديد من المستخدمين أن نكتب شيفرة منظمة بشكل افتراضي مع واجهة الخيارات: كل شيء له مكانه بناءً على الخيار الذي ينبني عليه. ومع ذلك، تفرض واجهة الخيارات قيودًا جديو عندما تتجاوز الشيفرة البرمجية لمكون واحد حدًا معينًا من التعقيد. وهذا القيد بارز بشكل خاص في المكونات التي تحتاج إلى التعامل مع العديد من **الوظائف المنطقية**، والتي شهدناها بشكل مباشر في العديد من تطبيقات Vue 2 التي تشتغل في طور الإنتاج.
 
-Take the folder explorer component from Vue CLI's GUI as an example: this component is responsible for the following logical concerns:
+خذ مكون مستكشف المجلدات من الواجهة الرسومية الخاصة بـ Vue CLI كمثال: هذا المكون مسؤول عن الوظائف المنطقية التالية:
 
-- Tracking current folder state and displaying its content
-- Handling folder navigation (opening, closing, refreshing...)
-- Handling new folder creation
-- Toggling show favorite folders only
-- Toggling show hidden folders
-- Handling current working directory changes
+- تتبع حالة المجلد الحالي وعرض محتوياته
+- التعامل مع تصفح المجلدات (فتح، إغلاق، تحديث...)
+- التعامل مع إنشاء مجلد جديد     
+- التبديل إلى عرض المجلدات المفضلة فقط
+- التبديل إلى عرض المجلدات المخفية
+- التعامل مع تغييرات مجلد العمل الحالي
 
-The [original version](https://github.com/vuejs/vue-cli/blob/a09407dd5b9f18ace7501ddb603b95e31d6d93c0/packages/@vue/cli-ui/src/components/folder/FolderExplorer.vue#L198-L404) of the component was written in Options API. If we give each line of code a color based on the logical concern it is dealing with, this is how it looks:
+النسخة [الأصلية](https://github.com/vuejs/vue-cli/blob/a09407dd5b9f18ace7501ddb603b95e31d6d93c0/packages/@vue/cli-ui/src/components/folder/FolderExplorer.vue#L198-L404) من المكون كتبت بواجهة الخيارات. إذا أعطينا كل سطر من الشيفرة لونًا بناءً على الوظيفة المنطقية التي يتعامل معها، هذا هو شكله:
 
 <img alt="folder component before" src="./images/options-api.png" width="129" height="500" style="margin: 1.2em auto">
 
-Notice how code dealing with the same logical concern is forced to be split under different options, located in different parts of the file. In a component that is several hundred lines long, understanding and navigating a single logical concern requires constantly scrolling up and down the file, making it much more difficult than it should be. In addition, if we ever intend to extract a logical concern into a reusable utility, it takes quite a bit of work to find and extract the right pieces of code from different parts of the file.
+لاحظ كيف تُجبر الشيفرة التي تتعامل مع نفس الوظيفة المنطقية على الانقسام تحت خيارات مختلفة، وتقع في أجزاء مختلفة من الملف. في مكون يتكون من عدة مئات من الأسطر، يتطلب فهم وتصفح وظيفة منطقية واحدة التمرير بين الأعلى والأسفل باستمرار، مما يجعل المهمة أكثر صعوبة مما ينبغي. بالإضافة إلى ذلك، إذا كنا ننوي استخراج وظيفة منطقية إلى أداة قابلة لإعادة الاستخدام، فإنها تتطلب الكثير من العمل لإيجاد واستخراج الأجزاء المناسبة من الشيفرة من أجزاء مختلفة من الملف.
 
-Here's the same component, before and after the [refactor into Composition API](https://gist.github.com/yyx990803/8854f8f6a97631576c14b63c8acd8f2e):
+هنا نفس المكون قبل وبعد [إعادة هيكلته يالواجهة التركيبية](https://gist.github.com/yyx990803/8854f8f6a97631576c14b63c8acd8f2e):
 
-![folder component after](./images/composition-api-after.png)
+![شكل مكون المتصفح بعد الهيكلة](./images/composition-api-after.png)
 
-Notice how the code related to the same logical concern can now be grouped together: we no longer need to jump between different options blocks while working on a specific logical concern. Moreover, we can now move a group of code into an external file with minimal effort, since we no longer need to shuffle the code around in order to extract them. This reduced friction for refactoring is key to the long-term maintainability in large codebases.
+لاحظ كيف يمكن تجميع الشيفرة المتعلقة بنفس الوظيفة المنطقية معًا الآن: لم نعد بحاجة إلى القفز بين كتل الخيارات المختلفة أثناء العمل على وظيفة منطقية محددة. علاوة على ذلك، يمكننا الآن نقل مجموعة من الشيفرة إلى ملف خارجي بجهد أدنى، لأننا لم نعد بحاجة إلى ترتيب الشيفرة من أجل استخراجها. هذا الاحتكاك المنخفض لإعادة الترتيب أمر أساسي لقابلية الصيانة على المدى الطويل في مجموعات الشيفرة الكبيرة.
 
-### Better Type Inference {#better-type-inference}
+### استنباط أفضل للأنواع {#better-type-inference}
 
-In recent years, more and more frontend developers are adopting [TypeScript](https://www.typescriptlang.org/) as it helps us write more robust code, make changes with more confidence, and provides a great development experience with IDE support. However, the Options API, originally conceived in 2013, was designed without type inference in mind. We had to implement some [absurdly complex type gymnastics](https://github.com/vuejs/core/blob/44b95276f5c086e1d88fa3c686a5f39eb5bb7821/packages/runtime-core/src/componentPublicInstance.ts#L132-L165) to make type inference work with the Options API. Even with all this effort, type inference for Options API can still break down for mixins and dependency injection.
+في السنوات الأخيرة، تبنى الكثير من مطوري الواجهة الأمامية [TypeScript](https://www.typescriptlang.org/) لأنه يساعدنا على كتابة شيفرة أكثر صلابة، وإجراء التغييرات بثقة أكبر، ويوفر تجربة تطوير رائعة مع دعم المحررات. ومع ذلك، واجهة الخيارات التي صممت في الأصل عام 2013، دون الأخذ في الاعتبار استنباط الأنواع. كان علينا تنفيذ بعض [التمارين  المعقدة بشكل سخيف](https://github.com/vuejs/core/blob/44b95276f5c086e1d88fa3c686a5f39eb5bb7821/packages/runtime-core/src/componentPublicInstance.ts#L132-L165) لجعل استنباط الأنواع يعمل مع واجهة الخيارات. حتى مع كل هذا الجهد، يمكن أن يتعطل استنباط الأنواع لواجهة الخيارات في المخاليط وحقن الإعتمادية.
 
-This had led many developers who wanted to use Vue with TS to lean towards Class API powered by `vue-class-component`. However, a class-based API heavily relies on ES decorators, a language feature that was only a stage 2 proposal when Vue 3 was being developed in 2019. We felt it was too risky to base an official API on an unstable proposal. Since then, the decorators proposal has gone through yet another complete overhaul, and finally reached stage 3 in 2022. In addition, class-based API suffers from logic reuse and organization limitations similar to Options API.
+هذا ما أدى بالعديد من المطورين الذين يريدون استخدام Vue مع TS يميلون نحو واجهة البرمجة الكائنية التي تعمل بواسطة `vue-class-component`. ومع ذلك، تعتمد واجهة البرمجة الكائنية بشكل كبير على مزيد من ES decorators، وهي ميزة لغة كانت مقترحة مرحلة 2 فقط عندما كان تم البدء في تطوير Vue 3 في عام 2019. شعرنا أنه من المخاطرة جدًا أن نقوم بتأسيس واجهة برمجة رسمية على مقترح غير مستقر. منذ ذلك الحين، مر مقترح decorators بتغييرات كاملة أخرى، ووصل أخيرًا إلى المرحلة 3 في عام 2022. بالإضافة إلى ذلك، تعاني واجهة البرمجة الكائنية من قيود إعادة استخدام الشيفرة وتنظيمها مماثلة لواجهة الخيارات.
 
-In comparison, Composition API utilizes mostly plain variables and functions, which are naturally type friendly. Code written in Composition API can enjoy full type inference with little need for manual type hints. Most of the time, Composition API code will look largely identical in TypeScript and plain JavaScript. This also makes it possible for plain JavaScript users to benefit from partial type inference.
+بالمقارنة، تستخدم واجهة البرمجة التركيبية متغيرات ودوال عادية بشكل أساسي، والتي تكون ودية للأنواع بشكل طبيعي. يمكن للشيفرة المكتوبة في واجهة البرمجة التركيبية الاستمتاع بالاستنباط الكامل للأنواع مع القليل من الحاجة إلى تلميحات الأنواع اليدوية. في معظم الأوقات، ستبدو الشيفرة المكتوبة في واجهة البرمجة التركيبية متطابقة تمامًا في TypeScript و JavaScript العادي. وهذا أيضًا يجعل من الممكن على مستخدمي JavaScript العادي الاستفادة من استنباط الأنواع الجزئي.
 
-### Smaller Production Bundle and Less Overhead {#smaller-production-bundle-and-less-overhead}
+### حزمة إنتاج أصغر وتكاليف أقل {#smaller-production-bundle-and-less-overhead}
 
-Code written in Composition API and `<script setup>` is also more efficient and minification-friendly than Options API equivalent. This is because the template in a `<script setup>` component is compiled as a function inlined in the same scope of the `<script setup>` code. Unlike property access from `this`, the compiled template code can directly access variables declared inside `<script setup>`, without an instance proxy in between. This also leads to better minification because all the variable names can be safely shortened.
+الشيفرة المكتوبة بواجهة البرمجة التركيبية و صسغى `<script setup>` أكثر كفاءة ودية للتقليل من حجمها مقارنة  بما يعادلها في واجهة الخيارات. هذا لأن القالب في عنصر `<script setup>` يترجم كدالة مضمنة في نفس نطاق شيفرة `<script setup>`. على عكس الوصول إلى الخاصية من `this`، يمكن لشيفرة القالب المترجمة الوصول مباشرة إلى المتغيرات المعلنة داخل `<script setup>`، دون وجود نسخة وسيط بينهما. وهذا أيضًا يؤدي إلى تقليل حجم الشيفرة بشكل أفضل لأن جميع أسماء المتغيرات يمكن تقليلها بأمان.
 
-## Relationship with Options API {#relationship-with-options-api}
+## العلاقة مع واجهة الخيارات {#relationship-with-options-api}
 
-### Trade-offs {#trade-offs}
+### التجاذبات {#trade-offs}
 
-Some users moving from Options API found their Composition API code less organized, and concluded that Composition API is "worse" in terms of code organization. We recommend users with such opinions to look at that problem from a different perspective.
+بعض المستخدمين الذين ينتقلون من واجهة الخيارات وجدوا أن شيفرة الواجهة التركيبية أقل تنظيمًا، واستنتجوا أن الواجهة التركيبية "أسوأ" من حيث تنظيم الشيفرة. نوصي المستخدمين الذين لديهم مثل هذه الآراء بالنظر إلى هذه المشكلة من منظور مختلف.
 
-It is true that Composition API no longer provides the "guard rails" that guide you to put your code into respective buckets. In return, you get to author component code like how you would write normal JavaScript. This means **you can and should apply any code organization best practices to your Composition API code as you would when writing normal JavaScript**. If you can write well-organized JavaScript, you should also be able to write well-organized Composition API code.
+صحيح أن الواجهة التركيبية لم تعد توفر "حواجز الحماية" التي توجهك لوضع شيفرتك في الحاويات المناسبة. وبالمقابل، يمكنك كتابة شيفرة المكون كما لو كنت تكتب JavaScript عادي. وهذا يعني **يمكنك ويجب عليك تطبيق أي ممارسات أفضل لتنظيم الشيفرة على شيفرة الواجهة التركيبية كما تفعل عند كتابة JavaScript عادي**. إذا كنت تستطيع كتابة JavaScript منظم، يجب أن تكون قادرًا أيضًا على كتابة شيفرة منظمة بالواجهة التركيبية .
 
-Options API does allow you to "think less" when writing component code, which is why many users love it. However, in reducing the mental overhead, it also locks you into the prescribed code organization pattern with no escape hatch, which can make it difficult to refactor or improve code quality in larger scale projects. In this regard, Composition API provides better long term scalability.
+واجهة الخيارات تسمح لك بـ "التفكير أقل" عند كتابة شيفرة المكون، وهذا هو السبب في أن العديد من المستخدمين يحبونها. ومع ذلك، في تقليل العبء الذهني، فإنه يقفلك في نمط تنظيم الشيفرة المحدد دون وجود مخرج، مما يجعل من الصعب إعادة ترتيب الشيفرة أو تحسين جودة الشيفرة في مشاريع أكبر حجمًا. من هذا المنطلق، توفر الواجهة التركيبية قابلية توسع أفضل على المدى الطويل.
 
-### Does Composition API cover all use cases? {#does-composition-api-cover-all-use-cases}
+### هل تغطي الواجهة التركيبية جميع حالات الاستخدام؟ {#does-composition-api-cover-all-use-cases}
 
-Yes in terms of stateful logic. When using Composition API, there are only a few options that may still be needed: `props`, `emits`, `name`, and `inheritAttrs`. If using `<script setup>`, then `inheritAttrs` is typically the only option that may require a separate normal `<script>` block.
+نعم من حيث المنطق الذي يحتوي على حالة. عند استخدام الواجهة التركيبية، هناك خيارات قليلة فقط قد تكون ما زالت مطلوبة: `props`، `emits`، `name`، و `inheritAttrs`. إذا كنت تستخدم `<script setup>`، فإن `inheritAttrs` هو الخيار الوحيد الذي قد يتطلب كتلة `<script>` عادية منفصلة.
 
-If you intend to exclusively use Composition API (along with the options listed above), you can shave a few kbs off your production bundle via a [compile-time flag](https://github.com/vuejs/core/tree/main/packages/vue#bundler-build-feature-flags) that drops Options API related code from Vue. Note this also affects Vue components in your dependencies.
+إذا كنت تنوي استخدام الواجهة التركيبية حصريًا (جنبًا إلى جنب مع الخيارات المذكورة أعلاه)، يمكنك تقليص بضعة كيلوبايتات من حزمة الإنتاج الخاصة بك عن طريق [علامة تصريف في وقت التشغيل](https://github.com/vuejs/core/tree/main/packages/vue#bundler-build-feature-flags) التي تحذف الشيفرة المتعلقة بواجهة الخيارات من Vue. لاحظ أن هذا يؤثر أيضًا على مكونات Vue في الاعتماديات الخاصة بك.
 
-### Can I use both APIs together? {#can-i-use-both-apis-together}
+### هل يمكنني استخدام الواجهتين مع بعض؟ {#can-i-use-both-apis-together}
 
-Yes. You can use Composition API via the [`setup()`](/api/composition-api-setup.html) option in an Options API component.
+نعم. يمكنك استخدام واجهة التركيبية عبر الخيار [`setup()`](/api/composition-api-setup.html) في مكون واجهة الخيارات.
 
-However, we only recommend doing so if you have an existing Options API codebase that needs to integrate with new features / external libraries written with Composition API.
+ومع ذلك، نوصي فقط بالقيام بذلك إذا كان لديك قاعدة شيفرات موجودة بالفعل تحتاج إلى التكامل مع ميزات / مكتبات خارجية جديدة مكتوبة بالواجهة التركيبية.
 
-### Will Options API be deprecated? {#will-options-api-be-deprecated}
+### هل ستُلغى واجهة الخيارات؟ {#will-options-api-be-deprecated}
 
-No, we do not have any plan to do so. Options API is an integral part of Vue and the reason many developers love it. We also realize that many of the benefits of Composition API only manifest in larger-scale projects, and Options API remains a solid choice for many low-to-medium-complexity scenarios.
+لا، ليس لدينا أي خطة للقيام بذلك. واجهة الخيارات هي جزء لا يتجزأ من Vue والسبب في ذلك أن العديد من المطورين يحبونها. ندرك أيضًا أن العديد من فوائد الواجهة التركيبية تظهر فقط في المشاريع ذات المستوى الأكبر، وواجهة الخيارات لا تزال خيارًا متينًا للعديد من السيناريوهات ذات المستوى المنخفض إلى المتوسط.
 
-## Relationship with Class API {#relationship-with-class-api}
+## العلاقة مع واجهة الكائنية {#relationship-with-class-api}
 
-We no longer recommend using Class API with Vue 3, given that Composition API provides great TypeScript integration with additional logic reuse and code organization benefits.
+نحن لم نعد نوصي باستخدام الواجهة الكائنية مع Vue 3، نظرًا لأن الواجهة التركيبية توفر تكاملًا رائعًا مع TypeScript مع فوائد إعادة الاستخدام الإضافية للشيفرة وتنظيمها.
 
-## Comparison with React Hooks {#comparison-with-react-hooks}
+## المقارنة مع خطافات React {#comparison-with-react-hooks}
 
-Composition API provides the same level of logic composition capabilities as React Hooks, but with some important differences.
+الواجهة التركيبية توفر نفس مستوى قدرات تركيب الشيفرة مثل خطافات React، ولكن مع بعض الاختلافات المهمة.
 
-React Hooks are invoked repeatedly every time a component updates. This creates a number of caveats that can confuse even seasoned React developers. It also leads to performance optimization issues that can severely affect development experience. Here are some examples:
+خطافات React تستدعى مرارًا وتكرارًا في كل مرة يُحدث فيها المكون. هذا يخلق عددًا من الحالات التي يمكن أن تربك حتى المطورين المتمرسين في React. كما أنه يؤدي إلى مشاكل تحسين الأداء التي يمكن أن تؤثر بشكل كبير على تجربة التطوير. وإليك بعض الأمثلة:
 
-- Hooks are call-order sensitive and cannot be conditional.
+- الخطافات حساسة لترتيب الاستدعاء ولا يمكن أن تكون شرطية.
 
-- Variables declared in a React component can be captured by a hook closure and become "stale" if the developer fails to pass in the correct dependencies array. This leads to React developers relying on ESLint rules to ensure correct dependencies are passed. However, the rule is often not smart enough and over-compensates for correctness, which leads to unnecessary invalidation and headaches when edge cases are encountered.
+- يمكن أن تُلتقط المتغيرات المعلنة في مكون React بواسطة مغلف الخطاف وتصبح "غير صالحة" إذا فشل المطور في تمرير مصفوفة الاعتماديات الصحيحة. وهذا يؤدي إلى أن يعتمد مطورو React على قواعد ESLint لضمان تمرير الاعتماديات الصحيحة. ومع ذلك، فإن القاعدة غالبًا ليست ذكية بما فيه الكفاية وتعوض عن الصحة، مما يؤدي إلى إلغاء غير ضروري وصداع عند مواجهة حالات قصوى.
 
-- Expensive computations require the use of `useMemo`, which again requires manually passing in the correct dependencies array.
+- تتطلب العمليات الحسابية المكلفة استخدام `useMemo`، والذي يتطلب مرة أخرى تمرير مصفوفة الاعتماديات الصحيحة يدويًا.
 
-- Event handlers passed to child components cause unnecessary child updates by default, and require explicit `useCallback` as an optimization. This is almost always needed, and again requires a correct dependencies array. Neglecting this leads to over-rendering apps by default and can cause performance issues without realizing it.
+- يتسبب معالجو الأحداث الممررة إلى المكونات الأبناء في تحديثات غير ضرورية للأبناء افتراضيًا، ويتطلب استخدام `useCallback` بشكل صريح كتحسين. وهذا مطلوب تقريبًا دائمًا، ويتطلب مرة أخرى مصفوفة الاعتماديات الصحيحة. وإهمال هذا يؤدي إلى إعادة تصيير التطبيقات افتراضيًا ويمكن أن يتسبب في مشاكل في الأداء دون أن ندرك ذلك.
 
-- The stale closure problem, combined with Concurrent features, makes it difficult to reason about when a piece of hooks code is run, and makes working with mutable state that should persist across renders (via `useRef`) cumbersome.
+- مشكلة المغلف الغير صالح، مجتمعة مع الميزات المتزامنة، تجعل من الصعب التفكير في متى تشغل قطعة من شيفرة الخطافات، وتجعل العمل مع الحالة القابلة للتغيير التي يجب أن تستمر عبر التصييرات (عبر `useRef`) مرهقة.
 
-In comparison, Vue Composition API:
+بالمقارنة، الواجهة التركيبية في Vue:
 
-- Invokes `setup()` or `<script setup>` code only once. This makes the code align better with the intuitions of idiomatic JavaScript usage as there are no stale closures to worry about. Composition API calls are also not sensitive to call order and can be conditional.
+- تستدعي شيفرة `()setup` أو `<script setup>` مرة واحدة فقط. وهذا يجعل الشيفرة تتوافق بشكل أفضل مع الحدس المتعلق باستخدام JavaScript النمطي لأنه لا توجد مغلفات غير صالحة للقلق بشأنها. كما أن استدعاء الواجهة التركيبية ليس حساسًا لترتيب الاستدعاء ويمكن أن يكون شرطيًا.
 
-- Vue's runtime reactivity system automatically collects reactive dependencies used in computed properties and watchers, so there's no need to manually declare dependencies.
+- يجمع نظام التفاعلية في وقت التشغيل في Vue تلقائيًا الاعتماديات التفاعلية المستخدمة في الخاصيات المحسوبة والمراقبة، لذا لا حاجة لإعلان الاعتماديات يدويًا.
 
-- No need to manually cache callback functions to avoid unnecessary child updates. In general, Vue's fine-grained reactivity system ensures child components only update when they need to. Manual child-update optimizations are rarely a concern for Vue developers.
+- لا حاجة لتخزين مؤقت لدوال رد النداء يدويًا لتجنب تحديثات الأبناء غير الضرورية. بشكل عام، يضمن نظام التفاعلية الدقيق في Vue أن تُحدث المكونات الأبناء فقط عندما يكون ذلك ضروريًا. وتحسينات تحديث الأبناء يدويًا نادرًا ما تكون مصدر قلق لمطوري Vue.
 
-We acknowledge the creativity of React Hooks, and it is a major source of inspiration for Composition API. However, the issues mentioned above do exist in its design and we noticed Vue's reactivity model happens to provide a way around them.
+نقرّ بالاعتراف بالإبداع في خطافات React، وهي مصدر إلهام رئيسي للواجهة التركيبية. ومع ذلك، فإن المشاكل المذكورة أعلاه موجودة في تصميمها ولوحظ أن نموذج التفاعلية في Vue يوفر طريقة للتغلب عليها.
