@@ -6,19 +6,19 @@ outline: deep
 import SpreadSheet from './demos/SpreadSheet.vue'
 </script>
 
-# Reactivity in Depth {#reactivity-in-depth}
+# التفاعلية بالتفصيل {#reactivity-in-depth}
 
-One of Vue’s most distinctive features is the unobtrusive reactivity system. Component state consists of reactive JavaScript objects. When you modify them, the view updates. It makes state management simple and intuitive, but it’s also important to understand how it works to avoid some common gotchas. In this section, we are going to dig into some of the lower-level details of Vue’s reactivity system.
+واحدة من أكثر ميزات Vue تميزًا هي نظام التفاعلية المنفرد. حالة المكون تتكون من كائنات JavaScript تفاعلية. عند تعديلها، تُحدث واجهة العرض. وهذا ما يجعل إدارة الحالة بسيطة وبديهية، ولكن من المهم أيضًا فهم كيفية عملها لتجنب بعض الأخطاء الشائعة. في هذا القسم ، سنقوم بالتنقيب في بعض التفاصيل على مستوى أدنى من نظام التفاعلية في Vue.
 
-## What is Reactivity? {#what-is-reactivity}
+## ماهي التفاعلية؟ {#what-is-reactivity}
 
-This term comes up in programming quite a bit these days, but what do people mean when they say it? Reactivity is a programming paradigm that allows us to adjust to changes in a declarative manner. The canonical example that people usually show, because it’s a great one, is an Excel spreadsheet:
+هذا المصطلح يظهر في البرمجة كثيرًا في هذه الأيام، ولكن ماذا يقصد الناس عندما يقولون ذلك؟ التفاعلية هي نمط برمجي يسمح لنا بالتكيف مع التغييرات بطريقة تصريحية. المثال الكلاسيكي الذي يظهره الناس عادة، لأنه مثال رائع، هو جدول بيانات Excel:
 
 <SpreadSheet />
 
-Here cell A2 is defined via a formula of `= A0 + A1` (you can click on A2 to view or edit the formula), so the spreadsheet gives us 3. No surprises there. But if you update A0 or A1, you'll notice that A2 automagically updates too.
+هنا تُعرف الخلية A2 عبر صيغة `= A0 + A1` (يمكنك النقر فوق A2 لعرض أو تحرير الصيغة) ، لذلك يعطينا جدول البيانات 3. لا مفاجآت هناك. ولكن إذا قمت بتحديث A0 أو A1 ، فستلاحظ أن A2 يُحدث تلقائيًا أيضًا.
 
-JavaScript doesn’t usually work like this. If we were to write something comparable in JavaScript:
+لا يعمل JavaScript عادة بهذه الطريقة. إذا كنا سنكتب شيئًا مماثلا في JavaScript:
 
 ```js
 let A0 = 1
@@ -28,12 +28,12 @@ let A2 = A0 + A1
 console.log(A2) // 3
 
 A0 = 2
-console.log(A2) // Still 3
+console.log(A2) // سيبقى 3
 ```
 
-When we mutate `A0`, `A2` does not change automatically.
+عندما نقوم بتغيير `A0` ، لا يتغير `A2` تلقائيًا.
 
-So how would we do this in JavaScript? First, in order to re-run the code that updates `A2`, let's wrap it in a function:
+لذا كيف يمكننا فعل ذلك في JavaScript؟ أولاً ، من أجل إعادة تشغيل الشيفرة التي تحدث `A2` ، دعنا نقوم بتغليفها داخل دالة:
 
 ```js
 let A2
@@ -43,31 +43,32 @@ function update() {
 }
 ```
 
-Then, we need to define a few terms:
+ثم ، نحتاج إلى تحديد بعض المصطلحات:
 
-- The `update()` function produces a **side effect**, or **effect** for short, because it modifies the state of the program.
+- الدالة `()update` تنتج **تأثير جانبي**، أو **تأثير** بشكل مختصر، لأنها تعدل حالة البرنامج.
 
-- `A0` and `A1` are considered **dependencies** of the effect, as their values are used to perform the effect. The effect is said to be a **subscriber** to its dependencies.
+- `A0` و `A1` تعتبر **اعتماديات** للتأثير، حيث تستخدم قيمهم لتنفيذ التأثير. يفترض أن التأثير هو **مشترِك** في الاعتماديات.
 
-What we need is a magic function that can invoke `update()` (the **effect**) whenever `A0` or `A1` (the **dependencies**) change:
+ما نحتاجه هو دالة سحرية يمكنها استدعاء `()update` (التأثير) كلما تغير `A0` أو `A1` (الاعتماديات):
+
 
 ```js
 whenDepsChange(update)
 ```
 
-This `whenDepsChange()` function has the following tasks:
+تقوم الدالة `()whenDepsChange` بالمهام التالية:
 
-1. Track when a variable is read. E.g. when evaluating the expression `A0 + A1`, both `A0` and `A1` are read.
+1. تتبع عندما تُقرأ قيمة متغير ما. على سبيل المثال عند تقييم التعبير `A0 + A1` ، يُقرأ كل من `A0` و `A1`.
 
-2. If a variable is read when there is a currently running effect, make that effect a subscriber to that variable. E.g. because `A0` and `A1` are read when `update()` is being executed, `update()` becomes a subscriber to both `A0` and `A1` after the first call.
+2. إذا قُرئ متغير ما عندما يكون هناك تأثير قيد التشغيل حاليًا ، فاجعل هذا التأثير مشترِكًا في هذا المتغير. على سبيل المثال لأن `A0` و `A1` تقرأ قيمتهما عند تنفيذ `()update` ، يصبح `()update` مشتركًا في كل من `A0` و `A1` بعد أول استدعاء.
 
-3. Detect when a variable is mutated. E.g. when `A0` is assigned a new value, notify all its subscriber effects to re-run.
+3. تكتشف عندما يُعدل متغير ما. على سبيل المثال عندما تُعين قيمة جديدة لـ `A0` ، تُعلم جميع التأثيرات المشترِكة بها بإعادة التشغيل.
 
-## How Reactivity Works in Vue {#how-reactivity-works-in-vue}
+## كيف تعمل التفاعلية في Vue {#how-reactivity-works-in-vue}
 
-We can't really track the reading and writing of local variables like in the example. There's just no mechanism for doing that in vanilla JavaScript. What we **can** do though, is intercept the reading and writing of **object properties**.
+لا يمكننا تتبع قراءة وكتابة المتغيرات المحلية كما في المثال. لا يوجد آلية للقيام بذلك في JavaScript الأساسي. ما **يمكننا** فعله ، على الرغم من ذلك ، هو اعتراض قراءة وكتابة **خاصيات الكائن**.
 
-There are two ways of intercepting property access in JavaScript: [getter](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/get) / [setters](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/set) and [Proxies](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy). Vue 2 used getter / setters exclusively due to browser support limitations. In Vue 3, Proxies are used for reactive objects and getter / setters are used for refs. Here's some pseudo-code that illustrates how they work:
+هناك طريقتان لاعتراض  الوصول إلى الخاصية في JavaScript: [getter](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/get) / [setters](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/set) و [Proxies](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy). في Vue 2 ، استخدم getter / setters حصريًا بسبب قيود دعم المتصفح. في Vue 3 ، استخدم Proxies للكائنات التفاعلية و getter / setters للمراجع. إليك الشيفرة المجردة الموالية التي توضح كيفية عملها:
 
 ```js{4,9,17,22}
 function reactive(obj) {
@@ -98,21 +99,21 @@ function ref(value) {
 }
 ```
 
-:::tip
-Code snippets here and below are meant to explain the core concepts in the simplest form possible, so many details are omitted, and edge cases ignored.
+:::tip ملاحظة
+تهدف مقاطع الشيفرة هنا وفيما يلي إلى شرح المفاهيم الأساسية بأبسط شكل ممكن، لذا تحذف العديد من التفاصيل ، وتُتَجاهل الحالات الحدية.
 :::
 
-This explains a few [limitations of reactive objects](/guide/essentials/reactivity-fundamentals.html#limitations-of-reactive) that we have discussed in the fundamentals section:
+هذا يشرح بعض [قيود الكائنات التفاعلية](/guide/essentials/reactivity-fundamentals.html#limitations-of-reactive) التي ناقشناها في قسم الأساسيات:
 
-- When you assign or destructure a reactive object's property to a local variable, the reactivity is "disconnected" because access to the local variable no longer triggers the get / set proxy traps.
+- عندما تُسند أو تفكك خاصية كائن تفاعلي إلى متغير محلي، "تُفصل" التفاعلية لأن الوصول إلى المتغير المحلي لم يعد يُشغل توابع الوسيط (proxy) get / set.
 
-- The returned proxy from `reactive()`, although behaving just like the original, has a different identity if we compare it to the original using the `===` operator.
+- الوسيط المُرجع من `()reactive` ، على الرغم من أنه يتصرف تمامًا مثل الأصلي ، له هوية مختلفة إذا قارناه بالأصل باستخدام عامل `===`.
 
-Inside `track()`, we check whether there is a currently running effect. If there is one, we lookup the subscriber effects (stored in a Set) for the property being tracked, and add the effect to the Set:
+داخل `()track` ، نتحقق مما إذا كان هناك تأثير يعمل حاليًا. إذا كان هناك واحد، فإننا نبحث عن تأثيرات المُشتركين (المخزنة في مجموعة Set) للخاصية التي تكون قيد المتابعة ، ونضيف التأثير إلى المجموعة (Set):
 
 ```js
-// This will be set right before an effect is about
-// to be run. We'll deal with this later.
+// سيعين هذا قبل تشغيل التأثير. 
+// سنتعامل مع هذا لاحقًا.
 let activeEffect
 
 function track(target, key) {
@@ -123,9 +124,9 @@ function track(target, key) {
 }
 ```
 
-Effect subscriptions are stored in a global `WeakMap<target, Map<key, Set<effect>>>` data structure. If no subscribing effects Set was found for a property (tracked for the first time), it will be created. This is what the `getSubscribersForProperty()` function does, in short. For simplicity, we will skip its details.
+تخزن اشتراكات التأثير في هيكل بيانات عام `<<<WeakMap<target, Map<key, Set<effect`. إذا لم يُعثر على مجموعة تأثيرات مشتركة لخاصية (اُتبعت للمرة الأولى) ، فستُنشأ. هذا ما تفعله وظيفة `()getSubscribersForProperty` ، بإيجاز  وللتبسيط، سنتخطى تفاصيلها.
 
-Inside `trigger()`, we again lookup the subscriber effects for the property. But this time we invoke them instead:
+داخل `()trigger` ، نبحث مرة أخرى عن تأثيرات مشتركي الخاصية. ولكن هذه المرة نقوم باستدعائها بدلاً من ذلك:
 
 ```js
 function trigger(target, key) {
@@ -134,7 +135,7 @@ function trigger(target, key) {
 }
 ```
 
-Now let's circle back to the `whenDepsChange()` function:
+الآن دعونا نعود إلى دالة `()whenDepsChange`:
 
 ```js
 function whenDepsChange(update) {
@@ -147,11 +148,11 @@ function whenDepsChange(update) {
 }
 ```
 
-It wraps the raw `update` function in an effect that sets itself as the current active effect before running the actual update. This enables `track()` calls during the update to locate the current active effect.
+يقوم بتغليف الدالة الخام `()update` في تأثير يضع نفسه كتأثير نشط حاليًا قبل تشغيل التحديث الفعلي. هذا يمكن استدعاءات `()track`  أثناء التحديث لتحديد التأثير النشط الحالي.
 
-At this point, we have created an effect that automatically tracks its dependencies, and re-runs whenever a dependency changes. We call this a **Reactive Effect**.
+في هذه النقطة، لقد قمنا بإنشاء تأثير يتتبع تلقائيًا اعتمادياته، ويعيد تشغيلها كلما تغيرت إحدى الاعتماديات. نسمي هذا **تأثيرًا تفاعليا**.
 
-Vue provides an API that allows you to create reactive effects: [`watchEffect()`](/api/reactivity-core.html#watcheffect). In fact, you may have noticed that it works pretty similarly to the magical `whenDepsChange()` in the example. We can now rework the original example using actual Vue APIs:
+يوفر Vue واجهة برمجية تسمح لك بإنشاء تأثيرات تفاعلية: [`()watchEffect`]. في الواقع، قد لاحظت أنه يعمل بشكل مشابه لـ `()whenDepsChange` السحرية في المثال. يمكننا الآن إعادة صياغة المثال الأصلي باستخدام الواجهات البرمجية لـVue الفعلية:
 
 ```js
 import { ref, watchEffect } from 'vue'
@@ -161,15 +162,15 @@ const A1 = ref(1)
 const A2 = ref()
 
 watchEffect(() => {
-  // tracks A0 and A1
+  // تتبع
   A2.value = A0.value + A1.value
 })
 
-// triggers the effect
+// تشغل التأثير
 A0.value = 2
 ```
 
-Using a reactive effect to mutate a ref isn't the most interesting use case - in fact, using a computed property makes it more declarative:
+استخدام تأثير تفاعلي لتغيير مرجع تفاعلي ليس أكثر حالات الاستخدام إثارة للاهتمام - في الواقع، باستخدام خاصية محسوبة يجعلها تصريحية بشكل أكبر :
 
 ```js
 import { ref, computed } from 'vue'
@@ -181,9 +182,9 @@ const A2 = computed(() => A0.value + A1.value)
 A0.value = 2
 ```
 
-Internally, `computed` manages its invalidation and re-computation using a reactive effect.
+داخليًا، تدير `()computed` إبطال صلاحيتها وإعادة حسابها باستخدام تأثير تفاعلي.
 
-So what's an example of a common and useful reactive effect? Well, updating the DOM! We can implement simple "reactive rendering" like this:
+إذا هل يوجد مثال على تأثير تفاعلي شائع ومفيد؟ حسنًا، تحديث DOM! يمكننا تنفيذ "تصيير تفاعلي" بسيط مثل هذا:
 
 ```js
 import { ref, watchEffect } from 'vue'
@@ -194,46 +195,45 @@ watchEffect(() => {
   document.body.innerHTML = `count is: ${count.value}`
 })
 
-// updates the DOM
+// يحدث الـ DOM
 count.value++
 ```
 
-In fact, this is pretty close to how a Vue component keeps the state and the DOM in sync - each component instance creates a reactive effect to render and update the DOM. Of course, Vue components use much more efficient ways to update the DOM than `innerHTML`. This is discussed in [Rendering Mechanism](./rendering-mechanism).
+في الواقع، هذا قريب جدًا من كيفية إبقاء مكون Vue على حالة متزامنة مع DOM - كل نسخة مكون تنشئ تأثيرًا تفاعليًا لتصيير وتحديث الـDOM. بالطبع، تستخدم مكونات Vue طرقًا أكثر كفاءة لتحديث DOM من `()innerHTML`. لقد نوقش هذا في [آلية التصيير](./rendering-mechanism).
 
 <div class="options-api">
 
-The `ref()`, `computed()` and `watchEffect()` APIs are all part of the Composition API. If you have only been using Options API with Vue so far, you'll notice that Composition API is closer to how Vue's reactivity system works under the hood. In fact, in Vue 3 the Options API is implemented on top of the Composition API. All property access on the component instance (`this`) triggers getter / setters for reactivity tracking, and options like `watch` and `computed` invoke their Composition API equivalents internally.
-
+`()ref`و `()computed` و `()watchEffect`  هم دوال من الواجهة الواجهة التركيبية. إذا كنت تستخدم واجهة  الخيارات فقط مع Vue حتى الآن، ستلاحظ أن الواجهة  التركيبية أقرب إلى كيفية عمل نظام التفاعلية في Vueخلف الكواليس. في الواقع، في Vue 3 تنفذ واجهة الخيارات بالاعتماد على الواجهة التركيبية. يؤدي الوصول إلى الخاصية على نسخة المكون (`this`) إلى تتبع الحصول وتعيين القيمة من أجل تتبع التفاعل، والخيارات مثل `watch` و `computed` تستدعي مكافئاتها في الواجهة التركيبية داخليًا.
 </div>
 
-## Runtime vs. Compile-time Reactivity {#runtime-vs-compile-time-reactivity}
+## التفاعلية في وقت التشغيل مقابل وقت التصريف {#runtime-vs-compile-time-reactivity}
 
-Vue's reactivity system is primarily runtime-based: the tracking and triggering are all performed while the code is running directly in the browser. The pros of runtime reactivity are that it can work without a build step, and there are fewer edge cases. On the other hand, this makes it constrained by the syntax limitations of JavaScript.
+نظام التفاعلية في Vue هو أساسًا يعتمد على وقت التشغيل: الشيفرة يُتتبع ويشغل أثناء تشغيل الشيفرة مباشرة في المتصفح. إيجابيات التفاعلية في وقت التشغيل هي أنه يمكن أن يعمل دون خطوة بناء، وهناك حالات محددة أقل. من ناحية أخرى، يجعل هذا مقيدًا بقيود صيغ الـJavaScript.
 
-We have already encountered a limitation in the previous example: JavaScript does not provide a way for us to intercept the reading and writing of local variables, so we have to always access reactive state as object properties, using either reactive objects or refs.
+لقد واجهنا بالفعل تقييدًا في المثال السابق: لا يوفر JavaScript طريقة لنا لاعتراض قراءة وتعيين المتغيرات المحلية، لذلك يجب علينا دائمًا الوصول إلى الحالة التفاعلية على شكل خاصيات الكائن، باستخدام كائنات أو مراجع تفاعلية.
 
-We have been experimenting with the [Reactivity Transform](/guide/extras/reactivity-transform.html) feature to reduce the code verbosity:
+لقد قمنا بتجربة ميزة [تحويل التفاعلية](/guide/extras/reactivity-transform.html) لتقليل طول الشيفرة:
 
 ```js
 let A0 = $ref(0)
 let A1 = $ref(1)
 
-// track on variable read
+// يتتبع عند قراءة المتغير
 const A2 = $computed(() => A0 + A1)
 
-// trigger on variable write
+// يشغل عند كتابة المتغير
 A0 = 2
 ```
 
-This snippet compiles into exactly what we'd have written without the transform, by automatically appending `.value` after references to the variables. With Reactivity Transform, Vue's reactivity system becomes a hybrid one.
+يصرف هذا المقتطف بالضبط إلى ما كتبناه بدون التحويل، عن طريق إضافة `value.` تلقائيًا بعد الإشارات إلى المتغيرات. مع تحويل التفاعلية، يصبح نظام التفاعلية في Vue نظامًا هجينًا.
 
-## Reactivity Debugging {#reactivity-debugging}
+## تنقيح أخطاء التفاعلية {#reactivity-debugging}
 
-It's great that Vue's reactivity system automatically tracks dependencies, but in some cases we may want to figure out exactly what is being tracked, or what is causing a component to re-render.
+من الرائع أن نظام التفاعلية في Vue يتتبع الاعتماديات تلقائيًا، ولكن في بعض الحالات قد نريد معرفة بالضبط ماهي الاعتمادية التي تحت قيد المتابعة، أو ما الذي يتسبب في إعادة تصيير المكون.
 
-### Component Debugging Hooks {#component-debugging-hooks}
+### خطافات تنقيح المكون {#component-debugging-hooks}
 
-We can debug what dependencies are used during a component's render and which dependency is triggering an update using the <span class="options-api">`renderTracked`</span><span class="composition-api">`onRenderTracked`</span> and <span class="options-api">`renderTriggered`</span><span class="composition-api">`onRenderTriggered`</span> lifecycle hooks. Both hooks will receive a debugger event which contains information on the dependency in question. It is recommended to place a `debugger` statement in the callbacks to interactively inspect the dependency:
+يمكننا تنقيح ماهي الاعتماديات التي استخدمت أثناء تصيير المكون وماهي الاعتمادية التي تسبب في التحديث باستخدام خطافات دورة حياة <span class="options-api">`renderTracked`</span><span class="composition-api">`onRenderTracked`</span> و <span class="options-api">`renderTriggered`</span><span class="composition-api">`onRenderTriggered`</span>. سيتلقى كلا الخطافين حدث تنقيح يحتوي على معلومات حول الاعتمادية المطلوبة. من المستحسن وضع تعليمة `debugger` في دوال رد النداء لفحص الاعتمادية تفاعليًا:
 
 <div class="composition-api">
 
@@ -267,11 +267,12 @@ export default {
 
 </div>
 
-:::tip
-Component debug hooks only work in development mode.
+
+:::tip ملاحظة
+خطافات تنقيح المكون تعمل فقط في وضع التطوير.
 :::
 
-The debug event objects have the following type:
+تحتوي كائنات حدث التنقيح على النوع التالي:
 
 <span id="debugger-event"></span>
 
@@ -289,45 +290,44 @@ type DebuggerEvent = {
 }
 ```
 
-### Computed Debugging {#computed-debugging}
+### التنقيح المحسوب للأخطاء  {#computed-debugging}
 
 <!-- TODO options API equivalent -->
 
-We can debug computed properties by passing `computed()` a second options object with `onTrack` and `onTrigger` callbacks:
+يمكننا تنقيح الخاصيات المحسوبة عن طريق تمرير كائن خيارات ثاني إلى `()computed`  مع دوال رد النداء `onTrack` و `onTrigger`:
 
-- `onTrack` will be called when a reactive property or ref is tracked as a dependency.
-- `onTrigger` will be called when the watcher callback is triggered by the mutation of a dependency.
+- ستستدعى `onTrack` عندما تُتبع خاصية تفاعلية أو مرجع كاعتمادية.
+- ستستدعى `onTrigger` عندما تشغل دالة رد النداء للمراقب بسبب تغيير اعتمادية.
 
-Both callbacks will receive debugger events in the [same format](#debugger-event) as component debug hooks:
+ستستقبل كلا الدالتين حدث تنقيح بنفس [التنسيق](#debugger-event) كخطافات تنقيح المكون:
 
 ```js
 const plusOne = computed(() => count.value + 1, {
   onTrack(e) {
-    // triggered when count.value is tracked as a dependency
+    // تشغل عندما تتبع count.value كاعتمادية
     debugger
   },
   onTrigger(e) {
-    // triggered when count.value is mutated
+    // تشغل عندما يتغير count.value
     debugger
   }
 })
 
-// access plusOne, should trigger onTrack
+// الوصول إلى plusOne ، يجب أن يشغل onTrack
 console.log(plusOne.value)
 
-// mutate count.value, should trigger onTrigger
+// تغيير count.value ، يجب أن يشغل onTrigger
 count.value++
 ```
 
-:::tip
-`onTrack` and `onTrigger` computed options only work in development mode.
+:::tip ملاحظة
+خيارات `onTrack` و `onTrigger` للدالة المحسوبة تعمل فقط في وضع التطوير.
 :::
-
-### Watcher Debugging {#watcher-debugging}
+### تنقيح الدوال المراقبة  {#watcher-debugging}
 
 <!-- TODO options API equivalent -->
 
-Similar to `computed()`, watchers also support the `onTrack` and `onTrigger` options:
+بشكل مشابه لـ `computed()` ، تدعم المراقبات أيضًا خيارات `onTrack` و `onTrigger`:
 
 ```js
 watch(source, callback, {
@@ -349,23 +349,23 @@ watchEffect(callback, {
 })
 ```
 
-:::tip
-`onTrack` and `onTrigger` watcher options only work in development mode.
+:::tip ملاحظة 
+خيارات `onTrack` و `onTrigger` للمراقب تعمل فقط في وضع التطوير.
 :::
 
-## Integration with External State Systems {#integration-with-external-state-systems}
+## الاندماج مع أنظمة الحالة الخارجية {#integration-with-external-state-systems}
 
-Vue's reactivity system works by deeply converting plain JavaScript objects into reactive proxies. The deep conversion can be unnecessary or sometimes unwanted when integrating with external state management systems (e.g. if an external solution also uses Proxies).
+يعمل نظام التفاعلية في Vue عن طريق تحويل كائنات JavaScript العادية إلى وسائط تفاعلية. يمكن أن يكون التحويل العميق غير ضروري أو غير مرغوب فيه أحيانًا عند الاندماج مع أنظمة إدارة الحالة الخارجية (على سبيل المثال ، إذا كانت الحلول الخارجية تستخدم أيضًا وسائط Proxies).
 
-The general idea of integrating Vue's reactivity system with an external state management solution is to hold the external state in a [`shallowRef`](/api/reactivity-advanced.html#shallowref). A shallow ref is only reactive when its `.value` property is accessed - the inner value is left intact. When the external state changes, replace the ref value to trigger updates.
+فكرة دمج نظام التفاعلية في Vue مع حلول إدارة الحالة الخارجية هي الاحتفاظ بالحالة الخارجية في [`shallowRef`](/api/reactivity-advanced.html#shallowref). يكون المرجع السطحي متفاعلاً فقط عند الوصول إلى خاصية `value.` - يترك القيمة الداخلية سليمة. عندما تتغير الحالة الخارجية ، استبدل قيمة المرجع لتشغيل التحديثات.
 
-### Immutable Data {#immutable-data}
+### البيانات غير القابلة للتغيير {#immutable-data}
 
-If you are implementing an undo / redo feature, you likely want to take a snapshot of the application's state on every user edit. However, Vue's mutable reactivity system isn't best suited for this if the state tree is large, because serializing the entire state object on every update can be expensive in terms of both CPU and memory costs.
+إذا كنت تقوم بتنفيذ ميزة التراجع / الإعادة ، فمن المحتمل أنك تريد التقاط لقطة لحالة التطبيق في كل تحرير للمستخدم. ومع ذلك ، فإن نظام التفاعلية القابل للتغيير في Vue ليس الأنسب لهذا إذا كانت شجرة الحالة كبيرة ، لأن سَلسَلة كائن الحالة بالكامل في كل تحديث يمكن أن يكون مكلفًا من حيث تكاليف وحدة المعالجة المركزية والذاكرة.
 
-[Immutable data structures](https://en.wikipedia.org/wiki/Persistent_data_structure) solve this by never mutating the state objects - instead, it creates new objects that share the same, unchanged parts with old ones. There are different ways of using immutable data in JavaScript, but we recommend using [Immer](https://immerjs.github.io/immer/) with Vue because it allows you to use immutable data while keeping the more ergonomic, mutable syntax.
+تحل [هياكل البيانات غير القابلة للتغيير](https://en.wikipedia.org/wiki/Persistent_data_structure) هذه بعدم تغيير كائنات الحالة أبدًا - بدلاً من ذلك ، ينشئ كائنات جديدة تشارك نفس الأجزاء غير المتغيرة مع القديمة. هناك طرق مختلفة لاستخدام البيانات غير القابلة للتغيير في JavaScript ، ولكن نوصي باستخدام [Immer](https://immerjs.github.io/immer/) مع Vue لأنه يتيح لك استخدام البيانات غير القابلة للتغيير مع الحفاظ على صيغة مريحة وقابلة للتغيير.
 
-We can integrate Immer with Vue via a simple composable:
+يمكننا دمج Immer مع Vue عبر دالة تركيبية بسيطة:
 
 ```js
 import produce from 'immer'
@@ -381,13 +381,13 @@ export function useImmer(baseState) {
 }
 ```
 
-[Try it in the Playground](https://sfc.vuejs.org/#eyJBcHAudnVlIjoiPHNjcmlwdCBzZXR1cD5cbmltcG9ydCB7IHVzZUltbWVyIH0gZnJvbSAnLi9pbW1lci5qcydcbiAgXG5jb25zdCBbaXRlbXMsIHVwZGF0ZUl0ZW1zXSA9IHVzZUltbWVyKFtcbiAge1xuICAgICB0aXRsZTogXCJMZWFybiBWdWVcIixcbiAgICAgZG9uZTogdHJ1ZVxuICB9LFxuICB7XG4gICAgIHRpdGxlOiBcIlVzZSBWdWUgd2l0aCBJbW1lclwiLFxuICAgICBkb25lOiBmYWxzZVxuICB9XG5dKVxuXG5mdW5jdGlvbiB0b2dnbGVJdGVtKGluZGV4KSB7XG4gIHVwZGF0ZUl0ZW1zKGl0ZW1zID0+IHtcbiAgICBpdGVtc1tpbmRleF0uZG9uZSA9ICFpdGVtc1tpbmRleF0uZG9uZVxuICB9KVxufVxuPC9zY3JpcHQ+XG5cbjx0ZW1wbGF0ZT5cbiAgPHVsPlxuICAgIDxsaSB2LWZvcj1cIih7IHRpdGxlLCBkb25lIH0sIGluZGV4KSBpbiBpdGVtc1wiXG4gICAgICAgIDpjbGFzcz1cInsgZG9uZSB9XCJcbiAgICAgICAgQGNsaWNrPVwidG9nZ2xlSXRlbShpbmRleClcIj5cbiAgICAgICAge3sgdGl0bGUgfX1cbiAgICA8L2xpPlxuICA8L3VsPlxuPC90ZW1wbGF0ZT5cblxuPHN0eWxlPlxuLmRvbmUge1xuICB0ZXh0LWRlY29yYXRpb246IGxpbmUtdGhyb3VnaDtcbn1cbjwvc3R5bGU+IiwiaW1wb3J0LW1hcC5qc29uIjoie1xuICBcImltcG9ydHNcIjoge1xuICAgIFwidnVlXCI6IFwiaHR0cHM6Ly9zZmMudnVlanMub3JnL3Z1ZS5ydW50aW1lLmVzbS1icm93c2VyLmpzXCIsXG4gICAgXCJpbW1lclwiOiBcImh0dHBzOi8vdW5wa2cuY29tL2ltbWVyQDkuMC43L2Rpc3QvaW1tZXIuZXNtLmpzP21vZHVsZVwiXG4gIH1cbn0iLCJpbW1lci5qcyI6ImltcG9ydCBwcm9kdWNlIGZyb20gJ2ltbWVyJ1xuaW1wb3J0IHsgc2hhbGxvd1JlZiB9IGZyb20gJ3Z1ZSdcblxuZXhwb3J0IGZ1bmN0aW9uIHVzZUltbWVyKGJhc2VTdGF0ZSkge1xuICBjb25zdCBzdGF0ZSA9IHNoYWxsb3dSZWYoYmFzZVN0YXRlKVxuICBjb25zdCB1cGRhdGUgPSAodXBkYXRlcikgPT4ge1xuICAgIHN0YXRlLnZhbHVlID0gcHJvZHVjZShzdGF0ZS52YWx1ZSwgdXBkYXRlcilcbiAgfVxuXG4gIHJldHVybiBbc3RhdGUsIHVwZGF0ZV1cbn0ifQ==)
+[اختبرها في حقل التجارب](https://sfc.vuejs.org/#eyJBcHAudnVlIjoiPHNjcmlwdCBzZXR1cD5cbmltcG9ydCB7IHVzZUltbWVyIH0gZnJvbSAnLi9pbW1lci5qcydcbiAgXG5jb25zdCBbaXRlbXMsIHVwZGF0ZUl0ZW1zXSA9IHVzZUltbWVyKFtcbiAge1xuICAgICB0aXRsZTogXCJMZWFybiBWdWVcIixcbiAgICAgZG9uZTogdHJ1ZVxuICB9LFxuICB7XG4gICAgIHRpdGxlOiBcIlVzZSBWdWUgd2l0aCBJbW1lclwiLFxuICAgICBkb25lOiBmYWxzZVxuICB9XG5dKVxuXG5mdW5jdGlvbiB0b2dnbGVJdGVtKGluZGV4KSB7XG4gIHVwZGF0ZUl0ZW1zKGl0ZW1zID0+IHtcbiAgICBpdGVtc1tpbmRleF0uZG9uZSA9ICFpdGVtc1tpbmRleF0uZG9uZVxuICB9KVxufVxuPC9zY3JpcHQ+XG5cbjx0ZW1wbGF0ZT5cbiAgPHVsPlxuICAgIDxsaSB2LWZvcj1cIih7IHRpdGxlLCBkb25lIH0sIGluZGV4KSBpbiBpdGVtc1wiXG4gICAgICAgIDpjbGFzcz1cInsgZG9uZSB9XCJcbiAgICAgICAgQGNsaWNrPVwidG9nZ2xlSXRlbShpbmRleClcIj5cbiAgICAgICAge3sgdGl0bGUgfX1cbiAgICA8L2xpPlxuICA8L3VsPlxuPC90ZW1wbGF0ZT5cblxuPHN0eWxlPlxuLmRvbmUge1xuICB0ZXh0LWRlY29yYXRpb246IGxpbmUtdGhyb3VnaDtcbn1cbjwvc3R5bGU+IiwiaW1wb3J0LW1hcC5qc29uIjoie1xuICBcImltcG9ydHNcIjoge1xuICAgIFwidnVlXCI6IFwiaHR0cHM6Ly9zZmMudnVlanMub3JnL3Z1ZS5ydW50aW1lLmVzbS1icm93c2VyLmpzXCIsXG4gICAgXCJpbW1lclwiOiBcImh0dHBzOi8vdW5wa2cuY29tL2ltbWVyQDkuMC43L2Rpc3QvaW1tZXIuZXNtLmpzP21vZHVsZVwiXG4gIH1cbn0iLCJpbW1lci5qcyI6ImltcG9ydCBwcm9kdWNlIGZyb20gJ2ltbWVyJ1xuaW1wb3J0IHsgc2hhbGxvd1JlZiB9IGZyb20gJ3Z1ZSdcblxuZXhwb3J0IGZ1bmN0aW9uIHVzZUltbWVyKGJhc2VTdGF0ZSkge1xuICBjb25zdCBzdGF0ZSA9IHNoYWxsb3dSZWYoYmFzZVN0YXRlKVxuICBjb25zdCB1cGRhdGUgPSAodXBkYXRlcikgPT4ge1xuICAgIHN0YXRlLnZhbHVlID0gcHJvZHVjZShzdGF0ZS52YWx1ZSwgdXBkYXRlcilcbiAgfVxuXG4gIHJldHVybiBbc3RhdGUsIHVwZGF0ZV1cbn0ifQ==)
 
-### State Machines {#state-machines}
+### آلات الحالات {#state-machines}
 
-[State Machine](https://en.wikipedia.org/wiki/Finite-state_machine) is a model for describing all the possible states an application can be in, and all the possible ways it can transition from one state to another. While it may be overkill for simple components, it can help make complex state flows more robust and manageable.
+[آلة الحالة](https://en.wikipedia.org/wiki/Finite-state_machine) هي نموذج لوصف جميع الحالات الممكنة التي يمكن أن يكون عليها التطبيق ، وجميع الطرق الممكنة التي يمكن أن ينتقل بها من حالة إلى أخرى. على الرغم من أنه قد يكون زيادة غير ضرورية للمكونات البسيطة ، إلا أنه يمكن أن يساعد في جعل تدفقات الحالة المعقدة أكثر قوة وقابلية للإدارة.
 
-One of the most popular state machine implementations in JavaScript is [XState](https://xstate.js.org/). Here's a composable that integrates with it:
+واحدة من أكثر تنفيذات آلة الحالة شيوعًا في JavaScript هي [XState](https://xstate.js.org/). إليك مكونًا يتكامل معه:
 
 ```js
 import { createMachine, interpret } from 'xstate'
@@ -405,8 +405,8 @@ export function useMachine(options) {
 }
 ```
 
-[Try it in the Playground](https://sfc.vuejs.org/#eyJBcHAudnVlIjoiPHNjcmlwdCBzZXR1cD5cbmltcG9ydCB7IHVzZU1hY2hpbmUgfSBmcm9tICcuL21hY2hpbmUuanMnXG4gIFxuY29uc3QgW3N0YXRlLCBzZW5kXSA9IHVzZU1hY2hpbmUoe1xuICBpZDogJ3RvZ2dsZScsXG4gIGluaXRpYWw6ICdpbmFjdGl2ZScsXG4gIHN0YXRlczoge1xuICAgIGluYWN0aXZlOiB7IG9uOiB7IFRPR0dMRTogJ2FjdGl2ZScgfSB9LFxuICAgIGFjdGl2ZTogeyBvbjogeyBUT0dHTEU6ICdpbmFjdGl2ZScgfSB9XG4gIH1cbn0pXG48L3NjcmlwdD5cblxuPHRlbXBsYXRlPlxuICA8YnV0dG9uIEBjbGljaz1cInNlbmQoJ1RPR0dMRScpXCI+XG4gICAge3sgc3RhdGUubWF0Y2hlcyhcImluYWN0aXZlXCIpID8gXCJPZmZcIiA6IFwiT25cIiB9fVxuICA8L2J1dHRvbj5cbjwvdGVtcGxhdGU+IiwiaW1wb3J0LW1hcC5qc29uIjoie1xuICBcImltcG9ydHNcIjoge1xuICAgIFwidnVlXCI6IFwiaHR0cHM6Ly9zZmMudnVlanMub3JnL3Z1ZS5ydW50aW1lLmVzbS1icm93c2VyLmpzXCIsXG4gICAgXCJ4c3RhdGVcIjogXCJodHRwczovL3VucGtnLmNvbS94c3RhdGVANC4yNy4wL2VzL2luZGV4LmpzP21vZHVsZVwiXG4gIH1cbn0iLCJtYWNoaW5lLmpzIjoiaW1wb3J0IHsgY3JlYXRlTWFjaGluZSwgaW50ZXJwcmV0IH0gZnJvbSAneHN0YXRlJ1xuaW1wb3J0IHsgc2hhbGxvd1JlZiB9IGZyb20gJ3Z1ZSdcblxuZXhwb3J0IGZ1bmN0aW9uIHVzZU1hY2hpbmUob3B0aW9ucykge1xuICBjb25zdCBtYWNoaW5lID0gY3JlYXRlTWFjaGluZShvcHRpb25zKVxuICBjb25zdCBzdGF0ZSA9IHNoYWxsb3dSZWYobWFjaGluZS5pbml0aWFsU3RhdGUpXG4gIGNvbnN0IHNlcnZpY2UgPSBpbnRlcnByZXQobWFjaGluZSlcbiAgICAub25UcmFuc2l0aW9uKChuZXdTdGF0ZSkgPT4gKHN0YXRlLnZhbHVlID0gbmV3U3RhdGUpKVxuICAgIC5zdGFydCgpXG4gIGNvbnN0IHNlbmQgPSAoZXZlbnQpID0+IHNlcnZpY2Uuc2VuZChldmVudClcblxuICByZXR1cm4gW3N0YXRlLCBzZW5kXVxufSJ9)
+[اختبرها في حقل التجارب](https://sfc.vuejs.org/#eyJBcHAudnVlIjoiPHNjcmlwdCBzZXR1cD5cbmltcG9ydCB7IHVzZU1hY2hpbmUgfSBmcm9tICcuL21hY2hpbmUuanMnXG4gIFxuY29uc3QgW3N0YXRlLCBzZW5kXSA9IHVzZU1hY2hpbmUoe1xuICBpZDogJ3RvZ2dsZScsXG4gIGluaXRpYWw6ICdpbmFjdGl2ZScsXG4gIHN0YXRlczoge1xuICAgIGluYWN0aXZlOiB7IG9uOiB7IFRPR0dMRTogJ2FjdGl2ZScgfSB9LFxuICAgIGFjdGl2ZTogeyBvbjogeyBUT0dHTEU6ICdpbmFjdGl2ZScgfSB9XG4gIH1cbn0pXG48L3NjcmlwdD5cblxuPHRlbXBsYXRlPlxuICA8YnV0dG9uIEBjbGljaz1cInNlbmQoJ1RPR0dMRScpXCI+XG4gICAge3sgc3RhdGUubWF0Y2hlcyhcImluYWN0aXZlXCIpID8gXCJPZmZcIiA6IFwiT25cIiB9fVxuICA8L2J1dHRvbj5cbjwvdGVtcGxhdGU+IiwiaW1wb3J0LW1hcC5qc29uIjoie1xuICBcImltcG9ydHNcIjoge1xuICAgIFwidnVlXCI6IFwiaHR0cHM6Ly9zZmMudnVlanMub3JnL3Z1ZS5ydW50aW1lLmVzbS1icm93c2VyLmpzXCIsXG4gICAgXCJ4c3RhdGVcIjogXCJodHRwczovL3VucGtnLmNvbS94c3RhdGVANC4yNy4wL2VzL2luZGV4LmpzP21vZHVsZVwiXG4gIH1cbn0iLCJtYWNoaW5lLmpzIjoiaW1wb3J0IHsgY3JlYXRlTWFjaGluZSwgaW50ZXJwcmV0IH0gZnJvbSAneHN0YXRlJ1xuaW1wb3J0IHsgc2hhbGxvd1JlZiB9IGZyb20gJ3Z1ZSdcblxuZXhwb3J0IGZ1bmN0aW9uIHVzZU1hY2hpbmUob3B0aW9ucykge1xuICBjb25zdCBtYWNoaW5lID0gY3JlYXRlTWFjaGluZShvcHRpb25zKVxuICBjb25zdCBzdGF0ZSA9IHNoYWxsb3dSZWYobWFjaGluZS5pbml0aWFsU3RhdGUpXG4gIGNvbnN0IHNlcnZpY2UgPSBpbnRlcnByZXQobWFjaGluZSlcbiAgICAub25UcmFuc2l0aW9uKChuZXdTdGF0ZSkgPT4gKHN0YXRlLnZhbHVlID0gbmV3U3RhdGUpKVxuICAgIC5zdGFydCgpXG4gIGNvbnN0IHNlbmQgPSAoZXZlbnQpID0+IHNlcnZpY2Uuc2VuZChldmVudClcblxuICByZXR1cm4gW3N0YXRlLCBzZW5kXVxufSJ9)
 
-### RxJS {#rxjs}
+### مكتبة RxJS {#rxjs}
 
-[RxJS](https://rxjs.dev/) is a library for working with asynchronous event streams. The [VueUse](https://vueuse.org/) library provides the [`@vueuse/rxjs`](https://vueuse.org/rxjs/readme.html) add-on for connecting RxJS streams with Vue's reactivity system.
+[RxJS](https://rxjs.dev/) هي مكتبة للعمل مع تدفقات الأحداث غير المتزامنة. توفر مكتبة [VueUse](https://vueuse.org/) إضافة [`vueuse/rxjs@`](https://vueuse.org/rxjs/readme.html) لربط تدفقات RxJS مع نظام التفاعلية في Vue.
