@@ -2,66 +2,65 @@
 outline: deep
 ---
 
-# Render Functions & JSX {#render-functions-jsx}
+# دوال التصيير و JSX {#render-functions-jsx}
 
-Vue recommends using templates to build applications in the vast majority of cases. However, there are situations where we need the full programmatic power of JavaScript. That's where we can use the **render function**.
+نوصي باستخدام القوالب لبناء التطبيقات في معظم الحالات. ومع ذلك ، هناك حالات نحتاج فيها إلى القوة البرمجية الكاملة لـ JavaScript. هنا يمكننا استخدام **دوال التصيير**.
 
-> If you are new to the concept of virtual DOM and render functions, make sure to read the [Rendering Mechanism](/guide/extras/rendering-mechanism.html) chapter first.
+> إذا كنت جديدًا على مفهوم الـDOM الافتراضي ودوال التصيير ، فتأكد من قراءة الفصل [آلية التصيير](/guide/extras/rendering-mechanism.html) أولاً.
+## استخدام أساسي {#basic-usage}
 
-## Basic Usage {#basic-usage}
+### إنشاء عقد افتراضية {#creating-vnodes}
 
-### Creating Vnodes {#creating-vnodes}
-
-Vue provides an `h()` function for creating vnodes:
+توفر Vue دالة `()h` لإنشاء عقد افتراضية:
 
 ```js
 import { h } from 'vue'
 
 const vnode = h(
   'div', // type
-  { id: 'foo', class: 'bar' }, // props
+  { id: 'foo', class: 'bar' }, // خاصيات
   [
-    /* children */
+    /* العقد الأبناء */
   ]
 )
 ```
 
-`h()` is short for **hyperscript** - which means "JavaScript that produces HTML (hypertext markup language)". This name is inherited from conventions shared by many virtual DOM implementations. A more descriptive name could be `createVnode()`, but a shorter name helps when you have to call this function many times in a render function.
+`()h` هي اختصار لـ **hyperscript** - والذي يعني "JavaScript الذي ينتج HTML (لغة ترميز النص الفائق)". هذا الاسم موروث من الاصطلاحات المشتركة بين العديد من تنفيذات DOM الافتراضية. يمكن أن يكون الاسم الأكثر وصفًا هو `()createVnode` ، ولكن الاسم الأقصر يساعد عندما تضطر إلى استدعاء هذه الدالة عدة مرات في دالة التصيير.
 
-The `h()` function is designed to be very flexible:
+دالة `()h` مصممة لتكون مرنة للغاية:
 
 ```js
-// all arguments except the type are optional
+// كل الوسائط ما عدا النوع اختيارية
 h('div')
 h('div', { id: 'foo' })
 
-// both attributes and properties can be used in props
-// Vue automatically picks the right way to assign it
-h('div', { class: 'bar', innerHTML: 'hello' })
+//كل من الخاصيات الأصلية والسمات يمكن استخدامها في خاصيات Vue
+// يقوم Vue تلقائيًا باختيار الطريقة الصحيحة لتعيينها
+h('div', { class: 'bar', innerHTML: 'السلام عليكم' })
 
-// props modifiers such as .prop and .attr can be added
-// with '.' and `^' prefixes respectively
+// يمكن إضافة معدلات الخاصيات مثل .prop و .attr
+// بالبادئة '.' و `^' على التوالي  
 h('div', { '.name': 'some-name', '^width': '100' })
 
-// class and style have the same object / array
-// value support that they have in templates
+// class و style لديهم نفس الدعم لقيمة الكائن / المصفوفة 
+// التي لديهم في القوالب
 h('div', { class: [foo, { bar }], style: { color: 'red' } })
 
-// event listeners should be passed as onXxx
+// يجب تمرير مستمعي الأحداث كـ onXxx
 h('div', { onClick: () => {} })
 
-// children can be a string
-h('div', { id: 'foo' }, 'hello')
+// العقد الأبناء يمكن أن يكون سلسلة نصية
+h('div', { id: 'foo' }, 'السلام عليكم')
 
-// props can be omitted when there are no props
-h('div', 'hello')
-h('div', [h('span', 'hello')])
+// يمكن حذف الخاصيات عندما لا توجد خاصيات
+h('div', 'السلام عليكم')
+h('div', [h('span', 'السلام عليكم')])
 
-// children array can contain mixed vnodes and strings
-h('div', ['hello', h('span', 'hello')])
+// يمكن أن تحتوي مصفوفة العقد الأبناء على عقد افتراضي وسلاسل نصية
+h('div', ['السلام عليكم', h('span', 'السلام عليكم')])
 ```
 
-The resulting vnode has the following shape:
+العقدة الافتراضية الناتجة لها الشكل التالي:
 
 ```js
 const vnode = h('div', { id: 'foo' }, [])
@@ -72,15 +71,15 @@ vnode.children // []
 vnode.key // null
 ```
 
-:::warning Note
-The full `VNode` interface contains many other internal properties, but it is strongly recommended to avoid relying on any properties other than the ones listed here. This avoids unintended breakage in case the internal properties are changed.
+:::warning ملاحظة
+تحتوي واجهة `VNode` الكاملة على العديد من الخاصيات الداخلية الأخرى ، ولكن من المستحسن بشدة تجنب الاعتماد على أي خاصيات غير تلك المدرجة هنا. هذا يتجنب الكسر غير المقصود في حال  تغيرت الخاصيات الداخلية.
 :::
 
-### Declaring Render Functions {#declaring-render-functions}
+### التصريح بدوال التصيير #declaring-render-functions}
 
 <div class="composition-api">
 
-When using templates with Composition API, the return value of the `setup()` hook is used to expose data to the template. When using render functions, however, we can directly return the render function instead:
+عند استخدام القوالب مع الواجهة التركيبية ، تستخدم قيمة إرجاع خطاف `()setup` لعرض البيانات على القالب. عند استخدام دوال التصيير ، يمكننا إرجاع الدالة المصيّرة مباشرةً بدلاً من ذلك:
 
 ```js
 import { ref, h } from 'vue'
@@ -92,20 +91,20 @@ export default {
   setup(props) {
     const count = ref(1)
 
-    // return the render function
+    // إرجاع دالة التصيير
     return () => h('div', props.msg + count.value)
   }
 }
 ```
 
-The render function is declared inside `setup()` so it naturally has access to the props and any reactive state declared in the same scope.
+دالة التصيير معلنة داخل `()setup` لذلك لديها بشكل طبيعي الوصول إلى الخاصيات وأي حالة تفاعلية صرح بها في نفس النطاق.
 
-In addition to returning a single vnode, you can also return strings or arrays:
+بالإضافة إلى إرجاع عقدة واحدة ، يمكنك أيضًا إرجاع سلاسل نصية أو مصفوفات:
 
 ```js
 export default {
   setup() {
-    return () => 'hello world!'
+    return () => 'السلام عليكم!'
   }
 }
 ```
@@ -115,7 +114,7 @@ import { h } from 'vue'
 
 export default {
   setup() {
-    // use an array to return multiple root nodes
+    // استخدام مصفوفة لإرجاع عقدة أبناء متعددة
     return () => [
       h('div'),
       h('div'),
@@ -125,14 +124,14 @@ export default {
 }
 ```
 
-:::tip
-Make sure to return a function instead of directly returning values! The `setup()` function is called only once per component, while the returned render function will be called multiple times.
+:::tip ملاحظة
+تأكد من إرجاع دالة بدلاً من إرجاع القيم مباشرةً! تستدعى دالة `()setup` مرة واحدة فقط لكل مكون ، بينما سستدعى دالة التصيير المرجعة عدة مرات.
 :::
 
 </div>
 <div class="options-api">
 
-We can declare render functions using the `render` option:
+يمكننا التصريح بدوال التصيير باستخدام خيار `render`:
 
 ```js
 import { h } from 'vue'
@@ -140,7 +139,7 @@ import { h } from 'vue'
 export default {
   data() {
     return {
-      msg: 'hello'
+      msg: 'السلام عليكم'
     }
   },
   render() {
@@ -149,14 +148,14 @@ export default {
 }
 ```
 
-The `render()` function has access to the component instance via `this`.
+دالة `()render` لديها الوصول إلى نسخة المكون عبر `this`.
 
-In addition to returning a single vnode, you can also return strings or arrays:
+بالإضافة إلى إرجاع عقدة واحدة ، يمكنك أيضًا إرجاع سلاسل نصية أو مصفوفات:
 
 ```js
 export default {
   render() {
-    return 'hello world!'
+    return 'السلام عليكم!'
   }
 }
 ```
@@ -166,7 +165,7 @@ import { h } from 'vue'
 
 export default {
   render() {
-    // use an array to return multiple root nodes
+    // استخدام مصفوفة لإرجاع عقدة أبناء متعددة
     return [
       h('div'),
       h('div'),
@@ -178,32 +177,32 @@ export default {
 
 </div>
 
-If a render function component doesn't need any instance state, they can also be declared directly as a function for brevity:
+إذا لم تكن تحتاج دالة التصيير إلى أي حالة من نسخة المكون ، فيمكن أيضًا إعلانها مباشرةً كدالة لغرض الإيجاز:
 
 ```js
-function Hello() {
-  return 'hello world!'
+function السلام عليكم() {
+    return 'السلام عليكم!'
 }
 ```
 
-That's right, this is a valid Vue component! See [Functional Components](#functional-components) for more details on this syntax.
+هذا صحيح، هذا مكون Vue صالح! اطلع على فصل [المكونات الوظيفية](#functional-components) لمزيد من التفاصيل حول هذه الصيغة.
 
-### Vnodes Must Be Unique {#vnodes-must-be-unique}
+### العقد الافتراضية لابد أن تكون فريدة {#vnodes-must-be-unique}
 
-All vnodes in the component tree must be unique. That means the following render function is invalid:
+جميع العقد في شجرة المكون يجب أن تكون فريدة. وهذا يعني أن دالة التصيير التالية غير صالحة:
 
 ```js
 function render() {
   const p = h('p', 'hi')
-  return h('div', [
-    // Yikes - duplicate vnodes!
+  return h('div', [ 
+    // 😬 - عقدة مكررة!
     p,
     p
   ])
 }
 ```
 
-If you really want to duplicate the same element/component many times, you can do so with a factory function. For example, the following render function is a perfectly valid way of rendering 20 identical paragraphs:
+إذا كنت تريد حقًا تكرار نفس العنصر / المكون عدة مرات ، فيمكنك القيام بذلك باستخدام دالة منتِجة. على سبيل المثال ، فإن دالة التصيير التالية هي طريقة صالحة تمامًا لتصيير 20 فقرة متطابقة:
 
 ```js
 function render() {
@@ -218,70 +217,71 @@ function render() {
 
 ## JSX / TSX {#jsx-tsx}
 
-[JSX](https://facebook.github.io/jsx/) is an XML-like extension to JavaScript that allows us to write code like this:
+[JSX](https://facebook.github.io/jsx/) هو امتداد شبيه بـ XML لـ JavaScript يسمح لنا بكتابة شيفرة مثل هذه:
 
 ```jsx
-const vnode = <div>hello</div>
+const vnode = <div>السلام عليكم</div>
 ```
 
-Inside JSX expressions, use curly braces to embed dynamic values:
+داخل تعبيرات JSX ، استخدم الأقواس المنحنية لتضمين القيم الديناميكية:
 
 ```jsx
-const vnode = <div id={dynamicId}>hello, {userName}</div>
+const vnode = <div id={dynamicId}>السلام عليكم, {userName}</div>
 ```
 
-`create-vue` and Vue CLI both have options for scaffolding projects with pre-configured JSX support. If you are configuring JSX manually, please refer to the documentation of [`@vue/babel-plugin-jsx`](https://github.com/vuejs/jsx-next) for details.
+`create-vue` و Vue CLI لديهما خيارات لاطلاق المشاريع بصيغة قاعدية مع دعم JSX معد مسبقًا. إذا كنت تقوم بتهيئة JSX يدويًا ، فيرجى الرجوع إلى توثيق [`vue/babel-plugin-jsx@`](https://github.com/vuejs/jsx-next) للحصول على التفاصيل.
 
-Although first introduced by React, JSX actually has no defined runtime semantics and can be compiled into various different outputs. If you have worked with JSX before, do note that **Vue JSX transform is different from React's JSX transform**, so you can't use React's JSX transform in Vue applications. Some notable differences from React JSX include:
 
-- You can use HTML attributes such as `class` and `for` as props - no need to use `className` or `htmlFor`.
-- Passing children to components (i.e. slots) [works differently](#passing-slots).
+على الرغم من أن React قدمته لأول مرة ، إلا أن JSX ليس لديها دلالات وقت التشغيل محددة ويمكن تصريفها إلى عديد من المخرجات المختلفة. إذا كنت قد عملت مع JSX من قبل ، فلاحظ أن **تصريف JSX في Vue مختلف عن تصريف JSX في React** ، لذلك لا يمكنك استخدام تحويل JSX في React في تطبيقات Vue. بعض الاختلافات الملحوظة عن JSX في React تشمل:
 
-Vue's type definition also provides type inference for TSX usage. When using TSX, make sure to specify `"jsx": "preserve"` in `tsconfig.json` so that TypeScript leaves the JSX syntax intact for Vue JSX transform to process.
+- يمكنك استخدام سمات HTML مثل `class` و `for` كخاصيات - لا حاجة لاستخدام `className` أو `htmlFor`.
+- تمرير العناصر الأبناء إلى المكونات (أي المنافذ) [يعمل بشكل مختلف](#passing-slots).
 
-## Render Function Recipes {#render-function-recipes}
+توفر تعريفات النوع في Vue أيضًا استنباط النوع لاستخدام TSX. عند استخدام TSX ، تأكد من تحديد `"jsx": "preserve"` في `tsconfig.json` حتى يترك TypeScript بناء صيغة JSX سليمًا لتصريف JSX في Vue من أجل معالجته.
 
-Below we will provide some common recipes for implementing template features as their equivalent render functions / JSX.
+## وصفات لاستخدام دالة التصيير {#render-function-recipes}
+
+أدناه سنقدم بعض الوصفات الشائعة لتنفيذ ميزات القالب بما يقابلها من دوال تصيير / JSX.
 
 ### `v-if` {#v-if}
 
-Template:
+القالب:
 
 ```vue-html
 <div>
-  <div v-if="ok">yes</div>
-  <span v-else>no</span>
+  <div v-if="ok">نعم</div>
+  <span v-else>لا</span>
 </div>
 ```
 
-Equivalent render function / JSX:
+المقابل باستخدام دالة التصيير / JSX:
 
 <div class="composition-api">
 
 ```js
-h('div', [ok.value ? h('div', 'yes') : h('span', 'no')])
+h('div', [ok.value ? h('div', 'نعم') : h('span', 'لا')])
 ```
 
 ```jsx
-<div>{ok.value ? <div>yes</div> : <span>no</span>}</div>
+<div>{ok.value ? <div>نعم</div> : <span>لا</span>}</div>
 ```
 
 </div>
 <div class="options-api">
 
 ```js
-h('div', [this.ok ? h('div', 'yes') : h('span', 'no')])
+h('div', [this.ok ? h('div', 'نعم') : h('span', 'لا')])
 ```
 
 ```jsx
-<div>{this.ok ? <div>yes</div> : <span>no</span>}</div>
+<div>{this.ok ? <div>نعم</div> : <span>لا</span>}</div>
 ```
 
 </div>
 
 ### `v-for` {#v-for}
 
-Template:
+القالب:
 
 ```vue-html
 <ul>
@@ -291,14 +291,14 @@ Template:
 </ul>
 ```
 
-Equivalent render function / JSX:
+المقابل باستخدام دالة التصيير / JSX:
 
 <div class="composition-api">
 
 ```js
 h(
   'ul',
-  // assuming `items` is a ref with array value
+  // مع الافتراض أن `items` هو مرجع بقيمة مصفوفة
   items.value.map(({ id, text }) => {
     return h('li', { key: id }, text)
   })
@@ -337,7 +337,7 @@ h(
 
 ### `v-on` {#v-on}
 
-Props with names that start with `on` followed by an uppercase letter are treated as event listeners. For example, `onClick` is the equivalent of `@click` in templates.
+الخاصيات التي تبدأ بـ `on` تليها حرف كبير تعامل على أنها مستمعات للأحداث. على سبيل المثال ، `onClick` هو المقابل لـ `click@` في القوالب.
 
 ```js
 h(
@@ -347,7 +347,7 @@ h(
       /* ... */
     }
   },
-  'click me'
+  'انقر على الزر'
 )
 ```
 
@@ -357,26 +357,26 @@ h(
     /* ... */
   }}
 >
-  click me
+  انقر على الزر
 </button>
 ```
 
-#### Event Modifiers {#event-modifiers}
+#### معدلات الأحداث {#event-modifiers}
 
-For the `.passive`, `.capture`, and `.once` event modifiers, they can be concatenated after the event name using camelCase.
+لمعدلات الأحداث `passive.` و `capture.` و `once.` ، يمكن دمجها بعد اسم الحدث باستخدام صيغة سنام الجمل camelCase.
 
-For example:
+على سبيل المثال:
 
 ```js
 h('input', {
   onClickCapture() {
-    /* listener in capture mode */
+    /* مستمع في وضع الالتقاط */
   },
   onKeyupOnce() {
-    /* triggers only once */
+    /* يشغل مرة واحدة فقط */
   },
   onMouseoverOnceCapture() {
-    /* once + capture */
+    /* مرة واحدة + التقاط */
   }
 })
 ```
@@ -389,7 +389,7 @@ h('input', {
 />
 ```
 
-For other event and key modifiers, the [`withModifiers`](/api/render-function.html#withmodifiers) helper can be used:
+بالنسبة لمعدلات الأحداث والمفاتيح الأخرى ، يمكن استخدام الدالة المساعدة [`withModifiers`](/api/render-function.html#withmodifiers):
 
 ```js
 import { withModifiers } from 'vue'
@@ -403,9 +403,9 @@ h('div', {
 <div onClick={withModifiers(() => {}, ['self'])} />
 ```
 
-### Components {#components}
+### المكونات {#components}
 
-To create a vnode for a component, the first argument passed to `h()` should be the component definition. This means when using render functions, it is unnecessary to register components - you can just use the imported components directly:
+لإنشاء عقدة افتراضية لمكون ، يجب أن يكون أول وسيط يُمرر إلى `()h` هو تعريف المكون. هذا يعني عند استخدام دوال التصيير ، فمن غير الضروري تسجيل المكونات - يمكنك استخدام المكونات المستوردة مباشرة:
 
 ```js
 import Foo from './Foo.vue'
@@ -427,9 +427,9 @@ function render() {
 }
 ```
 
-As we can see, `h` can work with components imported from any file format as long as it's a valid Vue component.
+كما نرى ، يمكن لـ `h` العمل مع المكونات المستوردة من أي تنسيق ملف طالما أنها مكون Vue صالح.
 
-Dynamic components are straightforward with render functions:
+المكونات الديناميكية بسيطة الاستخدام مع دوال التصيير:
 
 ```js
 import Foo from './Foo.vue'
@@ -446,24 +446,24 @@ function render() {
 }
 ```
 
-If a component is registered by name and cannot be imported directly (for example, globally registered by a library), it can be programmatically resolved by using the [`resolveComponent()`](/api/render-function.html#resolvecomponent) helper.
+إذا سُجل مكون بالاسم ولا يمكن استيراده مباشرة (على سبيل المثال ، سُجل على المستوى العام من قبل مكتبة ما) ، فيمكن حله بشكل برمجي باستخدام الدالة المساعدة [`()resolveComponent`](/api/render-function.html#resolvecomponent).
 
-### Rendering Slots {#rendering-slots}
+### تصيير المنافذ {#rendering-slots}
 
 <div class="composition-api">
 
-In render functions, slots can be accessed from the `setup()` context. Each slot on the `slots` object is a **function that returns an array of vnodes**:
+في دوال التصيير ، يمكن الوصول إلى المنافذ من سياق `()setup`. كل منفذ من كائن `slots` هو **دالة تعيد مصفوفة من العقد الافتراضية**:
 
 ```js
 export default {
   props: ['message'],
   setup(props, { slots }) {
     return () => [
-      // default slot:
+      // منفذ افتراضي:
       // <div><slot /></div>
       h('div', slots.default()),
 
-      // named slot:
+      // منفذ مسمى:
       // <div><slot name="footer" :text="message" /></div>
       h(
         'div',
@@ -476,20 +476,20 @@ export default {
 }
 ```
 
-JSX equivalent:
+المقابل باستخدام JSX:
 
 ```jsx
-// default
+// افتراضي
 <div>{slots.default()}</div>
 
-// named
+// مسمى
 <div>{slots.footer({ text: props.message })}</div>
 ```
 
 </div>
 <div class="options-api">
 
-In render functions, slots can be accessed from [`this.$slots`](/api/component-instance.html#slots):
+في دوال التصيير ، يمكن الوصول إلى المنافذ من خلال [`this.$slots`](/api/component-instance.html#slots):
 
 ```js
 export default {
@@ -511,7 +511,7 @@ export default {
 }
 ```
 
-JSX equivalent:
+المقابل باستخدام JSX:
 
 ```jsx
 // <div><slot /></div>
@@ -523,17 +523,17 @@ JSX equivalent:
 
 </div>
 
-### Passing Slots {#passing-slots}
+### تمرير المنافذ {#passing-slots}
 
-Passing children to components works a bit differently from passing children to elements. Instead of an array, we need to pass either a slot function, or an object of slot functions. Slot functions can return anything a normal render function can return - which will always be normalized to arrays of vnodes when accessed in the child component.
+تمرير المكونات الأبناء إلى المكونات الآباء يعمل بشكل مختلف قليلاً عن تمرير المكونات الأبناء إلى العناصر. بدلاً من مصفوفة ، نحتاج إلى تمرير دالة منفذ، أو كائن من دوال المنافذ. يمكن لدوال المنافذ إرجاع أي شيء يمكن لدالة التصيير العادية إرجاعه - والذي سيُطبّع دائمًا  إلى مصفوفات من العقد الافتراضية عند الوصول إليه في المكون الإبن.
 
 ```js
-// single default slot
-h(MyComponent, () => 'hello')
+// منفذ افتراضي واحد
+h(MyComponent, () => 'السلام عليكم')
 
-// named slots
-// notice the `null` is required to avoid
-// the slots object being treated as props
+// منافذ مسماة
+// لاحظ أن `null` مطلوب لتجنب
+// معاملة كائن المنافذ على أنه خاصية
 h(MyComponent, null, {
   default: () => 'default slot',
   foo: () => h('div', 'foo'),
@@ -541,11 +541,11 @@ h(MyComponent, null, {
 })
 ```
 
-JSX equivalent:
+المقابل باستخدام JSX:
 
 ```jsx
 // default
-<MyComponent>{() => 'hello'}</MyComponent>
+<MyComponent>{() => 'السلام عليكم'}</MyComponent>
 
 // named
 <MyComponent>{{
@@ -555,11 +555,11 @@ JSX equivalent:
 }}</MyComponent>
 ```
 
-Passing slots as functions allows them to be invoked lazily by the child component. This leads to the slot's dependencies being tracked by the child instead of the parent, which results in more accurate and efficient updates.
+تمرير المنافذ كدوال يسمح لها بأن تُستدعى بشكل خامل من قبل المكون الإبن. هذا يؤدي إلى تتبع اعتمادات المنفذ من قبل المكون الإبن بدلاً من المكون الأب، مما يؤدي إلى تحديثات أكثر دقة وكفاءة.
 
-### Built-in Components {#built-in-components}
+### المكونات المدمجة {#built-in-components}
 
-[Built-in components](/api/built-in-components.html) such as `<KeepAlive>`, `<Transition>`, `<TransitionGroup>`, `<Teleport>` and `<Suspense>` must be imported for use in render functions:
+يجب استيراد [المكونات المدمجة](/api/built-in-components.html) مثل `<KeepAlive>`و `<Transition>`و  `<TransitionGroup>`و  ` <Teleport> `  و `<Suspense>` للاستخدام في دوال التصيير:
 
 <div class="composition-api">
 
@@ -590,7 +590,7 @@ export default {
 
 ### `v-model` {#v-model}
 
-The `v-model` directive is expanded to `modelValue` and `onUpdate:modelValue` props during template compilation—we will have to provide these props ourselves:
+وسعت السمة الموجهة `v-model` إلى خاصيات `modelValue` و `onUpdate:modelValue` أثناء تصريف القالب - سنضطر إلى توفير هذه الخصائص بأنفسنا:
 
 <div class="composition-api">
 
@@ -626,14 +626,14 @@ export default {
 
 </div>
 
-### Custom Directives {#custom-directives}
+### السمات الموجهة المخصصة {#custom-directives}
 
-Custom directives can be applied to a vnode using [`withDirectives`](/api/render-function.html#withdirectives):
+يمكن تطبيق السمات الموجهة المخصصة على العقد الافتراضية باستخدام الدالة المساعدة [`withDirectives`](/api/render-function.html#withdirectives):
 
 ```js
 import { h, withDirectives } from 'vue'
 
-// a custom directive
+// سمة موجهة مخصصة  
 const pin = {
   mounted() { /* ... */ },
   updated() { /* ... */ }
@@ -645,17 +645,17 @@ const vnode = withDirectives(h('div'), [
 ])
 ```
 
-If the directive is registered by name and cannot be imported directly, it can be resolved using the [`resolveDirective`](/api/render-function.html#resolvedirective) helper.
+إذا سجلت السمة الموجهة بالاسم بشكل عام مثلا ولا يمكن استيرادها مباشرة، يمكن حلها باستخدام الدالة المساعدة [`resolveDirective`](/api/render-function.html#resolvedirective).
 
-## Functional Components {#functional-components}
+## الدوال الوظيفية {#functional-components}
 
-Functional components are an alternative form of component that don't have any state of their own. They act like pure functions: props in, vnodes out. They are rendered without creating a component instance (i.e. no `this`), and without the usual component lifecycle hooks.
+المكونات الوظيفية هي شكل بديل من المكونات لا تحتوي على أي حالة خاصة بها. إنها تعمل مثل الدوال النقية: استقبال الخاصيات، وارجاع العقد الافتراضية. تُصير دون إنشاء نسخة مكون (أي لا يوجد `this`)، وبدون خطافات دورة حياة المكون العادية.
 
-To create a functional component we use a plain function, rather than an options object. The function is effectively the `render` function for the component.
+لإنشاء مكون وظيفي نستخدم دالة عادية، بدلاً من كائن خيارات. الدالة هي عملياً دالة `render` للمكون.
 
 <div class="composition-api">
 
-The signature of a functional component is the same as the `setup()` hook:
+بصمة المكون الوظيفي هي نفسها بصمة خطاف `()setup`:
 
 ```js
 function MyComponent(props, { slots, emit, attrs }) {
@@ -666,7 +666,7 @@ function MyComponent(props, { slots, emit, attrs }) {
 </div>
 <div class="options-api">
 
-As there is no `this` reference for a functional component, Vue will pass in the `props` as the first argument:
+بما أنه لا يوجد مرجع `this` للمكون الوظيفي، ستمرر Vue الخاصيات كشكل وسيط أول:
 
 ```js
 function MyComponent(props, context) {
@@ -674,23 +674,23 @@ function MyComponent(props, context) {
 }
 ```
 
-The second argument, `context`, contains three properties: `attrs`, `emit`, and `slots`. These are equivalent to the instance properties [`$attrs`](/api/component-instance.html#attrs), [`$emit`](/api/component-instance.html#emit), and [`$slots`](/api/component-instance.html#slots) respectively.
+الوسيط الثاني، `context`، يحتوي على ثلاث خاصيات: `attrs`، `emit`، و `slots`. هذه مكافئة لخاصيات النسخة [`attrs$`](/api/component-instance.html#attrs)و [`emit$`](/api/component-instance.html#emit) و [`slots$`](/api/component-instance.html#slots) على التوالي.
 
 </div>
 
-Most of the usual configuration options for components are not available for functional components. However, it is possible to define [`props`](/api/options-state.html#props) and [`emits`](/api/options-state.html#emits) by adding them as properties:
+معظم خيارات التهيئة العادية للمكونات غير متوفرة للمكونات الوظيفية. ومع ذلك، من الممكن تعريف [`props`](/api/options-state.html#props) و [`emits`](/api/options-state.html#emits) عن طريق إضافتهم كخاصيات:
 
 ```js
 MyComponent.props = ['value']
 MyComponent.emits = ['click']
 ```
 
-If the `props` option is not specified, then the `props` object passed to the function will contain all attributes, the same as `attrs`. The prop names will not be normalized to camelCase unless the `props` option is specified.
+إذا لم يُحدَّد خيار `props`، فإن كائن `props` الممرر للدالة سيحتوي على جميع السمات، بشكل مشابه لـ `attrs`. لن تطبع أسماء الخاصيات إلى نمط سنام الجمل camelCase إلا إذا حُدد خيار `props`.
 
-For functional components with explicit `props`, [attribute fallthrough](/guide/components/attrs.html) works much the same as with normal components. However, for functional components that don't explicitly specify their `props`, only the `class`, `style`, and `onXxx` event listeners will be inherited from the `attrs` by default. In either case, `inheritAttrs` can be set to `false` to disable attribute inheritance:
+بالنسبة للمكونات الوظيفية مع `props` صريحة، [السمات المستترة](/guide/components/attrs.html) تعمل بنفس الطريقة مع المكونات العادية. ومع ذلك، بالنسبة للمكونات الوظيفية التي لا تحدد `props` بشكل صريح، فإن السمات `class`، `style`، ومستمعات الحدث `onXxx` فقط ستورث من `attrs` بشكل افتراضي. في كلا الحالتين، يمكن تعيين `inheritAttrs` إلى `false` لتعطيل توريث السمات:
 
 ```js
 MyComponent.inheritAttrs = false
 ```
 
-Functional components can be registered and consumed just like normal components. If you pass a function as the first argument to `h()`, it will be treated as a functional component.
+يمكن تسجيل المكونات الوظيفية واستهلاكها تماماً مثل المكونات العادية. إذا قمت بتمرير دالة كوسيط أول لـ `()h`، فسيتعامل معها كمكون وظيفي.
