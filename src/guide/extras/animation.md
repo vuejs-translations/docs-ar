@@ -5,13 +5,13 @@ import Colors from './demos/Colors.vue'
 import AnimateWatcher from './demos/AnimateWatcher.vue'
 </script>
 
-# Animation Techniques {#animation-techniques}
+# تقنيات التحريك {#animation-techniques}
 
-Vue provides the [`<Transition>`](/guide/built-ins/transition.html) and [`<TransitionGroup>`](/guide/built-ins/transition-group.html) components for handling enter / leave and list transitions. However, there are many other ways of using animations on the web, even in a Vue application. Here we will discuss a few additional techniques.
+توفر Vue مكونات `<Transition>` و `<TransitionGroup>` للتعامل مع انتقالات الدخول / الخروج وانتقالات القوائم. ومع ذلك ، هناك العديد من الطرق الأخرى لاستخدام التحريكات على الويب ، حتى في تطبيق Vue. هنا سنناقش بعض التقنيات الإضافية.
 
-## Class-based Animations {#class-based-animations}
+## التحريكات المعتمدة على الأصناف{#class-based-animations}
 
-For elements that are not entering / leaving the DOM, we can trigger animations by dynamically adding a CSS class:
+بالنسبة للعناصر التي لا تدخل / تخرج من الـDOM، يمكننا تشغيل التحريكات عن طريق إضافة صنف CSS بشكل ديناميكي:
 
 <div class="composition-api">
 
@@ -51,8 +51,8 @@ export default {
 
 ```vue-html
 <div :class="{ shake: disabled }">
-  <button @click="warnDisabled">Click me</button>
-  <span v-if="disabled">This feature is disabled!</span>
+  <button @click="warnDisabled">اضغط على الزر</button>
+  <span v-if="disabled">هذه الميزة معطلة!</span>
 </div>
 ```
 
@@ -88,9 +88,9 @@ export default {
 
 <DisabledButton />
 
-## State-driven Animations {#state-driven-animations}
+## التحريكات المعتمدة على الحالة {#state-driven-animations}
 
-Some transition effects can be applied by interpolating values, for instance by binding a style to an element while an interaction occurs. Take this example for instance:
+يمكن تطبيق بعض تأثيرات الانتقال عن طريق اقحام القيم ، على سبيل المثال عن طريق ربط النمط بعنصر أثناء حدوث تفاعل. خذ هذه الشيفرة على سبيل المثال:
 
 <div class="composition-api">
 
@@ -128,7 +128,7 @@ export default {
   :style="{ backgroundColor: `hsl(${x}, 80%, 50%)` }"
   class="movearea"
 >
-  <p>Move your mouse across this div...</p>
+  <p>حرك مؤشر الفأرة عبر هذا العنصر...</p>
   <p>x: {{ x }}</p>
 </div>
 ```
@@ -141,13 +141,13 @@ export default {
 
 <Colors />
 
-In addition to color, you can also use style bindings to animate transform, width, or height. You can even animate SVG paths using spring physics - after all, they are all attribute data bindings:
+بالإضافة إلى اللون ، يمكنك أيضًا استخدام ربط النمط لتحريك التحويل ، العرض أو الارتفاع. يمكنك حتى تحريك مسارات SVG باستخدام الفيزياء النابضية - بعد كل شيء ، فهي جميعًا ربط بيانات يالسمات:
 
 <ElasticHeader />
 
-## Animating with Watchers {#animating-with-watchers}
+## التحريك بالدوال المراقبة {#animating-with-watchers}
 
-With some creativity, we can use watchers to animate anything based on some numerical state. For example, we can animate the number itself:
+ببعض الإبداع ، يمكننا استخدام الدوال المراقبة لتحريك أي شيء بناءً على بعض الحالة العددية. على سبيل المثال ، يمكننا تحريك الرقم نفسه:
 
 <div class="composition-api">
 
@@ -166,7 +166,7 @@ watch(number, (n) => {
 ```
 
 ```vue-html
-Type a number: <input v-model.number="number" />
+اكتب رقما: <input v-model.number="number" />
 <p>{{ tweened.number.toFixed(0) }}</p>
 ```
 
@@ -192,7 +192,7 @@ export default {
 ```
 
 ```vue-html
-Type a number: <input v-model.number="number" />
+اكتب رقما: <input v-model.number="number" />
 <p>{{ tweened.toFixed(0) }}</p>
 ```
 
@@ -202,11 +202,11 @@ Type a number: <input v-model.number="number" />
 
 <div class="composition-api">
 
-[Try it in the Playground](https://sfc.vuejs.org/#eyJBcHAudnVlIjoiPHNjcmlwdCBzZXR1cD5cbmltcG9ydCB7IHJlZiwgcmVhY3RpdmUsIHdhdGNoIH0gZnJvbSAndnVlJ1xuaW1wb3J0IGdzYXAgZnJvbSAnZ3NhcCdcblxuY29uc3QgbnVtYmVyID0gcmVmKDApXG5jb25zdCB0d2VlbmVkID0gcmVhY3RpdmUoe1xuICBudW1iZXI6IDBcbn0pXG5cbndhdGNoKFxuICBudW1iZXIsXG4gIChuKSA9PiB7XG4gICAgZ3NhcC50byh0d2VlbmVkLCB7IGR1cmF0aW9uOiAwLjUsIG51bWJlcjogTnVtYmVyKG4pIHx8IDAgfSlcbiAgfVxuKVxuPC9zY3JpcHQ+XG5cbjx0ZW1wbGF0ZT5cbiAgPGRpdiBjbGFzcz1cImRlbW9cIj5cbiAgICBUeXBlIGEgbnVtYmVyOiA8aW5wdXQgdi1tb2RlbC5udW1iZXI9XCJudW1iZXJcIiAvPlxuICAgIDxwIGNsYXNzPVwiYmlnLW51bWJlclwiPnt7IHR3ZWVuZWQubnVtYmVyLnRvRml4ZWQoMCkgfX08L3A+XG4gIDwvZGl2PlxuPC90ZW1wbGF0ZT5cblxuPHN0eWxlPlxuLmJpZy1udW1iZXIge1xuICBmb250LXdlaWdodDogYm9sZDtcbiAgZm9udC1zaXplOiAyZW07XG59XG48L3N0eWxlPlxuIiwiaW1wb3J0LW1hcC5qc29uIjoie1xuICBcImltcG9ydHNcIjoge1xuICAgIFwiZ3NhcFwiOiBcImh0dHBzOi8vdW5wa2cuY29tL2dzYXA/bW9kdWxlXCIsXG4gICAgXCJ2dWVcIjogXCJodHRwczovL3NmYy52dWVqcy5vcmcvdnVlLnJ1bnRpbWUuZXNtLWJyb3dzZXIuanNcIlxuICB9XG59In0=)
+[اختبرها في حقل التجارب](https://play.vuejs.org/#eNp9U82O0zAQfpWRL9uV2mTFiktIiwAtEhwWBBx9SZNp6t3EtmynLXRzAfEsi7jxNu3bMHZ+uqDVXprxzHzffP7G3bNXWkebBlnCUpsboR1YdI1ecClqrYyDPRhcTekny53Y4BS2mcvX0MLKqBrOCHs29pY2033eh1TgMlfSOpBNvUQDc082uTgf0m6LKLEI+Y5/sucS+vYELrhsqZnLMHRyKk19OJHnMF9AQEAYHjk16TmnpLxoTOaEkkQUPZ+OrNfh69F3d3ABfgJAyyV907hzge5PB4e1rjKHdAJIC7GBvMqsnXNWYK04g0IYOhhXcRZ6AA73xx+H34dfcPhz/H78ebhPIBVSNw42s1oVWEWdCoJ1AbHEPTbVI/9SlLOhvtjvB6N6MF3zrdhhQU5C26axXxfBY1JIURo/0E1H675WPoxOpJ1nKyXdbIuiXLsElqoqXoxZK75hAs+wphQ5Q7b0JGzKumXParL7xipJTyew8b5gOUuGnXDmt+ITnK2d0zaJ40bq2zLKVR372ksypamQs34HLQ1wll7HSpT/0RNEiwrNB+13+u+YrKrU9n3IOdNgeB4Bs8b89pH8jd11qj4atGg2JGCsucyU6Lry1edr3FE8Fge5TxQ/oVVV4zV2ba8bWZDsB31B7bvglpDlF3u1cyjtcCkvNLgR+jmjv9ibJ65+knsZXY4utn8B1lpQPQ==)
 
 </div>
 <div class="options-api">
 
-[Try it in the Playground](https://sfc.vuejs.org/#eyJBcHAudnVlIjoiPHNjcmlwdD5cbmltcG9ydCBnc2FwIGZyb20gJ2dzYXAnXG5cbmV4cG9ydCBkZWZhdWx0IHtcbiAgZGF0YSgpIHtcbiAgICByZXR1cm4ge1xuICAgICAgbnVtYmVyOiAwLFxuICAgICAgdHdlZW5lZDogMFxuICAgIH1cbiAgfSxcbiAgd2F0Y2g6IHtcbiAgICBudW1iZXIobikge1xuICAgICAgZ3NhcC50byh0aGlzLCB7IGR1cmF0aW9uOiAwLjUsIHR3ZWVuZWQ6IE51bWJlcihuKSB8fCAwIH0pXG4gICAgfVxuICB9XG59XG48L3NjcmlwdD5cblxuPHRlbXBsYXRlPlxuXHRUeXBlIGEgbnVtYmVyOiA8aW5wdXQgdi1tb2RlbC5udW1iZXI9XCJudW1iZXJcIiAvPlxuXHQ8cCBjbGFzcz1cImJpZy1udW1iZXJcIj57eyB0d2VlbmVkLnRvRml4ZWQoMCkgfX08L3A+XG48L3RlbXBsYXRlPlxuXG48c3R5bGU+XG4uYmlnLW51bWJlciB7XG4gIGZvbnQtd2VpZ2h0OiBib2xkO1xuICBmb250LXNpemU6IDJlbTtcbn1cbjwvc3R5bGU+IiwiaW1wb3J0LW1hcC5qc29uIjoie1xuICBcImltcG9ydHNcIjoge1xuICAgIFwiZ3NhcFwiOiBcImh0dHBzOi8vdW5wa2cuY29tL2dzYXA/bW9kdWxlXCIsXG4gICAgXCJ2dWVcIjogXCJodHRwczovL3NmYy52dWVqcy5vcmcvdnVlLnJ1bnRpbWUuZXNtLWJyb3dzZXIuanNcIlxuICB9XG59In0=)
+[اختبرها في حقل التجارب](https://play.vuejs.org/#eNp9U8GO0zAQ/ZWRL9tKbVKx4hLCIkCLBIcFAUdf0mSaetexLXvSFrq5gPiWRdz4m/RvcOImLQitVKkz73me38w4e/bSmGhTI0tY6nIrDF1xJSqjLUHpMgMrqyu46MILrrjCXU8VuMpqSbDnCqDIKJtMQwxgkWqrhgxA1dUSbQKL2YDQFlFh4aGANN1f09PbjPJ1MhSH0okataH3FJGe0Fq4GeyhqG1GQisvFj2dnaRvxtL7e1hAMz2/iiv/S+OxX58QVkZmhD4DSAuxgVxmzj3nrMBKcwaFsD6xJDnrzwC0D4fv7a/2J7S/D98OP9qHBFKhTE2wmVe6QBkF/74sBF4lPtamZtRfinI+8Ff7/dCCb/KN2GExWUyhadLYBGext+ajND4z7FNHX2QXRie1MLOVVjTfoijXlMBSy+LZiDrxFRN4gpWHwjx6ETZjYf/zyo/61mnl30avxY+E42xcEWfdRjqAszWRcUkc18rclVGuq7jjXvhZ1BI5G0bvLyCXa7US5T/yvsQIifa96Vb69zWZlHr7rsfI1nh8TL5mjfndf/BbtwuuPlh0aDfewMhRZkukQF9/usGdj0dysPsI+RGdlnXnMRx7VavC2z4717t9209LqPKzu94RKjc01Rk9vXnO/Pf3+pHWT3Yvo8txis0fyDw/iw==)
 
 </div>
