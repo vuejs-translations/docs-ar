@@ -6,7 +6,6 @@ outline: deep
 
 > لقراءة هذه الصفحة يجب عليك أولا الاطلاع على [أساسيات المكونات](/guide/essentials/component-basics).  ثم العودة إلى هنا.
 
-
 ## توريث السمات {#attribute-inheritance}
 
 "السمات المستترة" هي سمة أو مستمع لحدث `v-on` تُمرَّر إلى مكون، ولكنها ليست معرفة بشكل صريح في [الخاصيات](./props) أو [الأحداث المرسلة](./events.html#declaring-emitted-events) للمكون الذي مُرِّرت إليه.  أمثلة شائعة عن ذلك هي سمات `class` و `style` و `id`.
@@ -14,8 +13,7 @@ outline: deep
 عندما يصيّر المكون واحد من العناصر الجذرية، سيتم إضافة السمات المستترة تلقائيًا إلى سمات العنصر الجذري.  على سبيل المثال، نعتبر المكون `<MyButton>` مع القالب التالي:
 
 ```vue-html
-<!-- قالب 
-<MyButton> -->
+<!-- قالب <MyButton> -->
 <button>انقر الزر</button>
 ```
 
@@ -38,8 +36,7 @@ outline: deep
   إذا كان العنصر الجذري للمكون الابن يحتوي بالفعل على سمات `class` أو `style`، سيتم دمجها مع قيم `class` و `style` التي تُمرَّر من الأب.  في المثال السابق، نعتبر المكون `<MyButton>`  بالقالب التالي:
 
 ```vue-html
-<!-- قالب
- <MyButton> -->
+<!-- قالب <MyButton> -->
 <button class="btn">انقر الزر</button>
 ```
 
@@ -64,9 +61,7 @@ outline: deep
 إذا كان المكون يصيّر مكون آخر كعنصر جذري، على سبيل المثال، نعتبر المكون `<MyButton>` المصيَّر لـ`<BaseButton>` كعنصر جذري:
 
 ```vue-html
-<!-- قالب 
-<MyButton/> 
-الذي يصيّر مكون آخر ببساطة -->
+<!-- قالب <MyButton/> الذي يصيّر مكون آخر ببساطة -->
 <BaseButton />
 ```
 
@@ -88,9 +83,7 @@ outline: deep
 
 ```vue
 <script>
-// استخدم 
-// <script> 
-// عادي لتعريف الخيارات
+// استخدم  <script>  عادي لتعريف الخيارات
 export default {
   inheritAttrs: false
 }
@@ -127,7 +120,6 @@ export default {
 </div>
 ```
 
-
 نريد تطبيق جميع السمات المستترة مثل `class` ومستمعي الأحداث `v-on` على العنصر `<button>` الفعلي، وليس على العنصر `<div>` الخارجي. يمكننا الوصول إلى هذا الهدف بتعطيل توريث السمات `inheritAttrs: false` وتطبيق السمات المستترة باستخدام `"v-bind="$attrs`:
 
 ```vue-html{2}
@@ -137,6 +129,7 @@ export default {
 ```
 
 تذكر أن [`v-bind` بدون وسيط](/guide/essentials/template-syntax.html#dynamically-binding-multiple-attributes) يربط جميع خاصيات الكائن كسمات للعنصر المستهدف.
+
 ## توريث السمات على عدة عناصر جذرية {#attribute-inheritance-on-multiple-root-nodes}
 
   على عكس المكونات التي لها عنصر جذر واحد، المكونات التي لها عدة عناصر جذرية لا تمتلك سلوك توريث السمات تلقائيًا. إذا لم يتم ربط `attrs$` بشكل صريح، سيُطلق تحذير تشغيلي.
@@ -180,8 +173,7 @@ const attrs = useAttrs()
 ```js
 export default {
   setup(props, ctx) {
-    // السمات المستترة معروضة كـ 
-    // ctx.attrs
+    // السمات المستترة معروضة كـ  ctx.attrs
     console.log(ctx.attrs)
   }
 }

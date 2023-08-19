@@ -149,8 +149,6 @@ const value = computed({
 
 افتراضيًا، يستخدم `v-model` على المكون `modelValue` كخاصية و `update:modelValue` كحدث. يمكننا تعديل هذه الأسماء من خلال إرسال وسيط إلى `v-model`:
 
-
-
 ```vue-html
 <MyComponent v-model:title="bookTitle" />
 ```

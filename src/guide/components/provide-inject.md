@@ -4,7 +4,6 @@
 
 ## التمرير العميق للخاصيات{#prop-drilling}
 
-
 عادةً , عندما نحتاج إلي تمرير بيانات من المُكون الأب إلي المُكون الإبن . نستخدم [الخاصيات (Props)](/guide/components/props). لكن تخيل اننا لدينا شجرة كبيرة من المُكونات , و المُكون الحفيد يحتاج إلي بيانات من المُكون الجد الأعلي منه . بإستخدام الخاصيات (Props) فقط , سوف نتمكن من تمرير نفس الخاصية إلي سلسلة الآباء كاملةً لكي ننقلها من المُكون الجد إلي المُكون الحفيد
 
 ![مُخطط التمرير العميق للخاصيات](./images/prop-drilling.png)
@@ -32,6 +31,7 @@ import { provide } from 'vue'
 provide(/* المفتاح */ 'message', /* القيمة */ 'hello!')
 </script>
 ```
+
 في حالة عدم إستخدام `<script setup>` , تأكد من إستدعاء دالة `()provide` بشكل متزامن (Synchronously) بداخل دالة `()setup`
 
 ```js
@@ -43,8 +43,8 @@ export default {
   }
 }
 ```
-تقبل هذه الدالة `()provide` وسيطين . يمسي الوسيط الأول بمفتاح الحقن **injection key** , و الذي يمكن ان يكون في هيئة نصاً String أو رمزً `Symbol` . 
-يتم إستخدام مفتاح الحقن بواسطة المُكونات الأحفاد للبحث عن القيمة المرغوب الوصول لها . كما يستطيع المُكون الأحادي ان يستدعي الدالة `()provide` عدة مرات لمفاتيح حقن مختلفة لتوفير قيم عديدة يمكن حقنها من قبل المُكونات الأحفاد
+
+تقبل هذه الدالة `()provide` وسيطين . يمسي الوسيط الأول بمفتاح الحقن **injection key** , و الذي يمكن ان يكون في هيئة نصاً String أو رمزً `Symbol` . يتم إستخدام مفتاح الحقن بواسطة المُكونات الأحفاد للبحث عن القيمة المرغوب الوصول لها . كما يستطيع المُكون الأحادي ان يستدعي الدالة `()provide` عدة مرات لمفاتيح حقن مختلفة لتوفير قيم عديدة يمكن حقنها من قبل المُكونات الأحفاد
 
 الوسيط الثاني هو القيمة المُقدمة . يمكن لهذه القيمة ان تكون من اي نوع , تشمل الحالة التفاعلية مثل refs
 
@@ -70,6 +70,7 @@ export default {
   }
 }
 ```
+
 كل خاصية في الكائن `provide` , يتم إستخدام المفتاح الخاص بها بواسطة المُكونات الأبناء أو الأحفاد وذالك لتحديد القيمة الصحيحة للحقن 
 
 إذا كنا نريد تقديم بيانات علي مستوي النسخة (Instance) , علي سبيل المثال البيانات الموجودة في دالة `()data` , فيجب إستخدام `provide` علي هيئة دالة :
@@ -89,11 +90,12 @@ export default {
   }
 }
 ```
+
 ولكن , لاحظ ان هذا الشكل لا يجعل الحقن تفاعلياً . يتم مناقشة هذا أسفل [جعل الحقن تفاعلياً](#working-with-reactivity)
 
 </div>
 
-## التزويد علي مستوي التطبيق {#app-level-provide}
+## التزويد علي مستوى التطبيق {#app-level-provide}
 
 بالإضافة إلي تزويد البيانات إلي المُكونات , يمكن ايضاً تزويدها علي مستوي التطبيق:
 
@@ -120,10 +122,10 @@ import { inject } from 'vue'
 const message = inject('message')
 </script>
 ```
+
 في حالة ان القيمة التي تم تزويدها هي قيمة تفاعلية (Ref) , سوف يتم حقنها كما هي و **لم** يتم تفكيكها تلقائياً . هذا يسمح للمكون الحاقن بالإحتفاظ بالإتصال التفاعلي بين المُكون Provider المزود 
 
 [مثال كامل للتزويد + الحقن مع الحالة التفاعلية](https://sfc.vuejs.org/#eyJBcHAudnVlIjoiPHNjcmlwdCBzZXR1cD5cbmltcG9ydCB7IHJlZiwgcHJvdmlkZSB9IGZyb20gJ3Z1ZSdcbmltcG9ydCBDaGlsZCBmcm9tICcuL0NoaWxkLnZ1ZSdcblxuLy8gYnkgcHJvdmlkaW5nIGEgcmVmLCB0aGUgR3JhbmRDaGlsZFxuLy8gY2FuIHJlYWN0IHRvIGNoYW5nZXMgaGFwcGVuaW5nIGhlcmUuXG5jb25zdCBtZXNzYWdlID0gcmVmKCdoZWxsbycpXG5wcm92aWRlKCdtZXNzYWdlJywgbWVzc2FnZSlcbjwvc2NyaXB0PlxuXG48dGVtcGxhdGU+XG4gIDxpbnB1dCB2LW1vZGVsPVwibWVzc2FnZVwiPlxuICA8Q2hpbGQgLz5cbjwvdGVtcGxhdGU+IiwiaW1wb3J0LW1hcC5qc29uIjoie1xuICBcImltcG9ydHNcIjoge1xuICAgIFwidnVlXCI6IFwiaHR0cHM6Ly9zZmMudnVlanMub3JnL3Z1ZS5ydW50aW1lLmVzbS1icm93c2VyLmpzXCJcbiAgfVxufSIsIkNoaWxkLnZ1ZSI6IjxzY3JpcHQgc2V0dXA+XG5pbXBvcnQgR3JhbmRDaGlsZCBmcm9tICcuL0dyYW5kQ2hpbGQudnVlJ1xuPC9zY3JpcHQ+XG5cbjx0ZW1wbGF0ZT5cbiAgPEdyYW5kQ2hpbGQgLz5cbjwvdGVtcGxhdGU+IiwiR3JhbmRDaGlsZC52dWUiOiI8c2NyaXB0IHNldHVwPlxuaW1wb3J0IHsgaW5qZWN0IH0gZnJvbSAndnVlJ1xuXG5jb25zdCBtZXNzYWdlID0gaW5qZWN0KCdtZXNzYWdlJylcbjwvc2NyaXB0PlxuXG48dGVtcGxhdGU+XG4gIDxwPlxuICAgIE1lc3NhZ2UgdG8gZ3JhbmQgY2hpbGQ6IHt7IG1lc3NhZ2UgfX1cbiAgPC9wPlxuPC90ZW1wbGF0ZT4ifQ==)
-
 
 مرة أخري , في حالة عدم استخدام `<script setup>` , يجب إستدعاء دالة `()inject` بشكل متزامن بداخل دالة `()setup`
 
@@ -152,6 +154,7 @@ export default {
   }
 }
 ```
+
 ينفذ الحقن **قبل** الحالة الخاصة بالمُكون . لذالك يُمكن الوصول إلي الخواص التي تم حقنها دالخل دالة `()data`
 
 ```js
@@ -165,7 +168,8 @@ export default {
   }
 }
 ```
-[مثال كامل علي التزويد + الحقن](https://sfc.vuejs.org/#eyJBcHAudnVlIjoiPHNjcmlwdD5cbmltcG9ydCBDaGlsZCBmcm9tICcuL0NoaWxkLnZ1ZSdcblxuZXhwb3J0IGRlZmF1bHQge1xuICBjb21wb25lbnRzOiB7IENoaWxkIH0sXG4gIHByb3ZpZGUoKSB7XG4gICAgcmV0dXJuIHtcbiAgICAgIG1lc3NhZ2U6ICdoZWxsbydcbiAgICB9XG4gIH1cbn1cbjwvc2NyaXB0PlxuXG48dGVtcGxhdGU+XG4gIDxDaGlsZCAvPlxuPC90ZW1wbGF0ZT4iLCJpbXBvcnQtbWFwLmpzb24iOiJ7XG4gIFwiaW1wb3J0c1wiOiB7XG4gICAgXCJ2dWVcIjogXCJodHRwczovL3NmYy52dWVqcy5vcmcvdnVlLnJ1bnRpbWUuZXNtLWJyb3dzZXIuanNcIlxuICB9XG59IiwiQ2hpbGQudnVlIjoiPHNjcmlwdD5cbmltcG9ydCBHcmFuZENoaWxkIGZyb20gJy4vR3JhbmRDaGlsZC52dWUnXG5cbmV4cG9ydCBkZWZhdWx0IHtcbiAgY29tcG9uZW50czoge1xuICAgIEdyYW5kQ2hpbGRcbiAgfVxufVxuPC9zY3JpcHQ+XG5cbjx0ZW1wbGF0ZT5cbiAgPEdyYW5kQ2hpbGQgLz5cbjwvdGVtcGxhdGU+IiwiR3JhbmRDaGlsZC52dWUiOiI8c2NyaXB0PlxuZXhwb3J0IGRlZmF1bHQge1xuICBpbmplY3Q6IFsnbWVzc2FnZSddXG59XG48L3NjcmlwdD5cblxuPHRlbXBsYXRlPlxuICA8cD5cbiAgICBNZXNzYWdlIHRvIGdyYW5kIGNoaWxkOiB7eyBtZXNzYWdlIH19XG4gIDwvcD5cbjwvdGVtcGxhdGU+In0=)
+
+[مثال كامل على التزويد + الحقن](https://sfc.vuejs.org/#eyJBcHAudnVlIjoiPHNjcmlwdD5cbmltcG9ydCBDaGlsZCBmcm9tICcuL0NoaWxkLnZ1ZSdcblxuZXhwb3J0IGRlZmF1bHQge1xuICBjb21wb25lbnRzOiB7IENoaWxkIH0sXG4gIHByb3ZpZGUoKSB7XG4gICAgcmV0dXJuIHtcbiAgICAgIG1lc3NhZ2U6ICdoZWxsbydcbiAgICB9XG4gIH1cbn1cbjwvc2NyaXB0PlxuXG48dGVtcGxhdGU+XG4gIDxDaGlsZCAvPlxuPC90ZW1wbGF0ZT4iLCJpbXBvcnQtbWFwLmpzb24iOiJ7XG4gIFwiaW1wb3J0c1wiOiB7XG4gICAgXCJ2dWVcIjogXCJodHRwczovL3NmYy52dWVqcy5vcmcvdnVlLnJ1bnRpbWUuZXNtLWJyb3dzZXIuanNcIlxuICB9XG59IiwiQ2hpbGQudnVlIjoiPHNjcmlwdD5cbmltcG9ydCBHcmFuZENoaWxkIGZyb20gJy4vR3JhbmRDaGlsZC52dWUnXG5cbmV4cG9ydCBkZWZhdWx0IHtcbiAgY29tcG9uZW50czoge1xuICAgIEdyYW5kQ2hpbGRcbiAgfVxufVxuPC9zY3JpcHQ+XG5cbjx0ZW1wbGF0ZT5cbiAgPEdyYW5kQ2hpbGQgLz5cbjwvdGVtcGxhdGU+IiwiR3JhbmRDaGlsZC52dWUiOiI8c2NyaXB0PlxuZXhwb3J0IGRlZmF1bHQge1xuICBpbmplY3Q6IFsnbWVzc2FnZSddXG59XG48L3NjcmlwdD5cblxuPHRlbXBsYXRlPlxuICA8cD5cbiAgICBNZXNzYWdlIHRvIGdyYW5kIGNoaWxkOiB7eyBtZXNzYWdlIH19XG4gIDwvcD5cbjwvdGVtcGxhdGU+In0=)
 
 ### الاسماء المميزة للحقن \* {#injection-aliasing}
 
@@ -200,6 +204,7 @@ export default {
 // "message" في حالة عدم تزويد خاصية بإسم 
 const value = inject('message', 'default value')
 ```
+
 في بعض الحالات , نريد إنشاء القيمة الإبتدائية من خلال إستدعاء دالة أو إستنساخ من كلاس جديد . لتجنب الحسابات الغير ضرورية أو الأثار الجانبية في حالة عدم استخدام القيمة الإختيارية . يمكن ان نستخدم دالة المصنع (Factory Function) لإنشاء القيمة الإبتدائية: 
 
 ```js
@@ -238,7 +243,6 @@ export default {
 
 هناك العديد من الاوقات نريد تعديل البيانات من المُكون الحاقن (injector component) . في بعض الأحيان , من الأفضل إضافة دالة مسؤولة عن تغيير الحالة
 
-
 ```vue{7-9,13}
 <!-- داخل مُكون التزويد-->
 <script setup>
@@ -272,7 +276,6 @@ const { location, updateLocation } = inject('location')
 
 أخيراً , يمكن ان نُغلف القيم المُزودة بدالة [`()readonly`](/api/reactivity-core.html#readonly) إذا كنا نريد ضمان عدم تغيير البيانات المارة عبر `provide` لا يمكن تعديلها بواسطة مُكون الحقن
 
-
 ```vue
 <script setup>
 import { ref, provide, readonly } from 'vue'
@@ -305,14 +308,13 @@ export default {
   }
 }
 ```
+
 [مثال كامل عن تزويد / حقن مع الحالة التفاعلية](https://sfc.vuejs.org/#eyJBcHAudnVlIjoiPHNjcmlwdD5cbmltcG9ydCBDaGlsZCBmcm9tICcuL0NoaWxkLnZ1ZSdcbmltcG9ydCB7IGNvbXB1dGVkIH0gZnJvbSAndnVlJ1xuXG5leHBvcnQgZGVmYXVsdCB7XG4gIGNvbXBvbmVudHM6IHsgQ2hpbGQgfSxcbiAgZGF0YSgpIHtcbiAgICByZXR1cm4ge1xuICAgICAgbWVzc2FnZTogJ2hlbGxvJ1xuICAgIH1cbiAgfSxcbiAgcHJvdmlkZSgpIHtcbiAgICByZXR1cm4ge1xuICAgICAgbWVzc2FnZTogY29tcHV0ZWQoKCkgPT4gdGhpcy5tZXNzYWdlKVxuICAgIH1cbiAgfVxufVxuPC9zY3JpcHQ+XG5cbjx0ZW1wbGF0ZT5cbiAgPGlucHV0IHYtbW9kZWw9XCJtZXNzYWdlXCI+XG4gIDxDaGlsZCAvPlxuPC90ZW1wbGF0ZT4iLCJpbXBvcnQtbWFwLmpzb24iOiJ7XG4gIFwiaW1wb3J0c1wiOiB7XG4gICAgXCJ2dWVcIjogXCJodHRwczovL3NmYy52dWVqcy5vcmcvdnVlLnJ1bnRpbWUuZXNtLWJyb3dzZXIuanNcIlxuICB9XG59IiwiQ2hpbGQudnVlIjoiPHNjcmlwdD5cbmltcG9ydCBHcmFuZENoaWxkIGZyb20gJy4vR3JhbmRDaGlsZC52dWUnXG5cbmV4cG9ydCBkZWZhdWx0IHtcbiAgY29tcG9uZW50czoge1xuICAgIEdyYW5kQ2hpbGRcbiAgfVxufVxuPC9zY3JpcHQ+XG5cbjx0ZW1wbGF0ZT5cbiAgPEdyYW5kQ2hpbGQgLz5cbjwvdGVtcGxhdGU+IiwiR3JhbmRDaGlsZC52dWUiOiI8c2NyaXB0PlxuZXhwb3J0IGRlZmF1bHQge1xuICBpbmplY3Q6IFsnbWVzc2FnZSddXG59XG48L3NjcmlwdD5cblxuPHRlbXBsYXRlPlxuICA8cD5cbiAgICBNZXNzYWdlIHRvIGdyYW5kIGNoaWxkOiB7eyBtZXNzYWdlIH19XG4gIDwvcD5cbjwvdGVtcGxhdGU+In0=)
 
 تستحدم دالة `()computed` عادةً في مُكونات الواجهة التركيبية (Composition Api Components) , ولكن ممكن ايضا لإستكمال حالات إستخدام معينة في واجهات الخيارات (Options Api) . يمكنك معرفة المزيد حول استخدامه من خلال قراءة [أساسيات التفاعلية](/guide/essentials/reactivity-fundamentals.html) و [الخواص المحسوبة](/guide/essentials/computed.html) مع أفضلية للواجهة التركيبية 
 
-
 :::warning الإعدادات المؤقتة مطلوبة
-يتطلب المثال السابق ضبط إعداد `app.config.unwrapInjectedRef = true` لجعل عملية الحقن تقوم بفض الحسبة التفاعلية (unwrap computed refs) بشكل تلقائي.
-هذا سوف يكون الشكل الإفتراضي في Vue 3.3 و هذا الحل تم تقديمه بشكل مؤقت لتجنب أي خلل . سوف يكون غير مطلوب في النسخ الي ستقدم بعد 3.3
+يتطلب المثال السابق ضبط إعداد `app.config.unwrapInjectedRef = true` لجعل عملية الحقن تقوم بفض الحسبة التفاعلية (unwrap computed refs) بشكل تلقائي. هذا سوف يكون الشكل الإفتراضي في Vue 3.3 و هذا الحل تم تقديمه بشكل مؤقت لتجنب أي خلل . سوف يكون غير مطلوب في النسخ الي ستقدم بعد 3.3
 :::
 
 </div>
@@ -322,6 +324,7 @@ export default {
 حتي الأن , لقد قمنا بإستخدام مفاتيح الحقن النصية في الأمثلة السابقة . إذا كنت تعمل علي تطبيق كبير مع العديد من مُزودي التباعية (dependency providers) , أو انت مسؤول عن مُكونات سيتم إستخدامها من قبل مُطورين أخرين , من الأفضل إستخدام مفاتيح الحقن الرموز (Symbol injection keys) لتجنب الصدامات المحتملة
 
 من الأفضل إستخراج الرموز من ملف مخصوص لها:
+
 ```js
 // keys.js
 export const myInjectionKey = Symbol()

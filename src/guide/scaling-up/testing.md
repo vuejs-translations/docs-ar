@@ -83,7 +83,6 @@ describe('increment', () => {
 ### الدوال التركيبية {#composables}
 
 فئة من الدوال المخصصة لتطبيقات Vue هي [الدوال التركيبية](/guide/reusability/composables.html)، و التي قد تحتاج إلى معالجة خاصة أثناء الاختبارات.
-
 اطلع على [اختبار الدوال التركيبية](#testing-composables) أدناه لمزيد من التفاصيل.
 
 ### اختبار الوحدات للمكونات {#unit-testing-components}
@@ -124,7 +123,6 @@ describe('increment', () => {
 
 - بالنسبة للمنطق **البصري**: تأكد من الناتج الصحيح للتصيير بناءً على الخاصيات و المنافذ المدخلة.
 - بالنسبة للمنطق **السلوكي**: تأكد من تحديثات الناتج الصحيح للتصيير أو الأحداث المنشورة بشكل صحيح بالرد على أحداث مدخلات المستخدم.
-
 
   في المثال أدناه، نظهر مكون Stepper يحتوي على عنصر DOM مسمى "increment" و يمكن النقر عليه. نمرر خاصية تسمى `max` التي تمنع Stepper من التزايد بعد `2`، لذلك إذا قمنا بالنقر على الزر 3 مرات، يجب أن تبقى واجهة المستخدم تظهر `2` فقط.
 
@@ -206,11 +204,10 @@ cy.get(valueSelector).should('be.visible').and('contain.text', '0')
     لا تعتمد على لقطات الاختبارات فقط. تأكيد السلسلة النصية للـHTML المصير لا يصف الحقيقة. اكتب الاختبارات بقصد معين.
 
     إذا كان تابع معين يحتاج إلى اختبار دقيق، ففكر في استخراجه إلى دالة مستقلة و كتابة اختبار وحدة لها. إذا لم يمكن استخراجها بشكل نظيف، فقد تُختبر كجزء من اختبار المكون أو اختبار التكامل أو الاختبار الشامل الذي يغطيها.
+  
 ### التوصية {#recommendation-1}
 
-
 - [مكتبة Vitest](https://vitest.dev/) للمكونات أو الدوال التركيبية التي تُصير بدون تصميم مرئي  (مثل دالة [`useFavicon`](https://vueuse.org/core/useFavicon/#usefavicon) في VueUse). يمكن اختبار المكونات و الـDOM باستخدام [@testing-library/vue](https://testing-library.com/docs/vue-testing-library/intro).
-
 
 - [اختبار المكونات في Cypress](https://on.cypress.io/component) للمكونات التي يتوقع أن تعمل بشكل صحيح بعد تصيير التنسيقات بشكل صحيح أو تفعيل الأحداث الأصلية للـDOM. يمكن استخدامه مع مكتبة الاختبارات عبر ملحق [@testing-library/cypress](https://testing-library.com/docs/cypress-testing-library/intro).
 
@@ -227,8 +224,6 @@ cy.get(valueSelector).should('be.visible').and('contain.text', '0')
  نوصي باستخدام `testing-library/vue@` لاختبار المكونات في التطبيقات، لأن تركيزها يتوافق أفضل مع أولويات اختبار التطبيقات. استخدم `vue/test-utils@` فقط إذا كنت تبني مكونات متقدمة تتطلب اختبار الواجهات البرمجية الخاصة بـVue.
 
 ### خيارات أخرى {#other-options-1}
-
-- [Nightwatch](https://v2.nightwatchjs.org/) is an E2E test runner with Vue Component Testing support. ([Example Project](https://github.com/nightwatchjs-community/todo-vue) in Nightwatch v2)
 
 - [Nightwatch](https://v2.nightwatchjs.org/) هو مشغل اختبارات E2E مع دعم اختبار مكونات Vue. ([مشروع مثال]((https://github.com/nightwatchjs-community/todo-vue) في Nightwatch v2)
 

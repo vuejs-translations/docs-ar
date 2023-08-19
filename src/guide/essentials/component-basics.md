@@ -7,10 +7,8 @@
 <!-- https://www.figma.com/file/qa7WHDQRWuEZNRs7iZRZSI/components -->
 
 هذا مشابه جدا لكيفية تداخل عناصر HTML الأصلية، ولكن Vue تنفذ نموذج مكوناته الخاص به للسماح لنا بتغليف محتوى مخصص وشيفرة في كل مكون. Vue تعمل أيضا بشكل جيد مع  الأصلية. إذا كنت مهتمًا بالعلاقة بين مكونات Vue ومكونات الـWeb الأصلية، [اطلع على المزيد من هنا](/guide/extras/web-components.html).
+
 ## تعريف مكون {#defining-a-component}
-
-When using a build step, we typically define each Vue component in a dedicated file using the `.vue` extension - known as a [Single-File Component](/guide/scaling-up/sfc.html) (SFC for short):
-
 
 عند استخدام عملية بناء، نحدد عادة كل مكون Vue في ملف منفصل باستخدام امتداد `.vue` - معروف باسم [مكون أحادي الملف ](/guide/scaling-up/sfc.html) (SFC اختصارا):
 
@@ -118,6 +116,7 @@ export default {
   <ButtonCounter />
 </template>
 ```
+
 لكي تعرض المكون المستورد إلى القالب، تحتاج إلى [تسجيله](/guide/components/registration.html) باستخدام خيار `components`. سيكون المكون متاحًا كوسم باستخدام اسم الخاصية التي سُجل بها.
 
 </div>
@@ -357,6 +356,7 @@ const postFontSize = ref(1)
   </div>
 </template>
 ```
+
 الزر لا يقوم بأي شيئ حتى الآن - نريد أن يوصل النقر على الزر معلومة للمكون الأب لكي يقوم بتكبير حجم النص في جميع المقالات. لحل هذه المشكلة، توفر المكونات نظامًا مخصصًا للأحداث. يمكن للأب اختيار الاستماع إلى أي حدث من نسخة المكون الابن باستخدام `v-on` أو `@`، كما هو معتاد مع حدث الـDOM الأصلي :
 
 ```vue-html{3}
@@ -365,6 +365,7 @@ const postFontSize = ref(1)
   @enlarge-text="postFontSize += 0.1"
  />
 ```
+
 ثم يمكن للمكون الابن إرسال حدث على نفسه باستدعاء  للتابع المدمج [**`emit$`**](/api/component-instance.html#emit)، وتمرير اسم الحدث 
 
 ```vue{5}
@@ -378,7 +379,6 @@ const postFontSize = ref(1)
 ```
 
 بفضل `"enlarge-text="postFontSize += 0.1@`، سيتم استقبال الحدث من قبل المكون الأب وتحديث قيمة `postFontSize`.
-
 
 <div class="options-api">
 
@@ -417,7 +417,6 @@ defineEmits(['enlarge-text'])
 ```
 
 </div>
-
 
 هذه الشيفرة توثق جميع الأحداث التي يرسلها مكون ما و بشكل اختياري [تتحقق من صحتها](/guide/components/events.html#events-validation) . كما تسمح لـ Vue بتجنب تطبيقها تلقائياً كمستمعات أصلية على العنصر الجذري للمكون الابن.
 
@@ -482,6 +481,7 @@ export default {
 }
 </style>
 ```
+
  كما رأيت أعلاه، نستخدم `<slot>` كعنصر نائب حيث نريد أن يوضع المحتوى الممرر من المكون الأب - وهذا كل شيء. لقد انتهينا!
 
 <div class="options-api">
@@ -517,8 +517,7 @@ export default {
 <div class="options-api">
 
 ```vue-html
-<!-- يتغير المكون عند تغيير 
-currentTab -->
+<!-- يتغير المكون عند تغيير currentTab -->
 <component :is="currentTab"></component>
 ```
 
@@ -526,19 +525,16 @@ currentTab -->
 <div class="composition-api">
 
 ```vue-html
-<!-- يتغير المكون عند تغيير 
-currentTab -->
+<!-- يتغير المكون عند تغيير currentTab -->
 <component :is="tabs[currentTab]"></component>
 ```
 
 </div>
 
-
 في المثال أعلاه، يمكن أن تحتوي القيمة الممررة إلى `:is` على أي من:
 
 - اسم المكون المسجل كسلسلة نصية، أو
 - كائن المكون المستورد حاليا
-
 
 يمكنك أيضًا استخدام سمة `is` لإنشاء عناصر HTML عادية.
 
@@ -555,13 +551,13 @@ currentTab -->
 - قالب سلاسل نصية مضمنة (على سبيل المثال `'...' :template`)
 - `<"script type="text/x-template>`
 :::
+
 ### عدم الحساسية لحالة الأحرف {#case-insensitivity}
 
 تكون الوسوم وأسماء السمات في HTML غير حساسة لحالة الأحرف، لذا ستقوم المتصفحات بتحويل أي حروف كبيرة إلى أحرف صغيرة. وهذا يعني أنه عند استخدام قوالب DOM،  أسماء المكونات بنمط باسكال (PascalCase) وأسماء الخاصيات بنمط سنام الجمل (camelCase) أو أسماء الأحداث `v-on` يجب أن يكتبوا بنمط أسياخ الشواء (kebab-case) :
 
 ```js
-//نمط سنام الجمل في 
-//JavaScript
+//نمط سنام الجمل في //JavaScript
 const BlogPost = {
   props: ['postTitle'],
   emits: ['updatePost'],
@@ -572,8 +568,7 @@ const BlogPost = {
 ```
 
 ```vue-html
-<!-- نظام أسياخ في 
-HTML -->
+<!-- نظام أسياخ في HTML -->
 <blog-post post-title="hello!" @update-post="onUpdatePost"></blog-post>
 ```
 
@@ -592,6 +587,7 @@ HTML -->
 ```vue-html
 <my-component></my-component>
 ```
+
 هذا لأن مواصفات HTML تسمح فقط [لعدد قليل من العناصر المحددة](https://html.spec.whatwg.org/multipage/syntax.html#void-elements) بحذف وسوم الغلق، وأكثرها شيوعًا هي عناصر `<input>` و `<img>`. بالنسبة لجميع العناصر الأخرى، إذا حذفت وسم الغلق، فسيفترض المحلل الأصلي لـ HTML أنك لم تنهي وسم الفتح. على سبيل المثال،  الشيفرة التالية:
 
 ```vue-html
@@ -612,7 +608,6 @@ HTML -->
 بعض عناصر HTML مثل `<ul>` و `<ol>` و `<table>` و `<select>` لها قيود على ما يمكن أن يُعرض داخلها، وبعض العناصر مثل `<li>` و `<tr>` و `<option>` يمكن أن تظهر فقط داخل عناصر محددة.
 
 هذا سيؤدي إلى مشاكل عند استخدام المكونات مع العناصر التي لها هذه القيود. على سبيل المثال:
-
 
 ```vue-html
 <table>

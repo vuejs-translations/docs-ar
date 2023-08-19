@@ -61,4 +61,6 @@ setTimeout(() => {
 
 ![Component lifecycle diagram](./images/lifecycle.png)
 
+<!-- https://www.figma.com/file/Xw3UeNMOralY6NV7gSjWdS/Vue-Lifecycle -->
+
 اطلع على <span class="composition-api">[مرجع واجهة برمجة التطبيقات لخطافات دورة الحياة](/api/composition-api-lifecycle.html)</span><span class="options-api">[مرجع واجهة برمجة التطبيقات لخطافات دورة الحياة](/api/options-lifecycle.html)</span> للحصول على تفاصيل عن جميع خطافات دورة الحياة وحالات استخدامها .

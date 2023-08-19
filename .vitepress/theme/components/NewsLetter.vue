@@ -41,14 +41,11 @@ import { VTLink } from '@vue/theme'
       <p class="help">
         يمكنك قراءة الأعداد السابقة والإستماع إلى البودكاست من
         <VTLink class="link" href="https://news.vuejs.org/" no-icon
-          >news.vuejs.org</VTLink
-        >. تستطيع متابعتنا على
+          >news.vuejs.org</VTLink>. تستطيع متابعتنا على
         <VTLink class="link" href="https://twitter.com/vuejs" no-icon
-          >تويتر</VTLink
-        >, أو الانضمام إلينا على
+          >تويتر</VTLink>, أو الانضمام إلينا على
         <VTLink class="link" href="https://chat.vuejs.org/" no-icon
-          >ديسكورد</VTLink
-        >.
+          >ديسكورد</VTLink>.
       </p>
     </div>
   </section>

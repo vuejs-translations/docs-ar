@@ -36,7 +36,10 @@ watch(
     لماذا Vue؟
   </a>
   <Teleport v-if="showWhyVue" to="body">
-    <div @click="showWhyVue = false" class="vuemastery-modal-mask">
+    <div
+       @click="showWhyVue = false"
+       class="vuemastery-modal-mask"
+       >
       <div class="vuemastery-modal-wrapper">
         <div class="vuemastery-modal-container">
           <div class="vuemastery-modal-content">

@@ -4,7 +4,6 @@
 
 الخاصيات المحسوبة تسمح لنا بحساب القيم المشتقة بشكل تصريحي. ومع ذلك، هناك حالات حيث نحتاج إلى تنفيذ "تأثيرات جانبية" بالرد على تغييرات الحالة - على سبيل المثال، تعديل DOM، أو تغيير جزء آخر من الحالة بناءً على نتيجة عملية غير متزامنة.
 
-
 <div class="options-api">
 
 مع واجهة الخيارات، يمكننا استخدام خيار [`watch`](/api/options-state.html#watch) لتشغيل دالة عند تغيير خاصية تفاعلية :
@@ -18,9 +17,7 @@ export default {
     }
   },
   watch: {
-    // عندما تتغير الخاصية 
-    // `question`
-    // سيتم تشغيل هذه الدالة
+    // عندما تتغير الخاصية  `question`  سيتم تشغيل هذه الدالة
     question(newQuestion, oldQuestion) {
       if (newQuestion.includes('?')) {
         this.getAnswer()
@@ -56,7 +53,7 @@ export default {
 ```js
 export default {
   watch: {
-    // ملاحظة: مسارات بسيطة فقط. لا يتم دعم التعبيرات.
+    // ملاحظة: مسارات بسيطة فقط. لا تدعم التعبيرات.
     'some.nested.key'(newValue) {
       // ...
     }
@@ -165,10 +162,7 @@ export default {
   watch: {
     someObject: {
       handler(newValue, oldValue) {
-        // ملاحظة: هنا
-        //`newValue` 
-        // سيكون مساويًا لـ 
-        // `oldValue` 
+        // ملاحظة: هنا `newValue` سيكون مساويًا لـ  `oldValue` 
         // على التغييرات المتداخلة طالما لم يتم استبدال الكائن نفسه.
         
       },
@@ -188,8 +182,8 @@ export default {
 const obj = reactive({ count: 0 })
 
 watch(obj, (newValue, oldValue) => {
-  // تشغل عند التغييرات المتداخلة للخاصية 
-  // ملاحظة: `newValue` سيكون مساويًا لـ `oldValue` هنا
+  // تشغل عند التغييرات المتداخلة للخاصية  ملاحظة:
+  // `newValue` سيكون مساويًا لـ `oldValue` هنا
   // لأنهما يشيران إلى نفس الكائن!
 })
 
@@ -197,8 +191,6 @@ obj.count++
 ```
 
 This should be differentiated with a getter that returns a reactive object - in the latter case, the callback will only fire if the getter returns a different object:
-
-
 
 ```js
 watch(
@@ -223,7 +215,6 @@ watch(
 ```
 
 </div>
-
 
 :::warning استخدمها بحذر
 تتطلب المراقبة العميقة مراجعة جميع الخصائص المتداخلة في الكائن المُراقَب، ويمكن أن تكون مكلفة عند استخدامها على بنية بيانات كبيرة. استخدمها فقط عند الضرورة وتأكد من تأثيرات الأداء. 
@@ -263,8 +254,7 @@ export default {
 
 ```js
 watch(source, (newValue, oldValue) => {
-  // سيتم تشغيله فورًا ثم مرة أخرى عند تغيير المصدر 
-  // `source`
+  // سيتم تشغيله فورًا ثم مرة أخرى عند تغيير المصدر `source`
 }, { immediate: true })
 ```
 
@@ -356,14 +346,14 @@ watchEffect(callback, {
   flush: 'post'
 })
 ```
+
 تمتلك `()watchEffect` مسمى ملائم أيضًا لخاصية التنفيذ بعد التحديث، وهي الدالة `()watchPostEffect`:
 
 ```js
 import { watchPostEffect } from 'vue'
 
 watchPostEffect(() => {
-  /* تم تنفيذها بعد تحديثات 
-    Vue */
+  /* نفذت بعد تحديثات  Vue */
 })
 ```
 
@@ -386,6 +376,7 @@ export default {
 ```
 
 هذا مفيد عندما تحتاج إلى إعداد دالة مراقِبة بشكل شرطي، أو مراقبة شيء ما فقط كاستجابة لتفاعل المستخدم. ويسمح لك أيضًا بإيقاف المراقبة في وقت مبكر.
+
 </div>
 
 ## إيقاف خاصية مراقِبة {#stopping-a-watcher}
@@ -398,6 +389,7 @@ export default {
 
 ```js
 const unwatch = this.$watch('foo', callback)
+
 // ...عندما لا تحتاج إلى المراقبة بعد ذلك:
 unwatch()
 ```
@@ -414,10 +406,10 @@ unwatch()
 <script setup>
 import { watchEffect } from 'vue'
 
-// هذا سيتم إيقافه تلقائيًا
+// هذا سيوقف تلقائيًا
 watchEffect(() => {})
 
-//هذا لن يتم إيقافه تلقائيًا!
+//هذا لن يوقف تلقائيًا!
 setTimeout(() => {
   watchEffect(() => {})
 }, 100)

@@ -83,7 +83,8 @@ function loadLazy() {
 import { defineAsyncComponent } from 'vue'
 
 //  سينشيء جزء منفصل لـ Foo.vue و إعتماداته.
-// سيجلب عند الطلب فقط عند عرض المكون غير المتزامن على الصفحة.
+// سيجلب عند الطلب فقط عند عرض
+// المكون غير المتزامن على الصفحة.
 const Foo = defineAsyncComponent(() => import('./Foo.vue'))
 ```
 
