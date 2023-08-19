@@ -28,8 +28,7 @@ console.log(props.foo)
 export default {
   props: ['foo'],
   setup(props) {
-    // setup()
-    //تتلقى الخاصيات كأول وسيط
+    // setup() تتلقى الخاصيات كأول وسيط
     console.log(props.foo)
   }
 }
@@ -47,16 +46,13 @@ export default {
 export default {
   props: ['foo'],
   created() {
-    // الخاصيات معروضة على
-    // `this`
+    // الخاصيات معروضة على `this`
     console.log(this.foo)
   }
 }
 ```
 
 </div>
-
-In addition to declaring props using an array of strings, we can also use the object syntax:
 
 بالإضافة إلى التصريح بالخاصيات باستخدام مصفوفة من السلاسل النصية، يمكننا أيضا استخدام الصيغة الكائنية:
 
@@ -75,8 +71,7 @@ export default {
 <div class="composition-api">
 
 ```js
-// في
-// <script setup>
+// في <script setup>
 defineProps({
   title: String,
   likes: Number
@@ -84,8 +79,7 @@ defineProps({
 ```
 
 ```js
-// في الملفات التي لا تستخدم
-// <script setup>
+// في الملفات التي لا تستخدم <script setup>
 export default {
   props: {
     title: String,
@@ -175,6 +169,7 @@ export default {
 ```vue-html
 <!-- تعيين القيمة ديناميكيا من متغير -->
 <BlogPost :title="post.title" />
+
 <!-- تعيين القيمة ديناميكيا من تعبير معقد -->
 <BlogPost :title="post.title + ' by ' + post.author.name" />
 ```
@@ -186,17 +181,10 @@ export default {
 #### الأرقام {#number}
 
 ```vue-html
-<!-- على الرغم من أن `42` ثابت، فإننا نحتاج إلى
-  v-bind
-  لإخبار
-  Vue
-  بأن  هذا تعبير
-  JavaScript
-  بدلاً من سلسلة نصية. -->
+<!-- على الرغم من أن `42` ثابت، فإننا نحتاج إلى  v-bind  لإخبار  Vue
+  بأن  هذا تعبير  JavaScript  بدلاً من سلسلة نصية. -->
 <BlogPost :likes="42" />
-<!-- en -->
-<!-- Dynamically assign to the value of a variable. -->
-<!-- ar -->
+
 <!-- تعيين القيمة ديناميكيا من متغير -->
 <BlogPost :likes="post.likes" />
 ```
@@ -207,14 +195,10 @@ export default {
 <!--  تضمين الخاصية بدون قيمة سيعني أن أنها
 `true`. -->
 <BlogPost is-published />
-<!-- على الرغم من أن `false` ثابت، فإننا نحتاج إلى
-  v-bind
-  لإخبار
-  Vue
-  بأن  هذا تعبير
-  JavaScript
-  بدلاً من سلسلة نصية. -->
+<!-- على الرغم من أن `42` ثابت، فإننا نحتاج إلى  v-bind  لإخبار  Vue
+  بأن  هذا تعبير  JavaScript  بدلاً من سلسلة نصية. -->
 <BlogPost :is-published="false" />
+
 <!-- تعيين القيمة ديناميكيا من متغير -->
 <BlogPost :is-published="post.isPublished" />
 ```
@@ -222,14 +206,10 @@ export default {
 #### المصفوفات {#array}
 
 ```vue-html
-<!-- على الرغم من أن المصفوفة ثابتة، فإننا نحتاج إلى
-  v-bind
-  لإخبار
-  Vue
-  بأن  هذا تعبير
-  JavaScript
-  بدلاً من سلسلة نصية. -->
+<!-- على الرغم من أن `42` ثابت، فإننا نحتاج إلى  v-bind  لإخبار  Vue
+  بأن  هذا تعبير  JavaScript  بدلاً من سلسلة نصية. -->
 <BlogPost :comment-ids="[234, 266, 273]" />
+
 <!-- تعيين القيمة ديناميكيا من متغير -->
 <BlogPost :comment-ids="post.commentIds" />
 ```
@@ -237,19 +217,15 @@ export default {
 #### الكائنات {#object}
 
 ```vue-html
-<!-- على الرغم من أن الكائن ثابت، فإننا نحتاج إلى
-  v-bind
-  لإخبار
-  Vue
-  بأن  هذا تعبير
-  JavaScript
-  بدلاً من سلسلة نصية. -->
+<!-- على الرغم من أن `42` ثابت، فإننا نحتاج إلى  v-bind  لإخبار  Vue
+  بأن  هذا تعبير  JavaScript  بدلاً من سلسلة نصية. -->
 <BlogPost
   :author="{
     name: 'Veronica',
     company: 'Veridian Dynamics'
   }"
  />
+
 <!-- تعيين القيمة ديناميكيا من متغير -->
 <BlogPost :author="post.author" />
 ```
@@ -335,11 +311,9 @@ export default {
 
    ```js
    const props = defineProps(['initialCounter'])
-   // counter
-   // يستخدم
-   // props.initialCounter
-   // كقيمة أولية فقط؛
-   // وهو مفصول عن تحديثات الخاصية المستقبلية.
+
+   // counter يستخدم props.initialCounter
+   // كقيمة أولية فقط؛ وهو مفصول عن تحديثات الخاصية المستقبلية.
    const counter = ref(props.initialCounter)
    ```
 
@@ -351,11 +325,8 @@ export default {
      props: ['initialCounter'],
      data() {
        return {
-         // counter
-         // يستخدم
-         // props.initialCounter
-         // كقيمة أولية فقط؛
-         // وهو مفصول عن تحديثات الخاصية المستقبلية.
+           // counter يستخدم props.initialCounter
+          // كقيمة أولية فقط؛ وهو مفصول عن تحديثات الخاصية المستقبلية.
          counter: this.initialCounter
        }
      }
@@ -370,6 +341,7 @@ export default {
 
    ```js
    const props = defineProps(['size'])
+
    // خاصية محسوبة تُحدث تلقائيًا عند تغيير الخاصية
    const normalizedSize = computed(() => props.size.trim().toLowerCase())
    ```
@@ -407,11 +379,8 @@ export default {
 
 ```js
 defineProps({
-  // التحقق من النوع الأساسي
-  //  (ستسمح القيم
-  // `null` و
-  // `undefined`
-  // بأي نوع)
+  // التحقق من النوع الأساسي  (ستسمح القيم
+  // `null` و `undefined` بأي نوع)
   propA: Number,
   // أنواع متعددة ممكنة
   propB: [String, Number],
@@ -429,7 +398,8 @@ defineProps({
   propE: {
     type: Object,
     // يجب أن تُعيد القيم الافتراضية للكائن أو المصفوفة من دالة مصنعة.
-    // تتلقى الدالة الخاصة بالخاصية الخام التي تم استلامها من قبل المكون كوسيط.
+    // تتلقى الدالة الخاصة بالخاصية الخام 
+    // التي تم استلامها من قبل المكون كوسيط.
     default(rawProps) {
       return { message: 'hello' }
     }
@@ -462,11 +432,8 @@ defineProps({
 ```js
 export default {
   props: {
-    // التحقق من النوع الأساسي
-    //  (ستسمح القيم
-    // `null` و
-    // `undefined`
-    // بأي نوع)
+  // التحقق من النوع الأساسي  (ستسمح القيم
+  // `null` و `undefined` بأي نوع)
     propA: Number,
     // أنواع متعددة ممكنة
     propB: [String, Number],
@@ -484,7 +451,8 @@ export default {
     propE: {
       type: Object,
       // يجب أن تُعيد القيم الافتراضية للكائن أو المصفوفة من دالة مصنعة.
-      // تتلقى الدالة الخاصة بالخاصية الخام التي تم استلامها من قبل المكون كوسيط.
+      // تتلقى الدالة الخاصة بالخاصية الخام 
+      // التي تم استلامها من قبل المكون كوسيط.
       default(rawProps) {
         return { message: 'hello' }
       }
@@ -520,14 +488,11 @@ export default {
 
 - إذا حُددت القيمة الافتراضية `default`، ستُستخدم إذا كانت القيمة المعطاة للخاصية هي`undefined` - وهذا يتضمن الحالتين عندما تكون الخاصية غير موجودة أو تم تمرير قيمة `undefined` بشكل صريح.
 
-
   عند فشل التحقق من صحة الخاصية، ستُنتج Vue تحذيرًا في وحدة التحكم (إذا كنت تستخدم الإصدار التطويري).
-
 
 <div class="composition-api">
 
-إذا كنت تستخدم [الخاصيات المصرحة استنادا على النوع](/api/sfc-script-setup.html#typescript-only-features) <sup class="vt-badge ts" />, ستحاول Vue أن تصرف توصيفات النوع إلى تصريحات بالخاصيات وقت التشغيل. على سبيل المثال، ستُصرف 
-`<defineProps<{ msg: string }` إلى `{ msg: { type: String, required: true }}`.
+إذا كنت تستخدم [الخاصيات المصرحة استنادا على النوع](/api/sfc-script-setup.html#typescript-only-features) <sup class="vt-badge ts" />, ستحاول Vue أن تصرف توصيفات النوع إلى تصريحات بالخاصيات وقت التشغيل. على سبيل المثال، ستُصرف `<defineProps<{ msg: string }` إلى `{ msg: { type: String, required: true }}`.
 
 </div>
 <div class="options-api">
@@ -615,12 +580,10 @@ export default {
 يمكن استخدام المكون بالشكل التالي:
 
 ```vue-html
-<!-- ما يعادل
-:disabled="true" -->
+<!-- ما يعادل :disabled="true" -->
 <MyComponent disabled />
 
-<!-- ما يعادل
- :disabled="false" -->
+<!-- ما يعادل :disabled="false" -->
 <MyComponent />
 ```
 

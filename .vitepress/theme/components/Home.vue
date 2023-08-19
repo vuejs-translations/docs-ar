@@ -14,7 +14,8 @@ onMounted(async () => {
 <template>
   <section id="hero" dir="rtl">
     <h1 class="tagline">
-      إطار جافاسكريبت
+      إطار
+       جافاسكريبت
       <br />
       <span class="accent">التقدمي</span>
     </h1>

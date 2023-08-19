@@ -46,8 +46,7 @@ onUnmounted(() => window.removeEventListener('mousemove', update))
 // mouse.js ملف
 import { ref, onMounted, onUnmounted } from 'vue'
 
-// اصطلاحا، تبدأ أسماء الدوال التركيبية بـ 
-// "use"
+// اصطلاحا، تبدأ أسماء الدوال التركيبية بـ  "use"
 export function useMouse() {
   // حالة محصورة ومدارة من قبل الدالة التركيبية
   const x = ref(0)
@@ -199,8 +198,7 @@ export function useFetch(url) {
     // إعادة تعيين الحالة قبل البحث .. 
     data.value = null
     error.value = null
-    // unref()
-    //  يفك المراجع التفاعلية المحتملة
+    // unref() يفك المراجع التفاعلية المحتملة
     fetch(unref(url))
       .then((res) => res.json())
       .then((json) => (data.value = json))
@@ -208,9 +206,7 @@ export function useFetch(url) {
   }
 
   if (isRef(url)) {
-    //تهيئة إعادة البحث التفاعلية إذا كان عنوان 
-    // URL 
-    // الإدخال مرجعًا تفاعليا
+    //تهيئة إعادة البحث التفاعلية إذا كان عنوان URL الإدخال مرجعًا تفاعليا
     watchEffect(doFetch)
   } else {
     // وإلا فقط اجلب البيانات مرة واحدة
@@ -223,7 +219,6 @@ export function useFetch(url) {
 ```
  
  هذه النسخة من `()useFetch` تقبل الآن كل من السلاسل النصية  ثابتة ومراجع refs كعنوان URL. عندما يكjشف  أن عنوان URL هو مرجع تفاعلي باستخدام [`isRef()`](/api/reactivity-utilities.html#isref) ، فإنه يضبط تأثيرًا تفاعليًا باستخدام [`watchEffect()`](/api/reactivity-core.html#watcheffect). سيُشغَّل التأثير على الفور وسيتم تتبع مرجع الـURL كإعتمادية أيضًا. عندما يتغير مرجع URL ، سيتم إعادة تعيين البيانات وجلبها مرة أخرى.
-
 
 هنا [النسخة المحدثة من `()useFetch`](https://sfc.vuejs.org/#eNp1Vs1u20YQfpUFL6JRmXQR9CLIQntIbwWKou2JF5paxlTFH+wu5RqCDnFs11X6FkZqR4njuG1gqE+yfJt8s0tStOz4oCV3Z775ZuabpefOd0XhzUruDJyhjERSKCa5KotRkCVpkQvF5kzwuM+iPC1KxcdswWKRp6wHp17HqJT8e66iw/bc85stbyJhGWRRnknFDkLJfxFTts96h0oVcuD7E5lnxTSM+GE+HXPhqeMiifIx9xDUV/k4lz4ArHsyhicYub2vezvNZmnwGoquu8P2R22gr+DjzcJpyWHfeMzZOFRhn3EhctEHoBLHoL7f5uECE/ZD31YF9cCL4il4Ko43plf6pjqrltUp01fVKR5PaGX6Y3VR7+i1vqteDmDMhgelUnnGZrtxLvYDJ2FJxr4JHPZtNE2i32iHEksCZzSfs4QtFkPfupjIgRqOkxm8kximhjQsCRjQxQjBTvQt05/0lb6tXlbn+spQ0B/0vb4cMEAaHy/lUoYvuIGnHhv/mlrLxBQD8ABbE6rN5QbrBSDfdojB2Qcv+2QJ8qnkliUV2KDA6bpaYgUtvWrxUDGgsQESEJyyJgfLDO9PAo82Rfc8rzEZ+m1fnL5jFbmbhgV0l2cQ9pxQUGBzIAMH9bCZBw5ETO+B00hRxhGNw0R6uXjh48kTZaaSlHtcprsHIj+SEOgEKP0Oho/NGRe7gmfQL0dvvoy5ZfoIl2AXQbZAKp0BQhoP5zGRP9FSZubtKITZ8zjmkdoa0CDjvxu/uMwilaDPDxRuS2FnwtTfDldWTkn9zYkRz8MjOgzlcRZtgMe5xa1B8ef7TL+BiKBKdBrNW6N1y+rcipMURQqAdq/rKdLX2H3HPI9ZBKJkZxfRKbLdtmJ+vG9/KeoNACGylf4fyruz2OvqvLogGZr7AqH+q141Zv9g/wwnkOYSuxf0SPO7wu8tzl4zuJ9Wf1ISl/pdC4rjO6zIQL+10dsb6deanmlRfZ1sSNJ905TJMCbcDwYXmJ/0PaZljW0zwQgOsuCu/66WRs0K1T8KE8VIm3mpXANO24T1L3BQagyvDb6DGiOvM2pCQ/q9XlNzPuKqqF6Z4VxRZHNQvaYL5K8OPQR/gxJil7BRFfIlW9wRFrMJgOqdEeYf1bLJNVC2KIJL1MPyjhsJmjKRoMB9q+HWEl5mkm2KGA4WkdqZyzdC21IEry3rWaIliZlrZsZ0ovV8pNDunf7w2rK12khqIydjCxlABPcWtjOPbj0Whv2C0TXWDX6JrwVu7BN9z/R7CmmbgDpSu2+IVj0KzXR1ksJNXYrsyY/ZoHEwlwmZf0lkQdZOcCsmy7CGz/gR+xFXSiK566Ib+XTGKcoE2ZkvbZ0O/nH4uQawX+C2O1T8H0J16IkwG+cpTkdsz3vW6R8FM8BNl7drZU0opEt8nlOqbu+J8ejtbBBqGfTZs709Wzf8LpzFZ86Rxgk=), مع تأخير مصطنع وخطأ عشوائي لأغراض التجربة.
 
@@ -241,11 +236,8 @@ export function useFetch(url) {
 import { unref } from 'vue'
 
 function useFeature(maybeRef) {
-  // إذا كان 
-  // maybeRef
-  // مرجعًا فستعاد قيمته، وإلا فستعاد 
-  // maybeRef
-  // كما هو
+  // إذا كان maybeRef مرجعًا فستعاد قيمته، وإلا فستعاد 
+  // maybeRef كما هو
   const value = unref(maybeRef)
 }
 ```
@@ -257,8 +249,7 @@ function useFeature(maybeRef) {
 ربما لاحظت أننا استخدمنا `()ref` بدلاً من `()reactive` في الدوال التركيبية. الممارسة الموصى بها هي استخدام دوال تركيبية لإرجاع كائن بسيط وغير تفاعلي يحتوي على مراجع تفاعلية متعددة. هذا يسمح بتفكيك الكائن في المكونات بينما يبقى تفاعلياً:
 
 ```js
-// x و y 
-// هما مرجعان تفاعليان
+// x و y  هما مرجعان تفاعليان
 const { x, y } = useMouse()
 ```
 
@@ -268,8 +259,7 @@ const { x, y } = useMouse()
 
 ```js
 const mouse = reactive(useMouse())
-//mouse.x 
-// مرتبط بالمرجع الأصلي
+//mouse.x مرتبط بالمرجع الأصلي
 console.log(mouse.x)
 ```
 
@@ -332,10 +322,7 @@ export default {
     return { x, y, data, error }
   },
   mounted() {
-    // يمكن الوصول إلى خاصيات 
-    // setup() 
-    //على
-    // `this`
+    // يمكن الوصول إلى خاصيات  setup() على `this`
     console.log(this.x)
   }
   // ...other options

@@ -24,7 +24,6 @@ footer: false
 
 تأكد من أن لديك إصدارًا محدثًا من [Node.js](https://nodejs.org/) مثبتًا ، ثم قم بتشغيل الأمر التالي في سطر الأوامر (بدون علامة `>`:)
 
-
 <div class="language-sh"><pre><code><span class="line"><span style="color:var(--vt-c-green);">&gt;</span> <span style="color:#A6ACCD;">npm init vue@latest</span></span></code></pre></div>
 
 هذا الأمر سيقوم بتثبيت وتنفيذ [create-vue](https://github.com/vuejs/create-vue)، و التي تعتبر الأداة الرسمية لإنشاء مشاريع Vue. ستتلقى الأسئلة الإختيارية لعدة ميزات مثل TypeScript ودعم الاختبارات:
@@ -49,13 +48,9 @@ footer: false
 <span class="line"><span style="color:var(--vt-c-green);">&gt; </span><span style="color:#A6ACCD;">npm run dev</span></span>
 <span class="line"></span></code></pre></div>
 
-
-بعد تنفيذ هاته الأوامر ستحصل على مشروعك الأول في Vue،  ما ستلاحظه هو أن المكونات المولدة مكتوبة باستخدام [الواجهة التركيبية](/guide/introduction.html#composition-api) و `<script setup>`، بدلاً من [واجهة الخيارات](/guide/introduction.html#options-api).
-
-إليك بعض الإرشادات الإضافية :
+بعد تنفيذ هاته الأوامر ستحصل على مشروعك الأول في Vue،  ما ستلاحظه هو أن المكونات المولدة مكتوبة باستخدام [الواجهة التركيبية](/guide/introduction.html#composition-api) و `<script setup>`، بدلاً من [واجهة الخيارات](/guide/introduction.html#options-api). إليك بعض الإرشادات الإضافية :
 
 - محرر النصوص الموصى به هو [Visual Studio Code](https://code.visualstudio.com/) + [إضافة Volar ](https://marketplace.visualstudio.com/items?itemName=Vue.volar). أما إذا كنت تستخدم محررات أخرى، فاطلع على [قسم دعم المحررات](/guide/scaling-up/tooling.html#ide-support).
-
 - نناقش المزيد من التفاصيل حول الأدوات، بما في ذلك الدمج مع إطارات الواجهة الخلفية  في [دليل الأدوات](/guide/scaling-up/tooling.html).
 - لكي تتعلم المزيد حول أداة البناء الأساسية Vite ،  اطلع على [توثيق Vite](https://vitejs.dev).
 - إذا اخترت استخدام TypeScript ، فاطلع [دليل استخدام TypeScript](typescript/overview.html).
@@ -68,7 +63,6 @@ footer: false
 هذا الأمر سينشئ إصداراً جاهزاً للإنتاج من تطبيقك في مجلد `./dist` على مستوى مجلد المشروع.اطلع على [دليل نشر الانتاج](/guide/best-practices/production-deployment.html) لمعرفة المزيد حول توصيل تطبيقك إلى مرحلة الانتاج.
 
 [الخطوات الموالية >](#next-steps)
-
 
 ## استخدام Vue  من شبكات تسليم المحتوى (CDN) {#using-vue-from-cdn}
 
@@ -125,6 +119,7 @@ footer: false
   }).mount('#app')
 </script>
 ```
+
 كما تلاحظ أننا نستخدم وسم `<script type="module">`, والرابط المستورد من شبكة تسليم المحتوى (CDN) يشير إلى النسخة المبنية بـ**وحدات الـES** بدلا من كائن Vue.
 
 [عرض مثال على JSFiddle](https://jsfiddle.net/yyx990803/vo23c470/)
@@ -138,7 +133,6 @@ import { createApp } from 'vue'
 ```
 
 نستطيع اعلام المتصفح على مكان استيراد وحدة `vue` عبر استخدام [خرائط الاستيراد](https://caniuse.com/import-maps) :
-
 
 ```html{1-7,12}
 <script type="importmap">
@@ -186,8 +180,6 @@ import { createApp } from 'vue'
 
 ```html
 <!-- index.html -->
-<div id="app"></div>
-
 <script type="module">
   import { createApp } from 'vue'
   import MyComponent from './my-component.js'
@@ -205,6 +197,7 @@ export default {
   template: `<div>العداد {{ count }}</div>`
 }
 ```
+
 إذا فتحت الملف `index.html` المذكور أعلاه مباشرةً في المتصفح، ستجد أنه يطلب منك تحميل ملف `my-component.js`، ولكن يبدو أنه لا يستطيع العثور عليه. هذا لأن الوحدات الـES لا تعمل على بروتوكول `file://`، لذا ستحتاج إلى تشغيل ملف `index.html` عبر بروتوكول `http://` باستخدام خادم HTTP محلي.
  
 لبدء خادم HTTP محلي، قم أولاً بتثبيت [Node.js](https://nodejs.org/en/) ثم قم بتشغيل `npx serve` من خلال سطر الأوامر في نفس المجلد الذي يحتوي على ملف HTML الخاص بك. يمكنك أيضاً استخدام أي خادم HTTP آخر يمكنه تقديم الملفات الثابتة و عرضها عبر المتصفح مع صيغ MIME الصحيحة.
@@ -214,8 +207,6 @@ export default {
 ### استخدام الواجهة التركيبية دون خطوة بناء {#using-composition-api-without-a-build-step}
 
 الكثير من أمثلة الواجهة التركيبية ستستخدم صياغة `<script setup>` . إذا كنت تنوي استخدام الواجهة التركيبية بدون عملية بناء، فتحقق من استخدام [خيار `()setup` ](/api/composition-api-setup.html).
-
-
 
 ## الخطوات الموالية {#next-steps}
 

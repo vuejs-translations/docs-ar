@@ -1,6 +1,7 @@
 # ربط التنسيقات و الأصناف {#class-and-style-bindings}
 
 احتياج شائع لربط البيانات هو التحكم في قائمة الأصناف وتنسيقات العنصر. بما أن `class` و `style` عبارة عن سمتين، يمكننا استخدام `v-bind` لاعطائهما سلسلة نصية كقيمة بشكل ديناميكي، على غرار السمات الأخرى. ومع ذلك، يمكن أن يكون توليد هذه القيم عن طريق ربط سلاسل مزعجًا ومُحتملًا للأخطاء. لهذا السبب، توفر Vue تحسينات خاصة عند استخدام `v-bind` مع `class` و `style`. بالإضافة إلى السلاسل النصية، يمكن أن تُقيّم العبارات أيضًا إلى كائنات أو مصفوفات.
+
 ## ربط أصناف الـHTML {#binding-html-classes}
 
 <div class="options-api">
@@ -18,7 +19,6 @@
 ```vue-html
 <div :class="{ active: isActive }"></div>
 ```
-
 
 الصيغة أعلاه تعني أن وجود الصنف `active` سيتم تحديده بواسطة [صحة](https://developer.mozilla.org/en-US/docs/Glossary/Truthy) الخاصية `isActive` من البيانات.
 
@@ -243,9 +243,8 @@ data() {
 <span>هذا هو المكون الابن</span>
 ```
 
-You can learn more about component attribute inheritance in [Fallthrough Attributes](/guide/components/attrs.html) section.
+يمكنك معرفة المزيد عن توريث سمات المكون في قسم [السمات المستترة](/guide/components/attrs.html).
 
-يمكنك معرفة المزيد عن توريث سمات المكون في قسم [Fallthrough Attributes](/guide/components/attrs.html).
 ## ربط التنسيقات السطرية {#binding-inline-styles}
 
 ### الربط بالكائنات {#binding-to-objects-1}
@@ -278,9 +277,7 @@ data() {
 <div :style="{ color: activeColor, fontSize: fontSize + 'px' }"></div>
 ```
 
-
-رغم أن الأسماء المكتوبة باستخدام نمط سنام الجمل camelCase موصى بها، إلا أن `style:` يدعم أيضًا أسماء الخاصيات CSS مكتوبة باستخدام نمط أسياخ الشواء kebab-case (وهي ما يتم استخدامه في CSS الفعلي) - على سبيل المثال:
-
+رغم أن الأسماء المكتوبة باستخدام نمط سنام الجمل camelCase موصى بها، إلا أن `style:` يدعم أيضًا أسماء الخاصيات CSS مكتوبة باستخدام نمط أسياخ الشواء kebab-case (وهي ما يستخدم في CSS الفعلي) - على سبيل المثال:
 
 ```vue-html
 <div :style="{ 'font-size': fontSize + 'px' }"></div>
@@ -339,6 +336,5 @@ data() {
 ```vue-html
 <div :style="{ display: ['-webkit-box', '-ms-flexbox', 'flex'] }"></div>
 ```
+
 هذه الشيفرة ستصير القيمة الأخيرة فقط في المصفوفة التي يدعمها المتصفح. في هذا المثال، ستقوم بتصيير `display: flex` للمتصفحات التي تدعم نسخة بدون بادئة من flexbox.
-
-

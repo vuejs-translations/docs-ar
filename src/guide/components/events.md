@@ -17,7 +17,6 @@ if (typeof window !== 'undefined') {
   }
 }
 </script>
-
 # أحداث المكونات {#component-events}
 
 > لقراءة هذه الصفحة يجب عليك أولا الاطلاع على [أساسيات المكونات](/guide/essentials/component-basics). ثم العودة إلى هنا.
@@ -90,8 +89,6 @@ export default {
 ```vue-html
 <MyButton @increase-by="increaseCount" />
 ```
-
-Then the value will be passed as the first parameter of that method:
 
 ثم ستُمرَّر القيمة كأول وسيط لهذا التابع:
 
@@ -187,9 +184,7 @@ export default {
 <script setup>
 const emit = defineEmits({
   submit(payload) {
-    // اعد
-    //`true` أو `false`
-    // للإشارة إلى
+    // اعد `true` أو `false` للإشارة إلى
     // نجاح / فشل التحقق
   }
 })
@@ -216,9 +211,7 @@ const emit = defineEmits<{
 export default {
   emits: {
     submit(payload) {
-       // اعد
-    //`true` أو `false`
-    // للإشارة إلى
+       // اعد true` أو `false` للإشارة إلى
     // نجاح / فشل التحقق
     }
   }

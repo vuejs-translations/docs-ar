@@ -67,7 +67,8 @@ import ListStagger from './transition-demos/ListStagger.vue'
   transform: translateX(30px);
 }
 
-/* تأكد من إخراج العناصر من تدفق التخطيط بحيث يمكن حساب التحريكات بشكل صحيح. */
+/* تأكد من إخراج العناصر من تدفق
+ التخطيط بحيث يمكن حساب التحريكات بشكل صحيح. */
 .list-leave-active {
   position: absolute;
 }

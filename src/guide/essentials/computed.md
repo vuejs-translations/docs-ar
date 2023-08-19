@@ -76,8 +76,7 @@ export default {
   computed: {
     //  خاصية محسوبة مُحصلة
     publishedBooksMessage() {
-    // `this` 
-    //يشير إلى  نسخة المكون
+    // `this` يشير إلى  نسخة المكون
       return this.author.books.length > 0 ? 'نعم' : 'لا'
   }
 }
@@ -128,8 +127,6 @@ const publishedBooksMessage = computed(() => {
 ```
 
 [اختبرها في حقل التجارب](https://sfc.vuejs.org/#eNp9Us1q20AQfpVhL3LAlkrbk3BUEgqFQm6ll24Pa2lsKbV2l52VSxA6NU0eI8eE3AK55E2kt8msrSSQv9vO3zff98224sDaeNOgSMWccldZD4S+sZnUVW2N89CCQ5X7aoNTyE1tG48FdLB0poaIJyOppc6NJg+q8aVxsP84MWmlBtCqxhSi76bU8NVgNA3JhTF/KIVf4Q0Q/WwQPsIMDoqN0jlv+NZUxdg6lj9x+VBRlb9S+8y1HyXC0Ql5dCfMCeC31N1eIJckoJ6oO1w+8LXNYl1RicVhIHOERGqFTP+hdzLZg/0MtiIcu+L0KDHeso/XqFe+hAw+wBeIhrP+bvgfAUsdTvtL5hDWz5OdrWwoBx5ru1YeOQKY22w4H06BB2/7Gxj+9df9VX/ZX8yT4D83kFU6a9s3iHYdg4eOsOURWUzF7nKzWtn4mIzm224lyLFAUqQ7USHHJwyxFKX3ltIkoWUefsQxxcatEn7FrtG+qjFGqmcLZ/4SOgaWYrzAFiPh5AbdzKEu0KF7D/NZ6wvcANuxfaK7B/XE7oo=)
-
-
 
 هنا صرحنا بخاصية محسوبة مسماة `publishedBooksMessage`. تتوقع الدالة `()computed` أن تتلقى دالة محصلة، ويتم إرجاع قيمة **ref محسوب**. مثل الـrefs العادية، يمكنك الوصول إلى النتيجة المحسوبة باستخدام `publishedBooksMessage.value`. تتم إزالة المراجع المحسوبة تلقائيًا في القوالب لذلك يمكنك الإشارة إليها دون `value.` في تعبيرات القالب.
 
@@ -200,6 +197,7 @@ const now = computed(() => Date.now())
 بالمقارنة، استدعاء تابع سيقوم بتشغيل الدالة **دائمًا** عندما يحدث إعادة التصيير.
 
 لماذا نحتاج إلى التخزين؟ تصور أنه لدينا خاصية محسوبة مُكْلِفة مسماة `list`، والتي تتطلب المرور عبر جميع عناصر مصفوفة كبيرة والقيام بالكثير من الحسابات. ثم قد نملك خاصيات محسوبة أخرى تعتمد على `list` بدورها. بدون التخزين، سنقوم بتشغيل الدالة المحصلة على `list` عدة مرات أكثر من الضروري! في حالات لا تريد التخزين، استدع تابع بدلاً من ذلك.
+
 ## الخاصيات المحسوبة القابلة للكتابة {#writable-computed}
 
 الخاصيات المحسوبة غير قابلة للتعيين افتراضيًا. إذا حاولت تعيين قيمة جديدة لخاصية محسوبة، ستحصل على تحذير خلال وقت التشغيل. في الحالات النادرة التي تحتاج إلى خاصية محسوبة "قابلة للكتابة"، يمكنك إنشاء واحدة من خلال توفير الدالتين المُحصِّلة و المعيّنة:
@@ -256,6 +254,7 @@ const fullName = computed({
 })
 </script>
 ```
+
 الآن عندما تقوم بتشغيل `  'محمد عبيدي' =  this.fullName ` سيتم تشغيل المعيّن وسيتم بالتالي تحديث  `this.firstName` و `this.lastName`.
 
 </div>

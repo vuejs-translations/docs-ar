@@ -29,7 +29,6 @@ const multiSelected = ref([])
 <input
   :value="text"
   @input="event => text = event.target.value">
-
 ```
 
 السمة الموجهة `v-model` تساعدنا على تبسيط الشيفرة السابقة إلى:
@@ -38,7 +37,7 @@ const multiSelected = ref([])
 <input v-model="text">
 ```
 
-على غرار ذلك، يمكن استخدام `v-model` على عناصر `<input>` من أنواع مختلفة، `<textarea>` ، و `<select>` . يتم توسيعه تلقائيًا إلى مختلف خاصيات وأحداث الـDOM  بناءً على العنصر الذي يُستخدم عليه :
+على غرار ذلك، يمكن استخدام `v-model` على عناصر `<input>` من أنواع مختلفة، `<textarea>` ، و `<select>` .  يوسع تلقائيًا إلى مختلف خاصيات وأحداث الـDOM  بناءً على العنصر الذي يُستخدم عليه :
 
 * `<input>` مع أنواع النصوص وعناصر `<textarea>` تستخدم خاصية `value` وحدث `input`؛
 * `<input type="checkbox">` و `<input type="radio">` تستخدم خاصية `checked` وحدث `change`؛
@@ -55,7 +54,6 @@ const multiSelected = ref([])
 ```vue-html
 <p>الرسالة: {{ message }}</p>
 <input v-model="message" placeholder="حرر رسالة" />
-
 ```
 
 <div class="demo">
@@ -75,9 +73,8 @@ const multiSelected = ref([])
 </div>
 
 <span id="vmodel-ime-tip"></span>
-
 ::: tip ملاحظة
-بالنسبة لللغات التي تتطلب [محرر أسلوب الإدخال IME](https://ar.wikipedia.org/wiki/%D8%A7%D9%84%D9%84%D8%BA%D8%A9_%D8%A7%D9%84%D9%8A%D8%A7%D8%A8%D8%A7%D9%86%D9%8A%D8%A9_%D9%88%D8%A7%D9%84%D8%AD%D9%88%D8%A7%D8%B3%D9%8A%D8%A8#%D8%A5%D8%AF%D8%AE%D8%A7%D9%84_%D8%A7%D9%84%D9%86%D8%B5) ( مثل الصينية، اليابانية، الكورية إلخ.)، ستلاحظ أن `v-model` لا يتم تحديثه أثناء تحرير تركيبات الـIME. إذا كنت ترغب في الرد على هذه تحديثات أيضًا، استخدم مستمع حدث الـ`input`  وربط السمة `value` بالخاصية التفاعلية بدلاً من استخدام `v-model`.
+بالنسبة لللغات التي تتطلب [محرر أسلوب الإدخال IME](https://ar.wikipedia.org/wiki/%D8%A7%D9%84%D9%84%D8%BA%D8%A9_%D8%A7%D9%84%D9%8A%D8%A7%D8%A8%D8%A7%D9%86%D9%8A%D8%A9_%D9%88%D8%A7%D9%84%D8%AD%D9%88%D8%A7%D8%B3%D9%8A%D8%A8#%D8%A5%D8%AF%D8%AE%D8%A7%D9%84_%D8%A7%D9%84%D9%86%D8%B5) ( مثل الصينية، اليابانية، الكورية إلخ.)، ستلاحظ أن `v-model` لا يحدث أثناء تحرير تركيبات الـIME. إذا كنت ترغب في الرد على هذه تحديثات أيضًا، استخدم مستمع حدث الـ`input`  وربط السمة `value` بالخاصية التفاعلية بدلاً من استخدام `v-model`.
 :::
 
 ### النص متعدد السطور {#multiline-text}
@@ -113,7 +110,6 @@ const multiSelected = ref([])
 
 <!-- جيد -->
 <textarea v-model="text"></textarea>
-
 ```
 
 ### خانة الاختيار {#checkbox}
@@ -175,7 +171,6 @@ export default {
 
 <input type="checkbox" id="واثق" value="واثق" v-model="checkedNames">
 <label for="واثق">واثق</label>
-
 ```
 
 <div class="demo">
@@ -250,7 +245,6 @@ export default {
   <option>ب</option>
   <option>ج</option>
 </select>
-
 ```
 
 <div class="demo">
@@ -292,12 +286,11 @@ export default {
 
 <div class="demo">
   <div>محدد: {{ multiSelected }}</div>
-  <select v-model="multiSelected" multiple>
 
+  <select v-model="multiSelected" multiple>
     <option>أ</option>
     <option>ب</option>
     <option>ج</option>
-
   </select> 
 </div>
 
@@ -319,19 +312,11 @@ export default {
 ```js
 const selected = ref('A')
 
-const options = ref([{
-        text: 'واحد',
-        value: 'أ'
-    },
-    {
-        text: 'اثنان',
-        value: 'ب'
-    },
-    {
-        text: 'ثلاثة',
-        value: 'ج'
-    }
-])
+const options = ref([
+  { text: "واحد",  value: "أ", },
+  { text: "اثنان", value: "ب" },
+  { text: "ثلاثة", value: "ج" },
+]);
 ```
 
 </div>
@@ -342,19 +327,11 @@ export default {
     data() {
         return {
             selected: 'A',
-            options: [{
-                    text: 'واحد',
-                    value: 'أ'
-                },
-                {
-                    text: 'اثنان',
-                    value: 'ب'
-                },
-                {
-                    text: 'ثلاثة',
-                    value: 'ج'
-                }
-            ]
+            options: [
+                    { text: "واحد",  value: "أ", },
+                    { text: "اثنان", value: "ب" },
+                    { text: "ثلاثة", value: "ج" },
+                   ]
         }
     }
 }
@@ -365,14 +342,11 @@ export default {
 ```vue-html
 <select v-model="selected">
   <option v-for="option in options" :value="option.value">
-
     {{ option.text }}
-
   </option>
 </select>
 
 <div>محدد: {{ selected }}</div>
-
 ```
 
 <div class="composition-api">
@@ -388,20 +362,16 @@ export default {
 
 ## ربط القيم {#value-bindings}
 
-For radio, checkbox and select options, the `v-model` binding values are usually static strings (or booleans for checkbox):
-
 بالنسبة لزر الانتقاء ، وخيارات خانة الاختيار والمنسدلة ، فإن قيم الربط `v-model` عادة ما تكون سلاسل ثابتة (أو قيم منطقية لخانة الاختيار):
 
 ```vue-html
-<!-- `picked`
- هو سلسلة نصية "أ" عند الاختيار -->
+<!-- `picked` هو سلسلة نصية "أ" عند الاختيار -->
 <input type="radio" v-model="picked" value="أ" />
 
 <!-- `toggle` هو إما صحيح أو خاطئ -->
 <input type="checkbox" v-model="toggle" />
 
-<!-- `selected` 
-هو سلسلة نصية "أ ب ج" عند اختيار الخيار الأول -->
+<!-- `selected` هو سلسلة نصية "أ ب ج" عند اختيار الخيار الأول -->
 <select v-model="selected">
   <option value="أ ب ج">أ ب ج</option>
 </select>
@@ -417,7 +387,6 @@ For radio, checkbox and select options, the `v-model` binding values are usually
   v-model="toggle"
   true-value="نعم"
   false-value="لا" />
-
 ```
 
 `true-value` و `false-value` هي سمات مخصصة لـ Vue التي تعمل فقط مع `v-model` . هنا سيتم تعيين قيمة خاصية `toggle` إلى `'نعم'` عند تحديد الخانة ، وتعيينها إلى `'لا'` عند إلغاء التحديد. يمكنك أيضًا ربطهم بقيم ديناميكية باستخدام `v-bind` :
@@ -439,7 +408,6 @@ For radio, checkbox and select options, the `v-model` binding values are usually
 ```vue-html
 <input type="radio" v-model="pick" :value="first" />
 <input type="radio" v-model="pick" :value="second" />
-
 ```
 
 `pick` سيُعيَّن بقيمة `first` عند تحديد إدخال الزر الأول ، وتعيينه إلى قيمة `second` عند تحديد الثاني.
@@ -462,11 +430,8 @@ For radio, checkbox and select options, the `v-model` binding values are usually
 افتراضيا، `v-model` تزامن الإدخال مع البيانات بعد كل حدث `input` (باستثناء تركيب IME كما [وصف أعلاه](#vmodel-ime-tip)). يمكنك إضافة المعدل `lazy` للمزامنة بعد الانتهاء من الكتابة و مغادرة إطار الإدخال أي بعد حدث `change`:
 
 ```vue-html
-<!-- مزامنة بعد 
-"change" بدلاً من 
-"input" -->
+<!-- مزامنة بعد "change" بدلاً من "input" -->
 <input v-model.lazy="msg" />
-
 ```
 
 ### المُعدِّل `.number` {#number}

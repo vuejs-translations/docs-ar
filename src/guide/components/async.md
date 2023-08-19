@@ -18,9 +18,7 @@ const AsyncComp = defineAsyncComponent(() => {
 ```
 كما تري , `defineAsyncComponent` يقبل وظيفة أداة التحميل (Loader Function) والتي ترجع وعداً (Promise) . رد الوعد `resolve` يجب استدعائه عندما يتم استرجاع المكون الخاص بك من الخادم . يمكنك ايضاً إستدعاء الرفض `reject(reason)` للإشارة إلي فشل التحميل
 
-
 [ES module dynamic import](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/import) أيضاً يرجع وعداً (Promise), لذالك سنستحدمه في معظم الأوقات مع `defineAsyncComponent` . تدعم حزم مثل Vite و Webpack البنية أيضًا (وستستخدمها كنقاط تقسيم للحزمة), حتى نتمكن من استخدامه لاستيراد Vue SFCs:
-
 
 ```js
 import { defineAsyncComponent } from 'vue'
@@ -29,11 +27,10 @@ const AsyncComp = defineAsyncComponent(() =>
   import('./components/MyComponent.vue')
 )
 ```
+
 النتيجة `AsyncComp` هو عبارة عن مكون مُغلف يستدعي وظيفة أداة التحميل فقط عندما يتم عرضها فعليًا على الصفحة. بالإضافة إلي ذالك , سيتم تمرير أي الخاصيات (Props) او منافذ (Slots) إلي المكون الداخلي , لذالك يمكنك استخدام الغُلاف غير المتزامن (Async Wrapper) لأستبدال المكون الأب أثناء التحميل البطئ (Lazy Loading) بسلاسة.
 
-
  المكونات الغير متزامنة يمكن ان يتم تسجيلها [بشكل عام](/guide/components/registration.html#global-registration) مثل المكونات العادية , بإستخدام `app.component()`:
-
 
 ```js
 app.component('MyComponent', defineAsyncComponent(() =>
@@ -87,8 +84,7 @@ const AdminPage = defineAsyncComponent(() =>
 
 ## حالات التحميل و الخطأ {#loading-and-error-states}
 
-تتضمن العمليات غير المتزامنة حتمًا حالات التحميل والخطأ `defineAsyncComponent()`
-يدعم التعامل مع هذه الحالات عبر الخيارات المتقدمة:
+تتضمن العمليات غير المتزامنة حتمًا حالات التحميل والخطأ `defineAsyncComponent()`يدعم التعامل مع هذه الحالات عبر الخيارات المتقدمة:
 
 ```js
 const AsyncComp = defineAsyncComponent({
@@ -97,7 +93,6 @@ const AsyncComp = defineAsyncComponent({
 
   // مكون لكي يتم إستخدامه أثناء تحميل المكون غير المتزامن (Async Component)
   loadingComponent: LoadingComponent,
-
   // التأخير قبل إظهار مكون التحميل. الافتراضي: 200 مللي ثانية.
   delay: 200,
 
@@ -115,6 +110,4 @@ const AsyncComp = defineAsyncComponent({
 
 ## الاستخدام مع Suspense {#using-with-suspense}
 
-المكونات غير متزامنة يمكن ان تستخدم مع المكون المدمج `<Suspense>` .  تم توثيق التفاعل بين 
-`<Suspense>` و المكونات الغير متزامنة في [الفصل المخصص `<Suspense>`](/guide/built-ins/suspense.html).
-
+المكونات غير متزامنة يمكن ان تستخدم مع المكون المدمج `<Suspense>` .  تم توثيق التفاعل بين `<Suspense>` و المكونات الغير متزامنة في [الفصل المخصص `<Suspense>`](/guide/built-ins/suspense.html).

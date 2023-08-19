@@ -109,17 +109,20 @@ app.directive('focus', {
 
 ```js
 const myDirective = {
-  //تستدعى قبل تطبيق سمات العنصر المرتبطة أو مستمعي الحدث
+  //تستدعى قبل تطبيق سمات 
+  // العنصر المرتبطة أو مستمعي الحدث
   created(el, binding, vnode, prevVnode) {
     // انظر أدناه للحصول على تفاصيل الوسيط
   },
   // تستدعى مباشرة قبل إدراج العنصر في DOM.
   beforeMount(el, binding, vnode, prevVnode) {},
-  // تستدعى عندما يوصَّل المكون الأب وجميع أبنائه المرتبطين بالعنصر.
+  // تستدعى عندما يوصَّل المكون 
+  // الأب وجميع أبنائه المرتبطين بالعنصر.
   mounted(el, binding, vnode, prevVnode) {},
   // تستدعى قبل تحديث المكون الأب
   beforeUpdate(el, binding, vnode, prevVnode) {},
-  // تستدعى بعد تحديث المكون الأب وجميع أبنائه
+  // تستدعى بعد تحديث 
+  // المكون الأب وجميع أبنائه
   updated(el, binding, vnode, prevVnode) {},
   // تستدعى قبل فصل المكون الأب
   beforeUnmount(el, binding, vnode, prevVnode) {},
@@ -144,7 +147,6 @@ const myDirective = {
   - `dir`: كائن تعريف الموجهة.
 
 - `vnode`: VNode الأساسي يمثل العنصر المرتبط.
-
 - `prevNode`: VNode يمثل العنصر المرتبط من التصيير السابق. متاح فقط في `beforeUpdate` و `updated`.
 
 كمثال، لنعتبر استخدام الموجهة التالي:
@@ -161,7 +163,6 @@ const myDirective = {
   modifiers: { bar: true },
   value: /* قيمة `baz` */,
   oldValue: /* قيمة `baz` من التحديث السابق */
-
 }
 ```
 

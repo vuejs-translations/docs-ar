@@ -14,8 +14,6 @@ outline: deep
 
 مع واجهة الخيارات، نستخدم خيار `data` للتصريح بحالة تفاعلية داخل المكون. قيمة الخيار يجب أن تكون دالة تعيد كائن `{}`. ستقوم Vue باستدعاء الدالة عند إنشاء نسخة جديدة من المكون، وتغليف الكائن المعاد في نظام تفاعليته. أي خاصيات من المستوى الأعلى من المكونات الأم أو من جذر التطبيق لهذا الكائن متاحة على مستوى نسخة المكون (this في التوابع وخطافات دورة الحياة) :
 
-
-
 ```js{2-6}
 export default {
   data() {
@@ -124,6 +122,7 @@ export default {
   }
 }
 ```
+
 التوابع المعروضة عادة ما تستخدم كمستمعات للأحداث:
 
 ```vue-html
@@ -200,6 +199,7 @@ export default {
   }
 }
 ```
+
 تمامًا مثل جميع الخاصيات الأخرى في نسخة المكون ، يمكن الوصول إلى `methods` من داخل قالب المكون. والتي تُستخدم عادة كمستمعات للأحداث:
 
 ```vue-html
@@ -313,10 +313,10 @@ const proxy = reactive(raw)
 // الوسيط ليس مساويًا للأصلي
 console.log(proxy === raw) // false
 ```
+
 فقط الوسيط هو المتفاعل - تغيير الكائن الأصلي لن يتسبب في تحديثه. لذلك ، أفضل ممارسة عند العمل مع نظام التفاعلية في Vue هي استخدام **النسخ الوسيطة فقط من الحالات**.
 
 من أجل ضمان الوصول المستمر إلى الوسيط،  استدعاء `()reactive` على نفس الكائن يعيد دائمًا نفس الوسيط ، و استدعاء `()reactive` على وسيط موجود يعيد أيضًا نفس الوسيط:
-
 
 ```js
 // استدعاء reactive() على نفس الكائن يعيد نفس الوسيط
@@ -343,9 +343,7 @@ console.log(proxy.nested === raw) // false
 
 1.  يعمل فقط مع أنواع الكائنات (الكائنات والمصفوفات و [أنواع المجموعات](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects#keyed_collections) مثل `Map` و `Set`). لا يمكن أن يحتوي على [أنواع البيانات الأولية](https://developer.mozilla.org/en-US/docs/Glossary/Primitive) مثل `string` ، `number` أو `boolean`.
 
-
 2. بما أن تتبع التفاعل في Vue يعمل على مستوى الوصول إلى الخاصية أي تحديثه لابد أن يتم بواسطة خاصية، يجب أن نبقى دائمًا على نفس المرجع للكائن التفاعلي. وهذا يعني أننا لا يمكننا بسهولة "استبدال" كائن تفاعلي لأن الاتصال التفاعلي مع المرجع الأول قد فُقِد:
-
 
    ```js
    let state = reactive({ count: 0 })
@@ -359,24 +357,19 @@ console.log(proxy.nested === raw) // false
    ```js
    const state = reactive({ count: 0 })
 
-   // n
-   // هي متغير محلي مفصول
-   // من 
+   // n هي متغير محلي مفصول من 
    // state.count.
    let n = state.count
    // لا يؤثر على الحالة الأصلية
    n++
 
-   // count
-   // هو ايضا مفصول عن 
-   // state.count
+   // count هو ايضا مفصول عن  state.count
    let { count } = state
    // لا يؤثر على الحالة الأصلية
    count++
 
    // الدالة تستقبل رقمًا عاديًا و
-   // لن تتمكن من تتبع التغييرات في 
-   // state.count
+   // لن تتمكن من تتبع التغييرات في  state.count
    callSomeFunction(state.count)
    ```
 
@@ -404,10 +397,7 @@ console.log(count.value) // 1
 
 الق نظرة على: [إضافة النوع إلى Refs](/guide/typescript/composition-api.html#typing-ref) <sup class="vt-badge ts" />
 
-
 بشكل مماثل لخاصيات الكائن المتفاعل ، فإن الخاصية `value.` للمتغير ref تفاعلية بدورها. بالإضافة إلى ذلك ، عند الحصول على أنواع الكائن ، يحول المتغير ref تلقائيًا الخاصية `value.` بواسطة الدالة `()reactive`.
-
-A ref containing an object value can reactively replace the entire object:
 
 ref المحتوي على قيمة كائن يمكنه استبدال كامل الكائن بشكل تفاعلي:
 
@@ -417,6 +407,7 @@ const objectRef = ref({ count: 0 })
 // سيعمل بشكل تفاعلي
 objectRef.value = { count: 1 }
 ```
+
 الـRefs يمكن أيضًا تمريرها كوسائط عبر الدوال أو فكها من الكائنات العادية دون فقدان التفاعلية:
 
 ```js
@@ -425,11 +416,8 @@ const obj = {
   bar: ref(2)
 }
 
-// تمرير 
-// ref
-// للدالة
-// تحتاج  للوصول إلى القيمة عبر
-// .value
+
+// تمرير ref للدالة تحتاج  للوصول إلى القيمة عبر .value
 // لكن ستبقي محافظة على بالتفاعلية
 callSomeFunction(obj.foo)
 
@@ -456,15 +444,12 @@ function increment() {
 
 <template>
   <button @click="increment">
-    <!-- لا حاجة لاستخدام -->
-    <!-- .value -->
-    {{ count }} 
+    {{ count }}     <!-- .value  لا حاجة لاستخدام -->
   </button>
 </template>
 ```
 
 [اختبره في حقل التجارب](https://sfc.vuejs.org/#eyJBcHAudnVlIjoiPHNjcmlwdCBzZXR1cD5cbmltcG9ydCB7IHJlZiB9IGZyb20gJ3Z1ZSdcblxuY29uc3QgY291bnQgPSByZWYoMClcblxuZnVuY3Rpb24gaW5jcmVtZW50KCkge1xuICBjb3VudC52YWx1ZSsrXG59XG48L3NjcmlwdD5cblxuPHRlbXBsYXRlPlxuICA8YnV0dG9uIEBjbGljaz1cImluY3JlbWVudFwiPnt7IGNvdW50IH19PC9idXR0b24+XG48L3RlbXBsYXRlPiIsImltcG9ydC1tYXAuanNvbiI6IntcbiAgXCJpbXBvcnRzXCI6IHtcbiAgICBcInZ1ZVwiOiBcImh0dHBzOi8vc2ZjLnZ1ZWpzLm9yZy92dWUucnVudGltZS5lc20tYnJvd3Nlci5qc1wiXG4gIH1cbn0ifQ==)
-
 
 تجدر الملاحظة إلى أن الفك ينطبق فقط إذا كان الـRefs خاصية على المستوى الأعلى في سياق تصيير القالب. على سبيل المثال ، `foo` هي خاصية على المستوى الأعلى ، ولكن `object.foo` ليست كذلك.
 
@@ -479,6 +464,7 @@ const object = { foo: ref(1) }
 ```vue-html
 {{ object.foo + 1 }}
 ```
+
 النتيجة المصيرة ستكون `[object Object]` لأن `object.foo` هو كائن ref. يمكننا إصلاح ذلك من خلال جعل `foo` خاصية على المستوى الأعلى:
 
 ```js
@@ -488,6 +474,7 @@ const { foo } = object
 ```vue-html
 {{ foo + 1 }}
 ```
+
 الآن ، ستكون نتيجة التصيير `2`.
 
 شيء آخر يجب الإشارة إليه هو أن الـref سيُفكَّك أيضًا إذا كان عبارة عن آخر قيمة مقدرة كنص مُقحم (أي علامة <code v-pre>{{ }}</code>) ، المثال الموالي سيُصيِّر القيمة `1`:
@@ -513,6 +500,7 @@ console.log(state.count) // 0
 state.count = 1
 console.log(count.value) // 1
 ```
+
 إذا تم تعيين ref جديدة لخاصية مرتبطة بـref موجودة ، فسَتَسْبدل الـref القديمة:
 
 ```js
@@ -520,15 +508,11 @@ const otherCount = ref(2)
 
 state.count = otherCount
 console.log(state.count) // 2
-// ref 
-// الأصلية الآن غير متصلة بـ 
-// state.count
+// ref الأصلية الآن غير متصلة بـ state.count
 console.log(count.value) // 1
 ```
 
 فك الـref يحدث فقط عند الوصول إلى الـref داخل كائن تفاعلي عميق. لا ينطبق ذلك عند الوصول إلى الـref كخاصية لـ [كائن تفاعلي سطحي](/api/reactivity-advanced.html#shallowreactive).
-
-
 
 ### فك Ref في المجموعات و المصفوفات {#ref-unwrapping-in-arrays-and-collections}
 
@@ -536,13 +520,11 @@ console.log(count.value) // 1
 
 ```js
 const books = reactive([ref('Vue 3 Guide')])
-// يجب إضافة 
-// .value
+// يجب إضافة  .value
 console.log(books[0].value)
 
 const map = reactive(new Map([['count', ref(0)]]))
-// يجب إضافة 
-// .value
+// يجب إضافة  .value
 console.log(map.get('count').value)
 ```
 
@@ -551,7 +533,6 @@ console.log(map.get('count').value)
 <div class="options-api">
 
 ### التوابع ذوات الحالة \* {#stateful-methods}
-
 
 في بعض الحالات ، قد نحتاج إلى إنشاء دالة تابعة ديناميكية ، على سبيل المثال إنشاء معالج حدث مؤجل:
 
@@ -598,13 +579,13 @@ export default {
 ## التحويلات التفاعلية <sup class="vt-badge experimental" /> \*\* {#reactivity-transform}
 
 الحاجة لاستخدام `.value` مع الـrefs هو أحد العيوب المفروضة من قبل قيود  الـ JavaScript. لكن مع تحويلات وقت التصريف، يمكننا تحسين الأداء من خلال إضافة `.value` تلقائيًا في المواقع المناسبة. يوفر Vue تحويلًا في وقت التصريف يسمح لنا بكتابة مثال "العداد" السابق كما يلي:
+
 ```vue
 <script setup>
 let count = $ref(0)
 
 function increment() {
-  //لا تحتاج ل 
-  // .value
+  //لا تحتاج ل .value
   count++
 }
 </script>
@@ -613,6 +594,7 @@ function increment() {
   <button @click="increment">{{ count }}</button>
 </template>
 ```
+
 يمكنك الاطلاع على المزيد حول [تحويل التفاعلية](/guide/extras/reactivity-transform.html) في القسم المخصص لها. تجدر الملاحظة إلى أنه ما زال في طور التجريب وقد يتغير قبل الانتهاء منه.
 
 </div>
