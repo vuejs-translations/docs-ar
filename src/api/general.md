@@ -1,12 +1,12 @@
-# Global API: General {#global-api-general}
+# الواجهة البرمجية العامة : عام {#global-api-general}
 
-## version {#version}
+## النسخة {#version}
 
-Exposes the current version of Vue.
+تعرض النسخة الحالية لـ Vue.
 
-- **Type:** `string`
+- **النوع:** `string`
 
-- **Example**
+- **مثال**
 
   ```js
   import { version } from 'vue'
@@ -14,23 +14,23 @@ Exposes the current version of Vue.
   console.log(version)
   ```
 
-## nextTick() {#nexttick}
+## ()nextTick {#nexttick}
 
-A utility for waiting for the next DOM update flush.
+أداة مساعدة لانتظار تدفق تحديث DOM التالي.
 
-- **Type**
+- **النوع**
 
   ```ts
   function nextTick(callback?: () => void): Promise<void>
   ```
 
-- **Details**
+- **التفاصيل**
 
-  When you mutate reactive state in Vue, the resulting DOM updates are not applied synchronously. Instead, Vue buffers them until the "next tick" to ensure that each component updates only once no matter how many state changes you have made.
+  عندما تقوم بتغيير حالة تفاعلية في Vue ، لا تتطبيق تحديثات DOM الناتجة بشكل متزامن. بدلاً من ذلك ، يقوم Vue بتخزينها حتى "النبض التالي" لضمان أن يقوم كل مكون بالتحديث مرة واحدة فقط بغض النظر عن عدد تغييرات الحالة التي قمت بها.
 
-  `nextTick()` can be used immediately after a state change to wait for the DOM updates to complete. You can either pass a callback as an argument, or await the returned Promise.
+يمكن استخدام `()nextTick` مباشرة بعد تغيير الحالة لانتظار اكتمال تحديثات DOM. يمكنك إما تمرير دالة رد النداء على الاستدعاء كوسيط ، أو انتظر الوعد المُرجع.
 
-- **Example**
+- **مثال**
 
   <div class="composition-api">
 
@@ -43,11 +43,11 @@ A utility for waiting for the next DOM update flush.
   async function increment() {
     count.value++
 
-    // DOM not yet updated
+    // الـ DOM لم يحدث بعد
     console.log(document.getElementById('counter').textContent) // 0
 
     await nextTick()
-    // DOM is now updated
+    // الـ DOM حدث الآن
     console.log(document.getElementById('counter').textContent) // 1
   }
   </script>
@@ -74,11 +74,11 @@ A utility for waiting for the next DOM update flush.
       async increment() {
         this.count++
 
-        // DOM not yet updated
+        // الـ DOM لم يحدث بعد
         console.log(document.getElementById('counter').textContent) // 0
 
         await nextTick()
-        // DOM is now updated
+        // الـ DOM حدث الآن
         console.log(document.getElementById('counter').textContent) // 1
       }
     }
@@ -92,36 +92,36 @@ A utility for waiting for the next DOM update flush.
 
   </div>
 
-- **See also** [`this.$nextTick()`](/api/component-instance#nexttick)
+- **اطلع أيضا على** [`this.$nextTick()`](/api/component-instance#nexttick)
 
-## defineComponent() {#definecomponent}
+## ()defineComponent {#definecomponent}
 
-A type helper for defining a Vue component with type inference.
+دالة مساعدة لتعريف مكون في Vue مع ميزة استنباط النوع.
 
-- **Type**
+- **النوع**
 
   ```ts
-  // options syntax
+  // صيغة الخيارات
   function defineComponent(
     component: ComponentOptions
   ): ComponentConstructor
 
-  // function syntax (requires 3.3+)
+  // صيغة الدالة (تتطلب 3.3+)
   function defineComponent(
     setup: ComponentOptions['setup'],
     extraOptions?: ComponentOptions
   ): () => any
   ```
 
-  > Type is simplified for readability.
+  > النوع مبسط لتسهيل القراءة.
 
-- **Details**
+- **التفاصيل**
 
-  The first argument expects a component options object. The return value will be the same options object, since the function is essentially a runtime no-op for type inference purposes only.
+  الوسيط الأول يتوقع كائن خيارات المكون. ستكون القيمة المُرجعة هي نفس كائن الخيارات ، لأن الدالة في الأساس لا تفعل شيئًا في وقت التشغيل إنما الغرض منها استنباط النوع فقط.
 
-  Note that the return type is a bit special: it will be a constructor type whose instance type is the inferred component instance type based on the options. This is used for type inference when the returned type is used as a tag in TSX.
+ لاحظ أن نوع الإرجاع مميز قليلاً: سيكون نوع باني المكون هو نوع النسخة الذي يُستنبط من نوع نسخة المكون الذي يعتمد على الخيارات. يستخدم هذا لاستنباط النوع عندما يستخدم النوع المُرجع كعنصر في TSX.
 
-  You can extract the instance type of a component (equivalent to the type of `this` in its options) from the return type of `defineComponent()` like this:
+  يمكنك استخراج نوع النسخة من المكون (المعادل لنوع `this` في خياراته) من نوع الإرجاع لـ `()defineComponent` مثل ما يلي:
 
   ```ts
   const Foo = defineComponent(/* ... */)
@@ -129,26 +129,26 @@ A type helper for defining a Vue component with type inference.
   type FooInstance = InstanceType<typeof Foo>
   ```
 
-  ### Function Signature <sup class="vt-badge" data-text="3.3+" /> {#function-signature}
+  ### بصمة الدالة <sup class="vt-badge" data-text="3.3+" /> {#function-signature}
 
-  `defineComponent()` also has an alternative signature that is meant to be used with Composition API and [render functions or JSX](/guide/extras/render-function.html).
+  `()defineComponent` لديها أيضًا بصمة بديلة يُقصد استخدامها مع الواجهة التركيبية و [دوال التصيير أو JSX](/guide/extras/render-function.html).
 
-  Instead of passing in an options object, a function is expected instead. This function works the same as the Composition API [`setup()`](/api/composition-api-setup.html#composition-api-setup) function: it receives the props and the setup context. The return value should be a render function - both `h()` and JSX are supported:
+  بدلاً من تمرير كائن خيارات ، يتوقع تمرير دالة بدلاً من ذلك. تعمل هذه الدالة بنفس طريقة دالة الواجهة التركيبية [`()setup`](/api/composition-api-setup.html#composition-api-setup): تستقبل الخاصيات وسياق الإعداد. يجب أن تكون القيمة المُرجعة هي دالة تصيير - كل من `()h` و JSX مدعومان:
 
   ```js
   import { ref, h } from 'vue'
 
   const Comp = defineComponent(
     (props) => {
-      // use Composition API here like in <script setup>
+      // استخدم الواجهة التركيبية هنا مثلما تفعل في <script setup>
       const count = ref(0)
 
       return () => {
-        // render function or JSX
+        // دالة التصيير أو JSX
         return h('div', count.value)
       }
     },
-    // extra options, e.g. declare props and emits
+    // خيارات إضافية ، على سبيل المثال إعلان الخاصيات والإرسال
     {
       props: {
         /* ... */
@@ -157,47 +157,47 @@ A type helper for defining a Vue component with type inference.
   )
   ```
 
-  The main use case for this signature is with TypeScript (and in particular with TSX), as it supports generics:
+    الحالة الرئيسية لاستخدام هذه البصمة هي مع TypeScript (وبخاصة مع TSX) ، حيث يدعم الوسيط المعمم:
 
   ```tsx
   const Comp = defineComponent(
     <T extends string | number>(props: { msg: T; list: T[] }) => {
-      // use Composition API here like in <script setup>
+      // استخدم الواجهة التركيبية هنا مثلما تفعل في <script setup>
       const count = ref(0)
 
       return () => {
-        // render function or JSX
+        // دالة التصيير أو JSX
         return <div>{count.value}</div>
       }
     },
-    // manual runtime props declaration is currently still needed.
+    // التصريح بالخاصيات في وقت التشغيل يتطلب حاليًا تصريحيا يدويًا.
     {
       props: ['msg', 'list']
     }
   )
   ```
 
-  In the future, we plan to provide a Babel plugin that automatically infers and injects the runtime props (like for `defineProps` in SFCs) so that the runtime props declaration can be omitted.
+    في المستقبل ، نخطط لتوفير إضافة لـ Babel تستنبط وتحقن الخاصيات في وقت التشغيل (مثل `()defineProps` في المكونات أحادية الملف) بحيث يمكن حذف التصريح بالخاصيات في وقت التشغيل.
 
-  ### Note on webpack Treeshaking {#note-on-webpack-treeshaking}
+  ### ملاحظة حول التجزئة الشجرية على webpack {#note-on-webpack-treeshaking}
 
-  Because `defineComponent()` is a function call, it could look like that it would produce side-effects to some build tools, e.g. webpack. This will prevent the component from being tree-shaken even when the component is never used.
+  بما أن `()defineComponent` هي استدعاء دالة، فقد يبدو أنها ستنتج آثارًا جانبية على بعض أدوات البناء ، على سبيل المثال webpack. سيمنع هذا المكون من الخضوع  للتجزئة الشجرية حتى عندما لا يستخدم المكون أبدًا.
 
-  To tell webpack that this function call is safe to be tree-shaken, you can add a `/*#__PURE__*/` comment notation before the function call:
+  لإخبار webpack أن استدعاء الدالة هذا آمن للتجزئة الشجرية ، يمكنك إضافة تعليق `/*__PURE__#*/` قبل استدعاء الدالة:
 
   ```js
   export default /*#__PURE__*/ defineComponent(/* ... */)
   ```
 
-  Note this is not necessary if you are using Vite, because Rollup (the underlying production bundler used by Vite) is smart enough to determine that `defineComponent()` is in fact side-effect-free without the need for manual annotations.
+  تجدر الملاحظة أن هذا ليس ضروريًا إذا كنت تستخدم Vite ، لأن Rollup (مجمع الإنتاج الأساسي الذي يستخدمه Vite) ذكي بما يكفي لتحديد أن `()defineComponent` هي في الواقع خالية من الآثار الجانبية دون الحاجة إلى تعليقات يدوية.
 
-- **See also** [Guide - Using Vue with TypeScript](/guide/typescript/overview#general-usage-notes)
+- **اطلع أيضا على** [دليل استخدام Vue مع Typescript](/guide/typescript/overview#general-usage-notes)
 
-## defineAsyncComponent() {#defineasynccomponent}
+## ()defineAsyncComponent {#defineasynccomponent}
 
-Define an async component which is lazy loaded only when it is rendered. The argument can either be a loader function, or an options object for more advanced control of the loading behavior.
+تعرف مكون غير متزامن يحمل بشكل خامل فقط عندما يصير. يمكن أن يكون الوسيط إما دالة تحميل أو كائن خيارات لمزيد من التحكم المتقدم في سلوك التحميل.
 
-- **Type**
+- **النوع**
 
   ```ts
   function defineAsyncComponent(
@@ -222,11 +222,11 @@ Define an async component which is lazy loaded only when it is rendered. The arg
   }
   ```
 
-- **See also** [Guide - Async Components](/guide/components/async)
+- **اطلع أيضا على** [دليل المكونات الغير متزامنة](/guide/components/async)
 
-## defineCustomElement() {#definecustomelement}
+## ()defineCustomElement {#definecustomelement}
 
-This method accepts the same argument as [`defineComponent`](#definecomponent), but instead returns a native [Custom Element](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_custom_elements) class constructor.
+تقبل هذه الدالة نفس الوسيط الذي تقبله [`()defineComponent`](#definecomponent) ، ولكنها بدلاً من ذلك ترجع باني فئة [عنصر مخصص](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_custom_elements) أصلي.
 
 - **Type**
 
@@ -240,29 +240,29 @@ This method accepts the same argument as [`defineComponent`](#definecomponent), 
   }
   ```
 
-  > Type is simplified for readability.
+  > النوع مبسط لتسهيل القراءة.
 
-- **Details**
+- **التفاصيل**
 
-  In addition to normal component options, `defineCustomElement()` also supports a special option `styles`, which should be an array of inlined CSS strings, for providing CSS that should be injected into the element's shadow root.
+   بالإضافة إلى خيارات المكون العادية ، تدعم `()defineCustomElement` أيضًا خيارًا خاصًا `styles` ، والذي يجب أن يكون مصفوفة من سلاسل نصية CSS السطري ، لتوفير CSS الذي سيحقن في جذر الظل الخاص بالعنصر.
 
-  The return value is a custom element constructor that can be registered using [`customElements.define()`](https://developer.mozilla.org/en-US/docs/Web/API/CustomElementRegistry/define).
+  القيمة المُرجعة هي باني عنصر مخصص يمكن تسجيله باستخدام [`()customElements.define()`](https://developer.mozilla.org/en-US/docs/Web/API/CustomElementRegistry/define).
 
-- **Example**
+- **مثال**
 
   ```js
   import { defineCustomElement } from 'vue'
 
   const MyVueElement = defineCustomElement({
-    /* component options */
+    /* خيارات المكون */
   })
 
-  // Register the custom element.
+  // سجل العنصر المخصص.
   customElements.define('my-vue-element', MyVueElement)
   ```
 
-- **See also**
+- **اطلع أيضا على**
 
-  - [Guide - Building Custom Elements with Vue](/guide/extras/web-components#building-custom-elements-with-vue)
+  - [دليل بناء عناصر مخصصة مع Vue](/guide/extras/web-components#building-custom-elements-with-vue)
 
-  - Also note that `defineCustomElement()` requires [special config](/guide/extras/web-components#sfc-as-custom-element) when used with Single-File Components.
+  -  لاحظ أيضا أن `()defineCustomElement` يتطلب [تهيئة خاصة](/guide/extras/web-components#sfc-as-custom-element) عند استخدامه مع مكونات أحادية الملف.

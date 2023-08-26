@@ -1,6 +1,6 @@
 import {
   __commonJS
-} from "./chunk-RSJERJUL.js";
+} from "./chunk-76J2PTFD.js";
 
 // node_modules/.pnpm/dynamics.js@1.1.5/node_modules/dynamics.js/lib/dynamics.js
 var require_dynamics = __commonJS({
@@ -62,7 +62,7 @@ var require_dynamics = __commonJS({
         return function(el) {
           var args, i, res;
           if (el instanceof Array || el instanceof NodeList || el instanceof HTMLCollection) {
-            res = function() {
+            res = (function() {
               var _i, _ref, _results;
               _results = [];
               for (i = _i = 0, _ref = el.length; 0 <= _ref ? _i < _ref : _i > _ref; i = 0 <= _ref ? ++_i : --_i) {
@@ -71,7 +71,7 @@ var require_dynamics = __commonJS({
                 _results.push(fn.apply(this, args));
               }
               return _results;
-            }.apply(this, arguments);
+            }).apply(this, arguments);
             return res;
           }
           return fn.apply(this, arguments);
