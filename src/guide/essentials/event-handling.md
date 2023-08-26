@@ -48,12 +48,12 @@ data() {
 
 <div class="composition-api">
 
-[اختبرها في حقل التجارب](https://sfc.vuejs.org/#eNp9kE1OAzEMha9iZVNQ2wlsR9MK7uFNGzwwpfmRkymLURZI3IVld0jcZHobHKZCCKTu8p6fP9sZ1H0I1aEnVasmGu5CgkipD2t0nQ2eEwzA1EKGlr2FmURn6NAZ72IC43uXYFUSVzfX6Bo9MaRbRCIb9ptEopptn5J3cGf2nXleofrunM9Rrcf38eP0CreNnjIlHcQ9vY2f41GqxxqG4Twq50aX3Rr9A1cLNW26tJtQ7aJ3csuADgDPhYhKEMUpnlxQNKqnlEKstY6tKT+wi5XnRy2vimVUZ6miaJdb9i+RWMCoFr8YWswD8ZLJPRATX2L+if7jFmxGl1X+Av7TkqA=)
+[اختبرها في حقل التجارب](https://play.vuejs.org/#eNp9kE1OAzEMha9iZVNQ2wlsR9MK7uFNGzwwpfmRkymLURZI3IVld0jcZHobHKZCCKTu8p6fP9sZ1H0I1aEnVasmGu5CgkipD2t0nQ2eEwzA1EKGlr2FmURn6NAZ72IC43uXYFUSVzfX6Bo9MaRbRCIb9ptEopptn5J3cGf2nXleofrunM9Rrcf38eP0CreNnjIlHcQ9vY2f41GqxxqG4Twq50aX3Rr9A1cLNW26tJtQ7aJ3csuADgDPhYhKEMUpnlxQNKqnlEKstY6tKT+wi5XnRy2vimVUZ6miaJdb9i+RWMCoFr8YWswD8ZLJPRATX2L+if7jFmxGl1X+Av7TkqA=)
 
 </div>
 <div class="options-api">
 
-[اختبرها في حقل التجارب](https://sfc.vuejs.org/#eNp9kEFOwzAQRa8y8grUNoZtFCq4hzdpOoWUxLHGk4IUZQGiIM7BooJdWSBxE+c22E0UIZAqWdb87/Gz5zfiyphoU6OIRWIzyg3PlcZ7UxHDEldpXTA0SgMsU05PTkOtGICQa9L9CYDirKo1I8VwFhzFbWjzm1+JHLleMJamSBmD4mRRM1caLrMiz24vlBgwk4kSc7dzX90DnCey7+pvmLn76Lbgdt1T99w9uj24b1++Hhz3GfRbcLx8gaYZgG0L3dbt3XuUSONBiRz/IaYiL8O4szI10dpW2kdxmEsNB1aJeJxU+KyCVuKG2dhYSrvKQoBrG1V0LX0VkX8zLzFCW84WVN1ZJA9WYvqLIb25QZoR6iUS0jHmn9Z/3IANWYv2B2TQtCQ=)
+[اختبرها في حقل التجارب](https://play.vuejs.org/#eNp9kEFOwzAQRa8y8grUNoZtFCq4hzdpOoWUxLHGk4IUZQGiIM7BooJdWSBxE+c22E0UIZAqWdb87/Gz5zfiyphoU6OIRWIzyg3PlcZ7UxHDEldpXTA0SgMsU05PTkOtGICQa9L9CYDirKo1I8VwFhzFbWjzm1+JHLleMJamSBmD4mRRM1caLrMiz24vlBgwk4kSc7dzX90DnCey7+pvmLn76Lbgdt1T99w9uj24b1++Hhz3GfRbcLx8gaYZgG0L3dbt3XuUSONBiRz/IaYiL8O4szI10dpW2kdxmEsNB1aJeJxU+KyCVuKG2dhYSrvKQoBrG1V0LX0VkX8zLzFCW84WVN1ZJA9WYvqLIb25QZoR6iUS0jHmn9Z/3IANWYv2B2TQtCQ=)
 
 </div>
 
@@ -107,12 +107,12 @@ data() {
 
 <div class="composition-api">
 
-[اختبرها في حقل التجارب](https://sfc.vuejs.org/#eNp9Uc1Kw0AQfpVxEVqhzd5LWhS8qjdPe2gaJzW12YTdST2E3FoVD6LP4KGCiIj4Ltm3cZK04g8ICzuz8833zXxbiIMs8xY5ioHwbWjijMAi5dlI6TjJUkNQgMEISohMmkCHoR2llQ5TbQl0kCAMa0C3c5qjN7Odvboa5TqkONUwNYjUxQVq2oNCaYBgjoa6Y7eq3qqX6qlaw25R03iLYJ5juTNmAgApx03TuE3AXbsbqNZuyT2v1XMbPlYfbuluwa3cFWyAcHhyVIdxBD9kt8LNm0eBmWJ9TY9ZulEslebjy9YEXp8TwiSbB4R1Rv4kJ+KV9sN5HF4MlWh2U2JUvbs7nuPB3buVL1sUd/jyq130RGtmPwkyNinVbHczltoUrBKD7aBKsMl1rsQ5UWYHUtoorD9pZr3UTCVHnsk1xewa2qQ/MemlRcPESvS+cUh+XKDpG9RnaND8x/kL+od3a5EoPwHZEdT+)
+[اختبرها في حقل التجارب](https://play.vuejs.org/#eNp9Uc1Kw0AQfpVxEVqhzd5LWhS8qjdPe2gaJzW12YTdST2E3FoVD6LP4KGCiIj4Ltm3cZK04g8ICzuz8833zXxbiIMs8xY5ioHwbWjijMAi5dlI6TjJUkNQgMEISohMmkCHoR2llQ5TbQl0kCAMa0C3c5qjN7Odvboa5TqkONUwNYjUxQVq2oNCaYBgjoa6Y7eq3qqX6qlaw25R03iLYJ5juTNmAgApx03TuE3AXbsbqNZuyT2v1XMbPlYfbuluwa3cFWyAcHhyVIdxBD9kt8LNm0eBmWJ9TY9ZulEslebjy9YEXp8TwiSbB4R1Rv4kJ+KV9sN5HF4MlWh2U2JUvbs7nuPB3buVL1sUd/jyq130RGtmPwkyNinVbHczltoUrBKD7aBKsMl1rsQ5UWYHUtoorD9pZr3UTCVHnsk1xewa2qQ/MemlRcPESvS+cUh+XKDpG9RnaND8x/kL+od3a5EoPwHZEdT+)
 
 </div>
 <div class="options-api">
 
-[اختبرها في حقل التجارب](https://sfc.vuejs.org/#eNp9UsFu00AQ/ZVhhdRUarz3yFQgcQVunPZgN5kkLvHa2h0HpCi3pJQeEHwDQqEgGlUt4ldm/6a7dmypTVXL8sy8nXn7PDML8aoso3mFYiBiOzRZScdK46eyMAQjHKfVjGChNMAopbR32PgABqkyuo0AdJrjAA7eVxid2oMGXQazPArfHGlajOygLZgYROrhHDV1lLtHyoSmmU3ugR4F3vKGr9wKeONWvHXnwQL/5lt3wdfAP93KfakP3Rnf8BVftsEt/98F/LeGLvjyPn06Q0O9xK352qf84g08XwQVUfiv5bPk8KGapNa+L9J9duftTVv+07g/+F+4FNzancFeCbx+96YFszE80pVGXY1HlJoJBjN566V1uupety1X2r+x7MbpA8K8nKWEIaL4pCIqNLwczrLhhxdK1ONQ4phv3Fev9Lv75taxbLJ8RSy7cnEksjwsRz9PSz/qQvvFqaWq3YFVohuzEn6zQqzElKi0AynteBjW7dRGhZlI70Wm0pTlGKHN+yem+GjReGIl6sXZcUgPztH0DeoRGjRPcT5I3eNtWySWd48cH0E=)
+[اختبرها في حقل التجارب](https://play.vuejs.org/#eNp9UsFu00AQ/ZVhhdRUarz3yFQgcQVunPZgN5kkLvHa2h0HpCi3pJQeEHwDQqEgGlUt4ldm/6a7dmypTVXL8sy8nXn7PDML8aoso3mFYiBiOzRZScdK46eyMAQjHKfVjGChNMAopbR32PgABqkyuo0AdJrjAA7eVxid2oMGXQazPArfHGlajOygLZgYROrhHDV1lLtHyoSmmU3ugR4F3vKGr9wKeONWvHXnwQL/5lt3wdfAP93KfakP3Rnf8BVftsEt/98F/LeGLvjyPn06Q0O9xK352qf84g08XwQVUfiv5bPk8KGapNa+L9J9duftTVv+07g/+F+4FNzancFeCbx+96YFszE80pVGXY1HlJoJBjN566V1uupety1X2r+x7MbpA8K8nKWEIaL4pCIqNLwczrLhhxdK1ONQ4phv3Fev9Lv75taxbLJ8RSy7cnEksjwsRz9PSz/qQvvFqaWq3YFVohuzEn6zQqzElKi0AynteBjW7dRGhZlI70Wm0pTlGKHN+yem+GjReGIl6sXZcUgPztH0DeoRGjRPcT5I3eNtWySWd48cH0E=)
 
 </div>
 
@@ -120,12 +120,12 @@ data() {
 
 <div class="composition-api">
 
-اطلع على : [إضافة الأنواع لمعالجات الأحداث](/guide/typescript/composition-api.html#typing-event-handlers) <sup class="vt-badge ts" />
+اطلع على : [إضافة الأنواع لمعالجات الأحداث](/guide/typescript/composition-api#typing-event-handlers) <sup class="vt-badge ts" />
 
 </div>
 <div class="options-api">
 
-اطلع على : [إضافة الأنواع لمعالجات الأحداث](/guide/typescript/options-api.html#typing-event-handlers) <sup class="vt-badge ts" />
+اطلع على : [إضافة الأنواع لمعالجات الأحداث](/guide/typescript/options-api#typing-event-handlers) <sup class="vt-badge ts" />
 
 </div>
 
@@ -165,12 +165,12 @@ methods: {
 
 <div class="composition-api">
 
-[اختبرها في حقل التجارب](https://sfc.vuejs.org/#eNp9kUFOwzAQRa9ieVMqNfE+ChXcw5s0TEtK7FieSRGqsqnCgmOwQGHDgtvYt2FCUFsB6sqeP/5Pnj97eetcumtBZjLH0leOBAK1bqnturUlVY0VWDxdGUAsNjAXe22FKGrwdNS07bTN1WRnIxcExtUFAVdC5KuWiDk3ZV2VD9dajsBZfA6f4SO8h2E213IZD7EXJy1Xk+kCILzFPr6IMPDRx0MYwuuJ9E/zDJmr4wflQlbGNZ4SU7h0i43lKL6H1D8N1DKbxh41zmqstbwncpgphetyDHCLaeM3im+pby1VBlJAk6x884jgGazl4oyhWNyBTzzYO/DgLzF/Pf3DHbG8gU52X9B0t6M=)
+[اختبرها في حقل التجارب](https://play.vuejs.org/#eNp9kUFOwzAQRa9ieVMqNfE+ChXcw5s0TEtK7FieSRGqsqnCgmOwQGHDgtvYt2FCUFsB6sqeP/5Pnj97eetcumtBZjLH0leOBAK1bqnturUlVY0VWDxdGUAsNjAXe22FKGrwdNS07bTN1WRnIxcExtUFAVdC5KuWiDk3ZV2VD9dajsBZfA6f4SO8h2E213IZD7EXJy1Xk+kCILzFPr6IMPDRx0MYwuuJ9E/zDJmr4wflQlbGNZ4SU7h0i43lKL6H1D8N1DKbxh41zmqstbwncpgphetyDHCLaeM3im+pby1VBlJAk6x884jgGazl4oyhWNyBTzzYO/DgLzF/Pf3DHbG8gU52X9B0t6M=)
 
 </div>
 <div class="options-api">
 
-[اختبرها في حقل التجارب](https://sfc.vuejs.org/#eNp9kU1OwzAQha9ieVMqtfE+ChXcwxs3mbYp8Y/sSQFV3VRhwTFYoLBhwW3s22CnKK2gQrJsz/PMN/bznt4bk+1aoDktXGlrgwuu4Mloi6SClWgbJHuuCJGAG125PEUcCXHi+UaCc2IN01MGIRxFAxZHPakcD6kgTnEUbOwRAwRpGoGQIiyWLaJW5K5s6vLhltPUYBJe/Jf/9B++n0w5XYRj6MhZK9ipKALI9Xr/HrrwSnwfly4cfe/fzqArhxfEgo33ozNay2TJXAqTbZ1W0a7hzfznwHE6ODO4QKOfKeZ0g2hczphblcnkrcu0XbO4y2yrsJaQgZPzpdWPDmwEczq7YLAo7sDOLagKLNj/mL9S/3ATNv0BPXwD+BTEqQ==)
+[اختبرها في حقل التجارب](https://play.vuejs.org/#eNp9kU1OwzAQha9ieVMqtfE+ChXcwxs3mbYp8Y/sSQFV3VRhwTFYoLBhwW3s22CnKK2gQrJsz/PMN/bznt4bk+1aoDktXGlrgwuu4Mloi6SClWgbJHuuCJGAG125PEUcCXHi+UaCc2IN01MGIRxFAxZHPakcD6kgTnEUbOwRAwRpGoGQIiyWLaJW5K5s6vLhltPUYBJe/Jf/9B++n0w5XYRj6MhZK9ipKALI9Xr/HrrwSnwfly4cfe/fzqArhxfEgo33ozNay2TJXAqTbZ1W0a7hzfznwHE6ODO4QKOfKeZ0g2hczphblcnkrcu0XbO4y2yrsJaQgZPzpdWPDmwEczq7YLAo7sDOLagKLNj/mL9S/3ATNv0BPXwD+BTEqQ==)
 
 </div>
 

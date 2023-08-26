@@ -275,7 +275,7 @@ export default {
 
 ## معالجة معدلات `v-model` {#handling-v-model-modifiers}
 
-عندما كنا نتعلم عن ارتباطات إدخال النموذج، رأينا أن `v-model` لديه [المعدلات المدمجة](/guide/essentials/forms.html#modifiers) - `.trim` , `.number` و `lazy.`. في بعض الحالات، قد ترغب أيضًا في أن يدعم `v-model` على مكون إدخال مخصص بعض المعدلات المخصصة.
+عندما كنا نتعلم عن ارتباطات إدخال النموذج، رأينا أن `v-model` لديه [المعدلات المدمجة](/guide/essentials/forms#modifiers) - `.trim` , `.number` و `lazy.`. في بعض الحالات، قد ترغب أيضًا في أن يدعم `v-model` على مكون إدخال مخصص بعض المعدلات المخصصة.
 
 لنقم بإنشاء مثال لمعدل مخصص، `capitalize`، يقوم بتكبير الحرف الأول من السلسلةالنصية المقدمة من خلال ربط `v-model`:
 
@@ -399,9 +399,11 @@ export default {
 </template>
 ```
 
-[اختبرها في حقل التجارب](https://sfc.vuejs.org/#eyJBcHAudnVlIjoiPHNjcmlwdD5cbmltcG9ydCBNeUNvbXBvbmVudCBmcm9tICcuL015Q29tcG9uZW50LnZ1ZSdcbiAgXG5leHBvcnQgZGVmYXVsdCB7XG4gIGNvbXBvbmVudHM6IHsgTXlDb21wb25lbnQgfSxcbiAgZGF0YSgpIHtcbiAgICByZXR1cm4ge1xuICAgICAgbXlUZXh0OiAnJ1xuICAgIH1cbiAgfVxufVxuPC9zY3JpcHQ+XG5cbjx0ZW1wbGF0ZT5cbiAgVGhpcyBpbnB1dCBjYXBpdGFsaXplcyBldmVyeXRoaW5nIHlvdSBlbnRlcjpcbiAgPE15Q29tcG9uZW50IHYtbW9kZWwuY2FwaXRhbGl6ZT1cIm15VGV4dFwiIC8+XG48L3RlbXBsYXRlPiIsImltcG9ydC1tYXAuanNvbiI6IntcbiAgXCJpbXBvcnRzXCI6IHtcbiAgICBcInZ1ZVwiOiBcImh0dHBzOi8vc2ZjLnZ1ZWpzLm9yZy92dWUucnVudGltZS5lc20tYnJvd3Nlci5qc1wiXG4gIH1cbn0iLCJNeUNvbXBvbmVudC52dWUiOiI8c2NyaXB0PlxuZXhwb3J0IGRlZmF1bHQge1xuICBwcm9wczoge1xuICAgIG1vZGVsVmFsdWU6IFN0cmluZyxcbiAgICBtb2RlbE1vZGlmaWVyczoge1xuICAgICAgZGVmYXVsdDogKCkgPT4gKHt9KVxuICAgIH1cbiAgfSxcbiAgZW1pdHM6IFsndXBkYXRlOm1vZGVsVmFsdWUnXSxcbiAgbWV0aG9kczoge1xuICAgIGVtaXRWYWx1ZShlKSB7XG4gICAgICBsZXQgdmFsdWUgPSBlLnRhcmdldC52YWx1ZVxuICAgICAgaWYgKHRoaXMubW9kZWxNb2RpZmllcnMuY2FwaXRhbGl6ZSkge1xuICAgICAgICB2YWx1ZSA9IHZhbHVlLmNoYXJBdCgwKS50b1VwcGVyQ2FzZSgpICsgdmFsdWUuc2xpY2UoMSlcbiAgICAgIH1cbiAgICAgIHRoaXMuJGVtaXQoJ3VwZGF0ZTptb2RlbFZhbHVlJywgdmFsdWUpXG4gICAgfVxuICB9XG59XG48L3NjcmlwdD5cblxuPHRlbXBsYXRlPlxuICA8aW5wdXQgdHlwZT1cInRleHRcIiA6dmFsdWU9XCJtb2RlbFZhbHVlXCIgQGlucHV0PVwiZW1pdFZhbHVlXCIgLz5cbjwvdGVtcGxhdGU+In0=)
+[اختبرها في حقل التجارب](https://play.vuejs.org/#eNqFks1qg0AQgF9lkIKGpqa9iikNOefUtJfaw6KTZEHdZR1DbPDdO7saf0qgIq47//PNXL2N1uG5Ri/y4io1UtNrUspCK0Owa7aK/0osCQ5GFeCHq4nMuvlJCZCUeHEOGR5EnRNcrTS92VURXGex2qXVZ4JEsOhsAQxSbcrbDaBo9nihCHyXAaC1B3/4jVdDoXwhLHQuCPkGsD/JCmSpa4JUaEkilz9YAZ7RNHSS5REaVQPXgCay9vG0rPNToTLMw9FznXhdHYkHK04Qr4Zs3tL7g2JG8B4QbZS2LLqGXK5PkdcYwTsZrs1R6RU7lcmDRDPaM7AuWARMbf0KwbVdTNk4dyyk5f3l15r5YjRm8b+dQYF0UtkY1jo4fYDDLAByZBxWCmvAkIQ5IvdoBTcLeYCAiVbhvNwJvEk4GIK5M0xPwmwoeF6EpD60RrMVFXJXj72+ymWKwUvfXt+gfVzGB1tzcKfDZec+o/LfxsTdtlCj7bSpm3Xk4tjpD8FZ+uZMWTowu7MW7S+CWR77)
 
 </div>
+
+### Modifiers for `v-model` with arguments {#modifiers-for-v-model-with-arguments}
 
 بالنسبة لربط `v-model` مع كل من الوسيط والمعدلات، سيكون اسم الخاصية المولدة `"arg + "Modifiers` على سبيل المثال.
 
@@ -431,6 +433,59 @@ export default {
     console.log(this.titleModifiers) // { capitalize: true }
   }
 }
+```
+
+</div>
+
+Here's another example of using modifiers with multiple `v-model` with different arguments:
+
+```vue-html
+<UserName
+  v-model:first-name.capitalize="first"
+  v-model:last-name.uppercase="last"
+/>
+```
+
+<div class="composition-api">
+
+```vue{5,6,10,11}
+<script setup>
+const props = defineProps({
+  firstName: String,
+  lastName: String,
+  firstNameModifiers: { default: () => ({}) },
+  lastNameModifiers: { default: () => ({}) }
+})
+defineEmits(['update:firstName', 'update:lastName'])
+
+console.log(props.firstNameModifiers) // { capitalize: true }
+console.log(props.lastNameModifiers) // { uppercase: true}
+</script>
+```
+
+</div>
+<div class="options-api">
+
+```vue{15,16}
+<script>
+export default {
+  props: {
+    firstName: String,
+    lastName: String,
+    firstNameModifiers: {
+      default: () => ({})
+    },
+    lastNameModifiers: {
+      default: () => ({})
+    }
+  },
+  emits: ['update:firstName', 'update:lastName'],
+  created() {
+    console.log(this.firstNameModifiers) // { capitalize: true }
+    console.log(this.lastNameModifiers) // { uppercase: true}
+  }
+}
+</script>
 ```
 
 </div>

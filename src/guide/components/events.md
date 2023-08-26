@@ -62,10 +62,10 @@ export default {
 <MyComponent @some-event.once="callback" />
 ```
 
-مثل المكونات والخصائص ، توفر أسماء الأحداث تحويل تلقائي لحالة الأحرف. يمكن ملاحظة أننا أرسلنا حدث مكتوب بنمط سنام الجمل camelCase ، لكن يمكننا الاستماع له باستخدام مستمع مكتوب بنمط أسياخ الشواء kebab-case داخل المكون الأب. كما في [تسمية الخاصيات](/guide/components/props.html#prop-name-casing) ، نوصي باستخدام مستمعي أحداث بنمط kebab-case في القوالب.
+مثل المكونات والخصائص ، توفر أسماء الأحداث تحويل تلقائي لحالة الأحرف. يمكن ملاحظة أننا أرسلنا حدث مكتوب بنمط سنام الجمل camelCase ، لكن يمكننا الاستماع له باستخدام مستمع مكتوب بنمط أسياخ الشواء kebab-case داخل المكون الأب. كما في [تسمية الخاصيات](/guide/components/props#prop-name-casing) ، نوصي باستخدام مستمعي أحداث بنمط kebab-case في القوالب.
 
 :::tip ملاحظة
-على عكس أحداث DOM الأصلية، فإن أحداث المكونات المرسلة لا تنتشر عبر شجرة مكونات التطبيق. يمكنك الاستماع فقط إلى الأحداث المرسلة من المكون الابن المباشر. إذا كان هناك حاجة للتواصل بين المكونات الشقيقة أو المكونات المتداخلة بعمق، فاستخدم ناقل خارجي للأحداث أو [حلول إدارة الحالة العامة](/guide/scaling-up/state-management.html).
+على عكس أحداث DOM الأصلية، فإن أحداث المكونات المرسلة لا تنتشر عبر شجرة مكونات التطبيق. يمكنك الاستماع فقط إلى الأحداث المرسلة من المكون الابن المباشر. إذا كان هناك حاجة للتواصل بين المكونات الشقيقة أو المكونات المتداخلة بعمق، فاستخدم ناقل خارجي للأحداث أو [حلول إدارة الحالة العامة](/guide/scaling-up/state-management).
 :::
 
 ## وسائط الحدث {#event-arguments}
@@ -119,7 +119,7 @@ function increaseCount(n) {
 
 ## التصريح بالأحداث المرسلة {#declaring-emitted-events}
 
-يمكن للمكون التصريح بشكل واضح عن الأحداث التي سيقوم بإرسالها باستخدام <span class="composition-api"> التعليمة العامة [`()defineEmits`](/api/sfc-script-setup.html#defineprops-defineemits) </span><span class="options-api">خيار [`emits`](/api/options-state.html#emits) </span>:
+يمكن للمكون التصريح بشكل واضح عن الأحداث التي سيقوم بإرسالها باستخدام <span class="composition-api"> التعليمة العامة [`()defineEmits`](/api/sfc-script-setup#defineprops-defineemits) </span><span class="options-api">خيار [`emits`](/api/options-state#emits) </span>:
 
 <div class="composition-api">
 
@@ -143,7 +143,7 @@ function buttonClick() {
 
 التعليمة العامة `()defineEmits` **لا يمكن** استخدامها داخل دالة ، يجب وضعها مباشرة داخل `<script setup>` ، كما هو الحال في المثال أعلاه.
 
-إذا كنت تستخدم الدالة `setup` بدلاً من `<script setup>` ، فيجب عليك الإعلان عن الأحداث باستخدام خيار [`emits`](/api/options-state.html#emits) ، ويتم توفير التابع `emit` في سياق `()setup` كوسيط ثاني:
+إذا كنت تستخدم الدالة `setup` بدلاً من `<script setup>` ، فيجب عليك الإعلان عن الأحداث باستخدام خيار [`emits`](/api/options-state#emits) ، ويتم توفير التابع `emit` في سياق `()setup` كوسيط ثاني:
 
 ```js
 export default {
@@ -202,7 +202,7 @@ const emit = defineEmits<{
 </script>
 ```
 
-أكثر تفاصيل حول : [إضافة الأنواع إلى الأحداث المرسلة](/guide/typescript/composition-api.html#typing-component-emits) <sup class="vt-badge ts" />
+أكثر تفاصيل حول : [إضافة الأنواع إلى الأحداث المرسلة](/guide/typescript/composition-api#typing-component-emits) <sup class="vt-badge ts" />
 
 </div>
 <div class="options-api">
@@ -218,11 +218,11 @@ export default {
 }
 ```
 
-أكثر تفاصيل حول : [إضافة الأنواع إلى الأحداث المرسلة](/guide/typescript/options-api.html#typing-component-emits) <sup class="vt-badge ts" />
+أكثر تفاصيل حول : [إضافة الأنواع إلى الأحداث المرسلة](/guide/typescript/options-api#typing-component-emits) <sup class="vt-badge ts" />
 
 </div>
 
-على الرغم من أن الأمر اختياري، إلا أنه ينصح بتعريف جميع الأحداث المرسلة من أجل توثيق جيد لكيفية عمل المكون. كما يسمح لـ Vue باستبعاد المستمعين المعروفين من [السمات المستترة](/guide/components/attrs.html#v-on-listener-inheritance) ، وتجنب الحالات القصوى الناتجة عن أحداث الـDOM الموزعة يدويا من المكتبات الخارجية.
+على الرغم من أن الأمر اختياري، إلا أنه ينصح بتعريف جميع الأحداث المرسلة من أجل توثيق جيد لكيفية عمل المكون. كما يسمح لـ Vue باستبعاد المستمعين المعروفين من [السمات المستترة](/guide/components/attrs#v-on-listener-inheritance) ، وتجنب الحالات القصوى الناتجة عن أحداث الـDOM الموزعة يدويا من المكتبات الخارجية.
 
 :::tip ملاحظة
 إذا تم تعريف حدث أصلي (على سبيل المثال ، `click`) في خيار `emits` ، فسينصت المستمع الآن فقط إلى أحداث `click` المنشأة من المكون ولن يستجيب لأحداث `click` الأصلية.

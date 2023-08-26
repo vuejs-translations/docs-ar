@@ -87,7 +87,7 @@ export default {
 <span>{{ publishedBooksMessage }}</span>
 ```
 
-[اختبرها في حقل التجارب](https://sfc.vuejs.org/#eNqNUs1Kw0AQfpVhL1GwiainECqKIAi9iRfjYZtMm9Rmd9mfaim5aPU1PFa8iODFN0nexk2aJqgowsLOzH77zcw3syBHQrgzg8QngYpkKnQ/ZHgruNQQ44iaqYZFyABiqunW9toGkKiNZBsPgBqdcOl3AQBGM/TBOeMJgxOOzk73NOT8Wvlw2UUAnAuDsAc9OIpnlEUYw6lJ4y/fGtC+BR1TlUa/Ig4s4jxBGMyVRjl3OsDVxszXRn3lNUPEM2E0xm0TwgynqUowPq7KHaBSdIydBK0IOkmVuxbArTtzp8jGOoE+7MIhOOVj8VE+OGDFKJfFqqlmnTlk9gReq7x1NGZiSjVaDwLRL5flXfEKluS9eIPyvngpnotV8RR4okJAoARl/cWiGcG/KoA8tzmrf1XyNiHZIWlWTb6XUeFOFGd2K+puw+ZBhaSVJyR2bSo/JInWQvmep0ZRtUsT5XI59qzlSsN0mqGLKusNJb9RKC1xSJqZ1RyeDc5Q9iSyGCXKvzi/QX/wbkQl+SdoQ/Wa)
+[اختبرها في حقل التجارب](https://play.vuejs.org/#eNqNUs1Kw0AQfpVhL1GwiainECqKIAi9iRfjYZtMm9Rmd9mfaim5aPU1PFa8iODFN0nexk2aJqgowsLOzH77zcw3syBHQrgzg8QngYpkKnQ/ZHgruNQQ44iaqYZFyABiqunW9toGkKiNZBsPgBqdcOl3AQBGM/TBOeMJgxOOzk73NOT8Wvlw2UUAnAuDsAc9OIpnlEUYw6lJ4y/fGtC+BR1TlUa/Ig4s4jxBGMyVRjl3OsDVxszXRn3lNUPEM2E0xm0TwgynqUowPq7KHaBSdIydBK0IOkmVuxbArTtzp8jGOoE+7MIhOOVj8VE+OGDFKJfFqqlmnTlk9gReq7x1NGZiSjVaDwLRL5flXfEKluS9eIPyvngpnotV8RR4okJAoARl/cWiGcG/KoA8tzmrf1XyNiHZIWlWTb6XUeFOFGd2K+puw+ZBhaSVJyR2bSo/JInWQvmep0ZRtUsT5XI59qzlSsN0mqGLKusNJb9RKC1xSJqZ1RyeDc5Q9iSyGCXKvzi/QX/wbkQl+SdoQ/Wa)
 
  هنا صرحنا بخاصية محسوبة مسماة `publishedBooksMessage`.
 
@@ -95,7 +95,7 @@ export default {
 
 يمكنك ربط الخصائص المحسوبة كبيانات في القوالب مثل أي خاصية عادية. يعرف Vue أن `this.publishedBooksMessage` يعتمد على `this.author.books`، لذلك سيقوم بتحديث أي ربط يعتمد على `this.publishedBooksMessage` عند تغيير `this.author.books`.
 
-الق نظرة على: [إضافة النوع إلى الخصائص المحسوبة ](/guide/typescript/options-api.html#typing-computed-properties) <sup class="vt-badge ts" />
+الق نظرة على: [إضافة النوع إلى الخصائص المحسوبة ](/guide/typescript/options-api#typing-computed-properties) <sup class="vt-badge ts" />
 
 </div>
 
@@ -126,15 +126,13 @@ const publishedBooksMessage = computed(() => {
 </template>
 ```
 
-[اختبرها في حقل التجارب](https://sfc.vuejs.org/#eNp9Us1q20AQfpVhL3LAlkrbk3BUEgqFQm6ll24Pa2lsKbV2l52VSxA6NU0eI8eE3AK55E2kt8msrSSQv9vO3zff98224sDaeNOgSMWccldZD4S+sZnUVW2N89CCQ5X7aoNTyE1tG48FdLB0poaIJyOppc6NJg+q8aVxsP84MWmlBtCqxhSi76bU8NVgNA3JhTF/KIVf4Q0Q/WwQPsIMDoqN0jlv+NZUxdg6lj9x+VBRlb9S+8y1HyXC0Ql5dCfMCeC31N1eIJckoJ6oO1w+8LXNYl1RicVhIHOERGqFTP+hdzLZg/0MtiIcu+L0KDHeso/XqFe+hAw+wBeIhrP+bvgfAUsdTvtL5hDWz5OdrWwoBx5ru1YeOQKY22w4H06BB2/7Gxj+9df9VX/ZX8yT4D83kFU6a9s3iHYdg4eOsOURWUzF7nKzWtn4mIzm224lyLFAUqQ7USHHJwyxFKX3ltIkoWUefsQxxcatEn7FrtG+qjFGqmcLZ/4SOgaWYrzAFiPh5AbdzKEu0KF7D/NZ6wvcANuxfaK7B/XE7oo=)
+[اختبرها في حقل التجارب](https://play.vuejs.org/#eNp9Us1q20AQfpVhL3LAlkrbk3BUEgqFQm6ll24Pa2lsKbV2l52VSxA6NU0eI8eE3AK55E2kt8msrSSQv9vO3zff98224sDaeNOgSMWccldZD4S+sZnUVW2N89CCQ5X7aoNTyE1tG48FdLB0poaIJyOppc6NJg+q8aVxsP84MWmlBtCqxhSi76bU8NVgNA3JhTF/KIVf4Q0Q/WwQPsIMDoqN0jlv+NZUxdg6lj9x+VBRlb9S+8y1HyXC0Ql5dCfMCeC31N1eIJckoJ6oO1w+8LXNYl1RicVhIHOERGqFTP+hdzLZg/0MtiIcu+L0KDHeso/XqFe+hAw+wBeIhrP+bvgfAUsdTvtL5hDWz5OdrWwoBx5ru1YeOQKY22w4H06BB2/7Gxj+9df9VX/ZX8yT4D83kFU6a9s3iHYdg4eOsOURWUzF7nKzWtn4mIzm224lyLFAUqQ7USHHJwyxFKX3ltIkoWUefsQxxcatEn7FrtG+qjFGqmcLZ/4SOgaWYrzAFiPh5AbdzKEu0KF7D/NZ6wvcANuxfaK7B/XE7oo=)
 
 هنا صرحنا بخاصية محسوبة مسماة `publishedBooksMessage`. تتوقع الدالة `()computed` أن تتلقى دالة محصلة، ويتم إرجاع قيمة **ref محسوب**. مثل الـrefs العادية، يمكنك الوصول إلى النتيجة المحسوبة باستخدام `publishedBooksMessage.value`. تتم إزالة المراجع المحسوبة تلقائيًا في القوالب لذلك يمكنك الإشارة إليها دون `value.` في تعبيرات القالب.
 
-A computed property automatically tracks its reactive dependencies. Vue is aware that the computation of `publishedBooksMessage` depends on `author.books`, so it will update any bindings that depend on `publishedBooksMessage` when `author.books` changes.
-
 خاصية محسوبة  تتبع تلقائيًا إعتمادياتها التفاعلية. يعرف Vue أن حساب `publishedBooksMessage` يعتمد على `author.books`، لذلك سيقوم بتحديث أي ربط يعتمد على `publishedBooksMessage` عند تغيير `author.books`.
 
-الق نظرة على: [إضافة النوع إلى الخاصيات المحسوبة ](/guide/typescript/composition-api.html#typing-computed) <sup class="vt-badge ts" />
+الق نظرة على: [إضافة النوع إلى الخاصيات المحسوبة ](/guide/typescript/composition-api#typing-computed) <sup class="vt-badge ts" />
 
 </div>
 

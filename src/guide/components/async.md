@@ -3,7 +3,7 @@
 ## الاستخدام الأساسي {#basic-usage}
 
 في التطبيقات الكبيرة ، قد نحتاج إلى تقسيم التطبيق إلى أجزاء أصغر وتحميل مكون من الخادم عند الحاجة. لجعل ذلك ممكنًا ، تحتوي Vue على دالة 
-[`defineAsyncComponent`](/api/general.html#defineasynccomponent) من أجل إنشاء مكون جديد
+[`defineAsyncComponent`](/api/general#defineasynccomponent) من أجل إنشاء مكون جديد
 
 ```js
 import { defineAsyncComponent } from 'vue'
@@ -30,7 +30,7 @@ const AsyncComp = defineAsyncComponent(() =>
 
 النتيجة `AsyncComp` هو عبارة عن مكون مُغلف يستدعي وظيفة أداة التحميل فقط عندما يتم عرضها فعليًا على الصفحة. بالإضافة إلي ذالك , سيتم تمرير أي الخاصيات (Props) او منافذ (Slots) إلي المكون الداخلي , لذالك يمكنك استخدام الغُلاف غير المتزامن (Async Wrapper) لأستبدال المكون الأب أثناء التحميل البطئ (Lazy Loading) بسلاسة.
 
- المكونات الغير متزامنة يمكن ان يتم تسجيلها [بشكل عام](/guide/components/registration.html#global-registration) مثل المكونات العادية , بإستخدام `app.component()`:
+ المكونات الغير متزامنة يمكن ان يتم تسجيلها [بشكل عام](/guide/components/registration#global-registration) مثل المكونات العادية , بإستخدام `app.component()`:
 
 ```js
 app.component('MyComponent', defineAsyncComponent(() =>
@@ -40,7 +40,7 @@ app.component('MyComponent', defineAsyncComponent(() =>
 
 <div class="options-api">
 
-يمكنك أيضاً إستخدام `defineAsyncComponent` عند [تسجيل المكون بشكل محلي](/guide/components/registration.html#local-registration):
+يمكنك أيضاً إستخدام `defineAsyncComponent` عند [تسجيل المكون بشكل محلي](/guide/components/registration#local-registration):
 
 ```vue
 <script>
@@ -110,4 +110,4 @@ const AsyncComp = defineAsyncComponent({
 
 ## الاستخدام مع Suspense {#using-with-suspense}
 
-المكونات غير متزامنة يمكن ان تستخدم مع المكون المدمج `<Suspense>` .  تم توثيق التفاعل بين `<Suspense>` و المكونات الغير متزامنة في [الفصل المخصص `<Suspense>`](/guide/built-ins/suspense.html).
+المكونات غير متزامنة يمكن ان تستخدم مع المكون المدمج `<Suspense>` .  تم توثيق التفاعل بين `<Suspense>` و المكونات الغير متزامنة في [الفصل المخصص `<Suspense>`](/guide/built-ins/suspense).

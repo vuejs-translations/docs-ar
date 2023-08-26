@@ -31,7 +31,7 @@ export default {
 
 </div>
 
-يوجد أيضًا خطافات أخرى ستستدعى في مراحل مختلفة من دورة حياة النسخة ، والأكثر شيوعًا هي <span class="composition-api">[`onMounted`](/api/composition-api-lifecycle.html#onmounted)، [`onUpdated`](/api/composition-api-lifecycle.html#onupdated)، و [`onUnmounted`](/api/composition-api-lifecycle.html#onunmounted).</span><span class="options-api">[`mounted`](/api/options-lifecycle.html#mounted)، [`updated`](/api/options-lifecycle.html#updated)، و [`unmounted`](/api/options-lifecycle.html#unmounted).</span>
+يوجد أيضًا خطافات أخرى ستستدعى في مراحل مختلفة من دورة حياة النسخة ، والأكثر شيوعًا هي <span class="composition-api">[`onMounted`](/api/composition-api-lifecycle#onmounted)، [`onUpdated`](/api/composition-api-lifecycle#onupdated)، و [`onUnmounted`](/api/composition-api-lifecycle#onunmounted).</span><span class="options-api">[`mounted`](/api/options-lifecycle#mounted)، [`updated`](/api/options-lifecycle#updated)، و [`unmounted`](/api/options-lifecycle#unmounted).</span>
 
 <div class="options-api">
 
@@ -63,4 +63,4 @@ setTimeout(() => {
 
 <!-- https://www.figma.com/file/Xw3UeNMOralY6NV7gSjWdS/Vue-Lifecycle -->
 
-اطلع على <span class="composition-api">[مرجع واجهة برمجة التطبيقات لخطافات دورة الحياة](/api/composition-api-lifecycle.html)</span><span class="options-api">[مرجع واجهة برمجة التطبيقات لخطافات دورة الحياة](/api/options-lifecycle.html)</span> للحصول على تفاصيل عن جميع خطافات دورة الحياة وحالات استخدامها .
+اطلع على <span class="composition-api">[مرجع واجهة برمجة التطبيقات لخطافات دورة الحياة](/api/composition-api-lifecycle)</span><span class="options-api">[مرجع واجهة برمجة التطبيقات لخطافات دورة الحياة](/api/options-lifecycle)</span> للحصول على تفاصيل عن جميع خطافات دورة الحياة وحالات استخدامها .

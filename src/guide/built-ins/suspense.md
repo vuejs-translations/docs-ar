@@ -32,7 +32,7 @@ outline: deep
 
 1. المكونات التي تحتوي على `()setup` لاتزامني. يشمل ذلك المكونات التي تستخدم `<script setup>` مع التعبيرات `await` على المستوى الأعلى.
 
-2. [المكونات اللاتزامنية](/guide/components/async.html).
+2. [المكونات اللاتزامنية](/guide/components/async).
 
 ### دالة `async setup()` {#async-setup}
 
@@ -101,7 +101,7 @@ const posts = await res.json()
 
 ## معالجة الأحداث {#error-handling}
 
-`<Suspense>` لا يوفر حاليًا معالجة الأخطاء عبر المكون نفسه - ومع ذلك ، يمكنك استخدام خيار [`errorCaptured`](/api/options-lifecycle.html#errorcaptured) أو [`()onErrorCaptured`](/api/composition-api-lifecycle.html#onerrorcaptured) لالتقاط ومعالجة الأخطاء اللاتزامنية في المكون الأب لـ `<Suspense>`.
+`<Suspense>` لا يوفر حاليًا معالجة الأخطاء عبر المكون نفسه - ومع ذلك ، يمكنك استخدام خيار [`errorCaptured`](/api/options-lifecycle#errorcaptured) أو [`()onErrorCaptured`](/api/composition-api-lifecycle#onerrorcaptured) لالتقاط ومعالجة الأخطاء اللاتزامنية في المكون الأب لـ `<Suspense>`.
 
 ## الدمج مع مكونات أخرى {#combining-with-other-components}
 

@@ -8,7 +8,7 @@ outline: deep
 
 ## توريث السمات {#attribute-inheritance}
 
-"السمات المستترة" هي سمة أو مستمع لحدث `v-on` تُمرَّر إلى مكون، ولكنها ليست معرفة بشكل صريح في [الخاصيات](./props) أو [الأحداث المرسلة](./events.html#declaring-emitted-events) للمكون الذي مُرِّرت إليه.  أمثلة شائعة عن ذلك هي سمات `class` و `style` و `id`.
+"السمات المستترة" هي سمة أو مستمع لحدث `v-on` تُمرَّر إلى مكون، ولكنها ليست معرفة بشكل صريح في [الخاصيات](./props) أو [الأحداث المرسلة](./events#declaring-emitted-events) للمكون الذي مُرِّرت إليه.  أمثلة شائعة عن ذلك هي سمات `class` و `style` و `id`.
 
 عندما يصيّر المكون واحد من العناصر الجذرية، سيتم إضافة السمات المستترة تلقائيًا إلى سمات العنصر الجذري.  على سبيل المثال، نعتبر المكون `<MyButton>` مع القالب التالي:
 
@@ -79,18 +79,14 @@ outline: deep
 
 <div class="composition-api">
 
-إذا كنت تستخدم `<script setup>`، ستحتاج إلى تعريف هذا الخيار باستخدام كتلة `<script>` عادية منفصلة:
+ منذ النسخة 3.3 يمكنك أيضًا استخدام [`defineOptions`](/api/sfc-script-setup#defineoptions) مباشرة في `<script setup>`:
 
 ```vue
-<script>
-// استخدم  <script>  عادي لتعريف الخيارات
-export default {
-  inheritAttrs: false
-}
-</script>
-
 <script setup>
-// ...setup شيفرة
+defineOptions({
+  inheritAttrs: false
+})
+// ...setup باقي شيفرة
 </script>
 ```
 
@@ -128,7 +124,7 @@ export default {
 </div>
 ```
 
-تذكر أن [`v-bind` بدون وسيط](/guide/essentials/template-syntax.html#dynamically-binding-multiple-attributes) يربط جميع خاصيات الكائن كسمات للعنصر المستهدف.
+تذكر أن [`v-bind` بدون وسيط](/guide/essentials/template-syntax#dynamically-binding-multiple-attributes) يربط جميع خاصيات الكائن كسمات للعنصر المستهدف.
 
 ## توريث السمات على عدة عناصر جذرية {#attribute-inheritance-on-multiple-root-nodes}
 

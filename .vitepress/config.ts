@@ -4,6 +4,7 @@ import { defineConfigWithTheme } from 'vitepress'
 import type { Config as ThemeConfig } from '@vue/theme'
 import baseConfig from '@vue/theme/config'
 import { headerPlugin } from './headerMdPlugin'
+// import { textAdPlugin } from './textAdMdPlugin'
 
 const nav: ThemeConfig['nav'] = [
   {
@@ -15,6 +16,7 @@ const nav: ThemeConfig['nav'] = [
       { text: 'الأمثلة', link: '/examples/' },
       { text: 'انطلاقة سريعة', link: '/guide/quick-start' },
       // { text: 'دليل الأسلوب', link: '/style-guide/' },
+      { text: 'فهرس', link: '/glossary/' },
       {
         text: 'Vue 2 توثيقات ',
         link: 'https://v2.vuejs.org'
@@ -32,7 +34,7 @@ const nav: ThemeConfig['nav'] = [
   },
   {
     text: 'حقل التجارب',
-    link: 'https://sfc.vuejs.org'
+    link: 'https://play.vuejs.org'
   },
   {
     text: 'بيئة العمل',
@@ -43,6 +45,10 @@ const nav: ThemeConfig['nav'] = [
         items: [
           { text: 'الشركاء', link: '/partners/' },
           { text: '(Themes) قوالب', link: '/ecosystem/themes' },
+          {
+            text: 'الشهادة',
+            link: 'https://certification.vuejs.org/?ref=vuejs-nav'
+          },
           { text: 'الوظائف', link: 'https://vuejobs.com/?ref=vuejs' },
           { text: 'شراء قمصان', link: 'https://vue.threadless.com/' }
         ]
@@ -323,16 +329,11 @@ export const sidebar: ThemeConfig['sidebar'] = {
         {
           text: 'تقنيات التحريك',
           link: '/guide/extras/animation'
-        },
-        {
-          text: 'تحويل التفاعل',
-          link: '/guide/extras/reactivity-transform'
         }
         // {
         //   text: 'Building a Library for Vue',
         //   link: '/guide/extras/building-a-library'
         // },
-        // { text: 'Custom Renderers', link: '/guide/extras/custom-renderer' },
         // {
         //   text: 'Vue for React Devs',
         //   link: '/guide/extras/vue-for-react-devs'
@@ -574,7 +575,6 @@ export default defineConfigWithTheme<ThemeConfig>({
   description: ' الإطار التقدمي للـJavascript  -Vue.js',
   srcDir: 'src',
   srcExclude: ['tutorial/**/description.md'],
-  scrollOffset: 'header',
 
   head: [
     ['meta', { name: 'theme-color', content: '#3c8772' }],
@@ -610,6 +610,13 @@ export default defineConfigWithTheme<ThemeConfig>({
         'data-spa': 'auto',
         defer: ''
       }
+    ],
+    [
+      'script',
+      {
+        src: 'https://vueschool.io/banner.js?affiliate=vuejs&type=top',
+        async: 'true'
+      }
     ]
   ],
 
@@ -634,6 +641,26 @@ export default defineConfigWithTheme<ThemeConfig>({
         link: 'https://ja.vuejs.org',
         text: '日本語',
         repo: 'https://github.com/vuejs-translations/docs-ja'
+      },
+      {
+        link: 'https://ua.vuejs.org',
+        text: 'Українська',
+        repo: 'https://github.com/vuejs-translations/docs-uk'
+      },
+      {
+        link: 'https://fr.vuejs.org',
+        text: 'Français',
+        repo: 'https://github.com/vuejs-translations/docs-fr'
+      },
+      {
+        link: 'https://ko.vuejs.org',
+        text: '한국어',
+        repo: 'https://github.com/vuejs-translations/docs-ko'
+      },
+      {
+        link: 'https://pt.vuejs.org',
+        text: 'Português',
+        repo: 'https://github.com/vuejs-translations/docs-pt'
       },
       {
         link: '/translations/',
@@ -679,6 +706,7 @@ export default defineConfigWithTheme<ThemeConfig>({
   markdown: {
     config(md) {
       md.use(headerPlugin)
+        // .use(textAdPlugin)
     }
   },
 
@@ -708,9 +736,5 @@ export default defineConfigWithTheme<ThemeConfig>({
     json: {
       stringify: true
     }
-  },
-
-  vue: {
-    reactivityTransform: true
   }
 })

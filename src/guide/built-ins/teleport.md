@@ -115,7 +115,8 @@ export default {
 يمكنك الضغط على الزر أدناه وفحص عنصر `<body>` عبر أدوات التطوير و التحكم في المتصفح:
 
 <script setup>
-let open = $ref(false)
+import { ref } from 'vue'
+const open = ref(false)
 </script>
 
 <div class="demo">
@@ -196,7 +197,7 @@ let open = $ref(false)
 
 ---
 
-**ذات علاقة**
+**ذات صلة**
 
-- [`<Teleport>` مرجع الواجهة البرمجية للمكون](/api/built-in-components.html#teleport)
-- [معالجة Teleports  في حالة التصيير من جانب الخادم SSR](/guide/scaling-up/ssr.html#teleports)
+- [`<Teleport>` مرجع الواجهة البرمجية للمكون](/api/built-in-components#teleport)
+- [معالجة Teleports  في حالة التصيير من جانب الخادم SSR](/guide/scaling-up/ssr#teleports)

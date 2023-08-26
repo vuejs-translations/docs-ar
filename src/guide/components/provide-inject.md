@@ -22,7 +22,7 @@
 
 <div class="composition-api">
 
-لكي نقوم بتوفير البيانات إلي المُكونات الأحفاد , نستخدم دالة [`()provide`](/api/composition-api-dependency-injection.html#provide)
+لكي نقوم بتوفير البيانات إلي المُكونات الأحفاد , نستخدم دالة [`()provide`](/api/composition-api-dependency-injection#provide)
 
 ```vue
 <script setup>
@@ -61,7 +61,7 @@ provide('key', count)
 
 <div class="options-api">
 
-لكي تقوم بتزويد المُكونات الأحفاد بالبيانات , أستخدم خاصية [`provide`](/api/options-composition.html#provide)
+لكي تقوم بتزويد المُكونات الأحفاد بالبيانات , أستخدم خاصية [`provide`](/api/options-composition#provide)
 
 ```js
 export default {
@@ -107,13 +107,13 @@ const app = createApp({})
 app.provide(/* المفتاح */ 'message', /* القيمة */ 'hello!')
 ```
 
-التزويد علي مستوي التطبيق يكون متاح لجميع المُكونات التي تم عرضها (Rendered components) في التطبيق . هذا الشكل مفيد خاصةً في حالة إنشاء  [إضافات](/guide/reusability/plugins.html), لأن الإضافات عادةً لن تكون قادرة علي تزويد القيم بإستخدام المُكونات
+التزويد علي مستوي التطبيق يكون متاح لجميع المُكونات التي تم عرضها (Rendered components) في التطبيق . هذا الشكل مفيد خاصةً في حالة إنشاء  [إضافات](/guide/reusability/plugins), لأن الإضافات عادةً لن تكون قادرة علي تزويد القيم بإستخدام المُكونات
 
 ## الحقن {#inject}
 
 <div class="composition-api">
 
-لكي نحقن البيانات التي يوفرها أحد مُكونات الأحفاد, نستخدم دالة  [`()inject`](/api/composition-api-dependency-injection.html#inject)
+لكي نحقن البيانات التي يوفرها أحد مُكونات الأحفاد, نستخدم دالة  [`()inject`](/api/composition-api-dependency-injection#inject)
 
 ```vue
 <script setup>
@@ -144,7 +144,7 @@ export default {
 
 <div class="options-api">
 
-لكي نحقن البيانات المتوفرة بواسطة المُكونات الأحفاد, نستخدم خاصية [`inject`](/api/options-composition.html#inject)
+لكي نحقن البيانات المتوفرة بواسطة المُكونات الأحفاد, نستخدم خاصية [`inject`](/api/options-composition#inject)
 
 ```js
 export default {
@@ -208,8 +208,10 @@ const value = inject('message', 'default value')
 في بعض الحالات , نريد إنشاء القيمة الإبتدائية من خلال إستدعاء دالة أو إستنساخ من كلاس جديد . لتجنب الحسابات الغير ضرورية أو الأثار الجانبية في حالة عدم استخدام القيمة الإختيارية . يمكن ان نستخدم دالة المصنع (Factory Function) لإنشاء القيمة الإبتدائية: 
 
 ```js
-const value = inject('key', () => new ExpensiveClass())
+const value = inject('key', () => new ExpensiveClass(), true)
 ```
+
+The third parameter indicates the default value should be treated as a factory function.
 
 </div>
 
@@ -274,7 +276,7 @@ const { location, updateLocation } = inject('location')
 </template>
 ```
 
-أخيراً , يمكن ان نُغلف القيم المُزودة بدالة [`()readonly`](/api/reactivity-core.html#readonly) إذا كنا نريد ضمان عدم تغيير البيانات المارة عبر `provide` لا يمكن تعديلها بواسطة مُكون الحقن
+أخيراً , يمكن ان نُغلف القيم المُزودة بدالة [`()readonly`](/api/reactivity-core#readonly) إذا كنا نريد ضمان عدم تغيير البيانات المارة عبر `provide` لا يمكن تعديلها بواسطة مُكون الحقن
 
 ```vue
 <script setup>
@@ -289,7 +291,7 @@ provide('read-only-count', readonly(count))
 
 <div class="options-api">
 
-من أجل جعل الحقن مرتبط مع المُكون المُزود بشكل تفاعلي , نحتاج إلي تزويد خاصية محسوبة (computed) بإستخدام دالة [()computed](/api/reactivity-core.html#computed)
+من أجل جعل الحقن مرتبط مع المُكون المُزود بشكل تفاعلي , نحتاج إلي تزويد خاصية محسوبة (computed) بإستخدام دالة [()computed](/api/reactivity-core#computed)
 
 ```js{10}
 import { computed } from 'vue'
@@ -311,7 +313,7 @@ export default {
 
 [مثال كامل عن تزويد / حقن مع الحالة التفاعلية](https://sfc.vuejs.org/#eyJBcHAudnVlIjoiPHNjcmlwdD5cbmltcG9ydCBDaGlsZCBmcm9tICcuL0NoaWxkLnZ1ZSdcbmltcG9ydCB7IGNvbXB1dGVkIH0gZnJvbSAndnVlJ1xuXG5leHBvcnQgZGVmYXVsdCB7XG4gIGNvbXBvbmVudHM6IHsgQ2hpbGQgfSxcbiAgZGF0YSgpIHtcbiAgICByZXR1cm4ge1xuICAgICAgbWVzc2FnZTogJ2hlbGxvJ1xuICAgIH1cbiAgfSxcbiAgcHJvdmlkZSgpIHtcbiAgICByZXR1cm4ge1xuICAgICAgbWVzc2FnZTogY29tcHV0ZWQoKCkgPT4gdGhpcy5tZXNzYWdlKVxuICAgIH1cbiAgfVxufVxuPC9zY3JpcHQ+XG5cbjx0ZW1wbGF0ZT5cbiAgPGlucHV0IHYtbW9kZWw9XCJtZXNzYWdlXCI+XG4gIDxDaGlsZCAvPlxuPC90ZW1wbGF0ZT4iLCJpbXBvcnQtbWFwLmpzb24iOiJ7XG4gIFwiaW1wb3J0c1wiOiB7XG4gICAgXCJ2dWVcIjogXCJodHRwczovL3NmYy52dWVqcy5vcmcvdnVlLnJ1bnRpbWUuZXNtLWJyb3dzZXIuanNcIlxuICB9XG59IiwiQ2hpbGQudnVlIjoiPHNjcmlwdD5cbmltcG9ydCBHcmFuZENoaWxkIGZyb20gJy4vR3JhbmRDaGlsZC52dWUnXG5cbmV4cG9ydCBkZWZhdWx0IHtcbiAgY29tcG9uZW50czoge1xuICAgIEdyYW5kQ2hpbGRcbiAgfVxufVxuPC9zY3JpcHQ+XG5cbjx0ZW1wbGF0ZT5cbiAgPEdyYW5kQ2hpbGQgLz5cbjwvdGVtcGxhdGU+IiwiR3JhbmRDaGlsZC52dWUiOiI8c2NyaXB0PlxuZXhwb3J0IGRlZmF1bHQge1xuICBpbmplY3Q6IFsnbWVzc2FnZSddXG59XG48L3NjcmlwdD5cblxuPHRlbXBsYXRlPlxuICA8cD5cbiAgICBNZXNzYWdlIHRvIGdyYW5kIGNoaWxkOiB7eyBtZXNzYWdlIH19XG4gIDwvcD5cbjwvdGVtcGxhdGU+In0=)
 
-تستحدم دالة `()computed` عادةً في مُكونات الواجهة التركيبية (Composition Api Components) , ولكن ممكن ايضا لإستكمال حالات إستخدام معينة في واجهات الخيارات (Options Api) . يمكنك معرفة المزيد حول استخدامه من خلال قراءة [أساسيات التفاعلية](/guide/essentials/reactivity-fundamentals.html) و [الخواص المحسوبة](/guide/essentials/computed.html) مع أفضلية للواجهة التركيبية 
+تستحدم دالة `()computed` عادةً في مُكونات الواجهة التركيبية (Composition Api Components) , ولكن ممكن ايضا لإستكمال حالات إستخدام معينة في واجهات الخيارات (Options Api) . يمكنك معرفة المزيد حول استخدامه من خلال قراءة [أساسيات التفاعلية](/guide/essentials/reactivity-fundamentals) و [الخواص المحسوبة](/guide/essentials/computed) مع أفضلية للواجهة التركيبية 
 
 :::warning الإعدادات المؤقتة مطلوبة
 يتطلب المثال السابق ضبط إعداد `app.config.unwrapInjectedRef = true` لجعل عملية الحقن تقوم بفض الحسبة التفاعلية (unwrap computed refs) بشكل تلقائي. هذا سوف يكون الشكل الإفتراضي في Vue 3.3 و هذا الحل تم تقديمه بشكل مؤقت لتجنب أي خلل . سوف يكون غير مطلوب في النسخ الي ستقدم بعد 3.3
@@ -350,7 +352,7 @@ import { myInjectionKey } from './keys.js'
 const injected = inject(myInjectionKey)
 ```
 
-شاهد أيضاً: [الأنواع للتزويد / الحقن](/guide/typescript/composition-api.html#typing-provide-inject) <sup class="vt-badge ts" />
+شاهد أيضاً: [الأنواع للتزويد / الحقن](/guide/typescript/composition-api#typing-provide-inject) <sup class="vt-badge ts" />
 
 </div>
 

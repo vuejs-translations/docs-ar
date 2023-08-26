@@ -80,11 +80,11 @@ const vnode = {
 </div>
 ```
 
-[تفحصه في مكتشف القوالب](https://vue-next-template-explorer.netlify.app/#eyJzcmMiOiI8ZGl2PlxuICA8ZGl2PmZvbzwvZGl2PlxuICA8ZGl2PmJhcjwvZGl2PlxuICA8ZGl2Pnt7IGR5bmFtaWMgfX08L2Rpdj5cbjwvZGl2PiIsInNzciI6ZmFsc2UsIm9wdGlvbnMiOnsiaG9pc3RTdGF0aWMiOnRydWV9fQ==)
+[تفحصه في مكتشف القوالب](https://template-explorer.vuejs.org/#eyJzcmMiOiI8ZGl2PlxuICA8ZGl2PmZvbzwvZGl2PiA8IS0tIGhvaXN0ZWQgLS0+XG4gIDxkaXY+YmFyPC9kaXY+IDwhLS0gaG9pc3RlZCAtLT5cbiAgPGRpdj57eyBkeW5hbWljIH19PC9kaXY+XG48L2Rpdj5cbiIsIm9wdGlvbnMiOnsiaG9pc3RTdGF0aWMiOnRydWV9fQ==)
 
 العناصر `foo` و `bar` هي عناصر ثابتة - إعادة إنشاء العقد الافتراضية والتفريق بينها في كل إعادة تصيير تعتبر عملية غير ضرورية. يرفع مصرف Vue تلقائيًا استدعاءات إنشائهم من دالة للتصيير، ويعيد استخدام نفس العقد في كل عملية تصيير. يمكن للمصيّر أيضًا تخطيها تمامًا عندما يلاحظ أن العقد القديمة والجديدة هما نفسهما.
 
-بالإضافة إلى ذلك، عندما يكون هناك عدد كافٍ من العناصر الثابتة المتتالية، فإنها ستضغط إلى عقدة واحدة "ثابتة" تحتوي على سلسلة نصية على شكل HTML عادي لجميع هذه العقد ([مثال](https://vue-next-template-explorer.netlify.app/#eyJzcmMiOiI8ZGl2PlxuICA8ZGl2IGNsYXNzPVwiZm9vXCI+Zm9vPC9kaXY+XG4gIDxkaXYgY2xhc3M9XCJmb29cIj5mb288L2Rpdj5cbiAgPGRpdiBjbGFzcz1cImZvb1wiPmZvbzwvZGl2PlxuICA8ZGl2IGNsYXNzPVwiZm9vXCI+Zm9vPC9kaXY+XG4gIDxkaXYgY2xhc3M9XCJmb29cIj5mb288L2Rpdj5cbiAgPGRpdj57eyBkeW5hbWljIH19PC9kaXY+XG48L2Rpdj4iLCJzc3IiOmZhbHNlLCJvcHRpb25zIjp7ImhvaXN0U3RhdGljIjp0cnVlfX0=)). توصل هذه العقد الثابتة عن طريق تعيينها مباشرة إلى `innerHTML`. كما أنها تخزن مؤقتا عقد DOM المقابلة عند الوصل الأولي - إذا أُعيد استخدام نفس المحتوى في أي مكان آخر في التطبيق، فإن عقد الـDOM الجديد تنشأ باستخدام `()cloneNode` الأصلي، وهي عملية فعالة للغاية.
+بالإضافة إلى ذلك، عندما يكون هناك عدد كافٍ من العناصر الثابتة المتتالية، فإنها ستضغط إلى عقدة واحدة "ثابتة" تحتوي على سلسلة نصية على شكل HTML عادي لجميع هذه العقد ([مثال](https://template-explorer.vuejs.org/#eyJzcmMiOiI8ZGl2PlxuICA8ZGl2IGNsYXNzPVwiZm9vXCI+Zm9vPC9kaXY+XG4gIDxkaXYgY2xhc3M9XCJmb29cIj5mb288L2Rpdj5cbiAgPGRpdiBjbGFzcz1cImZvb1wiPmZvbzwvZGl2PlxuICA8ZGl2IGNsYXNzPVwiZm9vXCI+Zm9vPC9kaXY+XG4gIDxkaXYgY2xhc3M9XCJmb29cIj5mb288L2Rpdj5cbiAgPGRpdj57eyBkeW5hbWljIH19PC9kaXY+XG48L2Rpdj4iLCJzc3IiOmZhbHNlLCJvcHRpb25zIjp7ImhvaXN0U3RhdGljIjp0cnVlfX0=)). توصل هذه العقد الثابتة عن طريق تعيينها مباشرة إلى `innerHTML`. كما أنها تخزن مؤقتا عقد DOM المقابلة عند الوصل الأولي - إذا أُعيد استخدام نفس المحتوى في أي مكان آخر في التطبيق، فإن عقد الـDOM الجديد تنشأ باستخدام `()cloneNode` الأصلي، وهي عملية فعالة للغاية.
 
 ### علامات التصحيح {#patch-flags}
 
@@ -185,7 +185,7 @@ div (block root)
 
 ### التأثير على الإنعاش في التصيير من جانب الخادوم {#impact-on-ssr-hydration}
 
-تحسن كل من علامات التصحيح وتسطيح شجرة العناصر أيضًا أداء [إنعاش في التصيير من جانب الخادوم](/guide/scaling-up/ssr.html#client-hydration):
+تحسن كل من علامات التصحيح وتسطيح شجرة العناصر أيضًا أداء [إنعاش في التصيير من جانب الخادوم](/guide/scaling-up/ssr#client-hydration):
 
 - يمكن لإنعاش العنصر الواحد أن يأخذ مسارات سريعة بناءً على علامة تصحيح العقد المقابلة.
 

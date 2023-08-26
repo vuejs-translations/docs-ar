@@ -215,7 +215,7 @@ export default defineComponent({
 
 ## توسيع الخاصيات العامة {#augmenting-global-properties}
 
-بعض الملحقات تثبت خاصيات متاحة على المستوى العام لجميع نسخ المكونات عبر [`app.config.globalProperties`](/api/application.html#app-config-globalproperties). على سبيل المثال ، قد نثبت `this.$http` لجلب البيانات أو `this.$translate` للترجمة التوطينية. لجعل هذا يعمل بشكل جيد مع TypeScript ، يوفر Vue واجهة `ComponentCustomProperties` المصممة للتوسيع عبر [توسيع وحدة TypeScript](https://www.typescriptlang.org/docs/handbook/declaration-merging.html#module-augmentation):
+بعض الملحقات تثبت خاصيات متاحة على المستوى العام لجميع نسخ المكونات عبر [`app.config.globalProperties`](/api/application#app-config-globalproperties). على سبيل المثال ، قد نثبت `this.$http` لجلب البيانات أو `this.$translate` للترجمة التوطينية. لجعل هذا يعمل بشكل جيد مع TypeScript ، يوفر Vue واجهة `ComponentCustomProperties` المصممة للتوسيع عبر [توسيع وحدة TypeScript](https://www.typescriptlang.org/docs/handbook/declaration-merging.html#module-augmentation):
 
 ```ts
 import axios from 'axios'

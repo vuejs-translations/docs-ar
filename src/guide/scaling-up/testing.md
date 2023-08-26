@@ -82,7 +82,7 @@ describe('increment', () => {
 
 ### الدوال التركيبية {#composables}
 
-فئة من الدوال المخصصة لتطبيقات Vue هي [الدوال التركيبية](/guide/reusability/composables.html)، و التي قد تحتاج إلى معالجة خاصة أثناء الاختبارات.
+فئة من الدوال المخصصة لتطبيقات Vue هي [الدوال التركيبية](/guide/reusability/composables)، و التي قد تحتاج إلى معالجة خاصة أثناء الاختبارات.
 اطلع على [اختبار الدوال التركيبية](#testing-composables) أدناه لمزيد من التفاصيل.
 
 ### اختبار الوحدات للمكونات {#unit-testing-components}
@@ -91,7 +91,7 @@ describe('increment', () => {
 
 1. اختبارات الصندوق الأبيض: اختبار الوحدات
 
-   الاختبارات المعروفة بـ "اختبارات الصندوق الأبيض" تهتم بتفاصيل تنفيذ و اعتماديات المكون. تركز على **عزل**  المكون تحت الاختبار. هذه الاختبارات عادة ما تشمل محاكاة بعض المكونات الأبناء أو كلهم، و إعداد حالة اللواحق و الاعتماديات (مثل Vuex).
+   الاختبارات المعروفة بـ "اختبارات الصندوق الأبيض" تهتم بتفاصيل تنفيذ و اعتماديات المكون. تركز على **عزل**  المكون تحت الاختبار. هذه الاختبارات عادة ما تشمل محاكاة بعض المكونات الأبناء أو كلهم، و إعداد حالة اللواحق و الاعتماديات (مثل Pinia).
 
 2. اختبارات الصندوق الأسود: اختبار المكون
 
@@ -207,11 +207,11 @@ cy.get(valueSelector).should('be.visible').and('contain.text', '0')
   
 ### التوصية {#recommendation-1}
 
-- [مكتبة Vitest](https://vitest.dev/) للمكونات أو الدوال التركيبية التي تُصير بدون تصميم مرئي  (مثل دالة [`useFavicon`](https://vueuse.org/core/useFavicon/#usefavicon) في VueUse). يمكن اختبار المكونات و الـDOM باستخدام [@testing-library/vue](https://testing-library.com/docs/vue-testing-library/intro).
+- [مكتبة Vitest](https://vitest.dev/) للمكونات أو الدوال التركيبية التي تُصير بدون تصميم مرئي  (مثل دالة [`useFavicon`](https://vueuse.org/core/useFavicon/#usefavicon) في VueUse). يمكن اختبار المكونات و الـDOM باستخدام [`@vue/test-utils`](https://github.com/vuejs/test-utils).
 
 - [اختبار المكونات في Cypress](https://on.cypress.io/component) للمكونات التي يتوقع أن تعمل بشكل صحيح بعد تصيير التنسيقات بشكل صحيح أو تفعيل الأحداث الأصلية للـDOM. يمكن استخدامه مع مكتبة الاختبارات عبر ملحق [@testing-library/cypress](https://testing-library.com/docs/cypress-testing-library/intro).
 
-  الفروق الرئيسية بين Vitest و مشغلات الاختبار في المتصفح هي السرعة و سياق التنفيذ. ببساطة، مشغلات المتصفح، مثل Cypress، يمكنها الكشف عن المشاكل التي لا يمكن لمشغلات Node، مثل Vitest، الكشف عنها (مثل مشاكل التنسيقات، الأحداث الأصلية الحقيقية للـDOM، وملفات تعريف الارتباط، والتخزين المحلي، وفشل الشبكة)، ولكن مشغلات المتصفح أبطأ بكثير من Vitest لأنها تفتح متصفحاً، و تصرف ملفات التنسيقات، وأكثر من ذلك. Cypress هو مشغل متصفح يدعم اختبار المكونات. يرجى قراءة [صفحة مقارنة Vitest](https://vitest.dev/guide/comparisons.html#cypress) للحصول على المعلومات الأخيرة حول مقارنة Vitest و Cypress.
+الفروقات الرئيسية بين Vitest و مشغلات الاختبار القائمة على المتصفح هي السرعة و سياق التنفيذ. بشكل مختصر، المشغلات القائمة على المتصفح، مثل Cypress، يمكنها اكتشاف المشاكل التي لا يمكن للمشغلات القائمة على العقد، مثل Vitest، اكتشافها (على سبيل المثال، مشاكل التنسيقات، أحداث DOM الأصلية الحقيقية، الكوكيز، التخزين المحلي، و فشل الشبكة)، ولكن المشغلات القائمة على المتصفح أبطأ بدرجات متعددة من Vitest لأنها تفتح متصفحًا، و تجمع ملفات الأنماط الخاصة بك، و أكثر. Cypress هو مشغل قائم على المتصفح يدعم اختبار المكونات. يرجى قراءة [صفحة المقارنة لـ Vitest](https://vitest.dev/guide/comparisons.html#cypress) للحصول على أحدث المعلومات في المقارنة بين Vitest و Cypress.
 
 ### وصل المكتبات {#mounting-libraries}
 
@@ -225,7 +225,9 @@ cy.get(valueSelector).should('be.visible').and('contain.text', '0')
 
 ### خيارات أخرى {#other-options-1}
 
-- [Nightwatch](https://v2.nightwatchjs.org/) هو مشغل اختبارات E2E مع دعم اختبار مكونات Vue. ([مشروع مثال]((https://github.com/nightwatchjs-community/todo-vue) في Nightwatch v2)
+- [Nightwatch](https://nightwatchjs.org/) هو مشغل اختبار E2E مع دعم اختبار المكونات. ([مشروع مثال](https://github.com/nightwatchjs-community/todo-vue))
+
+- [WebdriverIO](https://webdriver.io/docs/component-testing/vue) لاختبار المكونات عبر المتصفحات الذي يعتمد على التفاعل الأصلي للمستخدم بناءً على الأتمتة الموحدة. يمكن أيضًا استخدامه مع Testing Library.
 
 ## الاختبارات الشاملة {#e2e-testing}
 
@@ -273,7 +275,9 @@ cy.get(valueSelector).should('be.visible').and('contain.text', '0')
 
 - [Playwright](https://playwright.dev/)  هو أيضًا حل ممتاز للاختبارات الشاملة مع نطاق أوسع من دعم المتصفحات (بشكل رئيسي WebKit). انظر [لماذا Playwright](https://playwright.dev/docs/why-playwright) لمزيد من التفاصيل.
 
-- [Nightwatch v2](https://v2.nightwatchjs.org/)  هو حل للاختبارات الشاملة مبني على [Selenium WebDriver](https://www.npmjs.com/package/selenium-webdriver). وهذا يعطيه نطاقًا أوسع في دعم المتصفحات.
+- [Nightwatch](https://nightwatchjs.org/)  هو حل للاختبارات الشاملة مبني على [Selenium WebDriver](https://www.npmjs.com/package/selenium-webdriver). وهذا يعطيه نطاقًا أوسع في دعم المتصفحات.
+
+- [WebdriverIO](https://webdriver.io/) is a test automation framework for web and mobile testing based on the WebDriver protocol.
 
 ## وصفات {#recipes}
 
@@ -310,11 +314,12 @@ export default defineConfig({
 // tsconfig.json
 
 {
- "compilerOptions": {
+  "compilerOptions": {
     "types": ["vitest/globals"]
   }
 }
 ```
+
 :::
 
  ثم أنشئ ملفًا بامتداد `test.js.*` في مشروعك. يمكنك وضع جميع ملفات الاختبار في  مجلد الاختبار في جذر المشروع، أو في مجلدات اختبار بجوار ملفات المصدر الخاصة بك. سيبحث Vitest عنها تلقائيًا باستخدام الترتيب المصطلح عليه.
@@ -353,7 +358,7 @@ test('it should work', () => {
 
 ### اختبار الدوال التركيبية {#testing-composables}
 
-> قبل قراءة هذا القسم يجب أولا أن تكون قد اطلعت على قسم [الدوال التركيبية](/guide/reusability/composables.html).
+> قبل قراءة هذا القسم يجب أولا أن تكون قد اطلعت على قسم [الدوال التركيبية](/guide/reusability/composables).
 
 عندما يتعلق الأمر باختبارات الدوال التركيبية، يمكننا تقسيمها إلى فئتين: الدوال التركيبية التي لا تعتمد على نسخة مكون مضيفة، والدوال التركيبية التي تعتمد عليه.
 
@@ -413,6 +418,7 @@ export function withSetup(composable) {
   return [result, app]
 }
 ```
+
 ```js
 import { withSetup } from './test-utils'
 import { useFoo } from './foo'

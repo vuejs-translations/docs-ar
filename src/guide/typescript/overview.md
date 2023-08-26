@@ -87,7 +87,7 @@ Vue مكتوب بلغة TypeScript ويوفر دعم TypeScript بدرجة أو�
 
 ### `()defineComponent` {#definecomponent}
 
-لتمكين TypeScript من تحديد الأنواع بشكل صحيح داخل خيارات المكون ، نحتاج إلى تعريف المكونات باستخدام [`()defineComponent`](/api/general.html#definecomponent):
+لتمكين TypeScript من تحديد الأنواع بشكل صحيح داخل خيارات المكون ، نحتاج إلى تعريف المكونات باستخدام [`()defineComponent`](/api/general#definecomponent):
 
 ```ts
 import { defineComponent } from 'vue'
@@ -129,7 +129,7 @@ export default defineComponent({
 
 اطلع أيضًا على:
 
-- [ملاحظة بخصوص التخلص من الشيفرات الميتة في webpack](/api/general.html#note-on-webpack-treeshaking)
+- [ملاحظة بخصوص التخلص من الشيفرات الميتة في webpack](/api/general#note-on-webpack-treeshaking)
 - [اختبارات الأنواع لـ `defineComponent`](https://github.com/vuejs/core/blob/main/packages/dts-test/defineComponent.test-d.tsx)
 
 :::tip نصيحة
@@ -207,6 +207,17 @@ let x: string | number = 1
 :::tip نصيحة
 إذا كنت تستخدم Vue CLI أو إعداد webpack ، فتتطلب  تعبيرات TypeScript في القالب الاعتمادية `vue-loader@^16.8.0`.
 :::
+
+### الاستخدام مع TSX
+
+تدعم Vue أيضًا كتابة المكونات مع JSX / TSX. غُطيت التفاصيل في دليل [دالة التصيير و JSX](/guide/extras/render-function.html#jsx-tsx).
+
+## مكونات معممة {#generic-components}
+
+المكونات المعممة مدعومة في حالتين:
+
+- في المكونات أحادية الملف SFC : [`<script setup>` مع سمة `generic`](/api/sfc-script-setup.html#generics)
+- دالة التصيير و JSX   : [مع بصمة الدالة `()defineComponent`](/api/general.html#function-signature)
 
 ## وصفات محددة لكل واجهة {#api-specific-recipes}
 

@@ -6,11 +6,11 @@
 
 <!-- https://www.figma.com/file/qa7WHDQRWuEZNRs7iZRZSI/components -->
 
-هذا مشابه جدا لكيفية تداخل عناصر HTML الأصلية، ولكن Vue تنفذ نموذج مكوناته الخاص به للسماح لنا بتغليف محتوى مخصص وشيفرة في كل مكون. Vue تعمل أيضا بشكل جيد مع  الأصلية. إذا كنت مهتمًا بالعلاقة بين مكونات Vue ومكونات الـWeb الأصلية، [اطلع على المزيد من هنا](/guide/extras/web-components.html).
+هذا مشابه جدا لكيفية تداخل عناصر HTML الأصلية، ولكن Vue تنفذ نموذج مكوناته الخاص به للسماح لنا بتغليف محتوى مخصص وشيفرة في كل مكون. Vue تعمل أيضا بشكل جيد مع  الأصلية. إذا كنت مهتمًا بالعلاقة بين مكونات Vue ومكونات الـWeb الأصلية، [اطلع على المزيد من هنا](/guide/extras/web-components).
 
 ## تعريف مكون {#defining-a-component}
 
-عند استخدام عملية بناء، نحدد عادة كل مكون Vue في ملف منفصل باستخدام امتداد `.vue` - معروف باسم [مكون أحادي الملف ](/guide/scaling-up/sfc.html) (SFC اختصارا):
+عند استخدام عملية بناء، نحدد عادة كل مكون Vue في ملف منفصل باستخدام امتداد `.vue` - معروف باسم [مكون أحادي الملف ](/guide/scaling-up/sfc) (SFC اختصارا):
 
 <div class="options-api">
 
@@ -80,7 +80,8 @@ export default {
     <button @click="count++">
        لقد نقرت عليّ {{ count }} مرّة.
     </button>`
-  // أو `template: '#my-template-element'`
+  // يمكنها أيضا استهداف قالب موجود في DOM
+  // template: '#my-template-element'
 }
 ```
 
@@ -117,7 +118,7 @@ export default {
 </template>
 ```
 
-لكي تعرض المكون المستورد إلى القالب، تحتاج إلى [تسجيله](/guide/components/registration.html) باستخدام خيار `components`. سيكون المكون متاحًا كوسم باستخدام اسم الخاصية التي سُجل بها.
+لكي تعرض المكون المستورد إلى القالب، تحتاج إلى [تسجيله](/guide/components/registration) باستخدام خيار `components`. سيكون المكون متاحًا كوسم باستخدام اسم الخاصية التي سُجل بها.
 
 </div>
 
@@ -138,7 +139,7 @@ import ButtonCounter from './ButtonCounter.vue'
 
 </div>
 
-من الممكن أيضًا تسجيل مكون بشكل عام، مما يجعله متاحًا لجميع المكونات في تطبيق معين دون الحاجة إلى استيراده. الأسباب الإيجابية  والسلبية للتسجيل العام مقابل المحلي ستُناقش في القسم المخصص [لتسجيل المكون](/guide/components/registration.html).
+من الممكن أيضًا تسجيل مكون بشكل عام، مما يجعله متاحًا لجميع المكونات في تطبيق معين دون الحاجة إلى استيراده. الأسباب الإيجابية  والسلبية للتسجيل العام مقابل المحلي ستُناقش في القسم المخصص [لتسجيل المكون](/guide/components/registration).
 
 المكونات يمكن استخدامها مرات متعددة كما تريد:
 
@@ -151,12 +152,12 @@ import ButtonCounter from './ButtonCounter.vue'
 
 <div class="options-api">
 
-[اختبرها في حقل التجارب](https://sfc.vuejs.org/#eNqVUktOwzAQvYrlDaC2MWyrUPG5hjdp6tKUxo5spyBF2fAJVXc9RQEhVV32JvZtGDu0Ii0CEUWy53nmjec9F/gyy4JpznAXhyqWSaZ7lCdpJqRGV7nWgl+LnGsm0VCKFB0FpIG60iPKEaKc3fuiARtG+USjwqGxACbOuFbdGkBNUgeVlMMfkl13CDRLs0mkmYt0ODrr2RdbmSWyczszH2aFzNI+mY1ZwdY+28rHsHm0M5dn3uuEpXm1VUig3vM05yH/AkOyuxNu41qgThplwVgJDuL56ejXgaJ4Ny/FIJGLKR5pnakuIWoYO93GKhDyhsAukNAoSVnAVNrpS3GnQNkxsLS/cRAAp0x2JOMDJkG7Xzj3Ug94t7rDKAd2Nl7CT6YOIh0dn2znk0znkm8jZzkwddFpHUOTPx1GKOz7S6CLeJLEt+cUe5JWi2J/DB+4++C8rmBZO3s3gMztAhVF3RGVJbwEs7YL8xZ4TlKT7nlXfgJ0ICRj)
+[اختبرها في حقل التجارب](https://play.vuejs.org/#eNqVUktOwzAQvYrlDaC2MWyrUPG5hjdp6tKUxo5spyBF2fAJVXc9RQEhVV32JvZtGDu0Ii0CEUWy53nmjec9F/gyy4JpznAXhyqWSaZ7lCdpJqRGV7nWgl+LnGsm0VCKFB0FpIG60iPKEaKc3fuiARtG+USjwqGxACbOuFbdGkBNUgeVlMMfkl13CDRLs0mkmYt0ODrr2RdbmSWyczszH2aFzNI+mY1ZwdY+28rHsHm0M5dn3uuEpXm1VUig3vM05yH/AkOyuxNu41qgThplwVgJDuL56ejXgaJ4Ny/FIJGLKR5pnakuIWoYO93GKhDyhsAukNAoSVnAVNrpS3GnQNkxsLS/cRAAp0x2JOMDJkG7Xzj3Ug94t7rDKAd2Nl7CT6YOIh0dn2znk0znkm8jZzkwddFpHUOTPx1GKOz7S6CLeJLEt+cUe5JWi2J/DB+4++C8rmBZO3s3gMztAhVF3RGVJbwEs7YL8xZ4TlKT7nlXfgJ0ICRj)
 
 </div>
 <div class="composition-api">
 
-[اختبرها في حقل التجارب](https://sfc.vuejs.org/#eNqVkUtuwjAQhq8y8oZWQNxuUUB9XMMbSE2BEtuyHbqIsukjRew4BW1VCbHkJvZtOk5QVUBFajaZ+T3zjcd/Tq6VimYZJx0Sm0SPlQXDbaZ6TIxTJbWFm8xaKW5lJizXMNQyhUZE99QAaDAR05qAvZhYnqpp3/KQ2Xh02fNvvnQr8As/d19uDW7lX9zWrTH0r76scgye/TzUuc+6YOXefRlT7K84+7eh/xJj+nMn0iL1eu20r6KJkQIfIGcCgO0ODCMdqJSg4YIhZ2RkrTIdSs0wCVtPTCT1PcUo0jhonPKIm7Q90PLR4LtMkNL6xaAozrhuay7uuOb6FPOg9IgbsAUTBa5yZMbfbuag+RCKnY+1b0wkUhgLSQBAN1ScXZyf8BMgHlQj4SqZjpOHLiNVb7PJSHUcPjTzKVhb4m8T3NyisvBLyPPdpKJA493GL91HVEFpTT2wqvgGCGILTg==)
+[اختبرها في حقل التجارب](https://play.vuejs.org/#eNqVkUtuwjAQhq8y8oZWQNxuUUB9XMMbSE2BEtuyHbqIsukjRew4BW1VCbHkJvZtOk5QVUBFajaZ+T3zjcd/Tq6VimYZJx0Sm0SPlQXDbaZ6TIxTJbWFm8xaKW5lJizXMNQyhUZE99QAaDAR05qAvZhYnqpp3/KQ2Xh02fNvvnQr8As/d19uDW7lX9zWrTH0r76scgye/TzUuc+6YOXefRlT7K84+7eh/xJj+nMn0iL1eu20r6KJkQIfIGcCgO0ODCMdqJSg4YIhZ2RkrTIdSs0wCVtPTCT1PcUo0jhonPKIm7Q90PLR4LtMkNL6xaAozrhuay7uuOb6FPOg9IgbsAUTBa5yZMbfbuag+RCKnY+1b0wkUhgLSQBAN1ScXZyf8BMgHlQj4SqZjpOHLiNVb7PJSHUcPjTzKVhb4m8T3NyisvBLyPPdpKJA493GL91HVEFpTT2wqvgGCGILTg==)
 
 </div>
 
@@ -179,7 +180,7 @@ DOM -->
 
 إذا كنا بصدد تطوير مدونة ، فنحتاج بالتأكيد إلى مكون يمثل مقال، نريد أن تتشارك جميع مقالات المدونة نفس النسق، لكن بمحتوى مختلف. لن يكون هذا المكون مفيدًا إلا إذا كنت قادرًا على تمرير البيانات إليه ، مثل عنوان  ومحتوى المقال الذي نريد عرضه. هنا يأتي دور الخاصيات.
 
-الخاصيات هي سمات مخصصة يمكنك تسجيلها في مكون. لتمرير عنوان إلى مكون "مقال المدونة" ، يجب علينا تعريفه في قائمة الخاصيات التي يقبلها هذا المكون، باستخدام  <span class="options-api">[`props`](/api/options-state.html#props)</span><span class="composition-api"> التعليمة العامة [`defineProps`](/api/sfc-script-setup.html#defineprops-defineemits)</span>:
+الخاصيات هي سمات مخصصة يمكنك تسجيلها في مكون. لتمرير عنوان إلى مكون "مقال المدونة" ، يجب علينا تعريفه في قائمة الخاصيات التي يقبلها هذا المكون، باستخدام  <span class="options-api">[`props`](/api/options-state#props)</span><span class="composition-api"> التعليمة العامة [`defineProps`](/api/sfc-script-setup#defineprops-defineemits)</span>:
 
 <div class="options-api">
 
@@ -219,7 +220,7 @@ const props = defineProps(['title'])
 console.log(props.title)
 ```
 
-اطلع على : [إضافة الأنواع لخاصيات المكون](/guide/typescript/composition-api.html#typing-component-props) <sup class="vt-badge ts" />
+اطلع على : [إضافة الأنواع لخاصيات المكون](/guide/typescript/composition-api#typing-component-props) <sup class="vt-badge ts" />
 
 إذا كنت لا تستخدم `<script setup>` ، يجب عليك تعريف الخاصيات باستخدام خيار `props` ،وسيتم تمرير كائن الخاصيات إلى `()setup` كأول وسيط:
 
@@ -288,18 +289,18 @@ const posts = ref([
 
 <div class="options-api">
 
-[اختبرها في حقل التجارب](https://sfc.vuejs.org/#eNqFU82O0zAQfpWRLwWpjcXPKQqV4Ak4cVlzCI276yWxLdspoKgShy5CfZGuVkKwx76J/TaMnSZKYbUbRZG/8Xyfx99MOvJW62zTcpKTwq6M0G7JpGi0Mg7e1eryvbIO1kY1MMvoEIiEGZMATPKvKbXi67KtHXQxulLIl1w6m/cBGKUi2s7jtypd+ez5sG+4a40cEIDGXGRfDDg+HYgqhxdzcMLVPAdG/L3/FXb+Luwh3PgjfGh5dm0ZOR1xTnw5JR4izf8OP8M+/AB/G74/Tn41IYcdHnbwf/wBks4x3ITdqAFh74+ofevvsSjMvEN4iLKD6sd+kTB+8C3oaD0Cxxtdl44jAigqsYFKmDeMGFczkoIYnhrK3GaxVjEl2gZC9vYxgnIOIP/Mv532MlHFaKTk6T5DPIGesCzGPvcVUCwBVwWdFEbmpB+SRVNqtE1JHKDUPXbawOPH7jOCAxMxI1fOaZtTaterOEXXNlPmkuIqM610ouEZt83ik1FfLDepH6duJA2KwQ03C8NlxQ03j2n+k/qf7mA/XmU612c/wkPTrY3C0+BiljybYTef6ODV62XX9eMD221BEZ+5SbZ/AQsfRlQ=)
+[اختبرها في حقل التجارب](https://play.vuejs.org/#eNqFU82O0zAQfpWRLwWpjcXPKQqV4Ak4cVlzCI276yWxLdspoKgShy5CfZGuVkKwx76J/TaMnSZKYbUbRZG/8Xyfx99MOvJW62zTcpKTwq6M0G7JpGi0Mg7e1eryvbIO1kY1MMvoEIiEGZMATPKvKbXi67KtHXQxulLIl1w6m/cBGKUi2s7jtypd+ez5sG+4a40cEIDGXGRfDDg+HYgqhxdzcMLVPAdG/L3/FXb+Luwh3PgjfGh5dm0ZOR1xTnw5JR4izf8OP8M+/AB/G74/Tn41IYcdHnbwf/wBks4x3ITdqAFh74+ofevvsSjMvEN4iLKD6sd+kTB+8C3oaD0Cxxtdl44jAigqsYFKmDeMGFczkoIYnhrK3GaxVjEl2gZC9vYxgnIOIP/Mv532MlHFaKTk6T5DPIGesCzGPvcVUCwBVwWdFEbmpB+SRVNqtE1JHKDUPXbawOPH7jOCAxMxI1fOaZtTaterOEXXNlPmkuIqM610ouEZt83ik1FfLDepH6duJA2KwQ03C8NlxQ03j2n+k/qf7mA/XmU612c/wkPTrY3C0+BiljybYTef6ODV62XX9eMD221BEZ+5SbZ/AQsfRlQ=)
 
 </div>
 <div class="composition-api">
 
-[اختبرها في حقل التجارب](https://sfc.vuejs.org/#eNp9Uktu2zAQvcqAG6eALaKflaAYaE+QVTdhF6k1SphaJEHSLgpBQBdOUfgiDgIUbZa+CXmbDinbcL5acd6894Z6w459NKZYLpCVrHIzK40Hh35hpkLJ1mjroQOLDfTQWN3CiKijQ+vTXF+eaed3vYLvgeRINAChZloRwRDo4DRZnZynBn0dyLqEt2Pw0s+xBMHCffgTV+EuriHehC18XmBx7QSDfvxA8+5Ys0mK8Df+juv4C8Jt/Pmi7v2RLq5oxCb8CxvIFtt4E1cHOcR12JLtbbinqxDzjspNchTqyxuhKj6ERTFR4bE18wuPVEFVyyXU0p4KZv1csMTw1T6YnIlfThqdCCkVkGpIR7DEBCi/4Y9dr5B1QpOkzBff47kYBNPqkHoez2k+HSp+uBQbs2Ffk/bCUC5a0bK7bLtr0OwSMpIw2l2qBbvy3riSc9fM0kKvXaHtJadTYRfKyxYLdO3kq9XfHdoc+C7u7MEJXKKdWFQ1WrSveT6iPvFNtpR8T79y/MSeebQ1NlLhmdXGnZyPck6j1xcG1dWHadcNLwP6vuJUPwyw/w/JPS4N)
+[اختبرها في حقل التجارب](https://play.vuejs.org/#eNp9Uktu2zAQvcqAG6eALaKflaAYaE+QVTdhF6k1SphaJEHSLgpBQBdOUfgiDgIUbZa+CXmbDinbcL5acd6894Z6w459NKZYLpCVrHIzK40Hh35hpkLJ1mjroQOLDfTQWN3CiKijQ+vTXF+eaed3vYLvgeRINAChZloRwRDo4DRZnZynBn0dyLqEt2Pw0s+xBMHCffgTV+EuriHehC18XmBx7QSDfvxA8+5Ys0mK8Df+juv4C8Jt/Pmi7v2RLq5oxCb8CxvIFtt4E1cHOcR12JLtbbinqxDzjspNchTqyxuhKj6ERTFR4bE18wuPVEFVyyXU0p4KZv1csMTw1T6YnIlfThqdCCkVkGpIR7DEBCi/4Y9dr5B1QpOkzBff47kYBNPqkHoez2k+HSp+uBQbs2Ffk/bCUC5a0bK7bLtr0OwSMpIw2l2qBbvy3riSc9fM0kKvXaHtJadTYRfKyxYLdO3kq9XfHdoc+C7u7MEJXKKdWFQ1WrSveT6iPvFNtpR8T79y/MSeebQ1NlLhmdXGnZyPck6j1xcG1dWHadcNLwP6vuJUPwyw/w/JPS4N)
 
 </div>
 
 تجدر الإشارة إلى أن `v-bind` يستخدم لتمرير قيم الخاصية الديناميكية. هذا مفيد بشكل خاص عندما لا تعرف المحتوى الذي ستقوم بتصييره بدقة مسبقًا.
 
-هذا كل ما تحتاج إلى معرفته حول الخاصيات إلى حد الآن، ولكن بمجرد انتهاءك من قراءة هذه الصفحة وفهم محتواها، ننصحك بالعودة لاحقًا لقراءة الدليل الكامل على [الخاصيات](/guide/components/props.html).
+هذا كل ما تحتاج إلى معرفته حول الخاصيات إلى حد الآن، ولكن بمجرد انتهاءك من قراءة هذه الصفحة وفهم محتواها، ننصحك بالعودة لاحقًا لقراءة الدليل الكامل على [الخاصيات](/guide/components/props).
 
 ## الاستماع للأحداث {#listening-to-events}
 
@@ -366,7 +367,7 @@ const postFontSize = ref(1)
  />
 ```
 
-ثم يمكن للمكون الابن إرسال حدث على نفسه باستدعاء  للتابع المدمج [**`emit$`**](/api/component-instance.html#emit)، وتمرير اسم الحدث 
+ثم يمكن للمكون الابن إرسال حدث على نفسه باستدعاء  للتابع المدمج [**`emit$`**](/api/component-instance#emit)، وتمرير اسم الحدث 
 
 ```vue{5}
 <!-- BlogPost.vue, بدون <script> -->
@@ -382,16 +383,16 @@ const postFontSize = ref(1)
 
 <div class="options-api">
 
-[اختبرها في حقل التجارب](https://sfc.vuejs.org/#eNqNU81q20AQfpVhKSihtlS3PQnFpD30XCj0EuUgS2tHibQrdlduUmEo1AnFL+IQKG0OPfhNtG/T2dVP5P6ECCE0P9+3MzvfVORNUbjLkhKfBDIWaaGmIUvzggsFbzO+eM+lgrngOTiu1zkMwAkZQMjopU1N6DwqMwWV8cYc8YwyJf3GAT2VsVYj800iFR0cdnFBVSlYZwEUmIvok842TwVp4sNkBCpVGfUhJPV9/V2v6zu9AX1d7+BjSd1zGZL2iH3gyyFwa2D1D/1Nb/QN1Lf6y+PgVwOwXuNh2/pnvQXLs9PXet1zgN7UO+S+re+xKMy8Q3NraDvW057fdPmOM/Uh/YzMk8Zt8/CDb+D1I0FD0bzIIkXRAgiSdAm+VFcZPQpJBfOeZkgKz8GhuYN0BJJUYKZQWUgsA3IMp2Ke5XjOTZKhgJQ1UwhJF/Yv6FUbddNk4LdX00Ws8RA8piyLxIKOFb1Ubc5DeUfwwp10ydOgV1jTo4dN4l/g9a2TEWnEOc6jAsfFGQrXqiZsA1hvr7qQoFCNHZIzpQrpe56cx0a959LlYuHhnytKptKculTm45ngnyQVVgftlCyHh84lFWNBWUIFFY9x/pH6F283XmxluE97C/ivrSoEx9PgxLEX7DQqonlq98QZ3rJz+iT1xFkkJU5khlWMzVisMEKF4bPX06pqFA+rVeCh3UZmpVKcwXGcpfEFgp+ZCg72jz9EIlzKr7gSG9wCsyT6pv4VeA34v7Nd/QYfP6AT)
+[اختبرها في حقل التجارب](https://play.vuejs.org/#eNqNU81q20AQfpVhKSihtlS3PQnFpD30XCj0EuUgS2tHibQrdlduUmEo1AnFL+IQKG0OPfhNtG/T2dVP5P6ECCE0P9+3MzvfVORNUbjLkhKfBDIWaaGmIUvzggsFbzO+eM+lgrngOTiu1zkMwAkZQMjopU1N6DwqMwWV8cYc8YwyJf3GAT2VsVYj800iFR0cdnFBVSlYZwEUmIvok842TwVp4sNkBCpVGfUhJPV9/V2v6zu9AX1d7+BjSd1zGZL2iH3gyyFwa2D1D/1Nb/QN1Lf6y+PgVwOwXuNh2/pnvQXLs9PXet1zgN7UO+S+re+xKMy8Q3NraDvW057fdPmOM/Uh/YzMk8Zt8/CDb+D1I0FD0bzIIkXRAgiSdAm+VFcZPQpJBfOeZkgKz8GhuYN0BJJUYKZQWUgsA3IMp2Ke5XjOTZKhgJQ1UwhJF/Yv6FUbddNk4LdX00Ws8RA8piyLxIKOFb1Ubc5DeUfwwp10ydOgV1jTo4dN4l/g9a2TEWnEOc6jAsfFGQrXqiZsA1hvr7qQoFCNHZIzpQrpe56cx0a959LlYuHhnytKptKculTm45ngnyQVVgftlCyHh84lFWNBWUIFFY9x/pH6F283XmxluE97C/ivrSoEx9PgxLEX7DQqonlq98QZ3rJz+iT1xFkkJU5khlWMzVisMEKF4bPX06pqFA+rVeCh3UZmpVKcwXGcpfEFgp+ZCg72jz9EIlzKr7gSG9wCsyT6pv4VeA34v7Nd/QYfP6AT)
 
 </div>
 <div class="composition-api">
 
-[اختبرها في حقل التجارب](https://sfc.vuejs.org/#eNp9U81u00AQfpXRCimpiG0CnCwnKkhwroTEpeaQ2Ot0W3vX2t0EimUJibRCeZFUlRD0wCFv4n0bZv2TuJTWJ898M9/8fVuQN3nurpaU+CRQkWS5BkX1Mp+GnGW5kBoKkDSBEhIpMhhg6GAPvU3F4kQo3WKu1zksI4YBhDwSHANydCqYWKrhqQW6rwAW+zAegWY6pT6EpLqrfpp1dWs2YK6qHXxcUvdchQTK0cPEl/3ErU2rfpkfZmOuobox355OftVLNmsstq1+V1uoeXbmyqz3HGA21Q65b6o7bAojb9HcWtqQfzoKeX/M94LrD+wrbacdIxx4zWpxqWhomuXpTFNr6SBmK/CVvkzpJCQFJG22f5/rOQxoNsByBGImMVLqNCTIYKcJurV3I66cRNggSwGMN9sPSQf7F/SyRV0W9/z1NjqkNg7gMeXpTC6oo+kX3cYc2pvAC3fcBU+DvRDqDgMPh8S/wNuPTkak0ZCTzXK8kOAowKJWTAtgvz7UHutDPVk7JGda58r3PJVEVmTnyhVy4eGfK5dcs4y6VGXOXIrPisr69O3haw4PnSsqHUl5TCWVT3H+E/qA19Li+UscpS/7/zykmCaM0xMpcjU8HdR7HVjVNP53GdPW399vDT+qGtyoVU2UzpTCS8yxumPPcRDE2etpUTTihrIMPLRbZL7UWnA4jlIWXWDyM4rlh/eLHyERvr/vqP4NCt6+B3Nd/Qm8JvnRm5Z/AZdfj4I=)
+[اختبرها في حقل التجارب](https://play.vuejs.org/#eNp9U81u00AQfpXRCimpiG0CnCwnKkhwroTEpeaQ2Ot0W3vX2t0EimUJibRCeZFUlRD0wCFv4n0bZv2TuJTWJ898M9/8fVuQN3nurpaU+CRQkWS5BkX1Mp+GnGW5kBoKkDSBEhIpMhhg6GAPvU3F4kQo3WKu1zksI4YBhDwSHANydCqYWKrhqQW6rwAW+zAegWY6pT6EpLqrfpp1dWs2YK6qHXxcUvdchQTK0cPEl/3ErU2rfpkfZmOuobox355OftVLNmsstq1+V1uoeXbmyqz3HGA21Q65b6o7bAojb9HcWtqQfzoKeX/M94LrD+wrbacdIxx4zWpxqWhomuXpTFNr6SBmK/CVvkzpJCQFJG22f5/rOQxoNsByBGImMVLqNCTIYKcJurV3I66cRNggSwGMN9sPSQf7F/SyRV0W9/z1NjqkNg7gMeXpTC6oo+kX3cYc2pvAC3fcBU+DvRDqDgMPh8S/wNuPTkak0ZCTzXK8kOAowKJWTAtgvz7UHutDPVk7JGda58r3PJVEVmTnyhVy4eGfK5dcs4y6VGXOXIrPisr69O3haw4PnSsqHUl5TCWVT3H+E/qA19Li+UscpS/7/zykmCaM0xMpcjU8HdR7HVjVNP53GdPW399vDT+qGtyoVU2UzpTCS8yxumPPcRDE2etpUTTihrIMPLRbZL7UWnA4jlIWXWDyM4rlh/eLHyERvr/vqP4NCt6+B3Nd/Qm8JvnRm5Z/AZdfj4I=)
 
 </div>
 
-يمكننا اختيارياً التصريح بالأحداث المرسلة باستخدام <span class="options-api"> خيار [`emits`](/api/options-state.html#emits) </span> <span class="composition-api"> التعليمة العامة [`defineEmits`](/api/sfc-script-setup.html#defineprops-defineemits)</span> :
+يمكننا اختيارياً التصريح بالأحداث المرسلة باستخدام <span class="options-api"> خيار [`emits`](/api/options-state#emits) </span> <span class="composition-api"> التعليمة العامة [`defineEmits`](/api/sfc-script-setup#defineprops-defineemits)</span> :
 
 <div class="options-api">
 
@@ -418,7 +419,7 @@ defineEmits(['enlarge-text'])
 
 </div>
 
-هذه الشيفرة توثق جميع الأحداث التي يرسلها مكون ما و بشكل اختياري [تتحقق من صحتها](/guide/components/events.html#events-validation) . كما تسمح لـ Vue بتجنب تطبيقها تلقائياً كمستمعات أصلية على العنصر الجذري للمكون الابن.
+هذه الشيفرة توثق جميع الأحداث التي يرسلها مكون ما و بشكل اختياري [تتحقق من صحتها](/guide/components/events#events-validation) . كما تسمح لـ Vue بتجنب تطبيقها تلقائياً كمستمعات أصلية على العنصر الجذري للمكون الابن.
 
 <div class="composition-api">
 
@@ -432,7 +433,7 @@ emit('enlarge-text')
 </script>
 ```
 
-اطلع أيضا على: [إضافة الأنواع للأحداث المرسلة Emits](/guide/typescript/composition-api.html#typing-component-emits) <sup class="vt-badge ts" />
+اطلع أيضا على: [إضافة الأنواع للأحداث المرسلة Emits](/guide/typescript/composition-api#typing-component-emits) <sup class="vt-badge ts" />
   
 إذا كنت لا تستخدم `<script setup>`، يمكنك تعريف الأحداث المرسلة باستخدام خيار `emits`. يمكنك الوصول إلى دالة `emit` كخاصية في سياق الخطافة setup (ممررة إلى `()setup` كوسيط ثاني) :
 
@@ -486,12 +487,12 @@ export default {
 
 <div class="options-api">
 
-[اختبرها في حقل التجارب](https://sfc.vuejs.org/#eNp9UsGO1DAM/RUTDnvZNoDQCJUy0vIdubSNZ+jSJpGTDkWjPfIlHDgg4MivlL/B7nS6s7vSqj3Ezy8v9rOP6iaE/DCgKlQZG2pD2hrX9sFTgpsOKX30I+zI93CV6zMgF66MAzAOx5lqcVcNXYKjoI3n+w5digUc71XujOO/1OszHCTsQ1cllCiVZypHrJ2mX9Of6SdMv6e/03f49236kc+0tQ7mlXqVUNfqVHjWVyG/jd5xU3NBZklEo7giQQTjJiQ26lNKIRZax10jnd3G3NNe8ymnwaW2xxxjn9Xkv0QkFjbq+kJDM3hAygidRUJ6TvMR9YmuyIpN3Mql1zKcC6cAStseoOmqGD8YVQkzq/1o1JzkdEzk3X67OPeCPT8BS7omvTI7n+AUlZpVH1o6zyimrx1CbHxAy0i+vneeduepgJebzea9xLUnbq6A12GE6LvWAqG9yGRU2Xbg1XgbxhkOlbWt2xfw5tWC1FXzeU9+cDY7q+/eycdZtkf27tSQVGDSwpFn5qksayZlb9Xdf6+CBok=)
+[اختبرها في حقل التجارب](https://play.vuejs.org/#eNp9UsGO1DAM/RUTDnvZNoDQCJUy0vIdubSNZ+jSJpGTDkWjPfIlHDgg4MivlL/B7nS6s7vSqj3Ezy8v9rOP6iaE/DCgKlQZG2pD2hrX9sFTgpsOKX30I+zI93CV6zMgF66MAzAOx5lqcVcNXYKjoI3n+w5digUc71XujOO/1OszHCTsQ1cllCiVZypHrJ2mX9Of6SdMv6e/03f49236kc+0tQ7mlXqVUNfqVHjWVyG/jd5xU3NBZklEo7giQQTjJiQ26lNKIRZax10jnd3G3NNe8ymnwaW2xxxjn9Xkv0QkFjbq+kJDM3hAygidRUJ6TvMR9YmuyIpN3Mql1zKcC6cAStseoOmqGD8YVQkzq/1o1JzkdEzk3X67OPeCPT8BS7omvTI7n+AUlZpVH1o6zyimrx1CbHxAy0i+vneeduepgJebzea9xLUnbq6A12GE6LvWAqG9yGRU2Xbg1XgbxhkOlbWt2xfw5tWC1FXzeU9+cDY7q+/eycdZtkf27tSQVGDSwpFn5qksayZlb9Xdf6+CBok=)
 
 </div>
 <div class="composition-api">
 
-[اختبرها في حقل التجارب](https://sfc.vuejs.org/#eNp9UUFOwzAQ/MpiDr00MSBUoRAqlXf4ksRuSUlsa+2UoqpHXsKBAwKOfCX8hnWSVgEklEt2ZjyeHe/Ywtp40yiWsNQVWFoPTvnGzoUua2vQw6JS6G/NFpZoapjE/ACEYxOhU96foxM0eFXbKvMqTD49SGkCEL59az/aV2jf28/2Gb6e2pe4kx0tSZfyowWbsj5DVGc2XjujKeWusxoIJ1gCHRIwyhNmwe68ty7h3C2LEHLtYoMrTn8xNtqXtYqVq6MczYNTSMaCTUcenMCNwgiVlgoV/uf5S/rHN9juhd7TKuPaQtujpgBSWW6gqDLnbgTLgjLKzVawjiTaeTR6NR+aO6HOe2Cgc+RHZWU89FPKyfVnpd0bOf9YKXCFsUoSEh/v66ssTGUwgdPZbHYd5twgLZfAud2CM1UpAZUcMRFmsmxcApd228E2k7LUqwQuzgYkz4r7FZpGy+jgvrwKH7FUDxWv+4VCAuEHTbime5WgCStT7DnbfwMjhfVr)
+[اختبرها في حقل التجارب](https://play.vuejs.org/#eNp9UUFOwzAQ/MpiDr00MSBUoRAqlXf4ksRuSUlsa+2UoqpHXsKBAwKOfCX8hnWSVgEklEt2ZjyeHe/Ywtp40yiWsNQVWFoPTvnGzoUua2vQw6JS6G/NFpZoapjE/ACEYxOhU96foxM0eFXbKvMqTD49SGkCEL59az/aV2jf28/2Gb6e2pe4kx0tSZfyowWbsj5DVGc2XjujKeWusxoIJ1gCHRIwyhNmwe68ty7h3C2LEHLtYoMrTn8xNtqXtYqVq6MczYNTSMaCTUcenMCNwgiVlgoV/uf5S/rHN9juhd7TKuPaQtujpgBSWW6gqDLnbgTLgjLKzVawjiTaeTR6NR+aO6HOe2Cgc+RHZWU89FPKyfVnpd0bOf9YKXCFsUoSEh/v66ssTGUwgdPZbHYd5twgLZfAud2CM1UpAZUcMRFmsmxcApd228E2k7LUqwQuzgYkz4r7FZpGy+jgvrwKH7FUDxWv+4VCAuEHTbime5WgCStT7DnbfwMjhfVr)
 
 </div>
 
@@ -503,12 +504,12 @@ export default {
 
 <div class="options-api">
 
-[افتح المثال في حقل التجارب](https://sfc.vuejs.org/#eyJBcHAudnVlIjoiPHNjcmlwdD5cbmltcG9ydCBIb21lIGZyb20gJy4vSG9tZS52dWUnXG5pbXBvcnQgUG9zdHMgZnJvbSAnLi9Qb3N0cy52dWUnXG5pbXBvcnQgQXJjaGl2ZSBmcm9tICcuL0FyY2hpdmUudnVlJ1xuICBcbmV4cG9ydCBkZWZhdWx0IHtcbiAgY29tcG9uZW50czoge1xuICAgIEhvbWUsXG4gICAgUG9zdHMsXG4gICAgQXJjaGl2ZVxuICB9LFxuICBkYXRhKCkge1xuICAgIHJldHVybiB7XG4gICAgICBjdXJyZW50VGFiOiAnSG9tZScsXG4gICAgICB0YWJzOiBbJ0hvbWUnLCAnUG9zdHMnLCAnQXJjaGl2ZSddXG4gICAgfVxuICB9XG59XG48L3NjcmlwdD5cblxuPHRlbXBsYXRlPlxuICA8ZGl2IGNsYXNzPVwiZGVtb1wiPlxuICAgIDxidXR0b25cbiAgICAgICB2LWZvcj1cInRhYiBpbiB0YWJzXCJcbiAgICAgICA6a2V5PVwidGFiXCJcbiAgICAgICA6Y2xhc3M9XCJbJ3RhYi1idXR0b24nLCB7IGFjdGl2ZTogY3VycmVudFRhYiA9PT0gdGFiIH1dXCJcbiAgICAgICBAY2xpY2s9XCJjdXJyZW50VGFiID0gdGFiXCJcbiAgICAgPlxuICAgICAge3sgdGFiIH19XG4gICAgPC9idXR0b24+XG5cdCAgPGNvbXBvbmVudCA6aXM9XCJjdXJyZW50VGFiXCIgY2xhc3M9XCJ0YWJcIj48L2NvbXBvbmVudD5cbiAgPC9kaXY+XG48L3RlbXBsYXRlPlxuXG48c3R5bGU+XG4uZGVtbyB7XG4gIGZvbnQtZmFtaWx5OiBzYW5zLXNlcmlmO1xuICBib3JkZXI6IDFweCBzb2xpZCAjZWVlO1xuICBib3JkZXItcmFkaXVzOiAycHg7XG4gIHBhZGRpbmc6IDIwcHggMzBweDtcbiAgbWFyZ2luLXRvcDogMWVtO1xuICBtYXJnaW4tYm90dG9tOiA0MHB4O1xuICB1c2VyLXNlbGVjdDogbm9uZTtcbiAgb3ZlcmZsb3cteDogYXV0bztcbn1cblxuLnRhYi1idXR0b24ge1xuICBwYWRkaW5nOiA2cHggMTBweDtcbiAgYm9yZGVyLXRvcC1sZWZ0LXJhZGl1czogM3B4O1xuICBib3JkZXItdG9wLXJpZ2h0LXJhZGl1czogM3B4O1xuICBib3JkZXI6IDFweCBzb2xpZCAjY2NjO1xuICBjdXJzb3I6IHBvaW50ZXI7XG4gIGJhY2tncm91bmQ6ICNmMGYwZjA7XG4gIG1hcmdpbi1ib3R0b206IC0xcHg7XG4gIG1hcmdpbi1yaWdodDogLTFweDtcbn1cbi50YWItYnV0dG9uOmhvdmVyIHtcbiAgYmFja2dyb3VuZDogI2UwZTBlMDtcbn1cbi50YWItYnV0dG9uLmFjdGl2ZSB7XG4gIGJhY2tncm91bmQ6ICNlMGUwZTA7XG59XG4udGFiIHtcbiAgYm9yZGVyOiAxcHggc29saWQgI2NjYztcbiAgcGFkZGluZzogMTBweDtcbn1cbjwvc3R5bGU+IiwiaW1wb3J0LW1hcC5qc29uIjoie1xuICBcImltcG9ydHNcIjoge1xuICAgIFwidnVlXCI6IFwiaHR0cHM6Ly9zZmMudnVlanMub3JnL3Z1ZS5ydW50aW1lLmVzbS1icm93c2VyLmpzXCJcbiAgfVxufSIsIkhvbWUudnVlIjoiPHRlbXBsYXRlPlxuICA8ZGl2IGNsYXNzPVwidGFiXCI+XG4gICAgSG9tZSBjb21wb25lbnRcbiAgPC9kaXY+XG48L3RlbXBsYXRlPiIsIlBvc3RzLnZ1ZSI6Ijx0ZW1wbGF0ZT5cbiAgPGRpdiBjbGFzcz1cInRhYlwiPlxuICAgIFBvc3RzIGNvbXBvbmVudFxuICA8L2Rpdj5cbjwvdGVtcGxhdGU+IiwiQXJjaGl2ZS52dWUiOiI8dGVtcGxhdGU+XG4gIDxkaXYgY2xhc3M9XCJ0YWJcIj5cbiAgICBBcmNoaXZlIGNvbXBvbmVudFxuICA8L2Rpdj5cbjwvdGVtcGxhdGU+In0=)
+[افتح المثال في حقل التجارب](https://play.vuejs.org/#eyJBcHAudnVlIjoiPHNjcmlwdD5cbmltcG9ydCBIb21lIGZyb20gJy4vSG9tZS52dWUnXG5pbXBvcnQgUG9zdHMgZnJvbSAnLi9Qb3N0cy52dWUnXG5pbXBvcnQgQXJjaGl2ZSBmcm9tICcuL0FyY2hpdmUudnVlJ1xuICBcbmV4cG9ydCBkZWZhdWx0IHtcbiAgY29tcG9uZW50czoge1xuICAgIEhvbWUsXG4gICAgUG9zdHMsXG4gICAgQXJjaGl2ZVxuICB9LFxuICBkYXRhKCkge1xuICAgIHJldHVybiB7XG4gICAgICBjdXJyZW50VGFiOiAnSG9tZScsXG4gICAgICB0YWJzOiBbJ0hvbWUnLCAnUG9zdHMnLCAnQXJjaGl2ZSddXG4gICAgfVxuICB9XG59XG48L3NjcmlwdD5cblxuPHRlbXBsYXRlPlxuICA8ZGl2IGNsYXNzPVwiZGVtb1wiPlxuICAgIDxidXR0b25cbiAgICAgICB2LWZvcj1cInRhYiBpbiB0YWJzXCJcbiAgICAgICA6a2V5PVwidGFiXCJcbiAgICAgICA6Y2xhc3M9XCJbJ3RhYi1idXR0b24nLCB7IGFjdGl2ZTogY3VycmVudFRhYiA9PT0gdGFiIH1dXCJcbiAgICAgICBAY2xpY2s9XCJjdXJyZW50VGFiID0gdGFiXCJcbiAgICAgPlxuICAgICAge3sgdGFiIH19XG4gICAgPC9idXR0b24+XG5cdCAgPGNvbXBvbmVudCA6aXM9XCJjdXJyZW50VGFiXCIgY2xhc3M9XCJ0YWJcIj48L2NvbXBvbmVudD5cbiAgPC9kaXY+XG48L3RlbXBsYXRlPlxuXG48c3R5bGU+XG4uZGVtbyB7XG4gIGZvbnQtZmFtaWx5OiBzYW5zLXNlcmlmO1xuICBib3JkZXI6IDFweCBzb2xpZCAjZWVlO1xuICBib3JkZXItcmFkaXVzOiAycHg7XG4gIHBhZGRpbmc6IDIwcHggMzBweDtcbiAgbWFyZ2luLXRvcDogMWVtO1xuICBtYXJnaW4tYm90dG9tOiA0MHB4O1xuICB1c2VyLXNlbGVjdDogbm9uZTtcbiAgb3ZlcmZsb3cteDogYXV0bztcbn1cblxuLnRhYi1idXR0b24ge1xuICBwYWRkaW5nOiA2cHggMTBweDtcbiAgYm9yZGVyLXRvcC1sZWZ0LXJhZGl1czogM3B4O1xuICBib3JkZXItdG9wLXJpZ2h0LXJhZGl1czogM3B4O1xuICBib3JkZXI6IDFweCBzb2xpZCAjY2NjO1xuICBjdXJzb3I6IHBvaW50ZXI7XG4gIGJhY2tncm91bmQ6ICNmMGYwZjA7XG4gIG1hcmdpbi1ib3R0b206IC0xcHg7XG4gIG1hcmdpbi1yaWdodDogLTFweDtcbn1cbi50YWItYnV0dG9uOmhvdmVyIHtcbiAgYmFja2dyb3VuZDogI2UwZTBlMDtcbn1cbi50YWItYnV0dG9uLmFjdGl2ZSB7XG4gIGJhY2tncm91bmQ6ICNlMGUwZTA7XG59XG4udGFiIHtcbiAgYm9yZGVyOiAxcHggc29saWQgI2NjYztcbiAgcGFkZGluZzogMTBweDtcbn1cbjwvc3R5bGU+IiwiaW1wb3J0LW1hcC5qc29uIjoie1xuICBcImltcG9ydHNcIjoge1xuICAgIFwidnVlXCI6IFwiaHR0cHM6Ly9zZmMudnVlanMub3JnL3Z1ZS5ydW50aW1lLmVzbS1icm93c2VyLmpzXCJcbiAgfVxufSIsIkhvbWUudnVlIjoiPHRlbXBsYXRlPlxuICA8ZGl2IGNsYXNzPVwidGFiXCI+XG4gICAgSG9tZSBjb21wb25lbnRcbiAgPC9kaXY+XG48L3RlbXBsYXRlPiIsIlBvc3RzLnZ1ZSI6Ijx0ZW1wbGF0ZT5cbiAgPGRpdiBjbGFzcz1cInRhYlwiPlxuICAgIFBvc3RzIGNvbXBvbmVudFxuICA8L2Rpdj5cbjwvdGVtcGxhdGU+IiwiQXJjaGl2ZS52dWUiOiI8dGVtcGxhdGU+XG4gIDxkaXYgY2xhc3M9XCJ0YWJcIj5cbiAgICBBcmNoaXZlIGNvbXBvbmVudFxuICA8L2Rpdj5cbjwvdGVtcGxhdGU+In0=)
 
 </div>
 <div class="composition-api">
 
-[افتح المثال في حقل التجارب](https://sfc.vuejs.org/#eyJBcHAudnVlIjoiPHNjcmlwdCBzZXR1cD5cbmltcG9ydCBIb21lIGZyb20gJy4vSG9tZS52dWUnXG5pbXBvcnQgUG9zdHMgZnJvbSAnLi9Qb3N0cy52dWUnXG5pbXBvcnQgQXJjaGl2ZSBmcm9tICcuL0FyY2hpdmUudnVlJ1xuaW1wb3J0IHsgcmVmIH0gZnJvbSAndnVlJ1xuIFxuY29uc3QgY3VycmVudFRhYiA9IHJlZignSG9tZScpXG5cbmNvbnN0IHRhYnMgPSB7XG4gIEhvbWUsXG4gIFBvc3RzLFxuICBBcmNoaXZlXG59XG48L3NjcmlwdD5cblxuPHRlbXBsYXRlPlxuICA8ZGl2IGNsYXNzPVwiZGVtb1wiPlxuICAgIDxidXR0b25cbiAgICAgICB2LWZvcj1cIihfLCB0YWIpIGluIHRhYnNcIlxuICAgICAgIDprZXk9XCJ0YWJcIlxuICAgICAgIDpjbGFzcz1cIlsndGFiLWJ1dHRvbicsIHsgYWN0aXZlOiBjdXJyZW50VGFiID09PSB0YWIgfV1cIlxuICAgICAgIEBjbGljaz1cImN1cnJlbnRUYWIgPSB0YWJcIlxuICAgICA+XG4gICAgICB7eyB0YWIgfX1cbiAgICA8L2J1dHRvbj5cblx0ICA8Y29tcG9uZW50IDppcz1cInRhYnNbY3VycmVudFRhYl1cIiBjbGFzcz1cInRhYlwiPjwvY29tcG9uZW50PlxuICA8L2Rpdj5cbjwvdGVtcGxhdGU+XG5cbjxzdHlsZT5cbi5kZW1vIHtcbiAgZm9udC1mYW1pbHk6IHNhbnMtc2VyaWY7XG4gIGJvcmRlcjogMXB4IHNvbGlkICNlZWU7XG4gIGJvcmRlci1yYWRpdXM6IDJweDtcbiAgcGFkZGluZzogMjBweCAzMHB4O1xuICBtYXJnaW4tdG9wOiAxZW07XG4gIG1hcmdpbi1ib3R0b206IDQwcHg7XG4gIHVzZXItc2VsZWN0OiBub25lO1xuICBvdmVyZmxvdy14OiBhdXRvO1xufVxuXG4udGFiLWJ1dHRvbiB7XG4gIHBhZGRpbmc6IDZweCAxMHB4O1xuICBib3JkZXItdG9wLWxlZnQtcmFkaXVzOiAzcHg7XG4gIGJvcmRlci10b3AtcmlnaHQtcmFkaXVzOiAzcHg7XG4gIGJvcmRlcjogMXB4IHNvbGlkICNjY2M7XG4gIGN1cnNvcjogcG9pbnRlcjtcbiAgYmFja2dyb3VuZDogI2YwZjBmMDtcbiAgbWFyZ2luLWJvdHRvbTogLTFweDtcbiAgbWFyZ2luLXJpZ2h0OiAtMXB4O1xufVxuLnRhYi1idXR0b246aG92ZXIge1xuICBiYWNrZ3JvdW5kOiAjZTBlMGUwO1xufVxuLnRhYi1idXR0b24uYWN0aXZlIHtcbiAgYmFja2dyb3VuZDogI2UwZTBlMDtcbn1cbi50YWIge1xuICBib3JkZXI6IDFweCBzb2xpZCAjY2NjO1xuICBwYWRkaW5nOiAxMHB4O1xufVxuPC9zdHlsZT4iLCJpbXBvcnQtbWFwLmpzb24iOiJ7XG4gIFwiaW1wb3J0c1wiOiB7XG4gICAgXCJ2dWVcIjogXCJodHRwczovL3NmYy52dWVqcy5vcmcvdnVlLnJ1bnRpbWUuZXNtLWJyb3dzZXIuanNcIlxuICB9XG59IiwiSG9tZS52dWUiOiI8dGVtcGxhdGU+XG4gIDxkaXYgY2xhc3M9XCJ0YWJcIj5cbiAgICBIb21lIGNvbXBvbmVudFxuICA8L2Rpdj5cbjwvdGVtcGxhdGU+IiwiUG9zdHMudnVlIjoiPHRlbXBsYXRlPlxuICA8ZGl2IGNsYXNzPVwidGFiXCI+XG4gICAgUG9zdHMgY29tcG9uZW50XG4gIDwvZGl2PlxuPC90ZW1wbGF0ZT4iLCJBcmNoaXZlLnZ1ZSI6Ijx0ZW1wbGF0ZT5cbiAgPGRpdiBjbGFzcz1cInRhYlwiPlxuICAgIEFyY2hpdmUgY29tcG9uZW50XG4gIDwvZGl2PlxuPC90ZW1wbGF0ZT4ifQ==)
+[افتح المثال في حقل التجارب](https://play.vuejs.org/#eyJBcHAudnVlIjoiPHNjcmlwdCBzZXR1cD5cbmltcG9ydCBIb21lIGZyb20gJy4vSG9tZS52dWUnXG5pbXBvcnQgUG9zdHMgZnJvbSAnLi9Qb3N0cy52dWUnXG5pbXBvcnQgQXJjaGl2ZSBmcm9tICcuL0FyY2hpdmUudnVlJ1xuaW1wb3J0IHsgcmVmIH0gZnJvbSAndnVlJ1xuIFxuY29uc3QgY3VycmVudFRhYiA9IHJlZignSG9tZScpXG5cbmNvbnN0IHRhYnMgPSB7XG4gIEhvbWUsXG4gIFBvc3RzLFxuICBBcmNoaXZlXG59XG48L3NjcmlwdD5cblxuPHRlbXBsYXRlPlxuICA8ZGl2IGNsYXNzPVwiZGVtb1wiPlxuICAgIDxidXR0b25cbiAgICAgICB2LWZvcj1cIihfLCB0YWIpIGluIHRhYnNcIlxuICAgICAgIDprZXk9XCJ0YWJcIlxuICAgICAgIDpjbGFzcz1cIlsndGFiLWJ1dHRvbicsIHsgYWN0aXZlOiBjdXJyZW50VGFiID09PSB0YWIgfV1cIlxuICAgICAgIEBjbGljaz1cImN1cnJlbnRUYWIgPSB0YWJcIlxuICAgICA+XG4gICAgICB7eyB0YWIgfX1cbiAgICA8L2J1dHRvbj5cblx0ICA8Y29tcG9uZW50IDppcz1cInRhYnNbY3VycmVudFRhYl1cIiBjbGFzcz1cInRhYlwiPjwvY29tcG9uZW50PlxuICA8L2Rpdj5cbjwvdGVtcGxhdGU+XG5cbjxzdHlsZT5cbi5kZW1vIHtcbiAgZm9udC1mYW1pbHk6IHNhbnMtc2VyaWY7XG4gIGJvcmRlcjogMXB4IHNvbGlkICNlZWU7XG4gIGJvcmRlci1yYWRpdXM6IDJweDtcbiAgcGFkZGluZzogMjBweCAzMHB4O1xuICBtYXJnaW4tdG9wOiAxZW07XG4gIG1hcmdpbi1ib3R0b206IDQwcHg7XG4gIHVzZXItc2VsZWN0OiBub25lO1xuICBvdmVyZmxvdy14OiBhdXRvO1xufVxuXG4udGFiLWJ1dHRvbiB7XG4gIHBhZGRpbmc6IDZweCAxMHB4O1xuICBib3JkZXItdG9wLWxlZnQtcmFkaXVzOiAzcHg7XG4gIGJvcmRlci10b3AtcmlnaHQtcmFkaXVzOiAzcHg7XG4gIGJvcmRlcjogMXB4IHNvbGlkICNjY2M7XG4gIGN1cnNvcjogcG9pbnRlcjtcbiAgYmFja2dyb3VuZDogI2YwZjBmMDtcbiAgbWFyZ2luLWJvdHRvbTogLTFweDtcbiAgbWFyZ2luLXJpZ2h0OiAtMXB4O1xufVxuLnRhYi1idXR0b246aG92ZXIge1xuICBiYWNrZ3JvdW5kOiAjZTBlMGUwO1xufVxuLnRhYi1idXR0b24uYWN0aXZlIHtcbiAgYmFja2dyb3VuZDogI2UwZTBlMDtcbn1cbi50YWIge1xuICBib3JkZXI6IDFweCBzb2xpZCAjY2NjO1xuICBwYWRkaW5nOiAxMHB4O1xufVxuPC9zdHlsZT4iLCJpbXBvcnQtbWFwLmpzb24iOiJ7XG4gIFwiaW1wb3J0c1wiOiB7XG4gICAgXCJ2dWVcIjogXCJodHRwczovL3NmYy52dWVqcy5vcmcvdnVlLnJ1bnRpbWUuZXNtLWJyb3dzZXIuanNcIlxuICB9XG59IiwiSG9tZS52dWUiOiI8dGVtcGxhdGU+XG4gIDxkaXYgY2xhc3M9XCJ0YWJcIj5cbiAgICBIb21lIGNvbXBvbmVudFxuICA8L2Rpdj5cbjwvdGVtcGxhdGU+IiwiUG9zdHMudnVlIjoiPHRlbXBsYXRlPlxuICA8ZGl2IGNsYXNzPVwidGFiXCI+XG4gICAgUG9zdHMgY29tcG9uZW50XG4gIDwvZGl2PlxuPC90ZW1wbGF0ZT4iLCJBcmNoaXZlLnZ1ZSI6Ijx0ZW1wbGF0ZT5cbiAgPGRpdiBjbGFzcz1cInRhYlwiPlxuICAgIEFyY2hpdmUgY29tcG9uZW50XG4gIDwvZGl2PlxuPC90ZW1wbGF0ZT4ifQ==)
 
 </div>
 
@@ -538,7 +539,7 @@ export default {
 
 يمكنك أيضًا استخدام سمة `is` لإنشاء عناصر HTML عادية.
 
-عند التبديل بين عدة مكونات مع `<"..."=component :is>`، سيتم فصل المكون الذي تم التبديل عنه. يمكننا إجبار المكونات غير النشطة على البقاء "نشطة" باستخدام المكون المدمج [`<KeepAlive>`](/guide/built-ins/keep-alive.html).
+عند التبديل بين عدة مكونات مع `<"..."=component :is>`، سيتم فصل المكون الذي تم التبديل عنه. يمكننا إجبار المكونات غير النشطة على البقاء "نشطة" باستخدام المكون المدمج [`<KeepAlive>`](/guide/built-ins/keep-alive).
 
 ## تنبيهات حول تحليل قالب DOM {#dom-template-parsing-caveats}
 
@@ -615,7 +616,7 @@ const BlogPost = {
 </table>
 ```
 
-المكون المخصص `<blog-post-row>` سيُرفع كمحتوى غير صالح، مما يسبب أخطاء في الناتج النهائي المُصيّر. يمكننا استخدام السمة الخاصة [`is`](/api/built-in-special-attributes.html#is) كحل للمشكلة:
+المكون المخصص `<blog-post-row>` سيُرفع كمحتوى غير صالح، مما يسبب أخطاء في الناتج النهائي المُصيّر. يمكننا استخدام السمة الخاصة [`is`](/api/built-in-special-attributes#is) كحل للمشكلة:
 
 ```vue-html
 <table>

@@ -47,7 +47,7 @@
 
 توليد المواقع الساكنة بصفحة واحدة ملائم بشكل أفضل إذا كنت تتوقع تفاعل غير بسيط أو  مدة طويلة للجلسة أو عناصر / حالة محفوظة عبر التنقلات. وإلا ، فسيكون توليد المواقع الساكنة بالصفحات المتعددة أفضل خيارًا.
 
-يقوم فريق Vue أيضًا بالعمل على تطوير مولد مواقع ساكنة يسمى [VitePress](https://vitepress.vuejs.org/) ، والذي يدعم هذا الموقع الذي تقرأه حاليًا! يدعم VitePress كلا نوعي توليد المواقع الساكنة. [Nuxt](https://nuxt.com/) يدعم أيضًا SSG. يمكنك حتى دمج SSR وSSG لمسارات مختلفة في نفس تطبيق Nuxt.
+يقوم فريق Vue أيضًا بالعمل على تطوير مولد مواقع ساكنة يسمى [VitePress](https://vitepress.dev/) ، والذي يدعم هذا الموقع الذي تقرأه حاليًا! يدعم VitePress كلا نوعي توليد المواقع الساكنة. [Nuxt](https://nuxt.com/) يدعم أيضًا SSG. يمكنك حتى دمج SSR وSSG لمسارات مختلفة في نفس تطبيق Nuxt.
 
 ## ما وراء الويب {#beyond-the-web}
 
@@ -56,4 +56,4 @@
 - بناء تطبيقات سطح المكتب مع [Electron](https://www.electronjs.org/) أو [Tauri](https://tauri.studio/en/)
 - بناء تطبيقات الهاتف المحمول مع [Ionic Vue](https://ionicframework.com/docs/vue/overview)
 - بناء تطبيقات سطح المكتب والهاتف المحمول من نفس قاعدة الشفرة مع [Quasar](https://quasar.dev/)
-- استخدام [Custom Renderer API](/api/custom-renderer) Vue لبناء محررين مخصصين تستهدف [WebGL](https://troisjs.github.io/) أو حتى [الطرفية](https://github.com/ycmjason/vuminal)!
+- استخدام [Custom Renderer API](/api/custom-renderer) Vue لبناء محررين مخصصين تستهدف [WebGL](https://troisjs.github.io/) أو حتى [الطرفية](https://github.com/vue-terminal/vue-termui)!
