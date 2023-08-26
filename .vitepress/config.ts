@@ -28,7 +28,7 @@ const nav: ThemeConfig['nav'] = [
     ]
   },
   {
-    text: 'API مراجع',
+    text: '(API) مراجع الواجهة البرمجية',
     activeMatch: `^/api/`,
     link: '/api/'
   },
@@ -343,7 +343,7 @@ export const sidebar: ThemeConfig['sidebar'] = {
   ],
   '/api/': [
     {
-      text: 'واجهة برمجة التطبيقات العامة',
+      text: 'الواجهة البرمجية العامة',
       items: [
         { text: 'التطبيق', link: '/api/application' },
         {
@@ -422,7 +422,7 @@ export const sidebar: ThemeConfig['sidebar'] = {
       ]
     },
     {
-      text: 'واجهة برمجة التطبيقات متقدمة',
+      text: 'الواجهة البرمجية المتقدمة',
       items: [
         { text: 'دالة التصيير', link: '/api/render-function' },
         { text: 'التصيير من الخادم', link: '/api/ssr' },

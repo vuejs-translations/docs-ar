@@ -55,15 +55,15 @@ const filtered = computed(() => {
 </script>
 
 <template>
-  <div id="api-index">
+  <div id="api-index" dir="rtl">
     <div class="header">
-      <h1>API Reference</h1>
+      <h1>مرجع الواجهة البرمجية</h1>
       <div class="api-filter">
-        <label for="api-filter">Filter</label>
+        <label for="api-filter">بحث</label>
         <input
           ref="search"
           type="search"
-          placeholder="Enter keyword"
+          placeholder="ادخل كلمة مفتاحية"
           id="api-filter"
           v-model="query"
         />
@@ -82,9 +82,9 @@ const filtered = computed(() => {
           :key="item.text"
           class="api-group"
         >
-          <h3>{{ item.text }}</h3>
-          <ul>
-            <li v-for="h of item.headers" :key="h.anchor">
+          <h3 dir="ltr" style="text-align:right">{{ item.text }}</h3>
+          <ul >
+            <li v-for="h of item.headers" :key="h.anchor" dir="ltr">
               <a :href="withBase(item.link) + '.html#' + h.anchor">{{ h.text }}</a>
             </li>
           </ul>
@@ -93,7 +93,7 @@ const filtered = computed(() => {
     </div>
 
     <div v-if="!filtered.length" class="no-match">
-      No API matching "{{ query }}" found.
+      لا توجد واجهة برمجية تطابق "{{ query }}"
     </div>
   </div>
 </template>
