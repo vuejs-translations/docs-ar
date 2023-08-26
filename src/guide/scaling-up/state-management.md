@@ -67,7 +67,7 @@ export default {
 1. أكثر من واجهة قد تعتمد على نفس الحالة.
 2. قد تحتاج الأحداث من واجهات مختلفة إلى تغيير نفس الحالة.
 
-بالنسبة للحالة الأولى ، يمكن أن يكون الحل هو محاولة "رفع" الحالة المشتركة إلى المكون الجذري ، ثم تمريرها إلى الأسفل كخاصيات. ومع ذلك ، يصبح هذا مملًا بسرعة في شجرة المكونات مع هرميات عميقة ، مما يؤدي إلى مشكلة أخرى معروفة باسم [التمرير العميق](/guide/components/provide-inject.html#prop-drilling).
+بالنسبة للحالة الأولى ، يمكن أن يكون الحل هو محاولة "رفع" الحالة المشتركة إلى المكون الجذري ، ثم تمريرها إلى الأسفل كخاصيات. ومع ذلك ، يصبح هذا مملًا بسرعة في شجرة المكونات مع هرميات عميقة ، مما يؤدي إلى مشكلة أخرى معروفة باسم [التمرير العميق](/guide/components/provide-inject#prop-drilling).
 
 بالنسبة للحالة الثانية ، نجد أنفسنا نتعامل مع بعض الحلول مثل الوصول إلى نسخ المكون الأب / الإبن المباشرة عبر مرجع القالب، أو محاولة تغيير ومزامنة نسخ متعددة من الحالة عبر الأحداث المنشورة. كلا هذين النموذجين غير متينين ويؤديان بسرعة إلى شيفرة غير قابلة للصيانة.
 
@@ -77,11 +77,11 @@ export default {
 
 <div class="options-api">
 
-في واجهة الخيارات،  تُعرف البيانات التفاعلية باستخدام خيار `()data`. داخليًا، يُجعل الكائن المعاد من `()data`  تفاعليا عبر دالة [`()reactive`](/api/reactivity-core.html#reactive) ، والتي أيضًا متاحة كواجهة برمجية عامة.
+في واجهة الخيارات،  تُعرف البيانات التفاعلية باستخدام خيار `()data`. داخليًا، يُجعل الكائن المعاد من `()data`  تفاعليا عبر دالة [`()reactive`](/api/reactivity-core#reactive) ، والتي أيضًا متاحة كواجهة برمجية عامة.
 
 </div>
 
-إذا كان لديك جزء من الحالة يجب مشاركته بين عدة نسخ ، يمكنك استخدام [`()reactive`](/api/reactivity-core.html#reactive) لإنشاء كائن تفاعلي ، ثم استيراده إلى عدة مكونات:
+إذا كان لديك جزء من الحالة يجب مشاركته بين عدة نسخ ، يمكنك استخدام [`()reactive`](/api/reactivity-core#reactive) لإنشاء كائن تفاعلي ، ثم استيراده إلى عدة مكونات:
 
 ```js
 // store.js
@@ -187,12 +187,12 @@ export const store = reactive({
 
 <div class="composition-api">
 
-[اختبرها في حقل التجارب](https://sfc.vuejs.org/#eNq1U0tOwzAQvcrIG1q1jVlHLaLhGt60qUtdGtuynYAUZcVH3IQrkdswsdP0EwGVENlkZjzz3rzxuCRzraMi5yQmU5saoR1Y7nJ9w6TItDIO7hT+JZduDmujMriK6CHUlF71U5N+atKmTmmgQQJ0HM/0buE4egDTIyp6Fkl8ZEq7AjImgXWSLXS0tUqihLIpYu2BZSQGH2liyN74jGyc0zam1K7TpqWtjZS5p2hFJpdOZDziNpssjXq03CAwI+MjDIrBgpuJ4XLFDTc/YZ6l9nAb2IrJCqWcTvT7yyjBOmU4VN2AvY9wv4x2JQrwFtrL3DklYSXMjBHjdozAbboT6QO6AU7I1PAM2xkMGWnLoGzJo1ThoKCqIIb6tX6Dz4/6BY3n+h2deUtCA0tgp0jfu77T1fgfzX+UHL7LhCcXC9+3j5I7iYYvUieKg8rwWpjkTz4jVdLiZPwgZl32wK+3byuGa7+nRzr2y+82wobeR6P9zg1J9QUKe2ej)
+[[اختبرها في حقل التجارب](https://play.vuejs.org/#eNrNkk1uwyAQha8yYpNEiUzXllPVrtRTeJNSqtLGgGBsVbK4ewdwnT9FWWSTFczwmPc+xMhqa4uhl6xklRdOWQQvsbfPrVadNQ7h1dCqpcYaPp3pYFHwQyteXVxKm0tpM0krnm3IgAqUnd3vUFIFUB1Z8bNOkzoVny+wDTuNcZ1gBI/GSQhzqlQX3/5Gng81pA1t33tEo+FF7JX42bYsT1BaONlRguWqZZMU4C261CWMk3EhTK8RQphm8Twse/BscoUsvdqDkTX3kP3nI6aZwcmdQDUcMPJPabX8TQphtCf0RLqd1csxuqQAJTxtYnEUGtIpAH4pn1Ou17FDScOKhT+QNAVM)
 
 </div>
 <div class="options-api">
 
-[اختبرها في حقل التجارب](https://sfc.vuejs.org/#eNrdVEtu4zAMvQqhTRO0sWZtpINJ5hrauLIyVSeWDIpOCwRe9YPepFdqblPakt18iiLrGgasR1PUe4+StmJR19mmMSIX86DR1vRbOVvVHgn+ev4642gBK/QVXGTyM9RNujhNXZ6mLlMqgHLmoU8vzapo1gTbLqqHxJDHAOytfHUUWHa4VY7fuRwJMyBT1euCDCOA+R51eRRZ9pG5HCeIKxFVzKqizu6Cd2xGT0SlH0GJkZoSrKbDStwS1SGXMqx0J/EuZB7/SR5l2DiylclMqGY36O+DQS6sRFLT15Ac3BicoXGlQYPf1TxKPak7mMJSDjv0VVu3EMijgXZsVY+5EDfp6xaVBRWT6WABGmrQDQhiuQiYxDntKe2mH/DwpiHyDkqL10ogrZWAP3pt9X+GkZd1Gk3FiiZTJdK09GyTlkx7dhzaFnLYPe9e4P1t98SDx90rg0VaSsa1IgUZORzug8M9+4PNO8+4/rCdZdxgAls2GoWm0GQ3n17Fa2A0SXsXKNl5PWZP0p3AtHL41R+YPQ2Db3RrQ+R+eTm4NhXtB9GtrPA=)
+[[اختبرها في حقل التجارب](https://play.vuejs.org/#eNrdU8FqhDAU/JVHLruyi+lZ3FIt9Cu82JilaTWR5CkF8d8bE5O1u1so9FYQzAyTvJnRTKTo+3QcOMlIbpgWPT5WUnS90gjPyr4ll1jAWasOdim9UMum3a20vJWWqxSgkvzTyRt+rocWYVpYFoQm8wRsJh+viHLBcyXtk9No2ALkXd/WyC0CyDfW6RVTOiancQM5ku+x7nUxgUGlOcwxn8Ppu7HJ7udqaqz3SYikOQ5aBgT+OA9slt9kasToFnb5OiAqCU+sFezjVBHvRUimeWdT7JOKrFKAl8VvYatdI6RMDRJhdlPtWdQf5mdQP+SHdtyX/IftlH9pJyS1vcQ2NK8ZivFSiL8BsQmmpMG1s1NU79frYA1k8OD+/I3pUA6+CeNdHg6hmoTMX9pPSnk=)
 
 </div>
 
@@ -200,7 +200,7 @@ export const store = reactive({
 تجدر الملاحظة أن معالج النقر يستخدم `()store.increment` مع الأقواس - هذا ضروري لاستدعاء الدالة في سياق `this` المناسب لأنها ليست دالة تابعة للمكون.
 :::
 
-على الرغم من أننا نستخدم هنا كائنًا متغيرًا واحدًا كمخزن، يمكنك أيضًا مشاركة الحالة المتغيرة التي أنشئت باستخدام واجهات [التفاعلية](/api/reactivity-core.html) الأخرى مثل `()ref` أو `()computed`، أو حتى إرجاع الحالة العامة من [الدالة التركيبية](/guide/reusability/composables.html):
+على الرغم من أننا نستخدم هنا كائنًا متغيرًا واحدًا كمخزن، يمكنك أيضًا مشاركة الحالة المتغيرة التي أنشئت باستخدام واجهات [التفاعلية](/api/reactivity-core) الأخرى مثل `()ref` أو `()computed`، أو حتى إرجاع الحالة العامة من [الدالة التركيبية](/guide/reusability/composables):
 
 ```js
 import { ref } from 'vue'

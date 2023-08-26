@@ -14,9 +14,9 @@ import BetweenComponents from './transition-demos/BetweenComponents.vue'
 
 - المكون `<Transition>` لتطبيق التحريكات عندما يُدخل عنصر أو مكون إلى الـDOM أو إخراجه. ستغطى في هذه الصفحة.
 
-- المكون `<TransitionGroup>` لتطبيق التحريكات عندما يدرج عنصر أو مكون في قائمة `v-for` أو إزالته أو نقله. سيغطى في [الفصل التالي](/guide/built-ins/transition-group.html).
+- المكون `<TransitionGroup>` لتطبيق التحريكات عندما يدرج عنصر أو مكون في قائمة `v-for` أو إزالته أو نقله. سيغطى في [الفصل التالي](/guide/built-ins/transition-group).
 
-بصرف النظر عن هذين المكونين ، يمكننا أيضًا تطبيق التحريكات في Vue باستخدام تقنيات أخرى مثل تبديل أصناف CSS أو التحريكات المدفوعة بالحالة عبر ربط التنسيقات تغطى هذه التقنيات الإضافية في [فصل تقنيات التحريك](/guide/extras/animation.html).
+بصرف النظر عن هذين المكونين ، يمكننا أيضًا تطبيق التحريكات في Vue باستخدام تقنيات أخرى مثل تبديل أصناف CSS أو التحريكات المدفوعة بالحالة عبر ربط التنسيقات تغطى هذه التقنيات الإضافية في [فصل تقنيات التحريك](/guide/extras/animation).
 
 ## المكون `<Transition>` {#the-transition-component}
 
@@ -25,6 +25,7 @@ import BetweenComponents from './transition-demos/BetweenComponents.vue'
 - التصيير الشرطي عبر `v-if`
 - العرض الشرطي عبر `v-show`
 - تبديل المكونات الديناميكية عبر عنصر `<component>` الخاص
+- تغيير السمة الخاصة `key`
 
 هذا مثال على الاستخدام الأساسي الشائع:
 
@@ -244,7 +245,7 @@ There are six classes applied for enter / leave transitions.
 </div>
 <div class="options-api">
 
-[اختبرها في حقل التجارب](https://play.vuejs.org/#eNqNU81u1DAQfhXjE0jdWFU5LWlVQD3AgaLSY6TK68zueuvYkT3eBlV7gwsvAkJCiLfJvg1jZ5P2gCqkKB5/8+PvG4/v+eu2LbYR+JyXQXnd4llloWudR1bDUkaD7L6yjNUS5fMXg82YB4zejjvGwtrdzRn6CAOySwv96CvFVJc2CE1rJELaYbmIiM6yc2W0uj2teCrDTtmztFb8rP/Z/+h/77/tv5RiCKU0xsprL23QqB1VTKdZ2QBlqxjQNTNlZAgQKj44wSL4mVSotzD4KFRa3RCLm5uDUbMJQVnLMdeApKT/z124aBVcRrzSqzUOVTJlIt2y7UwvDyJJ3P5r/6f/RQK/l6IddIkHYQSU4nGzbBnws0nmuW7y9VR8jdiGuRCqtptQKONivTTSQ6FcI+RGdsLoRRAHeoUKQbwsjovjCWm0TWjFX+V7ygfwI45BObvUq2ITnKXJyNdM/XVNqw34yzYxpKz5OADUFGPc3fuMpSk4GnG1BnX7D3wTuoRV/KOHAH4LFZ98KP0KqHvJffHpA3RkT87G1dFQ9BPOKwjOxDweOexNtDXRfhSX2b7LbdR2dR0uOgRq/EHUOMa7HF9xeh5vn5D+QPekOBnnnu/+ArS5KtQ=)
+[Try it in the Playground](https://play.vuejs.org/#eNqNUcFuwjAM/RUvp+1Ao0k7sYDYF0yaOFZCJjU0LE2ixGFMiH9f2gDbcVKU2M9+tl98Fm8hNMdMYi5U0tEEXraOTsFHho52mC3DuXUAHTI+PlUbIBLn6G4eQOr91xw4ZqrIZXzKVY6S97rFYRqCRabRY7XNzN7BSlujPxetGMvAAh7GtxXLtd/vLSlZ0woFQK0jumTY+FJt7ORwoMLUObEfZtpiSpRaUYPkmOIMNZsj1VhJRWeGMsFmczU6uCOMHd64lrCQ/s/d+uw0vWf+MPuea5Vp5DJ0gOPM7K4Ci7CerPVKhipJ/moqgJJ//8ipxN92NFdmmLbSip45pLmUunOH1Gjrc7ezGKnRfpB4wJO0ZpvkdbJGpyRfmufm+Y4Mxo1oK16n9UwNxOUHwaK3iQ==)
 
 </div>
 
@@ -361,6 +362,8 @@ function onEnter(el, done) {
 
 // تستدعى عندما ينتهي انتقال الدخول.
 function onAfterEnter(el) {}
+
+// called when the enter transition is cancelled before completion.
 function onEnterCancelled(el) {}
 
 // تستدعى قبل خطاف الخروج.
@@ -456,7 +459,7 @@ export default {
 </div>
 <div class="options-api">
 
-[اختبرها في حقل التجارب](https://sfc.vuejs.org/#eyJBcHAudnVlIjoiPHNjcmlwdD5cbmltcG9ydCBnc2FwIGZyb20gJ2dzYXAnXG4gIFxuZXhwb3J0IGRlZmF1bHQge1xuICBkYXRhKCkge1xuICAgIHJldHVybiB7XG4gICAgICBzaG93OiB0cnVlXG4gICAgfVxuICB9LFxuICBtZXRob2RzOiB7XG5cdFx0b25CZWZvcmVFbnRlcixcbiAgICBvbkVudGVyLFxuICAgIG9uTGVhdmVcbiAgfVxufVxuXG5mdW5jdGlvbiBvbkJlZm9yZUVudGVyKGVsKSB7XG4gIGdzYXAuc2V0KGVsLCB7XG4gICAgc2NhbGVYOiAwLjI1LFxuICAgIHNjYWxlWTogMC4yNSxcbiAgICBvcGFjaXR5OiAxXG4gIH0pXG59XG4gIFxuZnVuY3Rpb24gb25FbnRlcihlbCwgZG9uZSkge1xuICBnc2FwLnRvKGVsLCB7XG4gICAgZHVyYXRpb246IDEsXG4gICAgc2NhbGVYOiAxLFxuICAgIHNjYWxlWTogMSxcbiAgICBvcGFjaXR5OiAxLFxuICAgIGVhc2U6ICdlbGFzdGljLmluT3V0KDIuNSwgMSknLFxuICAgIG9uQ29tcGxldGU6IGRvbmVcbiAgfSlcbn1cblxuZnVuY3Rpb24gb25MZWF2ZShlbCwgZG9uZSkge1xuXHRnc2FwLnRvKGVsLCB7XG4gICAgZHVyYXRpb246IDAuNyxcbiAgICBzY2FsZVg6IDEsXG4gICAgc2NhbGVZOiAxLFxuICAgIHg6IDMwMCxcbiAgICBlYXNlOiAnZWxhc3RpYy5pbk91dCgyLjUsIDEpJ1xuICB9KVxuICBnc2FwLnRvKGVsLCB7XG4gICAgZHVyYXRpb246IDAuMixcbiAgICBkZWxheTogMC41LFxuICAgIG9wYWNpdHk6IDAsXG4gICAgb25Db21wbGV0ZTogZG9uZVxuICB9KVxufVxuPC9zY3JpcHQ+XG5cbjx0ZW1wbGF0ZT5cbiAgPGJ1dHRvbiBAY2xpY2s9XCJzaG93ID0gIXNob3dcIj5Ub2dnbGU8L2J1dHRvbj5cblxuICA8VHJhbnNpdGlvblxuICAgIEBiZWZvcmUtZW50ZXI9XCJvbkJlZm9yZUVudGVyXCJcbiAgICBAZW50ZXI9XCJvbkVudGVyXCJcbiAgICBAbGVhdmU9XCJvbkxlYXZlXCJcbiAgICA6Y3NzPVwiZmFsc2VcIlxuICA+XG4gICAgPGRpdiBjbGFzcz1cImdzYXAtYm94XCIgdi1pZj1cInNob3dcIj48L2Rpdj5cbiAgPC9UcmFuc2l0aW9uPlxuPC90ZW1wbGF0ZT5cblxuPHN0eWxlPlxuLmdzYXAtYm94IHtcbiAgYmFja2dyb3VuZDogIzQyYjg4MztcbiAgbWFyZ2luLXRvcDogMjBweDtcbiAgd2lkdGg6IDMwcHg7XG4gIGhlaWdodDogMzBweDtcbiAgYm9yZGVyLXJhZGl1czogNTAlO1xufVxuPC9zdHlsZT5cbiIsImltcG9ydC1tYXAuanNvbiI6IntcbiAgXCJpbXBvcnRzXCI6IHtcbiAgICBcImdzYXBcIjogXCJodHRwczovL3VucGtnLmNvbS9nc2FwP21vZHVsZVwiLFxuICAgIFwidnVlXCI6IFwiaHR0cHM6Ly9zZmMudnVlanMub3JnL3Z1ZS5ydW50aW1lLmVzbS1icm93c2VyLmpzXCJcbiAgfVxufSJ9)
+[Try it in the Playground](https://play.vuejs.org/#eyJBcHAudnVlIjoiPHNjcmlwdD5cbmltcG9ydCBnc2FwIGZyb20gJ2dzYXAnXG4gIFxuZXhwb3J0IGRlZmF1bHQge1xuICBkYXRhKCkge1xuICAgIHJldHVybiB7XG4gICAgICBzaG93OiB0cnVlXG4gICAgfVxuICB9LFxuICBtZXRob2RzOiB7XG5cdFx0b25CZWZvcmVFbnRlcixcbiAgICBvbkVudGVyLFxuICAgIG9uTGVhdmVcbiAgfVxufVxuXG5mdW5jdGlvbiBvbkJlZm9yZUVudGVyKGVsKSB7XG4gIGdzYXAuc2V0KGVsLCB7XG4gICAgc2NhbGVYOiAwLjI1LFxuICAgIHNjYWxlWTogMC4yNSxcbiAgICBvcGFjaXR5OiAxXG4gIH0pXG59XG4gIFxuZnVuY3Rpb24gb25FbnRlcihlbCwgZG9uZSkge1xuICBnc2FwLnRvKGVsLCB7XG4gICAgZHVyYXRpb246IDEsXG4gICAgc2NhbGVYOiAxLFxuICAgIHNjYWxlWTogMSxcbiAgICBvcGFjaXR5OiAxLFxuICAgIGVhc2U6ICdlbGFzdGljLmluT3V0KDIuNSwgMSknLFxuICAgIG9uQ29tcGxldGU6IGRvbmVcbiAgfSlcbn1cblxuZnVuY3Rpb24gb25MZWF2ZShlbCwgZG9uZSkge1xuXHRnc2FwLnRvKGVsLCB7XG4gICAgZHVyYXRpb246IDAuNyxcbiAgICBzY2FsZVg6IDEsXG4gICAgc2NhbGVZOiAxLFxuICAgIHg6IDMwMCxcbiAgICBlYXNlOiAnZWxhc3RpYy5pbk91dCgyLjUsIDEpJ1xuICB9KVxuICBnc2FwLnRvKGVsLCB7XG4gICAgZHVyYXRpb246IDAuMixcbiAgICBkZWxheTogMC41LFxuICAgIG9wYWNpdHk6IDAsXG4gICAgb25Db21wbGV0ZTogZG9uZVxuICB9KVxufVxuPC9zY3JpcHQ+XG5cbjx0ZW1wbGF0ZT5cbiAgPGJ1dHRvbiBAY2xpY2s9XCJzaG93ID0gIXNob3dcIj5Ub2dnbGU8L2J1dHRvbj5cblxuICA8VHJhbnNpdGlvblxuICAgIEBiZWZvcmUtZW50ZXI9XCJvbkJlZm9yZUVudGVyXCJcbiAgICBAZW50ZXI9XCJvbkVudGVyXCJcbiAgICBAbGVhdmU9XCJvbkxlYXZlXCJcbiAgICA6Y3NzPVwiZmFsc2VcIlxuICA+XG4gICAgPGRpdiBjbGFzcz1cImdzYXAtYm94XCIgdi1pZj1cInNob3dcIj48L2Rpdj5cbiAgPC9UcmFuc2l0aW9uPlxuPC90ZW1wbGF0ZT5cblxuPHN0eWxlPlxuLmdzYXAtYm94IHtcbiAgYmFja2dyb3VuZDogIzQyYjg4MztcbiAgbWFyZ2luLXRvcDogMjBweDtcbiAgd2lkdGg6IDMwcHg7XG4gIGhlaWdodDogMzBweDtcbiAgYm9yZGVyLXJhZGl1czogNTAlO1xufVxuPC9zdHlsZT5cbiIsImltcG9ydC1tYXAuanNvbiI6IntcbiAgXCJpbXBvcnRzXCI6IHtcbiAgICBcImdzYXBcIjogXCJodHRwczovL3VucGtnLmNvbS9nc2FwP21vZHVsZVwiLFxuICAgIFwidnVlXCI6IFwiaHR0cHM6Ly9zZmMudnVlanMub3JnL3Z1ZS5ydW50aW1lLmVzbS1icm93c2VyLmpzXCJcbiAgfVxufSJ9)
 
 </div>
 
@@ -543,7 +546,7 @@ export default {
 
 ## الانتقال بين المكونات {#transition-between-components}
 
-يمكن أيضًا استخدام `<Transition>` حول [المكونات الديناميكية](/guide/essentials/component-basics.html#dynamic-components):
+يمكن أيضًا استخدام `<Transition>` حول [المكونات الديناميكية](/guide/essentials/component-basics#dynamic-components):
 
 ```vue-html
 <Transition name="fade" mode="out-in">
@@ -582,4 +585,4 @@ export default {
 
 **ذات صلة**
 
-- [مرجع الواجهة البرمجية لـ`<Transition>`](/api/built-in-components.html#transition)
+- [مرجع الواجهة البرمجية لـ`<Transition>`](/api/built-in-components#transition)

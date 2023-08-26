@@ -21,7 +21,7 @@
 
 ## توجيه بسيط من الصفر {#simple-routing-from-scratch}
 
-إذا كنت بحاجة فقط إلى توجيه بسيط جدًا ولا ترغب في تضمين مكتبة موجه متكاملة الوظائف ، يمكنك القيام بذلك باستخدام [المكونات الديناميكية](/guide/essentials/component-basics.html#dynamic-components) وتحديث حالة المكون الحالي عن طريق استماع إلى [الأحداث من جانب المستخدم](https://developer.mozilla.org/en-US/docs/Web/API/Window/hashchange_event) أو باستخدام [واجهة History](https://developer.mozilla.org/en-US/docs/Web/API/History).
+إذا كنت بحاجة فقط إلى توجيه بسيط جدًا ولا ترغب في تضمين مكتبة موجه متكاملة الوظائف ، يمكنك القيام بذلك باستخدام [المكونات الديناميكية](/guide/essentials/component-basics#dynamic-components) وتحديث حالة المكون الحالي عن طريق استماع إلى [الأحداث من جانب المستخدم](https://developer.mozilla.org/en-US/docs/Web/API/Window/hashchange_event) أو باستخدام [واجهة History](https://developer.mozilla.org/en-US/docs/Web/API/History).
 
   هنا مثال بسيط:
 

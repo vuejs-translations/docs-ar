@@ -7,7 +7,7 @@ import AnimateWatcher from './demos/AnimateWatcher.vue'
 
 # تقنيات التحريك {#animation-techniques}
 
-توفر Vue مكونات `<Transition>` و `<TransitionGroup>` للتعامل مع انتقالات الدخول / الخروج وانتقالات القوائم. ومع ذلك ، هناك العديد من الطرق الأخرى لاستخدام التحريكات على الويب ، حتى في تطبيق Vue. هنا سنناقش بعض التقنيات الإضافية.
+توفر Vue مكونات [`<Transition>`](/guide/built-ins/transition) و [`<TransitionGroup>`](/guide/built-ins/transition-group) للتعامل مع انتقالات الدخول / الخروج وانتقالات القوائم. ومع ذلك ، هناك العديد من الطرق الأخرى لاستخدام التحريكات على الويب ، حتى في تطبيق Vue. هنا سنناقش بعض التقنيات الإضافية.
 
 ## التحريكات المعتمدة على الأصناف{#class-based-animations}
 

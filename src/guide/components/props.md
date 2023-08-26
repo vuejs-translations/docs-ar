@@ -22,7 +22,7 @@ console.log(props.foo)
 </script>
 ```
 
-في المكونات التي لا تستعمل `<script setup>` ، يمكن التصريح بالخاصيات باستخدام خيار [`props`](/api/options-state.html#props):
+في المكونات التي لا تستعمل `<script setup>` ، يمكن التصريح بالخاصيات باستخدام خيار [`props`](/api/options-state#props):
 
 ```js
 export default {
@@ -40,7 +40,7 @@ export default {
 
 <div class="options-api">
 
-الخاصيات يُصرّح بها باستخدام خيار [`props`](/api/options-state.html#props):
+الخاصيات يُصرّح بها باستخدام خيار [`props`](/api/options-state#props):
 
 ```js
 export default {
@@ -96,7 +96,7 @@ export default {
 
 <div class="options-api">
 
-اطلع أيضا على : [إضافة الأنواع للمكونات](/guide/typescript/options-api.html#typing-component-props) <sup class="vt-badge ts" />
+اطلع أيضا على : [إضافة الأنواع للمكونات](/guide/typescript/options-api#typing-component-props) <sup class="vt-badge ts" />
 
 </div>
 
@@ -113,7 +113,7 @@ defineProps<{
 </script>
 ```
 
-تفاصيل أكثر عن: [إضافة الأنواع للمكونات](/guide/typescript/composition-api.html#typing-component-props) <sup class="vt-badge ts" />
+تفاصيل أكثر عن: [إضافة الأنواع للمكونات](/guide/typescript/composition-api#typing-component-props) <sup class="vt-badge ts" />
 
 </div>
 
@@ -148,13 +148,13 @@ export default {
 <span>{{ greetingMessage }}</span>
 ```
 
-تقنيا، يمكنك أيضا استخدام camelCase عند تمرير الخاصيات إلى مكون ابن (باستثناء [قوالب DOM](/guide/essentials/component-basics.html#dom-template-parsing-caveats)). ومع ذلك، فإن المصطلح عليه هو استخدام kebab-case في جميع الحالات لتتوافق مع نمط كتابة سمات HTML:
+تقنيا، يمكنك أيضا استخدام camelCase عند تمرير الخاصيات إلى مكون ابن (باستثناء [قوالب DOM](/guide/essentials/component-basics#dom-template-parsing-caveats)). ومع ذلك، فإن المصطلح عليه هو استخدام kebab-case في جميع الحالات لتتوافق مع نمط كتابة سمات HTML:
 
 ```vue-html
 <MyComponent greeting-message="مرحبا" />
 ```
 
-نستخدم [نمط باسكال PascalCase لوسوم المكونات](/guide/components/registration.html#component-name-casing) عند الإمكان لأنه يحسن قابلية القراءة للقوالب بتمييز مكونات Vue من العناصر الأصلية. ومع ذلك، لا يوجد فائدة عملية كبيرة في استخدام نمط سنام الجمل camelCase عند تمرير الخاصيات، لذا نختار أن نتبع اصطلاحات كل لغة.
+نستخدم [نمط باسكال PascalCase لوسوم المكونات](/guide/components/registration#component-name-casing) عند الإمكان لأنه يحسن قابلية القراءة للقوالب بتمييز مكونات Vue من العناصر الأصلية. ومع ذلك، لا يوجد فائدة عملية كبيرة في استخدام نمط سنام الجمل camelCase عند تمرير الخاصيات، لذا نختار أن نتبع اصطلاحات كل لغة.
 
 ### الخصائص الثابتة والمتغيرة {#static-vs-dynamic-props}
 
@@ -232,7 +232,7 @@ export default {
 
 ### ربط عدة خصائص باستخدام كائن {#binding-multiple-properties-using-an-object}
 
-إذا كنت تريد تمرير جميع حقول الكائن كخاصيات مكون، يمكنك استخدام [`v-bind` بدون وسيط](/guide/essentials/template-syntax.html#dynamically-binding-multiple-attributes) (`v-bind` بدلاً من `prop-name:`). على سبيل المثال، لنعتبر الكائن `post` كما يلي:
+إذا كنت تريد تمرير جميع حقول الكائن كخاصيات مكون، يمكنك استخدام [`v-bind` بدون وسيط](/guide/essentials/template-syntax#dynamically-binding-multiple-attributes) (`v-bind` بدلاً من `prop-name:`). على سبيل المثال، لنعتبر الكائن `post` كما يلي:
 
 <div class="options-api">
 
@@ -367,7 +367,7 @@ export default {
 
 عندما تُمرر الكائنات والمصفوفات كخاصيات، فإن المكون الابن لن يتمكن من تغيير ربط الخاصية، ولكن **سيتمكن** من تغيير خصائص الكائن أو المصفوفة المتداخلة. هذا لأنه في JavaScript يتم تمرير الكائنات والمصفوفات بالمرجع و ليس بالقيمة، و هو أمر مكلف تقنيا على Vue لمنع مثل هذه التغييرات.
 
-العيب الرئيسي لهذه التغييرات هو أنه يسمح للمكون الابن بتأثير على الحالة الأم بطريقة لا تكون واضحة للمكون الأب، وهذا قد يجعل من الصعب تحديد تدفق البيانات في المستقبل. كأفضل ممارسة، يجب عليك تجنب هذه التغييرات إلا إذا كان الأب والابن مرتبطين بشكل جيد من البداية. في معظم الحالات، يجب أن يقوم الابن بإرسال [حدث](/guide/components/events.html) للسماح للمكون الأب بإجراء التغيير.
+العيب الرئيسي لهذه التغييرات هو أنه يسمح للمكون الابن بتأثير على الحالة الأم بطريقة لا تكون واضحة للمكون الأب، وهذا قد يجعل من الصعب تحديد تدفق البيانات في المستقبل. كأفضل ممارسة، يجب عليك تجنب هذه التغييرات إلا إذا كان الأب والابن مرتبطين بشكل جيد من البداية. في معظم الحالات، يجب أن يقوم الابن بإرسال [حدث](/guide/components/events) للسماح للمكون الأب بإجراء التغيير.
 
 ## التحقق من صحة الخاصية {#prop-validation}
 
@@ -492,7 +492,7 @@ export default {
 
 <div class="composition-api">
 
-إذا كنت تستخدم [الخاصيات المصرحة استنادا على النوع](/api/sfc-script-setup.html#typescript-only-features) <sup class="vt-badge ts" />, ستحاول Vue أن تصرف توصيفات النوع إلى تصريحات بالخاصيات وقت التشغيل. على سبيل المثال، ستُصرف `<defineProps<{ msg: string }` إلى `{ msg: { type: String, required: true }}`.
+إذا كنت تستخدم [الخاصيات المصرحة استنادا على النوع](/api/sfc-script-setup#typescript-only-features) <sup class="vt-badge ts" />, ستحاول Vue أن تصرف توصيفات النوع إلى تصريحات بالخاصيات وقت التشغيل. على سبيل المثال، ستُصرف `<defineProps<{ msg: string }` إلى `{ msg: { type: String, required: true }}`.
 
 </div>
 <div class="options-api">
@@ -592,8 +592,24 @@ export default {
 <div class="composition-api">
 
 ```js
+// disabled ستحول إلى true
 defineProps({
   disabled: [Boolean, Number]
+})
+  
+// disabled ستحول إلى true
+defineProps({
+  disabled: [Boolean, String]
+})
+  
+// disabled ستحول إلى true
+defineProps({
+  disabled: [Number, Boolean]
+})
+  
+// disabled ستحول إلى سلسلة نصية فارغة (disabled="")
+defineProps({
+  disabled: [String, Boolean]
 })
 ```
 
@@ -601,9 +617,31 @@ defineProps({
 <div class="options-api">
 
 ```js
+// disabled ستحول إلى true
 export default {
   props: {
     disabled: [Boolean, Number]
+  }
+}
+  
+// disabled ستحول إلى true
+export default {
+  props: {
+    disabled: [Boolean, String]
+  }
+}
+  
+// disabled ستحول إلى true
+export default {
+  props: {
+    disabled: [Number, Boolean]
+  }
+}
+  
+// disabled ستحول إلى سلسلة نصية فارغة (disabled="")
+export default {
+  props: {
+    disabled: [String, Boolean]
   }
 }
 ```

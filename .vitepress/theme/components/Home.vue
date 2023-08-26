@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { onMounted } from 'vue'
-import SiteMap from './SiteMap.vue';
+import SiteMap from './SiteMap.vue'
 // import NewsLetter from './NewsLetter.vue'
 import { load, data, base } from './sponsors'
 import SponsorsGroup from './SponsorsGroup.vue'
@@ -23,7 +23,7 @@ onMounted(async () => {
       .إطار عمل سهل وقوي ومتعدد الإستعمالات لبناء واجهات الويب
     </p>
     <p class="actions">
-      <vue-mastery-modal />
+      <VueMasteryModal />
       <a class="get-started" href="/guide/introduction.html">
         البدء
         <svg
@@ -54,7 +54,13 @@ onMounted(async () => {
             />
             <img :src="`${base}/images/${img}`" :alt="name" />
           </picture>
-          <img v-else :src="`${base}/images/${img}`" :alt="name" />
+          <img
+            width="168"
+            height="42"
+            v-else
+            :src="`${base}/images/${img}`"
+            :alt="name"
+          />
         </a>
         <span>{{ description }}</span>
       </template>
@@ -274,7 +280,7 @@ html:not(.dark) .accent,
 
 @media (max-width: 576px) {
   #hero {
-    padding: 64px 32px;
+    padding: 56px 32px;
   }
 
   .description {
@@ -304,7 +310,7 @@ html:not(.dark) .accent,
   }
 
   .actions a {
-    margin: 0.5em 0;
+    margin: 18px 0;
   }
 }
 

@@ -6,7 +6,7 @@ outline: deep
 
 نوصي باستخدام القوالب لبناء التطبيقات في معظم الحالات. ومع ذلك ، هناك حالات نحتاج فيها إلى القوة البرمجية الكاملة لـ JavaScript. هنا يمكننا استخدام **دوال التصيير**.
 
-> إذا كنت جديدًا على مفهوم الـDOM الافتراضي ودوال التصيير ، فتأكد من قراءة الفصل [آلية التصيير](/guide/extras/rendering-mechanism.html) أولاً.
+> إذا كنت جديدًا على مفهوم الـDOM الافتراضي ودوال التصيير ، فتأكد من قراءة الفصل [آلية التصيير](/guide/extras/rendering-mechanism) أولاً.
 ## استخدام أساسي {#basic-usage}
 
 ### إنشاء عقد افتراضية {#creating-vnodes}
@@ -17,7 +17,7 @@ outline: deep
 import { h } from 'vue'
 
 const vnode = h(
-  'div', // type
+  'div', // نوع العنصر
   { id: 'foo', class: 'bar' }, // خاصيات
   [
     /* العقد الأبناء */
@@ -38,8 +38,8 @@ h('div', { id: 'foo' })
 // يقوم Vue تلقائيًا باختيار الطريقة الصحيحة لتعيينها
 h('div', { class: 'bar', innerHTML: 'السلام عليكم' })
 
-// يمكن إضافة معدلات الخاصيات مثل .prop و .attr
-// بالبادئة '.' و `^' على التوالي  
+// يمكن إضافة معدلات الخاصيات مثل `.prop` و `.attr`
+// بالبادئة `.` و `^` على التوالي  
 h('div', { '.name': 'some-name', '^width': '100' })
 
 // class و style لديهم نفس الدعم لقيمة الكائن / المصفوفة 
@@ -239,6 +239,16 @@ const vnode = <div id={dynamicId}>السلام عليكم, {userName}</div>
 
 توفر تعريفات النوع في Vue أيضًا استنباط النوع لاستخدام TSX. عند استخدام TSX ، تأكد من تحديد `"jsx": "preserve"` في `tsconfig.json` حتى يترك TypeScript بناء صيغة JSX سليمًا لتصريف JSX في Vue من أجل معالجته.
 
+### استنباط الأنواع في JSX {#jsx-type-inference}
+
+بشكل مماثل للتحويل ، تحتاج JSX في Vue أيضًا إلى تعريفات أنواع مختلفة. حاليًا ، تقوم أنواع Vue بتسجيل أنواع Vue JSX تلقائيًا على المستوى العام. هذا يعني أن TSX سيعمل من دون أي تكوين عندما تكون أنواع Vue متاحة.
+
+أنواع JSX العامة قد تتسبب في تعارض عند استخدامها مع مكتبات أخرى تحتاج أيضًا إلى استنباط أنواع JSX ، ولا سيما React. ابتداءً من 3.3 ، تدعم Vue تحديد مساحة الأسماء JSX عبر خيار [jsxImportSource](https://www.typescriptlang.org/tsconfig#jsxImportSource) في TypeScript. نعتزم إزالة تسجيل مساحة الأسماء JSX العامة الافتراضية في 3.4.
+
+لمستخدمي TSX ، من المقترح تعيين [jsxImportSource](https://www.typescriptlang.org/tsconfig#jsxImportSource) إلى `'vue'` في `tsconfig.json` بعد الترقية إلى 3.3 ، أو الاختيار في كل ملف مع `/* jsxImportSource vue@ */`. سيتيح لك هذا الاختيار في السلوك الجديد الآن والترقية بسهولة عند إصدار 3.4.
+
+إذا كانت هناك شيفرة تعتمد على وجود مساحة الأسماء العامة `JSX` ، فيمكنك الاحتفاظ بالسلوك العام الدقيق قبل 3.4 عن طريق الإشارة إلى `vue/jsx` بشكل صريح ، والذي يسجل مساحة الأسماء العامة `JSX`.
+
 ## وصفات لاستخدام دالة التصيير {#render-function-recipes}
 
 أدناه سنقدم بعض الوصفات الشائعة لتنفيذ ميزات القالب بما يقابلها من دوال تصيير / JSX.
@@ -389,7 +399,7 @@ h('input', {
 />
 ```
 
-بالنسبة لمعدلات الأحداث والمفاتيح الأخرى ، يمكن استخدام الدالة المساعدة [`withModifiers`](/api/render-function.html#withmodifiers):
+بالنسبة لمعدلات الأحداث والمفاتيح الأخرى ، يمكن استخدام الدالة المساعدة [`withModifiers`](/api/render-function#withmodifiers):
 
 ```js
 import { withModifiers } from 'vue'
@@ -446,7 +456,7 @@ function render() {
 }
 ```
 
-إذا سُجل مكون بالاسم ولا يمكن استيراده مباشرة (على سبيل المثال ، سُجل على المستوى العام من قبل مكتبة ما) ، فيمكن حله بشكل برمجي باستخدام الدالة المساعدة [`()resolveComponent`](/api/render-function.html#resolvecomponent).
+إذا سُجل مكون بالاسم ولا يمكن استيراده مباشرة (على سبيل المثال ، سُجل على المستوى العام من قبل مكتبة ما) ، فيمكن حله بشكل برمجي باستخدام الدالة المساعدة [`()resolveComponent`](/api/render-function#resolvecomponent).
 
 ### تصيير المنافذ {#rendering-slots}
 
@@ -489,7 +499,7 @@ export default {
 </div>
 <div class="options-api">
 
-في دوال التصيير ، يمكن الوصول إلى المنافذ من خلال [`this.$slots`](/api/component-instance.html#slots):
+في دوال التصيير ، يمكن الوصول إلى المنافذ من خلال [`this.$slots`](/api/component-instance#slots):
 
 ```js
 export default {
@@ -559,7 +569,7 @@ h(MyComponent, null, {
 
 ### المكونات المدمجة {#built-in-components}
 
-يجب استيراد [المكونات المدمجة](/api/built-in-components.html) مثل `<KeepAlive>`و `<Transition>`و  `<TransitionGroup>`و  ` <Teleport> `  و `<Suspense>` للاستخدام في دوال التصيير:
+يجب استيراد [المكونات المدمجة](/api/built-in-components) مثل `<KeepAlive>`و `<Transition>`و  `<TransitionGroup>`و  ` <Teleport> `  و `<Suspense>` للاستخدام في دوال التصيير:
 
 <div class="composition-api">
 
@@ -628,7 +638,7 @@ export default {
 
 ### السمات الموجهة المخصصة {#custom-directives}
 
-يمكن تطبيق السمات الموجهة المخصصة على العقد الافتراضية باستخدام الدالة المساعدة [`withDirectives`](/api/render-function.html#withdirectives):
+يمكن تطبيق السمات الموجهة المخصصة على العقد الافتراضية باستخدام الدالة المساعدة [`withDirectives`](/api/render-function#withdirectives):
 
 ```js
 import { h, withDirectives } from 'vue'
@@ -645,7 +655,42 @@ const vnode = withDirectives(h('div'), [
 ])
 ```
 
-إذا سجلت السمة الموجهة بالاسم بشكل عام مثلا ولا يمكن استيرادها مباشرة، يمكن حلها باستخدام الدالة المساعدة [`resolveDirective`](/api/render-function.html#resolvedirective).
+إذا سجلت السمة الموجهة بالاسم ولا يمكن استيرادها مباشرة ، فيمكن حلها باستخدام الدالة المساعدة [`resolveDirective`](/api/render-function#resolvedirective).
+
+### مراجع القالب {#template-refs}
+
+<div class="composition-api">
+
+مع الواجهة التركيبية ، تنشأ مراجع القالب عن طريق تمرير `()ref` نفسه كخاصية إلى العقدة الافتراضية:
+
+```js
+import { h, ref } from 'vue'
+
+export default {
+  setup() {
+    const divEl = ref()
+
+    // <div ref="divEl">
+    return () => h('div', { ref: divEl })
+  }
+}
+```
+
+</div>
+<div class="options-api">
+
+مع واجهة الخيارات ، تنشأ مراجع القالب عن طريق تمرير اسم المرجع كسلسلة في خاصيات العقدة الافتراضية:
+
+```js
+export default {
+  render() {
+    // <div ref="divEl">
+    return h('div', { ref: 'divEl' })
+  }
+}
+```
+
+</div>
 
 ## الدوال الوظيفية {#functional-components}
 
@@ -674,11 +719,11 @@ function MyComponent(props, context) {
 }
 ```
 
-الوسيط الثاني، `context`، يحتوي على ثلاث خاصيات: `attrs`، `emit`، و `slots`. هذه مكافئة لخاصيات النسخة [`attrs$`](/api/component-instance.html#attrs)و [`emit$`](/api/component-instance.html#emit) و [`slots$`](/api/component-instance.html#slots) على التوالي.
+الوسيط الثاني، `context`، يحتوي على ثلاث خاصيات: `attrs`، `emit`، و `slots`. هذه مكافئة لخاصيات النسخة [`attrs$`](/api/component-instance#attrs)و [`emit$`](/api/component-instance#emit) و [`slots$`](/api/component-instance#slots) على التوالي.
 
 </div>
 
-معظم خيارات التهيئة العادية للمكونات غير متوفرة للمكونات الوظيفية. ومع ذلك، من الممكن تعريف [`props`](/api/options-state.html#props) و [`emits`](/api/options-state.html#emits) عن طريق إضافتهم كخاصيات:
+معظم خيارات التهيئة العادية للمكونات غير متوفرة للمكونات الوظيفية. ومع ذلك، من الممكن تعريف [`props`](/api/options-state#props) و [`emits`](/api/options-state#emits) عن طريق إضافتهم كخاصيات:
 
 ```js
 MyComponent.props = ['value']
@@ -687,10 +732,85 @@ MyComponent.emits = ['click']
 
 إذا لم يُحدَّد خيار `props`، فإن كائن `props` الممرر للدالة سيحتوي على جميع السمات، بشكل مشابه لـ `attrs`. لن تطبع أسماء الخاصيات إلى نمط سنام الجمل camelCase إلا إذا حُدد خيار `props`.
 
-بالنسبة للمكونات الوظيفية مع `props` صريحة، [السمات المستترة](/guide/components/attrs.html) تعمل بنفس الطريقة مع المكونات العادية. ومع ذلك، بالنسبة للمكونات الوظيفية التي لا تحدد `props` بشكل صريح، فإن السمات `class`، `style`، ومستمعات الحدث `onXxx` فقط ستورث من `attrs` بشكل افتراضي. في كلا الحالتين، يمكن تعيين `inheritAttrs` إلى `false` لتعطيل توريث السمات:
+بالنسبة للمكونات الوظيفية مع `props` صريحة، [السمات المستترة](/guide/components/attrs) تعمل بنفس الطريقة مع المكونات العادية. ومع ذلك، بالنسبة للمكونات الوظيفية التي لا تحدد `props` بشكل صريح، فإن السمات `class`، `style`، ومستمعات الحدث `onXxx` فقط ستورث من `attrs` بشكل افتراضي. في كلا الحالتين، يمكن تعيين `inheritAttrs` إلى `false` لتعطيل توريث السمات:
 
 ```js
 MyComponent.inheritAttrs = false
 ```
 
 يمكن تسجيل المكونات الوظيفية واستهلاكها تماماً مثل المكونات العادية. إذا قمت بتمرير دالة كوسيط أول لـ `()h`، فسيتعامل معها كمكون وظيفي.
+
+### إضافة النوع إلى المكونات الوظيفية <sup class="vt-badge ts" /> {#typing-functional-components}
+
+المكونات الوظيفية يمكن أن تضاف لها الأنواع بناءً على ما إذا كانت مسماة أو مجهولة الاسم. يدعم Volar أيضًا التحقق من النوع للمكونات الوظيفية المكتوبة بشكل صحيح عند استهلاكها في قوالب SFC.
+
+**المكونات الوظيفية المسماة**
+
+```tsx
+import type { SetupContext } from 'vue'
+type FComponentProps = {
+  message: string
+}
+
+type Events = {
+  sendMessage(message: string): void
+}
+
+function FComponent(
+  props: FComponentProps,
+  context: SetupContext<Events>
+) {
+  return (
+    <button onClick={() => context.emit('sendMessage', props.message)}>
+        {props.message} {' '}
+    </button>
+  )
+}
+
+FComponent.props = {
+  message: {
+    type: String,
+    required: true
+  }
+}
+
+FComponent.emits = {
+  sendMessage: (value: unknown) => typeof value === 'string'
+}
+```
+
+**المكونات الوظيفية مجهولة الإسم**
+
+```tsx
+import type { FunctionalComponent } from 'vue'
+
+type FComponentProps = {
+  message: string
+}
+
+type Events = {
+  sendMessage(message: string): void
+}
+
+const FComponent: FunctionalComponent<FComponentProps, Events> = (
+  props,
+  context
+) => {
+  return (
+    <button onClick={() => context.emit('sendMessage', props.message)}>
+        {props.message} {' '}
+    </button>
+  )
+}
+
+FComponent.props = {
+  message: {
+    type: String,
+    required: true
+  }
+}
+
+FComponent.emits = {
+  sendMessage: (value) => typeof value === 'string'
+}
+```

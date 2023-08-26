@@ -6,7 +6,7 @@
 
 <div class="options-api">
 
-مع واجهة الخيارات، يمكننا استخدام خيار [`watch`](/api/options-state.html#watch) لتشغيل دالة عند تغيير خاصية تفاعلية :
+مع واجهة الخيارات، يمكننا استخدام خيار [`watch`](/api/options-state#watch) لتشغيل دالة عند تغيير خاصية تفاعلية :
 
 ```js
 export default {
@@ -65,7 +65,7 @@ export default {
 
 <div class="composition-api">
 
-مع الواجهة التركيبية، يمكننا استخدام الدالة [`watch`](/api/reactivity-core.html#watch) لتشغيل دالة عند تغيير حالة تفاعلية :
+مع الواجهة التركيبية، يمكننا استخدام الدالة [`watch`](/api/reactivity-core#watch) لتشغيل دالة عند تغيير حالة تفاعلية :
 
 ```vue
 <script setup>
@@ -280,7 +280,7 @@ watch(todoId, async () => {
 
 على وجه الخصوص، تجدر الإشارة إلى أن الدالة المُراقِبة تستخدم `todoId` مرتين، مرة كمصدر ومرة أخرى داخل الدالة المُعالجة.
 
-يمكن تبسيط هذا باستخدام [`()watchEffect`](/api/reactivity-core.html#watcheffect). يسمح لنا `()watchEffect` بتتبع الاعتماديات التفاعلية للدالة المعالجة تلقائيًا. يمكن إعادة كتابة المُراقِب أعلاه كما يلي:
+يمكن تبسيط هذا باستخدام [`()watchEffect`](/api/reactivity-core#watcheffect). يسمح لنا `()watchEffect` بتتبع الاعتماديات التفاعلية للدالة المعالجة تلقائيًا. يمكن إعادة كتابة المُراقِب أعلاه كما يلي:
 
 ```js
 watchEffect(async () => {
@@ -363,7 +363,7 @@ watchPostEffect(() => {
 
 ## الدالة `()this.$watch`  \* {#this-watch}
 
-من الممكن أيضًا إنشاء دوال مُراقِبة بشكل مباشر باستخدام [دالة النسخة `()watch$`](/api/component-instance.html#watch):
+من الممكن أيضًا إنشاء دوال مُراقِبة بشكل مباشر باستخدام [دالة النسخة `()watch$`](/api/component-instance#watch):
 
 ```js
 export default {

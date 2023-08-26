@@ -4,7 +4,7 @@
 
 لا تحتاج إلى تثبيت أي شيء على جهازك لتجربة المكونات أحادية الملف  - هناك حقول تجارب عبر الإنترنت تسمح لك بالقيام بذلك مباشرة في المتصفح:
 
-- [حقل تجارب المكونات أحادية الملف](https://sfc.vuejs.org)
+- [حقل تجارب المكونات أحادية الملف](https://play.vuejs.org)
   - دائما تنشر مع أحدث تعديل  لـVue
   - مصمم لفحص نتائج تصريف المكون
 - [Vue + Vite على منصة StackBlitz](https://vite.new/vue)
@@ -21,7 +21,7 @@
 
 للبدء مع Vite + Vue، قم بتشغيل الأمر التالي:
 
-<div class="language-sh"><pre><code><span class="line"><span style="color:var(--vt-c-green);">$</span> <span style="color:#A6ACCD;">npm init vue@latest</span></span></code></pre></div>
+<div class="language-sh"><pre><code><span class="line"><span style="color:var(--vt-c-green);">$</span> <span style="color:#A6ACCD;">npm create vue@latest</span></span></code></pre></div>
 
 هذا الأمر سيقوم بتثبيت وتنفيذ [create-vue](https://github.com/vuejs/create-vue), وهي الأداة الرسمية لتهيئة مشاريع Vue.
 
@@ -80,6 +80,7 @@
 - [التوثيق](https://devtools.vuejs.org/)
 - [إضافة كروم](https://chrome.google.com/webstore/detail/vuejs-devtools/nhdogjmejiglipccpnnnanhbledajbpd)
 - [إضافة فايرفوكس](https://addons.mozilla.org/en-US/firefox/addon/vue-js-devtools/)
+- [إضاف إيدج](https://microsoftedge.microsoft.com/addons/detail/vuejs-devtools/olofadcdnkkjdfgjcmjaadnlehnnihnl)
 - [تطبيق إلكترون مستقل](https://devtools.vuejs.org/guide/installation.html#standalone)
 
 ## TypeScript {#typescript}
@@ -88,7 +89,7 @@
 
 - [Volar](https://github.com/johnsoncodehk/volar) توفر التحقق من النوع للمكونات أحادية الملف باستخدام تكتيل `<"script lang="ts>`، بما في ذلك تعبيرات القالب والتحقق من صحة الخاصيات بين المكونات.
 
-- استخدم [`vue-tsc`](https://github.com/johnsoncodehk/volar/tree/master/vue-language-tools/vue-tsc) لتنفيذ نفس التحقق من النوع من خلال سطر الأوامر أو لإنشاء ملفات `d.ts` للمكونات أحادية الملف.
+- استخدم [`vue-tsc`](https://github.com/vuejs/language-tools/tree/master/packages/vue-tsc) لتنفيذ نفس التحقق من النوع من خلال سطر الأوامر أو لإنشاء ملفات `d.ts` للمكونات أحادية الملف.
 
 ## الاختبار {#testing}
 

@@ -10,7 +10,7 @@
 
 ### تخطي تحليل المكون {#skipping-component-resolution}
 
-بشكل افتراضي، سيحاول Vue حل علامة HTML غير أصلية كمكون Vue مسجل قبل العود إلى تصييرها كعنصر مخصص. سيتسبب هذا في إصدار Vue لتحذير "فشل في حل المكون" أثناء التطوير. لإعلام Vue بأن بعض العناصر يجب معاملتها على أنها عناصر مخصصة وتخطي تحليل المكون، يمكننا تحديد [خيار `compilerOptions.isCustomElement` ](/api/application.html#app-config-compileroptions).
+بشكل افتراضي، سيحاول Vue حل علامة HTML غير أصلية كمكون Vue مسجل قبل العود إلى تصييرها كعنصر مخصص. سيتسبب هذا في إصدار Vue لتحذير "فشل في حل المكون" أثناء التطوير. لإعلام Vue بأن بعض العناصر يجب معاملتها على أنها عناصر مخصصة وتخطي تحليل المكون، يمكننا تحديد [خيار `compilerOptions.isCustomElement` ](/api/application#app-config-compileroptions).
 
 إذا كنت تستخدم Vue مع إعداد بناء، يجب تمرير الخيار عبر تكوينات البناء لأنه خيار في وقت التصريف.
 
@@ -81,7 +81,7 @@ module.exports = {
 
 ### دالة defineCustomElement {#definecustomelement}
 
-تدعم Vue إنشاء عناصر مخصصة باستخدام نفس الواجهة البرمجية للمكونات Vue عبر دالة [`defineCustomElement`](/api/general.html#definecustomelement). تقبل الدالة نفس الوسيط مثل [`defineComponent`](/api/general.html#definecomponent)، ولكنها بدلاً من ذلك تعيد بناءً مخصصًا للعنصر يمتد من `HTMLElement`:
+تدعم Vue إنشاء عناصر مخصصة باستخدام نفس الواجهة البرمجية للمكونات Vue عبر دالة [`defineCustomElement`](/api/general#definecustomelement). تقبل الدالة نفس الوسيط مثل [`defineComponent`](/api/general#definecomponent)، ولكنها بدلاً من ذلك تعيد بناءً مخصصًا للعنصر يمتد من `HTMLElement`:
 
 ```vue-html
 <my-vue-element></my-vue-element>
@@ -157,7 +157,7 @@ document.body.appendChild(
 
 داخل المكون، يمكن عرض المنافذ باستخدام عنصر `<slot/>` كالمعتاد. ومع ذلك، عند استهلاك العنصر الناتج، يقبل فقط [صيغة المنافذ الأصلية](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_templates_and_slots):
 
-- [المنافذ ذات النطاق](/guide/components/slots.html#scoped-slots) غير مدعومة.
+- [المنافذ ذات النطاق](/guide/components/slots#scoped-slots) غير مدعومة.
 
 - عند تمرير المنافذ المسماة، استخدم السمة `slot` بدلاً من السمة الموجهة `v-slot`:
 
@@ -169,7 +169,7 @@ document.body.appendChild(
 
 #### تزويد/حقن {#provide-inject}
 
-[الواجهة البرمجية لمبداأ التزويد/الحقن](/guide/components/provide-inject.html#provide-inject) وما يعادلها في [الواجهة التركيبية](/api/composition-api-dependency-injection.html#provide) تعمل أيضًا بين عناصر Vue المخصصة المحددة. ومع ذلك، تجدر الملاحظة أن هذا يعمل **فقط بين العناصر المخصصة**. أي أن عنصر Vue مخصص لن يكون قادرًا على حقن الخصائص التي وفرت بواسطة  العنصر المخصص غير مكون Vue.
+[الواجهة البرمجية لمبداأ التزويد/الحقن](/guide/components/provide-inject#provide-inject) وما يعادلها في [الواجهة التركيبية](/api/composition-api-dependency-injection#provide) تعمل أيضًا بين عناصر Vue المخصصة المحددة. ومع ذلك، تجدر الملاحظة أن هذا يعمل **فقط بين العناصر المخصصة**. أي أن عنصر Vue مخصص لن يكون قادرًا على حقن الخصائص التي وفرت بواسطة  العنصر المخصص غير مكون Vue.
 
 ### المكونات أحادية الملف كعناصر ممخصصة {#sfc-as-custom-element}
 
@@ -224,6 +224,30 @@ export function register() {
 
 إذا كان لديك العديد من المكونات، يمكنك أيضًا الاستفادة من ميزات أدوات البناء مثل [glob import](https://vitejs.dev/guide/features.html#glob-import) في Vite أو [`require.context`](https://webpack.js.org/guides/dependency-management/#requirecontext) في webpack لتحميل جميع المكونات من مجلد ما.
 
+### مكونات الويب و Typescript {#web-components-and-typescript}
+
+إذا كنت تقوم بتطوير تطبيق أو مكتبة، قد ترغب في [فحص النوع](/guide/scaling-up/tooling.html#typescript) لمكونات Vue الخاصة بك، بما في ذلك تلك التي عرفت كعناصر مخصصة.
+
+العناصر المخصصة مسجلة على نطاق عام باستخدام الواجهات البرمجية  الأصلية، لذلك فبشكل افتراضي لن يكون لديها استنتاج النوع عند استخدامها في قوالب Vue. لتوفير دعم النوع لمكونات Vue المسجلة كعناصر مخصصة، يمكننا تسجيل الأنواع العامة للمكونات باستخدام واجهة [`GlobalComponents`](https://github.com/vuejs/language-tools/blob/master/packages/vscode-vue/README.md#usage) في قوالب Vue و / أو في [JSX](https://www.typescriptlang.org/docs/handbook/jsx.html#intrinsic-elements):
+
+```typescript
+import { defineCustomElement } from 'vue'
+
+// مكون أحادي الملف
+import CounterSFC from './src/components/counter.ce.vue'
+
+// حول المكون إلى عناصر الويب
+export const Counter = defineCustomElement(CounterSFC)
+
+// register global typings
+// سجل الأنواع العامة
+declare module 'vue' {
+  export interface GlobalComponents {
+    'Counter': typeof Counter,
+  }
+}
+```
+
 ## مكونات الويب مقابل مكونات Vue {#web-components-vs-vue-components}
 
 هناك بعض المطورين يعتقدون أنه يجب تجنب نماذج المكونات الخاصة بالإطار، وأن استخدام عناصر الويب فقط يجعل التطبيق "مستقبلي". هنا سنحاول شرح لماذا نعتقد أن هذا هو اتخاذ مبسط للغاية للمشكلة.
@@ -244,8 +268,8 @@ export function register() {
 
 هناك أيضًا بعض المجالات التي نجد فيها عناصر مخصصة تقييدية:
 
-- تقييم المنافذ بحرص يعيق تكوين المكونات. المنافذ ذات النطاق المحدد في Vue هي آلية قوية لتكوين المكونات، والتي لا يمكن دعمها من قبل عناصر مخصصة بسبب طبيعة المنافذ الأصلية الحريصة. تعني المنافذ الحريصة أيضًا أن المكون الذي يستقبل المنفذ لا يمكنه التحكم في متى أو ما إذا كان سيقوم بتصيير جزء من محتوى المنفذ.
+- تقييم المنافذ بحرص يعيق تكوين المكونات. [المنافذ ذات النطاق](/guide/components/slots#scoped-slots) في Vue هي آلية قوية لتكوين المكونات، والتي لا يمكن دعمها من قبل عناصر مخصصة بسبب طبيعة المنافذ الأصلية الحريصة. تعني المنافذ الحريصة أيضًا أن المكون الذي يستقبل المنفذ لا يمكنه التحكم في متى أو ما إذا كان سيقوم بتصيير جزء من محتوى المنفذ.
 
-- يتطلب شحن عناصر مخصصة مع CSS محددة النطاق في ظل DOM اليوم تضمين CSS داخل JavaScript بحيث يمكن حقنها في الجذور الظلية في وقت التشغيل. كما أنها تؤدي إلى تكرار التنسيقات في العلامات في سيناريوهات التصيير من جانب الخادوم. هناك [ميزات منصة](https://github.com/whatwg/html/pull/4898/) تعمل في هذا المجال - ولكن حتى الآن لا تدعم بشكل عام، ولا تزال هناك مخاوف إنتاجية للأداء والتصيير من جانب الخادوم التي يجب معالجتها. في غضون ذلك، توفر ملفات SFC في Vue [آليات تحديد نطاق CSS](/api/sfc-css-features.html) تدعم استخراج التنسيقات إلى ملفات CSS عادية.
+- يتطلب شحن عناصر مخصصة مع CSS محددة النطاق في ظل DOM اليوم تضمين CSS داخل JavaScript بحيث يمكن حقنها في الجذور الظلية في وقت التشغيل. كما أنها تؤدي إلى تكرار التنسيقات في العلامات في سيناريوهات التصيير من جانب الخادوم. هناك [ميزات منصة](https://github.com/whatwg/html/pull/4898/) تعمل في هذا المجال - ولكن حتى الآن لا تدعم بشكل عام، ولا تزال هناك مخاوف إنتاجية للأداء والتصيير من جانب الخادوم التي يجب معالجتها. في غضون ذلك، توفر ملفات SFC في Vue [آليات تحديد نطاق CSS](/api/sfc-css-features) تدعم استخراج التنسيقات إلى ملفات CSS عادية.
 
 ستبقى Vue دائمًا متوافقًا مع أحدث المعايير في منصة الويب، وسنستفيد بسرور من أي شيء توفره المنصة إذا جعل عملنا أسهل. ومع ذلك، هدفنا هو توفير حلول تعمل بشكل جيد وتعمل اليوم. وهذا يعني أنه يجب علينا دمج ميزات المنصة الجديدة بعقلية نقدية - وهذا ينطوي على سد الفجوات حيث تفشل المعايير بينما تظل الحاجة قائمةً.

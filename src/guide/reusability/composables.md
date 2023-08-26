@@ -6,7 +6,7 @@ const { x, y } = useMouse()
 </script>
 
 :::tip ملاحظة
-نفترض في هذا القسم أنه لديك معرفة أساسية بالواجهة التركيبية. إذا كنت تتعلم Vue باستخدام واجهة الخيارات فقط ، يمكنك تعيين تفضيل الواجهة التركيبية (باستخدام زر التبديل في أعلى الشريط الجانبي على اليسار) وإعادة قراءة الفصول [أساسيات التفاعل](/guide/essentials/reactivity-fundamentals.html) و [خطافات دورة الحياة](/guide/essentials/lifecycle.html).
+نفترض في هذا القسم أنه لديك معرفة أساسية بالواجهة التركيبية. إذا كنت تتعلم Vue باستخدام واجهة الخيارات فقط ، يمكنك تعيين تفضيل الواجهة التركيبية (باستخدام زر التبديل في أعلى الشريط الجانبي على اليسار) وإعادة قراءة الفصول [أساسيات التفاعل](/guide/essentials/reactivity-fundamentals) و [خطافات دورة الحياة](/guide/essentials/lifecycle).
 :::
 
 ##  ماهي الدالة "التركيبية"؟ {#what-is-a-composable}
@@ -84,7 +84,7 @@ const { x, y } = useMouse()
   موضع مؤشر الفأرة: {{ x }}, {{ y }}
 </div>
 
-[Try it in the Playground](https://sfc.vuejs.org/#eNqNks9Kw0AQxl9lyaUR0o3nogUP3vQoKOQSm2lNaWaX3U3aUnIQFHwPBfFYEME32b6NM0kb6x/ESzIzO/vLfPNlFZxoLasSgkFwZEcm105YcKUeJpgXWhknVqK0cK7oIWoxNqoQPRkXnMup7SWY4Eih5b5FJJbUc9xdCA8SPIpbLAEpcVDoWeqAMiE295sH/+bfKfBP/tWvhX/e3G1u/aNf+5eBWBFS1HXEAYFrhnWAIAraAftFqmkShSRhxdhke2CTgBhc4Rpp5DwJbpzTdhDHdjxi4VMrlZnEFElTossLkGCL/rVRcwuGwEkQ7TFiKlZg+gYwAwPmL+a31h9cxpKomqTs9kkaurUbGEdCIW0SHWQcXiD1cdI5QR9rLIBFc2lc4sjlCvccaDfQWrQgb4gaHpIvu9pyr8bVT4TOaM8hVIBuSxFiIat0VgLdaepSpxO4bI+WvxxdbSXyq1MS0lDHQzHPMVNzmWbZKfef5dYBggl7zS4KVUEv2g5x0My7p/8rwjTd/6Iwx9D/bbD7X9mA+gMimhdI)
+[Try it in the Playground](https://play.vuejs.org/#eNqNkj1rwzAQhv/KocUOGKVzSAIdurVjoQUvJj4XlfgkJNmxMfrvPcmJkkKHLrbu69H7SlrEszFyHFDsxN6drDIeHPrBHGtSvdHWwwKDwzfNHwjQWd1DIbd9jOW3K2qq6aTJxb6pgpl7Dnmg3NS0365YBnLgsTfnxiNHACvUaKe80gTKQeN3sDAIQqjignEhIvKYqMRta1acFVrsKtDEQPLYxuU7cV8Msmg2mdTilIa6gU5p27tYWKKq1c3ENphaPrGFW25+yMXsHWFaFlfiiOSvFIBJjs15QJ5JeWmaL/xYS/Mfpc9YYrPxl52ULOpwhIuiVl9k07Yvsf9VOY+EtizSWfR6xKK6itgkvQ/+fyNs6v4XJXIsPwVL+WprCiL8AEUxw5s=)
 
 كما نلاحظ، تبقى الشيفرة الرئيسية متطابقة- كل ما علينا القيام به هو نقله إلى دالة خارجية وإرجاع الحالة التي يجب عرضها. تمامًا كما هو الحال داخل المكون، يمكنك استخدام مجموعة كاملة من [دوال الواجهة التركيبية](/api/#composition-api) في الدوال التركيبية. يمكن استخدام نفس دالة `()useMouse` الآن في أي مكون.
 
@@ -125,7 +125,7 @@ export function useMouse() {
 ```
 
 :::tip ملاحظة
-يمكن لكل نسخة مكون استدعاء `()useMouse` إنشاء نسخه من الحالة `x` و `y` لذلك لن يتداخلوا مع بعضهم البعض. إذا كنت ترغب في إدارة الحالة المشتركة بين المكونات ، قراءة فصل [إدارة الحالة](/guide/scaling-up/state-management.html).
+يمكن لكل نسخة مكون استدعاء `()useMouse` إنشاء نسخه من الحالة `x` و `y` لذلك لن يتداخلوا مع بعضهم البعض. إذا كنت ترغب في إدارة الحالة المشتركة بين المكونات ، قراءة فصل [إدارة الحالة](/guide/scaling-up/state-management).
 :::
 
 ## مثال عن حالة لاتزامنية {#async-state-example}
@@ -184,43 +184,62 @@ const { data, error } = useFetch('...')
 </script>
 ```
 
-`()useFetch` تأخذ عنوان (URL) كسلسلة نصية ثابتة كإدخال - لذلك يقوم بجلب البيانات مرة واحدة فقط وينتهي ذلك. ماذا لو أردنا أن يقوم بجلب البيانات مرة أخرى عند تغيير العنوان؟ يمكننا الوصول إلى ذلك من خلال قبول المراجع التفاعلية refs أيضًا كوسيط:
+### قبول حالة تفاعلية {#accepting-reactive-state}
+
+الدالة التركيبية `()useFetch` تأخذ سلسلة نصية عبارة عن عنوان URL ثابتة كإدخال - لذلك يقوم بالبحث مرة واحدة فقط ثم ينتهي. ماذا لو أردنا إعادة البحث كلما تغيرت العنوان URL؟ من أجل تحقيق هذا، نحتاج إلى تمرير الحالة التفاعلية إلى الدالة التركيبية، والسماح للدالة التركيبية بإنشاء مراقبين يقومون بإجراءات باستخدام الحالة الممررة.
+
+على سبيل المثال، يجب أن تكون الدالة التركيبية `()useFetch` قادرة على قبول مرجع:
 
 ```js
+const url = ref('/initial-url')
+
+const { data, error } = useFetch(url)
+
+// هذا يجب أن يؤدي إلى إعادة البحث
+url.value = '/new-url'
+```
+
+Or, accept a getter function:
+
+أو، قبول دالة محصلة:
+
+```js
+// إعادة البحث عند تغيير props.id
+const { data, error } = useFetch(() => `/posts/${props.id}`)
+```
+
+يمكننا إعادة تنظيم تنفيذنا الحالي مع واجهتي البرمجة [`()watchEffect`](/api/reactivity-core.html#watcheffect) و [`()toValue`](/api/reactivity-utilities.html#tovalue):
+
+```js{8,13}
 // fetch.js
-import { ref, isRef, unref, watchEffect } from 'vue'
+import { ref, watchEffect, toValue } from 'vue'
 
 export function useFetch(url) {
   const data = ref(null)
   const error = ref(null)
 
-  function doFetch() {
+  watchEffect(() => {
     // إعادة تعيين الحالة قبل البحث .. 
     data.value = null
     error.value = null
-    // unref() يفك المراجع التفاعلية المحتملة
-    fetch(unref(url))
+    // toValue() يفك المراجع التفاعلية المحتملة or getters
+    fetch(toValue(url))
       .then((res) => res.json())
       .then((json) => (data.value = json))
       .catch((err) => (error.value = err))
-  }
-
-  if (isRef(url)) {
-    //تهيئة إعادة البحث التفاعلية إذا كان عنوان URL الإدخال مرجعًا تفاعليا
-    watchEffect(doFetch)
-  } else {
-    // وإلا فقط اجلب البيانات مرة واحدة
-    // وتجنب التكلفة الإضافية للدالة المراقبة
-    doFetch()
-  }
+  })
 
   return { data, error }
 }
 ```
- 
- هذه النسخة من `()useFetch` تقبل الآن كل من السلاسل النصية  ثابتة ومراجع refs كعنوان URL. عندما يكjشف  أن عنوان URL هو مرجع تفاعلي باستخدام [`isRef()`](/api/reactivity-utilities.html#isref) ، فإنه يضبط تأثيرًا تفاعليًا باستخدام [`watchEffect()`](/api/reactivity-core.html#watcheffect). سيُشغَّل التأثير على الفور وسيتم تتبع مرجع الـURL كإعتمادية أيضًا. عندما يتغير مرجع URL ، سيتم إعادة تعيين البيانات وجلبها مرة أخرى.
 
-هنا [النسخة المحدثة من `()useFetch`](https://sfc.vuejs.org/#eNp1Vs1u20YQfpUFL6JRmXQR9CLIQntIbwWKou2JF5paxlTFH+wu5RqCDnFs11X6FkZqR4njuG1gqE+yfJt8s0tStOz4oCV3Z775ZuabpefOd0XhzUruDJyhjERSKCa5KotRkCVpkQvF5kzwuM+iPC1KxcdswWKRp6wHp17HqJT8e66iw/bc85stbyJhGWRRnknFDkLJfxFTts96h0oVcuD7E5lnxTSM+GE+HXPhqeMiifIx9xDUV/k4lz4ArHsyhicYub2vezvNZmnwGoquu8P2R22gr+DjzcJpyWHfeMzZOFRhn3EhctEHoBLHoL7f5uECE/ZD31YF9cCL4il4Ko43plf6pjqrltUp01fVKR5PaGX6Y3VR7+i1vqteDmDMhgelUnnGZrtxLvYDJ2FJxr4JHPZtNE2i32iHEksCZzSfs4QtFkPfupjIgRqOkxm8kximhjQsCRjQxQjBTvQt05/0lb6tXlbn+spQ0B/0vb4cMEAaHy/lUoYvuIGnHhv/mlrLxBQD8ABbE6rN5QbrBSDfdojB2Qcv+2QJ8qnkliUV2KDA6bpaYgUtvWrxUDGgsQESEJyyJgfLDO9PAo82Rfc8rzEZ+m1fnL5jFbmbhgV0l2cQ9pxQUGBzIAMH9bCZBw5ETO+B00hRxhGNw0R6uXjh48kTZaaSlHtcprsHIj+SEOgEKP0Oho/NGRe7gmfQL0dvvoy5ZfoIl2AXQbZAKp0BQhoP5zGRP9FSZubtKITZ8zjmkdoa0CDjvxu/uMwilaDPDxRuS2FnwtTfDldWTkn9zYkRz8MjOgzlcRZtgMe5xa1B8ef7TL+BiKBKdBrNW6N1y+rcipMURQqAdq/rKdLX2H3HPI9ZBKJkZxfRKbLdtmJ+vG9/KeoNACGylf4fyruz2OvqvLogGZr7AqH+q141Zv9g/wwnkOYSuxf0SPO7wu8tzl4zuJ9Wf1ISl/pdC4rjO6zIQL+10dsb6deanmlRfZ1sSNJ905TJMCbcDwYXmJ/0PaZljW0zwQgOsuCu/66WRs0K1T8KE8VIm3mpXANO24T1L3BQagyvDb6DGiOvM2pCQ/q9XlNzPuKqqF6Z4VxRZHNQvaYL5K8OPQR/gxJil7BRFfIlW9wRFrMJgOqdEeYf1bLJNVC2KIJL1MPyjhsJmjKRoMB9q+HWEl5mkm2KGA4WkdqZyzdC21IEry3rWaIliZlrZsZ0ovV8pNDunf7w2rK12khqIydjCxlABPcWtjOPbj0Whv2C0TXWDX6JrwVu7BN9z/R7CmmbgDpSu2+IVj0KzXR1ksJNXYrsyY/ZoHEwlwmZf0lkQdZOcCsmy7CGz/gR+xFXSiK566Ib+XTGKcoE2ZkvbZ0O/nH4uQawX+C2O1T8H0J16IkwG+cpTkdsz3vW6R8FM8BNl7drZU0opEt8nlOqbu+J8ejtbBBqGfTZs709Wzf8LpzFZ86Rxgk=), مع تأخير مصطنع وخطأ عشوائي لأغراض التجربة.
+`()toValue` هي واجهة برمجية أضيفت في النسخة 3.3. صممت لتطبيع المراجع أو الدوال المحصلة إلى قيم. إذا كان الوسيط مرجعًا، فإنه يعيد قيمة المرجع؛ إذا كان الوسيط دالة، فسيقوم بالاتصال بالدالة وإرجاع قيمة الإرجاع الخاصة بها. وإلا، فإنه يعيد الوسيط كما هو. يعمل بنفس الطريقة مثل [`()unref`](/api/reactivity-utilities.html#unref)، ولكن مع معاملة خاصة للدوال.
+
+لاحظ أن `toValue(url)` يستدعى **داخل** خطاف `()watchEffect`. هذا يضمن تتبع أي اعتماديات تفاعلية يُتوصل إليها أثناء تطبيع `()toValue` بواسطة الدالة المراقبة.
+
+الآن  هذه النسخة من `()useFetch` تقبل سلاسل نصية URL ثابتة ومراجع ودوال محصلة، مما يجعلها أكثر مرونة بكثير. ستشغل الآثار الجانبية على الفور، وستُتبع أي اعتماديات يُتوصل إليها أثناء `toValue(url)`. إذا لم تُتبع أي اعتماديات (على سبيل المثال، العنوان URL هو سلسلة بالفعل)، فإن الآثار الجانبية تعمل مرة واحدة فقط؛ وإلا، فسيعاد تشغيلها كلما تغيرت اعتمادية مُتتبعة.
+
+هنا [النسخة المحدثة من `useFetch()`](https://play.vuejs.org/#eNptVMFu2zAM/RXOFztYZncodgmSYAPWnTZsKLadfFFsulHrSIZEJwuC/PtIyXaTtkALxxT5yPf45FPypevyfY/JIln6yumOwCP13bo0etdZR3ACh80cKrvresIaztA4u4OUi9KLpN7jN6RqO53nxRjKHz1nlqayxhNslMc/roUVpFuizi+K4tFb07Wqwq1ta3Q5HTtd2RpzblqQra0vGCCW65oreaIs/ZjOxmAf8MYRs2wGq/XU6D3X5HvV9sj5Y8UJakVqDuicdXMGJHfk0VcTj4wxOX9ZRFVYD34h3PGchPwG8N2qGjobZlpIYLnpiayB/YfGulWZaNAGPpUJfK5aXT1JRIbXZbI+nUDD+bwsYklAL2lZ6z1X64ZTw2CcKcAM3a1/2s6/gzsJAzKL3hA6rBfAWCE536H36gEDriwwFA4zTSMEpox7L8+L/pxacPv4K86Brcc4jGjFNV/5AS3TlrbLzqHwkLPYkt/fxFiLUto85Hk+ni+LScpknlwYhX147buD4oO7psGK5kD2r+zxhQdLg/9CSdObijSzvVoinGSeuPYwbPSP6VtZ8HgSJHx5JP8XA2TKH00F0V4BFaAouISvDHhiNrBB3j1CI90D5ZglfaMHuYXAx3Dc2+v4JbRt9wi0xWDymCpTbJ01tvftEbwFTakHcqp64guqPKgJoMYOTc1+OcLmeMUlEBzZM3ZUdjVqPPj/eRq5IAPngKwc6UZXWrXcpFVH4GmVqXkt0boiHwGog9IEpHdo+6GphBmgN6L1DA66beUC9s4EnhwdeOomMlMSkwsytLac5g7aR11ibkDZSLUABRk+aD8QoMiS1WSCcaKwISEZ2MqXIaBfLSpmchUb05pRsTNUIiNkOFjr9SZxyJTHOXx1YGR49eGRDP4rzRt6lmay86Re7DcgGTzAL74GrEOWDUaRL9kjb/fSoWzO3wPAlXNB9M1+KNrmcXF8uoab/PaCljQLwCN5oS93+jpFWmYyT/g8Zel9NEJ4S2fPpYMsc7i9uQlREeecnP8DWEwr0Q==), with an artificial delay and randomized error for demo purposes.
 
 ## اصطلاحات و ممارسات جيدة {#conventions-and-best-practices}
 
@@ -230,19 +249,22 @@ export function useFetch(url) {
 
 ### وسائط الإدخال {#input-arguments}
 
-الدالة التركيبية يمكنها قبول المراجع التفاعلية كوسائط حتى لو لم تعتمد عليها بهدف التفاعل. إذا كنت تكتب دالة تركيبية قد يستخدمها مطورون آخرون، فإنه من الممارسات الجيدة معالجة حالة وسائط الإدخال الخاصة بالمطورين كمراجع بدلاً من قيم خام. ستكون [`()unref`](/api/reactivity-utilities.html#unref) مفيدة لهذا الغرض:
+الدالة التركيبية يمكنها قبول المراجع التفاعلية كوسائط حتى لو لم تعتمد عليها بهدف التفاعل. إذا كنت تكتب دالة تركيبية قد يستخدمها مطورون آخرون، فإنه من الممارسات الجيدة معالجة حالة وسائط الإدخال الخاصة بالمطورين كمراجع بدلاً من قيم خام. ستكون [`()toValue`](/api/reactivity-utilities.html#tovalue) مفيدة لهذا الغرض:
 
 ```js
-import { unref } from 'vue'
+import { toValue } from 'vue'
 
-function useFeature(maybeRef) {
-  // إذا كان maybeRef مرجعًا فستعاد قيمته، وإلا فستعاد 
-  // maybeRef كما هو
-  const value = unref(maybeRef)
+function useFeature(maybeRefOrGetter) {
+  // إذا كان maybeRefOrGetter مرجعًا أو محصلة،
+  // سترجع قيمته المعيارية.
+  // وإلا، يرجع كما هو.
+  const value = toValue(maybeRefOrGetter)
 }
 ```
 
-إذا كانت الدالة التركيبية تنشئ تأثيرات تفاعلية عندما يكون الإدخال مرجعًا تقاعليا ref، فتأكد من مراقبة المرجع بشكل صريح باستخدام `()watch`، أو استدع `()unref` داخل `()watchEffect` حتى يُتتبع بشكل صحيح.
+إذا كانت الدالة التركيبية الخاصة بك تنشئ آثارًا تفاعلية عندما يكون المدخل مرجعًا أو محصلة، تأكد من مراقبة المرجع / المحصلة بشكل صريح باستخدام `()watch`، أو استدعاء `()toValue` داخل `()watchEffect` حتى يتتبع بشكل صحيح.
+
+توفر [النسخة المحدثة من `()useFetch` التي ناقشناها سابقًا](#accepting-reactive-state) مثالًا ملموسًا على دالة تركيبية تقبل المراجع والمحصلات والقيم العادية كوسيط إدخال.
 
 ### قيم الإرجاع {#return-values}
 
@@ -271,7 +293,7 @@ console.log(mouse.x)
 
 من الممكن تنفيذ الآثار الجانبية (مثل إضافة مستمعين لحدث DOM أو جلب البيانات) في الدوال المُركَّبة، لكن يجب الانتباه إلى القواعد التالية:
 
-- إذا كنت تعمل على تطبيق يستخدم [تصيير من جانب الخادم](/guide/scaling-up/ssr.html) (SSR)، فتأكد من تنفيذ الآثار الجانبية المتعلقة بـ DOM في مراحل حياة ما بعد الوصل، على سبيل المثال `()onMounted`. تُستدعي هذه الخطافات فقط في المتصفح، لذا يمكنك التأكد من أن الشيفرة الموجودة داخلها لديها وصول إلى DOM.
+- إذا كنت تعمل على تطبيق يستخدم [تصيير من جانب الخادم](/guide/scaling-up/ssr) (SSR)، فتأكد من تنفيذ الآثار الجانبية المتعلقة بـ DOM في مراحل حياة ما بعد الوصل، على سبيل المثال `()onMounted`. تُستدعي هذه الخطافات فقط في المتصفح، لذا يمكنك التأكد من أن الشيفرة الموجودة داخلها لديها وصول إلى DOM.
 
 - تذكر تنظيف الآثار الجانبية في `()onUnmounted`. على سبيل المثال، إذا كانت الدالة التركيبية تضبط مستمعًا لحدث DOM، فيجب أن تزيل هذا المستمع في `()onUnmounted` كما رأيناه في مثال `()useMouse`. قد يكون من الجيد استخدام دالة تركيبية تقوم بذلك تلقائيًا بالنسبة لك، مثل `()useEventListener`.
 
@@ -279,7 +301,7 @@ console.log(mouse.x)
 
 الدوال التركيبية يجب استدعاؤها **بشكل متزامن** في `<script setup>` أو في خطاف `()setup`. في بعض الحالات، يمكنك أيضًا استدعاؤها في خطافات حياة مثل `()onMounted`.
 
-هذه هي السياقات حيث يمكن لـ Vue تحديد الحالة النشطة الحالية لنسخة المكون. يجب أن يكون لديك وصول إلى الحالة النشطة للمكون حتى:
+هذه القيود مهمة لأن هذه هي السياقات التي يمكن لـ Vue تحديد النسخة النشطة من المكون الحالي. يعد الوصول إلى النسخة النشطة من المكون ضروريًا لذلك:
 
 1. يمكن تسجيل خطافات مراحل الحياة فيها.
 
@@ -333,7 +355,7 @@ export default {
 
 ### المقارنة مع المخلوطات (mixins) {#vs-mixins}
 
-المستخدمون القادمون من Vue 2 قد يكونون على دراية بخيار [mixins](/api/options-composition.html#mixins)، الذي يسمح أيضًا باستخراج شيفرة مكون إلى وحدات قابلة للإعادة الاستخدام. هناك ثلاثة عيوب رئيسية للمخلوطات:
+المستخدمون القادمون من Vue 2 قد يكونون على دراية بخيار [mixins](/api/options-composition#mixins)، الذي يسمح أيضًا باستخراج شيفرة مكون إلى وحدات قابلة للإعادة الاستخدام. هناك ثلاثة عيوب رئيسية للمخلوطات:
 
 1. **مصدر غير واضح**: عند استخدام العديد من المخلوطات، يصبح غير واضحًا أي خاصية مثبتة من قبل المخلوط، مما يجعل من الصعب تتبع التنفيذ وفهم سلوك المكون. هذا هو السبب في أننا نوصي باستخدام المراجع التفاعلية + تفكيك الخاصيات للدوال التركيبية: تجعل مصدر الخاصية واضحًا في المكونات المُستهلِكة.
 
@@ -345,7 +367,7 @@ export default {
 
 ### المقارنة مع المكونات عديمة التصيير {#vs-renderless-components}
 
-في فصل منافذ المكونات، تحدثنا عن نمط [المكون عديم التصيير](/guide/components/slots.html#renderless-components) بناءً على المنافذ ذات النطاق، حتى أننا قمنا بتطبيق نفس العرض التوضيحي لتتبع مؤشر الفأرة باستخدام المكونات عديمة التصيير.
+في فصل منافذ المكونات، تحدثنا عن نمط [المكون عديم التصيير](/guide/components/slots#renderless-components) بناءً على المنافذ ذات النطاق، حتى أننا قمنا بتطبيق نفس العرض التوضيحي لتتبع مؤشر الفأرة باستخدام المكونات عديمة التصيير.
 
 الميزة الرئيسية للدوال التركيبية على المكونات عديمة التصيير هي أن الدوال التركيبية لا تزيد تكلفة إضافية إلى نسخة المكون. عند استخدامها على مستوى كامل التطبيق، يمكن أن تصبح كمية نسخ المكونات الإضافية المنشأة من خلال نمط المكونات عديمة التصيير ذات تكلفة أداء ملحوظة.
 
@@ -357,7 +379,7 @@ export default {
 
 ## للمزيد من الاطلاع {#further-reading}
 
-- [نظام التفاعلية بالتفصيل](/guide/extras/reactivity-in-depth.html): لفهم كيفية عمل نظام التفاعلية في Vue  بشكل معمق.
-- [إدارة الحالة](/guide/scaling-up/state-management.html): لإدارة الحالة المشتركة بين عدة مكوّنات.
-- [اختبار الدوال التركيبية](/guide/scaling-up/testing.html#testing-composables): نصائح لاختبار الوحدات في الدوال التركيبية.
+- [نظام التفاعلية بالتفصيل](/guide/extras/reactivity-in-depth): لفهم كيفية عمل نظام التفاعلية في Vue  بشكل معمق.
+- [إدارة الحالة](/guide/scaling-up/state-management): لإدارة الحالة المشتركة بين عدة مكوّنات.
+- [اختبار الدوال التركيبية](/guide/scaling-up/testing#testing-composables): نصائح لاختبار الوحدات في الدوال التركيبية.
 - [VueUse مكتبة](https://vueuse.org/): مجموعة متنامية من الدوال التركيبية لـVue.  الشيفرة المصدرية هي أيضا مصدر تعلم رائع.

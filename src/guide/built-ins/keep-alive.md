@@ -8,7 +8,7 @@ import SwitchComponent from './keep-alive-demos/SwitchComponent.vue'
 
 ## استعمال أساسي {#basic-usage}
 
-في فصل أساسيات المكونات ، أدرجنا صيغة [المكونات الديناميكية](/guide/essentials/component-basics.html#dynamic-components) باستخدام عنصر `<component>` الخاص:
+في فصل أساسيات المكونات ، أدرجنا صيغة [المكونات الديناميكية](/guide/essentials/component-basics#dynamic-components) باستخدام عنصر `<component>` الخاص:
 
 ```vue-html
 <component :is="activeComponent" />
@@ -37,17 +37,17 @@ import SwitchComponent from './keep-alive-demos/SwitchComponent.vue'
 
 <div class="composition-api">
 
-[اختبرها في حقل التجارب](https://sfc.vuejs.org/#eNqtU81u1DAQfhXLly3ablxxjNKIXY7cOPuSTby7Lv6T7aRUq5z4EeJFKg6oQpx4k+RtGDshbFpUVMEpmZlvvhl/M3PEa2OSpmY4xZkrLTceOeZrk1PFpdHWoyNyh0IIff2a7VCLdlZLtICMxYR4qaVZj4GERCtQzgGbGWAzAqgqtXIelbW1THl0eVLsLDI9oyojQ2fQExieSSMKz8BCKKt4g0pROHdJccWkpjj6ISKKLRN5xpWpPfI3hgHCFhUHCGpWUldMgGcsDL60KUQdQLEsOEiO1hkZaP4H52bg3NzjfMWYWQveDA+KrhLQWgU9Uh4eNhHmGZliv/LJnCAjIAn8ZeREKHyOh1GsZGGSK6cVzPsY4HQMOIpTFD3BB8MJNsUH741LCXG7MkzsyiXa7gn8JbZWnkuWMCdXW6uvHbNATPH5CQcBZ8PsCpqvmGX2Mc570Ae8gbalqoWnTBv22NLaB9s67ZqG1mHTAHF28Zf1Mnl327/vP/Tv+k/9RxSM7mt0fU7DdoSSAHOmUMj5GxFmLQu752pl+f7gU/T8wryFwcXMH91dd9vdgdDHsYu2heqQPNBsa++1Qi9Kwcs3Ye4Bs1xC+jIjQ/APk53u6WlyDGJItx+lWCz+RQvY6qdp8a37Hr9fohqhjbkWw439PipAxNuev779CQyxulo=)
+[اختبرها في حقل التجارب](https://play.vuejs.org/#eNqtU81u1DAQfhXLly3ablxxjNKIXY7cOPuSTby7Lv6T7aRUq5z4EeJFKg6oQpx4k+RtGDshbFpUVMEpmZlvvhl/M3PEa2OSpmY4xZkrLTceOeZrk1PFpdHWoyNyh0IIff2a7VCLdlZLtICMxYR4qaVZj4GERCtQzgGbGWAzAqgqtXIelbW1THl0eVLsLDI9oyojQ2fQExieSSMKz8BCKKt4g0pROHdJccWkpjj6ISKKLRN5xpWpPfI3hgHCFhUHCGpWUldMgGcsDL60KUQdQLEsOEiO1hkZaP4H52bg3NzjfMWYWQveDA+KrhLQWgU9Uh4eNhHmGZliv/LJnCAjIAn8ZeREKHyOh1GsZGGSK6cVzPsY4HQMOIpTFD3BB8MJNsUH741LCXG7MkzsyiXa7gn8JbZWnkuWMCdXW6uvHbNATPH5CQcBZ8PsCpqvmGX2Mc570Ae8gbalqoWnTBv22NLaB9s67ZqG1mHTAHF28Zf1Mnl327/vP/Tv+k/9RxSM7mt0fU7DdoSSAHOmUMj5GxFmLQu752pl+f7gU/T8wryFwcXMH91dd9vdgdDHsYu2heqQPNBsa++1Qi9Kwcs3Ye4Bs1xC+jIjQ/APk53u6WlyDGJItx+lWCz+RQvY6qdp8a37Hr9fohqhjbkWw439PipAxNuev779CQyxulo=)
 
 </div>
 <div class="options-api">
 
-[اختبرها في حقل التجارب](https://sfc.vuejs.org/#eNqtVEtu2zAQvcqAG7ewLQZdCqpRu8teQRtaoh2m4gck5SYwvOoHRS8SdFEERVe9iXybDklbrdwggZEAhqUZvnkk37zRlsyNyTYtJzkpXGWF8bNSCWm09fBWSzOHldUSRhmNUYCOBoDFALA4AABKxa8jqOYr1jYetiFbIUYrrrzLYZs2mBxodpMAqJlnL14mMIDlvrXqGGF5ay0W5zCKpXEjgF144B/+CtpfAgPPpWmY5xgBFLXYQNUw516XpOZSlyTmcaVhS97MCqFM68HfGI4Iy2qBENhMpa55g5nD5iHHmjZg4iEwpjOYFzSxPAPlIlEuTijfcW7mjdik68RULyfkIlyr55sVtF871tMhQUFREHwr6D8ykQlJvZ1KZrIrpxUaI8pfHhZcSbB1ibIk2O0Ql+TSe+NySt2qCha4cpm2a4pvmW2VF5Jn3Mnp0uoPjlskLkls94GDYnLD7RQPX3PL7UOcJ9D/eI9mwKv0lh24+z5fPmI7jXfI4eIsu5lZd7v/tP+8/7j/uv8CIeh+xNS3PNjFJJgzTIHzN03ovmR2LdTUivUl7vfqwlxjK2Pl7+6uu+3uUPptOg7sdrg7FieaZeu9VvCmakT1PjghYMZjLB8XNC3e0+t+ZJ8okHRrnMlHxvE8hdD95yn0s/sVn9+jRniiE4XSKP6dPUTEL8BQk90fzkvNng==)
+[اختبرها في حقل التجارب](https://play.vuejs.org/#eNqtVEtu2zAQvcqAG7ewLQZdCqpRu8teQRtaoh2m4gck5SYwvOoHRS8SdFEERVe9iXybDklbrdwggZEAhqUZvnkk37zRlsyNyTYtJzkpXGWF8bNSCWm09fBWSzOHldUSRhmNUYCOBoDFALA4AABKxa8jqOYr1jYetiFbIUYrrrzLYZs2mBxodpMAqJlnL14mMIDlvrXqGGF5ay0W5zCKpXEjgF144B/+CtpfAgPPpWmY5xgBFLXYQNUw516XpOZSlyTmcaVhS97MCqFM68HfGI4Iy2qBENhMpa55g5nD5iHHmjZg4iEwpjOYFzSxPAPlIlEuTijfcW7mjdik68RULyfkIlyr55sVtF871tMhQUFREHwr6D8ykQlJvZ1KZrIrpxUaI8pfHhZcSbB1ibIk2O0Ql+TSe+NySt2qCha4cpm2a4pvmW2VF5Jn3Mnp0uoPjlskLkls94GDYnLD7RQPX3PL7UOcJ9D/eI9mwKv0lh24+z5fPmI7jXfI4eIsu5lZd7v/tP+8/7j/uv8CIeh+xNS3PNjFJJgzTIHzN03ovmR2LdTUivUl7vfqwlxjK2Pl7+6uu+3uUPptOg7sdrg7FieaZeu9VvCmakT1PjghYMZjLB8XNC3e0+t+ZJ8okHRrnMlHxvE8hdD95yn0s/sVn9+jRniiE4XSKP6dPUTEL8BQk90fzkvNng==)
 
 </div>
 
 :::tip ملاحظة
-عند استخدامها في [قوالب الـDOM](/guide/essentials/component-basics.html#dom-template-parsing-caveats)، يجب إشارة إليها باستخدام `<keep-alive>`.
+عند استخدامها في [قوالب الـDOM](/guide/essentials/component-basics#dom-template-parsing-caveats)، يجب إشارة إليها باستخدام `<keep-alive>`.
 :::
 
 ## التضمين / استبعاد {#include-exclude}
@@ -71,7 +71,7 @@ import SwitchComponent from './keep-alive-demos/SwitchComponent.vue'
 </KeepAlive>
 ```
 
-يُتحقق من التطابق عبر خيار [`name`](/api/options-misc.html#name) للمكون، لذا يجب على المكونات التي تحتاج إلى التخزين الشرطي عبر `KeepAlive` التعريف بخيار `name` بشكل صريح.
+يُتحقق من التطابق عبر خيار [`name`](/api/options-misc#name) للمكون، لذا يجب على المكونات التي تحتاج إلى التخزين الشرطي عبر `KeepAlive` التعريف بخيار `name` بشكل صريح.
 
 :::tip ملاحظة
 من الإصدار 3.2.34، سيتم تلقائيا تحديد خيار `name` للمكون المستخدم في `<script setup>` بناءً على اسم الملف، مما يزيل الحاجة إلى تعريف الاسم يدويا.
@@ -93,7 +93,7 @@ import SwitchComponent from './keep-alive-demos/SwitchComponent.vue'
 
 <div class="composition-api">
 
-مكون مخزن يمكنه تسجيل دوال دورة حياة لهذين الحالتين باستخدام [`()onActivated`](/api/composition-api-lifecycle.html#onactivated) و[`()onDeactivated`](/api/composition-api-lifecycle.html#ondeactivated):
+مكون مخزن يمكنه تسجيل دوال دورة حياة لهذين الحالتين باستخدام [`()onActivated`](/api/composition-api-lifecycle#onactivated) و[`()onDeactivated`](/api/composition-api-lifecycle#ondeactivated):
 
 ```vue
 <script setup>
@@ -114,7 +114,7 @@ onDeactivated(() => {
 </div>
 <div class="options-api">
 
-مكون مخزن يمكنه تسجيل دوال دورة حياة لهذين الحالتين باستخدام دوال [`activated`](/api/options-lifecycle.html#activated) و[`deactivated`](/api/options-lifecycle.html#deactivated):
+مكون مخزن يمكنه تسجيل دوال دورة حياة لهذين الحالتين باستخدام دوال [`activated`](/api/options-lifecycle#activated) و[`deactivated`](/api/options-lifecycle#deactivated):
 
 ```js
 export default {
@@ -141,4 +141,4 @@ export default {
 
 **ذات علاقة**
 
-- [ مرجع الواجهة البرمجية لـ`<KeepAlive>`](/api/built-in-components.html#keepalive)
+- [ مرجع الواجهة البرمجية لـ`<KeepAlive>`](/api/built-in-components#keepalive)

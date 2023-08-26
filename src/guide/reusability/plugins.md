@@ -14,7 +14,7 @@ app.use(myPlugin, {
 })
 ```
 
-يُعرَّف الملحق على أنه إما كائن يعرض التابع  `()install` أو مجرد دالة تتصرف بنفسها كدالة تثبيت. تتلقى دالة التثبيت [نسخة التطبيق](/api/application.html) بالإضافة إلى خيارات إضافية مرسلة إلى `()app.use` ، إذا توفرت:
+يُعرَّف الملحق على أنه إما كائن يعرض التابع  `()install` أو مجرد دالة تتصرف بنفسها كدالة تثبيت. تتلقى دالة التثبيت [نسخة التطبيق](/api/application) بالإضافة إلى خيارات إضافية مرسلة إلى `()app.use` ، إذا توفرت:
 
 ```js
 const myPlugin = {
@@ -26,11 +26,11 @@ const myPlugin = {
 
 لا يوجد نطاق محدد بالضبط للملحق، ولكن السيناريوهات الشائعة التي تكون الملحقات مفيدة فيها تشمل:
 
-1. تسجيل مكون أو مجموعة مكونات أو موجهات مخصصة باستخدام [`app.component()`](/api/application.html#app-component) و [`app.directive()`](/api/application.html#app-directive).
+1. تسجيل مكون أو مجموعة مكونات أو موجهات مخصصة باستخدام [`app.component()`](/api/application#app-component) و [`app.directive()`](/api/application#app-directive).
 
-2. جعل مورد ما [قابلاً للحقن](/guide/components/provide-inject.html) في جميع أنحاء التطبيق من خلال استدعاء [`()app.provide`](/api/application.html#app-provide).
+2. جعل مورد ما [قابلاً للحقن](/guide/components/provide-inject) في جميع أنحاء التطبيق من خلال استدعاء [`()app.provide`](/api/application#app-provide).
 
-3. إضافة بعض الخاصيات أو التوابع العامة لنسخة التطبيق من خلال إرفاقها بـ [`app.config.globalProperties`](/api/application.html#app-config-globalproperties).
+3. إضافة بعض الخاصيات أو التوابع العامة لنسخة التطبيق من خلال إرفاقها بـ [`app.config.globalProperties`](/api/application#app-config-globalproperties).
 
 4. مكتبة تحتاج إلى تنفيذ بعض التركيبات المذكورة أعلاه (على سبيل المثال [vue-router](https://github.com/vuejs/vue-router-next)).
 
@@ -89,7 +89,7 @@ app.use(i18nPlugin, {
 
 الآن، سيستبدل التعبير الأولي `translate('greetings.hello')$` بـ `مرحبا!` عند تشغيل التطبيق.
 
-اطلع أيضا على: [تعزيز الخاصيات العامة](/guide/typescript/options-api.html#augmenting-global-properties) <sup class="vt-badge ts" />
+اطلع أيضا على: [تعزيز الخاصيات العامة](/guide/typescript/options-api#augmenting-global-properties) <sup class="vt-badge ts" />
 
 :::tip ملاحظة
 استخدم الخاصيات العامة في حالة الضرورة فقط، لأنه يمكن أن يصبح الأمر مربكًا بسرعة إذا استخدمت العديد من الخاصيات العامة المدخلة من قبل ملحقات مختلفة مستخدمة عبر التطبيق.

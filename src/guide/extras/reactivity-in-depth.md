@@ -103,9 +103,9 @@ function ref(value) {
 تهدف مقاطع الشيفرة هنا وفيما يلي إلى شرح المفاهيم الأساسية بأبسط شكل ممكن، لذا تحذف العديد من التفاصيل ، وتُتَجاهل الحالات الحدية.
 :::
 
-هذا يشرح بعض [قيود الكائنات التفاعلية](/guide/essentials/reactivity-fundamentals.html#limitations-of-reactive) التي ناقشناها في قسم الأساسيات:
+هذا يشرح بعض [قيود الكائنات التفاعلية](/guide/essentials/reactivity-fundamentals#limitations-of-reactive) التي ناقشناها في قسم الأساسيات:
 
-- عندما تُسند أو تفكك خاصية كائن تفاعلي إلى متغير محلي، "تُفصل" التفاعلية لأن الوصول إلى المتغير المحلي لم يعد يُشغل توابع الوسيط (proxy) get / set.
+- عندما تعين أو تفكك خاصية كائن تفاعلي إلى متغير محلي، فإن الوصول إلى هذا المتغير أو تعيينه يصبح غير تفاعلي لأنه لم يعد يُشغل خطافات الوصول / التعيين على كائن المصدر. لاحظ أن هذا "الانفصال" يؤثر فقط على ربط المتغير - إذا كان المتغير يشير إلى قيمة غير أساسية مثل كائن، فإن تغيير الكائن سيظل تفاعليًا.
 
 - الوسيط المُرجع من `()reactive` ، على الرغم من أنه يتصرف تمامًا مثل الأصلي ، له هوية مختلفة إذا قارناه بالأصل باستخدام عامل `===`.
 
@@ -208,24 +208,11 @@ count.value++
 
 ## التفاعلية في وقت التشغيل مقابل وقت التصريف {#runtime-vs-compile-time-reactivity}
 
-نظام التفاعلية في Vue هو أساسًا يعتمد على وقت التشغيل: الشيفرة يُتتبع ويشغل أثناء تشغيل الشيفرة مباشرة في المتصفح. إيجابيات التفاعلية في وقت التشغيل هي أنه يمكن أن يعمل دون خطوة بناء، وهناك حالات محددة أقل. من ناحية أخرى، يجعل هذا مقيدًا بقيود صيغ الـJavaScript.
+نظام التفاعلية في Vue هو أساسًا يعتمد على وقت التشغيل: الشيفرة يُتتبع ويشغل أثناء تشغيل الشيفرة مباشرة في المتصفح. إيجابيات التفاعلية في وقت التشغيل هي أنه يمكن أن يعمل دون خطوة بناء، وهناك حالات محددة أقل. من ناحية أخرى، يجعل هذا مقيدًا بقيود صيغ الـJavaScript, مما يؤدي إلى الحاجة إلى حاويات القيمة مثل Vue refs.
 
-لقد واجهنا بالفعل تقييدًا في المثال السابق: لا يوفر JavaScript طريقة لنا لاعتراض قراءة وتعيين المتغيرات المحلية، لذلك يجب علينا دائمًا الوصول إلى الحالة التفاعلية على شكل خاصيات الكائن، باستخدام كائنات أو مراجع تفاعلية.
+بعض الإطارات ، مثل [Svelte](https://svelte.dev/) ، تختار التغلب على مثل هذه القيود من خلال تنفيذ التفاعلية أثناء التصريف. يحلل ويحول الشيفرة من أجل محاكاة التفاعلية. تتيح له الخطوة التصريفية تغيير الصيغة الأساسية لـ JavaScript نفسها - على سبيل المثال ، حقن الشيفرة ضمنيًا التي تنفذ تحليل الاعتمادية وتشغيل التأثيرات حول الوصول إلى المتغيرات المحلية. العيب هو أن مثل هذه التحويلات تتطلب خطوة بناء ، وتغيير بنية الجملة الأساسية لـ JavaScript هو أساسًا إنشاء لغة تبدو مثل JavaScript ولكن تترجم إلى شيء آخر.
 
-لقد قمنا بتجربة ميزة [تحويل التفاعلية](/guide/extras/reactivity-transform.html) لتقليل طول الشيفرة:
-
-```js
-let A0 = $ref(0)
-let A1 = $ref(1)
-
-// يتتبع عند قراءة المتغير
-const A2 = $computed(() => A0 + A1)
-
-// يشغل عند كتابة المتغير
-A0 = 2
-```
-
-يصرف هذا المقتطف بالضبط إلى ما كتبناه بدون التحويل، عن طريق إضافة `value.` تلقائيًا بعد الإشارات إلى المتغيرات. مع تحويل التفاعلية، يصبح نظام التفاعلية في Vue نظامًا هجينًا.
+فريق Vue قام بالاستكشاف في هذا الاتجاه من خلال ميزة تجريبية تسمى [تحويل التفاعلية](/guide/extras/reactivity-transform) ، ولكن في النهاية قررنا أنها لن تكون مناسبة للمشروع للأسباب [الموضحة هنا](https://github.com/vuejs/rfcs/discussions/369#discussioncomment-5059028)
 
 ## تنقيح أخطاء التفاعلية {#reactivity-debugging}
 
@@ -357,7 +344,7 @@ watchEffect(callback, {
 
 يعمل نظام التفاعلية في Vue عن طريق تحويل كائنات JavaScript العادية إلى وسائط تفاعلية. يمكن أن يكون التحويل العميق غير ضروري أو غير مرغوب فيه أحيانًا عند الاندماج مع أنظمة إدارة الحالة الخارجية (على سبيل المثال ، إذا كانت الحلول الخارجية تستخدم أيضًا وسائط Proxies).
 
-فكرة دمج نظام التفاعلية في Vue مع حلول إدارة الحالة الخارجية هي الاحتفاظ بالحالة الخارجية في [`shallowRef`](/api/reactivity-advanced.html#shallowref). يكون المرجع السطحي متفاعلاً فقط عند الوصول إلى خاصية `value.` - يترك القيمة الداخلية سليمة. عندما تتغير الحالة الخارجية ، استبدل قيمة المرجع لتشغيل التحديثات.
+فكرة دمج نظام التفاعلية في Vue مع حلول إدارة الحالة الخارجية هي الاحتفاظ بالحالة الخارجية في [`shallowRef`](/api/reactivity-advanced#shallowref). يكون المرجع السطحي متفاعلاً فقط عند الوصول إلى خاصية `value.` - يترك القيمة الداخلية سليمة. عندما تتغير الحالة الخارجية ، استبدل قيمة المرجع لتشغيل التحديثات.
 
 ### البيانات غير القابلة للتغيير {#immutable-data}
 
@@ -410,3 +397,99 @@ export function useMachine(options) {
 ### مكتبة RxJS {#rxjs}
 
 [RxJS](https://rxjs.dev/) هي مكتبة للعمل مع تدفقات الأحداث غير المتزامنة. توفر مكتبة [VueUse](https://vueuse.org/) إضافة [`vueuse/rxjs@`](https://vueuse.org/rxjs/readme.html) لربط تدفقات RxJS مع نظام التفاعلية في Vue.
+
+## Connection to Signals {#connection-to-signals}
+
+لقد قامت العديد من الإطارات الأخرى بتقديم أوليات تفاعلية مماثلة للمراجع من الواجهة التركيبية في Vue، تحت مصطلح "الإشارات":
+
+- [Solid Signals](https://www.solidjs.com/docs/latest/api#createsignal)
+- [Angular Signals](https://github.com/angular/angular/discussions/49090)
+- [Preact Signals](https://preactjs.com/guide/v10/signals/)
+- [Qwik Signals](https://qwik.builder.io/docs/components/state/#usesignal)
+
+بشكل أساسي، الإشارات هي نوع من الأوليات التفاعلية مثل المراجع في Vue. إنها حاوية قيمة توفر تتبع الاعتمادية عند الوصول، وتشغيل التأثيرات الجانبية عند التغيير. هذا النمط القائم على الأوليات التفاعلية ليس مفهومًا جديدًا بشكل خاص في عالم الواجهة الأمامية: إنه يعود إلى تنفيذات مثل [Knockout observables](https://knockoutjs.com/documentation/observables.html) و [Meteor Tracker](https://docs.meteor.com/api/tracker.html) منذ أكثر من عقد من الزمن. واجهة خيارات Vue ومكتبة إدارة حالة React [MobX](https://mobx.js.org/) مبنية أيضًا على نفس المبادئ، ولكنها تخفي الأوليات وراء خاصيات الكائن.
+
+على الرغم من أنه ليس سمة ضرورية لشيء ما ليتأهل كإشارات، إلا أن المفهوم يناقش في الوقت الحالي إلى جانب نموذج التصيير حيث تنفذ التحديثات من خلال اشتراكات دقيقة. نظرًا لاستخدام Virtual DOM، تعتمد Vue حاليًا [على المصرفات لتحقيق التحسينات المماثلة](/guide/extras/rendering-mechanism#compiler-informed-virtual-dom). ومع ذلك، نحن نستكشف أيضًا استراتيجية ترجمة جديدة مستوحاة من Solid (وضع البخار) التي لا تعتمد على Virtual DOM وتستفيد أكثر من نظام التفاعلية المدمج في Vue.
+
+### تنازلات تصميم الواجهات البرمجية {#api-design-trade-offs}
+
+تصميم إشارات Preact و Qwik مشابه جدًا لـ [shallowRef](/api/reactivity-advanced#shallowref) في Vue: توفر الثلاثة واجهة قابلة للتغيير عبر خاصية `value.`. سنركز النقاش على إشارات Solid و Angular.
+
+#### إشارات Solid {#solid-signals}
+
+تصميم الواجهة البرمجية `()createSignal` في Solid يؤكد على الفصل بين القراءة والكتابة. تعرض الإشارات كدوال محصلة مقروءة فقط ومنفصلة عن الدوال المُعيِّنة:
+
+```js
+const [count, setCount] = createSignal(0)
+
+count() // الوصول
+setCount(1) // تحديث القيمة
+```
+
+لاحظ كيف يمكن تمرير إشارة `count` دون الدالة المُعيِّنة. هذا يضمن أن الحالة لا يمكن تغييرها أبدًا ما لم تعرض الدالة المُعيِّنة أيضًا بشكل صريح. قد يكون موضوعًا لمتطلبات المشروع والذوق الشخصي ما إذا كانت هذه الضمانات الآمنة تبرر صيغة أكثر تفصيلاً - ولكن في حالة تفضيلك لهذا النمط من الواجهات البرمجية، يمكنك تكراره بسهولة في Vue:
+
+```js
+import { shallowRef, triggerRef } from 'vue'
+
+export function createSignal(value, options) {
+  const r = shallowRef(value)
+  const get = () => r.value
+  const set = (v) => {
+    r.value = typeof v === 'function' ? v(r.value) : v
+    if (options?.equals === false) triggerRef(r)
+  }
+  return [get, set]
+}
+```
+
+[اختبرها في حقل التجارب](https://play.vuejs.org/#eNpdUk1TgzAQ/Ss7uQAjgr12oNXxH+ix9IAYaDQkMV/qMPx3N6G0Uy9Msu/tvn2PTORJqcI7SrakMp1myoKh1qldI9iopLYwQadpa+krG0TLYYZeyxGSojSSs/d7E8vFh0ka0YhOCmPh0EknbB4mPYfTEeqbIelD1oiqXPRQCS+WjoojAW8A1Wmzm1A39KYZzHNVYiUib85aKeCx46z7rBuySqQe6h14uINN1pDIBWACVUcqbGwtl17EqvIiR3LyzwcmcXFuTi3n8vuF9jlYzYaBajxfMsDcomv6E/m9E51luN2NV99yR3OQKkAmgykss+SkMZerxMLEZFZ4oBYJGAA600VEryAaD6CPaJwJKwnr9ldR2WMedV1Dsi6WwB58emZlsAV/zqmH9LzfvqBfruUmNvZ4QN7VearjenP4aHwmWsABt4x/+tiImcx/z27Jqw==)
+
+#### إشارات Angular {#angular-signals}
+
+Angular تخضع لبعض التغييرات الأساسية من خلال التخلي عن الفحص القذر وإدخال تنفيذها الخاص للأوليات التفاعلية. تبدو الواجهة البرمجية للإشارات في Angular هكذا:
+
+
+```js
+const count = signal(0)
+
+count() // الوصول إلى القيمة
+count.set(1) // تعيين القيمة الجديدة
+count.update((v) => v + 1) // تحديث القيمة باستخدام القيمة السابقة
+
+// تغيير الكائنات العميقة بنفس الهوية
+const state = signal({ count: 0 })
+state.mutate((o) => {
+  o.count++
+})
+```
+
+مرة أخرى، يمكننا تكرار الواجهة البرمجية بسهولة في Vue:
+
+```js
+import { shallowRef, triggerRef } from 'vue'
+
+export function signal(initialValue) {
+  const r = shallowRef(initialValue)
+  const s = () => r.value
+  s.set = (value) => {
+    r.value = value
+  }
+  s.update = (updater) => {
+    r.value = updater(r.value)
+  }
+  s.mutate = (mutator) => {
+    mutator(r.value)
+    triggerRef(r)
+  }
+  return s
+}
+```
+
+[اختبرها في حقل التجارب](https://play.vuejs.org/#eNp9UslOwzAQ/ZVRLiRQEsqxpBUIvoADp0goTd3U4DiWl4AU5d8ZL3E3iZtn5r1Z3vOYvAiRD4Ykq6RUjaRCgyLaiE3FaSd6qWEERVteswU0fSeMJjuYYC/7Dm7youatYbW895D8S91UvOJNz5VGuOEa1oGePmRzYdebLSNYmRumaQbrjSfg8xYeEVsWfh/cBANNOsFqTTACKA/LzavrTtUKxjEyp6kssDZj3vygAPJjL1Bbo3XP4blhtPleV4nrlBuxw1npYLca4A6WWZU4PADljSQd4drRC8//rxfKaW+f+ZJg4oJbFvG8ZJFcaYreHL041Iz1P+9kvwAtadsS6d7Rm1rB55VRaLAzhvy6NnvDG01x1WAN5VTTmn3UzJAMRrudd0pa++LEc9wRpRDlHZT5YGu2pOzhWHAJWxvnakxOHufFxqx/4MxzcEinIYP+eV5ntOe5Rx94IYjopxOZUhnIEr+4xPMrjuG1LPFftkTj5DNJGhwYBZ4BJz3DV56FmJLpD1DrKXU=)
+
+بالمقارنة مع المراجع في Vue، توفر الواجهات البرمجية القائمة على الدوال المحصلة في Solid و Angular بعض التنازلات المثيرة للاهتمام عند استخدامها في مكونات Vue:
+
+- `()` أقل تفصيلاً  من `value.`، ولكن تحديث القيمة أكثر تفصيلاً.
+- لا يوجد فك تغليف للمراجع: الوصول إلى القيم يتطلب دائمًا `()`. هذا يجعل وصول القيم متسقًا في كل مكان. هذا يعني أيضًا أنه يمكنك تمرير الإشارات الخام أسفل كخاصيات المكون.
+
+سواء كانت هذه الواجهات البرمجية تناسبك إلى حد ما بشكل شخصي. هدفنا هنا هو إظهار التشابه الأساسي والتنازلات بين هذه التصاميم المختلفة للواجهات البرمجية. نريد أيضًا أن نظهر أن Vue مرن: لست مقيدًا حقًا بالواجهات البرمجية الحالية. إذا لزم الأمر، يمكنك إنشاء أوليات تفاعلية برمجية خاصة بك لتناسب احتياجات أكثر تحديدًا.

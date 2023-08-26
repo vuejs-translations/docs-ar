@@ -40,12 +40,12 @@ const awesome = ref(true)
 
 <div class="composition-api">
 
-[اختبرها في حقل التجارب](https://sfc.vuejs.org/#eNp9kE1OwzAQha8y9aYgNbG6rdIKLsHKmzZMaEr8o7GTLqLsKoE4ATskkCiwQSy5iXMLjoDTFIpAYjfz/N5n+9Xs1Ji4KpFNWGJTyo0Di640M6FyaTQ5qIEwgwYy0hKGwToUSqhUK+tgvkarJcK08xw5KvFYqIT3oIAIi0NpirnDsCWL0jmt4CQt8vRyKtghPtiPgs38i3/yr+1Nu0l4H+hByzFUUZ4dYsF7ViL4N7/1j/7dPw8Svhx39+ysWFic+Yf2ur2CduO38HF3e//l4N/PYiPWfzSScxOvrFahilooALE/sIJNYKd0Wiig2wVbOmfshHObpV2BKxtruuBhiqlULpcYo5XRgvTaIgWwYKMfDB7ECikiVOdISP8xf1n/cDtsI1TDmk8rYa1q)
+[اختبرها في حقل التجارب](https://play.vuejs.org/#eNp9kE1OwzAQha8y9aYgNbG6rdIKLsHKmzZMaEr8o7GTLqLsKoE4ATskkCiwQSy5iXMLjoDTFIpAYjfz/N5n+9Xs1Ji4KpFNWGJTyo0Di640M6FyaTQ5qIEwgwYy0hKGwToUSqhUK+tgvkarJcK08xw5KvFYqIT3oIAIi0NpirnDsCWL0jmt4CQt8vRyKtghPtiPgs38i3/yr+1Nu0l4H+hByzFUUZ4dYsF7ViL4N7/1j/7dPw8Svhx39+ysWFic+Yf2ur2CduO38HF3e//l4N/PYiPWfzSScxOvrFahilooALE/sIJNYKd0Wiig2wVbOmfshHObpV2BKxtruuBhiqlULpcYo5XRgvTaIgWwYKMfDB7ECikiVOdISP8xf1n/cDtsI1TDmk8rYa1q)
 
 </div>
 <div class="options-api">
 
-[اختبرها في حقل التجارب](https://sfc.vuejs.org/#eNp9kNFKwzAUhl/lLFcKa8NuSzf0JbzKTded2c42DclJJ4zdDRSfwDtBwak34qVvkr6Fj2BCyxwKhhDOn/Ofj+TfsHOl4tYiS1hqcl0qmgmJ16rRBAtcZrYi2AgJsMgoOznta0EayWoZlCDwK1ujaWpMgLTF3rINPX/4nfID2gvCWlUZoVcA6dwSNRLO8qrMr6aCDSSYwmgoBZu5N/fi3ru7bpfyfqAfLibQRuXyZ8x7LyyC+3B79+w+3eso5cXkyIyVwZl76m67G+h2bg9fD/ePgyflh6exMSvrEEJUZypemUb6gPq/Dw0jWNKnEe58gkELVhApk3BulnmIdWXiRl9yX8XaSiprjNHU0Vw3a4PagwUbHzG4v2xRRxrlAjXq/5i/rH+4ARviZ9tvaiizdw==)
+[اختبرها في حقل التجارب](https://play.vuejs.org/#eNp9kNFKwzAUhl/lLFcKa8NuSzf0JbzKTded2c42DclJJ4zdDRSfwDtBwak34qVvkr6Fj2BCyxwKhhDOn/Ofj+TfsHOl4tYiS1hqcl0qmgmJ16rRBAtcZrYi2AgJsMgoOznta0EayWoZlCDwK1ujaWpMgLTF3rINPX/4nfID2gvCWlUZoVcA6dwSNRLO8qrMr6aCDSSYwmgoBZu5N/fi3ru7bpfyfqAfLibQRuXyZ8x7LyyC+3B79+w+3eso5cXkyIyVwZl76m67G+h2bg9fD/ePgyflh6exMSvrEEJUZypemUb6gPq/Dw0jWNKnEe58gkELVhApk3BulnmIdWXiRl9yX8XaSiprjNHU0Vw3a4PagwUbHzG4v2xRRxrlAjXq/5i/rH+4ARviZ9tvaiizdw==)
 
 </div>
 
@@ -111,7 +111,7 @@ Because `v-if` is a directive, it has to be attached to a single element. But wh
 ## `v-if` مع `v-for` {#v-if-with-v-for}
 
 ::: warning ملاحظة
-**لا** يُوصى باستخدام `v-if` و `v-for` على نفس العنصر بسبب الأولوية الضمنية لـ`v-if`. اطلع على [دليل الأسلوب](/style-guide/rules-essential.html#avoid-v-if-with-v-for) للحصول على التفاصيل.
+**لا** يُوصى باستخدام `v-if` و `v-for` على نفس العنصر بسبب الأولوية الضمنية لـ`v-if`. اطلع على [دليل الأسلوب](/style-guide/rules-essential#avoid-v-if-with-v-for) للحصول على التفاصيل.
 :::
 
 عندما تكون `v-if` و `v-for` مستخدمتان على نفس العنصر، ستُقيَّم `v-if` أولا. اطلع على [دليل تصيير القوائم](list#v-for-with-v-if) للحصول على التفاصيل.

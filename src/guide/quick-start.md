@@ -6,7 +6,7 @@ footer: false
 
 ##  تجربة Vue على الانترنت {#try-vue-online}
 
-- من أجل الحصول على نظرة عامة عن Vue، يمكنك تجربته مباشرة في [حقل التجارب](https://sfc.vuejs.org/#eNo9j01qAzEMha+iapMWOjbdDm6gu96gG2/cjJJM8B+2nBaGuXvlpBMwtj4/JL234EfO6toIRzT1UObMexvpN6fCMNHRNc+w2AgwOXbPL/caoBC3EjcCCPU0wu6TvE/wlYqfnnZ3ae2PXHKMfiwQYArZOyYhAHN+2y9LnwLrarTQ7XeOuTFch5Am8u8WRbcoktGPbnzFOXS3Q3BZXWqKkuRmy/4L1eK4GbUoUTtbPDPnOmpdj4ee/1JVKictlSot8hxIUQ3Dd0k/lYoMtrglwfUPkXdoJg==).
+- من أجل الحصول على نظرة عامة عن Vue، يمكنك تجربته مباشرة في [حقل التجارب](https://play.vuejs.org/#eNo9jcEKwjAMhl/lt5fpQYfXUQfefAMvvRQbddC1pUuHUPrudg4HIcmXjyRZXEM4zYlEJ+T0iEPgXjn6BB8Zhp46WUZWDjCa9f6w9kAkTtH9CRinV4fmRtZ63H20Ztesqiylphqy3R5UYBqD1UyVAPk+9zkvV1CKbCv9poMLiTEfR2/IXpSoXomqZLtti/IFwVtA9A==).
 
 - إذا كنت تفضل إعداد HTML بسيط دون أي خطوات بناء، يمكنك استخدام [JSFiddle](https://jsfiddle.net/yyx990803/2ke1ab0z/)  كنقطة البداية.
 
@@ -20,11 +20,10 @@ footer: false
 - تنصيب [Node.js](https://nodejs.org/) الإصدار 16.0 أو أعلى
   :::
 
-في هذا القسم سنقدم كيفية إنشاء [تطبيق أحادي الصفحة باستعمال Vue](/guide/extras/ways-of-using-vue.html#single-page-application-spa) على جهازك. سيكون المشروع الذي سيبنى يستخدم إعداد بنية مرتكزة على [Vite](https://vitejs.dev) والتي تسمح لنا باستخدام [المكونات أحادية الملف](/guide/scaling-up/sfc) (SFCs).
+في هذا القسم سنقدم كيفية إنشاء [تطبيق أحادي الصفحة باستعمال Vue](/guide/extras/ways-of-using-vue#single-page-application-spa) على جهازك. سيكون المشروع الذي سيبنى يستخدم إعداد بنية مرتكزة على [Vite](https://vitejs.dev) والتي تسمح لنا باستخدام [المكونات أحادية الملف](/guide/scaling-up/sfc) (SFCs).
+تأكد من أن لديك إصدارًا محدثًا من [Node.js](https://nodejs.org/) مثبتًا ، وأن المجلد الحالي هو المجلد الذي تنوي فيه إنشاء المشروع، ثم قم بتشغيل الأمر التالي في سطر الأوامر (بدون علامة `>`:)
 
-تأكد من أن لديك إصدارًا محدثًا من [Node.js](https://nodejs.org/) مثبتًا ، ثم قم بتشغيل الأمر التالي في سطر الأوامر (بدون علامة `>`:)
-
-<div class="language-sh"><pre><code><span class="line"><span style="color:var(--vt-c-green);">&gt;</span> <span style="color:#A6ACCD;">npm init vue@latest</span></span></code></pre></div>
+<div class="language-sh"><pre><code><span class="line"><span style="color:var(--vt-c-green);">&gt;</span> <span style="color:#A6ACCD;">npm create vue@latest</span></span></code></pre></div>
 
 هذا الأمر سيقوم بتثبيت وتنفيذ [create-vue](https://github.com/vuejs/create-vue)، و التي تعتبر الأداة الرسمية لإنشاء مشاريع Vue. ستتلقى الأسئلة الإختيارية لعدة ميزات مثل TypeScript ودعم الاختبارات:
 
@@ -34,7 +33,7 @@ footer: false
 <span style="color:var(--vt-c-green);">✔</span> <span style="color:#A6ACCD;">Add Vue Router for Single Page Application development? <span style="color:#888;">… <span style="color:#89DDFF;text-decoration:underline">No</span> / Yes</span></span>
 <span style="color:var(--vt-c-green);">✔</span> <span style="color:#A6ACCD;">Add Pinia for state management? <span style="color:#888;">… <span style="color:#89DDFF;text-decoration:underline">No</span> / Yes</span></span>
 <span style="color:var(--vt-c-green);">✔</span> <span style="color:#A6ACCD;">Add Vitest for Unit testing? <span style="color:#888;">… <span style="color:#89DDFF;text-decoration:underline">No</span> / Yes</span></span>
-<span style="color:var(--vt-c-green);">✔</span> <span style="color:#A6ACCD;">Add Cypress for both Unit and End-to-End testing? <span style="color:#888;">… <span style="color:#89DDFF;text-decoration:underline">No</span> / Yes</span></span>
+<span style="color:var(--vt-c-green);">✔</span> <span style="color:#A6ACCD;">Add an End-to-End Testing Solution? <span style="color:#888;">… <span style="color:#89DDFF;text-decoration:underline">No</span> / Cypress / Playwright</span></span>
 <span style="color:var(--vt-c-green);">✔</span> <span style="color:#A6ACCD;">Add ESLint for code quality? <span style="color:#888;">… <span style="color:#89DDFF;text-decoration:underline">No</span> / Yes</span></span>
 <span style="color:var(--vt-c-green);">✔</span> <span style="color:#A6ACCD;">Add Prettier for code formatting? <span style="color:#888;">… <span style="color:#89DDFF;text-decoration:underline">No</span> / Yes</span></span>
 <span></span>
@@ -48,19 +47,19 @@ footer: false
 <span class="line"><span style="color:var(--vt-c-green);">&gt; </span><span style="color:#A6ACCD;">npm run dev</span></span>
 <span class="line"></span></code></pre></div>
 
-بعد تنفيذ هاته الأوامر ستحصل على مشروعك الأول في Vue،  ما ستلاحظه هو أن المكونات المولدة مكتوبة باستخدام [الواجهة التركيبية](/guide/introduction.html#composition-api) و `<script setup>`، بدلاً من [واجهة الخيارات](/guide/introduction.html#options-api). إليك بعض الإرشادات الإضافية :
+بعد تنفيذ هاته الأوامر ستحصل على مشروعك الأول في Vue،  ما ستلاحظه هو أن المكونات المولدة مكتوبة باستخدام [الواجهة التركيبية](/guide/introduction#composition-api) و `<script setup>`، بدلاً من [واجهة الخيارات](/guide/introduction#options-api). إليك بعض الإرشادات الإضافية :
 
-- محرر النصوص الموصى به هو [Visual Studio Code](https://code.visualstudio.com/) + [إضافة Volar ](https://marketplace.visualstudio.com/items?itemName=Vue.volar). أما إذا كنت تستخدم محررات أخرى، فاطلع على [قسم دعم المحررات](/guide/scaling-up/tooling.html#ide-support).
-- نناقش المزيد من التفاصيل حول الأدوات، بما في ذلك الدمج مع إطارات الواجهة الخلفية  في [دليل الأدوات](/guide/scaling-up/tooling.html).
+- محرر النصوص الموصى به هو [Visual Studio Code](https://code.visualstudio.com/) + [إضافة Volar ](https://marketplace.visualstudio.com/items?itemName=Vue.volar). أما إذا كنت تستخدم محررات أخرى، فاطلع على [قسم دعم المحررات](/guide/scaling-up/tooling#ide-support).
+- نناقش المزيد من التفاصيل حول الأدوات، بما في ذلك الدمج مع إطارات الواجهة الخلفية  في [دليل الأدوات](/guide/scaling-up/tooling).
 - لكي تتعلم المزيد حول أداة البناء الأساسية Vite ،  اطلع على [توثيق Vite](https://vitejs.dev).
-- إذا اخترت استخدام TypeScript ، فاطلع [دليل استخدام TypeScript](typescript/overview.html).
+- إذا اخترت استخدام TypeScript ، فاطلع [دليل استخدام TypeScript](typescript/overview).
 
 لما تنهي تطوير تطبيقك و تريد ادخاله لمرحلة الإنتاج، قم بتشغيل الأمر التالي:
 
 <div class="language-sh"><pre><code><span class="line"><span style="color:var(--vt-c-green);">&gt; </span><span style="color:#A6ACCD;">npm run build</span></span>
 <span class="line"></span></code></pre></div>
 
-هذا الأمر سينشئ إصداراً جاهزاً للإنتاج من تطبيقك في مجلد `./dist` على مستوى مجلد المشروع.اطلع على [دليل نشر الانتاج](/guide/best-practices/production-deployment.html) لمعرفة المزيد حول توصيل تطبيقك إلى مرحلة الانتاج.
+هذا الأمر سينشئ إصداراً جاهزاً للإنتاج من تطبيقك في مجلد `./dist` على مستوى مجلد المشروع.اطلع على [دليل نشر الانتاج](/guide/best-practices/production-deployment) لمعرفة المزيد حول توصيل تطبيقك إلى مرحلة الانتاج.
 
 [الخطوات الموالية >](#next-steps)
 
@@ -80,6 +79,8 @@ footer: false
 
 الرابط اعلاه يحمل *عملية البناء العامة* لـ Vue، حيث يتم تعريض جميع واجهات برمجة التطبيقات (API) على المستوى الأعلى كخاصيات على الكائن العام `Vue`. هنا مثال كامل لاستخدام عملية البناء العامة:
 
+<div class="options-api">
+
 ```html
 <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
 
@@ -98,11 +99,44 @@ footer: false
 </script>
 ```
 
-[عرض مثال على JSFiddle](https://jsfiddle.net/5arqghdL/)
+[عرض على  Codepen](https://codepen.io/vuejs-examples/pen/QWJwJLp)
+
+</div>
+
+<div class="composition-api">
+
+```html
+<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+
+<div id="app">{{ message }}</div>
+
+<script>
+  const { createApp, ref } = Vue
+
+  createApp({
+    setup() {
+      const message = ref('Hello vue!')
+      return {
+        message
+      }
+    }
+  }).mount('#app')
+</script>
+```
+
+[عرض على  Codepen](https://codepen.io/vuejs-examples/pen/eYQpQEG)
+
+:::tip ملاحظة
+الكثير من الأمثلة في الواجهة التركيبية في جميع أنحاء الدليل ستستخدم الصيغة `<script setup>`، والتي تتطلب أدوات البناء. إذا كنت تنوي استخدام واجهة التركيبية بدون خطوة بناء، فاطلع على استخدام [خيار `()setup`](/api/composition-api-setup).
+:::
+
+</div>
 
 ### استخدام عملية البناء بوحدات الـES {#using-the-es-module-build}
 
 فيما تبقى من التوثيق، سنستخدم بشكل أساسي صيغة [وحدات ES](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules).  معظم المتصفحات الحديثة تدعم وحدات الـES  بشكل أصلي، لذا يمكننا استخدام Vue من شبكة تسليم المحتوى (CDN) عبر وحدات ES الأصلية مثل هذا المثال:
+
+<div class="options-api">
 
 ```html{3,4}
 <div id="app">{{ message }}</div>
@@ -120,9 +154,64 @@ footer: false
 </script>
 ```
 
+</div>
+
+<div class="composition-api">
+
+```html{3,4}
+<div id="app">{{ message }}</div>
+
+<script type="module">
+  import { createApp, ref } from 'https://unpkg.com/vue@3/dist/vue.esm-browser.js'
+
+  createApp({
+    setup() {
+      const message = ref('Hello Vue!')
+      return {
+        message
+      }
+    }
+  }).mount('#app')
+</script>
+```
+
+</div>
+
+<div class="composition-api">
+
+```html{3,4}
+<div id="app">{{ message }}</div>
+
+<script type="module">
+  import { createApp, ref } from 'https://unpkg.com/vue@3/dist/vue.esm-browser.js'
+
+  createApp({
+    setup() {
+      const message = ref('Hello Vue!')
+      return {
+        message
+      }
+    }
+  }).mount('#app')
+</script>
+```
+
+</div>
+
+</div>
+
 كما تلاحظ أننا نستخدم وسم `<script type="module">`, والرابط المستورد من شبكة تسليم المحتوى (CDN) يشير إلى النسخة المبنية بـ**وحدات الـES** بدلا من كائن Vue.
 
-[عرض مثال على JSFiddle](https://jsfiddle.net/yyx990803/vo23c470/)
+<div class="options-api">
+
+[عرض على  Codepen](https://codepen.io/vuejs-examples/pen/VwVYVZO)
+
+</div>
+<div class="composition-api">
+
+[عرض على  Codepen](https://codepen.io/vuejs-examples/pen/MWzazEv)
+
+</div>
 
 ### تمكين خرائط الاستيراد {#enabling-import-maps1}
 
@@ -133,6 +222,8 @@ import { createApp } from 'vue'
 ```
 
 نستطيع اعلام المتصفح على مكان استيراد وحدة `vue` عبر استخدام [خرائط الاستيراد](https://caniuse.com/import-maps) :
+
+<div class="options-api">
 
 ```html{1-7,12}
 <script type="importmap">
@@ -158,20 +249,49 @@ import { createApp } from 'vue'
 </script>
 ```
 
-[عرض مثال على JSFiddle](https://jsfiddle.net/yyx990803/2ke1ab0z/)
+[عرض على  Codepen](https://codepen.io/vuejs-examples/pen/wvQKQyM)
+
+</div>
+
+<div class="composition-api">
+
+```html{1-7,12}
+<script type="importmap">
+  {
+    "imports": {
+      "vue": "https://unpkg.com/vue@3/dist/vue.esm-browser.js"
+    }
+  }
+</script>
+
+<div id="app">{{ message }}</div>
+
+<script type="module">
+  import { createApp, ref } from 'vue'
+
+  createApp({
+    setup() {
+      const message = ref('Hello Vue!')
+      return {
+        message
+      }
+    }
+  }).mount('#app')
+</script>
+```
+
+[عرض على  Codepen](https://codepen.io/vuejs-examples/pen/YzRyRYM)
+
+</div>
 
 تستطيع أيضاً إضافة مدخلات للاعتماديات الأخرى إلى خريطة الاستيراد - لكن تأكد من أنها تشير إلى الإصدار الأصلي لوحدات الـES للمكتبة التي تنوي استخدامها.
 
-:::tip دعم خرائط الاستيراد في المتصفحات 
-خرائط الاستيراد مدعومة بشكل أصلي في المتصفحات المرتكزة على Chromium، لذا ننصح باستخدام Chrome أو Edge أثناء عملية التعلم.
-
-إذا كنت تستخدم Firefox، فهي مدعومة بشكل افتراضي في الإصدار 108+ أو عن طريق تفعيل الخيار `dom.importMaps.enabled` في `about:config` في النسخ الأخرى 102+
-
-إذا كان متصفحك المفضل لا يدعم خرائط الاستيراد حتى الآن، يمكنك تعويضها باستخدام [es-module-shims](https://github.com/guybedford/es-module-shims).
+:::tip دعم خرائط الاستيراد في المتصفح
+خرائط الاستيراد هي ميزة متصفح جديدة نسبيًا. تأكد من استخدام متصفح ضمن [نطاق الدعم](https://caniuse.com/import-maps). وبشكل خاص، فهي مدعومة فقط في Safari 16.4+.
 :::
 
 :::warning ملاحظات عن الاستخدام في الإنتاج
-الأمثلة السابقة تستخدم الإصدار التطويري لـVue - إذا كنت تنوي استخدام Vue من شبكة تسليم المحتوى (CDN) في الإنتاج، تأكد من مراجعة [دليل نشر الإنتاج](/guide/best-practices/production-deployment.html#without-build-tools).
+الأمثلة السابقة تستخدم الإصدار التطويري لـVue - إذا كنت تنوي استخدام Vue من شبكة تسليم المحتوى (CDN) في الإنتاج، تأكد من مراجعة [دليل نشر الإنتاج](/guide/best-practices/production-deployment#without-build-tools).
 :::
 
 ### تقسيم وحدات الـES {#splitting-up-the-modules}
@@ -188,6 +308,8 @@ import { createApp } from 'vue'
 </script>
 ```
 
+<div class="options-api">
+
 ```js
 // my-component.js
 export default {
@@ -198,15 +320,30 @@ export default {
 }
 ```
 
-إذا فتحت الملف `index.html` المذكور أعلاه مباشرةً في المتصفح، ستجد أنه يطلب منك تحميل ملف `my-component.js`، ولكن يبدو أنه لا يستطيع العثور عليه. هذا لأن الوحدات الـES لا تعمل على بروتوكول `file://`، لذا ستحتاج إلى تشغيل ملف `index.html` عبر بروتوكول `http://` باستخدام خادم HTTP محلي.
- 
-لبدء خادم HTTP محلي، قم أولاً بتثبيت [Node.js](https://nodejs.org/en/) ثم قم بتشغيل `npx serve` من خلال سطر الأوامر في نفس المجلد الذي يحتوي على ملف HTML الخاص بك. يمكنك أيضاً استخدام أي خادم HTTP آخر يمكنه تقديم الملفات الثابتة و عرضها عبر المتصفح مع صيغ MIME الصحيحة.
+</div>
+<div class="composition-api">
 
-ربما لاحظت أن قالب العنصر المستورد مضمن كنص JavaScript. إذا كنت تستخدم VSCode، يمكنك تثبيت إضافة [es6-string-html](https://marketplace.visualstudio.com/items?itemName=Tobermory.es6-string-html) وإضافة تعليق `/*html*/` قبل السلاسل النصية لابراز الصيغة البرمجية.
+```js
+// my-component.js
+import { ref } from 'vue'
+export default {
+  setup() {
+    const count = ref(0)
+    return { count }
+  },
+  template: `<div>count is {{ count }}</div>`
+}
+```
 
-### استخدام الواجهة التركيبية دون خطوة بناء {#using-composition-api-without-a-build-step}
+</div>
 
-الكثير من أمثلة الواجهة التركيبية ستستخدم صياغة `<script setup>` . إذا كنت تنوي استخدام الواجهة التركيبية بدون عملية بناء، فتحقق من استخدام [خيار `()setup` ](/api/composition-api-setup.html).
+إذا فتحت ملف `index.html` أعلاه مباشرةً في متصفحك، ستجد أنه يرمي بخطأ لأن وحدات الـES لا يمكن أن تعمل عبر البروتوكول `//:file`، وهو البروتوكول الذي يستخدمه المتصفح عند فتح ملف محلي.
+
+لأسباب أمنية، فإن وحدات الـES يمكن أن تعمل فقط عبر البروتوكول `//:http`، وهو البروتوكول الذي يستخدمه المتصفح عند فتح صفحات على الويب. من أجل أن تعمل وحدات الـES على جهازنا المحلي، نحتاج إلى تقديم ملف `index.html` عبر البروتوكول `//:http`،، مع خادم HTTP محلي.
+
+لبدء خادم HTTP محلي، تأكد أولاً من تثبيت [Node.js](https://nodejs.org/en/)، ثم قم بتشغيل `npx serve` من سطر الأوامر في نفس المجلد الذي يوجد به ملف HTML الخاص بك. يمكنك أيضًا استخدام أي خادم HTTP آخر يمكنه تقديم الملفات الثابتة مع أنواع MIME الصحيحة.
+
+ربما لاحظت أن قالب المكون المستورد مضمن كسلسلة JavaScript. إذا كنت تستخدم VSCode، يمكنك تثبيت إضافة [es6-string-html](https://marketplace.visualstudio.com/items?itemName=Tobermory.es6-string-html) وإضافة تعليق `/*html*/` للسلاسل النصية للحصول على تمييز الصيغة لها.
 
 ## الخطوات الموالية {#next-steps}
 

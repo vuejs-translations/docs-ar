@@ -1,14 +1,14 @@
 # تسجيل المكون {#component-registration}
 
-<VueSchoolLink href="https://vueschool.io/lessons/vue-3-global-vs-local-vue-components" title="درس Vue.js مجاني حول تسجيل المكونات"/>
-
 > لقراءة هذه الصفحة يجب عليك أولا الاطلاع على [أساسيات المكونات](/guide/essentials/component-basics).  ثم العودة إلى هنا.
+
+<VueSchoolLink href="https://vueschool.io/lessons/vue-3-global-vs-local-vue-components" title="درس Vue.js مجاني حول تسجيل المكونات"/>
 
 أي مكون Vue يحتاج إلى أن يكون "مسجلا" لكي تتمكن Vue من تحديد شيفرته التنفيذية عندما يُعثر عليه في قالب. هناك طريقتان لتسجيل المكونات: عامة ومحلية.
 
 ## التسجيل العام {#global-registration}
 
-يمكننا جعل المكونات متاحة بشكل عام في [تطبيق Vue](/guide/essentials/application.html) الحالي باستخدام التابع `()app.component`:
+يمكننا جعل المكونات متاحة بشكل عام في [تطبيق Vue](/guide/essentials/application) الحالي باستخدام التابع `()app.component`:
 
 ```js
 import { createApp } from 'vue'
@@ -136,6 +136,6 @@ export default {
 
 2. `<PascalCase />` يجعل المسألة أكثر وضوحًا أن هذا الوسم هو مكون Vue بدلاً من عنصر HTML أصلي في القوالب. ويفر"ق أيضًا مكونات Vue عن العناصر المخصصة (مكونات الويب).
 
-هذا هو النمط الموصى به عند العمل مع المكونات أحادية الملف SFC أو القوالب النصية. ومع ذلك، كما تم بحثه في [ تنبيهات حول تحليل قالب الـDOM](/guide/essentials/component-basics.html#dom-template-parsing-caveats), الوسوم الكتوبة بنمط باسكال PascalCase لا يمكن استخدامها في قوالب DOM.
+هذا هو النمط الموصى به عند العمل مع المكونات أحادية الملف SFC أو القوالب النصية. ومع ذلك، كما تم بحثه في [ تنبيهات حول تحليل قالب الـDOM](/guide/essentials/component-basics#dom-template-parsing-caveats), الوسوم الكتوبة بنمط باسكال PascalCase لا يمكن استخدامها في قوالب DOM.
 
 لحسن الحظ، يدعم Vue تحليل الوسوم المكتوبة بنمط أسياخ الشواء kebab-case للمكونات المسجلة باستخدام نمط باسكال PascalCase. وهذا يعني أن المكون المسجل باسم `MyComponent` يمكن استدعاؤه في القالب عبر `<MyComponent>` و `<my-component>` . ويسمح لنا هذا باستخدام نفس شيفرة تسجيل مكون الـJavaScript بغض النظر عن مصدر القالب.

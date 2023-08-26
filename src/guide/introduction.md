@@ -30,6 +30,8 @@ Vue (تنطق **ڨْيُو**) هو إطار عمل مبني  بالـJavaScript 
 
  مثال بسيط :
 
+<div class="options-api">
+
 ```js
 import {  createApp } from 'vue'
 
@@ -41,6 +43,23 @@ createApp({
     }
 }).mount('#app')
 ```
+
+</div>
+<div class="composition-api">
+
+```js
+import { createApp, ref } from 'vue'
+
+createApp({
+  setup() {
+    return {
+      count: ref(0)
+    }
+  }
+}).mount('#app')
+```
+
+</div>
 
 ```vue-html
 <div id="app">
@@ -96,6 +115,8 @@ Vue هو إطار عمل ونظام بيئي يغطي معظم الميزات ا
 
 في معظم مشاريع Vue المُنشأة عن طريق أدوات البناء مثل Webpack أو Vite، نقوم بتأليف مكونات Vue باستخدام تنسيق ملف يشبه HTML يسمى **المكون أحادي الملف** (يُعرف أيضًا باسم ملفات `vue.` ، والمختصرة باسم **SFC**). يقوم ملف Vue أحادي الملف، كما يوحي الاسم ، بتغليف شيفرة المكون (JavaScript) و القالب باستعمال وسم template الذي يمثل الـ(HTML) و التنسيقات (CSS) في ملف واحد. هذا هو المثال السابق ، مكتوبًا بصيغة SFC. 
 
+<div class="options-api">
+
 ```vue
 <script>
 export default {
@@ -117,6 +138,48 @@ button {
 }
 </style>
 ```
+
+</div>
+<div class="composition-api">
+
+```vue
+<script setup>
+import { ref } from 'vue'
+const count = ref(0)
+</script>
+
+<template>
+  <button @click="count++">العداد: {{ count }}</button>
+</template>
+
+<style scoped>
+button {
+  font-weight: bold;
+}
+</style>
+```
+
+</div>
+<div class="composition-api">
+
+```vue
+<script setup>
+import { ref } from 'vue'
+const count = ref(0)
+</script>
+
+<template>
+  <button @click="count++">Count is: {{ count }}</button>
+</template>
+
+<style scoped>
+button {
+  font-weight: bold;
+}
+</style>
+```
+
+</div>
 
 SFC هي خاصية مُميِّزة لـVue وهي الطريقة الموصى بها لتأليف مكونات Vue **إذا كانت** حالة الاستخدام الخاصة بك تستدعي إعدادًا لعملية بناء. يمكنك معرفة المزيد في القسم المخصص له حول [الدافع وراء تبني الـSFC و كيفية توظيفه](/guide/scaling-up/sfc) - و ما عليك ادراكه هو أن هاته الصيغة تقوم Vue بترجمتها لشيفرة قابلة للتصيير و ذلك عن طريق اعدادات أدوات البناء. 
 
