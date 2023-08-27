@@ -21,6 +21,7 @@ footer: false
   :::
 
 في هذا القسم سنقدم كيفية إنشاء [تطبيق أحادي الصفحة باستعمال Vue](/guide/extras/ways-of-using-vue#single-page-application-spa) على جهازك. سيكون المشروع الذي سيبنى يستخدم إعداد بنية مرتكزة على [Vite](https://vitejs.dev) والتي تسمح لنا باستخدام [المكونات أحادية الملف](/guide/scaling-up/sfc) (SFCs).
+
 تأكد من أن لديك إصدارًا محدثًا من [Node.js](https://nodejs.org/) مثبتًا ، وأن المجلد الحالي هو المجلد الذي تنوي فيه إنشاء المشروع، ثم قم بتشغيل الأمر التالي في سطر الأوامر (بدون علامة `>`:)
 
 <div class="language-sh"><pre><code><span class="line"><span style="color:var(--vt-c-green);">&gt;</span> <span style="color:#A6ACCD;">npm create vue@latest</span></span></code></pre></div>
@@ -177,29 +178,6 @@ footer: false
 
 </div>
 
-<div class="composition-api">
-
-```html{3,4}
-<div id="app">{{ message }}</div>
-
-<script type="module">
-  import { createApp, ref } from 'https://unpkg.com/vue@3/dist/vue.esm-browser.js'
-
-  createApp({
-    setup() {
-      const message = ref('Hello Vue!')
-      return {
-        message
-      }
-    }
-  }).mount('#app')
-</script>
-```
-
-</div>
-
-</div>
-
 كما تلاحظ أننا نستخدم وسم `<script type="module">`, والرابط المستورد من شبكة تسليم المحتوى (CDN) يشير إلى النسخة المبنية بـ**وحدات الـES** بدلا من كائن Vue.
 
 <div class="options-api">
@@ -300,6 +278,8 @@ import { createApp } from 'vue'
 
 ```html
 <!-- index.html -->
+<div id="app"></div>
+
 <script type="module">
   import { createApp } from 'vue'
   import MyComponent from './my-component.js'

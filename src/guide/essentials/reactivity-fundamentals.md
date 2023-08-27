@@ -91,7 +91,7 @@ count.value++
 console.log(count.value) // 1
 ```
 
-> اطلع أيضا على : [كيفية إضافة النوع إلى ref](/guide/reactivity-fundamentals#why-refs) <sup class="vt-badge ts" />
+> اطلع أيضا على : [كيفية إضافة النوع إلى ref](/guide/typescript/composition-api#typing-ref) <sup class="vt-badge ts" />
 
 من أجل الوصول إلى المرجع التفاعلي في قالب المكون، قم بتصريحه وإرجاعه من دالة `()setup` للمكون:
 

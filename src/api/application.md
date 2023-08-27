@@ -1,32 +1,41 @@
-# Application API {#application-api}
+#  الواجهة البرمجية لانشاء تطبيق {#application-api}
 
-## createApp() {#createapp}
+## ()createApp {#createapp}
 
 Creates an application instance.
 
-- **Type**
+تنشئ نسخة من التطبيق
+
+- **النوع**
 
   ```ts
   function createApp(rootComponent: Component, rootProps?: object): App
   ```
 
-- **Details**
+- **التفاصيل**
 
   The first argument is the root component. The second optional argument is the props to be passed to the root component.
 
-- **Example**
+  الوسيط الأول هو المكون الجذر. الوسيط الثاني اختياري وهو الخصائص التي ستمرر إلى المكون الجذر.
+
+- **مثال**
 
   With inline root component:
+
+  مع مكون جذري سطري
 
   ```js
   import { createApp } from 'vue'
 
   const app = createApp({
     /* root component options */
+    /* خيارات المكون الجذري */
   })
   ```
 
   With imported component:
+
+  مع مكون مستورد
 
   ```js
   import { createApp } from 'vue'
@@ -37,15 +46,21 @@ Creates an application instance.
 
 - **See also** [Guide - Creating a Vue Application](/guide/essentials/application)
 
-## createSSRApp() {#createssrapp}
+- **اطلع أيضا على** [دليل - إنشاء تطبيق في Vue](/guide/essentials/application)
+
+## ()createSSRApp {#createssrapp}
 
 Creates an application instance in [SSR Hydration](/guide/scaling-up/ssr#client-hydration) mode. Usage is exactly the same as `createApp()`.
 
-## app.mount() {#app-mount}
+تنشئ نسخة من التطبيق في [وضع الإنعاش من جانب الخادوم](/guide/scaling-up/ssr#client-hydration). الاستخدام هو بالضبط نفس استخدام `()createApp`.
+
+## ()app.mount {#app-mount}
 
 Mounts the application instance in a container element.
 
-- **Type**
+توصل  نسخة التطبيق في عنصر مُستوعِب
+
+- **النوع**
 
   ```ts
   interface App {
@@ -53,17 +68,25 @@ Mounts the application instance in a container element.
   }
   ```
 
-- **Details**
+- **التفاصيل**
 
   The argument can either be an actual DOM element or a CSS selector (the first matched element will be used). Returns the root component instance.
 
+  الوسيط يمكن أن يكون عنصر DOM أو محدد CSS (سيستخدم أول عنصر مطابق). ترجع نسخة المكون الجذري.
+
   If the component has a template or a render function defined, it will replace any existing DOM nodes inside the container. Otherwise, if the runtime compiler is available, the `innerHTML` of the container will be used as the template.
+
+  إذا كان للمكون قالب أو دالة تصيير محددة ، فسيحل محل أي عناصر DOM موجودة داخل العنصر المستوعب. وإلا ، إذا كان مصرف وقت التشغيل متاحًا ، فسيستخدم `innerHTML` للعنصر المستوعب كقالب.
 
   In SSR hydration mode, it will hydrate the existing DOM nodes inside the container. If there are [mismatches](/guide/scaling-up/ssr#hydration-mismatch), the existing DOM nodes will be morphed to match the expected output.
 
+    في وضع الإنعاش من جانب الخادوم ، سيقوم بانعاش عناصر DOM الموجودة داخل العنصر المستوعب. إذا كانت هناك [عدم تطابقات](/guide/scaling-up/ssr#hydration-mismatch) ، فستُحول عناصر DOM الموجودة لتتطابق مع الإخراج المتوقع.
+
   For each app instance, `mount()` can only be called once.
 
-- **Example**
+  لكل نسخة من التطبيق ، يمكن استدعاء `()mount` مرة واحدة فقط.
+
+- **مثال**
 
   ```js
   import { createApp } from 'vue'
@@ -73,6 +96,8 @@ Mounts the application instance in a container element.
   ```
 
   Can also mount to an actual DOM element:
+
+  يمكن أيضًا توصيله بعنصر DOM فعلي:
 
   ```js
   app.mount(document.body.firstChild)
