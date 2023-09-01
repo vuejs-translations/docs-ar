@@ -99,11 +99,11 @@ console.log(count.value) // 1
 import { ref } from 'vue'
 
 export default {
-  // `setup` is a special hook dedicated for the Composition API.
+  // `setup` هو خطاف خاص مخصص للواجهة التركيبية
   setup() {
     const count = ref(0)
 
-    // expose the ref to the template
+    // عرض المرجع للقالب
     return {
       count
     }
