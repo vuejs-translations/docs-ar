@@ -355,7 +355,7 @@ export const sidebar: ThemeConfig['sidebar'] = {
     {
       text: 'الواجهة التركيبية ',
       items: [
-        { text: 'setup()دالةال', link: '/api/composition-api-setup' },
+        { text: 'الدالة ()setup', link: '/api/composition-api-setup' },
         {
           text: 'التفاعلية: الأساسيات',
           link: '/api/reactivity-core'
