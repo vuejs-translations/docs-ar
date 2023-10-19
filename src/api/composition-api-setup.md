@@ -1,4 +1,4 @@
-# الواجهة التركيبية: setup() {#composition-api-setup}
+# الواجهة التركيبية: ()setup {#composition-api-setup}
 
 ## استخدام أساسي {#basic-usage}
 

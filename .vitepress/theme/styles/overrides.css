@@ -71,3 +71,6 @@ pre {
   padding-right: 1rem;
 }
 
+.vt-badge.dev-only:before {
+  content: 'فقط في وضع التطوير';
+}
