@@ -1,34 +1,34 @@
-# Composition API: Lifecycle Hooks {#composition-api-lifecycle-hooks}
+# الواجهة التركيبية: خطافات دورة الحياة {#composition-api-lifecycle-hooks}
 
-:::info Usage Note
-All APIs listed on this page must be called synchronously during the `setup()` phase of a component. See [Guide - Lifecycle Hooks](/guide/essentials/lifecycle) for more details.
+:::info ملاحظة الاستخدام
+يجب استدعاء جميع الواجهات البرمجية الواردة في هذه الصفحة بشكل متزامن خلال مرحلة `()setup` للمكون. انظر إلى [دليل - خطافات دورة الحياة](/guide/essentials/lifecycle) لمزيد من التفاصيل.
 :::
 
-## onMounted() {#onmounted}
+## ()onMounted {#onmounted}
 
-Registers a callback to be called after the component has been mounted.
+تسجل دالة رد نداء لتكون مستدعاة بعد أن يوصل المكون.
 
-- **Type**
+- **النوع**
 
   ```ts
   function onMounted(callback: () => void): void
   ```
 
-- **Details**
+- **التفاصيل**
 
-  A component is considered mounted after:
+  يعتبر المكون موصولا بعد:
 
-  - All of its synchronous child components have been mounted (does not include async components or components inside `<Suspense>` trees).
+  - كل مكوناته الأبناء المتزامنة قد وُصلت (لا يشمل المكونات الأبناء الغير متزامنة أو المكونات داخل أشجار `<Suspense>`).
 
-  - Its own DOM tree has been created and inserted into the parent container. Note it only guarantees that the component's DOM tree is in-document if the application's root container is also in-document.
+  - أنشئت شجرة الـDOM الخاصة به وإدراجها في حاوية الأب. تجدر الملاحظة أنه يضمن فقط أن شجرة DOM للمكون في المستند إذا كانت حاوية جذر التطبيق أيضًا في المستند.
 
-  This hook is typically used for performing side effects that need access to the component's rendered DOM, or for limiting DOM-related code to the client in a [server-rendered application](/guide/scaling-up/ssr).
+  هذا الخطاف يستخدم عادة لأداء الآثار الجانبية التي تحتاج إلى الوصول إلى DOM المكون المصير، أو لتقييد الكود المتعلق بـDOM للعميل في [تطبيق مصير على الخادم](/guide/scaling-up/ssr).
 
-  **This hook is not called during server-side rendering.**
+  **هذا الخطاف لا يستدعى أثناء التصيير من طرف الخادم.**
 
-- **Example**
+- **مثال**
 
-  Accessing an element via template ref:
+  الوصول إلى عنصر عن طريق مراجع القالب:
 
   ```vue
   <script setup>
@@ -46,31 +46,31 @@ Registers a callback to be called after the component has been mounted.
   </template>
   ```
 
-## onUpdated() {#onupdated}
+## ()onUpdated {#onupdated}
 
-Registers a callback to be called after the component has updated its DOM tree due to a reactive state change.
+تسجل دالة رد نداء لتكون مستدعاة بعد أن يحدث المكون تحديثا لشجرة DOM بسبب تغيير حالة تفاعلية.
 
-- **Type**
+- **النوع**
 
   ```ts
   function onUpdated(callback: () => void): void
   ```
 
-- **Details**
+- **التفاصيل**
 
-  A parent component's updated hook is called after that of its child components.
+  يستدعى خطاف التحديث للمكون الأب بعد ذلك من مكوناته الأبناء.
 
-  This hook is called after any DOM update of the component, which can be caused by different state changes, because multiple state changes can be batched into a single render cycle for performance reasons. If you need to access the updated DOM after a specific state change, use [nextTick()](/api/general#nexttick) instead.
+  يستدعى هذا الخطاف بعد أي تحديث DOM للمكون، والذي يمكن أن يسببه تغييرات حالة مختلفة، لأنه يمكن دمج تغييرات حالة متعددة في دورة تصيير واحدة لأسباب أداء. إذا كنت بحاجة إلى الوصول إلى DOM المحدث بعد تغيير حالة محدد، استخدم [nextTick()](/api/general#nexttick) بدلا من ذلك.
 
-  **This hook is not called during server-side rendering.**
+  **هذا الخطاف لا يستدعى أثناء التصيير من طرف الخادم.**
 
-  :::warning
-  Do not mutate component state in the updated hook - this will likely lead to an infinite update loop!
+  :::warning تنبيه
+  لا تغير حالة المكون في خطاف التحديث - هذا سيؤدي على الأرجح إلى حلقة تحديث لا نهائية!
   :::
 
-- **Example**
+- **مثال**
 
-  Accessing updated DOM:
+  الوصول إلى DOM المحدث:
 
   ```vue
   <script setup>
@@ -79,7 +79,7 @@ Registers a callback to be called after the component has updated its DOM tree d
   const count = ref(0)
 
   onUpdated(() => {
-    // text content should be the same as current `count.value`
+    // المحتوى النصي يجب أن يكون نفسه كـ `count.value` الحالي
     console.log(document.getElementById('count').textContent)
   })
   </script>
@@ -89,29 +89,29 @@ Registers a callback to be called after the component has updated its DOM tree d
   </template>
   ```
 
-## onUnmounted() {#onunmounted}
+## ()onUnmounted {#onunmounted}
 
-Registers a callback to be called after the component has been unmounted.
+تسجل دالة رد نداء لتكون مستدعاة بعد أن يُفصل المكون.
 
-- **Type**
+- **النوع**
 
   ```ts
   function onUnmounted(callback: () => void): void
   ```
 
-- **Details**
+- **التفاصيل**
 
-  A component is considered unmounted after:
+  يعتبر المكون مفصولا بعد:
 
-  - All of its child components have been unmounted.
+  - كل مكوناته الأبناء قد فصلت.
 
-  - All of its associated reactive effects (render effect and computed / watchers created during `setup()`) have been stopped.
+  - أوقفت جميع التأثيرات التفاعلية المرتبطة به (تأثير التصيير والخاصيات المحسوبة / الخاصيات المراقبة التي أنشئت أثناء `()setup`).
 
-  Use this hook to clean up manually created side effects such as timers, DOM event listeners or server connections.
+  استخدم هذا الخطاف لتنظيف الآثار الجانبية التي تم أنشئت يدويًا مثل المؤقتات، مستمعات أحداث DOM أو اتصالات الخادم.
 
-  **This hook is not called during server-side rendering.**
+  **هذا الخطاف لا يستدعى أثناء التصيير من طرف الخادم.**
 
-- **Example**
+- **مثال**
 
   ```vue
   <script setup>
@@ -128,59 +128,59 @@ Registers a callback to be called after the component has been unmounted.
   </script>
   ```
 
-## onBeforeMount() {#onbeforemount}
+## ()onBeforeMount {#onbeforemount}
 
-Registers a hook to be called right before the component is to be mounted.
+تسجل دالة رد نداء لتكون مستدعاة مباشرة قبل أن يوصل المكون.
 
-- **Type**
+- **النوع**
 
   ```ts
   function onBeforeMount(callback: () => void): void
   ```
 
-- **Details**
+- **التفاصيل**
 
-  When this hook is called, the component has finished setting up its reactive state, but no DOM nodes have been created yet. It is about to execute its DOM render effect for the first time.
+   عندما يستدعى هذا الخطاف، يكون المكون قد انتهى من إعداد حالته التفاعلية، ولكن لم تُنشأ أي عقد DOM بعد. هو على وشك تنفيذ تأثير تصيير DOM لأول مرة.
 
-  **This hook is not called during server-side rendering.**
+  **هذا الخطاف لا يستدعى أثناء التصيير من طرف الخادم.**
 
-## onBeforeUpdate() {#onbeforeupdate}
+## ()onBeforeUpdate {#onbeforeupdate}
 
-Registers a hook to be called right before the component is about to update its DOM tree due to a reactive state change.
+تسجل دالة رد نداء لتكون مستدعاة مباشرة قبل أن يحدث المكون تحديثا لشجرة DOM بسبب تغيير حالة تفاعلية.
 
-- **Type**
+- **النوع**
 
   ```ts
   function onBeforeUpdate(callback: () => void): void
   ```
 
-- **Details**
+- **التفاصيل**
 
-  This hook can be used to access the DOM state before Vue updates the DOM. It is also safe to modify component state inside this hook.
+  يمكن استخدام هذا الخطاف للوصول إلى حالة DOM قبل أن يحدث Vue تحديثا للـDOM. كما أنه آمن لتعديل حالة المكون داخل هذا الخطاف.
 
-  **This hook is not called during server-side rendering.**
+  **هذا الخطاف لا يستدعى أثناء التصيير من طرف الخادم.**
 
-## onBeforeUnmount() {#onbeforeunmount}
+## ()onBeforeUnmount {#onbeforeunmount}
 
-Registers a hook to be called right before a component instance is to be unmounted.
+تسجل دالة رد نداء لتكون مستدعاة مباشرة قبل أن تُفصل نسخة المكون.
 
-- **Type**
+- **النوع**
 
   ```ts
   function onBeforeUnmount(callback: () => void): void
   ```
 
-- **Details**
+- **التفاصيل**
 
-  When this hook is called, the component instance is still fully functional.
+  عندما يستدعى هذا الخطاف، تكون نسخة المكون لا تزال تشتغل بالكامل.
 
-  **This hook is not called during server-side rendering.**
+  **هذا الخطاف لا يستدعى أثناء التصيير من طرف الخادم.**
 
-## onErrorCaptured() {#onerrorcaptured}
+## ()onErrorCaptured {#onerrorcaptured}
 
-Registers a hook to be called when an error propagating from a descendant component has been captured.
+تسجل دالة رد نداء لتكون مستدعاة عندما يلتقط خطأ مصدره من مكون إبن.
 
-- **Type**
+- **النوع**
 
   ```ts
   function onErrorCaptured(callback: ErrorCapturedHook): void
@@ -192,41 +192,41 @@ Registers a hook to be called when an error propagating from a descendant compon
   ) => boolean | void
   ```
 
-- **Details**
+- **التفاصيل**
 
-  Errors can be captured from the following sources:
+  يمكن أن تُلتقط الأخطاء من المصادر التالية:
 
-  - Component renders
-  - Event handlers
-  - Lifecycle hooks
-  - `setup()` function
-  - Watchers
-  - Custom directive hooks
-  - Transition hooks
+  - تصيير المكون
+  - معالجات الأحداث
+  - خطافات دورة الحياة
+  - دالة `()setup`
+  - الدوال المراقبة
+  - خطافات السمات الموجهة المخصصة
+  - خطافات الانتقال
 
-  The hook receives three arguments: the error, the component instance that triggered the error, and an information string specifying the error source type.
+  يستقبل الخطاف ثلاثة وسيطات: الخطأ، نسخة المكون التي أحدثت الخطأ، وسلسلة معلومات تحدد نوع مصدر الخطأ.
 
-  You can modify component state in `errorCaptured()` to display an error state to the user. However, it is important that the error state should not render the original content that caused the error; otherwise the component will be thrown into an infinite render loop.
+   يمكنك تعديل حالة المكون في `()errorCaptured` لعرض حالة الخطأ للمستخدم. ومع ذلك، من المهم أن حالة الخطأ لا يجب أن تصيّر المحتوى الأصلي الذي تسبب في الخطأ؛ وإلا سيُلقى المكون في حلقة تصيير لا نهائية.
 
-  The hook can return `false` to stop the error from propagating further. See error propagation details below.
+  يمكن للخطاف أن يرجع `false` لمنع الخطأ من الانتشار أكثر. انظر إلى تفاصيل انتشار الخطأ أدناه.
 
-  **Error Propagation Rules**
+  **قواعد انتشار الخطأ**
 
-  - By default, all errors are still sent to the application-level [`app.config.errorHandler`](/api/application#app-config-errorhandler) if it is defined, so that these errors can still be reported to an analytics service in a single place.
+  - بشكل افتراضي، ترسل جميع الأخطاء إلى مستوى جذر التطبيق [`app.config.errorHandler`](/api/application#app-config-errorhandler) إذا عرف، بحيث يمكن الإبلاغ عن هذه الأخطاء لخدمة تحليلية في مكان واحد.
 
-  - If multiple `errorCaptured` hooks exist on a component's inheritance chain or parent chain, all of them will be invoked on the same error, in the order of bottom to top. This is similar to the bubbling mechanism of native DOM events.
+  - إذا كانت هناك عدة خطافات `()errorCaptured` على سلسلة الوراثة أو سلسلة الأب للمكون، سيستدعى كل منها على نفس الخطأ، بالترتيب من الأسفل إلى الأعلى. هذا مشابه لآلية الفقاعة في أحداث DOM الأصلية.
 
-  - If the `errorCaptured` hook itself throws an error, both this error and the original captured error are sent to `app.config.errorHandler`.
+  - إذا ألقى الخطاف `()errorCaptured` نفسه خطأ، يرسل هذا الخطأ والخطأ الملتقط الأصلي إلى `app.config.errorHandler`.
 
-  - An `errorCaptured` hook can return `false` to prevent the error from propagating further. This is essentially saying "this error has been handled and should be ignored." It will prevent any additional `errorCaptured` hooks or `app.config.errorHandler` from being invoked for this error.
+  - يمكن لخطاف `()errorCaptured` أن يرجع `false` لمنع الخطأ من الانتشار أكثر. هذا يعني بشكل أساسي "تم التعامل مع هذا الخطأ ويجب تجاهله." سيمنع أي خطافات `()errorCaptured` إضافية أو `app.config.errorHandler` من الاستدعاء لهذا الخطأ.
 
-## onRenderTracked() <sup class="vt-badge dev-only" /> {#onrendertracked}
+## ()onRenderTracked <sup class="vt-badge dev-only" /> {#onrendertracked}
 
-Registers a debug hook to be called when a reactive dependency has been tracked by the component's render effect.
+تسجل دالة رد نداء لتكون مستدعاة عندما يتم تتبع اعتمادية تفاعلية بواسطة تأثير تصيير المكون.
 
-**This hook is development-mode-only and not called during server-side rendering.**
+**هذا الخطاف للوضع التطويري فقط ولا يستدعى أثناء التصيير من طرف الخادم.**
 
-- **Type**
+- **النوع**
 
   ```ts
   function onRenderTracked(callback: DebuggerHook): void
@@ -241,15 +241,15 @@ Registers a debug hook to be called when a reactive dependency has been tracked 
   }
   ```
 
-- **See also** [Reactivity in Depth](/guide/extras/reactivity-in-depth)
+- **اطلع أيضا على** [التفاعلية بالتفصيل](/guide/extras/reactivity-in-depth)
 
-## onRenderTriggered() <sup class="vt-badge dev-only" /> {#onrendertriggered}
+## ()onRenderTriggered <sup class="vt-badge dev-only" /> {#onrendertriggered}
 
-Registers a debug hook to be called when a reactive dependency triggers the component's render effect to be re-run.
+تسجل دالة رد نداء لتكون مستدعاة عندما تشغل اعتمادية تفاعلية تأثير تصيير المكون لإعادة التشغيل.
 
-**This hook is development-mode-only and not called during server-side rendering.**
+**هذا الخطاف للوضع التطويري فقط ولا يستدعى أثناء التصيير من طرف الخادم.**
 
-- **Type**
+- **النوع**
 
   ```ts
   function onRenderTriggered(callback: DebuggerHook): void
@@ -267,53 +267,53 @@ Registers a debug hook to be called when a reactive dependency triggers the comp
   }
   ```
 
-- **See also** [Reactivity in Depth](/guide/extras/reactivity-in-depth)
+- **اطلع أيضا على** [التفاعلية بالتفصيل](/guide/extras/reactivity-in-depth)
 
-## onActivated() {#onactivated}
+## ()onActivated {#onactivated}
 
-Registers a callback to be called after the component instance is inserted into the DOM as part of a tree cached by [`<KeepAlive>`](/api/built-in-components#keepalive).
+تسجل دالة رد نداء لتكون مستدعاة بعد أن تُدرج نسخة المكون في DOM كجزء من شجرة مخزنة بواسطة [`<KeepAlive>`](/api/built-in-components#keepalive).
 
-**This hook is not called during server-side rendering.**
+**هذا الخطاف لا يستدعى أثناء التصيير من طرف الخادم.**
 
-- **Type**
+- **النوع**
 
   ```ts
   function onActivated(callback: () => void): void
   ```
 
-- **See also** [Guide - Lifecycle of Cached Instance](/guide/built-ins/keep-alive#lifecycle-of-cached-instance)
+- **اطلع أيضا على** [دليل - دورة حياة النسخة المخزنة](/guide/built-ins/keep-alive#lifecycle-of-cached-instance)
 
-## onDeactivated() {#ondeactivated}
+## ()onDeactivated {#ondeactivated}
 
-Registers a callback to be called after the component instance is removed from the DOM as part of a tree cached by [`<KeepAlive>`](/api/built-in-components#keepalive).
+تسجل دالة رد نداء لتكون مستدعاة بعد أن تُزال نسخة المكون من DOM كجزء من شجرة مخزنة بواسطة [`<KeepAlive>`](/api/built-in-components#keepalive).
 
-**This hook is not called during server-side rendering.**
+**هذا الخطاف لا يستدعى أثناء التصيير من طرف الخادم.**
 
-- **Type**
+- **النوع**
 
   ```ts
   function onDeactivated(callback: () => void): void
   ```
 
-- **See also** [Guide - Lifecycle of Cached Instance](/guide/built-ins/keep-alive#lifecycle-of-cached-instance)
+- **اطلع أيضا على** [دليل - دورة حياة النسخة المخزنة](/guide/built-ins/keep-alive#lifecycle-of-cached-instance)
 
-## onServerPrefetch() <sup class="vt-badge" data-text="SSR only" /> {#onserverprefetch}
+## ()onServerPrefetch <sup class="vt-badge" data-text="فقط في وضع تصيير من طرف الخادوم" /> {#onserverprefetch}
 
-Registers an async function to be resolved before the component instance is to be rendered on the server.
+تسجل دالة غير متزامنة لتكون محل حل قبل أن تُصيّر نسخة المكون على الخادم.
 
-- **Type**
+- **النوع**
 
   ```ts
   function onServerPrefetch(callback: () => Promise<any>): void
   ```
 
-- **Details**
+- **التفاصيل**
 
-  If the callback returns a Promise, the server renderer will wait until the Promise is resolved before rendering the component.
+  إذا أرجعت الدالة رد نداء من النوع Promise، سينتظر مصيّر الخادم حتى يُحل الوعد قبل تصيير المكون.
 
-  This hook is only called during server-side rendering can be used to perform server-only data fetching.
+  هذا الخطاف لا يستدعى أثناء التصيير من طرف الخادم ويمكن استخدامه لأداء جلب البيانات فقط من الخادم.
 
-- **Example**
+- **مثال**
 
   ```vue
   <script setup>
@@ -322,20 +322,20 @@ Registers an async function to be resolved before the component instance is to b
   const data = ref(null)
 
   onServerPrefetch(async () => {
-    // component is rendered as part of the initial request
-    // pre-fetch data on server as it is faster than on the client
+    // يصير المكون كجزء من الطلب الأولي
+    // جلب البيانات مسبقا على الخادم لأنه أسرع من العميل
     data.value = await fetchOnServer(/* ... */)
   })
 
   onMounted(async () => {
     if (!data.value) {
-      // if data is null on mount, it means the component
-      // is dynamically rendered on the client. Perform a
-      // client-side fetch instead.
+      // إذا كانت البيانات مساوية لـ null عند التوصيل، فهذا يعني أن المكون
+      // يصيّر بشكل ديناميكي على العميل.
+      // قم بجلب البيانات من العميل بدلا من ذلك.
       data.value = await fetchOnClient(/* ... */)
     }
   })
   </script>
   ```
 
-- **See also** [Server-Side Rendering](/guide/scaling-up/ssr)
+- **اطلع أيضا على** [التصيير من طرف الخادم](/guide/scaling-up/ssr)

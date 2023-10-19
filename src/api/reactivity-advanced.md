@@ -1,10 +1,10 @@
-# Reactivity API: Advanced {#reactivity-api-advanced}
+# الواجهة البرمجية للتفاعلية: الدليل المتقدم  {#reactivity-api-advanced}
 
-## shallowRef() {#shallowref}
+## ()shallowRef {#shallowref}
 
-Shallow version of [`ref()`](./reactivity-core#ref).
+نسخة سطحية من [`ref()`](./reactivity-core#ref).
 
-- **Type**
+- **النوع**
 
   ```ts
   function shallowRef<T>(value: T): ShallowRef<T>
@@ -14,62 +14,62 @@ Shallow version of [`ref()`](./reactivity-core#ref).
   }
   ```
 
-- **Details**
+- **التفاصيل**
 
-  Unlike `ref()`, the inner value of a shallow ref is stored and exposed as-is, and will not be made deeply reactive. Only the `.value` access is reactive.
+  على عكس `()ref`، تخزن القيمة الداخلية للمرجع السطحي وعرضها كما هي، ولن تُجعل تفاعلية بشكل عميق. فقط الوصول إلى `value.` هو تفاعلي.
 
-  `shallowRef()` is typically used for performance optimizations of large data structures, or integration with external state management systems.
+  `()shallowRef` تستخدم عادة لتحسينات الأداء لهياكل البيانات الكبيرة، أو التكامل مع أنظمة إدارة الحالة الخارجية.
 
-- **Example**
+- **مثال**
 
   ```js
   const state = shallowRef({ count: 1 })
 
-  // does NOT trigger change
+  // لا يشغل التغيير
   state.value.count = 2
 
-  // does trigger change
+  // يشغل التغيير
   state.value = { count: 2 }
   ```
 
-- **See also**
-  - [Guide - Reduce Reactivity Overhead for Large Immutable Structures](/guide/best-practices/performance#reduce-reactivity-overhead-for-large-immutable-structures)
-  - [Guide - Integration with External State Systems](/guide/extras/reactivity-in-depth#integration-with-external-state-systems)
+- **اطلع أيضاً على**
+  - [دليل - تقليل تكاليف التفاعل لهياكل البيانات الكبيرة غير المتغيرة](/guide/best-practices/performance#reduce-reactivity-overhead-for-large-immutable-structures)
+  - [دليل - الدمج مع أنظمة الحالة الخارجية](/guide/extras/reactivity-in-depth#integration-with-external-state-systems)
 
-## triggerRef() {#triggerref}
+## ()triggerRef {#triggerref}
 
-Force trigger effects that depends on a [shallow ref](#shallowref). This is typically used after making deep mutations to the inner value of a shallow ref.
+ترغم تشغيل التأثيرات التي تعتمد على [مرجع سطحي](#shallowref).  يستخدم هذا عادة بعد إجراء تغييرات عميقة على القيمة الداخلية للمرجع السطحي.
 
-- **Type**
+- **النوع**
 
   ```ts
   function triggerRef(ref: ShallowRef): void
   ```
 
-- **Example**
+- **مثال**
 
   ```js
   const shallow = shallowRef({
-    greet: 'Hello, world'
+    greet: 'أهلا وسهلا'
   })
 
-  // Logs "Hello, world" once for the first run-through
+  // تطبع "أهلا وسهلا" مرة واحدة لأول مرة
   watchEffect(() => {
     console.log(shallow.value.greet)
   })
 
-  // This won't trigger the effect because the ref is shallow
-  shallow.value.greet = 'Hello, universe'
+  // لن يشغل هذا التأثير لأن المرجع سطحي  
+  shallow.value.greet = 'مرحبا'
 
-  // Logs "Hello, universe"
-  triggerRef(shallow)
+  // "تطبع "مرحبا 
+    triggerRef(shallow)
   ```
 
-## customRef() {#customref}
+## ()customRef {#customref}
 
-Creates a customized ref with explicit control over its dependency tracking and updates triggering.
+ينشئ مرجع مخصص مع التحكم الصريح في تتبع الاعتماد وتحديثات التشغيل.
 
-- **Type**
+- **النوع**
 
   ```ts
   function customRef<T>(factory: CustomRefFactory<T>): Ref<T>
@@ -83,15 +83,15 @@ Creates a customized ref with explicit control over its dependency tracking and 
   }
   ```
 
-- **Details**
+- **التفاصيل**
 
-  `customRef()` expects a factory function, which receives `track` and `trigger` functions as arguments and should return an object with `get` and `set` methods.
+  `()customRef` يتوقع دالة منتجة، تستقبل `track` و `trigger` وتعيد كائنًا يحتوي على التوابع `get` و `set`.
 
-  In general, `track()` should be called inside `get()`, and `trigger()` should be called inside `set()`. However, you have full control over when they should be called, or whether they should be called at all.
+  بشكل عام، يجب استدعاء `()track` داخل `()get`، ويجب استدعاء `()trigger` داخل `()set`. ومع ذلك، لديك التحكم الكامل في متى يجب استدعاؤهما، أو ما إذا كان يجب استدعاؤهما على الإطلاق.
 
-- **Example**
+- **مثال**
 
-  Creating a debounced ref that only updates the value after a certain timeout after the latest set call:
+  إنشاء مرجع مؤجل يحدث القيمة فقط بعد فترة زمنية معينة بعد آخر مجموعة إستدعاءات:
 
   ```js
   import { customRef } from 'vue'
@@ -116,7 +116,7 @@ Creates a customized ref with explicit control over its dependency tracking and 
   }
   ```
 
-  Usage in component:
+  الاستخدام في المكون:
 
   ```vue
   <script setup>
@@ -129,27 +129,27 @@ Creates a customized ref with explicit control over its dependency tracking and 
   </template>
   ```
 
-  [Try it in the Playground](https://play.vuejs.org/#eNplUkFugzAQ/MqKC1SiIekxIpEq9QVV1BMXCguhBdsyaxqE/PcuGAhNfYGd3Z0ZDwzeq1K7zqB39OI205UiaJGMOieiapTUBAOYFt/wUxqRYf6OBVgotGzA30X5Bt59tX4iMilaAsIbwelxMfCvWNfSD+Gw3++fEhFHTpLFuCBsVJ0ScgUQjw6Az+VatY5PiroHo3IeaeHANlkrh7Qg1NBL43cILUmlMAfqVSXK40QUOSYmHAZHZO0KVkIZgu65kTnWp8Qb+4kHEXfjaDXkhd7DTTmuNZ7MsGyzDYbz5CgSgbdppOBFqqT4l0eX1gZDYOm057heOBQYRl81coZVg9LQWGr+IlrchYKAdJp9h0C6KkvUT3A6u8V1dq4ASqRgZnVnWg04/QWYNyYzC2rD5Y3/hkDgz8fY/cOT1ZjqizMZzGY3rDPC12KGZYyd3J26M8ny1KKx7c3X25q1c1wrZN3L9LCMWs/+AmeG6xI=)
+  [اختبرها في حقل التجارب](https://play.vuejs.org/#eNplUkFugzAQ/MqKC1SiIekxIpEq9QVV1BMXCguhBdsyaxqE/PcuGAhNfYGd3Z0ZDwzeq1K7zqB39OI205UiaJGMOieiapTUBAOYFt/wUxqRYf6OBVgotGzA30X5Bt59tX4iMilaAsIbwelxMfCvWNfSD+Gw3++fEhFHTpLFuCBsVJ0ScgUQjw6Az+VatY5PiroHo3IeaeHANlkrh7Qg1NBL43cILUmlMAfqVSXK40QUOSYmHAZHZO0KVkIZgu65kTnWp8Qb+4kHEXfjaDXkhd7DTTmuNZ7MsGyzDYbz5CgSgbdppOBFqqT4l0eX1gZDYOm057heOBQYRl81coZVg9LQWGr+IlrchYKAdJp9h0C6KkvUT3A6u8V1dq4ASqRgZnVnWg04/QWYNyYzC2rD5Y3/hkDgz8fY/cOT1ZjqizMZzGY3rDPC12KGZYyd3J26M8ny1KKx7c3X25q1c1wrZN3L9LCMWs/+AmeG6xI=)
 
-## shallowReactive() {#shallowreactive}
+## ()shallowReactive {#shallowreactive}
 
-Shallow version of [`reactive()`](./reactivity-core#reactive).
+نسخة سطحية من [`()reactive`](./reactivity-core#reactive).
 
-- **Type**
+- **النوع**
 
   ```ts
   function shallowReactive<T extends object>(target: T): T
   ```
 
-- **Details**
+- **التفاصيل**
 
-  Unlike `reactive()`, there is no deep conversion: only root-level properties are reactive for a shallow reactive object. Property values are stored and exposed as-is - this also means properties with ref values will **not** be automatically unwrapped.
+  على عكس `()reactive`، لا يوجد تحويل عميق: فقط الخاصيات على مستوى الجذر هي تفاعلية لكائن تفاعلي سطحي. تخزن القيم الخاصة وتعرضها كما هي - وهذا يعني أيضًا أن الخاصيات ذات القيم المرجعية لن تُفك تلقائيًا.
 
-  :::warning Use with Caution
-  Shallow data structures should only be used for root level state in a component. Avoid nesting it inside a deep reactive object as it creates a tree with inconsistent reactivity behavior which can be difficult to understand and debug.
+  :::warning استخدمها بحذر
+  يجب استخدام هياكل البيانات السطحية فقط لحالة مستوى الجذر في المكون. تجنب تضمينها داخل كائن تفاعلي عميق حيث ينشئ شجرة بسلوك غير متسق للتفاعل والتي يمكن أن تكون صعبة الفهم والتصحيح.
   :::
 
-- **Example**
+- **مثال**
 
   ```js
   const state = shallowReactive({
@@ -159,35 +159,35 @@ Shallow version of [`reactive()`](./reactivity-core#reactive).
     }
   })
 
-  // mutating state's own properties is reactive
+  // تغيير خاصيات الحالة الخاصة تفاعلي
   state.foo++
 
-  // ...but does not convert nested objects
+  // ...ولكن لا يحول الكائنات المتداخلة
   isReactive(state.nested) // false
 
-  // NOT reactive
+  // غير تفاعلي
   state.nested.bar++
   ```
 
-## shallowReadonly() {#shallowreadonly}
+## ()shallowReadonly {#shallowreadonly}
 
-Shallow version of [`readonly()`](./reactivity-core#readonly).
+نسخة سطحية من [`()readonly`](./reactivity-core#readonly).
 
-- **Type**
+- **النوع**
 
   ```ts
   function shallowReadonly<T extends object>(target: T): Readonly<T>
   ```
 
-- **Details**
+- **التفاصيل**
 
-  Unlike `readonly()`, there is no deep conversion: only root-level properties are made readonly. Property values are stored and exposed as-is - this also means properties with ref values will **not** be automatically unwrapped.
+  على عكس `()readonly`، لا يوجد تحويل عميق: فقط الخاصيات على مستوى الجذر هي للقراءة فقط. تخزن القيم الخاصة وتعرضها كما هي - وهذا يعني أيضًا أن الخاصيات ذات القيم المرجعية لن تُفك تلقائيًا.
 
-  :::warning Use with Caution
-  Shallow data structures should only be used for root level state in a component. Avoid nesting it inside a deep reactive object as it creates a tree with inconsistent reactivity behavior which can be difficult to understand and debug.
+  :::warning استخدمها بحذر
+  يجب استخدام هياكل البيانات السطحية فقط لحالة مستوى الجذر في المكون. تجنب تضمينها داخل كائن تفاعلي عميق حيث ينشئ شجرة بسلوك غير متسق للتفاعل والتي يمكن أن تكون صعبة الفهم والتصحيح.
   :::
 
-- **Example**
+- **مثال**
 
   ```js
   const state = shallowReadonly({
@@ -197,33 +197,33 @@ Shallow version of [`readonly()`](./reactivity-core#readonly).
     }
   })
 
-  // mutating state's own properties will fail
+  // تغيير خاصيات الحالة الخاصة سيفشل
   state.foo++
 
-  // ...but works on nested objects
+  // ...ولكن يعمل على الكائنات المتداخلة
   isReadonly(state.nested) // false
 
-  // works
+  // يعمل
   state.nested.bar++
   ```
 
-## toRaw() {#toraw}
+## ()toRaw {#toraw}
 
-Returns the raw, original object of a Vue-created proxy.
+يعيد الكائن الأصلي الخام للوسيط الذي أنشأته Vue.
 
-- **Type**
+- **النوع**
 
   ```ts
   function toRaw<T>(proxy: T): T
   ```
 
-- **Details**
+- **التفاعل**
 
-  `toRaw()` can return the original object from proxies created by [`reactive()`](./reactivity-core#reactive), [`readonly()`](./reactivity-core#readonly), [`shallowReactive()`](#shallowreactive) or [`shallowReadonly()`](#shallowreadonly).
+  `()toRaw` يمكن أن يعيد الكائن الأصلي من الوسيط الذي أنشأته [`()reactive`](./reactivity-core#reactive)، [`()readonly`](./reactivity-core#readonly)، [`()shallowReactive`](#shallowreactive) أو [`()shallowReadonly`](#shallowreadonly).
 
-  This is an escape hatch that can be used to temporarily read without incurring proxy access / tracking overhead or write without triggering changes. It is **not** recommended to hold a persistent reference to the original object. Use with caution.
+  هذا هو مخرج الهروب الذي يمكن استخدامه للقراءة مؤقتًا دون تكبد تكاليف الوصول / التتبع أو الكتابة دون تشغيل التغييرات. **لا** يوصى بالاحتفاظ بمرجع دائم إلى الكائن الأصلي. استخدمها بحذر.
 
-- **Example**
+- **مثال**
 
   ```js
   const foo = {}
@@ -232,35 +232,35 @@ Returns the raw, original object of a Vue-created proxy.
   console.log(toRaw(reactiveFoo) === foo) // true
   ```
 
-## markRaw() {#markraw}
+## ()markRaw {#markraw}
 
-Marks an object so that it will never be converted to a proxy. Returns the object itself.
+يميز كائنًا بحيث لن يحول إلى وسيط أبدًا. يعيد الكائن نفسه.
 
-- **Type**
+- **النوع**
 
   ```ts
   function markRaw<T extends object>(value: T): T
   ```
 
-- **Example**
+- **مثال**
 
   ```js
   const foo = markRaw({})
   console.log(isReactive(reactive(foo))) // false
 
-  // also works when nested inside other reactive objects
+  // يعمل أيضًا عند التضمين داخل كائنات تفاعلية أخرى
   const bar = reactive({ foo })
   console.log(isReactive(bar.foo)) // false
   ```
 
-  :::warning Use with Caution
-  `markRaw()` and shallow APIs such as `shallowReactive()` allow you to selectively opt-out of the default deep reactive/readonly conversion and embed raw, non-proxied objects in your state graph. They can be used for various reasons:
+  :::warning استخدمها بحذر
+    `()markRaw` والواجهات البرمجية سطحية مثل `()shallowReactive` تسمح لك بالاستبعاد الاختياري من التحويل الافتراضي العميق للتفاعلية / للقراءة فقط وتضمين الكائنات الخام غير الموجهة في رسم الحالة الخاص بك. يمكن استخدامها لأسباب مختلفة:
 
-  - Some values simply should not be made reactive, for example a complex 3rd party class instance, or a Vue component object.
+  - بعض القيم ببساطة لا ينبغي أن تصبح تفاعلية، على سبيل المثال مثيل فئة طرف ثالث معقد، أو كائن مكون Vue.
 
-  - Skipping proxy conversion can provide performance improvements when rendering large lists with immutable data sources.
+  - يمكن أن يوفر تخطي تحويل الوسيط تحسينات في الأداء عند عرض قوائم كبيرة مع مصادر بيانات غير قابلة للتغيير.
 
-  They are considered advanced because the raw opt-out is only at the root level, so if you set a nested, non-marked raw object into a reactive object and then access it again, you get the proxied version back. This can lead to **identity hazards** - i.e. performing an operation that relies on object identity but using both the raw and the proxied version of the same object:
+  تعتبر هذه الواجهات ذات مستوى متقدم لأن الاستبعاد الخام هو فقط على مستوى الجذر، لذلك إذا قمت بتعيين كائن خام غير مميز مضمن في كائن تفاعلي ثم الوصول إليه مرة أخرى، فستحصل على الإصدار التفاعلي مرة أخرى. يمكن أن يؤدي هذا إلى **مخاطر الهوية** - أي القيام بعملية تعتمد على هوية الكائن ولكن باستخدام الإصدار الخام والتفاعلي لنفس الكائن:
 
   ```js
   const foo = markRaw({
@@ -268,33 +268,33 @@ Marks an object so that it will never be converted to a proxy. Returns the objec
   })
 
   const bar = reactive({
-    // although `foo` is marked as raw, foo.nested is not.
+    // على الرغم من أن `foo` مميز كخام، `foo.nested` ليس كذلك.
     nested: foo.nested
   })
 
   console.log(foo.nested === bar.nested) // false
   ```
 
-  Identity hazards are in general rare. However, to properly utilize these APIs while safely avoiding identity hazards requires a solid understanding of how the reactivity system works.
+  مخاطر الهوية نادرة بشكل عام. ومع ذلك، لاستخدام هذه الواجهات بشكل صحيح مع تجنب مخاطر الهوية بأمان يتطلب فهمًا قويًا لكيفية عمل نظام التفاعلية.
 
   :::
 
-## effectScope() {#effectscope}
+## ()effectScope {#effectscope}
 
-Creates an effect scope object which can capture the reactive effects (i.e. computed and watchers) created within it so that these effects can be disposed together. For detailed use cases of this API, please consult its corresponding [RFC](https://github.com/vuejs/rfcs/blob/master/active-rfcs/0041-reactivity-effect-scope.md).
+تنشئ كائن نطاق تأثير يمكنه التقاط التأثيرات التفاعلية (أي المحسوبة والمراقبة) التي تُنشأ داخله بحيث يمكن التخلص من هذه التأثيرات معًا. لحالات الاستخدام المفصلة لهذه الواجهة البرمجية، يرجى الاطلاع على [RFC](https://github.com/vuejs/rfcs/blob/master/active-rfcs/0041-reactivity-effect-scope.md).
 
-- **Type**
+- **النوع**
 
   ```ts
   function effectScope(detached?: boolean): EffectScope
 
   interface EffectScope {
-    run<T>(fn: () => T): T | undefined // undefined if scope is inactive
+    run<T>(fn: () => T): T | undefined // undefined إذا كان النطاق غير نشط
     stop(): void
   }
   ```
 
-- **Example**
+- **مثال**
 
   ```js
   const scope = effectScope()
@@ -307,27 +307,27 @@ Creates an effect scope object which can capture the reactive effects (i.e. comp
     watchEffect(() => console.log('Count: ', doubled.value))
   })
 
-  // to dispose all effects in the scope
+  // للتخلص من جميع التأثيرات في النطاق
   scope.stop()
   ```
 
-## getCurrentScope() {#getcurrentscope}
+## ()getCurrentScope {#getcurrentscope}
 
-Returns the current active [effect scope](#effectscope) if there is one.
+يعيد النطاق النشط الحالي [effect scope](#effectscope) إذا كان هناك.
 
-- **Type**
+- **النوع**
 
   ```ts
   function getCurrentScope(): EffectScope | undefined
   ```
 
-## onScopeDispose() {#onscopedispose}
+## ()onScopeDispose {#onscopedispose}
 
-Registers a dispose callback on the current active [effect scope](#effectscope). The callback will be invoked when the associated effect scope is stopped.
+  يسجل دالة رد نداء للتخلض على النطاق النشط الحالي [effect scope](#effectscope). ستستدعى الدالة عندما يوقف النطاق التأثيري المرتبط.
 
-This method can be used as a non-component-coupled replacement of `onUnmounted` in reusable composition functions, since each Vue component's `setup()` function is also invoked in an effect scope.
+يمكن استخدام هذه الطريقة كبديل غير مرتبط بالمكون لـ `()onUnmounted` في الدوال التركيبية القابلة لإعادة الاستخدام، لأن دالة `()setup` في كل مكون Vue تستدعى أيضًا في نطاق تأثيري.
 
-- **Type**
+- **النوع**
 
   ```ts
   function onScopeDispose(fn: () => void): void

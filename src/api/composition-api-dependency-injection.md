@@ -1,60 +1,60 @@
-# Composition API: <br>Dependency Injection {#composition-api-dependency-injection}
+# الواجهة التركيبية: <br>حقن الإعتمادية {#composition-api-dependency-injection}
 
-## provide() {#provide}
+## ()provide {#provide}
 
-Provides a value that can be injected by descendant components.
+توفر قيمة يمكن حقنها من طرف المكونات الأبناء.
 
-- **Type**
+- **النوع**
 
   ```ts
   function provide<T>(key: InjectionKey<T> | string, value: T): void
   ```
 
-- **Details**
+- **التفاصيل**
 
-  `provide()` takes two arguments: the key, which can be a string or a symbol, and the value to be injected.
+  `provide()` تأخذ وسيطتين: المفتاح، الذي يمكن أن يكون سلسلة أو رمز، والقيمة التي ستحقن.
 
-  When using TypeScript, the key can be a symbol casted as `InjectionKey` - a Vue provided utility type that extends `Symbol`, which can be used to sync the value type between `provide()` and `inject()`.
+  عند استخدام TypeScript، يمكن أن يكون المفتاح رمز موفر كـ `InjectionKey` - نوع مساعد مقدم من طرف Vue يمتد من `Symbol`، والذي يمكن استخدامه لمزامنة نوع القيمة بين `()provide` و `()inject`.
 
-  Similar to lifecycle hook registration APIs, `provide()` must be called synchronously during a component's `setup()` phase.
+  مشابه لواجهات برمجة خطافات دورة الحياة، يجب استدعاء `()provide` بشكل متزامن خلال مرحلة `()setup` للمكون.
 
-- **Example**
+- **مثال**
 
   ```vue
   <script setup>
   import { ref, provide } from 'vue'
   import { fooSymbol } from './injectionSymbols'
 
-  // provide static value
+  // يوفر قيمة ساكنة
   provide('foo', 'bar')
 
-  // provide reactive value
+  // يوفر قيمة تفاعلية
   const count = ref(0)
   provide('count', count)
 
-  // provide with Symbol keys
+  // يوفر مفاتيح رمزية
   provide(fooSymbol, count)
   </script>
   ```
 
-- **See also**
-  - [Guide - Provide / Inject](/guide/components/provide-inject)
-  - [Guide - Typing Provide / Inject](/guide/typescript/composition-api#typing-provide-inject) <sup class="vt-badge ts" />
+- **اطلع أيضا**
+  - [دليل - توفير / حقن](/guide/components/provide-inject)
+  - [دليل - إضافة الأنواع في توفير / حقن](/guide/typescript/composition-api#typing-provide-inject) <sup class="vt-badge ts" />
 
-## inject() {#inject}
+## ()inject {#inject}
 
-Injects a value provided by an ancestor component or the application (via `app.provide()`).
+تحقن قيمة موفرة من طرف مكون أب أو التطبيق (عبر `app.provide()`).
 
-- **Type**
+- **النوع**
 
   ```ts
-  // without default value
+  // بدون قيمة افتراضية
   function inject<T>(key: InjectionKey<T> | string): T | undefined
 
-  // with default value
+  // مع قيمة افتراضية 
   function inject<T>(key: InjectionKey<T> | string, defaultValue: T): T
 
-  // with factory
+  // مع دالة منتجة
   function inject<T>(
     key: InjectionKey<T> | string,
     defaultValue: () => T,
@@ -62,47 +62,47 @@ Injects a value provided by an ancestor component or the application (via `app.p
   ): T
   ```
 
-- **Details**
+- **التفاصيل**
 
-  The first argument is the injection key. Vue will walk up the parent chain to locate a provided value with a matching key. If multiple components in the parent chain provides the same key, the one closest to the injecting component will "shadow" those higher up the chain. If no value with matching key was found, `inject()` returns `undefined` unless a default value is provided.
+   الوسيط الأول هو مفتاح الحقن. سيقوم Vue بالتجوال في سلسلة المكونات الأباء لتحديد قيمة موفرة مع مفتاح مطابق. إذا كانت هناك عدة مكونات في سلسلة الأباء توفر نفس المفتاح، فسيتم "تظليل" أقرب مكون إلى المكون المحقق. إذا لم يُعثر على قيمة مع مفتاح مطابق، فإن `()inject` ترجع `undefined` ما لم تُوفر قيمة افتراضية.
 
-  The second argument is optional and is the default value to be used when no matching value was found.
+  الوسيط الثاني اختياري وهو القيمة الافتراضية التي ستستخدم عندما لا يُعثر على قيمة مطابقة.
 
-  The second argument can also be a factory function that returns values that are expensive to create. In this case, `true` must be passed as the third argument to indicate that the function should be used as a factory instead of the value itself.
+  يمكن أن يكون الوسيط الثاني أيضا دالة منتجة ترجع قيم مكلفة لإنشائها. في هذه الحالة، يجب تمرير `true` كوسيط ثالث للإشارة إلى أن الدالة يجب أن تستخدم كمنتجة بدلا من القيمة نفسها.
 
-  Similar to lifecycle hook registration APIs, `inject()` must be called synchronously during a component's `setup()` phase.
+  مشابه لواجهات برمجة خطافات دورة الحياة، يجب استدعاء `()inject` بشكل متزامن خلال مرحلة `()setup` للمكون.
 
-  When using TypeScript, the key can be of type of `InjectionKey` - a Vue-provided utility type that extends `Symbol`, which can be used to sync the value type between `provide()` and `inject()`.
+  عند استخدام TypeScript، يمكن أن يكون المفتاح من نوع `InjectionKey` - نوع مساعد مقدم من طرف Vue يمتد من `Symbol`، والذي يمكن استخدامه لمزامنة نوع القيمة بين `()provide` و `()inject`.
 
-- **Example**
+- **مثال**
 
-  Assuming a parent component has provided values as shown in the previous `provide()` example:
+  بفرض أن مكون أب قد قدم قيم كما هو موضح في مثال `()provide` السابق:
 
   ```vue
   <script setup>
   import { inject } from 'vue'
   import { fooSymbol } from './injectionSymbols'
 
-  // inject static value without default
+  // حقن قيمة ساكنة بدون قيمة افتراضية
   const foo = inject('foo')
 
-  // inject reactive value
+  // حقن قيمة تفاعلية 
   const count = inject('count')
 
-  // inject with Symbol keys
+  // حقن بمفاتيح رمزية  
   const foo2 = inject(fooSymbol)
 
-  // inject with default value
+  // حقن بقيمة افتراضية
   const bar = inject('foo', 'default value')
 
-  // inject with function default value
+  // حقن بقيمة افتراضية من دالة
   const fn = inject('function', () => {})
 
-  // inject with default value factory
+  // حقن بدالة منتجة لقيمة افتراضية
   const baz = inject('factory', () => new ExpensiveObject(), true)
   </script>
   ```
 
-- **See also**
-  - [Guide - Provide / Inject](/guide/components/provide-inject)
-  - [Guide - Typing Provide / Inject](/guide/typescript/composition-api#typing-provide-inject) <sup class="vt-badge ts" />
+- **اطلع أيضا**
+  - [دليل - توفير / حقن](/guide/components/provide-inject)
+  - [دليل - إضافة الأنواع في توفير / حقن](/guide/typescript/composition-api#typing-provide-inject) <sup class="vt-badge ts" />
