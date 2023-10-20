@@ -1,16 +1,16 @@
-# Component Instance {#component-instance}
+#  نسخة المكون {#component-instance}
 
-:::info
-This page documents the built-in properties and methods exposed on the component public instance, i.e. `this`.
+:::info معلومة
+هذه الصفحة توثق الخاصيات والدوال المدمجة المكشوفة على النسخة العامة للمكون، أي `this`.
 
-All properties listed on this page are readonly (except nested properties in `$data`).
+جميع الخاصيات المدرجة على هذه الصفحة لا يمكن تعديلها (باستثناء الخاصيات المتداخلة في `$data`).
 :::
 
-## $data {#data}
+## data$ {#data}
 
-The object returned from the [`data`](./options-state#data) option, made reactive by the component. The component instance proxies access to the properties on its data object.
+الكائن المرجع من خيار [`data`](./options-state#data)، يجعل تفاعليًا من طرف المكون. النسخة العامة للمكون توكل الوصول إلى الخاصيات على كائن البيانات الخاص به.
 
-- **Type**
+- **النوع**
 
   ```ts
   interface ComponentPublicInstance {
@@ -18,11 +18,11 @@ The object returned from the [`data`](./options-state#data) option, made reactiv
   }
   ```
 
-## $props {#props}
+## props$ {#props}
 
-An object representing the component's current, resolved props.
+كائن يمثل الخاصيات الحالية للمكون، بعد حلها.
 
-- **Type**
+- **النوع**
 
   ```ts
   interface ComponentPublicInstance {
@@ -30,15 +30,15 @@ An object representing the component's current, resolved props.
   }
   ```
 
-- **Details**
+- **التفاصيل**
 
-  Only props declared via the [`props`](./options-state#props) option will be included. The component instance proxies access to the properties on its props object.
+  فقط الخاصيات المعلنة عبر خيار [`props`](./options-state#props) ستدرج. النسخة العامة للمكون توكل الوصول إلى الخاصيات على كائن الخاصيات الخاص به.
 
-## $el {#el}
+## el$ {#el}
 
-The root DOM node that the component instance is managing.
+عنصر  الـDOM الجذر الذي تديره النسخة العامة للمكون.
 
-- **Type**
+- **النوع**
 
   ```ts
   interface ComponentPublicInstance {
@@ -46,23 +46,23 @@ The root DOM node that the component instance is managing.
   }
   ```
 
-- **Details**
+- **التفاصيل**
 
-  `$el` will be `undefined` until the component is [mounted](./options-lifecycle#mounted).
+  `$el` سيكون `undefined` حتى  [يوصل](./options-lifecycle#mounted) المكون.
 
-  - For components with a single root element, `$el` will point to that element.
-  - For components with text root, `$el` will point to the text node.
-  - For components with multiple root nodes, `$el` will be the placeholder DOM node that Vue uses to keep track of the component's position in the DOM (a text node, or a comment node in SSR hydration mode).
+  - بالنسبة للمكونات ذات عنصر جذر واحد، `$el` سيشير إلى هذا العنصر.
+  - بالنسبة للمكونات ذات عنصر جذر نصي، `$el` سيشير إلى عنصر النص.
+  - بالنسبة للمكونات ذات عناصر جذر متعددة، `$el` سيكون عنصر DOM البديل الذي يستخدمه Vue لتتبع موضع المكون في DOM (عنصر نصي، أو عنصر تعليق في وضع تصيير من طرف الخادوم).
 
-  :::tip
-  For consistency, it is recommended to use [template refs](/guide/essentials/template-refs) for direct access to elements instead of relying on `$el`.
+  :::tip ملاحظة
+  بغرض التناسق، يوصى باستخدام [مراجع القالب](/guide/essentials/template-refs) للوصول المباشر إلى العناصر بدلاً من الاعتماد على `$el`.
   :::
 
-## $options {#options}
+## options$ {#options}
 
-The resolved component options used for instantiating the current component instance.
+الخيارات المحلولة للمكون المستخدمة لتثبيت النسخة العامة الحالية للمكون.
 
-- **Type**
+- **النوع**
 
   ```ts
   interface ComponentPublicInstance {
@@ -70,15 +70,15 @@ The resolved component options used for instantiating the current component inst
   }
   ```
 
-- **Details**
+- **التفاصيل**
 
-  The `$options` object exposes the resolved options for the current component and is the merge result of these possible sources:
+  يكشف كائن `options$` الخيارات المحلولة للمكون الحالي وهو نتيجة الدمج لهذه المصادر المحتملة:
 
-  - Global mixins
-  - Component `extends` base
-  - Component mixins
+  - المخاليط العامة  
+  - المكون `extends` الأساسي
+  - مخاليط المكون
 
-  It is typically used to support custom component options:
+  عادة ما يستخدم لدعم خيارات المكون المخصصة:
 
   ```js
   const app = createApp({
@@ -89,13 +89,13 @@ The resolved component options used for instantiating the current component inst
   })
   ```
 
-- **See also** [`app.config.optionMergeStrategies`](/api/application#app-config-optionmergestrategies)
+- **اطلع أيضًا على** [`app.config.optionMergeStrategies`](/api/application#app-config-optionmergestrategies)
 
-## $parent {#parent}
+## parent$ {#parent}
 
-The parent instance, if the current instance has one. It will be `null` for the root instance itself.
+النسخة الأم، إذا كانت النسخة العامة الحالية للمكون لديها نسخة أم. سيكون `null` للنسخة الجذر نفسها.
 
-- **Type**
+- **النوع**
 
   ```ts
   interface ComponentPublicInstance {
@@ -103,11 +103,11 @@ The parent instance, if the current instance has one. It will be `null` for the 
   }
   ```
 
-## $root {#root}
+## root$ {#root}
 
-The root component instance of the current component tree. If the current instance has no parents this value will be itself.
+النسخة الجذر لشجرة المكون الحالية. إذا لم يكن للنسخة العامة الحالية للمكون أي أباء ستكون هذه القيمة هي نفسها.
 
-- **Type**
+- **النوع**
 
   ```ts
   interface ComponentPublicInstance {
@@ -115,11 +115,11 @@ The root component instance of the current component tree. If the current instan
   }
   ```
 
-## $slots {#slots}
+## slots$ {#slots}
 
-An object representing the [slots](/guide/components/slots) passed by the parent component.
+كائن يمثل [المنافذ](/guide/components/slots) التي يمررها المكون الأم.
 
-- **Type**
+- **النوع**
 
   ```ts
   interface ComponentPublicInstance {
@@ -129,21 +129,21 @@ An object representing the [slots](/guide/components/slots) passed by the parent
   type Slot = (...args: any[]) => VNode[]
   ```
 
-- **Details**
+- **التفاصيل**
 
-  Typically used when manually authoring [render functions](/guide/extras/render-function), but can also be used to detect whether a slot is present.
+  عادة ما يستخدم عند كتابة [دوال التصيير](/guide/extras/render-function) يدويًا، ولكن يمكن أيضًا استخدامه للكشف عما إذا كان المنفذ موجودا.
 
-  Each slot is exposed on `this.$slots` as a function that returns an array of vnodes under the key corresponding to that slot's name. The default slot is exposed as `this.$slots.default`.
+  يُعرض كل منفذ على `this.$slots` كدالة ترجع مصفوفة من تحت المفتاح المقابل لاسم المنفذ. يُعرض المنفذ الافتراضي كعقد افتراضية `this.$slots.default`.
 
-  If a slot is a [scoped slot](/guide/components/slots#scoped-slots), arguments passed to the slot functions are available to the slot as its slot props.
+  إذا كان المنفذ [منفذ ذو نطاق](/guide/components/slots#scoped-slots)، فإن الوسائط التي تمرره إلى دوال المنفذ متاحة للمنفذ كخاصيات المنفذ.
 
-- **See also** [Render Functions - Rendering Slots](/guide/extras/render-function#rendering-slots)
+- **اطلع أيضًا على** [دوال التصيير - تصيير المنافذ](/guide/extras/render-function#rendering-slots)
 
-## $refs {#refs}
+## refs$ {#refs}
 
-An object of DOM elements and component instances, registered via [template refs](/guide/essentials/template-refs).
+كائن من عناصر DOM ونسخ المكونات، مسجلة عبر [مراجع القالب](/guide/essentials/template-refs).
 
-- **Type**
+- **النوع**
 
   ```ts
   interface ComponentPublicInstance {
@@ -151,16 +151,16 @@ An object of DOM elements and component instances, registered via [template refs
   }
   ```
 
-- **See also**
+- **اطلع أيضًا على**
 
-  - [Template refs](/guide/essentials/template-refs)
-  - [Special Attributes - ref](./built-in-special-attributes.md#ref)
+  - [مراجع القالب](/guide/essentials/template-refs)
+  - [السمات الخاصة - ref](./built-in-special-attributes.md#ref)
 
-## $attrs {#attrs}
+## attrs$ {#attrs}
 
-An object that contains the component's fallthrough attributes.
+كائن يحتوي على السمات الخاصة بالمكون.
 
-- **Type**
+- **النوع**
 
   ```ts
   interface ComponentPublicInstance {
@@ -168,21 +168,22 @@ An object that contains the component's fallthrough attributes.
   }
   ```
 
-- **Details**
+- **التفاصيل**
 
-  [Fallthrough Attributes](/guide/components/attrs) are attributes and event handlers passed by the parent component, but not declared as a prop or an emitted event by the child.
+  [السمات المستترة](/guide/components/attrs) هي السمات ومعالجات الأحداث التي يمررها المكون الأب، ولكن ليست معلنة كخاصية أو حدث مرسل من طرف المكون الإبن.
 
-  By default, everything in `$attrs` will be automatically inherited on the component's root element if there is only a single root element. This behavior is disabled if the component has multiple root nodes, and can be explicitly disabled with the [`inheritAttrs`](./options-misc#inheritattrs) option.
+  بشكل افتراضي، سيورث كل شيء في `attrs$` تلقائيًا على عنصر الجذر للمكون إذا كان هناك عنصر جذر واحد فقط. يُعطل هذا السلوك إذا كان للمكون عناصر جذر متعددة، ويمكن تعطيله صراحة باستخدام خيار [`inheritAttrs`](./options-misc#inheritattrs).
+[Fallthrough Attributes](/guide/components/attrs)
 
-- **See also**
+- **اطلع أيضًا على**
 
-  - [Fallthrough Attributes](/guide/components/attrs)
+  - [السمات المستترة](/guide/components/attrs)
 
-## $watch() {#watch}
+## ()watch$ {#watch}
 
-Imperative API for creating watchers.
+واجهة برمجية أمرية لإنشاء الدوال المراقبة.
 
-- **Type**
+- **النوع**
 
   ```ts
   interface ComponentPublicInstance {
@@ -210,62 +211,61 @@ Imperative API for creating watchers.
   type StopHandle = () => void
   ```
 
-- **Details**
+- **التفاصيل**
 
-  The first argument is the watch source. It can be a component property name string, a simple dot-delimited path string, or a getter function.
+  الوسيط الأول هو مصدر المراقبة. يمكن أن يكون سلسلة نصية لاسم خاصية المكون، سلسلة مسار محددة بنقاط، أو دالة محصلة.
 
-  The second argument is the callback function. The callback receives the new value and the old value of the watched source.
+  الوسيط الثاني هو دالة رد النداء. تستقبل دالة رد النداء القيمة الجديدة والقيمة القديمة للمصدر المراقَب.
 
-  - **`immediate`**: trigger the callback immediately on watcher creation. Old value will be `undefined` on the first call.
-  - **`deep`**: force deep traversal of the source if it is an object, so that the callback fires on deep mutations. See [Deep Watchers](/guide/essentials/watchers#deep-watchers).
-  - **`flush`**: adjust the callback's flush timing. See [Callback Flush Timing](/guide/essentials/watchers#callback-flush-timing) and [`watchEffect()`](/api/reactivity-core#watcheffect).
-  - **`onTrack / onTrigger`**: debug the watcher's dependencies. See [Watcher Debugging](/guide/extras/reactivity-in-depth#watcher-debugging).
+  - **`immediate`**: تشغيل دالة رد النداء على الفور عند إنشاء الدالة المراقبة. ستكون القيمة القديمة `undefined` في الاستدعاء الأول.
+  - **`deep`**: فرض المرور العميق للمصدر إذا كان كائنًا أو مصفوفة ، بحيث تنشط دالة رد النداء على التغييرات العميقة. انظر [المراقبون العميقون](/guide/essentials/watchers#deep-watchers).
+  - **`flush`**: ضبط وقت تفريغ دالة رد النداء. انظر [توقيت تفريغ دالة رد النداء](/guide/essentials/watchers#callback-flush-timing) و [`watchEffect()`](/api/reactivity-core#watcheffect).
+  - **`onTrack / onTrigger`**: تنقيح اعتماديات الدالة المراقبة. اطلع على [تنقيح الدالة المراقبة](/guide/extras/reactivity-in-depth#watcher-debugging).
 
-- **Example**
+- **مثال**
 
-  Watch a property name:
+  مراقبة اسم خاصية:
 
   ```js
   this.$watch('a', (newVal, oldVal) => {})
   ```
 
-  Watch a dot-delimited path:
+  مراقبة مسار محدد بنقاط:
 
   ```js
   this.$watch('a.b', (newVal, oldVal) => {})
   ```
 
-  Using getter for more complex expressions:
+  استخدام دالة محصلة في التعبيرات المعقدة
 
   ```js
   this.$watch(
-    // every time the expression `this.a + this.b` yields
-    // a different result, the handler will be called.
-    // It's as if we were watching a computed property
-    // without defining the computed property itself.
+    // في كل مرة يعيد فيها التعبير `this.a + this.b`
+    // نتيجة مختلفة، سيتم استدعاء المعالج.
+    // كما لو كنا نراقب خاصية محسوبة
     () => this.a + this.b,
     (newVal, oldVal) => {}
   )
   ```
 
-  Stopping the watcher:
+  توقيف الدالة المراقبة:
 
   ```js
   const unwatch = this.$watch('a', cb)
 
-  // later...
+  // لاحقا...
   unwatch()
   ```
 
-- **See also**
-  - [Options - `watch`](/api/options-state#watch)
-  - [Guide - Watchers](/guide/essentials/watchers)
+- **اطلع أيضًا على**
+  - [خيارات - `watch`](/api/options-state#watch)
+  - [دليل - الدوال المراقبة](/guide/essentials/watchers)
 
-## $emit() {#emit}
+## ()emit$ {#emit}
 
-Trigger a custom event on the current instance. Any additional arguments will be passed into the listener's callback function.
+تشغل حدث مخصص على النسخة الحالية للمكون. ستمرر أي وسائط إضافية إلى دالة رد النداء للمستمع.
 
-- **Type**
+- **النوع**
 
   ```ts
   interface ComponentPublicInstance {
@@ -273,29 +273,29 @@ Trigger a custom event on the current instance. Any additional arguments will be
   }
   ```
 
-- **Example**
+- **مثال**
 
   ```js
   export default {
     created() {
-      // only event
+      // فقط الحدث
       this.$emit('foo')
-      // with additional arguments
+      // مع وسائط إضافية
       this.$emit('bar', 1, 2, 3)
     }
   }
   ```
 
-- **See also**
+- **اطلع أيضًا على**
 
-  - [Component - Events](/guide/components/events)
-  - [`emits` option](./options-state#emits)
+  - [المكون - الأحداث](/guide/components/events)
+  - [خيار `emits`](./options-state#emits)
 
-## $forceUpdate() {#forceupdate}
+## ()forceUpdate$ {#forceupdate}
 
-Force the component instance to re-render.
+إجبار النسخة الحالية للمكون على إعادة التصيير.
 
-- **Type**
+- **النوع**
 
   ```ts
   interface ComponentPublicInstance {
@@ -303,15 +303,15 @@ Force the component instance to re-render.
   }
   ```
 
-- **Details**
+- **التفاصيل**
 
-  This should be rarely needed given Vue's fully automatic reactivity system. The only cases where you may need it is when you have explicitly created non-reactive component state using advanced reactivity APIs.
+  يجب أن يكون هذا مطلوبًا نادرًا نظرًا لنظام الاستجابة التلقائي الكامل لـ Vue. الحالات الوحيدة التي قد تحتاجها هي عندما تكون قد أنشأت بشكل صريح حالة غير تفاعلية للمكون باستخدام الواجهات البرمجية التفاعلية المتقدمة .
 
-## $nextTick() {#nexttick}
+## ()nextTick$ {#nexttick}
 
-Instance-bound version of the global [`nextTick()`](./general#nexttick).
+النسخة المرتبطة بالنسخة العامة لـ [`()nextTick`](./general#nexttick).
 
-- **Type**
+- **النوع**
 
   ```ts
   interface ComponentPublicInstance {
@@ -319,8 +319,8 @@ Instance-bound version of the global [`nextTick()`](./general#nexttick).
   }
   ```
 
-- **Details**
+- **التفاصيل**
 
-  The only difference from the global version of `nextTick()` is that the callback passed to `this.$nextTick()` will have its `this` context bound to the current component instance.
+  الفرق الوحيد عن النسخة العامة لـ `()nextTick` هو أن دالة رد النداء التي تمررها إلى `()this.$nextTick` سيكون لها سياق `this` مرتبط بالنسخة الحالية للمكون.
 
-- **See also** [`nextTick()`](./general#nexttick)
+- **اطلع أيضًا على** [`()nextTick`](./general#nexttick)

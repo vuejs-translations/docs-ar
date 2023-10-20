@@ -1,10 +1,10 @@
-# Options: State {#options-state}
+# الخيارات: الحالة {#options-state}
 
 ## data {#data}
 
-A function that returns the initial reactive state for the component instance.
+هي دالة تعيد الحالة النشطة الأولية لنسخة المكون.
 
-- **Type**
+- **النوع**
 
   ```ts
   interface ComponentOptions {
@@ -15,17 +15,17 @@ A function that returns the initial reactive state for the component instance.
   }
   ```
 
-- **Details**
+- **التفاصيل**
 
-  The function is expected to return a plain JavaScript object, which will be made reactive by Vue. After the instance is created, the reactive data object can be accessed as `this.$data`. The component instance also proxies all the properties found on the data object, so `this.a` will be equivalent to `this.$data.a`.
+  الدالة من المتوقع أن تعيد كائن JavaScript عادي ، والذي سيُجعل نشطًا بواسطة Vue. بعد إنشاء النسخة ، يمكن الوصول إلى كائن البيانات النشط باسم `this.$data`. كما تقوم نسخة المكون بتمثيل جميع الخاصيات الموجودة في كائن البيانات data ، لذلك `this.a` سيكون مكافئًا لـ `this.$data.a`.
 
-  All top-level data properties must be included in the returned data object. Adding new properties to `this.$data` is possible, but it is **not** recommended. If the desired value of a property is not yet available then an empty value such as `undefined` or `null` should be included as a placeholder to ensure that Vue knows that the property exists.
+  يجب تضمين جميع خاصيات البيانات الأولية في كائن البيانات المُرجع. إضافة خاصيات جديدة إلى `this.$data` ممكن ، ولكن **لا** يُنصح به. إذا لم يكن القيمة المطلوبة للخاصية متاحة بعد ، فيجب تضمين قيمة فارغة مثل `undefined` أو `null` كعنصر نائب للتأكد من أن Vue يعرف أن الخاصية موجودة.
 
-  Properties that start with `_` or `$` will **not** be proxied on the component instance because they may conflict with Vue's internal properties and API methods. You will have to access them as `this.$data._property`.
+   الخاصيات التي تبدأ بـ `_` أو `$` لن تُمثل على نسخة المكون لأنها قد تتعارض مع خاصيات Vue الداخلية وتوابع الواجهة البرمجية. سيتعين عليك الوصول إليها كـ `this.$data._property`.
 
-  It is **not** recommended to return objects with their own stateful behavior like browser API objects and prototype properties. The returned object should ideally be a plain object that only represents the state of the component.
+   **لا** يُنصح بإرجاع كائنات تتمتع بسلوك ذو حالة مثل كائنات الواجهة البرمجية للمتصفح وخاصيات النموذج الأساسية (prototype). يجب أن يكون الكائن المُرجع كائنًا عاديًا يمثل فقط حالة المكون.
 
-- **Example**
+- **مثال**
 
   ```js
   export default {
@@ -39,19 +39,19 @@ A function that returns the initial reactive state for the component instance.
   }
   ```
 
-  Note that if you use an arrow function with the `data` property, `this` won't be the component's instance, but you can still access the instance as the function's first argument:
+  تجدر الملاحظة أنه إذا كنت تستخدم دالة سهمية مع خاصية `data` ، فلن يكون `this` هو نسخة المكون ، ولكن يمكنك الوصول إلى النسخة كأول وسيط للدالة:
 
   ```js
   data: (vm) => ({ a: vm.myProp })
   ```
 
-- **See also** [Reactivity in Depth](/guide/extras/reactivity-in-depth)
+- **اطلع أيضًا على** [التفاعلية بالتفصيل](/guide/extras/reactivity-in-depth)
 
 ## props {#props}
 
-Declare the props of a component.
+تصرح بخاصيات المكون.
 
-- **Type**
+- **النوع**
 
   ```ts
   interface ComponentOptions {
@@ -74,30 +74,30 @@ Declare the props of a component.
   type PropType<T> = { new (): T } | { new (): T }[]
   ```
 
-  > Types are simplified for readability.
+  > الأنواع مبسطة لتسهيل القراءة.
 
-- **Details**
+- **التفاصيل**
 
-  In Vue, all component props need to be explicitly declared. Component props can be declared in two forms:
+  في Vue ، يجب التصريح بجميع الخاصيات المكون بوضوح. يمكن التصريح بخاصيات المكون بشكلين:
 
-  - Simple form using an array of strings
-  - Full form using an object where each property key is the name of the prop, and the value is the prop's type (a constructor function) or advanced options.
+  - صيغة بسيطة باستخدام مصفوفة من السلاسل النصية
+  - صيغة كاملة باستخدام كائن حيث يكون مفتاح كل خاصية هو اسم الخاصية ، والقيمة هي نوع الخاصية (دالة بناء) أو خيارات متقدمة.
 
-  With object-based syntax, each prop can further define the following options:
+  مع الصيغة القائمة على الكائنات ، يمكن لكل خاصية تحديد الخيارات التالية:
 
-  - **`type`**: Can be one of the following native constructors: `String`, `Number`, `Boolean`, `Array`, `Object`, `Date`, `Function`, `Symbol`, any custom constructor function or an array of those. In development mode, Vue will check if a prop's value matches the declared type, and will throw a warning if it doesn't. See [Prop Validation](/guide/components/props#prop-validation) for more details.
+  - **`type`**: يمكن أن يكون أحد البناة الأساسيين الموالين: `String` ، `Number` ، `Boolean` ، `Array` ، `Object` ، `Date` ، `Function` ، `Symbol` ، أي دالة بناء مخصصة أو مصفوفة من هؤلاء. في وضع التطوير ، سيتحقق Vue مما إذا كانت قيمة الخاصية تطابق النوع المعلن ، وسيشغل تحذيرًا إذا لم يكن كذلك. انظر [التحقق من الخاصية](/guide/components/props#prop-validation) لمزيد من التفاصيل.
 
-    Also note that a prop with `Boolean` type affects its value casting behavior in both development and production. See [Boolean Casting](/guide/components/props#boolean-casting) for more details.
+    تجدر الملاحظة أيضا أن الخاصية ذات النوع `Boolean` تؤثر على سلوك تحويل قيمتها في كل من وضع التطوير والإنتاج. انظر [تحويل القيمة المنطقية](/guide/components/props#boolean-casting) لمزيد من التفاصيل.
 
-  - **`default`**: Specifies a default value for the prop when it is not passed by the parent or has `undefined` value. Object or array defaults must be returned using a factory function. The factory function also receives the raw props object as the argument.
+  - **`default`**: يحدد قيمة افتراضية للخاصية عندما لا تمرر من قبل المكون الأب أو لها قيمة `undefined`. يجب إرجاع القيم الافتراضية للكائن أو المصفوفة باستخدام دالة منتجة. تتلقى الدالة المنتجة أيضًا كائن الخاصيات الخام كوسيط.
 
-  - **`required`**: Defines if the prop is required. In a non-production environment, a console warning will be thrown if this value is truthy and the prop is not passed.
+  - **`required`**: يحدد ما إذا كانت الخاصية مطلوبة. في بيئة غير إنتاجية ، سيُرسل تحذير على وحدة التحكم إذا كانت هذه القيمة صحيحة ولم  تُمرر الخاصية.
 
-  - **`validator`**: Custom validator function that takes the prop value as the sole argument. In development mode, a console warning will be thrown if this function returns a falsy value (i.e. the validation fails).
+  - **`validator`**: دالة التحقق المخصصة التي تأخذ قيمة الخاصية كوسيط وحيد. في وضع التطوير ، سيُرسل تحذير على وحدة التحكم إذا كانت هذه الدالة تعيد قيمة خاطئة (أي فشل التحقق).
 
-- **Example**
+- **مثال**
 
-  Simple declaration:
+  تصريح بسيط:
 
   ```js
   export default {
@@ -105,14 +105,14 @@ Declare the props of a component.
   }
   ```
 
-  Object declaration with validations:
-
+  التصريح عن طريق كائن مع التحققات:
+ 
   ```js
   export default {
     props: {
-      // type check
+      // التحقق من النوع
       height: Number,
-      // type check plus other validations
+      // التحقق من النوع بالإضافة إلى التحققات الأخرى
       age: {
         type: Number,
         default: 0,
@@ -125,15 +125,15 @@ Declare the props of a component.
   }
   ```
 
-- **See also**
-  - [Guide - Props](/guide/components/props)
-  - [Guide - Typing Component Props](/guide/typescript/options-api#typing-component-props) <sup class="vt-badge ts" />
+- **اطلع أيضًا على**
+  - [الخاصيات](/guide/components/props)
+  - [إضافة الأنواع إلى الخاصيات](/guide/typescript/options-api#typing-component-props) <sup class="vt-badge ts" />
 
 ## computed {#computed}
 
-Declare computed properties to be exposed on the component instance.
+التصريح بالخاصيات المحسوبة لعرضها على نسخة المكون.
 
-- **Type**
+- **النوع**
 
   ```ts
   interface ComponentOptions {
@@ -158,13 +158,13 @@ Declare computed properties to be exposed on the component instance.
   }
   ```
 
-- **Details**
+- **التفاصيل**
 
-  The option accepts an object where the key is the name of the computed property, and the value is either a computed getter, or an object with `get` and `set` methods (for writable computed properties).
+  الخيار يقبل كائن حيث يكون المفتاح هو اسم الخاصية المحسوبة ، والقيمة إما دالة محصلة محسوبة، أو كائن يحتوي على توابع `get` و `set` (للخاصيات المحسوبة القابلة للكتابة).
 
-  All getters and setters have their `this` context automatically bound to the component instance.
+  جميع المحصلات والمعينات لها سياق `this` مرتبط تلقائيًا بنسخة المكون.
 
-  Note that if you use an arrow function with a computed property, `this` won't point to the component's instance, but you can still access the instance as the function's first argument:
+  تجدر الملاحظة أنه إذا كنت تستخدم دالة سهمية مع خاصية محسوبة ، فلن يشير `this` إلى نسخة المكون ، ولكن يمكنك الوصول إلى النسخة كأول وسيط للدالة:
 
   ```js
   export default {
@@ -174,7 +174,7 @@ Declare computed properties to be exposed on the component instance.
   }
   ```
 
-- **Example**
+- **lehg**
 
   ```js
   export default {
@@ -182,11 +182,11 @@ Declare computed properties to be exposed on the component instance.
       return { a: 1 }
     },
     computed: {
-      // readonly
+      // قابل للقراءة فقط
       aDouble() {
         return this.a * 2
       },
-      // writable
+      // قابل للكتابة
       aPlus: {
         get() {
           return this.a + 1
@@ -207,15 +207,15 @@ Declare computed properties to be exposed on the component instance.
   }
   ```
 
-- **See also**
-  - [Guide - Computed Properties](/guide/essentials/computed)
-  - [Guide - Typing Computed Properties](/guide/typescript/options-api#typing-computed-properties) <sup class="vt-badge ts" />
+- **اطلع أيضًا على**
+  - [الخاصيات المحسوبة](/guide/essentials/computed)
+  - [إضافة الأنواع إلى الخاصيات المحسوبة](/guide/typescript/options-api#typing-computed-properties) <sup class="vt-badge ts" />
 
 ## methods {#methods}
 
-Declare methods to be mixed into the component instance.
+التصريح بالتوابع لتدمج في نسخة المكون.
 
-- **Type**
+- **النوع**
 
   ```ts
   interface ComponentOptions {
@@ -225,11 +225,11 @@ Declare methods to be mixed into the component instance.
   }
   ```
 
-- **Details**
+- **التفاصيل**
 
-  Declared methods can be directly accessed on the component instance, or used in template expressions. All methods have their `this` context automatically bound to the component instance, even when passed around.
+  يمكن الوصول إلى التوابع المصرح مباشرةً على نسخة المكون، أو استخدامها في تعبيرات القوالب. جميع الوظائف لها سياق `this` مرتبط تلقائيًا بنسخة المكون ، حتى عند تمريرها.
 
-  Avoid using arrow functions when declaring methods, as they will not have access to the component instance via `this`.
+  تجنب استخدام الدوال السهمية عند التصريح بالتوابع ، لأنها لن تتمكن من الوصول إلى نسخة المكون عبر `this`.
 
 - **Example**
 
@@ -250,13 +250,13 @@ Declare methods to be mixed into the component instance.
   }
   ```
 
-- **See also** [Event Handling](/guide/essentials/event-handling)
+- **اطلع أيضًا على** [معالجة الأحداث](/guide/essentials/event-handling)
 
 ## watch {#watch}
 
-Declare watch callbacks to be invoked on data change.
+التصريح بدوال مراقبة لتكون مستدعاة عند تغيير البيانات.
 
-- **Type**
+- **النوع**
 
   ```ts
   interface ComponentOptions {
@@ -283,24 +283,24 @@ Declare watch callbacks to be invoked on data change.
   }
   ```
 
-  > Types are simplified for readability.
+  > الأنواع مبسطة لتسهيل القراءة.
 
-- **Details**
+- **التفاصيل**
 
-  The `watch` option expects an object where keys are the reactive component instance properties to watch (e.g. properties declared via `data` or `computed`) — and values are the corresponding callbacks. The callback receives the new value and the old value of the watched source.
+  يتوقع الخيار `watch` كائنًا حيث تكون المفاتيح هي خاصيات نسخة المكون النشطة المعدة للمراقبة (على سبيل المثال الخاصيات المعلنة عبر `data` أو `computed`) - والقيم هي الدوال المقابلة. تتلقى دالة رد النداء القيمة الجديدة والقيمة القديمة للمصدر المراقَب.
 
-  In addition to a root-level property, the key can also be a simple dot-delimited path, e.g. `a.b.c`. Note that this usage does **not** support complex expressions - only dot-delimited paths are supported. If you need to watch complex data sources, use the imperative [`$watch()`](/api/component-instance#watch) API instead.
+  بالإضافة إلى خاصية المستخدمة على مستوى الجذر، يمكن أن يكون المفتاح مسارًا بسيطًا مفصولًا بنقاط، على سبيل المثال `a.b.c`. لاحظ أن هذا الاستخدام **لا** يدعم التعبيرات المعقدة - تُدعم مسارات مفصولة بنقطة فقط. إذا كنت بحاجة إلى مراقبة مصادر بيانات معقدة ، فيرجى استخدام الواجهة البرمجية الأمرية [`()watch$`](/api/component-instance#watch) بدلاً من ذلك.
 
-  The value can also be a string of a method name (declared via `methods`), or an object that contains additional options. When using the object syntax, the callback should be declared under the `handler` field. Additional options include:
+  يمكن أن تكون القيمة أيضًا سلسلة من اسم الدالة (المصرح بها عبر `methods`) ، أو كائن يحتوي على خيارات إضافية. عند استخدام صيغة الكائن ، يجب أن يصرح بدالة رد النداء تحت مفتاح `handler`. تشمل الخيارات الإضافية:
 
-  - **`immediate`**: trigger the callback immediately on watcher creation. Old value will be `undefined` on the first call.
-  - **`deep`**: force deep traversal of the source if it is an object or an array, so that the callback fires on deep mutations. See [Deep Watchers](/guide/essentials/watchers#deep-watchers).
-  - **`flush`**: adjust the callback's flush timing. See [Callback Flush Timing](/guide/essentials/watchers#callback-flush-timing) and [`watchEffect()`](/api/reactivity-core#watcheffect).
-  - **`onTrack / onTrigger`**: debug the watcher's dependencies. See [Watcher Debugging](/guide/extras/reactivity-in-depth#watcher-debugging).
+  - **`immediate`**: تشغيل دالة رد النداء على الفور عند إنشاء الدالة المراقبة. ستكون القيمة القديمة `undefined` في الاستدعاء الأول.
+  - **`deep`**: فرض المرور العميق للمصدر إذا كان كائنًا أو مصفوفة ، بحيث تنشط دالة رد النداء على التغييرات العميقة. انظر [المراقبون العميقون](/guide/essentials/watchers#deep-watchers).
+  - **`flush`**: ضبط وقت تفريغ دالة رد النداء. انظر [توقيت تفريغ دالة رد النداء](/guide/essentials/watchers#callback-flush-timing) و [`watchEffect()`](/api/reactivity-core#watcheffect).
+  - **`onTrack / onTrigger`**: تنقيح اعتماديات الدالة المراقبة. اطلع على [تنقيح الدالة المراقبة](/guide/extras/reactivity-in-depth#watcher-debugging).
 
-  Avoid using arrow functions when declaring watch callbacks as they will not have access to the component instance via `this`.
+  تجنب استخدام الدوال السهمية عند تصريح دوال مراقبة لأنها لن تتمكن من الوصول إلى نسخة المكون عبر `this`.
 
-- **Example**
+- **مثال**
 
   ```js
   export default {
@@ -316,31 +316,31 @@ Declare watch callbacks to be invoked on data change.
       }
     },
     watch: {
-      // watching top-level property
+      // مراقبة خاصية على مستوى الجذر
       a(val, oldVal) {
         console.log(`new: ${val}, old: ${oldVal}`)
       },
-      // string method name
+      // اسم الدالة على شكل سلسلة نصية
       b: 'someMethod',
-      // the callback will be called whenever any of the watched object properties change regardless of their nested depth
+      // ستستدعى دالة رد النداء كلما تغيرت أي من خاصيات الكائن المراقب بغض النظر عن عمقها المتداخل
       c: {
         handler(val, oldVal) {
           console.log('c changed')
         },
         deep: true
       },
-      // watching a single nested property:
+      // مراقبة خاصية متداخلة واحدة:
       'c.d': function (val, oldVal) {
-        // do something
+        // افعل شيئًا ما
       },
-      // the callback will be called immediately after the start of the observation
+      // ستستدعى دالة رد النداء على الفور بعد بدء المراقبة
       e: {
         handler(val, oldVal) {
           console.log('e changed')
         },
         immediate: true
       },
-      // you can pass array of callbacks, they will be called one-by-one
+      // يمكنك تمرير مصفوفة من دوال رد النداء ، ستستدعى واحدة تلو الأخرى
       f: [
         'handle1',
         function handle2(val, oldVal) {
@@ -368,13 +368,13 @@ Declare watch callbacks to be invoked on data change.
   }
   ```
 
-- **See also** [Watchers](/guide/essentials/watchers)
+- **اطلع أيضًا على** [الدوال المراقبة](/guide/essentials/watchers)
 
 ## emits {#emits}
 
-Declare the custom events emitted by the component.
+التصريح بالأحداث المخصصة التي يرسلها المكون.
 
-- **Type**
+- **النوع**
 
   ```ts
   interface ComponentOptions {
@@ -388,20 +388,20 @@ Declare the custom events emitted by the component.
   type EmitValidator = (...args: unknown[]) => boolean
   ```
 
-- **Details**
+- **التفاصيل**
 
-  Emitted events can be declared in two forms:
+  يمكن التصريح بالأحداث المرسلة بصيغتين:
 
-  - Simple form using an array of strings
-  - Full form using an object where each property key is the name of the event, and the value is either `null` or a validator function.
+  - صيغة بسيطة باستخدام مصفوفة من السلاسل النصية
+  - صيغة كاملة باستخدام كائن حيث يكون مفتاح كل خاصية هو اسم الخاصية ، والقيمة إما `null` أو دالة التحقق.
 
-  The validation function will receive the additional arguments passed to the component's `$emit` call. For example, if `this.$emit('foo', 1)` is called, the corresponding validator for `foo` will receive the argument `1`. The validator function should return a boolean to indicate whether the event arguments are valid.
+  ستتلقى دالة التحقق الوسيط الإضافي الذي يمرر إلى استدعاء `emit$` للمكون. على سبيل المثال ، إذا أُستدعي `this.$emit('foo', 1)` ، فسيتلقى مُتحقق `foo` المقابل الوسيط `1`. يجب أن تعيد دالة التحقق قيمة منطقية للإشارة إلى ما إذا كانت وسائط الحدث صالحة.
 
-  Note that the `emits` option affects which event listeners are considered component event listeners, rather than native DOM event listeners. The listeners for declared events will be removed from the component's `$attrs` object, so they will not be passed through to the component's root element. See [Fallthrough Attributes](/guide/components/attrs) for more details.
+  تجدر الملاحظة أن خيار `emits` يؤثر على الأحداث التي تعتبر مستمعات لأحداث المكون ، بدلاً من مستمعات الأحداث الأصلية للـDOM. ستُزال مستمعات الأحداث المصرح بها من كائن `attrs$` للمكون ، لذلك لن  تُمرر إلى عنصر جذر المكون. اطلع على [السمات المستترة](/guide/components/attrs) لمزيد من التفاصيل.
 
 - **Example**
 
-  Array syntax:
+  صيغة المصفوفة:
 
   ```js
   export default {
@@ -412,15 +412,15 @@ Declare the custom events emitted by the component.
   }
   ```
 
-  Object syntax:
+  صيغة الكائن:
 
   ```js
   export default {
     emits: {
-      // no validation
+      // بدون تحقق  
       click: null,
 
-      // with validation
+      // مع التحقق
       submit: (payload) => {
         if (payload.email && payload.password) {
           return true
@@ -433,15 +433,15 @@ Declare the custom events emitted by the component.
   }
   ```
 
-- **See also**
-  - [Guide - Fallthrough Attributes](/guide/components/attrs)
-  - [Guide - Typing Component Emits](/guide/typescript/options-api#typing-component-emits) <sup class="vt-badge ts" />
+- **اطلع أيضًا على**
+  - [السمات المستترة](/guide/components/attrs)
+  - [إضافة الأنواع إلى الأحداث المرسلة](/guide/typescript/options-api#typing-component-emits) <sup class="vt-badge ts" />
 
 ## expose {#expose}
 
-Declare exposed public properties when the component instance is accessed by a parent via template refs.
+التصريح بالخاصيات العامة المكشوفة عندما يُوصل إلى نسخة المكون من قبل المكون الأب عبر مراجع القوالب.
 
-- **Type**
+- **النوع**
 
   ```ts
   interface ComponentOptions {
@@ -449,19 +449,19 @@ Declare exposed public properties when the component instance is accessed by a p
   }
   ```
 
-- **Details**
+- **التفاصيل**
 
-  By default, a component instance exposes all instance properties to the parent when accessed via `$parent`, `$root`, or template refs. This can be undesirable, since a component most likely has internal state or methods that should be kept private to avoid tight coupling.
+  بشكل افتراضي ، تكشف نسخة المكون عن جميع خاصيات النسخة للمكون الأب عند الوصول إليها عبر `$parent` ، `$root` ، أو مراجع القوالب. يمكن أن يكون هذا غير مرغوب فيه ، لأن المكون على الأرجح يحتوي على حالة داخلية أو توابع يجب الاحتفاظ بها كخاصية خاصة لتجنب الارتباط الوثيق.
 
-  The `expose` option expects a list of property name strings. When `expose` is used, only the properties explicitly listed will be exposed on the component's public instance.
+  يتوقع الخيار `expose` قائمة من سلاسل أسماء الخاصيات. عند استخدام `expose` ،ستعرض الخاصيات المدرجة صراحة فقط على النسخة العامة للمكون.
 
-  `expose` only affects user-defined properties - it does not filter out built-in component instance properties.
+  `expose` يؤثر فقط على الخاصيات المعرفة بواسطة المستخدم - لا يقوم بتصفية خاصيات نسخة المكون المدمجة.
 
-- **Example**
+- **مثال**
 
   ```js
   export default {
-    // only `publicMethod` will be available on the public instance
+    // ستكون `publicMethod` فقط متاحة على النسخة العامة
     expose: ['publicMethod'],
     methods: {
       publicMethod() {

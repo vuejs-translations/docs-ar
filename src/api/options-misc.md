@@ -1,10 +1,10 @@
-# Options: Misc {#options-misc}
+# الخيارات: متفرقة {#options-misc}
 
 ## name {#name}
 
-Explicitly declare a display name for the component.
+تصرح بشكل صريح عن اسم العرض للمكون.
 
-- **Type**
+- **النوع**
 
   ```ts
   interface ComponentOptions {
@@ -12,31 +12,31 @@ Explicitly declare a display name for the component.
   }
   ```
 
-- **Details**
+- **التفاصيل**
 
-  The name of a component is used for the following:
+  إسم المكون يستخدم في الأمور التالية:
 
-  - Recursive self-reference in the component's own template
-  - Display in Vue DevTools' component inspection tree
-  - Display in warning component traces
+  - الإشارة الذاتية المتكررة في قالب المكون الخاص به
+  - العرض في شجرة تفتيش المكون في أدوات تطوير Vue
+  - العرض في تتبعات التحذير للمكون
 
-  When you use Single-File Components, the component already infers its own name from the filename. For example, a file named `MyComponent.vue` will have the inferred display name "MyComponent".
+  لما تستخدم المكونات أحادية الملف، المكون يستنتج اسمه الخاص من اسم الملف. على سبيل المثال، ملف يسمى `MyComponent.vue` سيكون له اسم العرض المستنتج "MyComponent".
 
-  Another case is that when a component is registered globally with [`app.component`](/api/application#app-component), the global ID is automatically set as its name.
+  حالة أخرى هي عندما يُسجل المكون على نطاق عام باستخدام [`app.component`](/api/application#app-component)، ستعين الهوية العامة تلقائيًا كاسم له.
 
-  The `name` option allows you to override the inferred name, or to explicitly provide a name when no name can be inferred (e.g. when not using build tools, or an inlined non-SFC component).
+  خيار `name` يسمح لك بتجاوز الاسم المستنتج، أو توفير اسم بشكل صريح عندما لا يمكن استنتاج اسم (على سبيل المثال، عندما لا تستخدم أدوات البناء، أو مكون غير موجود في ملف واحد).
 
-  There is one case where `name` is explicitly necessary: when matching against cacheable components in [`<KeepAlive>`](/guide/built-ins/keep-alive) via its `include / exclude` props.
+  هناك حالة واحدة يكون فيها `name` ضروريًا بشكل صريح: عند مطابقة المكونات القابلة للتخزين في ذاكرة التخزين المؤقت [`<KeepAlive>`](/guide/built-ins/keep-alive) عبر خاصيتي `include / exclude`.
 
-  :::tip
-  Since version 3.2.34, a single-file component using `<script setup>` will automatically infer its `name` option based on the filename, removing the need to manually declare the name even when used with `<KeepAlive>`.
+  :::tip ملاحظة
+  منذ الإصدار 3.2.34، المكون أحادي الملف الذي يستخدم صيغة `<script setup>` سيستنتج خيار `name` بشكل تلقائي استنادًا إلى اسم الملف، مما يزيل الحاجة إلى تعريف الاسم يدويًا حتى عند استخدام `<KeepAlive>`.
   :::
 
 ## inheritAttrs {#inheritattrs}
 
-Controls whether the default component attribute fallthrough behavior should be enabled.
+يتحكم في ما إذا كان يجب تمكين سلوك السمة المستترة الافتراضية للمكون.
 
-- **Type**
+- **النوع**
 
   ```ts
   interface ComponentOptions {
@@ -44,11 +44,11 @@ Controls whether the default component attribute fallthrough behavior should be 
   }
   ```
 
-- **Details**
+- **التفاصيل**
 
-  By default, parent scope attribute bindings that are not recognized as props will "fallthrough". This means that when we have a single-root component, these bindings will be applied to the root element of the child component as normal HTML attributes. When authoring a component that wraps a target element or another component, this may not always be the desired behavior. By setting `inheritAttrs` to `false`, this default behavior can be disabled. The attributes are available via the `$attrs` instance property and can be explicitly bound to a non-root element using `v-bind`.
+  بشكل افتراضي، ربطات السمات في نطاق الأب التي لا يُتعرف عليها كخاصيات كـ"سمات مستترة". هذا يعني أنه عندما يكون لدينا مكون جذر واحد، سيطبق هذه الربطات على عنصر الجذر للمكون الابن كسمات HTML عادية. عند كتابة مكون يلف عنصر هدف أو مكون آخر، قد لا يكون هذا هو السلوك المرغوب دائمًا. بتعيين `inheritAttrs` إلى `false`، يمكن تعطيل هذا السلوك الافتراضي. السمات متوفرة عبر خاصية النسخة `attrs$` ويمكن ربطها بشكل صريح بعنصر غير جذري باستخدام `v-bind`.
 
-- **Example**
+- **مثال**
 
   <div class="options-api">
 
@@ -76,7 +76,7 @@ Controls whether the default component attribute fallthrough behavior should be 
   </div>
   <div class="composition-api">
 
-  When declaring this option in a component that uses `<script setup>`, you can use the [`defineOptions`](/api/sfc-script-setup#defineoptions) macro:
+  عند التصريح بهذا الخيار في مكون يستخدم `<script setup>`، يمكنك استخدام التعليمة العامة [`defineOptions`](/api/sfc-script-setup#defineoptions):
 
   ```vue
   <script setup>
@@ -99,7 +99,7 @@ Controls whether the default component attribute fallthrough behavior should be 
   </template>
   ```
 
-  Since 3.3 you can also use `defineOptions` directly in `<script setup>`:
+  منذ 3.3 يمكنك أيضًا استخدام `defineOptions` مباشرة في `<script setup>`:
 
   ```vue
   <script setup>
@@ -122,13 +122,13 @@ Controls whether the default component attribute fallthrough behavior should be 
 
   </div>
 
-- **See also** [Fallthrough Attributes](/guide/components/attrs)
+- **اطلع أيضًا على** [السمات المستترة](/guide/components/attrs)
 
 ## components {#components}
 
-An object that registers components to be made available to the component instance.
+يقوم بتسجيل مكونات لتصبح متوفرة لنسخة المكون.
 
-- **Type**
+- **النوع**
 
   ```ts
   interface ComponentOptions {
@@ -136,7 +136,7 @@ An object that registers components to be made available to the component instan
   }
   ```
 
-- **Example**
+- **مثال**
 
   ```js
   import Foo from './Foo.vue'
@@ -144,21 +144,21 @@ An object that registers components to be made available to the component instan
 
   export default {
     components: {
-      // shorthand
+      // اختصار
       Foo,
-      // register under a different name
+      // تسجيل باسم مختلف
       RenamedBar: Bar
     }
   }
   ```
 
-- **See also** [Component Registration](/guide/components/registration)
+- **اطلع أيضًا على** [تسجيل المكونات](/guide/components/registration)
 
 ## directives {#directives}
 
-An object that registers directives to be made available to the component instance.
+يقوم بتسجيل السمات الموجهة لتصبح متوفرة لنسخة المكون.
 
-- **Type**
+- **النوع**
 
   ```ts
   interface ComponentOptions {
@@ -166,12 +166,12 @@ An object that registers directives to be made available to the component instan
   }
   ```
 
-- **Example**
+- **مثال**
 
   ```js
   export default {
     directives: {
-      // enables v-focus in template
+      // تمكين v-focus في القالب
       focus: {
         mounted(el) {
           el.focus()
@@ -185,6 +185,6 @@ An object that registers directives to be made available to the component instan
   <input v-focus>
   ```
 
-  A hash of directives to be made available to the component instance.
+  مجموعة من السمات الموجهة لتصبح متوفرة لنسخة المكون.
 
-- **See also** [Custom Directives](/guide/reusability/custom-directives)
+- **اطلع أيضًا على** [السمات الموجهة المخصصة](/guide/reusability/custom-directives)
