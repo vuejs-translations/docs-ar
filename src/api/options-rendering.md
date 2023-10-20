@@ -1,10 +1,10 @@
-# Options: Rendering {#options-rendering}
+# الخيارات: التصيير {#options-rendering}
 
 ## template {#template}
 
-A string template for the component.
+قالب المكون على شكل سلسلة نصية.
 
-- **Type**
+- **النوع**
 
   ```ts
   interface ComponentOptions {
@@ -12,25 +12,24 @@ A string template for the component.
   }
   ```
 
-- **Details**
+- **التفاصيل**
 
-  A template provided via the `template` option will be compiled on-the-fly at runtime. It is only supported when using a build of Vue that includes the template compiler. The template compiler is **NOT** included in Vue builds that have the word `runtime` in their names, e.g. `vue.runtime.esm-bundler.js`. Consult the [dist file guide](https://github.com/vuejs/core/tree/main/packages/vue#which-dist-file-to-use) for more details about the different builds.
+  القالب المقدم عبر الخيار `template` سيُصير على الطائر أثناء التشغيل. هذا الخيار مدعوم فقط عند استخدام عملية بناء Vue الذي يتضمن مصرف القوالب. مصرف القوالب **غير** مدرج في بناء Vue الذي يحتوي على كلمة `runtime` في أسمائه، على سبيل المثال `vue.runtime.esm-bundler.js`. راجع [دليل ملفات التوزيع](https://github.com/vuejs/core/tree/main/packages/vue#which-dist-file-to-use)  لمزيد من التفاصيل حول مختلف عمليات البناء.
 
-  If the string starts with `#` it will be used as a `querySelector` and use the selected element's `innerHTML` as the template string. This allows the source template to be authored using native `<template>` elements.
+  إذا بدأت السلسلة النصية بـ `#` ستُستخدم كـ `querySelector` واستخدام `innerHTML` للعنصر المحدد كسلسلة نصية للقالب. هذا يسمح بكتابة القالب الأصلي باستخدام عناصر `<template>` الأصلية.
 
-  If the `render` option is also present in the same component, `template` will be ignored.
+  إذا كان الخيار `render` موجود أيضًا في نفس المكون، سيتم تجاهل خيار `template`.
 
-  If the root component of your application doesn't have a `template` or `render` option specified, Vue will try to use the `innerHTML` of the mounted element as the template instead.
+  إذا لم يكن لدى المكون الجذر لتطبيقك خيار `template` أو `render` محدد، سيحاول Vue استخدام `innerHTML` للعنصر المركب كقالب بدلاً من ذلك.
 
-  :::warning Security Note
-  Only use template sources that you can trust. Do not use user-provided content as your template. See [Security Guide](/guide/best-practices/security#rule-no-1-never-use-non-trusted-templates) for more details.
+  :::warning ملاحظة أمان
+  استخدم فقط مصادر القوالب التي يمكنك الوثوق بها. لا تستخدم محتوى المستخدم المقدم كقالب. راجع [دليل الأمان](/guide/best-practices/security#rule-no-1-never-use-non-trusted-templates) لمزيد من التفاصيل.
   :::
-
 ## render {#render}
 
-A function that programmatically returns the virtual DOM tree of the component.
+دالة تعيد برمجيًا الشجرة DOM الافتراضية للمكون.
 
-- **Type**
+- **النوع**
 
   ```ts
   interface ComponentOptions {
@@ -51,21 +50,22 @@ A function that programmatically returns the virtual DOM tree of the component.
   type VNodeArrayChildren = (VNodeArrayChildren | VNodeChildAtom)[]
   ```
 
-- **Details**
+- **التفاصيل**
 
-  `render` is an alternative to string templates that allows you to leverage the full programmatic power of JavaScript to declare the render output of the component.
+  `render` هو بديل لقوالب السلسلة النصية التي تسمح لك بالاستفادة من القوة البرمجية الكاملة لـ JavaScript للتصريح بمخرجات تصيير المكون.
 
-  Pre-compiled templates, for example those in Single-File Components, are compiled into the `render` option at build time. If both `render` and `template` are present in a component, `render` will take higher priority.
+  القوالب المصرفة مسبقًا، على سبيل المثال تلك الموجودة في مكونات الملف الواحد، تصرف إلى خيار `render` أثناء عملية البناء. إذا كان كل من `render` و `template` موجودين في مكون، سيأخذ `render` أولوية أعلى.
+ [Render Functions](/guide/extras/render-function)
 
-- **See also**
-  - [Rendering Mechanism](/guide/extras/rendering-mechanism)
-  - [Render Functions](/guide/extras/render-function)
+- **اطلع أيضًا على**
+  - [آلية التصيير](/guide/extras/rendering-mechanism)
+  - [دوال التصيير](/guide/extras/render-function)
 
 ## compilerOptions {#compileroptions}
 
-Configure runtime compiler options for the component's template.
+تقوم بإعداد خيارات مصرف التشغيل لقالب المكون.
 
-- **Type**
+- **النوع**
 
   ```ts
   interface ComponentOptions {
@@ -78,19 +78,19 @@ Configure runtime compiler options for the component's template.
   }
   ```
 
-- **Details**
+- **التفاصيل**
 
-  This config option is only respected when using the full build (i.e. the standalone `vue.js` that can compile templates in the browser). It supports the same options as the app-level [app.config.compilerOptions](/api/application#app-config-compileroptions), and has higher priority for the current component.
+  هذا الخيار لا يؤخذ بعين الاعتبار إلا عند استخدام  عملية بناء كاملة (أي `vue.js` المستقل الذي يمكنه تصريف القوالب في المتصفح). يدعم نفس الخيارات كـ [app.config.compilerOptions](/api/application#app-config-compileroptions) على مستوى جذر التطبيق، وله أولوية أعلى للمكون الحالي
 
-- **See also** [app.config.compilerOptions](/api/application#app-config-compileroptions)
+- **اطلع أيضًا على** [app.config.compilerOptions](/api/application#app-config-compileroptions)
 
 ## slots<sup class="vt-badge ts"/> {#slots}
 
-An option to assist with type inference when using slots programmatically in render functions. Only supported in 3.3+.
+خيار للمساعدة في استنتاج النوع عند استخدام المنافذ برمجيًا في دوال التصيير. مدعوم فقط في 3.3+.
 
-- **Details**
+- **التفاصيل**
 
-  This option's runtime value is not used. The actual types should be declared via type casting using the `SlotsType` type helper:
+  قيمة هذا الخيار في وقت التشغيل لا تستخدم. يجب أن تُعلن الأنواع الفعلية باستخدام تحويل النوع باستخدام دالة النوع المساعدة `SlotsType`:
 
   ```ts
   import { SlotsType } from 'vue'

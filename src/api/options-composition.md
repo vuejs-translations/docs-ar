@@ -1,10 +1,10 @@
-# Options: Composition {#options-composition}
+# الخيارات: التركيب {#options-composition}
 
 ## provide {#provide}
 
-Provide values that can be injected by descendant components.
+توفر القيم التي يمكن حقنها من طرف المكونات الأبناء.
 
-- **Type**
+- **النوع**
 
   ```ts
   interface ComponentOptions {
@@ -12,15 +12,15 @@ Provide values that can be injected by descendant components.
   }
   ```
 
-- **Details**
+- **التفاصيل**
 
-  `provide` and [`inject`](#inject) are used together to allow an ancestor component to serve as a dependency injector for all its descendants, regardless of how deep the component hierarchy is, as long as they are in the same parent chain.
+  `provide` و [`inject`](#inject) يستخدمان معًا للسماح لمكون أب أن يعمل كحاقن اعتمادية لجميع المكونات الأبناء، بغض النظر عن مدى عمق تسلسل المكونات، طالما أنها في نفس سلسلة المكون الأب.
 
-  The `provide` option should be either an object or a function that returns an object. This object contains the properties that are available for injection into its descendants. You can use Symbols as keys in this object.
+  يجب أن يكون الخيار `provide` إما كائن أو دالة تعيد كائنًا. يحتوي هذا الكائن على الخاصيات المتاحة للحقن في المكونات الأبناء. يمكنك استخدام الرموز كمفاتيح في هذا الكائن.
 
-- **Example**
+- **مثال**
 
-  Basic usage:
+  استخدام أساسي:
 
   ```js
   const s = Symbol()
@@ -33,7 +33,7 @@ Provide values that can be injected by descendant components.
   }
   ```
 
-  Using a function to provide per-component state:
+  استخدام دالة لتوفير حالة لكل مكون:
 
   ```js
   export default {
@@ -50,15 +50,15 @@ Provide values that can be injected by descendant components.
   }
   ```
 
-  Note in the above example, the provided `msg` will NOT be reactive. See [Working with Reactivity](/guide/components/provide-inject#working-with-reactivity) for more details.
+  تجدر الملاحظة في المثال أعلاه، أن `msg` الموفرة لن تكون تفاعلية. انظر [العمل مع التفاعلية](/guide/components/provide-inject#working-with-reactivity) لمزيد من التفاصيل.
 
-- **See also** [Provide / Inject](/guide/components/provide-inject)
+- **اطلع أيضًا على** [حقن/تزويد](/guide/components/provide-inject)
 
 ## inject {#inject}
 
-Declare properties to inject into the current component by locating them from ancestor providers.
+يصرح بالخاصيات لحقنها في المكون الحالي عن طريق تحديدها من مزودي المكونات الأباء.
 
-- **Type**
+- **النوع**
 
   ```ts
   interface ComponentOptions {
@@ -75,24 +75,24 @@ Declare properties to inject into the current component by locating them from an
   }
   ```
 
-- **Details**
+- **التفاصيل**
 
-  The `inject` option should be either:
+  الخيار `inject` يجب أن يكون إما:
 
-  - An array of strings, or
-  - An object where the keys are the local binding name and the value is either:
-    - The key (string or Symbol) to search for in available injections, or
-    - An object where:
-      - The `from` property is the key (string or Symbol) to search for in available injections, and
-      - The `default` property is used as fallback value. Similar to props default values, a factory function is needed for object types to avoid value sharing between multiple component instances.
+  - مصفوفة من السلاسل النصية، أو
+  - كائن حيث تكون المفاتيح هي اسم الربط المحلي والقيمة إما:
+    - المفتاح (سلسلة نصية أو رمز) للبحث عنه في الحقنات المتاحة، أو
+    - كائن حيث:
+      - خاصية `from` هي المفتاح (سلسلة نصية أو رمز) للبحث عنه في الحقنات المتاحة، و
+      - تستخدم خاصية `default` كقيمة احتياطية. مماثلة للقيم الافتراضية للخاصيات، يلزم استخدام دالة منتجة لأنواع الكائن لتجنب مشاركة القيمة بين عدة نسخ من المكون.
 
-  An injected property will be `undefined` if neither a matching property nor a default value was provided.
+  ستكون الخاصية المحقونة `undefined` إذا لم توفر خاصية مطابقة أو قيمة افتراضية.
 
-  Note that injected bindings are NOT reactive. This is intentional. However, if the injected value is a reactive object, properties on that object do remain reactive. See [Working with Reactivity](/guide/components/provide-inject#working-with-reactivity) for more details.
+  تجدر الملاحظة أن الربط المحقون ليس تفاعليًا. هذا أمر مقصود. ومع ذلك، إذا كانت القيمة المحقونة هي كائن تفاعلي، فإن الخاصيات على هذا الكائن تظل تفاعلية. انظر [العمل مع التفاعلية](/guide/components/provide-inject#working-with-reactivity) لمزيد من التفاصيل.
 
-- **Example**
+- **مثال**
 
-  Basic usage:
+  استخدام أساسي:
 
   ```js
   export default {
@@ -103,7 +103,7 @@ Declare properties to inject into the current component by locating them from an
   }
   ```
 
-  Using an injected value as the default for a prop:
+  استخدام قيمة محقونة كقيمة افتراضية لخاصية:
 
   ```js
   const Child = {
@@ -118,7 +118,7 @@ Declare properties to inject into the current component by locating them from an
   }
   ```
 
-  Using an injected value as data entry:
+  استخدام قيمة محقونة كإدخال بيانات:
 
   ```js
   const Child = {
@@ -131,7 +131,7 @@ Declare properties to inject into the current component by locating them from an
   }
   ```
 
-  Injections can be optional with default value:
+  يمكن أن تكون الحقنات اختيارية مع قيمة افتراضية:
 
   ```js
   const Child = {
@@ -141,7 +141,7 @@ Declare properties to inject into the current component by locating them from an
   }
   ```
 
-  If it needs to be injected from a property with a different name, use `from` to denote the source property:
+  إذا كان يحتاج إلى حقنه من خاصية باسم مختلف، استخدم `from` للإشارة إلى خاصية المصدر:
 
   ```js
   const Child = {
@@ -154,7 +154,7 @@ Declare properties to inject into the current component by locating them from an
   }
   ```
 
-  Similar to prop defaults, you need to use a factory function for non-primitive values:
+  مماثلة للقيم الافتراضية للخاصيات، يجب استخدام دالة منتجة للقيم غير الأساسية:
 
   ```js
   const Child = {
@@ -167,13 +167,13 @@ Declare properties to inject into the current component by locating them from an
   }
   ```
 
-- **See also** [Provide / Inject](/guide/components/provide-inject)
+- **اطلع أيضًا على** [حقن/تزويد](/guide/components/provide-inject)
 
 ## mixins {#mixins}
 
-An array of option objects to be mixed into the current component.
+مصفوفة من كائنات الخيارات لتدمج في المكون الحالي.
 
-- **Type**
+- **النوع**
 
   ```ts
   interface ComponentOptions {
@@ -181,17 +181,17 @@ An array of option objects to be mixed into the current component.
   }
   ```
 
-- **Details**
+- **التفاصيل**
 
-  The `mixins` option accepts an array of mixin objects. These mixin objects can contain instance options like normal instance objects, and they will be merged against the eventual options using the certain option merging logic. For example, if your mixin contains a `created` hook and the component itself also has one, both functions will be called.
+  خيار `mixins` يقبل مصفوفة من المخاليط. يمكن أن تحتوي المخاليط هذه على خيارات النسخة مثل كائنات النسخة العادية، وستدمج مع الخيارات النهائية باستخدام منطق دمج الخيارات معين. على سبيل المثال، إذا كانت المخاليط تحتوي على خطاف `created` وكان المكون نفسه يحتوي أيضًا على خطاف `created`، ستستدعى كلتا الدالتين.
 
-  Mixin hooks are called in the order they are provided, and called before the component's own hooks.
+  تستدعى خطافات المخاليط بالترتيب الذي وفرت به، وتستدعى قبل خطافات المكون الخاصة به.
 
-  :::warning No Longer Recommended
-  In Vue 2, mixins were the primary mechanism for creating reusable chunks of component logic. While mixins continue to be supported in Vue 3, [Composable functions using Composition API](/guide/reusability/composables) is now the preferred approach for code reuse between components.
+  :::warning غير موصى به بعد الآن
+  في Vue 2، كانت المخاليط هي الآلية الأساسية لإنشاء شظايا قابلة لإعادة الاستخدام من منطق المكون. في حين أن المخاليط ما زالت مدعومة في Vue 3، [الدوال المركبة باستخدام واجهة التركيب](/guide/reusability/composables) هي الآلية المفضلة الآن لإعادة استخدام الكود بين المكونات.
   :::
 
-- **Example**
+- **مثال**
 
   ```js
   const mixin = {
@@ -213,9 +213,9 @@ An array of option objects to be mixed into the current component.
 
 ## extends {#extends}
 
-A "base class" component to extend from.
+مكون "فئة أساسية" للتوريث منه.
 
-- **Type**
+- **النوع**
 
   ```ts
   interface ComponentOptions {
@@ -223,17 +223,17 @@ A "base class" component to extend from.
   }
   ```
 
-- **Details**
+- **التفاصيل**
 
-  Allows one component to extend another, inheriting its component options.
+  يسمح لمكون واحد بالوراثة من مكون آخر، وراثة خيارات المكون الخاص به.
 
-  From an implementation perspective, `extends` is almost identical to `mixins`. The component specified by `extends` will be treated as though it were the first mixin.
+  من وجهة نظر ي تنفيذية، `extends` متطابق تقريبًا مع `mixins`. سيتم التعامل مع المكون المحدد بواسطة `extends` كما لو كان أول مخلوط.
 
-  However, `extends` and `mixins` express different intents. The `mixins` option is primarily used to compose chunks of functionality, whereas `extends` is primarily concerned with inheritance.
+  ومع ذلك، `extends` و `mixins` تعبران عن نوايا مختلفة. يستخدم خيار `mixins` أساسًا لتركيب أجزاء من الوظائف، بينما يهتم `extends` أساسًا بالوراثة.
 
-  As with `mixins`, any options (except for `setup()`) will be merged using the relevant merge strategy.
+  مثل `mixins`، ستدمج أي خيارات (باستثناء `setup()`) باستخدام استراتيجية الدمج المناسبة.
 
-- **Example**
+- **مثال**
 
   ```js
   const CompA = { ... }
@@ -244,21 +244,21 @@ A "base class" component to extend from.
   }
   ```
 
-  :::warning Not Recommended for Composition API
-  `extends` is designed for Options API and does not handle the merging of the `setup()` hook.
+  :::warning غير موصى به للواجهة التركيبية
+  `extends` مصمم لواجهة الخيارات ولا يتعامل مع دمج خطاف `setup()`.
 
-  In Composition API, the preferred mental model for logic reuse is "compose" over "inheritance". If you have logic from a component that needs to be reused in another one, consider extracting the relevant logic into a [Composable](/guide/reusability/composables#composables).
+  في الواجهة التركيبية، النموذج الذهني المفضل لإعادة استخدام المنطق هو "التركيب" على "الوراثة". إذا كان لديك شيفرة  من مكون يحتاج إلى إعادة استخدامه في مكون آخر، فكر في استخراج الشيفرة ذات الصلة إلى [دوال تركيبية](/guide/reusability/composables#composables).
 
-  If you still intend to "extend" a component using Composition API, you can call the base component's `setup()` in the extending component's `setup()`:
+  إذا كنت لا تزال تنوي "تمديد" مكون باستخدام الواجهة التركيبية، يمكنك استدعاء خطاف `setup()` للمكون الأساسي في خطاف `setup()` للمكون الممتد:
 
-  ```js
+   ```js
   import Base from './Base.js'
   export default {
     extends: Base,
     setup(props, ctx) {
       return {
         ...Base.setup(props, ctx),
-        // local bindings
+        // الربط المحلي
       }
     }
   }
