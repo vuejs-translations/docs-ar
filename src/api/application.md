@@ -182,11 +182,12 @@
 - **مثال**
 
   ```js
-  import { createApp } from 'vue'
-  import MyPlugin from './plugins/MyPlugin'
+  import { inject } from 'vue'
 
-  const app = createApp({
-    /* ... */
+  app.provide('id', 1)
+
+  const injected = app.runWithContext(() => {
+    return inject('id')
   })
 
   app.use(MyPlugin)

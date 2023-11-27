@@ -32,6 +32,8 @@ Vue (تنطق **ڨْيُو**) هو إطار عمل مبني  بالـJavaScript 
 
 <div class="options-api">
 
+<div class="options-api">
+
 ```js
 import {  createApp } from 'vue'
 
@@ -114,6 +116,8 @@ Vue هو إطار عمل ونظام بيئي يغطي معظم الميزات ا
 ## المكونات أحادية الملف {#single-file-components}
 
 في معظم مشاريع Vue المُنشأة عن طريق أدوات البناء مثل Webpack أو Vite، نقوم بتأليف مكونات Vue باستخدام تنسيق ملف يشبه HTML يسمى **المكون أحادي الملف** (يُعرف أيضًا باسم ملفات `vue.` ، والمختصرة باسم **SFC**). يقوم ملف Vue أحادي الملف، كما يوحي الاسم ، بتغليف شيفرة المكون (JavaScript) و القالب باستعمال وسم template الذي يمثل الـ(HTML) و التنسيقات (CSS) في ملف واحد. هذا هو المثال السابق ، مكتوبًا بصيغة SFC. 
+
+<div class="options-api">
 
 <div class="options-api">
 

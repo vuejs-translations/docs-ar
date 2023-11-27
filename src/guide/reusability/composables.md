@@ -227,6 +227,10 @@ export function useFetch(url) {
       .then((res) => res.json())
       .then((json) => (data.value = json))
       .catch((err) => (error.value = err))
+  }
+
+  watchEffect(() => {
+    fetchData()
   })
 
   return { data, error }

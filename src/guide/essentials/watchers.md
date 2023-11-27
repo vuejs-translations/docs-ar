@@ -270,12 +270,16 @@ watch(source, (newValue, oldValue) => {
 const todoId = ref(1)
 const data = ref(null)
 
-watch(todoId, async () => {
-  const response = await fetch(
-    `https://jsonplaceholder.typicode.com/todos/${todoId.value}`
-  )
-  data.value = await response.json()
-}, { immediate: true })
+watch(
+  todoId,
+  async () => {
+    const response = await fetch(
+      `https://jsonplaceholder.typicode.com/todos/${todoId.value}`
+    )
+    data.value = await response.json()
+  },
+  { immediate: true }
+)
 ```
 
 على وجه الخصوص، تجدر الإشارة إلى أن الدالة المُراقِبة تستخدم `todoId` مرتين، مرة كمصدر ومرة أخرى داخل الدالة المُعالجة.

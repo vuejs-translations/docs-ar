@@ -141,7 +141,7 @@ const { getByText } = render(Stepper, {
 
 getByText('0') //الإدعاء الضمني الذي يقول "0" موجود داخل المكون
 
-const button = getByText('increment')
+const button = getByRole('button', { name: /increment/i })
 
 // نشر حدث النقر على زر للزيادة.
 await fireEvent.click(button)

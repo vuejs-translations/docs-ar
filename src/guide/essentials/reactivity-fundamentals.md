@@ -277,6 +277,8 @@ export default {
 
 في Vue، الحالة تفاعلية عميقة بشكل افتراضي. هذا يعني أنه يمكنك توقع كشف التغييرات حتى عند تغيير الكائنات المتداخلة أو المصفوفات:
 
+In Vue, state is deeply reactive by default. This means you can expect changes to be detected even when you mutate nested objects or arrays:
+
 ```js
 export default {
   data() {

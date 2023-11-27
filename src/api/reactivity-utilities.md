@@ -86,6 +86,22 @@
 
   بصمة خاصية الكائن:
 
+  Normalization signature (3.3+):
+
+  ```js
+  // returns existing refs as-is
+  toRef(existingRef)
+
+  // creates a readonly ref that calls the getter on .value access
+  toRef(() => props.foo)
+
+  // creates normal refs from non-function values
+  // equivalent to ref(1)
+  toRef(1)
+  ```
+
+  Object property signature:
+
   ```js
   const state = reactive({
     foo: 1,

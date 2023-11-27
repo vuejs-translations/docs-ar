@@ -86,13 +86,25 @@
   {
     "name": "Curotec",
     "logo": "curotec.png",
-    "intro": "Our clients leverage our deep Vue.js & Nuxt.js expertise to develop better digital products and quickly expand their product development team velocity.",
+    "intro": "Work with a team that understands Vue.js inside and out. SaaS and enterprise teams leverage Curotec for best-in-class project execution and staff augmentation services focused on Vue.js.",
     "description": [
-      "Curotec approaches software development and IT support differently – address the business problems that our clients tell us they need to have solved with technology and with the right resources at the right time. That starts with understanding your challenges and pairing it with solutions and talent to get the outcome you’re driving for.",
-      "The result? Products that are responsive to your needs and primed for your growth, while ensuring your applications have a clean and straightforward end-user experience. And with well-developed and elegantly written code, it’s seamless for us to support and maintain as your needs evolve."
+      "Whether you need a firm to build your idea, support an existing codebase, or augment your front-end dev team, we’ve got you covered. SaaS and enterprise product teams turn to Curotec for a firm that can get the job done right.",
+      "We've got an all-shores model with team members in the US, LATAM, and South Asia. We'll create a flexible engagement for your needs aligned with your budget, timezone, and project goals. We also cover three main focus areas which include:",
+      "- Enterprise software development",
+      "- SaaS product development",
+      "- Headless / Jamstack website development",
+      "If you're looking for a Vue.js-focused front-end development team that writes great quality code and gets stuff done, click the contact button below and get in touch!"
     ],
     "region": ["North America", "Latin America"],
-    "proficiencies": ["Vue", "Nuxt", "Laravel", "Jamstack"],
+    "proficiencies": [
+      "Vue.js",
+      "Nuxt",
+      "Laravel",
+      "Headless",
+      "Node.js",
+      "Python",
+      "WordPress"
+    ],
     "website": {
       "text": "www.curotec.com",
       "url": "https://www.curotec.com/services/technologies/vuejs/"
@@ -193,26 +205,6 @@
     },
     "contact": "info@dreamonkey.com",
     "hiring": "https://dreamonkey.com/en/work-with-us"
-  },
-  {
-    "name": "Jump24",
-    "logo": "jump24.svg",
-    "flipLogo": true,
-    "hero": "jump24-hero.jpg",
-    "intro": "Hand crafted software, delivered. We work alongside start-ups, enterprises and tech teams creating bespoke web software solutions that will help them grow. Honing our skills since 2013, our strength is our people. We design and build custom applications to the highest standard, so you can reap the benefits.",
-    "description": [
-      "Jump24 is a full-circle development studio that brings ideas to life. From our base in the UK, we’ve worked closely over the years with clients in Europe and the United States, including Jamie Oliver, Admiral, InPost and Buffer. With a team of 16 developers, you’ll be in safe hands with us.",
-      "Long-lasting relationships are our speciality. Whether you’re a startup, enterprise or agency, your story is important to us. We focus on the minute details to help create something that reflects you and your business.",
-      "We’re a talkative bunch, so to find out even more about us, head to our Twitter and LinkedIn."
-    ],
-    "proficiencies": ["Vue", "Laravel", "Tailwind", "Inertia", "React"],
-    "region": ["Europe"],
-    "website": {
-      "text": "jump24.co.uk",
-      "url": "https://jump24.co.uk/vue-specialist/"
-    },
-    "contact": "hello@jump24.co.uk",
-    "hiring": "jump24.co.uk/careers"
   },
   {
     "name": "HeroDevs",

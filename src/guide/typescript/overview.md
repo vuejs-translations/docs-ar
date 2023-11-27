@@ -34,7 +34,7 @@ Vue مكتوب بلغة TypeScript ويوفر دعم TypeScript بدرجة أو�
 
   - [ملحق TypeScript Vue ](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin) مطلوب أيضًا للحصول على دعم الأنواع للمستوردات `*.vue` في ملفات TS.
 
-- [WebStorm](https://www.jetbrains.com/webstorm/) يوفر أيضًا دعم TypeScript و Vue بشكل جاهز.محررات JetBrains الأخرى تدعمهم، إما بشكل جاهز أو عبر [ملحق مجاني](https://plugins.jetbrains.com/plugin/9442-vue-js).
+- [WebStorm](https://www.jetbrains.com/webstorm/) يوفر أيضًا دعم TypeScript و Vue بشكل جاهز.محررات JetBrains الأخرى تدعمهم، إما بشكل جاهز أو عبر [ملحق مجاني](https://plugins.jetbrains.com/plugin/9442-vue-js). As of version 2023.2, WebStorm and the Vue Plugin come with built-in support for the Vue Language Server. You can set the Vue service to use Volar integration on all TypeScript versions, under Settings > Languages & Frameworks > TypeScript > Vue. By default, Volar will be used for TypeScript versions 5.0 and higher.
 
 ### إعداد `tsconfig.json` {#configuring-tsconfig-json}
 
@@ -208,7 +208,18 @@ let x: string | number = 1
 إذا كنت تستخدم Vue CLI أو إعداد webpack ، فتتطلب  تعبيرات TypeScript في القالب الاعتمادية `vue-loader@^16.8.0`.
 :::
 
-### الاستخدام مع TSX
+### Usage with TSX
+
+Vue also supports authoring components with JSX / TSX. Details are covered in the [Render Function & JSX](/guide/extras/render-function.html#jsx-tsx) guide.
+
+## Generic Components {#generic-components}
+
+Generic components are supported in two cases:
+
+- In SFCs: [`<script setup>` with the `generic` attribute](/api/sfc-script-setup.html#generics)
+- Render function / JSX components: [`defineComponent()`'s function signature](/api/general.html#function-signature)
+
+## API-Specific Recipes {#api-specific-recipes}
 
 تدعم Vue أيضًا كتابة المكونات مع JSX / TSX. غُطيت التفاصيل في دليل [دالة التصيير و JSX](/guide/extras/render-function.html#jsx-tsx).
 

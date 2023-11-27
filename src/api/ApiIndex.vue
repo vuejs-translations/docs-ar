@@ -83,7 +83,7 @@ const filtered = computed(() => {
           class="api-group"
         >
           <h3 dir="ltr" style="text-align:right">{{ item.text }}</h3>
-          <ul >
+          <ul>
             <li v-for="h of item.headers" :key="h.anchor" dir="ltr">
               <a :href="withBase(item.link) + '.html#' + h.anchor">{{ h.text }}</a>
             </li>
