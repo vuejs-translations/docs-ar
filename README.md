@@ -1,5 +1,7 @@
 # vuejs.org
 
+> **رابط قناة المحادثة على ديسكورد: https://discord.gg/fhEj5nBRaR**
+
 أنشئ هذا الموقع بواسطة [VitePress](https://github.com/vuejs/vitepress) إعتمادا على [@vue/theme](https://github.com/vuejs/vue-theme). يتواجد محتوى الموقع داخل مجلد `src` على شكل ملفات مكتوبة بصيغة ماركداون (Markdown). التعديلات البسيطة يمكن إجراؤها على Github مباشرة وتُرسل بعد ذلك على شكل طلب دمج Pull Request.
 
 يُفضل استخدام مدير الحزم [pnpm](https://pnpm.io/) عند التطوير المحلي.
