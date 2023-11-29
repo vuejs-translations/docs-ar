@@ -20,7 +20,7 @@ onMounted(async () => {
       <span class="accent">التقدمي</span>
     </h1>
     <p class="description">
-      .إطار عمل سهل وقوي ومتعدد الإستعمالات لبناء واجهات الويب
+      إطار عمل سهل وقوي ومتعدد الإستعمالات لبناء واجهات الويب.
     </p>
     <p class="actions">
       <VueMasteryModal />

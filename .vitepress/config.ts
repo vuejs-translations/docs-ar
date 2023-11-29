@@ -121,7 +121,7 @@ const nav: ThemeConfig['nav'] = [
     ]
   },
   {
-    text: 'كن راعياً',
+    text: 'الرعاية',
     link: '/sponsor/'
   },
   {
