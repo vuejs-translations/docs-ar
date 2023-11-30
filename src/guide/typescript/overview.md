@@ -212,17 +212,6 @@ let x: string | number = 1
 
 Vue also supports authoring components with JSX / TSX. Details are covered in the [Render Function & JSX](/guide/extras/render-function.html#jsx-tsx) guide.
 
-## Generic Components {#generic-components}
-
-Generic components are supported in two cases:
-
-- In SFCs: [`<script setup>` with the `generic` attribute](/api/sfc-script-setup.html#generics)
-- Render function / JSX components: [`defineComponent()`'s function signature](/api/general.html#function-signature)
-
-## API-Specific Recipes {#api-specific-recipes}
-
-تدعم Vue أيضًا كتابة المكونات مع JSX / TSX. غُطيت التفاصيل في دليل [دالة التصيير و JSX](/guide/extras/render-function.html#jsx-tsx).
-
 ## مكونات معممة {#generic-components}
 
 المكونات المعممة مدعومة في حالتين:

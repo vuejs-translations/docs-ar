@@ -139,8 +139,6 @@ footer: false
 
 <div class="options-api">
 
-<div class="options-api">
-
 ```html{3,4}
 <div id="app">{{ message }}</div>
 
@@ -202,8 +200,6 @@ import { createApp } from 'vue'
 ```
 
 نستطيع اعلام المتصفح على مكان استيراد وحدة `vue` عبر استخدام [خرائط الاستيراد](https://caniuse.com/import-maps) :
-
-<div class="options-api">
 
 <div class="options-api">
 
