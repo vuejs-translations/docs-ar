@@ -361,7 +361,7 @@ export const sidebar: ThemeConfig['sidebar'] = {
           link: '/api/reactivity-core'
         },
         {
-          text: 'التفاعلية : الأدوات',
+          text: 'التفاعلية : الدوال المساعدة',
           link: '/api/reactivity-utilities'
         },
         {
@@ -700,7 +700,7 @@ export default defineConfigWithTheme<ThemeConfig>({
     ],
 
     editLink: {
-      repo: 'https://github.com/vuejs-translations/docs-ar',
+      repo: 'vuejs-translations/docs-ar',
       text: 'عدل هذه الصفحة على GitHub'
     },
 
