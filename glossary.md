@@ -79,6 +79,7 @@
 | reactivity             | (كإسم للمفهوم) تفاعلية                         | ليس بعد   |
 | reconciliation         | المطابقة                                       | ليس بعد   |
 | ref                    | مرجع تفاعلي                                    | ليس بعد   |
+| regular expression     | تعبير نمطي                                   | ليس بعد   |
 | render function        | دالة التصيير                                   | ليس بعد   |
 | renderless             | عديمة تصيير                                    | ليس بعد   |
 | reproduction           | استنساخ                                        | ليس بعد   |
