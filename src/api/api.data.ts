@@ -62,13 +62,17 @@ function parsePageHeaders(link: string) {
   if (h2s) {
     const anchorRE = /\{#([^}]+)\}/
     headers = h2s.map((h) => {
-      const text = h
+      let text = h
         .slice(2)
         .replace(/<sup class=.*/, '')
         .replace(/\\</g, '<')
         .replace(/`([^`]+)`/g, '$1')
         .replace(anchorRE, '') // hidden anchor tag
         .trim()
+      const bracketRE = /\(\)(.+)/
+      if (bracketRE.test(text)) {
+        text = text.replace(bracketRE, '$1()')
+      }
       const anchor = h.match(anchorRE)?.[1] ?? slugify(text)
       return { text, anchor }
     })
