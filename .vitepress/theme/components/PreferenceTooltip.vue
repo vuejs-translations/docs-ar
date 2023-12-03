@@ -97,32 +97,32 @@ function dismiss() {
 
 <template>
   <Transition name="fly-in">
-    <div class="preference-tooltip" v-if="show">
+    <div class="preference-tooltip" v-if="show" dir="rtl">
       <template v-if="source === 'default'">
-        <p>API style now defaults to Composition API.</p>
+        <p>الآن النمط البرمجي الافتراضي هو الواجهة التركيبية.</p>
         <p>
-          Some pages contain different content based on the API style
-          chosen. Use this switch to toggle between APIs styles.
+          بعض الصفحات تحتوي على محتوى مختلف بناءً على نمط واجهة البرمجة
+          المختارة. استخدم هذا الزر للتبديل بين أنماط واجهات البرمجة.
         </p>
       </template>
       <template v-if="source && source.startsWith('url')">
         <p>
-          Showing content for
-          {{ preferComposition ? 'Composition' : 'Options' }} API because
+          عرض المحتوى لـ
+          {{ preferComposition ? 'الواجهة التركيبية' : 'واجهة الخيارات' }}لأن
           {{
             source === 'url-query'
-              ? 'it is specified by the URL query.'
-              : 'the target section is only available for that API.'
+              ? 'تم تحديده في استعلام URL.'
+              : 'القسم المستهدف متاح فقط لهذه الواجهة.'
           }}
         </p>
         <p>
-          This is different from your saved preference and will only affect
-          the current browsing session.
+          هذا مختلف عن تفضيلك المحفوظ وسيؤثر
+          فقط على جلسة التصفح الحالية.
         </p>
       </template>
       <p class="actions">
-        <a href="/guide/introduction#api-styles">Learn more</a>
-        <button @click="dismiss">Got it</button>
+        <a href="/guide/introduction#api-styles">اطلع على المزيد</a>
+        <button @click="dismiss">مفهوم</button>
       </p>
       <div class="arrow-top"></div>
       <div class="arrow-top inner"></div>
@@ -191,9 +191,11 @@ p {
 }
 
 .actions {
-  text-align: right;
+  text-align: left;
   margin-top: 14px;
   margin-bottom: 0;
+  display: flex;
+  gap:16px;
 }
 
 a {
