@@ -1,14 +1,14 @@
-# Built-in Special Elements {#built-in-special-elements}
+# عناصر خاصة مدمجة {#built-in-special-elements}
 
-:::info Not Components
-`<component>`, `<slot>` and `<template>` are component-like features and part of the template syntax. They are not true components and are compiled away during template compilation. As such, they are conventionally written with lowercase in templates.
+:::info ليسوا مكونات
+`<component>`، `<slot>` و `<template>` هي ميزات تشبه المكونات وجزء من صيغة القوالب. ولكن ليست مكونات حقيقية وتُزال أثناء تصريف القوالب. وبالتالي، تُكتب بشكل اعتيادي بأحرف صغيرة في القوالب.
 :::
 
 ## `<component>` {#component}
 
-A "meta component" for rendering dynamic components or elements.
+"مكون وصفي" لتصيير المكونات أو العناصر الديناميكية.
 
-- **Props**
+- **الخاصيات**
 
   ```ts
   interface DynamicComponentProps {
@@ -16,17 +16,17 @@ A "meta component" for rendering dynamic components or elements.
   }
   ```
 
-- **Details**
+- **التفاصيل**
 
-  The actual component to render is determined by the `is` prop.
+  المكون الفعلي الذي سيُصيَّر يُحدَّد بواسطة خاصية `is`.
 
-  - When `is` is a string, it could be either an HTML tag name or a component's registered name.
+  - عندما يكون `is` سلسلة نصية، فقد يكون اسم علامة HTML أو اسم مسجل لمكون.
 
-  - Alternatively, `is` can also be directly bound to the definition of a component.
+  - بدلاً من ذلك، يمكن ربط `is` مباشرةً بتعريف مكون.
 
-- **Example**
+- **مثال**
 
-  Rendering components by registered name (Options API):
+  تصيير المكونات بالاسم المسجل (واجهة الخيارات):
 
   ```vue
   <script>
@@ -48,7 +48,7 @@ A "meta component" for rendering dynamic components or elements.
   </template>
   ```
 
-  Rendering components by definition (Composition API with `<script setup>`):
+  تصيير المكونات بالتعريف (  الواجهة التركيبية مع`<script setup>`):
 
   ```vue
   <script setup>
@@ -61,13 +61,13 @@ A "meta component" for rendering dynamic components or elements.
   </template>
   ```
 
-  Rendering HTML elements:
+  تصيير عناصر HTML:
 
   ```vue-html
   <component :is="href ? 'a' : 'span'"></component>
   ```
 
-  The [built-in components](./built-in-components) can all be passed to `is`, but you must register them if you want to pass them by name. For example:
+  يمكن تمرير جميع المكونات المدمجة إلى `is`، ولكن يجب تسجيلها إذا كنت تريد تمريرها بالاسم. على سبيل المثال:
 
   ```vue
   <script>
@@ -88,9 +88,9 @@ A "meta component" for rendering dynamic components or elements.
   </template>
   ```
 
-  Registration is not required if you pass the component itself to `is` rather than its name, e.g. in `<script setup>`.
+  لا يلزم التسجيل إذا قمت بتمرير المكون نفسه إلى `is` بدلاً من اسمه، على سبيل المثال في `<script setup>`.
 
-  If `v-model` is used on a `<component>` tag, the template compiler will expand it to a `modelValue` prop and `update:modelValue` event listener, much like it would for any other component. However, this won't be compatible with native HTML elements, such as `<input>` or `<select>`. As a result, using `v-model` with a dynamically created native element won't work:
+  إذا استخدم `v-model` على عنصر `<component>`، فسيقوم مُصرف القوالب بتوسيعه إلى خاصية `modelValue` ومستمع حدث `update:modelValue`، تمامًا كما سيفعل لأي مكون آخر. ومع ذلك، لن يكون ذلك متوافقًا مع عناصر HTML الأصلية، مثل `<input>` أو `<select>`، ونتيجة لذلك، لن يعمل استخدام `v-model` مع عنصر HTML أصلي يتم يُنشأ بشكل ديناميكي:
 
   ```vue
   <script setup>
@@ -101,64 +101,64 @@ A "meta component" for rendering dynamic components or elements.
   </script>
 
   <template>
-    <!-- This won't work as 'input' is a native HTML element -->
+    <!-- هذا لن يعمل لأن 'input' هو عنصر HTML أصلي -->
     <component :is="tag" v-model="username" />
   </template>
   ```
 
-  In practice, this edge case isn't common as native form fields are typically wrapped in components in real applications. If you do need to use a native element directly then you can split the `v-model` into an attribute and event manually.
+  في الواقع، هذه الحالة الحدية ليست شائعة لأن حقول النموذج الأصلية عادة ما تكون ملفوفة في مكونات في التطبيقات الحقيقية. إذا كنت بحاجة إلى استخدام عنصر أصلي مباشرةً، فيمكنك تقسيم `v-model` إلى سمة وحدث يدويًا.
 
-- **See also** [Dynamic Components](/guide/essentials/component-basics#dynamic-components)
+- **اطلع أيضًا على** [المكونات الديناميكية](/guide/essentials/component-basics#dynamic-components)
 
 ## `<slot>` {#slot}
 
-Denotes slot content outlets in templates.
+يُشير إلى مخارج محتوى المنافذ في القوالب.
 
-- **Props**
+- **التفاصيل**
 
   ```ts
   interface SlotProps {
     /**
-     * Any props passed to <slot> to passed as arguments
-     * for scoped slots
-     */
+     * أي خاصيات مررت إلى <slot> لتمريرها كوسائط
+     * للمنافذ المحددة
+    */
     [key: string]: any
     /**
-     * Reserved for specifying slot name.
+     * محجوز لتحديد اسم المنفذ.
      */
     name?: string
   }
   ```
 
-- **Details**
+- **التفاصيل**
 
-  The `<slot>` element can use the `name` attribute to specify a slot name. When no `name` is specified, it will render the default slot. Additional attributes passed to the slot element will be passed as slot props to the scoped slot defined in the parent.
+   يمكن لعنصر `<slot>` استخدام الخاصية `name` لتحديد اسم المنفذ. عندما لا يُحدَّد `name`، فسيقوم بتصيير المنفذ الافتراضي. ستمرر السمات الإضافية الممررة إلى عنصر المنفذ كخاصيات المنفذ إلى المنفذ ذو النطاق المعرف في المكون الأب.
 
-  The element itself will be replaced by its matched slot content.
+  سيستبدل العنصر نفسه بمحتوى المنفذ المطابق له.
 
-  `<slot>` elements in Vue templates are compiled into JavaScript, so they are not to be confused with [native `<slot>` elements](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/slot).
+  تُصرَّف عناصر `<slot>` في قوالب Vue إلى JavaScript، لذلك لا ينبغي الخلط بينها وبين [عناصر `<slot>` الأصلية](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/slot).
 
-- **See also** [Component - Slots](/guide/components/slots)
+- **اطلع أيضًا على** [المكونات - المنافذ](/guide/components/slots)
 
 ## `<template>` {#template}
 
-The `<template>` tag is used as a placeholder when we want to use a built-in directive without rendering an element in the DOM.
+يُستخدم عنصر `<template>` كعنصر نائب عندما نريد استخدام موجهة مدمجة دون تصيير عنصر في DOM.
 
-- **Details**
+- **التفاصيل**
 
-  The special handling for `<template>` is only triggered if it is used with one of these directives:
+  تُشغَّل المعالجة الخاصة لـ `<template>` فقط إذا استخدمت مع واحدة من هذه الموجهات:
 
-  - `v-if`, `v-else-if`, or `v-else`
+  - `v-if`, `v-else-if`, أو `v-else`
   - `v-for`
   - `v-slot`
 
-  If none of those directives are present then it will be rendered as a [native `<template>` element](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/template) instead.
+  إذا لم تكن أي من تلك الموجهات موجودة، فستُصيَّر بدلاً من ذلك كعنصر `<template>` [الأصلي](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/template).
 
-  A `<template>` with a `v-for` can also have a [`key` attribute](/api/built-in-special-attributes#key). All other attributes and directives will be discarded, as they aren't meaningful without a corresponding element.
+  يمكن أن يحتوي `<template>` مع `v-for` أيضًا على [خاصية `key`](/api/built-in-special-attributes#key). سيتم تجاهل جميع السمات والموجهات الأخرى، لأنها ليست ذات معنى بدون عنصر مقابل.
 
-  Single-file components use a [top-level `<template>` tag](/api/sfc-spec#language-blocks) to wrap the entire template. That usage is separate from the use of `<template>` described above. That top-level tag is not part of the template itself and doesn't support template syntax, such as directives.
+  تستخدم المكونات أحادية الملف [عنصر `<template>` على المستوى الأعلى](/api/sfc-spec#language-blocks) لتغليف القالب بأكمله. هذا الاستخدام منفصل عن استخدام `<template>` الموضح أعلاه. لا يشكل العنصر على المستوى الأعلى جزءًا من القالب نفسه ولا يدعم صيغة القالب، مثل الموجهات.
 
-- **See also**
-  - [Guide - `v-if` on `<template>`](/guide/essentials/conditional#v-if-on-template)
-  - [Guide - `v-for` on `<template>`](/guide/essentials/list#v-for-on-template)
-  - [Guide - Named slots](/guide/components/slots#named-slots)
+- **اطلع أيضًا على**
+  - [الدليل - `v-if` على `<template>`](/guide/essentials/conditional#v-if-on-template)
+  - [الدليل - `v-for` على `<template>`](/guide/essentials/list#v-for-on-template)
+  - [الدليل - المنافذ المسماة](/guide/components/slots#named-slots)
