@@ -67,7 +67,7 @@ export default {
 
 </div>
 
-تجدر الإشارة إلى أنه يمكنك الوصول إلى المرجع **بعد وصل المكون.** إذا حاولت الوصول إلى <span class="options-api">`$refs.input`</span><span class="composition-api">`input`</span> في تعبيرات القالب، سيكون معدوم `null` في أول تصيير . لأن العنصر يكون غير متوفر حتى يتهيأ التصيير الأولي.
+تجدر الإشارة إلى أنه يمكنك الوصول إلى المرجع  **بعد وصل المكون.** إذا حاولت الوصول إلى <span class="options-api">`$refs.input`</span><span class="composition-api">`input`</span> في تعبيرات المكون, سيكون <span class="options-api">`undefined`</span><span class="composition-api">`null`</span> أثناء التصيير الأول. ذلك لأن العنصر لا يكون موجودًا إلا بعد اكتمال التصيير الأول!
 
 <div class="composition-api">
 
