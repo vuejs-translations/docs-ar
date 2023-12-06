@@ -17,7 +17,7 @@ footer: false
 :::tip متطلبات مسبقة
 
 - الاعتياد على سطر الأوامر
-- تنصيب [Node.js](https://nodejs.org/) الإصدار 16.0 أو أعلى
+- تنصيب [Node.js](https://nodejs.org/) الإصدار 18.0 أو أعلى
   :::
 
 في هذا القسم سنقدم كيفية إنشاء [تطبيق أحادي الصفحة باستعمال Vue](/guide/extras/ways-of-using-vue#single-page-application-spa) على جهازك. سيكون المشروع الذي سيبنى يستخدم إعداد بنية مرتكزة على [Vite](https://vitejs.dev) والتي تسمح لنا باستخدام [المكونات أحادية الملف](/guide/scaling-up/sfc) (SFCs).
