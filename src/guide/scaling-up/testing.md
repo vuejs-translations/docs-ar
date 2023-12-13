@@ -1,5 +1,5 @@
 <script setup>
-import TestingApiSwitcher from './TestingApiSwitcher.vue'
+import { VTCodeGroup, VTCodeGroupTab } from '@vue/theme'
 </script>
 
 # الاختبار {#testing}
@@ -126,72 +126,68 @@ describe('increment', () => {
 
   لا نعرف شيئا عن الشيفرة التنفيذية Stepper، فقط أن "المدخل" هو خاصية `max` و "المخرج" هو حالة DOM كما سيراها المستخدم.
 
-<TestingApiSwitcher>
+<VTCodeGroup>
+  <VTCodeGroupTab label="Vue Test Utils">
 
-<div class="testing-library-api">
+  ```js
+  const valueSelector = '[data-testid=stepper-value]'
+  const buttonSelector = '[data-testid=increment]'
 
-```js
-const { getByText } = render(Stepper, {
-  props: {
-    max: 1
-  }
-})
+  const wrapper = mount(Stepper, {
+    props: {
+      max: 1
+    }
+  })
 
-getByText('0') //الإدعاء الضمني الذي يقول "0" موجود داخل المكون
+  expect(wrapper.find(valueSelector).text()).toContain('0')
 
-const button = getByRole('button', { name: /increment/i })
+  await wrapper.find(buttonSelector).trigger('click')
 
-// نشر حدث النقر على زر للزيادة.
-await fireEvent.click(button)
+  expect(wrapper.find(valueSelector).text()).toContain('1')
+  ```
 
-getByText('1')
+  </VTCodeGroupTab>
+  <VTCodeGroupTab label="Cypress">
 
-await fireEvent.click(button)
-```
+  ```js
+  const valueSelector = '[data-testid=stepper-value]'
+  const buttonSelector = '[data-testid=increment]'
 
-</div>
+  mount(Stepper, {
+    props: {
+      max: 1
+    }
+  })
 
-<div class="vtu-api">
+  cy.get(valueSelector).should('be.visible').and('contain.text', '0')
+    .get(buttonSelector).click()
+    .get(valueSelector).should('contain.text', '1')
+  ```
 
-```js
-const valueSelector = '[data-testid=stepper-value]'
-const buttonSelector = '[data-testid=increment]'
+  </VTCodeGroupTab>
+  <VTCodeGroupTab label="Testing Library">
 
-const wrapper = mount(Stepper, {
-  props: {
-    max: 1
-  }
-})
+  ```js
+  const { getByText } = render(Stepper, {
+    props: {
+      max: 1
+    }
+  })
 
-expect(wrapper.find(valueSelector).text()).toContain('0')
+  getByText('0') // Implicit assertion that "0" is within the component
 
-await wrapper.find(buttonSelector).trigger('click')
+  const button = getByRole('button', { name: /increment/i })
 
-expect(wrapper.find(valueSelector).text()).toContain('1')
-```
+  // Dispatch a click event to our increment button.
+  await fireEvent.click(button)
 
-</div>
+  getByText('1')
 
-<div class="cypress-api">
+  await fireEvent.click(button)
+  ```
 
-```js
-const valueSelector = '[data-testid=stepper-value]'
-const buttonSelector = '[data-testid=increment]'
-
-mount(Stepper, {
-  props: {
-    max: 1
-  }
-})
-
-cy.get(valueSelector).should('be.visible').and('contain.text', '0')
-  .get(buttonSelector).click()
-  .get(valueSelector).should('contain.text', '1')
-```
-
-</div>
-
-</TestingApiSwitcher>
+  </VTCodeGroupTab>
+</VTCodeGroup>
 
 - **لا تقم بـ**
 
