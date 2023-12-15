@@ -1,8 +1,8 @@
-# SFC CSS Features {#sfc-css-features}
+# ميزات الـCSS في المكونات أحادية الملف  {#sfc-css-features}
 
-## Scoped CSS {#scoped-css}
+## تنسيقات الـCSS المحصورة {#scoped-css}
 
-When a `<style>` tag has the `scoped` attribute, its CSS will apply to elements of the current component only. This is similar to the style encapsulation found in Shadow DOM. It comes with some caveats, but doesn't require any polyfills. It is achieved by using PostCSS to transform the following:
+لما يكون عندك عنصر `<style>` مع الخاصية `scoped`، الـCSS الخاص بها سوف يطبق على العناصر الموجودة في المكون الحالي فقط. هذا مشابه للتنسيقات المحصورة في Shadow DOM. تأتي هذه الخاصية مع بعض التنبيهات، ولكن لا يتطلب أي polyfills. يمكن تحقيقها باستخدام PostCSS لتحويل ما يلي:
 
 ```vue
 <style scoped>
@@ -12,11 +12,11 @@ When a `<style>` tag has the `scoped` attribute, its CSS will apply to elements 
 </style>
 
 <template>
-  <div class="example">hi</div>
+  <div class="example">مرحبا</div>
 </template>
 ```
 
-Into the following:
+إلى ما يلي:
 
 ```vue
 <style>
@@ -26,17 +26,17 @@ Into the following:
 </style>
 
 <template>
-  <div class="example" data-v-f3f3eg9>hi</div>
+  <div class="example" data-v-f3f3eg9>مرحبا</div>
 </template>
 ```
 
-### Child Component Root Elements {#child-component-root-elements}
+### العناصر الجذرية للمكون الابن {#child-component-root-elements}
 
-With `scoped`, the parent component's styles will not leak into child components. However, a child component's root node will be affected by both the parent's scoped CSS and the child's scoped CSS. This is by design so that the parent can style the child root element for layout purposes.
+مع سمة `scoped`، تنسيقات المكون الأب لن تتسرب إلى المكونات الأبناء. ومع ذلك، سيتأثر العنصر الجذر للمكون الابن بكل من تنسيقات الـCSS المحصورة للمكون الأب وتنسيقات الـCSS المحصورة للمكون الابن. هذا مصمم هكذا حتى يتمكن المكون الأب من تنسيق العنصر الجذر للمكون الابن لأغراض تخطيطية.
 
-### Deep Selectors {#deep-selectors}
+### المحدِّدات العميقة {#deep-selectors}
 
-If you want a selector in `scoped` styles to be "deep", i.e. affecting child components, you can use the `:deep()` pseudo-class:
+إذا كنت تريد محددًا في التنسيقات المحصورة أن يكون "عميقًا"، أي يؤثر على المكونات الأبناء، يمكنك استخدام الصنف الوهمي `()deep:`:
 
 ```vue
 <style scoped>
@@ -46,7 +46,7 @@ If you want a selector in `scoped` styles to be "deep", i.e. affecting child com
 </style>
 ```
 
-The above will be compiled into:
+المثال السابق سيُصرَّف إلى:
 
 ```css
 .a[data-v-f3f3eg9] .b {
@@ -54,13 +54,13 @@ The above will be compiled into:
 }
 ```
 
-:::tip
-DOM content created with `v-html` are not affected by scoped styles, but you can still style them using deep selectors.
+:::tip ملاحظة
+محتوى DOM الذي أُنشئ باستخدام `v-html` لا يتأثر بالتنسيقات المحصورة، ولكن يمكنك تنسيقها باستخدام المحددات العميقة.
 :::
 
-### Slotted Selectors {#slotted-selectors}
+### مُحدِّدات المنافذ {#slotted-selectors}
 
-By default, scoped styles do not affect contents rendered by `<slot/>`, as they are considered to be owned by the parent component passing them in. To explicitly target slot content, use the `:slotted` pseudo-class:
+بشكل افتراضي، التنسيقات المحصورة لا تؤثر على المحتويات التي عرضت بواسطة `<slot/>`، لأنها تعتبر مملوكة للمكون الأب الذي يمررها. لاستهداف محتوى المنفذ بشكل صريح، استخدم الصنف الوهمي `slotted:`:
 
 ```vue
 <style scoped>
@@ -70,9 +70,9 @@ By default, scoped styles do not affect contents rendered by `<slot/>`, as they 
 </style>
 ```
 
-### Global Selectors {#global-selectors}
+### المحدِّدات العامة {#global-selectors}
 
-If you want just one rule to apply globally, you can use the `:global` pseudo-class rather than creating another `<style>` (see below):
+إذا كنت تريد تطبيق قاعدة واحدة على نحو عام، يمكنك استخدام الصنف الوهمي `global:` بدلاً من إنشاء عنصر `<style>` آخر (انظر أدناه):
 
 ```vue
 <style scoped>
@@ -82,33 +82,33 @@ If you want just one rule to apply globally, you can use the `:global` pseudo-cl
 </style>
 ```
 
-### Mixing Local and Global Styles {#mixing-local-and-global-styles}
+### خلط التنسيقات العامة والمحلية {#mixing-local-and-global-styles}
 
-You can also include both scoped and non-scoped styles in the same component:
+يمكنك أيضًا تضمين التنسيقات المحصورة وغير المحصورة في نفس المكون:
 
 ```vue
 <style>
-/* global styles */
+/* التنسيقات العامة */
 </style>
 
 <style scoped>
-/* local styles */
+/* التنسيقات المحصورة */
 </style>
 ```
 
-### Scoped Style Tips {#scoped-style-tips}
+### نصائح للتعامل مع التنسيقات المحصورة {#scoped-style-tips}
 
-- **Scoped styles do not eliminate the need for classes**. Due to the way browsers render various CSS selectors, `p { color: red }` will be many times slower when scoped (i.e. when combined with an attribute selector). If you use classes or ids instead, such as in `.example { color: red }`, then you virtually eliminate that performance hit.
+- **التنسيقات المحصورة لا تقضي على الحاجة إلى الأصناف**. بسبب الطريقة التي تقوم بها المتصفحات بتصيير المحددات المختلفة في CSS، ستكون `p { color: red }` أبطأ بكثير عندما تكون محصورة (أي عندما تكون مجتمعة مع محدد السمة). إذا كنت تستخدم الأصناف أو المعرفات بدلاً من ذلك، مثل `example { color: red }.`، فإنك تقضي على هذا الأثر الأدائي تقريبًا.
 
-- **Be careful with descendant selectors in recursive components!** For a CSS rule with the selector `.a .b`, if the element that matches `.a` contains a recursive child component, then all `.b` in that child component will be matched by the rule.
+- **كن حذرًا مع المحددات الفرعية في المكونات المتكررة!** بالنسبة لقاعدة CSS مع محدد `a .b.`، إذا كان العنصر الذي يطابق `a.` يحتوي على مكون ابن متكرر، فسيُطابق كل عنصر `b.` في هذا المكون الابن بالقاعدة.
 
-## CSS Modules {#css-modules}
+## وحدات الـCSS {#css-modules}
 
-A `<style module>` tag is compiled as [CSS Modules](https://github.com/css-modules/css-modules) and exposes the resulting CSS classes to the component as an object under the key of `$style`:
+عنصر `<style module>` يُصرف كـ [وحدات الـCSS](https://github.com/css-modules/css-modules) ويعرض التنسيقات الناتجة للمكون ككائن تحت مفتاح `$style`:
 
 ```vue
 <template>
-  <p :class="$style.red">This should be red</p>
+  <p :class="$style.red">هذه الفقرة يجب أن تكون بلون أحمر</p>
 </template>
 
 <style module>
@@ -118,13 +118,13 @@ A `<style module>` tag is compiled as [CSS Modules](https://github.com/css-modul
 </style>
 ```
 
-The resulting classes are hashed to avoid collision, achieving the same effect of scoping the CSS to the current component only.
+التنسيقات الناتجة مشفرة لتجنب التعارض، وتحقيق نفس التأثير لتحصين التنسيقات للمكون الحالي فقط.
 
-Refer to the [CSS Modules spec](https://github.com/css-modules/css-modules) for more details such as [global exceptions](https://github.com/css-modules/css-modules#exceptions) and [composition](https://github.com/css-modules/css-modules#composition).
+راجع [مواصفات وحدات الـCSS](https://github.com/css-modules/css-modules) للحصول على مزيد من التفاصيل مثل [الاستثناءات العامة](https://github.com/css-modules/css-modules#exceptions) و[التركيب](https://github.com/css-modules/css-modules#composition).
 
-### Custom Inject Name {#custom-inject-name}
+### اسم تزويد مخصص {#custom-inject-name}
 
-You can customize the property key of the injected classes object by giving the `module` attribute a value:
+يمكنك تخصيص مفتاح الخاصية لكائن التنسيقات المزودة عن طريق إعطاء الخاصية `module` قيمة:
 
 ```vue
 <template>
@@ -138,28 +138,28 @@ You can customize the property key of the injected classes object by giving the 
 </style>
 ```
 
-### Usage with Composition API {#usage-with-composition-api}
+### الاستخدام مع الواجهة التركيبية {#usage-with-composition-api}
 
-The injected classes can be accessed in `setup()` and `<script setup>` via the `useCssModule` API. For `<style module>` blocks with custom injection names, `useCssModule` accepts the matching `module` attribute value as the first argument:
+يمكن الوصول إلى التنسيقات المزودة في `()setup` و `<script setup>` عبر الدالة التركيبية `useCssModule`. بالنسبة لكتل `<style module>` مع أسماء تزويد مخصصة، تقبل `useCssModule` قيمة الخاصية `module` المطابقة كوسيط أول:
 
 ```js
 import { useCssModule } from 'vue'
 
-// inside setup() scope...
-// default, returns classes for <style module>
+// داخل نطاق ()setup...
+// افتراضيا، يرجع التنسيقات لـ <style module>
 useCssModule()
 
-// named, returns classes for <style module="classes">
+// مسمى، يرجع التنسيقات لـ <style module="classes">
 useCssModule('classes')
 ```
 
-## `v-bind()` in CSS {#v-bind-in-css}
+## دالة `v-bind()` في الـCSS {#v-bind-in-css}
 
-SFC `<style>` tags support linking CSS values to dynamic component state using the `v-bind` CSS function:
+عناصر `<style>` في المكونات أحادية الملف تدعم ربط قيم الـCSS بحالة المكون الديناميكية باستخدام دالة `v-bind` الـخاصة بالـCSS:
 
 ```vue
 <template>
-  <div class="text">hello</div>
+  <div class="text">مرحبا</div>
 </template>
 
 <script>
@@ -179,7 +179,7 @@ export default {
 </style>
 ```
 
-The syntax works with [`<script setup>`](./sfc-script-setup), and supports JavaScript expressions (must be wrapped in quotes):
+تعمل هذه الصيغة مع [`<script setup>`](./sfc-script-setup)، وتدعم تعبيرات الـJavaScript (يجب أن تكون ملفوفة بعلامات اقتباس):
 
 ```vue
 <script setup>
@@ -199,4 +199,4 @@ p {
 </style>
 ```
 
-The actual value will be compiled into a hashed CSS custom property, so the CSS is still static. The custom property will be applied to the component's root element via inline styles and reactively updated if the source value changes.
+ستصرف القيمة الفعلية إلى خاصية CSS مخصصة و مشفرة، لذلك لا تزال التنسيقات ثابتة. ستطبق الخاصية المخصصة على عنصر الجذر للمكون عبر التنسيقات الداخلية وتحديثها بشكل تفاعلي إذا تغيرت القيمة المصدرية.
