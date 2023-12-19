@@ -2,6 +2,10 @@
 footer: false
 ---
 
+<script setup>
+import { VTCodeGroup, VTCodeGroupTab } from '@vue/theme'
+</script>
+
 # انطلاقة سريعة {#quick-start}
 
 ##  تجربة Vue على الانترنت {#try-vue-online}
@@ -22,12 +26,41 @@ footer: false
 
 في هذا القسم سنقدم كيفية إنشاء [تطبيق أحادي الصفحة باستعمال Vue](/guide/extras/ways-of-using-vue#single-page-application-spa) على جهازك. سيكون المشروع الذي سيبنى يستخدم إعداد بنية مرتكزة على [Vite](https://vitejs.dev) والتي تسمح لنا باستخدام [المكونات أحادية الملف](/guide/scaling-up/sfc) (SFCs).
 
-تأكد من أن لديك إصدارًا محدثًا من [Node.js](https://nodejs.org/) مثبتًا ، وأن المجلد الحالي هو المجلد الذي تنوي فيه إنشاء المشروع، ثم قم بتشغيل الأمر التالي في سطر الأوامر (بدون علامة `>`:)
+تأكد من أن لديك إصدارًا محدثًا من [Node.js](https://nodejs.org/) مثبتًا ، وأن المجلد الحالي هو المجلد الذي تنوي فيه إنشاء المشروع، ثم قم بتشغيل الأمر التالي في سطر الأوامر (بدون علامة `$` ):
 
-<div class="language-sh"><pre><code><span class="line"><span style="color:var(--vt-c-green);">&gt;</span> <span style="color:#A6ACCD;">npm create vue@latest</span></span></code></pre></div>
+
+<VTCodeGroup>
+  <VTCodeGroupTab label="npm">
+
+  ```sh
+  $ npm create vue@latest
+  ```
+
+  </VTCodeGroupTab>
+  <VTCodeGroupTab label="pnpm">
+  
+  ```sh
+  $ pnpm create vue@latest
+  ```
+
+  </VTCodeGroupTab>
+  <VTCodeGroupTab label="yarn">
+  
+  ```sh
+  $ yarn create vue@latest
+  ```
+
+  </VTCodeGroupTab>
+  <VTCodeGroupTab label="bun">
+  
+  ```sh
+  $ bun create vue@latest
+  ```
+
+  </VTCodeGroupTab>
+</VTCodeGroup>
 
 هذا الأمر سيقوم بتثبيت وتنفيذ [create-vue](https://github.com/vuejs/create-vue)، و التي تعتبر الأداة الرسمية لإنشاء مشاريع Vue. ستتلقى الأسئلة الإختيارية لعدة ميزات مثل TypeScript ودعم الاختبارات:
-
 <div class="language-sh"><pre><code><span style="color:var(--vt-c-green);">✔</span> <span style="color:#A6ACCD;">Project name: <span style="color:#888;">… <span style="color:#89DDFF;">&lt;</span><span style="color:#888;">your-project-name</span><span style="color:#89DDFF;">&gt;</span></span></span>
 <span style="color:var(--vt-c-green);">✔</span> <span style="color:#A6ACCD;">Add TypeScript? <span style="color:#888;">… <span style="color:#89DDFF;text-decoration:underline">No</span> / Yes</span></span>
 <span style="color:var(--vt-c-green);">✔</span> <span style="color:#A6ACCD;">Add JSX Support? <span style="color:#888;">… <span style="color:#89DDFF;text-decoration:underline">No</span> / Yes</span></span>
@@ -43,10 +76,44 @@ footer: false
 
 إذا كنت غير متأكد من خيار ، فاختر `No` بالضغط على مفتاح `Enter`. بمجرد إنشاء المشروع ، اتبع التعليمات لتثبيت الاعتماديات وبدء خادم التطوير:
 
-<div class="language-sh"><pre><code><span class="line"><span style="color:var(--vt-c-green);">&gt; </span><span style="color:#A6ACCD;">cd</span><span style="color:#A6ACCD;"> </span><span style="color:#89DDFF;">&lt;</span><span style="color:#888;">اسم-مشروعك</span><span style="color:#89DDFF;">&gt;</span></span>
-<span class="line"><span style="color:var(--vt-c-green);">&gt; </span><span style="color:#A6ACCD;">npm install</span></span>
-<span class="line"><span style="color:var(--vt-c-green);">&gt; </span><span style="color:#A6ACCD;">npm run dev</span></span>
-<span class="line"></span></code></pre></div>
+<VTCodeGroup>
+  <VTCodeGroupTab label="npm">
+
+  ```sh
+  $ cd <your-project-name>
+  $ npm install
+  $ npm run dev
+  ```
+
+  </VTCodeGroupTab>
+  <VTCodeGroupTab label="pnpm">
+  
+  ```sh
+  $ cd <your-project-name>
+  $ pnpm install
+  $ pnpm run dev
+  ```
+
+  </VTCodeGroupTab>
+  <VTCodeGroupTab label="yarn">
+  
+  ```sh
+  $ cd <your-project-name>
+  $ yarn
+  $ yarn dev
+  ```
+
+  </VTCodeGroupTab>
+  <VTCodeGroupTab label="bun">
+  
+  ```sh
+  $ cd <your-project-name>
+  $ bun install
+  $ bun run dev
+  ```
+
+  </VTCodeGroupTab>
+</VTCodeGroup>
 
 بعد تنفيذ هاته الأوامر ستحصل على مشروعك الأول في Vue،  ما ستلاحظه هو أن المكونات المولدة مكتوبة باستخدام [الواجهة التركيبية](/guide/introduction#composition-api) و `<script setup>`، بدلاً من [واجهة الخيارات](/guide/introduction#options-api). إليك بعض الإرشادات الإضافية :
 
@@ -57,8 +124,36 @@ footer: false
 
 لما تنهي تطوير تطبيقك و تريد ادخاله لمرحلة الإنتاج، قم بتشغيل الأمر التالي:
 
-<div class="language-sh"><pre><code><span class="line"><span style="color:var(--vt-c-green);">&gt; </span><span style="color:#A6ACCD;">npm run build</span></span>
-<span class="line"></span></code></pre></div>
+<VTCodeGroup>
+  <VTCodeGroupTab label="npm">
+
+  ```sh
+  $ npm run build
+  ```
+
+  </VTCodeGroupTab>
+  <VTCodeGroupTab label="pnpm">
+  
+  ```sh
+  $ pnpm run build
+  ```
+
+  </VTCodeGroupTab>
+  <VTCodeGroupTab label="yarn">
+  
+  ```sh
+  $ yarn build
+  ```
+
+  </VTCodeGroupTab>
+  <VTCodeGroupTab label="bun">
+  
+  ```sh
+  $ bun run build
+  ```
+
+  </VTCodeGroupTab>
+</VTCodeGroup>
 
 هذا الأمر سينشئ إصداراً جاهزاً للإنتاج من تطبيقك في مجلد `./dist` على مستوى مجلد المشروع.اطلع على [دليل نشر الانتاج](/guide/best-practices/production-deployment) لمعرفة المزيد حول توصيل تطبيقك إلى مرحلة الانتاج.
 
