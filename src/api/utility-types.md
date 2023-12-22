@@ -1,14 +1,14 @@
-# Utility Types {#utility-types}
+# الأنواع المساعدة (Typescript) {#utility-types}
 
-:::info
-This page only lists a few commonly used utility types that may need explanation for their usage. For a full list of exported types, consult the [source code](https://github.com/vuejs/core/blob/main/packages/runtime-core/src/index.ts#L131).
+:::info 
+هذه الصفحة تعرض فقط بعض الأنواع المساعدة المستخدمة بشكل شائع والتي قد تحتاج إلى شرح لاستخدامها. للحصول على قائمة كاملة بالأنواع المصدرة، استشر [الشيفرة المصدرية](https://github.com/vuejs/core/blob/main/packages/runtime-core/src/index.ts#L131).
 :::
 
-## PropType\<T> {#proptype-t}
+## <PropType\<T {#proptype-t}
 
-Used to annotate a prop with more advanced types when using runtime props declarations.
+يستخدم لتوصيف الخاصية بأنواع أكثر تقدما عند استخدام تصريحات الخاصيات في وقت التشغيل.
 
-- **Example**
+- **مثال**
 
   ```ts
   import type { PropType } from 'vue'
@@ -22,7 +22,7 @@ Used to annotate a prop with more advanced types when using runtime props declar
   export default {
     props: {
       book: {
-        // provide more specific type to `Object`
+        // توفير نوع أكثر تحديدا لـ `Object`
         type: Object as PropType<Book>,
         required: true
       }
@@ -30,27 +30,27 @@ Used to annotate a prop with more advanced types when using runtime props declar
   }
   ```
 
-- **See also** [Guide - Typing Component Props](/guide/typescript/options-api#typing-component-props)
+- **اطلع أيضا على** [دليل - إضافة الأنواع لخاصيات المكون](/guide/typescript/options-api#typing-component-props)
 
-## MaybeRef\<T> {#mayberef}
+## <MaybeRef\<T {#mayberef}
 
-Alias for `T | Ref<T>`. Useful for annotating arguments of [Composables](/guide/reusability/composables.html).
+اسم بديل لـ `T | Ref<T>`. مفيد لتوصيف الوسائط لـ [الدوال التركيبية](/guide/reusability/composables.html).
 
-- Only supported in 3.3+.
+- مدعوم فقط في 3.3+
 
-## MaybeRefOrGetter\<T> {#maybereforgetter}
+## <MaybeRefOrGetter\<T {#maybereforgetter}
 
-Alias for `T | Ref<T> | (() => T)`. Useful for annotating arguments of [Composables](/guide/reusability/composables.html).
+اسم بديل لـ `T | Ref<T> | (() => T)`. مفيد لتوصيف الوسائط لـ [الدوال التركيبية](/guide/reusability/composables.html).
 
-- Only supported in 3.3+.
+- مدعوم فقط في 3.3+
 
-## ExtractPropTypes\<T> {#extractproptypes}
+## <ExtractPropTypes\<T {#extractproptypes}
 
-Extract prop types from a runtime props options object. The extracted types are internal facing - i.e. the resolved props received by the component. This means boolean props and props with default values are always defined, even if they are not required.
+تستخرج أنواع الخاصيات من كائن خيارات الخاصيات في وقت التشغيل. الأنواع المستخرجة هي الأنواع الداخلية - أي الخاصيات المستبيَنة التي يتلقاها المكون. هذا يعني أن الخاصيات المنطقية والخاصيات التي تحتوي على قيم افتراضية دائمًا ما تكون محددة، حتى لو لم تكن مطلوبة.
 
-To extract public facing props, i.e. props that the parent is allowed to pass, use [`ExtractPublicPropTypes`](#extractpublicproptypes).
+من أجل استخراج الخاصيات العامة، أي الخاصيات التي يسمح للأب بتمريرها، استخدم [`ExtractPublicPropTypes`](#extractpublicproptypes).
 
-- **Example**
+- **مثال**
 
   ```ts
   const propsOptions = {
@@ -75,11 +75,11 @@ To extract public facing props, i.e. props that the parent is allowed to pass, u
   // }
   ```
 
-## ExtractPublicPropTypes\<T> {#extractpublicproptypes}
+## <ExtractPublicPropTypes\<T {#extractpublicproptypes}
 
-Extract prop types from a runtime props options object. The extracted types are public facing - i.e. the props that the parent is allowed to pass.
+تستخرج أنواع الخاصيات من كائن خيارات الخاصيات في وقت التشغيل. الأنواع المستخرجة هي الأنواع العامة - أي الخاصيات التي يسمح للأب بتمريرها.
 
-- **Example**
+- **مثال**
 
   ```ts
   const propsOptions = {
@@ -106,9 +106,9 @@ Extract prop types from a runtime props options object. The extracted types are 
 
 ## ComponentCustomProperties {#componentcustomproperties}
 
-Used to augment the component instance type to support custom global properties.
+يستخدم لتوسيع نوع نسخة المكون لدعم الخاصيات العامة المخصصة.
 
-- **Example**
+- **مثال**
 
   ```ts
   import axios from 'axios'
@@ -121,17 +121,17 @@ Used to augment the component instance type to support custom global properties.
   }
   ```
 
-  :::tip
-  Augmentations must be placed in a module `.ts` or `.d.ts` file. See [Type Augmentation Placement](/guide/typescript/options-api#augmenting-global-properties) for more details.
+  :::tip ملاحظة
+  يجب وضع التوسيعات في ملف `.ts` أو `.d.ts` مستقل. اطلع على [مكان التوسيعات](/guide/typescript/options-api#augmenting-global-properties) للمزيد من التفاصيل.
   :::
 
-- **See also** [Guide - Augmenting Global Properties](/guide/typescript/options-api#augmenting-global-properties)
+- **اطلع أيضا على** [دليل - توسيع الخاصيات العامة](/guide/typescript/options-api#augmenting-global-properties)
 
 ## ComponentCustomOptions {#componentcustomoptions}
 
-Used to augment the component options type to support custom options.
+يستخدم لتوسيع نوع خيارات المكون لدعم الخيارات المخصصة.
 
-- **Example**
+- **مثال**
 
   ```ts
   import { Route } from 'vue-router'
@@ -143,17 +143,17 @@ Used to augment the component options type to support custom options.
   }
   ```
 
-  :::tip
-  Augmentations must be placed in a module `.ts` or `.d.ts` file. See [Type Augmentation Placement](/guide/typescript/options-api#augmenting-global-properties) for more details.
+  :::tip ملاحظة
+  يجب وضع التوسيعات في ملف `.ts` أو `.d.ts` مستقل. اطلع على [مكان التوسيعات](/guide/typescript/options-api#augmenting-global-properties) للمزيد من التفاصيل.
   :::
 
-- **See also** [Guide - Augmenting Custom Options](/guide/typescript/options-api#augmenting-custom-options)
+- **اطلع أيضا على** [دليل - توسيع الخيارات المخصصة](/guide/typescript/options-api#augmenting-custom-options)
 
 ## ComponentCustomProps {#componentcustomprops}
 
-Used to augment allowed TSX props in order to use non-declared props on TSX elements.
+يستخدم لتوسيع الخاصيات المسموح بها في TSX من أجل استخدام الخاصيات غير المصرح بها على عناصر TSX.
 
-- **Example**
+- **مثال**
 
   ```ts
   declare module 'vue' {
@@ -166,21 +166,21 @@ Used to augment allowed TSX props in order to use non-declared props on TSX elem
   ```
 
   ```tsx
-  // now works even if hello is not a declared prop
+  // يعمل الآن حتى لو لم يُصرح بـ hello كخاصية
   <MyComponent hello="world" />
   ```
 
-  :::tip
-  Augmentations must be placed in a module `.ts` or `.d.ts` file. See [Type Augmentation Placement](/guide/typescript/options-api#augmenting-global-properties) for more details.
+  :::tip ملاحظة 
+  يجب وضع التوسيعات في ملف `.ts` أو `.d.ts` مستقل. اطلع على [مكان التوسيعات](/guide/typescript/options-api#augmenting-global-properties) للمزيد من التفاصيل.
   :::
 
 ## CSSProperties {#cssproperties}
 
-Used to augment allowed values in style property bindings.
+يستخدم لتوسيع القيم المسموح بها في ربط خاصية التنسيقات.
 
-- **Example**
+- **مثال**
 
-  Allow any custom CSS property
+  السماح بأي خاصية CSS مخصصة
 
   ```ts
   declare module 'vue' {
@@ -198,12 +198,12 @@ Used to augment allowed values in style property bindings.
   <div :style="{ '--bg-color': 'blue' }"></div>
   ```
 
-:::tip
-Augmentations must be placed in a module `.ts` or `.d.ts` file. See [Type Augmentation Placement](/guide/typescript/options-api#augmenting-global-properties) for more details.
+:::tip ملاحظة
+يجب وضع التوسيعات في ملف `.ts` أو `.d.ts` مستقل. اطلع على [مكان التوسيعات](/guide/typescript/options-api#augmenting-global-properties) للمزيد من التفاصيل.
 :::
 
-:::info See also
-SFC `<style>` tags support linking CSS values to dynamic component state using the `v-bind` CSS function. This allows for custom properties without type augmentation.
+:::info اطلع أيضا على
+  تدعم علامات `<style>` في المكونات أحادية الملف ربط قيم CSS بحالة المكون الديناميكية باستخدام دالة `v-bind` الخاصة بـ CSS. هذا يسمح بالخاصيات المخصصة دون توسيع الأنواع.
 
-- [v-bind() in CSS](/api/sfc-css-features#v-bind-in-css)
+  - [()v-bind في CSS](/api/sfc-css-features#v-bind-in-css)
   :::
