@@ -418,7 +418,7 @@ export const sidebar: ThemeConfig['sidebar'] = {
       items: [
         { text: 'مواصفات الصيغة', link: '/api/sfc-spec' },
         { text: '<script setup>', link: '/api/sfc-script-setup' },
-        { text: 'CSSميزات ال', link: '/api/sfc-css-features' }
+        { text: 'ميزات الـCSS', link: '/api/sfc-css-features' }
       ]
     },
     {
@@ -426,7 +426,7 @@ export const sidebar: ThemeConfig['sidebar'] = {
       items: [
         { text: 'دالة التصيير', link: '/api/render-function' },
         { text: 'التصيير من الخادم', link: '/api/ssr' },
-        { text: 'TypeScriptأدوات النوع ل', link: '/api/utility-types' },
+        { text: 'الأنواع المساعدة (Typescript)', link: '/api/utility-types' },
         { text: 'مصير مخصص', link: '/api/custom-renderer' }
       ]
     }
