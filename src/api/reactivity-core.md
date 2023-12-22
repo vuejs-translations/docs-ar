@@ -3,7 +3,7 @@
 :::info اطلع أيضًا على
 لفهم أفضل للواجهات التفاعلية، يوصى بقراءة الفصول التالية في الدليل:
 
-- [أساسيات التفاعلية](/guide/essentials/reactivity-fundamentals) (مع تفضيل الواجهة التركيبية)
+- [أساسيات واجهة التفاعليةية](/guide/essentials/reactivity-fundamentals) (مع تفضيل الواجهة التركيبية)
 - [التفاعلية بالتفصيل](/guide/extras/reactivity-in-depth)
   :::
 

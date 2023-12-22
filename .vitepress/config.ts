@@ -156,7 +156,7 @@ export const sidebar: ThemeConfig['sidebar'] = {
           link: '/guide/essentials/template-syntax'
         },
         {
-          text: 'أساسيات التفاعل',
+          text: 'أساسيات واجهة التفاعلية',
           link: '/guide/essentials/reactivity-fundamentals'
         },
         {
