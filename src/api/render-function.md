@@ -1,20 +1,20 @@
-# Render Function APIs {#render-function-apis}
+# الواجهة البرمجية لدالة التخريج {#render-function-apis}
 
-## h() {#h}
+## ()h {#h}
 
-Creates virtual DOM nodes (vnodes).
+تنشئ عقد DOM افتراضية (vnodes).
 
-- **Type**
+- **النوع**
 
   ```ts
-  // full signature
+  // البصمة الكاملة
   function h(
     type: string | Component,
     props?: object | null,
     children?: Children | Slot | Slots
   ): VNode
 
-  // omitting props
+  // حذف الخاصيات
   function h(type: string | Component, children?: Children | Slot): VNode
 
   type Children = string | number | boolean | VNode | null | Children[]
@@ -24,68 +24,68 @@ Creates virtual DOM nodes (vnodes).
   type Slots = { [name: string]: Slot }
   ```
 
-  > Types are simplified for readability.
+  > الأنواع مبسطة لتسهيل القراءة.
 
-- **Details**
+- **التفاصيل**
 
-  The first argument can either be a string (for native elements) or a Vue component definition. The second argument is the props to be passed, and the third argument is the children.
+  الوسيط الأول يمكن أن يكون سلسلة نصية  (للعناصر الأصلية) أو تعريف مكون Vue. الوسيط الثاني هو الخاصيات التي ستُمرر ، والوسيط الثالث هو المكونات الأبناء.
 
-  When creating a component vnode, the children must be passed as slot functions. A single slot function can be passed if the component expects only the default slot. Otherwise, the slots must be passed as an object of slot functions.
+  عند إنشاء عقد المكون ، يجب تمرير الأبناء كدوال منفذ. يمكن تمرير دالة منفذ واحدة إذا كان المكون يتوقع فقط منفذ افتراضي. وإلا ، يجب تمرير المنافذ ككائن من دوال المنافذ.
 
-  For convenience, the props argument can be omitted when the children is not a slots object.
+  للتسهيل ، يمكن حذف وسيط الخاصيات عندما لا تكون المكونات الأبناء عبارة عن كائن منافذ.  
 
-- **Example**
+- **مثال**
 
-  Creating native elements:
+  إنشاء عناصر أصلية:
 
   ```js
   import { h } from 'vue'
 
-  // all arguments except the type are optional
+  // جميع الوسائط ما عدا النوع اختيارية
   h('div')
   h('div', { id: 'foo' })
 
-  // both attributes and properties can be used in props
-  // Vue automatically picks the right way to assign it
+  // يمكن استخدام السمات والخاصيات في كائن الخاصيات
+  // يختار Vue تلقائيًا الطريقة الصحيحة لتعيينها
   h('div', { class: 'bar', innerHTML: 'hello' })
 
-  // class and style have the same object / array
-  // value support like in templates
+  // الفئة والنمط لديهما نفس قيمة  دعم 
+  // الكائن / مصفوفة مثل القوالب
   h('div', { class: [foo, { bar }], style: { color: 'red' } })
 
-  // event listeners should be passed as onXxx
+  // يجب تمرير مستمعي الأحداث كـ onXxx
   h('div', { onClick: () => {} })
 
-  // children can be a string
+  // يمكن أن تكون المكونات الأبناء سلسلة نصية
   h('div', { id: 'foo' }, 'hello')
 
-  // props can be omitted when there are no props
+  // يمكن حذف كائن الخاصيات عندما لا تكون هناك خاصيات
   h('div', 'hello')
   h('div', [h('span', 'hello')])
 
-  // children array can contain mixed vnodes and strings
+  // مصفوفة الأبناء يمكن أن تحتوي على عقد افتراضية وسلاسل مختلطة
   h('div', ['hello', h('span', 'hello')])
   ```
 
-  Creating components:
+  إنشاء المكونات:
 
   ```js
   import Foo from './Foo.vue'
 
-  // passing props
+  // تمرير الخاصيات
   h(Foo, {
-    // equivalent of some-prop="hello"
-    someProp: 'hello',
-    // equivalent of @update="() => {}"
+    // ما يعادل some-prop="مرحبا"
+    someProp: 'مرحبا',
+    // ما يعادل @update="() => {}"
     onUpdate: () => {}
   })
 
-  // passing single default slot
+  // تمرير منفذ افتراضي واحد  
   h(Foo, () => 'default slot')
 
-  // passing named slots
-  // notice the `null` is required to avoid
-  // slots object being treated as props
+  // تمرير منافذ مسماة
+  // لاحظ أنه يتطلب `null` لتجنب
+  // يتم التعامل مع كائن المنافذ كخاصيات
   h(MyComponent, null, {
     default: () => 'default slot',
     foo: () => h('div', 'foo'),
@@ -93,27 +93,27 @@ Creates virtual DOM nodes (vnodes).
   })
   ```
 
-- **See also** [Guide - Render Functions - Creating VNodes](/guide/extras/render-function#creating-vnodes)
+- **اطلع أيضاً** [دليل دوال التخريج - إنشاء عقد VNodes](/guide/extras/render-function#creating-vnodes)
 
-## mergeProps() {#mergeprops}
+## ()mergeProps {#mergeprops}
 
-Merge multiple props objects with special handling for certain props.
+دمج عدة كائنات خاصيات مع معالجة خاصة لبعض الخاصيات.
 
-- **Type**
+- **النوع**
 
   ```ts
   function mergeProps(...args: object[]): object
   ```
 
-- **Details**
+- **التفاصيل**
 
-  `mergeProps()` supports merging multiple props objects with special handling for the following props:
+  `mergeProps()` يدعم دمج عدة كائنات خاصيات مع معالجة خاصة للخاصيات التالية:
 
   - `class`
   - `style`
-  - `onXxx` event listeners - multiple listeners with the same name will be merged into an array.
+  - `onXxx` مستمعي الأحداث - ستُدمج المستمعات المتعددة بنفس الاسم في مصفوفة.
 
-  If you do not need the merge behavior and want simple overwrites, native object spread can be used instead.
+  إذا لم تكن بحاجة إلى سلوك الدمج وتريد استبدالات بسيطة ، فيمكن استخدام طريقة نشر الكائن الأصلية بدلاً من ذلك.
 
 - **Example**
 
@@ -139,25 +139,25 @@ Merge multiple props objects with special handling for certain props.
    */
   ```
 
-## cloneVNode() {#clonevnode}
+## ()cloneVNode {#clonevnode}
 
-Clones a vnode.
+تستنسخ عقدة افتراضية.
 
-- **Type**
+- **النوع**
 
   ```ts
   function cloneVNode(vnode: VNode, extraProps?: object): VNode
   ```
 
-- **Details**
+- **التفاصيل**
 
-  Returns a cloned vnode, optionally with extra props to merge with the original.
+  يعيد عقدة افتراضية مستنسخة ، اختياريًا مع خاصيات إضافية لدمجها مع الأصل.
 
-  Vnodes should be considered immutable once created, and you should not mutate the props of an existing vnode. Instead, clone it with different / extra props.
+  يجب اعتبار العقد الافتراضية غير قابلة للتغيير بمجرد إنشائها ، ولا يجب تغيير خاصيات عقدة افتراضية موجودة. بدلاً من ذلك ، استنسخها مع خاصيات مختلفة / إضافية.
 
-  Vnodes have special internal properties, so cloning them is not as simple as an object spread. `cloneVNode()` handles most of the internal logic.
+  العقد الافتراضية لها خاصيات داخلية خاصة ، لذلك لا يكون استنساخها بسيطًا مثل نشر الكائن. `()cloneVNode` يتعامل مع معظم المنطق الداخلي.
 
-- **Example**
+- **مثال**
 
   ```js
   import { h, cloneVNode } from 'vue'
@@ -166,35 +166,35 @@ Clones a vnode.
   const cloned = cloneVNode(original, { id: 'foo' })
   ```
 
-## isVNode() {#isvnode}
+## ()isVNode {#isvnode}
 
-Checks if a value is a vnode.
+تحقق مما إذا كانت القيمة عبارة عن عقدة افتراضية.
 
-- **Type**
+- **النوع**
 
   ```ts
   function isVNode(value: unknown): boolean
   ```
 
-## resolveComponent() {#resolvecomponent}
+## ()resolveComponent {#resolvecomponent}
 
-For manually resolving a registered component by name.
+لاستبيان المكون المسجل يدويًا بالاسم.
 
-- **Type**
+- **النوع**
 
   ```ts
   function resolveComponent(name: string): Component | string
   ```
 
-- **Details**
+- **التفاصيل**
 
-  **Note: you do not need this if you can import the component directly.**
+  **ملاحظة: لا تحتاج إلى ذلك إذا كنت تستطيع استيراد المكون مباشرة.**
 
-  `resolveComponent()` must be called inside<span class="composition-api"> either `setup()` or</span> the render function in order to resolve from the correct component context.
+  يجب استدعاء `()resolveComponent` إما<span class="composition-api"> داخل `()setup` أو</span> دالة التخريج من أجل استبيان سياق المكون الصحيح.
 
-  If the component is not found, a runtime warning will be emitted, and the name string is returned.
+  إذا لم يعثر على المكون ، فسيصدَر تحذير في وقت التشغيل ، ويرجع السلسلة النصية للاسم.
 
-- **Example**
+- **مثال**
 
   <div class="composition-api">
 
@@ -228,33 +228,33 @@ For manually resolving a registered component by name.
 
   </div>
 
-- **See also** [Guide - Render Functions - Components](/guide/extras/render-function#components)
+- **اطلع أيضاً** [دليل دوال التخريج - المكونات](/guide/extras/render-function#components)
 
-## resolveDirective() {#resolvedirective}
+## ()resolveDirective {#resolvedirective}
 
-For manually resolving a registered directive by name.
+لاستبيان السمة الموجهة المسجلة يدويًا بالاسم.
 
-- **Type**
+- **النوع**
 
   ```ts
   function resolveDirective(name: string): Directive | undefined
   ```
 
-- **Details**
+- **النوع**
 
-  **Note: you do not need this if you can import the directive directly.**
+  **ملاحظة: لا تحتاج إلى ذلك إذا كنت تستطيع استيراد السمة الموجهة مباشرة.**
 
-  `resolveDirective()` must be called inside<span class="composition-api"> either `setup()` or</span> the render function in order to resolve from the correct component context.
+  يجب استدعاء `()resolveDirective` إما<span class="composition-api"> داخل `()setup` أو</span> دالة التخريج من أجل استبيان سياق المكون الصحيح.
 
-  If the directive is not found, a runtime warning will be emitted, and the function returns `undefined`.
+  إذا لم يعثر على السمة الموجهة ، فسيصدَر تحذير في وقت التشغيل ، وتعيد الدالة القيمة  `undefined`.
 
-- **See also** [Guide - Render Functions - Custom Directives](/guide/extras/render-function#custom-directives)
+- **اطلع أيضاً** [دليل دوال التخريج - السمات الموجهة المخصصة](/guide/extras/render-function#custom-directives)
 
-## withDirectives() {#withdirectives}
+## ()withDirectives {#withdirectives}
 
-For adding custom directives to vnodes.
+لاضافة السمات الموجهة المخصصة إلى العقد الافتراضية.
 
-- **Type**
+- **النوع**
 
   ```ts
   function withDirectives(
@@ -271,16 +271,16 @@ For adding custom directives to vnodes.
   >
   ```
 
-- **Details**
+- **التفاصيل**
 
-  Wraps an existing vnode with custom directives. The second argument is an array of custom directives. Each custom directive is also represented as an array in the form of `[Directive, value, argument, modifiers]`. Tailing elements of the array can be omitted if not needed.
+  تلف العقدة الافتراضية الموجودة بالسمات الموجهة المخصصة. الوسيط الثاني هو مصفوفة من السمات الموجهة المخصصة. تُمثَّل كل سمة موجهة مخصصة أيضًا كمصفوفة على شكل `[Directive, value, argument, modifiers]`. يمكن حذف العناصر التذييلية من المصفوفة إذا لم يكن هناك حاجة إليها.
 
-- **Example**
+- **مثال**
 
   ```js
   import { h, withDirectives } from 'vue'
 
-  // a custom directive
+  // سمة موجهة مخصصة  
   const pin = {
     mounted() {
       /* ... */
@@ -296,29 +296,29 @@ For adding custom directives to vnodes.
   ])
   ```
 
-- **See also** [Guide - Render Functions - Custom Directives](/guide/extras/render-function#custom-directives)
+- **اطلع أيضاً** [دليل دوال التخريج - السمات الموجهة المخصصة](/guide/extras/render-function#custom-directives)
 
-## withModifiers() {#withmodifiers}
+## ()withModifiers {#withmodifiers}
 
-For adding built-in [`v-on` modifiers](/guide/essentials/event-handling#event-modifiers) to an event handler function.
+لاضافة المعدلات المدمجة [`v-on`](/guide/essentials/event-handling#event-modifiers) إلى دالة معالج الحدث.
 
-- **Type**
+- **النوع**
 
   ```ts
   function withModifiers(fn: Function, modifiers: string[]): Function
   ```
 
-- **Example**
+- **مثال**
 
   ```js
   import { h, withModifiers } from 'vue'
 
   const vnode = h('button', {
-    // equivalent of v-on:click.stop.prevent
+    // ما يعادل v-on:click.stop.prevent
     onClick: withModifiers(() => {
       // ...
     }, ['stop', 'prevent'])
   })
   ```
 
-- **See also** [Guide - Render Functions - Event Modifiers](/guide/extras/render-function#event-modifiers)
+- **اطلع أيضاً** [دليل دوال التخريج - معدلات الأحداث](/guide/extras/render-function#event-modifiers)
