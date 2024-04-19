@@ -91,7 +91,8 @@ const count = ref(0)
 ربما يكون لديك العديد من الأسئلة لحد الآن، لكن لا داعي للقلق، سنقوم بإجابة كل تلك الأسئلة في حينها، فقط يرجى قراءة التوثيق بشكل متأني حتى تفهم بشكل ممتاز ما توفره Vue.
 
 :::tip المتطلبات الأساسية
-نفترض عبر بقية التوثيق أن تكون لديك معرفة أساسية بـ HTML ، CSS و JavaScript. إذا كنت جديدًا تمامًا في مجال تطوير الواجهات الأمامية ، فقد لا تكون  فكرة محبذة التخطي مباشرة إلى إطار العمل كخطوة أولى - فهم الأساسيات ثم العودة! يمكنك التحقق من مستوى معرفتك عبر القاء [نظرة عامة على الـJavascript](https://developer.mozilla.org/en-US/docs/Web/JavaScript/A_re-introduction_to_JavaScript). خبرة مسبقة مع أطر العمل الأخرى تساعد، ولكنها ليست مطلوبة. 
+نفترض عبر بقية التوثيق أن تكون لديك معرفة أساسية بـ HTML ، CSS و JavaScript. إذا كنت جديدًا تمامًا في مجال تطوير الواجهات الأمامية ، فقد لا تكون  فكرة محبذة التخطي مباشرة إلى إطار العمل كخطوة أولى - فهم الأساسيات ثم العودة! يمكنك التحقق من مستوى معرفتك عبر القاء نظرة على هذه المقدمات المختصرة حول [Javascript](https://developer.mozilla.org/en-US/docs/Web/JavaScript/A_re-introduction_to_JavaScript) و [HTML](https://developer.mozilla.org/en-US/docs/Learn/HTML/Introduction_to_HTML) و [CSS](https://developer.mozilla.org/en-US/docs/Learn/CSS/First_steps) . الخبرة مسبقة مع أطر العمل الأخرى تساعد، ولكنها ليست مطلوبة. 
+
 :::
 
 ## إطار عمل تقدمي {#the-progressive-framework}
