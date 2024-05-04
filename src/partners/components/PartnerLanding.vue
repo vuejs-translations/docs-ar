@@ -17,20 +17,20 @@ onMounted(() => {
 
 <template>
   <div class="PartnerPage">
-    <PartnerHero />
+    <PartnerHero title="شركاء فيو" />
 
     <!-- Spotlight -->
     <div class="spotlight">
       <div class="spotlight-inner">
-        <h2>Partner Spotlight</h2>
+        <h2>الشريك النجم</h2>
         <PartnerCard v-if="spotlighted" hero :data="spotlighted" />
       </div>
     </div>
 
     <div class="featured">
-      <h2>Featured Partners</h2>
+      <h2>الشركاء المتميزون</h2>
       <PartnerList :filter="(p) => p.platinum" showLinkToAll />
-      <a class="browse-all" href="./all.html">Browse All Partners</a>
+      <a class="browse-all" href="./all.html">تفقد كل الشركاء</a>
     </div>
 
     <PartnerJoin />
