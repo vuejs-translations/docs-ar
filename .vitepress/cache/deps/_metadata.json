@@ -1,29 +1,29 @@
 {
-  "hash": "9d7bd9d3",
-  "browserHash": "471d76a2",
+  "hash": "831dfe67",
+  "browserHash": "531b02b6",
   "optimized": {
     "vue": {
-      "src": "../../../node_modules/.pnpm/vue@3.3.4/node_modules/vue/dist/vue.runtime.esm-browser.js",
+      "src": "../../../node_modules/.pnpm/vue@3.4.26/node_modules/vue/dist/vue.runtime.esm-browser.js",
       "file": "vue.js",
-      "fileHash": "e0742c69",
+      "fileHash": "7b0cf463",
       "needsInterop": false
     },
     "vitepress > @vue/devtools-api": {
       "src": "../../../node_modules/.pnpm/@vue+devtools-api@6.5.0/node_modules/@vue/devtools-api/lib/esm/index.js",
       "file": "vitepress___@vue_devtools-api.js",
-      "fileHash": "2f2059e7",
+      "fileHash": "9b0f0d7d",
       "needsInterop": false
     },
     "gsap": {
       "src": "../../../node_modules/.pnpm/gsap@3.9.0/node_modules/gsap/index.js",
       "file": "gsap.js",
-      "fileHash": "794a5241",
+      "fileHash": "301fcb35",
       "needsInterop": false
     },
     "dynamics.js": {
       "src": "../../../node_modules/.pnpm/dynamics.js@1.1.5/node_modules/dynamics.js/lib/dynamics.js",
       "file": "dynamics__js.js",
-      "fileHash": "3d12462a",
+      "fileHash": "ce6bea05",
       "needsInterop": true
     }
   },
