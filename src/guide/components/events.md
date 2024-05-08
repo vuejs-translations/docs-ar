@@ -17,6 +17,7 @@ if (typeof window !== 'undefined') {
   }
 }
 </script>
+
 # أحداث المكونات {#component-events}
 
 > لقراءة هذه الصفحة يجب عليك أولا الاطلاع على [أساسيات المكونات](/guide/essentials/component-basics). ثم العودة إلى هنا.
@@ -176,14 +177,14 @@ export default {
 
 </div>
 
-خيار `emits` يدعم أيضًا صيغة الكائن ، والتي تسمح لنا بتنفيذ التحقق من صحة الوسائط الممررة للأحداث المرسلة في وقت التشغيل :
+خيار `emits` يدعم أيضًا صيغة الكائن، إذا كنت تستخدم الـTypescript تستطيع تمرير وسائط ذات نوع، والتي تسمح لنا بتنفيذ التحقق من صحة الحمولة الممررة للأحداث المرسلة في وقت التشغيل :
 
 <div class="composition-api">
 
 ```vue
 <script setup>
 const emit = defineEmits({
-  submit(payload) {
+  submit(payload: { email: string, password: string }) {
     // اعد `true` أو `false` للإشارة إلى
     // نجاح / فشل التحقق
   }
@@ -210,9 +211,9 @@ const emit = defineEmits<{
 ```js
 export default {
   emits: {
-    submit(payload) {
+    submit(payload: { email: string, password: string }) {
        // اعد true` أو `false` للإشارة إلى
-    // نجاح / فشل التحقق
+       // نجاح / فشل التحقق
     }
   }
 }
@@ -287,3 +288,14 @@ export default {
 ```
 
 </div>
+
+## الأحداث كخاصيات {#events-props}
+
+يمكنك أيضًا تعريف وتمرير الأحداث كخاصيات، عن طريق إضافة النص `on` 
+مع اسم الحدث بالحروف الكبيرة. استخدام `props.onEvent` له سلوك مختلف عن استخدام `emit('event')`، حيث سيمرر الأول فقط المستمع المعتمد على الخاصية (سواء `event@` أو `on-event:`)
+
+:::warning
+إذا مُرِّر كل من `:onEvent` و `event@` فقد يكون `props.onEvent` مصفوفة من الدوال بدلاً من دالة، هذا السلوك غير مستقر وقد يتغير في المستقبل.
+:::
+
+لهذا السبب، يُفضل استخدام `emit('event')` بدلاً من `props.onEvent` عند إرسال الأحداث.

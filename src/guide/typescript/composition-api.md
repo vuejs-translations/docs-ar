@@ -95,7 +95,6 @@ export default defineComponent({
 
 باستخدام التصريح على أساس الأنواع، يمكن للخاصية استخدام نوع معقد كما هو الحال بالنسبة لأي نوع آخر:
 
-
 ```vue
 <script setup lang="ts">
 interface Book {
@@ -143,6 +142,18 @@ export default defineComponent({
 <script setup lang="ts">
 // زمن التشغيل
 const emit = defineEmits(['change', 'update'])
+
+//  معتمدة على الخيارات
+const emit = defineEmits({
+  change: (id: number) => {
+    // تعيد `true` أو `false` للإشارة إلى
+    // نجاح / فشل التحقق
+  },
+  update: (value: string) => {
+    // تعيد `true` أو `false` للإشارة إلى
+    // نجاح / فشل التحقق
+  }
+})
 
 // على أساس الأنواع
 const emit = defineEmits<{
