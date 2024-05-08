@@ -23,17 +23,17 @@
   ```vue
   <script setup>
   import { ref, provide } from 'vue'
-  import { fooSymbol } from './injectionSymbols'
+  import { countSymbol } from './injectionSymbols'
 
   // يوفر قيمة ساكنة
-  provide('foo', 'bar')
+  provide('path', '/project/')
 
   // يوفر قيمة تفاعلية
   const count = ref(0)
   provide('count', count)
 
   // يوفر مفاتيح رمزية
-  provide(fooSymbol, count)
+  provide(countSymbol, count)
   </script>
   ```
 
@@ -81,10 +81,10 @@
   ```vue
   <script setup>
   import { inject } from 'vue'
-  import { fooSymbol } from './injectionSymbols'
+  import { countSymbol } from './injectionSymbols'
 
   // حقن قيمة ساكنة بدون قيمة افتراضية
-  const foo = inject('foo')
+  const path = inject('path')
 
   // حقن قيمة تفاعلية 
   const count = inject('count')
@@ -93,7 +93,7 @@
   const foo2 = inject(fooSymbol)
 
   // حقن بقيمة افتراضية
-  const bar = inject('foo', 'default value')
+  const bar = inject('path', '/default-path')
 
   // حقن بقيمة افتراضية من دالة
   const fn = inject('function', () => {})
@@ -101,6 +101,16 @@
   // حقن بدالة منتجة لقيمة افتراضية
   const baz = inject('factory', () => new ExpensiveObject(), true)
   </script>
+  ```
+
+## ()hasInjectionContext <sup class="vt-badge" data-text="3.3+" /> {#has-injection-context}
+
+تعيد `true` إذا كان بإمكان استخدام [()inject](#inject) بدون تحذير بأنه استدعي في المكان الخطأ (مثل خارج `()setup`). تم تصميم هذه الطريقة لتكون مستخدمة من قبل المكتبات التي تريد استخدام `()inject` داخليًا دون تشغيل تحذير للمستخدم النهائي.
+
+- **النوع**
+
+  ```ts
+  function hasInjectionContext(): boolean
   ```
 
 - **اطلع أيضا**
