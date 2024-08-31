@@ -2,82 +2,82 @@
 outline: deep
 ---
 
-# Community Guide {#community-guide}
+# دليل المجتمع {#community-guide}
 
-Vue's community is growing incredibly fast and if you're reading this, there's a good chance you're ready to join it. So... welcome!
+يتمتع مجتمع فيُو بنمو سريع للغاية، وإذا كنت تقرأ هذا، فهناك فرصة جيدة أنك جاهز للانضمام إليه. لذا... مرحبًا بك!
 
-Now we'll answer both what the community can do for you and what you can do for the community.
+سنجيب الآن على ما يمكن أن يقدمه المجتمع لك وما يمكنك تقديمه للمجتمع.
 
-## Resources {#resources}
+## الموارد {#resources}
 
-### Code of Conduct {#code-of-conduct}
+### مدونة السلوك {#code-of-conduct}
 
-Our [Code of Conduct](/about/coc) is a guide to make it easier to enrich all of us and the technical communities in which we participate.
+مدونة السلوك الخاصة بنا هي دليل لتسهيل إثراء الجميع والمجتمعات التقنية التي نشارك فيها.
 
-### Stay in the Know {#stay-in-the-know}
+### البقاء على اطلاع {#stay-in-the-know}
 
-- Follow our [official Twitter account](https://twitter.com/vuejs).
-- Follow our [team members](./team) on Twitter or GitHub.
-- Follow the [RFC discussions](https://github.com/vuejs/rfcs).
-- Subscribe to the [official blog](https://blog.vuejs.org/).
+- تابع [حسابنا الرسمي على تويتر](https://twitter.com/vuejs).
+- تابع [أعضاء فريقنا](./team) على تويتر أو GitHub.
+- تابع [مناقشات RFC](https://github.com/vuejs/rfcs).
+- اشترك في [المدونة الرسمية](https://blog.vuejs.org/).
 
-### Get Support {#get-support}
+### الحصول على الدعم {#get-support}
 
-- [Discord Chat](https://chat.vuejs.org/): A place for Vue devs to meet and chat in real time.
-- [Forum](https://forum.vuejs.org/): The best place to ask questions and get answers about Vue and its ecosystem.
-- [DEV Community](https://dev.to/t/vue): Share and discuss Vue related topics on Dev.to.
-- [Meetups](https://events.vuejs.org/meetups): Want to find local Vue enthusiasts like yourself? Interested in becoming a community leader? We have the help and support you need right here!
-- [GitHub](https://github.com/vuejs): If you have a bug to report or feature to request, that's what the GitHub issues are for. Please respect the rules specified in each repository's issue template.
-- [Twitter Community (unofficial)](https://twitter.com/i/communities/1516368750634840064): A Twitter community, where you can meet other Vue enthusiasts, get help, or just chat about Vue.
+- [دردشة Discord](https://chat.vuejs.org/): مكان لمطوري فيُو للقاء والدردشة في الوقت الحقيقي.
+- [المنتدى](https://forum.vuejs.org/): أفضل مكان لطرح الأسئلة والحصول على إجابات حول فيُو ونظامه البيئي.
+- [مجتمع DEV](https://dev.to/t/vue): شارك وناقش مواضيع فيُو على Dev.to.
+- [اللقاءات](https://events.vuejs.org/meetups): هل تريد العثور على محبي فيُو المحليين مثلك؟ هل ترغب في أن تصبح قائدًا للمجتمع؟ لدينا المساعدة والدعم الذي تحتاجه هنا!
+- [GitHub](https://github.com/vuejs): إذا كان لديك خطأ للإبلاغ عنه أو ميزة لطلبها، فهذا هو ما تستخدمه لتقارير GitHub. يرجى احترام القواعد المحددة في قالب مشكلة كل مستودع.
+- [مجتمع تويتر (غير رسمي)](https://twitter.com/i/communities/1516368750634840064): مجتمع تويتر، حيث يمكنك لقاء عشاق فيُو الآخرين، والحصول على المساعدة، أو مجرد الدردشة عن فيُو.
 
-### Explore the Ecosystem {#explore-the-ecosystem}
+### استكشاف النظام البيئي {#explore-the-ecosystem}
 
-- [The Awesome Vue Page](https://github.com/vuejs/awesome-vue): See what other awesome resources have been published by other awesome people.
-- [Vue Telescope Explorer](https://vuetelescope.com/explore): Explore websites made with Vue, with insights on what framework / libraries they use.
-- [Made with Vue.js](https://madewithvuejs.com/): showcases of projects and libraries made with Vue.
-- [The "Show and Tell" Subforum](https://forum.vuejs.org/c/show-and-tell): Another great place to check out what others have built with and for the growing Vue ecosystem.
+- [صفحة Vue الرائعة](https://github.com/vuejs/awesome-vue): شاهد الموارد الرائعة الأخرى التي نشرها أشخاص رائعون آخرون.
+- [Vue Telescope Explorer](https://vuetelescope.com/explore): استكشف المواقع المصنوعة باستخدام فيُو مع رؤى حول إطار العمل / المكتبات التي يستخدمونها.
+- [صنع باستخدام Vue.js](https://madewithvuejs.com/): عروض المشاريع والمكتبات المصنوعة باستخدام فيُو.
+- [المنتدى الفرعي "عرض وشارك"](https://forum.vuejs.org/c/show-and-tell): مكان رائع آخر للتحقق مما بناه الآخرون باستخدام ولأجل نظام فيُو البيئي المتنامي.
 
-## What You Can Do {#what-you-can-do}
+## ما يمكنك فعله {#what-you-can-do}
 
-### Help Fellow Users {#help-fellow-users}
+### مساعدة المستخدمين الآخرين {#help-fellow-users}
 
-Code contribution is not the only form of contribution to the Vue community. Answering a question for a fellow Vue user on Discord or the forum is also considered a valuable contribution.
+المساهمة في الكود ليست الشكل الوحيد للمساهمة في مجتمع فيُو. الإجابة على سؤال لمستخدم فيُو آخر على ديسكورد أو المنتدى تُعتبر أيضًا مساهمة قيمة.
 
-### Help Triage Issues {#help-triage-issues}
+### مساعدة في تصنيف المشكلات {#help-triage-issues}
 
-Triaging an issue means gathering missing information, running the reproduction, verifying the issue's validity, and investigating the cause of the issue.
+تصنيف المشكلة يعني جمع المعلومات المفقودة، وتشغيل الاستنساخ، والتحقق من صحة المشكلة، والتحقيق في سبب المشكلة.
 
-We receive many issues in [our repositories on GitHub](https://github.com/vuejs) every single day. Our bandwidth is limited compared to the amount of users we have, so issue triaging alone can take an enormous amount of effort from the team. By helping us triage the issues, you are helping us become more efficient, allowing us to spend time on higher priority work.
+نتلقى العديد من المشكلات في [مستودعاتنا على GitHub](https://github.com/vuejs) كل يوم. قدرتنا على التعامل محدودة مقارنة بعدد المستخدمين لدينا، لذا يمكن أن يستغرق تصنيف المشكلات جهدًا كبيرًا من الفريق. من خلال مساعدتنا في تصنيف المشكلات، تساعدنا على أن نصبح أكثر كفاءة، مما يتيح لنا قضاء وقتنا على العمل ذي الأولوية الأعلى.
 
-You don't have to triage an issue with the goal of fixing it (although that would be nice too). Sharing the result of your investigation, for example the commit that led to the bug, can already save us a ton of time.
+لا يتعين عليك تصنيف مشكلة بهدف إصلاحها (على الرغم من أن ذلك سيكون رائعًا أيضًا). مشاركة نتيجة التحقيق، مثل الالتزام الذي أدى إلى الخطأ، يمكن أن توفر لنا الكثير من الوقت.
 
-### Contribute Code {#contribute-code}
+### المساهمة في الكود {#contribute-code}
 
-Contributing bug fixes or new features is the most direct form of contribution you can make.
+تعتبر المساهمة بإصلاح الأخطاء أو الميزات الجديدة الشكل الأكثر مباشرة من المساهمة التي يمكنك تقديمها.
 
-The Vue core repository provides a [contributing guide](https://github.com/vuejs/core/blob/main/.github/contributing.md), which contains pull request guidelines and information regarding build setup and high-level architecture. Other sub-project repositories may also contain its own contribution guide - please make sure to read them before submitting pull requests.
+يوفر مستودع فيُو الرئيسي [دليل المساهمة](https://github.com/vuejs/core/blob/main/.github/contributing.md)، والذي يحتوي على إرشادات طلب السحب ومعلومات حول إعداد البناء والهندسة المعمارية على مستوى عالٍ. قد تحتوي مستودعات المشاريع الفرعية الأخرى أيضًا على دليل مساهمة خاص بها - يرجى التأكد من قراءتها قبل تقديم طلبات السحب.
 
-Bug fixes are welcome at any time. For new features, it is best to discuss the use case and implementation details first in the [RFC repo](https://github.com/vuejs/rfcs/discussions).
+التصحيحات مرحب بها في أي وقت. بالنسبة للميزات الجديدة، من الأفضل مناقشة حالة الاستخدام وتفاصيل التنفيذ أولاً في [مستودع RFC](https://github.com/vuejs/rfcs/discussions).
 
-### Share (and Build) Your Experience {#share-and-build-your-experience}
+### شارك (وابنِ) تجربتك {#share-and-build-your-experience}
 
-Apart from answering questions and sharing resources in the forum and chat, there are a few other less obvious ways to share and expand what you know:
+بصرف النظر عن الإجابة على الأسئلة ومشاركة الموارد في المنتدى والدردشة، هناك بعض الطرق الأخرى الأقل وضوحًا لمشاركة وتوسيع ما تعرفه:
 
-- **Develop learning materials.** It's often said that the best way to learn is to teach. If there's something interesting you're doing with Vue, strengthen your expertise by writing a blog post, developing a workshop, or even publishing a gist that you share on social media.
-- **Watch a repo you care about.** This will send you notifications whenever there's activity in that repository, giving you insider knowledge about ongoing discussions and upcoming features. It's a fantastic way to build expertise so that you're eventually able to help address issues and pull requests.
+- **تطوير مواد تعليمية.** غالبًا ما يُقال أن أفضل طريقة للتعلم هي التدريس. إذا كان هناك شيء مثير تفعله باستخدام فيُو، عزز خبرتك بكتابة منشور مدونة، أو تطوير ورشة عمل، أو حتى نشر جست تشاركه على وسائل التواصل الاجتماعي.
+- **مراقبة مستودع يهمك.** سيؤدي ذلك إلى إرسال إشعارات إليك كلما كان هناك نشاط في ذلك المستودع، مما يمنحك معرفة داخلية حول المناقشات الجارية والميزات القادمة. إنها طريقة رائعة لبناء الخبرة بحيث تكون قادرًا في النهاية على المساعدة في معالجة المشكلات وطلبات السحب.
 
-### Translate Docs {#translate-docs}
+### ترجمة الوثائق {#translate-docs}
 
-I hope that right now, you're reading this sentence in your preferred language. If not, would you like to help us get there?
+آمل أن تكون الآن تقرأ هذه الجملة بلغة تفضلها. إذا لم يكن الأمر كذلك، هل ترغب في مساعدتنا للوصول إلى هناك؟
 
-See the [Translations guide](/translations/) for more details on how you can get involved.
+راجع [دليل الترجمات](/translations/) لمزيد من التفاصيل حول كيفية الانخراط.
 
-### Become a Community Leader {#become-a-community-leader}
+### أن تصبح قائدًا للمجتمع {#become-a-community-leader}
 
-There's a lot you can do to help Vue grow in your community:
+هناك الكثير مما يمكنك فعله لمساعدة فيُو على النمو في مجتمعك:
 
-- **Present at your local meetup.** Whether it's giving a talk or running a workshop, you can bring a lot of value to your community by helping both new and experienced Vue developers continue to grow.
-- **Start your own meetup.** If there's not already a Vue meetup in your area, you can start your own! Use the [resources at events.vuejs.org](https://events.vuejs.org/resources/#getting-started) to help you succeed!
-- **Help meetup organizers.** There can never be too much help when it comes to running an event, so offer a hand to help out local organizers to help make every event a success.
+- **قدّم عرضًا في لقائك المحلي.** سواء كان تقديم محاضرة أو إدارة ورشة عمل، يمكنك تقديم قيمة كبيرة لمجتمعك من خلال مساعدة المطورين الجدد وذوي الخبرة على الاستمرار في النمو.
+- **ابدأ لقاءً خاصًا بك.** إذا لم يكن هناك بالفعل لقاء لـ فيُو في منطقتك، يمكنك بدء لقاء خاص بك! استخدم [الموارد على events.vuejs.org](https://events.vuejs.org/resources/#getting-started) لمساعدتك على النجاح!
+- **ساعد منظمي اللقاءات.** لا يمكن أبدًا أن يكون هناك الكثير من المساعدة عندما يتعلق الأمر بإدارة حدث، لذا قدم يد المساعدة لمنظمي اللقاءات المحليين لمساعدتهم على جعل كل حدث ناجحًا.
 
-If you have any questions on how you can get more involved with your local Vue community, reach out on Twitter at [@vuejs_events](https://www.twitter.com/vuejs_events)!
+إذا كانت لديك أي أسئلة حول كيفية الانخراط أكثر في مجتمع فيُو المحلي الخاص بك، تواصل عبر تويتر على [@vuejs_events](https://www.twitter.com/vuejs_events)!

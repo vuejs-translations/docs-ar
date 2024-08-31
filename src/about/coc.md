@@ -1,45 +1,45 @@
-# Code Of Conduct {#code-of-conduct}
+# مدونة السلوك {#code-of-conduct}
 
-## Our Pledge {#our-pledge}
+## تعهدنا {#our-pledge}
 
-In the interest of fostering an open and welcoming environment, we as contributors and maintainers pledge to making participation in our project and our community a harassment-free experience for everyone, regardless of age, body size, disability, ethnicity, sex characteristics, gender identity and expression, level of experience, education, socio-economic status, nationality, personal appearance, race, religion, political party, or sexual identity and orientation. Note, however, that religion, political party, or other ideological affiliation provide no exemptions for the behavior we outline as unacceptable in this Code of Conduct.
+حرصاً منا على تعزيز بيئة مفتوحة ومرحبة، نعد نحن كمساهمين ومشرفين بجعل المشاركة في مشروعنا ومجتمعنا تجربة خالية من التحرش للجميع، بغض النظر عن العمر، حجم الجسم، الإعاقة، العرق، خصائص الجنس، هوية وتعبير الجنس، مستوى الخبرة، التعليم، الوضع الاجتماعي والاقتصادي، الجنسية، المظهر الشخصي، العرق، الدين، الحزب السياسي، أو الهوية الجنسية والتوجه. ومع ذلك، يرجى ملاحظة أن الدين، الحزب السياسي، أو الانتماءات الأيديولوجية الأخرى لا توفر أي استثناءات للسلوك الذي نحدده على أنه غير مقبول في مدونة السلوك هذه.
 
-## Our Standards {#our-standards}
+## معاييرنا {#our-standards}
 
-Examples of behavior that contributes to creating a positive environment include:
+أمثلة على السلوك الذي يساهم في خلق بيئة إيجابية تشمل:
 
-- Using welcoming and inclusive language
-- Being respectful of differing viewpoints and experiences
-- Gracefully accepting constructive criticism
-- Focusing on what is best for the community
-- Showing empathy towards other community members
+- استخدام لغة مرحبة وشاملة
+- احترام وجهات النظر والخبرات المختلفة
+- قبول النقد البناء برحابة صدر
+- التركيز على ما هو الأفضل للمجتمع
+- إظهار التعاطف تجاه أعضاء المجتمع الآخرين
 
-Examples of unacceptable behavior by participants include:
+أمثلة على السلوك غير المقبول من قبل المشاركين تشمل:
 
-- The use of sexualized language or imagery and unwelcome sexual attention or advances
-- Trolling, insulting/derogatory comments, and personal or political attacks
-- Public or private harassment
-- Publishing others' private information, such as a physical or electronic address, without explicit permission
-- Other conduct which could reasonably be considered inappropriate in a professional setting
+- استخدام لغة أو صور ذات طابع جنسي والاهتمام أو التقدمات الجنسية غير المرغوب فيها
+- الترويج، التعليقات المهينة/الازدرائية، والهجمات الشخصية أو السياسية
+- التحرش العام أو الخاص
+- نشر معلومات خاصة بالآخرين، مثل عنوان فيزيائي أو إلكتروني، دون إذن صريح
+- سلوك آخر يمكن اعتباره غير مناسب في بيئة مهنية
 
-## Our Responsibilities {#our-responsibilities}
+## مسؤولياتنا {#our-responsibilities}
 
-Project maintainers are responsible for clarifying the standards of acceptable behavior and are expected to take appropriate and fair corrective action in response to any instances of unacceptable behavior.
+المشرفون على المشروع مسؤولون عن توضيح معايير السلوك المقبول ومن المتوقع أن يتخذوا إجراءات تصحيحية مناسبة وعادلة استجابة لأي حالات سلوك غير مقبول.
 
-Project maintainers have the right and responsibility to remove, edit, or reject comments, commits, code, wiki edits, issues, and other contributions that are not aligned to this Code of Conduct, or to ban temporarily or permanently any contributor for other behaviors that they deem inappropriate, threatening, offensive, or harmful.
+يمتلك المشرفون على المشروع الحق والمسؤولية في إزالة أو تعديل أو رفض التعليقات، والتزامات الكود، وتعديلات الويكي، والقضايا، والمساهمات الأخرى التي لا تتماشى مع مدونة السلوك هذه، أو حظر مؤقتاً أو دائماً أي مساهم لأسباب أخرى يعتبرونها غير مناسبة أو مهددة أو مسيئة أو ضارة.
 
-## Scope {#scope}
+## النطاق {#scope}
 
-This Code of Conduct applies both within project spaces and in public spaces when an individual is representing the project or its community. Examples of representing a project or community include using an official project e-mail address, posting via an official social media account, or acting as an appointed representative at an online or offline event. Representation of a project may be further defined and clarified by project maintainers.
+تنطبق مدونة السلوك هذه سواء داخل مساحات المشروع أو في المساحات العامة عندما يمثل الفرد المشروع أو مجتمعه. تشمل أمثلة تمثيل مشروع أو مجتمع استخدام عنوان بريد إلكتروني رسمي للمشروع، أو النشر عبر حساب رسمي على وسائل التواصل الاجتماعي، أو التصرف كممثل معين في حدث عبر الإنترنت أو حدث فعلي. قد يتم تعريف وتمييز تمثيل المشروع بشكل إضافي من قبل مشرفي المشروع.
 
-## Enforcement {#enforcement}
+## التنفيذ {#enforcement}
 
-Instances of abusive, harassing, or otherwise unacceptable behavior may be reported by contacting the project team at community@vuejs.org. All complaints will be reviewed and investigated and will result in a response that is deemed necessary and appropriate to the circumstances. The project team is obligated to maintain confidentiality with regard to the reporter of an incident. Further details of specific enforcement policies may be posted separately.
+يمكن الإبلاغ عن حالات السلوك المسيء أو التحرشي أو غير المقبول عن طريق التواصل مع فريق المشروع عبر البريد الإلكتروني community@vuejs.org. سيتم مراجعة جميع الشكاوى والتحقيق فيها، وسينتج عن ذلك استجابة تُعتبر ضرورية ومناسبة للظروف. يتعين على فريق المشروع الحفاظ على سرية هوية المبلغ عن الحادث. قد يتم نشر تفاصيل إضافية حول سياسات التنفيذ المحددة بشكل منفصل.
 
-Project maintainers who do not follow or enforce the Code of Conduct in good faith may face temporary or permanent repercussions as determined by other members of the project's leadership.
+قد يواجه المشرفون على المشروع الذين لا يتبعون أو ينفذون مدونة السلوك بحسن نية تداعيات مؤقتة أو دائمة كما يحددها أعضاء آخرون من قيادة المشروع.
 
-## Attribution {#attribution}
+## النسب {#attribution}
 
-This Code of Conduct is adapted from the [Contributor Covenant][homepage], version 1.4, available at https://www.contributor-covenant.org/version/1/4/code-of-conduct.html
+تم تكييف مدونة السلوك هذه من [ميثاق المساهمين][homepage]، الإصدار 1.4، والمتوفر على https://www.contributor-covenant.org/version/1/4/code-of-conduct.html
 
 [homepage]: https://www.contributor-covenant.org
