@@ -1,75 +1,180 @@
-.VPSidebar,
-.vt-doc.guide,
-.vt-doc.api,
-.VPContentDocOutline,
-.edit-link {
+@import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;900&display=swap');
+
+:root {
+  --vt-scroll-thumb-color-light: #c1c1c1;
+  --vt-scroll-track-color-light: #f1f1f1;
+
+  --vt-scroll-thumb-color-dark: #767676;
+  --vt-scroll-track-color-dark: #242424;
+
+  --vt-font-family-base: 'Vazirmatn', 'Inter var experimental', 'Inter var',
+    Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
+    Ubuntu, Cantarell, 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif !important;
+  --vt-font-family-mono: Menlo, Monaco, Consolas, 'Vazirmatn',
+    'Courier New', monospace !important;
+}
+
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--vt-scroll-thumb-color-light)
+    var(--vt-scroll-track-color-light);
+}
+
+/* Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+  width: 7.5px;
+}
+
+/* Chrome, Edge, and Safari */
+*::-webkit-scrollbar-thumb {
+  background: var(--vt-scroll-thumb-color-light);
+  border-radius: 10px;
+}
+
+/* Chrome, Edge, and Safari */
+*::-webkit-scrollbar-track {
+  background: var(--vt-scroll-track-color-light);
+}
+
+/* darkmode styles */
+.dark {
+  &,
+  * {
+    scrollbar-color: var(--vt-scroll-thumb-color-dark)
+      var(--vt-scroll-track-color-dark);
+  }
+  &,
+  *::-webkit-scrollbar-thumb {
+    background: var(--vt-scroll-thumb-color-dark);
+  }
+  &,
+  *::-webkit-scrollbar-track {
+    background: var(--vt-scroll-track-color-dark);
+  }
+}
+
+/* RTL & Persian Styles */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+ul,
+li {
   direction: rtl;
 }
 
-pre {
+.license {
   direction: ltr;
 }
-.vt-doc .custom-block {
-  padding: 22px 24px 4px 20px !important;
-}
-.vt-doc .custom-block:before {
-  content: 'ⓘ';
-  position: absolute;
-  font-weight: 600;
-  font-size: 15px;
-  top: 28px;
-  right: 12px;
-}
 
-.vt-doc .custom-block-title {
-  margin-right: 14px;
+.vt-link-icon {
+  margin-left: 0;
+  margin-right: 4px;
 }
 
 .vt-doc ul {
-  padding-left: auto;
   padding-right: 1.25rem;
+  padding-left: 0 !important;
 }
 
 .vt-doc ul > li:before {
-  content: '•';
   right: -1.25rem;
 }
 
-.ar.vue-mastery-link .description {
-  margin-right: 16px;
+.vt-doc .custom-block {
+  padding: 20px 40px 4px 42px !important;
 }
 
-.vt-doc a[href^="https://sfc.vuejs.org"]:before
-{
-  padding-right: 2.5px;
+.vt-doc .custom-block:before {
+  left: auto !important;
+  right: 17px;
+}
+
+.outline-title {
+  direction: rtl;
 }
 
 .vt-doc .header-anchor {
-  position: absolute;
-  right: -24px;
+  float: right !important;
+  margin-right: -1.1em;
+  padding-left: 0.23em;
 }
 
-.vt-doc ol > li:before {
-  left: auto;
-  right: 2px;
+.vt-icon {
+  margin-right: 0px !important;
+  margin-left: 8px;
 }
 
-.vt-doc ol > li p {
-  padding-right: 1.25rem;
+.top-link,
+.VPNavScreenMenu {
+  direction: rtl;
 }
 
-.vt-badge.experimental:before {
-  content: 'تجريبي';
+.outline-marker {
+  left: auto !important;
+  right: -12px;
 }
 
-.demo label {
-  margin: 0 0.3em 0 1em;
+.vt-doc ol > li {
+  padding-left: unset !important;
+  padding-right: 1.5rem !important;
+  text-align: right;
 }
-.vt-doc blockquote {
-  border-left:none!important;
-  border-right: 0.2rem solid var(--vt-c-divider);
+
+.vt-doc ol > li::before {
+  left: unset !important;
+  right: 2px !important;
+}
+
+.vt-menu-link {
+  direction: rtl;
+}
+
+.join-translations {
+  direction: rtl;
+}
+
+.aside-container .VPContentDocOutline .nested {
+  padding-left: unset;
   padding-right: 1rem;
 }
+
+.vt-badge.ts {
+  margin-right: 0.5em;
+}
+
+.details summary {
+  direction: rtl;
+}
+
+.tutorial .vue-repl .toggle {
+  margin-right: 4px;
+}
+
+.tutorial .vue-repl .msg {
+  direction: ltr;
+}
+
+.vt-doc a[href^="https://play.vuejs.org"]:before
+{
+  padding-left: unset;
+  padding-right: 3px;
+  margin-right: 4px;
+  margin-left: 8px;
+  margin-top: 4px;
+  padding-top: 0.5px;
+}
+
+.vt-banner-text {
+  direction: ltr;
+}
+
 
 .vt-badge.dev-only:before {
   content: 'فقط في وضع التطوير';
