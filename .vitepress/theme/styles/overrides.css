@@ -15,6 +15,34 @@
     'Courier New', monospace !important;
 }
 
+.VPSidebar,
+.vt-doc.guide,
+.vt-doc.api,
+.VPContentDocOutline,
+.edit-link {
+  direction: rtl;
+}
+
+
+pre {
+  direction: ltr;
+}
+.vt-doc .custom-block {
+  padding: 22px 24px 4px 20px !important;
+}
+.vt-doc .custom-block:before {
+  content: 'ⓘ';
+  position: absolute;
+  font-weight: 600;
+  font-size: 15px;
+  top: 28px;
+  right: 12px;
+}
+
+.vt-doc .custom-block-title {
+  margin-right: 14px;
+}
+
 /* Firefox */
 * {
   scrollbar-width: thin;
@@ -79,12 +107,23 @@ li {
 }
 
 .vt-doc ul {
+  padding-left: auto;
   padding-right: 1.25rem;
   padding-left: 0 !important;
 }
 
 .vt-doc ul > li:before {
+  content: '•';
   right: -1.25rem;
+}
+
+.ar.vue-mastery-link .description {
+  margin-right: 16px;
+}
+
+.vt-doc a[href^="https://sfc.vuejs.org"]:before
+{
+  padding-right: 2.5px;
 }
 
 .vt-doc .custom-block {
@@ -101,10 +140,13 @@ li {
 }
 
 .vt-doc .header-anchor {
+  position: absolute;
+  right: -24px;
   float: right !important;
   margin-right: -1.1em;
   padding-left: 0.23em;
 }
+
 
 .vt-icon {
   margin-right: 0px !important;
@@ -178,4 +220,27 @@ li {
 
 .vt-badge.dev-only:before {
   content: 'فقط في وضع التطوير';
+}
+
+
+.vt-doc ol > li:before {
+  left: auto;
+  right: 2px;
+}
+
+.vt-doc ol > li p {
+  padding-right: 1.25rem;
+}
+
+.vt-badge.experimental:before {
+  content: 'تجريبي';
+}
+
+.demo label {
+  margin: 0 0.3em 0 1em;
+}
+.vt-doc blockquote {
+  border-left:none!important;
+  border-right: 0.2rem solid var(--vt-c-divider);
+  padding-right: 1rem;
 }
