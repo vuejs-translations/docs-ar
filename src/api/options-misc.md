@@ -99,27 +99,6 @@
   </template>
   ```
 
-  منذ 3.3 يمكنك أيضًا استخدام `defineOptions` مباشرة في `<script setup>`:
-
-  ```vue
-  <script setup>
-  defineProps(['label', 'value'])
-  defineEmits(['input'])
-  defineOptions({ inheritAttrs: false })
-  </script>
-
-  <template>
-    <label>
-      {{ label }}
-      <input
-        v-bind="$attrs"
-        v-bind:value="value"
-        v-on:input="$emit('input', $event.target.value)"
-      />
-    </label>
-  </template>
-  ```
-
   </div>
 
 - **اطلع أيضًا على** [السمات المستترة](/guide/components/attrs)
@@ -185,6 +164,4 @@
   <input v-focus>
   ```
 
-  مجموعة من السمات الموجهة لتصبح متوفرة لنسخة المكون.
-
-- **اطلع أيضًا على** [السمات الموجهة المخصصة](/guide/reusability/custom-directives)
+- **See also** [Custom Directives](/guide/reusability/custom-directives)

@@ -53,7 +53,7 @@
 
 على الرغم من أن Vue مصممة أساسا لبناء تطبيقات الويب ، إلا أنها ليست محدودة بالمعنى الواضح في المتصفح فقط. يمكنك:
 
-- بناء تطبيقات سطح المكتب مع [Electron](https://www.electronjs.org/) أو [Tauri](https://tauri.studio/en/)
+- بناء تطبيقات سطح المكتب مع [Electron](https://www.electronjs.org/) أو [Tauri](https://tauri.app)
 - بناء تطبيقات الهاتف المحمول مع [Ionic Vue](https://ionicframework.com/docs/vue/overview)
 - بناء تطبيقات سطح المكتب والهاتف المحمول من نفس قاعدة الشفرة مع [Quasar](https://quasar.dev/)
 - استخدام [Custom Renderer API](/api/custom-renderer) Vue لبناء محررين مخصصين تستهدف [WebGL](https://troisjs.github.io/) أو حتى [الطرفية](https://github.com/vue-terminal/vue-termui)!

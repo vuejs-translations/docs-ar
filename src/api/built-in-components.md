@@ -126,7 +126,7 @@ h(Transition, {
   </Transition>
   ```
 
-- **اطلع أيضاً على** [دليل مكون`<Transition>`](/api/built-in-components.html#transition)
+- **اطلع أيضاً على** [دليل مكون - Transition](/guide/built-ins/transition)
 
 ## مكون `<TransitionGroup>` {#transitiongroup}
 

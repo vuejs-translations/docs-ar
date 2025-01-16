@@ -315,10 +315,6 @@ export default {
 
 تستحدم دالة `()computed` عادةً في مُكونات الواجهة التركيبية (Composition Api Components) , ولكن ممكن ايضا لإستكمال حالات إستخدام معينة في واجهات الخيارات (Options Api) . يمكنك معرفة المزيد حول استخدامه من خلال قراءة [أساسيات التفاعلية](/guide/essentials/reactivity-fundamentals) و [الخواص المحسوبة](/guide/essentials/computed) مع أفضلية للواجهة التركيبية 
 
-:::warning الإعدادات المؤقتة مطلوبة
-يتطلب المثال السابق ضبط إعداد `app.config.unwrapInjectedRef = true` لجعل عملية الحقن تقوم بفض الحسبة التفاعلية (unwrap computed refs) بشكل تلقائي. هذا سوف يكون الشكل الإفتراضي في Vue 3.3 و هذا الحل تم تقديمه بشكل مؤقت لتجنب أي خلل . سوف يكون غير مطلوب في النسخ الي ستقدم بعد 3.3
-:::
-
 </div>
 
 ##  استخدام المفاتيح الرموز Symbols Keys {#working-with-symbol-keys}

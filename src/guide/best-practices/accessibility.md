@@ -116,16 +116,16 @@ watch(
 
 [العناصر المميزة](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/landmark_role) توفر الوصول البرمجي إلى الأقسام داخل التطبيق. يمكن للمستخدمين الذين يعتمدون على التقنيات المساعدة التنقل إلى كل قسم من التطبيق وتخطي المحتوى. يمكنك استخدام [أدوار ARIA](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles) لمساعدتك في الحصول على ذلك.
 
-| HTML        | ARIA دور             | غرض العنصر المميز                                                                              |
-| ----------- | -------------------- | ---------------------------------------------------------------------------------------------- |
-| header      | "role="banner        | العنوان الرئيسي: عنوان الصفحة                                                                  |
-| nav         | "role="navigation    | مجموعة من الروابط المناسبة للاستخدام عند تنقل الوثيقة أو الوثائق ذات الصلة                     |
-| main        | "role="main          | المحتوى الرئيسي أو المركزي للوثيقة.                                                            |
-| footer      | "role="contentinfo   | معلومات عن الوثيقة الأصلية: الحاشيات / حقوق النشر / روابط إلى بيان الخصوصية                    |
-| aside       | "role="complementary | يدعم المحتوى الرئيسي ، ولكنه مفصول ومعناه على حدة في محتوىه                                    |
-| _غير متوفر_ | "role="search        | هذا القسم يحتوي على وظيفة البحث للتطبيق                                                        |
-| form        | "role="form         | مجموعة من عناصر النموذج المرتبطة                                                               |
-| section     | "role="region        | المحتوى الذي يتعلق به والذي يرغب المستخدمون بالتنقل إليه بشكل عام. يجب توفير تسمية لهذا العنصر |
+| HTML            | ARIA Role            | Landmark Purpose                                                                                                 |
+| --------------- | -------------------- | ---------------------------------------------------------------------------------------------------------------- |
+| header          | role="banner"‎        | العنوان الرئيسي: عنوان الصفحة                                                                                    |
+| nav             | role="navigation"‎    | مجموعة من الروابط المناسبة للاستخدام عند تنقل الوثيقة أو الوثائق ذات الصلة                                        |
+| main            | role="main"‎          | المحتوى الرئيسي أو المركزي للوثيقة.                                                                              |
+| footer          | role="contentinfo"‎   | معلومات عن الوثيقة الأصلية: الحاشيات / حقوق النشر / روابط إلى بيان الخصوصية                                       |
+| aside           | role="complementary"‎ | يدعم المحتوى الرئيسي ، ولكنه مفصول ومعناه على حدة في محتوىه                                                      |
+| search          | role="search"‎        | هذا القسم يحتوي على وظيفة البحث للتطبيق                                                                          |
+| form            | role="form"‎          | مجموعة من عناصر النموذج المرتبطة                                                                                 |
+| section         | role="region"‎        | المحتوى الذي يتعلق به والذي يرغب المستخدمون بالتنقل إليه بشكل عام. يجب توفير تسمية لهذا العنصر                   |
 
 :::tip نصيحة:
 يُوصى باستخدام عناصر HTML المميزة مع سمات دور عنصر مميز مكررة لتحسين التوافق مع [المتصفحات القديمة التي لا تدعم عناصر HTML5 الدلالية](https://caniuse.com/#feat=html5semantic).
@@ -503,7 +503,7 @@ watch(
   - [ChromeVox](https://chrome.google.com/webstore/detail/chromevox-classic-extensi/kgejglhpjiefppelpmljglcjbhoiplfn?hl=en)
 - أدوات التكبير
   - [MAGic](https://www.freedomscientific.com/products/software/magic/)
-  - [ZoomText](https://www.zoomtext.com/)
+  - [ZoomText](https://www.freedomscientific.com/products/software/zoomtext/)
   - [Magnifier](https://support.microsoft.com/en-us/help/11542/windows-use-magnifier-to-make-things-easier-to-see)
 
 ### الاختبار {#testing}
