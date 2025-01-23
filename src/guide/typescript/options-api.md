@@ -230,7 +230,7 @@ declare module 'vue' {
 
 اطلع أيضا على
 
-- [ اختبار  الوحدات لـTypeScript لامتدادات أنواع المكونات](https://github.com/vuejs/core/blob/main/packages/dts-test/componentTypeExtensions.test-d.tsx)
+- [ اختبار  الوحدات لـTypeScript لامتدادات أنواع المكونات](https://github.com/vuejs/core/blob/main/packages-private/dts-test/componentTypeExtensions.test-d.tsx)
 
 ### موضع توسيع النوع {#type-augmentation-placement}
 
@@ -290,4 +290,4 @@ declare module 'vue' {
 
 اطلع أيضا على
 
-- [ اختبار  الوحدات لـTypeScript لامتدادات أنواع المكونات](https://github.com/vuejs/core/blob/main/packages/dts-test/componentTypeExtensions.test-d.tsx)
+- [ اختبار  الوحدات لـTypeScript لامتدادات أنواع المكونات](https://github.com/vuejs/core/blob/main/packages-private/dts-test/componentTypeExtensions.test-d.tsx)

@@ -5,8 +5,3 @@
 @import "./utilities.css";
 @import "./style-guide.css";
 @import "./overrides.css";
-
-/* vitepress rc.31 migrated to shijiki and need this to apply code styles */
-.vp-code span {
-  color: var(--shiki-dark, inherit);
-}

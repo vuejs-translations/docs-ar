@@ -117,7 +117,72 @@ defineProps<{
 
 </div>
 
-## تفاصيل تمرير الخاصيات {#prop-passing-details}
+<div class="composition-api">
+
+## Reactive Props Destructure <sup class="vt-badge" data-text="3.5+" /> \*\* {#reactive-props-destructure}
+
+Vue's reactivity system tracks state usage based on property access. E.g. when you access `props.foo` in a computed getter or a watcher, the `foo` prop gets tracked as a dependency.
+
+So, given the following code:
+
+```js
+const { foo } = defineProps(['foo'])
+
+watchEffect(() => {
+  // runs only once before 3.5
+  // re-runs when the "foo" prop changes in 3.5+
+  console.log(foo)
+})
+```
+
+In version 3.4 and below, `foo` is an actual constant and will never change. In version 3.5 and above, Vue's compiler automatically prepends `props.` when code in the same `<script setup>` block accesses variables destructured from `defineProps`. Therefore the code above becomes equivalent to the following:
+
+```js {5}
+const props = defineProps(['foo'])
+
+watchEffect(() => {
+  // `foo` transformed to `props.foo` by the compiler
+  console.log(props.foo)
+})
+```
+
+In addition, you can use JavaScript's native default value syntax to declare default values for the props. This is particularly useful when using the type-based props declaration:
+
+```ts
+const { foo = 'hello' } = defineProps<{ foo?: string }>()
+```
+
+If you prefer to have more visual distinction between destructured props and normal variables in your IDE, Vue's VSCode extension provides a setting to enable inlay-hints for destructured props.
+
+### Passing Destructured Props into Functions {#passing-destructured-props-into-functions}
+
+When we pass a destructured prop into a function, e.g.:
+
+```js
+const { foo } = defineProps(['foo'])
+
+watch(foo, /* ... */)
+```
+
+This will not work as expected because it is equivalent to `watch(props.foo, ...)` - we are passing a value instead of a reactive data source to `watch`. In fact, Vue's compiler will catch such cases and throw a warning.
+
+Similar to how we can watch a normal prop with `watch(() => props.foo, ...)`, we can watch a destructured prop also by wrapping it in a getter:
+
+```js
+watch(() => foo, /* ... */)
+```
+
+In addition, this is the recommended approach when we need to pass a destructured prop into an external function while retaining reactivity:
+
+```js
+useComposable(() => foo)
+```
+
+The external function can call the getter (or normalize it with [toValue](/api/reactivity-utilities.html#tovalue)) when it needs to track changes of the provided prop, e.g. in a computed or watcher getter.
+
+</div>
+
+  ## تفاصيل تمرير الخاصيات {#prop-passing-details}
 
 ### طريقة تسمية الخاصية {#prop-name-casing}
 
@@ -389,13 +454,18 @@ defineProps({
     type: String,
     required: true
   },
-  // رقم مع قيمة افتراضية
+  // Required but nullable string
   propD: {
+    type: [String, null],
+    required: true
+  },
+  // Number with a default value
+  propE: {
     type: Number,
     default: 100
   },
-  // كائن مع قيمة افتراضية
-  propE: {
+  // Object with a default value
+  propF: {
     type: Object,
     // يجب أن تُعيد القيم الافتراضية للكائن أو المصفوفة من دالة مصنعة.
     // تتلقى الدالة الخاصة بالخاصية الخام 
@@ -404,17 +474,19 @@ defineProps({
       return { message: 'hello' }
     }
   },
-  // دالة مخصصة للتحقق من صحة الخاصية
-  propF: {
-    validator(value) {
-      // يجب أن تتطابق القيمة مع أحد هذه السلاسل النصية
+  // Custom validator function
+  // full props passed as 2nd argument in 3.4+
+  propG: {
+    validator(value, props) {
+      // The value must match one of these strings
       return ['success', 'warning', 'danger'].includes(value)
     }
   },
-  // دالة مع قيمة افتراضية
-  propG: {
+  // Function with a default value
+  propH: {
     type: Function,
-    // على عكس القيم الافتراضية للكائن أو المصفوفة، ليست هذه دالة مُصنعة - هذه دالة لتقديم قيمة افتراضية
+    // Unlike object or array default, this is not a factory
+    // function - this is a function to serve as a default value
     default() {
       return 'الدالة الافتراضية'
     }
@@ -442,13 +514,18 @@ export default {
       type: String,
       required: true
     },
-    // رقم مع قيمة افتراضية
+    // Required but nullable string
     propD: {
+      type: [String, null],
+      required: true
+    },
+    // Number with a default value
+    propE: {
       type: Number,
       default: 100
     },
-    // كائن مع قيمة افتراضية
-    propE: {
+    // Object with a default value
+    propF: {
       type: Object,
       // يجب أن تُعيد القيم الافتراضية للكائن أو المصفوفة من دالة مصنعة.
       // تتلقى الدالة الخاصة بالخاصية الخام 
@@ -457,17 +534,19 @@ export default {
         return { message: 'hello' }
       }
     },
-    // دالة مخصصة للتحقق من صحة الخاصية
-    propF: {
-      validator(value) {
-        // يجب أن تتطابق القيمة مع أحد هذه السلاسل النصية
+    // Custom validator function
+    // full props passed as 2nd argument in 3.4+
+    propG: {
+      validator(value, props) {
+        // The value must match one of these strings
         return ['success', 'warning', 'danger'].includes(value)
       }
     },
-    // دالة مع قيمة افتراضية
-    propG: {
+    // Function with a default value
+    propH: {
       type: Function,
-      // على عكس القيم الافتراضية للكائن أو المصفوفة، ليست هذه دالة مُصنعة - هذه دالة لتقديم قيمة افتراضية
+      // Unlike object or array default, this is not a factory
+      // function - this is a function to serve as a default value
       default() {
         return 'الدالة الافتراضية'
       }
@@ -515,6 +594,7 @@ Note that props are validated **before** a component instance is created, so ins
 - `Date` (`تاريخ`)
 - `Function` (`دالة`)
 - `Symbol` (`رمز`)
+- `Error` (`خطأ`)
 
 بالإضافة إلى ذلك ، يمكن أن يكون `type` أيضًا صنفًا مخصصًا أو دالة بانية وسيُجرى التحقق من النوع باستخدام `instanceof` . على سبيل المثال ،ليكن الصنف التالي:
 
@@ -551,6 +631,39 @@ export default {
 </div>
 
 ستستخدم Vue الشيفرة  `instanceof Person` للتحقق من صحة القيمة الموجودة في خاصية `author` هل هي نسخة من الصنف `Person` أم لا.
+
+### Nullable Type {#nullable-type}
+
+If the type is required but nullable, you can use the array syntax that includes `null`:
+
+<div class="composition-api">
+
+```js
+defineProps({
+  id: {
+    type: [String, null],
+    required: true
+  }
+})
+```
+
+</div>
+<div class="options-api">
+
+```js
+export default {
+  props: {
+    id: {
+      type: [String, null],
+      required: true
+    }
+  }
+}
+```
+
+</div>
+
+Note that if `type` is just `null` without using the array syntax, it will allow any type.
 
 ## تحويل القيم المنطقية {#boolean-casting}
 

@@ -116,7 +116,7 @@ data() {
 
 </div>
 
-الدالة المعالجة تتلقى تلقائيًا كائن حدث الـDOM الأصلي الذي يُشغل - في المثال أعلاه ، نستطيع الوصول إلى العنصر الذي يقوم باطلاق الحدث عبر `event.target.tagName`.
+A method handler automatically receives the native DOM Event object that triggers it - in the example above, we are able to access the element dispatching the event via `event.target`.
 
 <div class="composition-api">
 
@@ -259,6 +259,7 @@ methods: {
 ```vue-html
 <!--  استخدم وضع الالتقاط عند إضافة مستمع الحدث -->
 <!-- مثال: يعالج الحدث الهدف لعنصر داخلي هنا قبل أن يعالج من قبل العنصر ذاته -->
+<!-- here before being handled by that element           -->
 <div @click.capture="doThis">...</div>
 
 <!-- حدث النقر على الأكثر مرة واحدة -->
@@ -356,3 +357,5 @@ Vue توفر أسماء بديلة للمفاتيح الأكثر استخدام�
 * `.middle`
 
 هذه المُعدِّلات تقيد المُعالِج بالأحداث التي شُغلت بواسطة زر فأرة معين.
+
+Note, however, that `.left`, `.right`, and `.middle` modifier names are based on the typical right-handed mouse layout, but in fact represent "main", "secondary", and "auxiliary" pointing device event triggers, respectively, and not the actual physical buttons. So that for a left-handed mouse layout the "main" button might physically be the right one but would trigger the `.left` modifier handler. Or a trackpad might trigger the `.left` handler with a one-finger tap, the `.right` handler with a two-finger tap, and the `.middle` handler with a three-finger tap. Similarly, other devices and event sources generating "mouse" events might have trigger modes that are not related to "left" and "right" whatsoever.

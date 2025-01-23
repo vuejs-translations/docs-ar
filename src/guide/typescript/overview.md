@@ -26,7 +26,7 @@ Vue مكتوب بلغة TypeScript ويوفر دعم TypeScript بدرجة أو�
 
 - [Visual Studio Code](https://code.visualstudio.com/) (VSCode) موصى به بشدة لدعمه الرائع لـ TypeScript.
 
-  - [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) هو ملحق VSCode الرسمي الذي يوفر دعم TypeScript داخل SFC Vue ، بالإضافة إلى العديد من الميزات الرائعة.
+  - [Vue - Official](https://marketplace.visualstudio.com/items?itemName=Vue.volar) هو ملحق VSCode الرسمي الذي يوفر دعم TypeScript داخل SFC Vue ، بالإضافة إلى العديد من الميزات الرائعة.
 
     :::tip نصيحة
     Volar يستبدل [Vetur](https://marketplace.visualstudio.com/items?itemName=octref.vetur) ، ملحق VSCode الرسمي السابق لـ Vue 2. إذا كنت تمتلك Vetur حاليًا ، تأكد من تعطيله في مشاريع Vue 3.
@@ -42,34 +42,18 @@ Vue مكتوب بلغة TypeScript ويوفر دعم TypeScript بدرجة أو�
 
 عند إعداد `tsconfig.json` يدويًا ، يتضمن بعض الخيارات الملحوظة:
 
-- [`compilerOptions.isolatedModules`](https://www.typescriptlang.org/tsconfig#isolatedModules) مضبوط على `true` لان Vite يستخدم [esbuild](https://esbuild.github.io/) لترجمه TypeScript  ويعتمد على محدوديات الترجمة للملف الواحد. [`compilerOptions.verbatimModuleSyntax`](https://www.typescriptlang.org/tsconfig#verbatimModuleSyntax) هو [a superset of `isolatedModules`](https://github.com/microsoft/TypeScript/issues/53601) وهو خيار جيد أيضًا - إنه ما يستخدمه [`‎@vue/tsconfig`](https://github.com/vuejs/tsconfig).
+- [`compilerOptions.isolatedModules`](https://www.typescriptlang.org/tsconfig#isolatedModules) مضبوط على `true` لان Vite يستخدم [esbuild](https://esbuild.github.io/) لترجمه TypeScript  ويعتمد على محدوديات الترجمة للملف الواحد. [`compilerOptions.verbatimModuleSyntax`](https://www.typescriptlang.org/tsconfig#verbatimModuleSyntax) هو [a superset of `isolatedModules`](https://github.com/microsoft/TypeScript/issues/53601) وهو خيار جيد أيضًا - إنه ما يستخدمه [`@vue/tsconfig`](https://github.com/vuejs/tsconfig).
 
 - إذا كنت تستخدم واجهة الخيارات ، فيجب عليك تعيين [`compilerOptions.strict`](https://www.typescriptlang.org/tsconfig#strict) إلى `true` (أو على الأقل تمكين [`compilerOptions.noImplicitThis`](https://www.typescriptlang.org/tsconfig#noImplicitThis) ، وهو جزء من العلم `strict`) لاستغلال التحقق من الأنواع لـ `this` في خيارات المكون. وإلا ستُعامَل `this` كـ `any`.
 
 - إذا قمت بإعداد الأسماء البديلة للمحلل في أداة البناء الخاصة بك ، على سبيل المثال الاسم البديل `*/@*` المعد افتراضيا في مشروع `create-vue` ، فيجب عليك أيضًا إعداده لـ TypeScript عبر [`compilerOptions.paths`](https://www.typescriptlang.org/tsconfig#paths).
 
+- If you intend to use TSX with Vue, set [`compilerOptions.jsx`](https://www.typescriptlang.org/tsconfig#jsx) to `"preserve"`, and set [`compilerOptions.jsxImportSource`](https://www.typescriptlang.org/tsconfig#jsxImportSource) to `"vue"`.
+
 اطلع أيضا على:
 
 - [التوثيق الرسمي لخيارات مصرف TypeScript ](https://www.typescriptlang.org/docs/handbook/compiler-options.html)
 - [تنبيهات عن تصريف TypeScript بواسطة esbuild](https://esbuild.github.io/content-types/#typescript-caveats)
-
-### وضع الاستحواذ لـ Volar {#volar-takeover-mode}
-
-> هذا القسم ينطبق فقط على VSCode + Volar.
-
-من أجل جعل المكونات أحادية الملف وTypeScript تعمل معا ، ينشئ Volar نسخة من لغة TS منفصل مصحوبًا بدعم خاص بـVue ، ويستخدمه في المكونات أحادية الملف. في نفس الوقت ، تعالج ملفات TS العادية بواسطة خدمة TS الداخلية لـ VSCode ، وهذا هو السبب في أننا نحتاج [ملحق TypeScript Vue](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin) لدعم استيرادات مكونات Vue أحادية الملف في ملفات TS. يعمل هذا الإعداد الافتراضي ، لكن لكل مشروع نحن نشغل نسختين من خدمة TS: واحد من Volar ، والآخر من خدمة VSCode الداخلية. هذا الأمر غير فعال ويمكن أن يؤدي إلى مشاكل أداء في المشاريع الكبيرة.
-
-يوفر Volar ميزة تسمى "وضع الاستحواذ" لتحسين الأداء. في وضع الاستحواذ ، يوفر Volar دعمًا لكل من ملفات Vue و TS باستخدام نسخة واحدة من خدمة TS.
-
-لتمكين وضع الاستحواذ ، يجب عليك تعطيل خدمة TS الداخلية لـ VSCode في **مساحة العمل لمشروعك فقط** باتباع الخطوات التالية:
-
-1. في مساحة العمل لمشروعك ، اظهر لوحة الأوامر باستخدام `Ctrl + Shift + P` (macOS: `Cmd + Shift + P`).
-2. اكتب `built` واختر "Extensions: Show Built-in Extensions".
-3. اكتب `typescript` في مربع البحث عن الملحق (لا تزيل بادئة `@builtin`).
-4. انقر فوق رمز العجلة الصغيرة لـ "TypeScript and JavaScript Language Features" ، وحدد "Disable (Workspace)".
-5. إعادة تحميل مساحة العمل. سيمكن وضع الاستحواذ عند فتح ملف Vue أو TS.
-
-<img src="./images/takeover-mode.png" width="590" height="426" style="margin:0px auto;border-radius:8px">
 
 ### ملاحظة بخصوص Vue CLI و `ts-loader` {#note-on-vue-cli-and-ts-loader}
 
@@ -130,7 +114,7 @@ export default defineComponent({
 اطلع أيضًا على:
 
 - [ملاحظة بخصوص التخلص من الشيفرات الميتة في webpack](/api/general#note-on-webpack-treeshaking)
-- [اختبارات الأنواع لـ `defineComponent`](https://github.com/vuejs/core/blob/main/packages/dts-test/defineComponent.test-d.tsx)
+- [اختبارات الأنواع لـ `defineComponent`](https://github.com/vuejs/core/blob/main/packages-private/dts-test/defineComponent.test-d.tsx)
 
 :::tip نصيحة
 تمكن الدالة `()defineComponent` أيضًا تحديد الأنواع للمكونات المعرفة في JavaScript العادي.
@@ -208,7 +192,7 @@ let x: string | number = 1
 إذا كنت تستخدم Vue CLI أو إعداد webpack ، فتتطلب  تعبيرات TypeScript في القالب الاعتمادية `vue-loader@^16.8.0`.
 :::
 
-### Usage with TSX
+### Usage with TSX {#usage-with-tsx}
 
 Vue also supports authoring components with JSX / TSX. Details are covered in the [Render Function & JSX](/guide/extras/render-function.html#jsx-tsx) guide.
 

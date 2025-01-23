@@ -34,15 +34,15 @@
 
 ## <MaybeRef\<T {#mayberef}
 
-اسم بديل لـ `T | Ref<T>`. مفيد لتوصيف الوسائط لـ [الدوال التركيبية](/guide/reusability/composables.html).
-
 - مدعوم فقط في 3.3+
+
+اسم بديل لـ `T | Ref<T>`. مفيد لتوصيف الوسائط لـ [الدوال التركيبية](/guide/reusability/composables.html).
 
 ## <MaybeRefOrGetter\<T {#maybereforgetter}
 
-اسم بديل لـ `T | Ref<T> | (() => T)`. مفيد لتوصيف الوسائط لـ [الدوال التركيبية](/guide/reusability/composables.html).
-
 - مدعوم فقط في 3.3+
+
+اسم بديل لـ `T | Ref<T> | (() => T)`. مفيد لتوصيف الوسائط لـ [الدوال التركيبية](/guide/reusability/composables.html).
 
 ## <ExtractPropTypes\<T {#extractproptypes}
 
@@ -76,6 +76,8 @@
   ```
 
 ## <ExtractPublicPropTypes\<T {#extractpublicproptypes}
+
+- مدعوم فقط في 3.3+
 
 تستخرج أنواع الخاصيات من كائن خيارات الخاصيات في وقت التشغيل. الأنواع المستخرجة هي الأنواع العامة - أي الخاصيات التي يسمح للأب بتمريرها.
 

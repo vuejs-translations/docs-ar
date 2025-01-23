@@ -45,22 +45,22 @@
 
 ## ()computed {#computed}
 
-يأخذ دالة محصلة ويعيد مرجع تفاعلي تفاعلي للقراءة فقط [ref](#ref) للقيمة المُرجعة من الدالة المحصلة. يمكنه أيضًا أخذ كائن مع دوال `get` و `set` لإنشاء مرجع تفاعلي قابل للكتابة.
+يأخذ [دالة محصلة](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/get#description) ويعيد مرجع تفاعلي تفاعلي للقراءة فقط [ref](#ref) للقيمة المُرجعة من الدالة المحصلة. يمكنه أيضًا أخذ كائن مع دوال `get` و `set` لإنشاء مرجع تفاعلي قابل للكتابة.
 
 - **النوع**
 
   ```ts
    // للقراءة فقط
   function computed<T>(
-    getter: () => T,
-    // انظر الرابط "تنقيح الدوال المحسوبة" أدناه
+    getter: (oldValue: T | undefined) => T,
+    // see "Computed Debugging" link below
     debuggerOptions?: DebuggerOptions
   ): Readonly<Ref<Readonly<T>>>
 
   // قابل للكتابة
   function computed<T>(
     options: {
-      get: () => T
+      get: (oldValue: T | undefined) => T
       set: (value: T) => void
     },
     debuggerOptions?: DebuggerOptions
@@ -112,6 +112,7 @@
   - [الخاصيات المحسوبة](/guide/essentials/computed)
   - [تنقيح الخاصيات المحسوبة](/guide/extras/reactivity-in-depth#computed-debugging)
   - [إضافة النوع إلى `()computed`](/guide/typescript/composition-api#typing-computed) <sup class="vt-badge ts" />
+  - [Guide - Performance - Computed Stability](/guide/best-practices/performance#computed-stability)
 
 ## ()reactive {#reactive}
 
@@ -237,7 +238,7 @@
   function watchEffect(
     effect: (onCleanup: OnCleanup) => void,
     options?: WatchEffectOptions
-  ): StopHandle
+  ): WatchHandle
 
   type OnCleanup = (cleanupFn: () => void) => void
 
@@ -247,7 +248,12 @@
     onTrigger?: (event: DebuggerEvent) => void
   }
 
-  type StopHandle = () => void
+  interface WatchHandle {
+    (): void // callable, same as `stop`
+    pause: () => void
+    resume: () => void
+    stop: () => void
+  }
   ```
 
 - **التفاصيل**
@@ -272,20 +278,7 @@
   // -> logs 1
   ```
 
-  تنظيف التأثيرات الجانبية:
-
-  ```js
-  watchEffect(async (onCleanup) => {
-    const { response, cancel } = doAsyncWork(id.value)
-    // سيتم استدعاء `cancel` إذا تغير `id`
-    // بحيث يتم إلغاء الطلب المعلق السابق
-    // إذا لم يكتمل بعد
-    onCleanup(cancel)
-    data.value = await response
-  })
-  ```
-
-  توقيف الدالة المراقبة:
+  Stopping the watcher:
 
   ```js
   const stop = watchEffect(() => {})
@@ -294,7 +287,48 @@
   stop()
   ```
 
-  الخيارات:
+  Pausing / resuming the watcher: <sup class="vt-badge" data-text="3.5+" />
+
+  ```js
+  const { stop, pause, resume } = watchEffect(() => {})
+
+  // temporarily pause the watcher
+  pause()
+
+  // resume later
+  resume()
+
+  // stop
+  stop()
+  ```
+
+  Side effect cleanup:
+
+  ```js
+  watchEffect(async (onCleanup) => {
+    const { response, cancel } = doAsyncWork(newId)
+    // `cancel` will be called if `id` changes, cancelling
+    // the previous request if it hasn't completed yet
+    onCleanup(cancel)
+    data.value = await response
+  })
+  ```
+
+  Side effect cleanup in 3.5+:
+
+  ```js
+  import { onWatcherCleanup } from 'vue'
+
+  watchEffect(async () => {
+    const { response, cancel } = doAsyncWork(newId)
+    // `cancel` will be called if `id` changes, cancelling
+    // the previous request if it hasn't completed yet
+    onWatcherCleanup(cancel)
+    data.value = await response
+  })
+  ```
+
+  Options:
 
   ```js
   watchEffect(() => {}, {
@@ -332,14 +366,14 @@
     source: WatchSource<T>,
     callback: WatchCallback<T>,
     options?: WatchOptions
-  ): StopHandle
+  ): WatchHandle
 
   // مراقبة مصادر متعددة
   function watch<T>(
     sources: WatchSource<T>[],
     callback: WatchCallback<T[]>,
     options?: WatchOptions
-  ): StopHandle
+  ): WatchHandle
 
   type WatchCallback<T> = (
     value: T,
@@ -348,18 +382,24 @@
   ) => void
 
   type WatchSource<T> =
-    | Ref<T> // مرجع تفاعلي ref
-    | (() => T) // دالة محصلة
-    | T extends object
-    ? T
-    : never // كائن تفاعلي
+    | Ref<T> // ref
+    | (() => T) // getter
+    | (T extends object ? T : never) // reactive object
 
   interface WatchOptions extends WatchEffectOptions {
     immediate?: boolean // default: false
-    deep?: boolean // default: false
+    deep?: boolean | number // default: false
     flush?: 'pre' | 'post' | 'sync' // default: 'pre'
     onTrack?: (event: DebuggerEvent) => void
     onTrigger?: (event: DebuggerEvent) => void
+    once?: boolean // default: false (3.4+)
+  }
+
+  interface WatchHandle {
+    (): void // callable, same as `stop`
+    pause: () => void
+    resume: () => void
+    stop: () => void
   }
   ```
 
@@ -386,6 +426,7 @@
   - **`deep`**: فرض التنقيح العميق للمصدر إذا كان كائنًا، بحيث تنشط دالة رد النداء على التغييرات العميقة. انظر [الدوال المراقبة العميقة](/guide/essentials/watchers#deep-watchers).
   - **`flush`**: ضبط توقيت تنشيط دالة رد النداء. انظر [توقيت تنشيط دالة رد النداء](/guide/essentials/watchers#callback-flush-timing) و [`()watchEffect`](/api/reactivity-core#watcheffect).
   - **`onTrack / onTrigger`**: تنقيح اعتماديات الدالة المراقبة. انظر [تنقيح الدوال المراقبة](/guide/extras/reactivity-in-depth#watcher-debugging).
+  - **`once`**: (3.4+) run the callback only once. The watcher is automatically stopped after the first callback run.
 
   مقارنة بـ [`()watchEffect`](#watcheffect)، `()watch` تسمح لنا بـ:
 
@@ -469,7 +510,22 @@
   stop()
   ```
 
-  تنظيف التأثيرات الجانبية:
+  Pausing / resuming the watcher: <sup class="vt-badge" data-text="3.5+" />
+
+  ```js
+  const { stop, pause, resume } = watch(() => {})
+
+  // temporarily pause the watcher
+  pause()
+
+  // resume later
+  resume()
+
+  // stop
+  stop()
+  ```
+
+  Side effect cleanup:
 
   ```js
   watch(id, async (newId, oldId, onCleanup) => {
@@ -481,7 +537,45 @@
   })
   ```
 
-- **اطلع أيضًا على**
+  Side effect cleanup in 3.5+:
 
-  - [الدوال المراقبة](/guide/essentials/watchers)
-  - [تنقيح الدوال المراقبة](/guide/extras/reactivity-in-depth#watcher-debugging)
+  ```js
+  import { onWatcherCleanup } from 'vue'
+
+  watch(id, async (newId) => {
+    const { response, cancel } = doAsyncWork(newId)
+    onWatcherCleanup(cancel)
+    data.value = await response
+  })
+  ```
+
+- **See also**
+
+  - [Guide - Watchers](/guide/essentials/watchers)
+  - [Guide - Watcher Debugging](/guide/extras/reactivity-in-depth#watcher-debugging)
+
+## onWatcherCleanup() <sup class="vt-badge" data-text="3.5+" /> {#onwatchercleanup}
+
+Register a cleanup function to be executed when the current watcher is about to re-run. Can only be called during the synchronous execution of a `watchEffect` effect function or `watch` callback function (i.e. it cannot be called after an `await` statement in an async function.)
+
+- **Type**
+
+  ```ts
+  function onWatcherCleanup(
+    cleanupFn: () => void,
+    failSilently?: boolean
+  ): void
+  ```
+
+- **Example**
+
+  ```ts
+  import { watch, onWatcherCleanup } from 'vue'
+
+  watch(id, (newId) => {
+    const { response, cancel } = doAsyncWork(newId)
+    // `cancel` will be called if `id` changes, cancelling
+    // the previous request if it hasn't completed yet
+    onWatcherCleanup(cancel)
+  })
+  ```

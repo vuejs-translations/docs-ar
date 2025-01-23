@@ -6,9 +6,8 @@ footer: false
 
 :::info أنت بصدد تصفح توثيق الإصدار 3 الخاص بـVue
 
-* سينتهي دعم Vue 2 في 31 ديسمبر 2023. تعرف على المزيد حول الموضوع هنا [دعم Vue 2 الممدد طويل المدى (LTS)](https://v2.vuejs.org/lts/) 
-* تم نقل توثيق Vue 2 إلى [v2.vuejs.org](https://v2.vuejs.org/).
-* للترقية من Vue 2 الق نظرة على [دليل الترقية](https://v3-migration.vuejs.org/).
+- انتهى دعم فيو 2 في **Dec 31, 2023**. اعرف المزيد عن [Vue 2 نهاية حياة](https://v2.vuejs.org/eol/).
+- إذا كنت تريد الترقية من فيو 2 فراجع [دليل الترقية](https://v3-migration.vuejs.org/).
   :::
 
 <style src="@theme/styles/vue-mastery.css"></style>

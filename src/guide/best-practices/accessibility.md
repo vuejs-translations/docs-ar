@@ -118,20 +118,16 @@ watch(
 
 | HTML            | ARIA Role            | Landmark Purpose                                                                                                 |
 | --------------- | -------------------- | ---------------------------------------------------------------------------------------------------------------- |
-| header          | role="banner"‎        | العنوان الرئيسي: عنوان الصفحة                                                                                    |
-| nav             | role="navigation"‎    | مجموعة من الروابط المناسبة للاستخدام عند تنقل الوثيقة أو الوثائق ذات الصلة                                        |
-| main            | role="main"‎          | المحتوى الرئيسي أو المركزي للوثيقة.                                                                              |
-| footer          | role="contentinfo"‎   | معلومات عن الوثيقة الأصلية: الحاشيات / حقوق النشر / روابط إلى بيان الخصوصية                                       |
-| aside           | role="complementary"‎ | يدعم المحتوى الرئيسي ، ولكنه مفصول ومعناه على حدة في محتوىه                                                      |
-| search          | role="search"‎        | هذا القسم يحتوي على وظيفة البحث للتطبيق                                                                          |
-| form            | role="form"‎          | مجموعة من عناصر النموذج المرتبطة                                                                                 |
-| section         | role="region"‎        | المحتوى الذي يتعلق به والذي يرغب المستخدمون بالتنقل إليه بشكل عام. يجب توفير تسمية لهذا العنصر                   |
+| header          | role="banner"        | Prime heading: title of the page                                                                                 |
+| nav             | role="navigation"    | Collection of links suitable for use when navigating the document or related documents                           |
+| main            | role="main"          | The main or central content of the document.                                                                     |
+| footer          | role="contentinfo"   | Information about the parent document: footnotes/copyrights/links to privacy statement                           |
+| aside           | role="complementary" | Supports the main content, yet is separated and meaningful on its own content                                    |
+| search          | role="search"        | This section contains the search functionality for the application                                               |
+| form            | role="form"          | Collection of form-associated elements                                                                           |
+| section         | role="region"        | Content that is relevant and that users will likely want to navigate to. Label must be provided for this element |
 
-:::tip نصيحة:
-يُوصى باستخدام عناصر HTML المميزة مع سمات دور عنصر مميز مكررة لتحسين التوافق مع [المتصفحات القديمة التي لا تدعم عناصر HTML5 الدلالية](https://caniuse.com/#feat=html5semantic).
-:::
-
-[اطلع اكثر على العناصر المميزة](https://www.w3.org/TR/wai-aria-1.2/#landmark_roles)
+[Read more about landmarks](https://www.w3.org/TR/wai-aria-1.2/#landmark_roles)
 
 ## النماذج الدلالية {#semantic-forms}
 
@@ -154,8 +150,6 @@ watch(
 </form>
 ```
 
-<!-- <common-codepen-snippet title="Simple Form" slug="dyNzzWZ" :height="368" tab="js,result" theme="light" :preview="false" :editable="false" /> -->
-
 لاحظ كيف يمكنك تضمين `'autocomplete='on` على عنصر النموذج وسيطبق على جميع الإدخالات في النموذج الخاص بك. يمكنك أيضًا تعيين [قيم مختلفة لسمة الإكمال التلقائي](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/autocomplete) لكل إدخال.
 
 ### عناصر التسميات (labels) {#labels}
@@ -166,8 +160,6 @@ watch(
 <label for="name">الاسم</label>
 <input type="text" name="name" id="name" v-model="name" />
 ```
-
-<!-- <common-codepen-snippet title="Form Label" slug="XWpaaaj" :height="265" tab="js,result" theme="light" :preview="false" :editable="false" /> -->
 
 إذا فحصت هذا العنصر في أدوات التطوير لـChrome وفتحت علامة التبويب Accessibility داخل علامة التبويب للعناصر (Elements) ، سترى كيف يحصل الإدخال على اسمه من عنصر التسمية:
 
@@ -201,8 +193,6 @@ watch(
 />
 ```
 
-<!-- <common-codepen-snippet title="Form ARIA label" slug="NWdvvYQ" :height="265" tab="js,result" theme="light" :preview="false" :editable="false" /> -->
-
 لا تتردد في فحص هذا العنصر في أدوات تطوير Chrome لرؤية كيف تغير اسم الوصول:
 
 ![Chrome Developer Tools showing input accessible name from aria-label](./images/AccessibleARIAlabelDevTools.png)
@@ -233,8 +223,6 @@ watch(
 </form>
 ```
 
-<!-- <common-codepen-snippet title="Form ARIA labelledby" slug="MWJvvBe" :height="265" tab="js,result" theme="light" :preview="false" :editable="false" /> -->
-
 ![أدوات تطوير Chrome تظهر اسم الإدخال الوصولي من aria-labelledby](./images/AccessibleARIAlabelledbyDevTools.png)
 
 #### سمة `aria-describedby` {#aria-describedby}
@@ -264,8 +252,6 @@ watch(
   <button type="submit">ارسال</button>
 </form>
 ```
-
-<!-- <common-codepen-snippet title="Form ARIA describedby" slug="gOgxxQE" :height="265" tab="js,result" theme="light" :preview="false" :editable="false" /> -->
 
 يمكنك رؤية الوصف عن طريق فحص أدوات تطوير Chrome:
 
@@ -352,8 +338,6 @@ watch(
 </fieldset>
 ```
 
-<!-- <common-codepen-snippet title="Form Instructions" slug="WNREEqv" :height="265" tab="js,result" theme="light" :preview="false" :editable="false" /> -->
-
 ### اخفاء المحتوى {#hiding-content}
 
 عادةً ما لا ينصح بإخفاء التسميات بصورة مرئية، حتى إذا كان الإدخال له اسم وصولي. ومع ذلك، إذا كانت وظيفة الإدخال يمكن فهمها بواسطة المحتوى المحيط، فإذن يمكننا إخفاء التسمية المرئية.
@@ -386,8 +370,6 @@ watch(
 }
 ```
 
-<!-- <common-codepen-snippet title="Form Search" slug="QWdMqWy" :height="265" tab="js,result" theme="light" :preview="false" :editable="false" /> -->
-
 #### سمة `aria-hidden="true"` {#aria-hidden-true}
 
 إضافة `aria-hidden="true"` ستخفي المكون من التقنيات المساعدة ولكن ستبقي متاحة بصورة مرئية للمستخدمين الآخرين. لا تستخدمه على المكونات التي يمكن التركيز عليها، بل على المحتوى المزين والمكرر والخارج عن الشاشة.
@@ -413,8 +395,6 @@ watch(
   <input type="submit" value="ارسال" />
 </form>
 ```
-
-<!-- <common-codepen-snippet title="Form Buttons" slug="JjEyrYZ" :height="467" tab="js,result" theme="light" :preview="false" :editable="false" /> -->
 
 ### الصور الوظيفية {#functional-images}
 
@@ -449,8 +429,6 @@ watch(
   </button>
 </form>
 ```
-
-<!-- <common-codepen-snippet title="Functional Images" slug="jOyLGqM" :height="265" tab="js,result" theme="light" :preview="false" :editable="false" /> -->
 
 ## المعايير {#standards}
 

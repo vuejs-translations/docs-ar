@@ -128,7 +128,7 @@ const publishedBooksMessage = computed(() => {
 
 [اختبرها في حقل التجارب](https://play.vuejs.org/#eNp9Us1q20AQfpVhL3LAlkrbk3BUEgqFQm6ll24Pa2lsKbV2l52VSxA6NU0eI8eE3AK55E2kt8msrSSQv9vO3zff98224sDaeNOgSMWccldZD4S+sZnUVW2N89CCQ5X7aoNTyE1tG48FdLB0poaIJyOppc6NJg+q8aVxsP84MWmlBtCqxhSi76bU8NVgNA3JhTF/KIVf4Q0Q/WwQPsIMDoqN0jlv+NZUxdg6lj9x+VBRlb9S+8y1HyXC0Ql5dCfMCeC31N1eIJckoJ6oO1w+8LXNYl1RicVhIHOERGqFTP+hdzLZg/0MtiIcu+L0KDHeso/XqFe+hAw+wBeIhrP+bvgfAUsdTvtL5hDWz5OdrWwoBx5ru1YeOQKY22w4H06BB2/7Gxj+9df9VX/ZX8yT4D83kFU6a9s3iHYdg4eOsOURWUzF7nKzWtn4mIzm224lyLFAUqQ7USHHJwyxFKX3ltIkoWUefsQxxcatEn7FrtG+qjFGqmcLZ/4SOgaWYrzAFiPh5AbdzKEu0KF7D/NZ6wvcANuxfaK7B/XE7oo=)
 
-هنا صرحنا بخاصية محسوبة مسماة `publishedBooksMessage`. تتوقع الدالة `()computed` أن تتلقى دالة محصلة، ويتم إرجاع قيمة **ref محسوب**. مثل الـrefs العادية، يمكنك الوصول إلى النتيجة المحسوبة باستخدام `publishedBooksMessage.value`. تتم إزالة المراجع المحسوبة تلقائيًا في القوالب لذلك يمكنك الإشارة إليها دون `value.` في تعبيرات القالب.
+Here we have declared a computed property `publishedBooksMessage`. The `computed()` function expects to be passed a [getter function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/get#description), and the returned value is a **computed ref**. Similar to normal refs, you can access the computed result as `publishedBooksMessage.value`. Computed refs are also auto-unwrapped in templates so you can reference them without `.value` in template expressions.
 
 خاصية محسوبة  تتبع تلقائيًا إعتمادياتها التفاعلية. يعرف Vue أن حساب `publishedBooksMessage` يعتمد على `author.books`، لذلك سيقوم بتحديث أي ربط يعتمد على `publishedBooksMessage` عند تغيير `author.books`.
 
@@ -257,11 +257,120 @@ const fullName = computed({
 
 </div>
 
+## Getting the Previous Value {#previous}
+
+- Only supported in 3.4+
+
+In case you need it, you can get the previous value returned by the computed property accessing
+the first argument of the getter:
+
+<div class="options-api">
+
+```js
+export default {
+  data() {
+    return {
+      count: 2
+    }
+  },
+  computed: {
+    // This computed will return the value of count when it's less or equal to 3.
+    // When count is >=4, the last value that fulfilled our condition will be returned
+    // instead until count is less or equal to 3
+    alwaysSmall(previous) {
+      if (this.count <= 3) {
+        return this.count
+      }
+
+      return previous
+    }
+  }
+}
+```
+</div>
+
+<div class="composition-api">
+
+```vue
+<script setup>
+import { ref, computed } from 'vue'
+
+const count = ref(2)
+
+// This computed will return the value of count when it's less or equal to 3.
+// When count is >=4, the last value that fulfilled our condition will be returned
+// instead until count is less or equal to 3
+const alwaysSmall = computed((previous) => {
+  if (count.value <= 3) {
+    return count.value
+  }
+
+  return previous
+})
+</script>
+```
+</div>
+
+In case you're using a writable computed:
+
+<div class="options-api">
+
+```js
+export default {
+  data() {
+    return {
+      count: 2
+    }
+  },
+  computed: {
+    alwaysSmall: {
+      get(previous) {
+        if (this.count <= 3) {
+          return this.count
+        }
+
+        return previous;
+      },
+      set(newValue) {
+        this.count = newValue * 2
+      }
+    }
+  }
+}
+```
+
+</div>
+<div class="composition-api">
+
+```vue
+<script setup>
+import { ref, computed } from 'vue'
+
+const count = ref(2)
+
+const alwaysSmall = computed({
+  get(previous) {
+    if (count.value <= 3) {
+      return count.value
+    }
+
+    return previous
+  },
+  set(newValue) {
+    count.value = newValue * 2
+  }
+})
+</script>
+```
+
+</div>
+
+
 ## الممارسات الجيّدة {#best-practices}
 
 ### يجب أن تكون الدوال المحصلة خالية من التأثيرات الجانبية {#getters-should-be-side-effect-free}
 
-من المهم أن نتذكر أن الدوال المُحصلة يجب أن تقوم فقط بحسابات بحتة وبدون تأثيرات جانبية. على سبيل المثال، **لا تقم بطلبات غير متزامنة أو تغيير الـDOM داخل دالة محصلة!**. تصور أي خاصية محسوبة كوصف تصريحي لكيفية استخراج قيمة استنادًا إلى قيم أخرى - يجب أن تكون مسؤوليتها فقط حساب القيمة وإرجاعها. في وقت لاحق في هذا الدليل، سنتحدث عن كيفية تنفيذ التأثيرات الجانبية بالرد على تغييرات الحالة باستخدام [الخاصيات المراقبة](./watchers).
+It is important to remember that computed getter functions should only perform pure computation and be free of side effects. For example, **don't mutate other state, make async requests, or mutate the DOM inside a computed getter!** Think of a computed property as declaratively describing how to derive a value based on other values - its only responsibility should be computing and returning that value. Later in the guide we will discuss how we can perform side effects in reaction to state changes with [watchers](./watchers).
 
 ### تجنب تعيين القيمة المحسوبة {#avoid-mutating-computed-value}
 

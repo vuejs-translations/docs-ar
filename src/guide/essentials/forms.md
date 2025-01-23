@@ -39,9 +39,9 @@ const multiSelected = ref([])
 
 على غرار ذلك، يمكن استخدام `v-model` على عناصر `<input>` من أنواع مختلفة، `<textarea>` ، و `<select>` .  يوسع تلقائيًا إلى مختلف خاصيات وأحداث الـDOM  بناءً على العنصر الذي يُستخدم عليه :
 
-* `<input>` مع أنواع النصوص وعناصر `<textarea>` تستخدم خاصية `value` وحدث `input`؛
-* `<input type="checkbox">` و `<input type="radio">` تستخدم خاصية `checked` وحدث `change`؛
-* `<select>` تستخدم `value` كخاصية و `change` كحدث.
+- `<input>` مع أنواع النصوص وعناصر `<textarea>` تستخدم خاصية `value` وحدث `input`؛
+- `<input type="checkbox">` و `<input type="radio">` تستخدم خاصية `checked` وحدث `change`؛
+- `<select>` تستخدم `value` كخاصية و `change` كحدث.
 
 ::: tip ملاحظة
 سيتجاهل `v-model` القيم الأولية للخاصيات `value` ، `checked` أو `selected` التي توجد على أي عنصر من عناصر النموذج. سيتعامل دائمًا مع الحالة المرتبطة بـJavaScript الحالية كمصدر للحقيقة. يجب عليك تعريف القيمة الأولية من جانب الـJavaScript، باستخدام <span class="options-api">خيار [`data`](/api/options-state.html#data) </span><span class="composition-api"> واجهة الدوال التفاعلية مثل `ref` أو `[reactive` ](/api/reactivity-core.html#reactivity-api-core)</span>.
@@ -442,7 +442,7 @@ export default {
 <input v-model.number="age" />
 ```
 
-إذا لم تُحلّل القيمة باستخدام `parseFloat()` ، فستُستخدام القيمة الأصلية بدلاً من ذلك.
+If the value cannot be parsed with `parseFloat()`, then the original (string) value is used instead. In particular, if the input is empty (for instance after the user clearing the input field), an empty string is returned. This behavior differs from the [DOM property `valueAsNumber`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLInputElement#valueasnumber). 
 
 المُعدِّل `number` يُطبَّق تلقائيًا إذا كان الإدخال لديه السمة `type="number"` .
 

@@ -58,9 +58,9 @@
 
   ```vue
   <script setup>
-  import { ref } from 'vue'
+  import { useTemplateRef } from 'vue'
 
-  const p = ref()
+  const pRef = useTemplateRef('p')
   </script>
 
   <template>
@@ -91,7 +91,9 @@
 
 - **يتوقع قيمة من نوع:** `string | Component`
 
-- **الاستخدامعلى العناصر الأصلية** <sup class="vt-badge">3.1+</sup>
+- **الاستخدام على العناصر الأصلية**
+ 
+  - مدعوم فقط في 3.1+
 
   عندما تستخدم السمة `is` على عنصر HTML أصلي، ستترجم على أنها [عنصر مدمج مخصص](https://html.spec.whatwg.org/multipage/custom-elements.html#custom-elements-customized-builtin-example)، وهو ميزة أصلية لمنصة الويب.
 

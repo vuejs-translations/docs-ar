@@ -114,7 +114,7 @@ onMounted(() => {
 
 :::
 
-إذا كنت تنوي استخدام الواجهة التركيبية حصريًا (جنبًا إلى جنب مع الخيارات المذكورة أعلاه)، يمكنك تقليص بضعة كيلوبايتات من حزمة الإنتاج الخاصة بك عن طريق [علامة تصريف في وقت التشغيل](https://github.com/vuejs/core/tree/main/packages/vue#bundler-build-feature-flags) التي تحذف الشيفرة المتعلقة بواجهة الخيارات من Vue. لاحظ أن هذا يؤثر أيضًا على مكونات Vue في الاعتماديات الخاصة بك.
+If you intend to exclusively use Composition API (along with the options listed above), you can shave a few kbs off your production bundle via a [compile-time flag](/api/compile-time-flags) that drops Options API related code from Vue. Note this also affects Vue components in your dependencies.
 
 ### هل يمكنني استخدام الواجهتين مع بعض؟ {#can-i-use-both-apis-together}
 
@@ -146,7 +146,9 @@ onMounted(() => {
 
 - مشكلة المغلف الغير صالح، مجتمعة مع الميزات المتزامنة، تجعل من الصعب التفكير في متى تشغل قطعة من شيفرة الخطافات، وتجعل العمل مع الحالة القابلة للتغيير التي يجب أن تستمر عبر التصييرات (عبر `useRef`) مرهقة.
 
-بالمقارنة، الواجهة التركيبية في Vue:
+> Note: some of the above issues that are related to memoization can be resolved by the upcoming [React Compiler](https://react.dev/learn/react-compiler).
+
+In comparison, Vue Composition API:
 
 - تستدعي شيفرة `()setup` أو `<script setup>` مرة واحدة فقط. وهذا يجعل الشيفرة تتوافق بشكل أفضل مع الحدس المتعلق باستخدام JavaScript النمطي لأنه لا توجد مغلفات غير صالحة للقلق بشأنها. كما أن استدعاء الواجهة التركيبية ليس حساسًا لترتيب الاستدعاء ويمكن أن يكون شرطيًا.
 

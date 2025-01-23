@@ -18,7 +18,9 @@
 
 - **التفاصيل**
 
-  يستدعى على الفور عندما تُهيأ النسخة، بعد حل الخاصيات، قبل معالجة خيارات أخرى مثل `()data` أو `computed`.
+  Called immediately when the instance is initialized and props are resolved.
+
+  Then the props will be defined as reactive properties and the state such as `data()` or `computed` will be set up.
 
   لاحظ أن خطاف `()setup` من الواجهة التركيبية يستدعى قبل أي خطافات واجهة الخيارات، حتى `beforeCreate()`.
 
@@ -195,6 +197,10 @@
 
   يستقبل الخطاف ثلاثة وسيطات: الخطأ، نسخة المكون التي أحدثت الخطأ، وسلسلة معلومات تحدد نوع مصدر الخطأ.
 
+  :::tip
+  In production, the 3rd argument (`info`) will be a shortened code instead of the full information string. You can find the code to string mapping in the [Production Error Code Reference](/error-reference/#runtime-errors).
+  :::
+  
    يمكنك تعديل حالة المكون في `()errorCaptured` لعرض حالة الخطأ للمستخدم. ومع ذلك، من المهم أن حالة الخطأ لا يجب أن تصيّر المحتوى الأصلي الذي تسبب في الخطأ؛ وإلا سيُلقى المكون في حلقة تصيير لا نهائية.
 
   يمكن للخطاف أن يرجع `false` لمنع الخطأ من الانتشار أكثر. انظر إلى تفاصيل انتشار الخطأ أدناه.
@@ -208,6 +214,12 @@
   - إذا ألقى الخطاف `()errorCaptured` نفسه خطأ، يرسل هذا الخطأ والخطأ الملتقط الأصلي إلى `app.config.errorHandler`.
 
   - يمكن لخطاف `()errorCaptured` أن يرجع `false` لمنع الخطأ من الانتشار أكثر. هذا يعني بشكل أساسي "تم التعامل مع هذا الخطأ ويجب تجاهله." سيمنع أي خطافات `()errorCaptured` إضافية أو `app.config.errorHandler` من الاستدعاء لهذا الخطأ.
+
+  **Error Capturing Caveats**
+  
+  - In components with async `setup()` function (with top-level `await`) Vue **will always** try to render component template, even if `setup()` throwed error. This will likely cause more errors because during render component's template might try to access non-existing properties of failed `setup()` context. When capturing errors in such components, be ready to handle errors from both failed async `setup()` (they will always come first) and failed render process.
+
+  - <sup class="vt-badge" data-text="SSR only"></sup> Replacing errored child component in parent component deep inside `<Suspense>` will cause hydration mismatches in SSR. Instead, try to separate logic that can possibly throw from child `setup()` into separate function and execute it in the parent component's `setup()`, where you can safely `try/catch` the execution process and make replacement if needed before rendering the actual child component.
 
   **Error Capturing Caveats**
   

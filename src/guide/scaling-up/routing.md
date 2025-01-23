@@ -2,7 +2,7 @@
 
 ## التوجيه من جانب الخادوم مقابل التوجيه من جانب المستخدم {#client-side-vs-server-side-routing}
 
-التوجيه من جانب الخادوم يعني أن الخادوم يرسل إجابة استنادًا إلى مسار URL الذي يزوره المستخدم. عندما ننقر على رابط في تطبيق ويب معروض من قبل الخادوم التقليدي ، يتلقى المتصفح إجابة HTML من الخادوم ويعيد تحميل الصفحة بأكملها مع HTML الجديد.
+Routing on the server side means the server is sending a response based on the URL path that the user is visiting. When we click on a link in a traditional server-rendered web app, the browser receives an HTML response from the server and reloads the entire page with the new HTML.
 
 لكن في [التطبيق أحادي الصفحة](https://developer.mozilla.org/en-US/docs/Glossary/SPA) (SPA) ، يمكن لـ JavaScript من جانب المستخدم اعتراض التنقل بين الصفحات، جلب البيانات الجديدة بشكل ديناميكي ، وتحديث الصفحة الحالية دون إعادة تحميلها بالكامل. وعادة ما يؤدي هذا إلى تجربة مستخدم أسرع، خصوصًا لحالات الاستخدام التي تشبه  "التطبيقات" الحقيقية، حيث يُتوقع من المستخدم أن يقوم بالعديد من التفاعلات على مدى فترة طويلة من الوقت.
 

@@ -469,7 +469,7 @@ console.log(proxy.nested === raw) // false
 
 ### كخاصية لكائن تفاعلي (reactive) \*\* {#ref-unwrapping-as-reactive-object-property}
 
-يفك المرجع تلقائيًا عند الوصول إليه أو تغييره كخاصية لكائن تفاعلي. بعبارة أخرى، يتصرف كخاصية عادية:
+A ref is automatically unwrapped when accessed or mutated as a property of a reactive object. In other words, it behaves like a normal property:
 
 ```js
 const count = ref(0)

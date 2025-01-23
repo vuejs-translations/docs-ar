@@ -2,37 +2,28 @@
   "engines": {
     "node": ">=18.0.0"
   },
+  "type": "module",
   "scripts": {
     "dev": "vitepress",
     "build": "vitepress build",
     "preview": "vitepress preview",
-    "preinstall": "npx only-allow pnpm"
+    "preinstall": "npx only-allow pnpm",
+    "type": "vue-tsc --noEmit"
   },
   "dependencies": {
-    "@vue/repl": "^1.5.0",
-    "@vue/theme": "^2.2.4",
+    "@vue/repl": "^4.4.2",
+    "@vue/theme": "^2.3.0",
     "dynamics.js": "^1.1.5",
-    "gsap": "^3.9.0",
-    "vitepress": "1.0.0-rc.33",
-    "vue": "^3.4.0-rc.3"
+    "gsap": "^3.12.5",
+    "vitepress": "^1.4.3",
+    "vue": "^3.5.12"
   },
   "devDependencies": {
-    "@types/markdown-it": "^12.2.3",
-    "@types/node": "^16.9.1",
-    "terser": "^5.14.2"
+    "@types/body-scroll-lock": "^3.1.2",
+    "@types/markdown-it": "^14.1.2",
+    "@types/node": "^22.7.5",
+    "typescript": "^5.6.3",
+    "vue-tsc": "^2.1.6"
   },
-  "pnpm": {
-    "overrides": {
-      "@vitejs/plugin-vue": "5.0.0-beta.1"
-    },
-    "peerDependencyRules": {
-      "ignoreMissing": [
-        "@algolia/client-search",
-        "react",
-        "react-dom",
-        "@types/react",
-        "search-insights"
-      ]
-    }
-  }
+  "packageManager": "pnpm@9.12.1"
 }

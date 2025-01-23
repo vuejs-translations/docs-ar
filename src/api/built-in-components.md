@@ -286,6 +286,12 @@ h(Transition, {
       * يمكن تغييرها بشكل ديناميكي.
      */
     disabled?: boolean
+    /**
+     * When `true`, the Teleport will defer until other
+     * parts of the application have been mounted before
+     * resolving its target. (3.5+)
+     */
+    defer?: boolean
   }
   ```
 
@@ -307,7 +313,16 @@ h(Transition, {
   </Teleport>
   ```
 
-- **اطلع أيضاً على** [دليل مكون`<Teleport>`](/api/built-in-components.html#teleport)
+  Defer target resolution <sup class="vt-badge" data-text="3.5+" />:
+
+  ```vue-html
+  <Teleport defer to="#late-div">...</Teleport>
+
+  <!-- somewhere later in the template -->
+  <div id="late-div"></div>
+  ```
+
+- **اطلع أيضا على** [Guide - Teleport](/guide/built-ins/teleport)
 
 ## مكون `<Suspense>` <sup class="vt-badge experimental" /> {#suspense}
 
@@ -318,6 +333,7 @@ h(Transition, {
   ```ts
   interface SuspenseProps {
     timeout?: string | number
+    suspensible?: boolean
   }
   ```
 
@@ -333,4 +349,6 @@ h(Transition, {
 
   إذا صادفت اعتماديات غير متزامنة ([مكونات غير متزامنة](/guide/components/async) ومكونات مع [`async setup()`](/guide/built-ins/suspense#async-setup)) أثناء تصيير المنفذ الافتراضي ، فسوف تنتظر حتى  تُحل جميعًا قبل عرض المنفذ الافتراضي.
 
-- **اطلع أيضاً على** [دليل مكون`<Suspense>`](/api/built-in-components.html#suspense)
+  By setting the Suspense as `suspensible`, all the async dependency handling will be handled by the parent Suspense. See [implementation details](https://github.com/vuejs/core/pull/6736)
+
+- **اطلع أيضاً على** [Guide - Suspense](/guide/built-ins/suspense)

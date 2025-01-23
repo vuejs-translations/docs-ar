@@ -1,6 +1,29 @@
 <script setup>
 import { VTCodeGroup, VTCodeGroupTab } from '@vue/theme'
 </script>
+<style>
+.lambdatest {
+  background-color: var(--vt-c-bg-soft);
+  border-radius: 8px;
+  padding: 12px 16px 12px 12px;
+  font-size: 13px;
+  a {
+    display: flex;
+    color: var(--vt-c-text-2);
+  }
+  img {
+    background-color: #fff;
+    padding: 12px 16px;
+    border-radius: 6px;
+    margin-right: 24px;
+  }
+  .testing-partner {
+    color: var(--vt-c-text-1);
+    font-size: 15px;
+    font-weight: 600;
+  }
+}
+</style>
 
 # الاختبار {#testing}
 
@@ -40,7 +63,7 @@ import { VTCodeGroup, VTCodeGroupTab } from '@vue/theme'
 
 ```js
 // helpers.js
-export function increment (current, max = 10) {
+export function increment(current, max = 10) {
   if (current < max) {
     return current + 1
   }
@@ -105,9 +128,7 @@ describe('increment', () => {
 
 ### خيارات أخرى {#other-options}
 
-- [أداة Jest](https://jestjs.io/) هي إطار اختبار الوحدات مشهور، ومع ذلك، نوصي باستخدام أداة Jest إذا كان لديك مجموعة اختبارات Jest حالية التي تحتاج إلى الترحيل إلى مشروع Vite، لأن Vitest تقدم تكامل أكثر سلاسة و أداء أفضل.
-
-## اختبار المكون {#component-testing}
+- [Jest](https://jestjs.io/) is a popular unit testing framework. However, we only recommend Jest if you have an existing Jest test suite that needs to be migrated over to a Vite-based project, as Vitest offers a more seamless integration and better performance.
 
 في تطبيقات Vue، المكونات هي الكتل الرئيسية لواجهة المستخدم. لذلك، المكونات هي الوحدة الطبيعية للفصل عند التحقق من سلوك التطبيق. من ناحية تفصيلية، اختبار المكون يقع في مكان ما فوق اختبار الوحدة و يمكن اعتباره نوع من اختبار التكامل. يجب أن يشمل اختبلر المكونات معظم تطبيق Vue و نوصي بأن يكون لكل مكون ملف مواصفاته الخاص.
 
@@ -235,6 +256,8 @@ describe('increment', () => {
 
 تقوم الاختبارات الشاملة بتحقق من العديد من الطبقات في التطبيق. يمكنها أن تستهدف التطبيق المبني محليًا، أو حتى بيئة تجريبية مباشرة. اختبار بيئة تجريبية مباشرة لا تتضمن فقط شيفرة واجهة المستخدم الأمامية والخادم الثابت، بل تشمل جميع خدمات الخلفية والبنية المرتبطة.
 
+- [WebdriverIO](https://webdriver.io/docs/component-testing/vue) for cross-browser component testing that relies on native user interaction based on standardized automation. It can also be used with Testing Library.
+
 > كلما كانت اختباراتك مشابهة لطريقة استخدام البرمجيات الخاصة بك، كلما أعطتك المزيد من الثقة. - [Kent C. Dodds](https://twitter.com/kentcdodds/status/977018512689455106) - مؤلف Testing Library
 
 باختبار كيف تؤثر عمليات المستخدمين على التطبيق، فإن الاختبارات الشاملة هي غالبًا مفتاح الثقة الأعلى في ما إذا كان التطبيق يعمل بشكل صحيح أم لا.
@@ -270,6 +293,28 @@ describe('increment', () => {
 - [Playwright](https://playwright.dev/)  هو أيضًا حل ممتاز للاختبارات الشاملة مع نطاق أوسع من دعم المتصفحات (بشكل رئيسي WebKit). انظر [لماذا Playwright](https://playwright.dev/docs/why-playwright) لمزيد من التفاصيل.
 
 - [Nightwatch](https://nightwatchjs.org/)  هو حل للاختبارات الشاملة مبني على [Selenium WebDriver](https://www.npmjs.com/package/selenium-webdriver). وهذا يعطيه نطاقًا أوسع في دعم المتصفحات.
+
+When end-to-end (E2E) tests are run in continuous integration/deployment pipelines, they are often run in headless browsers (i.e., no visible browser is opened for the user to watch). A critical feature of modern E2E testing frameworks is the ability to see snapshots and/or videos of the application during testing, providing some insight into why errors are happening. Historically, it was tedious to maintain these integrations.
+
+### Recommendation {#recommendation-2}
+
+- [Playwright](https://playwright.dev/) is a great E2E testing solution that supports Chromium, WebKit, and Firefox. Test on Windows, Linux, and macOS, locally or on CI, headless or headed with native mobile emulation of Google Chrome for Android and Mobile Safari. It has an informative UI, excellent debuggability, built-in assertions, parallelization, traces and is designed to eliminate flaky tests. Support for [Component Testing](https://playwright.dev/docs/test-components) is available, but marked experimental. Playwright is open source and maintained by Microsoft.
+
+- [Cypress](https://www.cypress.io/) has an informative graphical interface, excellent debuggability, built-in assertions, stubs, flake-resistance, and snapshots. As mentioned above, it provides stable support for [Component Testing](https://docs.cypress.io/guides/component-testing/introduction). Cypress supports Chromium-based browsers, Firefox, and Electron. WebKit support is available, but marked experimental. Cypress is MIT-licensed, but some features like parallelization require a subscription to Cypress Cloud.
+
+<div class="lambdatest">
+  <a href="https://lambdatest.com" target="_blank">
+    <img src="/images/lambdatest.svg">
+    <div>
+      <div class="testing-partner">Testing Sponsor</div>
+      <div>Lambdatest is a cloud platform for running E2E, accessibility, and visual regression tests across all major browsers and real devices, with AI assisted test generation!</div>
+    </div>
+  </a>
+</div>
+
+### Other Options {#other-options-2}
+
+- [Nightwatch](https://nightwatchjs.org/) is an E2E testing solution based on [Selenium WebDriver](https://www.npmjs.com/package/selenium-webdriver). This gives it the widest browser support range, including native mobile testing. Selenium-based solutions will be slower than Playwright or Cypress.
 
 - [WebdriverIO](https://webdriver.io/) is a test automation framework for web and mobile testing based on the WebDriver protocol.
 

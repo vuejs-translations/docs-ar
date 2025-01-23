@@ -17,6 +17,7 @@ const nav: ThemeConfig['nav'] = [
       { text: 'انطلاقة سريعة', link: '/guide/quick-start' },
       // { text: 'دليل الأسلوب', link: '/style-guide/' },
       { text: 'فهرس', link: '/glossary/' },
+      { text: 'مرجع الأخطاء', link: '/error-reference/' },
       {
         text: 'Vue 2 توثيقات ',
         link: 'https://v2.vuejs.org'
@@ -44,6 +45,7 @@ const nav: ThemeConfig['nav'] = [
         text: 'Resources',
         items: [
           { text: 'الشركاء', link: '/partners/' },
+          { text: 'المطورون', link: '/developers/' },
           { text: 'قوالب (Themes)', link: '/ecosystem/themes' },
           { text: 'مكونات واجهة المستخدم', link: 'https://ui-libs.vercel.app/' },
           {
@@ -115,6 +117,7 @@ const nav: ThemeConfig['nav'] = [
         link: '/about/community-guide'
       },
       { text: 'مدونة قواعد السلوك', link: '/about/coc' },
+      { text: 'سياسة الخصوصية', link: '/about/privacy' },
       {
         text: 'الوثائقي',
         link: 'https://www.youtube.com/watch?v=OrxmtDw4pVI'
@@ -126,9 +129,13 @@ const nav: ThemeConfig['nav'] = [
     link: '/sponsor/'
   },
   {
-    text: 'الشركاء',
-    link: '/partners/',
-    activeMatch: `^/partners/`
+    text: 'الخبراء',
+    badge: { text: 'جديد' },
+    activeMatch: `^/(partners|developers)/`,
+    items: [
+      { text: 'الشركاء', link: '/partners/' },
+      { text: 'المطورون', link: '/developers/', badge: { text: 'جديد' } }
+    ]
   }
 ]
 
@@ -178,18 +185,15 @@ export const sidebar: ThemeConfig['sidebar'] = {
           link: '/guide/essentials/event-handling'
         },
         { text: 'ربط إدخالات النموذج', link: '/guide/essentials/forms' },
-        {
-          text: 'خطافات دورة الحياة',
-          link: '/guide/essentials/lifecycle'
-        },
         { text: 'الخاصيات المراقبة', link: '/guide/essentials/watchers' },
-        {
-          text: 'Refs مراجع القالب',
-          link: '/guide/essentials/template-refs'
-        },
+        { text: 'Refs مراجع القالب', link: '/guide/essentials/template-refs' },
         {
           text: 'أساسيات المكونات',
           link: '/guide/essentials/component-basics'
+        },
+        {
+          text: 'خطافات دورة الحياة',
+          link: '/guide/essentials/lifecycle'
         }
       ]
     },
@@ -376,6 +380,10 @@ export const sidebar: ThemeConfig['sidebar'] = {
         {
           text: 'حقن الإعتمادية',
           link: '/api/composition-api-dependency-injection'
+        },
+        {
+          text: 'Helpers',
+          link: '/api/composition-api-helpers'
         }
       ]
     },
@@ -425,10 +433,12 @@ export const sidebar: ThemeConfig['sidebar'] = {
     {
       text: 'الواجهة البرمجية المتقدمة',
       items: [
-        { text: 'دالة التصيير', link: '/api/render-function' },
-        { text: 'التصيير من الخادم', link: '/api/ssr' },
+        { text: 'العناصر المخصصة', link: '/api/custom-elements' },
+        { text: 'دالة التشكيل', link: '/api/render-function' },
+        { text: 'التشكيل من الخادم', link: '/api/ssr' },
         { text: 'الأنواع المساعدة (Typescript)', link: '/api/utility-types' },
-        { text: 'مصير مخصص', link: '/api/custom-renderer' }
+        { text: 'مشكل مخصص', link: '/api/custom-renderer' },
+        { text: 'شارات التشكيل', link: '/api/compile-time-flags' }
       ]
     }
   ],
@@ -570,8 +580,11 @@ export const sidebar: ThemeConfig['sidebar'] = {
 export default defineConfigWithTheme<ThemeConfig>({
   extends: baseConfig,
 
+  sitemap: {
+    hostname: 'https://vuejs.org'
+  },
+
   lang: 'ar',
-  dir:'rtl',
   title: 'Vue.js إطار',
   description: ' الإطار التقدمي للـJavascript  -Vue.js',
   srcDir: 'src',
@@ -610,6 +623,14 @@ export default defineConfigWithTheme<ThemeConfig>({
       {},
       fs.readFileSync(
         path.resolve(__dirname, './inlined-scripts/restorePreference.js'),
+        'utf-8'
+      )
+    ],
+    [
+      'script',
+      {},
+      fs.readFileSync(
+        path.resolve(__dirname, './inlined-scripts/uwu.js'),
         'utf-8'
       )
     ],
@@ -684,6 +705,26 @@ export default defineConfigWithTheme<ThemeConfig>({
         repo: 'https://github.com/vuejs-translations/docs-it'
       },
       {
+        link: 'https://fa.vuejs.org',
+        text: 'فارسی',
+        repo: 'https://github.com/vuejs-translations/docs-fa'
+      },
+      {
+        link: 'https://ru.vuejs.org',
+        text: 'Русский',
+        repo: 'https://github.com/translation-gang/docs-ru'
+      },
+      {
+        link: 'https://cs.vuejs.org',
+        text: 'Čeština',
+        repo: 'https://github.com/vuejs-translations/docs-cs'
+      },
+      {
+        link: 'https://zh-hk.vuejs.org',
+        text: '繁體中文',
+        repo: 'https://github.com/vuejs-translations/docs-zh-hk'
+      },
+      {
         link: '/translations/',
         text: 'ساعدنا في الترجمة',
         isTranslationsDesc: true
@@ -693,7 +734,7 @@ export default defineConfigWithTheme<ThemeConfig>({
     algolia: {
       indexName: 'vuejs',
       appId: 'ML0LEBN7FQ',
-      apiKey: 'f49cbd92a74532cc55cfbffa5e5a7d01',
+      apiKey: '21cf9df0734770a2448a9da64a700c22',
       searchParameters: {
         facetFilters: ['version:v3']
       }
@@ -707,7 +748,7 @@ export default defineConfigWithTheme<ThemeConfig>({
     socialLinks: [
       { icon: 'github', link: 'https://github.com/vuejs/' },
       { icon: 'twitter', link: 'https://twitter.com/vuejs' },
-      { icon: 'discord', link: 'https://discord.com/invite/HBherRA' }
+      { icon: 'discord', link: 'https://discord.com/invite/vue' }
     ],
 
     editLink: {
@@ -725,6 +766,7 @@ export default defineConfigWithTheme<ThemeConfig>({
   },
 
   markdown: {
+    theme: 'github-dark',
     config(md) {
       md.use(headerPlugin)
       // .use(textAdPlugin)
@@ -751,7 +793,6 @@ export default defineConfigWithTheme<ThemeConfig>({
       }
     },
     build: {
-      minify: 'terser',
       chunkSizeWarningLimit: Infinity
     },
     json: {
