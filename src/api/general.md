@@ -129,7 +129,9 @@
   type FooInstance = InstanceType<typeof Foo>
   ```
 
-  ### بصمة الدالة <sup class="vt-badge" data-text="3.3+" /> {#function-signature}
+  ### بصمة الدالة {#function-signature}
+
+  - Only supported in 3.3+
 
   `()defineComponent` لديها أيضًا بصمة بديلة يُقصد استخدامها مع الواجهة التركيبية و [دوال التصيير أو JSX](/guide/extras/render-function.html).
 
@@ -222,47 +224,4 @@
   }
   ```
 
-- **اطلع أيضا على** [دليل المكونات الغير متزامنة](/guide/components/async)
-
-## ()defineCustomElement {#definecustomelement}
-
-تقبل هذه الدالة نفس الوسيط الذي تقبله [`()defineComponent`](#definecomponent) ، ولكنها بدلاً من ذلك ترجع باني فئة [عنصر مخصص](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_custom_elements) أصلي.
-
-- **Type**
-
-  ```ts
-  function defineCustomElement(
-    component:
-      | (ComponentOptions & { styles?: string[] })
-      | ComponentOptions['setup']
-  ): {
-    new (props?: object): HTMLElement
-  }
-  ```
-
-  > النوع مبسط لتسهيل القراءة.
-
-- **التفاصيل**
-
-   بالإضافة إلى خيارات المكون العادية ، تدعم `()defineCustomElement` أيضًا خيارًا خاصًا `styles` ، والذي يجب أن يكون مصفوفة من سلاسل نصية CSS السطري ، لتوفير CSS الذي سيحقن في جذر الظل الخاص بالعنصر.
-
-  القيمة المُرجعة هي باني عنصر مخصص يمكن تسجيله باستخدام [`()customElements.define()`](https://developer.mozilla.org/en-US/docs/Web/API/CustomElementRegistry/define).
-
-- **مثال**
-
-  ```js
-  import { defineCustomElement } from 'vue'
-
-  const MyVueElement = defineCustomElement({
-    /* خيارات المكون */
-  })
-
-  // سجل العنصر المخصص.
-  customElements.define('my-vue-element', MyVueElement)
-  ```
-
-- **اطلع أيضا على**
-
-  - [دليل بناء عناصر مخصصة مع Vue](/guide/extras/web-components#building-custom-elements-with-vue)
-
-  -  لاحظ أيضا أن `()defineCustomElement` يتطلب [تهيئة خاصة](/guide/extras/web-components#sfc-as-custom-element) عند استخدامه مع مكونات أحادية الملف.
+- **See also** [Guide - Async Components](/guide/components/async)

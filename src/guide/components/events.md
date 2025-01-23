@@ -32,7 +32,7 @@ if (typeof window !== 'undefined') {
 
 ```vue-html
 <!-- MyComponent -->
-<button @click="$emit('someEvent')">انفر الزر</button>
+<button @click="$emit('someEvent')">انفر هنا</button>
 ```
 
 <div class="options-api">
@@ -177,12 +177,12 @@ export default {
 
 </div>
 
-خيار `emits` يدعم أيضًا صيغة الكائن، إذا كنت تستخدم الـTypescript تستطيع تمرير وسائط ذات نوع، والتي تسمح لنا بتنفيذ التحقق من صحة الحمولة الممررة للأحداث المرسلة في وقت التشغيل :
+The `emits` option and `defineEmits()` macro also support an object syntax. If using TypeScript you can type arguments, which allows us to perform runtime validation of the payload of the emitted events:
 
 <div class="composition-api">
 
 ```vue
-<script setup>
+<script setup lang="ts">
 const emit = defineEmits({
   submit(payload: { email: string, password: string }) {
     // اعد `true` أو `false` للإشارة إلى

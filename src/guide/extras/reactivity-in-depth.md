@@ -68,7 +68,7 @@ whenDepsChange(update)
 
 لا يمكننا تتبع قراءة وكتابة المتغيرات المحلية كما في المثال. لا يوجد آلية للقيام بذلك في JavaScript الأساسي. ما **يمكننا** فعله ، على الرغم من ذلك ، هو اعتراض قراءة وكتابة **خاصيات الكائن**.
 
-هناك طريقتان لاعتراض  الوصول إلى الخاصية في JavaScript: [getter](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/get) / [setters](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/set) و [Proxies](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy). في Vue 2 ، استخدم getter / setters حصريًا بسبب قيود دعم المتصفح. في Vue 3 ، استخدم Proxies للكائنات التفاعلية و getter / setters للمراجع. إليك الشيفرة المجردة الموالية التي توضح كيفية عملها:
+There are two ways of intercepting property access in JavaScript: [getter](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/get#description) / [setters](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/set#description) and [Proxies](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy). Vue 2 used getter / setters exclusively due to browser support limitations. In Vue 3, Proxies are used for reactive objects and getter / setters are used for refs. Here's some pseudo-code that illustrates how they work:
 
 ```js{4,9,17,22}
 function reactive(obj) {
@@ -192,7 +192,7 @@ import { ref, watchEffect } from 'vue'
 const count = ref(0)
 
 watchEffect(() => {
-  document.body.innerHTML = `count is: ${count.value}`
+  document.body.innerHTML = `Count is: ${count.value}`
 })
 
 // يحدث الـ DOM
@@ -355,7 +355,7 @@ watchEffect(callback, {
 يمكننا دمج Immer مع Vue عبر دالة تركيبية بسيطة:
 
 ```js
-import produce from 'immer'
+import { produce } from 'immer'
 import { shallowRef } from 'vue'
 
 export function useImmer(baseState) {
@@ -368,7 +368,7 @@ export function useImmer(baseState) {
 }
 ```
 
-[اختبرها في حقل التجارب](https://sfc.vuejs.org/#eyJBcHAudnVlIjoiPHNjcmlwdCBzZXR1cD5cbmltcG9ydCB7IHVzZUltbWVyIH0gZnJvbSAnLi9pbW1lci5qcydcbiAgXG5jb25zdCBbaXRlbXMsIHVwZGF0ZUl0ZW1zXSA9IHVzZUltbWVyKFtcbiAge1xuICAgICB0aXRsZTogXCJMZWFybiBWdWVcIixcbiAgICAgZG9uZTogdHJ1ZVxuICB9LFxuICB7XG4gICAgIHRpdGxlOiBcIlVzZSBWdWUgd2l0aCBJbW1lclwiLFxuICAgICBkb25lOiBmYWxzZVxuICB9XG5dKVxuXG5mdW5jdGlvbiB0b2dnbGVJdGVtKGluZGV4KSB7XG4gIHVwZGF0ZUl0ZW1zKGl0ZW1zID0+IHtcbiAgICBpdGVtc1tpbmRleF0uZG9uZSA9ICFpdGVtc1tpbmRleF0uZG9uZVxuICB9KVxufVxuPC9zY3JpcHQ+XG5cbjx0ZW1wbGF0ZT5cbiAgPHVsPlxuICAgIDxsaSB2LWZvcj1cIih7IHRpdGxlLCBkb25lIH0sIGluZGV4KSBpbiBpdGVtc1wiXG4gICAgICAgIDpjbGFzcz1cInsgZG9uZSB9XCJcbiAgICAgICAgQGNsaWNrPVwidG9nZ2xlSXRlbShpbmRleClcIj5cbiAgICAgICAge3sgdGl0bGUgfX1cbiAgICA8L2xpPlxuICA8L3VsPlxuPC90ZW1wbGF0ZT5cblxuPHN0eWxlPlxuLmRvbmUge1xuICB0ZXh0LWRlY29yYXRpb246IGxpbmUtdGhyb3VnaDtcbn1cbjwvc3R5bGU+IiwiaW1wb3J0LW1hcC5qc29uIjoie1xuICBcImltcG9ydHNcIjoge1xuICAgIFwidnVlXCI6IFwiaHR0cHM6Ly9zZmMudnVlanMub3JnL3Z1ZS5ydW50aW1lLmVzbS1icm93c2VyLmpzXCIsXG4gICAgXCJpbW1lclwiOiBcImh0dHBzOi8vdW5wa2cuY29tL2ltbWVyQDkuMC43L2Rpc3QvaW1tZXIuZXNtLmpzP21vZHVsZVwiXG4gIH1cbn0iLCJpbW1lci5qcyI6ImltcG9ydCBwcm9kdWNlIGZyb20gJ2ltbWVyJ1xuaW1wb3J0IHsgc2hhbGxvd1JlZiB9IGZyb20gJ3Z1ZSdcblxuZXhwb3J0IGZ1bmN0aW9uIHVzZUltbWVyKGJhc2VTdGF0ZSkge1xuICBjb25zdCBzdGF0ZSA9IHNoYWxsb3dSZWYoYmFzZVN0YXRlKVxuICBjb25zdCB1cGRhdGUgPSAodXBkYXRlcikgPT4ge1xuICAgIHN0YXRlLnZhbHVlID0gcHJvZHVjZShzdGF0ZS52YWx1ZSwgdXBkYXRlcilcbiAgfVxuXG4gIHJldHVybiBbc3RhdGUsIHVwZGF0ZV1cbn0ifQ==)
+[Try it in the Playground](https://play.vuejs.org/#eNp9VMFu2zAM/RXNl6ZAYnfoTlnSdRt66DBsQ7vtEuXg2YyjRpYEUU5TBPn3UZLtuE1RH2KLfCIfycfsk8/GpNsGkmkyw8IK4xiCa8wVV6I22jq2Zw3CbV2DZQe2srpmZ2km/PmMK8a4KrRCxxbCQY1j1pgyd3DrD0s27++OFh689z/0OOEkTBlPvkNuFfvbAE/Gra/UilzOko0Mh2A+ufcHwd9ij8KtWUjwMsAqlxgjcLU854qrVaMKJ7RiTleVDBRHQpWwO4/xB8xHoRg2v+oyh/MioJepT0ClvTsxhnSUi1LOsthN6iMdCGgkBacTY7NGhjd9ScG2k5W2c56M9rG6ceBPdbOWm1AxO0/a+uiZFjJHpFv7Fj10XhdSFBtyntTJkzaxf/ZtQnYguoFNJkUkmAWGs2xAm47onqT/jPWHxjjYuUkJhba57+yUSaFg4tZWN9X6Y9eIcC8ZJ1FQkzo36QNqRZILQXjroAqnXb+9LQzVD3vtnMFpljXKbKq00HWU3/X7i/QivcxKgS5aUglVXjxNAGvK8KnWZSNJWa0KDoGChzmk3L28jSVcQX1o1d1puwfgOpdSP97BqsfQxhCCK9gFTC+tXu7/coR7R71rxRWXBL2FpHOMOAAeYVGJhBvFL3s+kGKIkW5zSfKfd+RHA2u3gzZEpML9y9JS06YtAq5DLFmOMWXsjkM6rET1YjzUcSMk2J/G1/h8TKGOb8HmV7bdQbqzhmLziv0Bd3Govywg2O1x8Umvua3ARffN/Q/S1sDZDfMN5x2glo3nGGFfGlUS7QEusL0NcxWq+o03OwcKu6Ke/+fwhIb89Y3Sj3Qv0w+9xg7/AWfvyMs=)
 
 ### آلات الحالات {#state-machines}
 
@@ -403,13 +403,13 @@ export function useMachine(options) {
 لقد قامت العديد من الإطارات الأخرى بتقديم أوليات تفاعلية مماثلة للمراجع من الواجهة التركيبية في Vue، تحت مصطلح "الإشارات":
 
 - [Solid Signals](https://www.solidjs.com/docs/latest/api#createsignal)
-- [Angular Signals](https://github.com/angular/angular/discussions/49090)
+- [Angular Signals](https://angular.dev/guide/signals)
 - [Preact Signals](https://preactjs.com/guide/v10/signals/)
 - [Qwik Signals](https://qwik.builder.io/docs/components/state/#usesignal)
 
 بشكل أساسي، الإشارات هي نوع من الأوليات التفاعلية مثل المراجع في Vue. إنها حاوية قيمة توفر تتبع الاعتمادية عند الوصول، وتشغيل التأثيرات الجانبية عند التغيير. هذا النمط القائم على الأوليات التفاعلية ليس مفهومًا جديدًا بشكل خاص في عالم الواجهة الأمامية: إنه يعود إلى تنفيذات مثل [Knockout observables](https://knockoutjs.com/documentation/observables.html) و [Meteor Tracker](https://docs.meteor.com/api/tracker.html) منذ أكثر من عقد من الزمن. واجهة خيارات Vue ومكتبة إدارة حالة React [MobX](https://mobx.js.org/) مبنية أيضًا على نفس المبادئ، ولكنها تخفي الأوليات وراء خاصيات الكائن.
 
-على الرغم من أنه ليس سمة ضرورية لشيء ما ليتأهل كإشارات، إلا أن المفهوم يناقش في الوقت الحالي إلى جانب نموذج التصيير حيث تنفذ التحديثات من خلال اشتراكات دقيقة. نظرًا لاستخدام Virtual DOM، تعتمد Vue حاليًا [على المصرفات لتحقيق التحسينات المماثلة](/guide/extras/rendering-mechanism#compiler-informed-virtual-dom). ومع ذلك، نحن نستكشف أيضًا استراتيجية ترجمة جديدة مستوحاة من Solid (وضع البخار) التي لا تعتمد على Virtual DOM وتستفيد أكثر من نظام التفاعلية المدمج في Vue.
+Although not a necessary trait for something to qualify as signals, today the concept is often discussed alongside the rendering model where updates are performed through fine-grained subscriptions. Due to the use of Virtual DOM, Vue currently [relies on compilers to achieve similar optimizations](/guide/extras/rendering-mechanism#compiler-informed-virtual-dom). However, we are also exploring a new Solid-inspired compilation strategy, called [Vapor Mode](https://github.com/vuejs/core-vapor), that does not rely on Virtual DOM and takes more advantage of Vue's built-in reactivity system.
 
 ### تنازلات تصميم الواجهات البرمجية {#api-design-trade-offs}
 
@@ -452,21 +452,15 @@ Angular تخضع لبعض التغييرات الأساسية من خلال ال
 ```js
 const count = signal(0)
 
-count() // الوصول إلى القيمة
-count.set(1) // تعيين القيمة الجديدة
-count.update((v) => v + 1) // تحديث القيمة باستخدام القيمة السابقة
-
-// تغيير الكائنات العميقة بنفس الهوية
-const state = signal({ count: 0 })
-state.mutate((o) => {
-  o.count++
-})
+count() // access the value
+count.set(1) // set new value
+count.update((v) => v + 1) // update based on previous value
 ```
 
 مرة أخرى، يمكننا تكرار الواجهة البرمجية بسهولة في Vue:
 
 ```js
-import { shallowRef, triggerRef } from 'vue'
+import { shallowRef } from 'vue'
 
 export function signal(initialValue) {
   const r = shallowRef(initialValue)
@@ -477,15 +471,11 @@ export function signal(initialValue) {
   s.update = (updater) => {
     r.value = updater(r.value)
   }
-  s.mutate = (mutator) => {
-    mutator(r.value)
-    triggerRef(r)
-  }
   return s
 }
 ```
 
-[اختبرها في حقل التجارب](https://play.vuejs.org/#eNp9UslOwzAQ/ZVRLiRQEsqxpBUIvoADp0goTd3U4DiWl4AU5d8ZL3E3iZtn5r1Z3vOYvAiRD4Ykq6RUjaRCgyLaiE3FaSd6qWEERVteswU0fSeMJjuYYC/7Dm7youatYbW895D8S91UvOJNz5VGuOEa1oGePmRzYdebLSNYmRumaQbrjSfg8xYeEVsWfh/cBANNOsFqTTACKA/LzavrTtUKxjEyp6kssDZj3vygAPJjL1Bbo3XP4blhtPleV4nrlBuxw1npYLca4A6WWZU4PADljSQd4drRC8//rxfKaW+f+ZJg4oJbFvG8ZJFcaYreHL041Iz1P+9kvwAtadsS6d7Rm1rB55VRaLAzhvy6NnvDG01x1WAN5VTTmn3UzJAMRrudd0pa++LEc9wRpRDlHZT5YGu2pOzhWHAJWxvnakxOHufFxqx/4MxzcEinIYP+eV5ntOe5Rx94IYjopxOZUhnIEr+4xPMrjuG1LPFftkTj5DNJGhwYBZ4BJz3DV56FmJLpD1DrKXU=)
+[Try it in the Playground](https://play.vuejs.org/#eNp9Ul1v0zAU/SuWX9ZCSRh7m9IKGHuAB0AD8WQJZclt6s2xLX+ESlH+O9d2krbr1Df7nnPu17k9/aR11nmgt7SwleHaEQvO6w2TvNXKONITyxtZihWpVKu9g5oMZGtUS66yvJSNF6V5lyjZk71ikslKSeuQ7qUj61G+eL+cgFr5RwGITAkXiyVZb5IAn2/IB+QWeeoHO8GPg1aL0gH+CCl215u7mJ3bW9L3s3IYihyxifMlFRpJqewL1qN3TknysRK8el4zGjNlXtdYa9GFrjryllwvGY18QrisDLQgXZTnSX8pF64zzD7pDWDghbbI5/Hoip7tFL05eLErhVD/HmB75Edpyd8zc9DUaAbso3TrZeU4tjfawSV3vBR/SuFhSfrQUXLHBMvmKqe8A8siK7lmsi5gAbJhWARiIGD9hM7BIfHSgjGaHljzlDyGF2MEPQs6g5dpcAIm8Xs+2XxODTgUn0xVYdJ5RxPhKOd4gdMsA/rgLEq3vEEHlEQPYrbgaqu5APNDh6KWUTyuZC2jcWvfYswZD6spXu2gen4l/mT3Icboz3AWpgNGZ8yVBttM8P2v77DH9wy2qvYC2RfAB7BK+NBjon32ssa2j3ix26/xsrhsftv7vQNpp6FCo4E5RD6jeE93F0Y/tHuT3URd2OLwHyXleRY=)
 
 بالمقارنة مع المراجع في Vue، توفر الواجهات البرمجية القائمة على الدوال المحصلة في Solid و Angular بعض التنازلات المثيرة للاهتمام عند استخدامها في مكونات Vue:
 

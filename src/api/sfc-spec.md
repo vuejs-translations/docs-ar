@@ -66,7 +66,7 @@ export default {
 
 - [Gridsome: `<page-query>`](https://gridsome.org/docs/querying-data/)
 - [vite-plugin-vue-gql: `<gql>`](https://github.com/wheatjs/vite-plugin-vue-gql)
-- [vue-i18n: `<i18n>`](https://github.com/intlify/bundle-tools/tree/main/packages/vite-plugin-vue-i18n#i18n-custom-block)
+- [vue-i18n: `<i18n>`](https://github.com/intlify/bundle-tools/tree/main/packages/unplugin-vue-i18n#i18n-custom-block)
 
 معالجة الكتل المخصصة ستعتمد على الأدوات - إذا كنت تريد بناء تكاملات كتل مخصصة خاصة بك، انظر [قسم أدوات تكاملات كتل المكونات أحادية الملف](/guide/scaling-up/tooling#sfc-custom-block-integrations) للمزيد من التفاصيل.
 
@@ -135,6 +135,13 @@ p {{ msg }}
 <unit-test src="./unit-test.js">
 </unit-test>
 ```
+
+:::warning Note
+While using aliases in `src`, don't start with `~`, anything after it is interpreted as a module request. This means you can reference assets inside node modules:
+```vue
+<img src="~some-npm-package/foo.png">
+```
+:::
 
 ## Comments {#comments}
 

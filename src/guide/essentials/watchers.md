@@ -100,7 +100,7 @@ watch(question, async (newQuestion) => {
 
 ### أنواع مصادر الدالة المُراقبة {#watch-source-types}
 
-الوسيط الأول للدالة `watch` يمكن أن يكون أنواع مختلفة من  "المصادر" التفاعلية : يمكن أن يكون ref (بما في ذلك الخاصيات المحسوبة)، كائن تفاعلي ، دالة مُحصِّلة، أو مصفوفة من مصادر متعددة :
+`watch`'s first argument can be different types of reactive "sources": it can be a ref (including computed refs), a reactive object, a [getter function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/get#description), or an array of multiple sources:
 
 ```js
 const x = ref(0)
@@ -144,7 +144,7 @@ watch(obj.count, (count) => {
 watch(
   () => obj.count,
   (count) => {
-    console.log(`count is: ${count}`)
+    console.log(`Count is: ${count}`)
   }
 )
 ```
@@ -216,8 +216,10 @@ watch(
 
 </div>
 
-:::warning استخدمها بحذر
-تتطلب المراقبة العميقة مراجعة جميع الخصائص المتداخلة في الكائن المُراقَب، ويمكن أن تكون مكلفة عند استخدامها على بنية بيانات كبيرة. استخدمها فقط عند الضرورة وتأكد من تأثيرات الأداء. 
+In Vue 3.5+, the `deep` option can also be a number indicating the max traversal depth - i.e. how many levels should Vue traverse an object's nested properties.
+
+:::warning Use with Caution
+Deep watch requires traversing all nested properties in the watched object, and can be expensive when used on large data structures. Use it only when necessary and beware of the performance implications.
 :::
 
 ## الدوال المُراقِبة الفورية {#eager-watchers}
@@ -256,6 +258,43 @@ export default {
 watch(source, (newValue, oldValue) => {
   // سيتم تشغيله فورًا ثم مرة أخرى عند تغيير المصدر `source`
 }, { immediate: true })
+```
+
+</div>
+
+## Once Watchers {#once-watchers}
+
+- Only supported in 3.4+
+
+Watcher's callback will execute whenever the watched source changes. If you want the callback to trigger only once when the source changes, use the `once: true` option.
+
+<div class="options-api">
+
+```js
+export default {
+  watch: {
+    source: {
+      handler(newValue, oldValue) {
+        // when `source` changes, triggers only once
+      },
+      once: true
+    }
+  }
+}
+```
+
+</div>
+
+<div class="composition-api">
+
+```js
+watch(
+  source,
+  (newValue, oldValue) => {
+    // when `source` changes, triggers only once
+  },
+  { once: true }
+)
 ```
 
 </div>
@@ -315,17 +354,143 @@ watchEffect(async () => {
 
 </div>
 
+## Side Effect Cleanup {#side-effect-cleanup}
+
+Sometimes we may perform side effects, e.g. asynchronous requests, in a watcher:
+
+<div class="composition-api">
+
+```js
+watch(id, (newId) => {
+  fetch(`/api/${newId}`).then(() => {
+    // callback logic
+  })
+})
+```
+
+</div>
+<div class="options-api">
+
+```js
+export default {
+  watch: {
+    id(newId) {
+      fetch(`/api/${newId}`).then(() => {
+        // callback logic
+      })
+    }
+  }
+}
+```
+
+</div>
+
+But what if `id` changes before the request completes? When the previous request completes, it will still fire the callback with an ID value that is already stale. Ideally, we want to be able to cancel the stale request when `id` changes to a new value.
+
+We can use the [`onWatcherCleanup()`](/api/reactivity-core#onwatchercleanup) <sup class="vt-badge" data-text="3.5+" /> API to register a cleanup function that will be called when the watcher is invalidated and is about to re-run:
+
+<div class="composition-api">
+
+```js {10-13}
+import { watch, onWatcherCleanup } from 'vue'
+
+watch(id, (newId) => {
+  const controller = new AbortController()
+
+  fetch(`/api/${newId}`, { signal: controller.signal }).then(() => {
+    // callback logic
+  })
+
+  onWatcherCleanup(() => {
+    // abort stale request
+    controller.abort()
+  })
+})
+```
+
+</div>
+<div class="options-api">
+
+```js {12-15}
+import { onWatcherCleanup } from 'vue'
+
+export default {
+  watch: {
+    id(newId) {
+      const controller = new AbortController()
+
+      fetch(`/api/${newId}`, { signal: controller.signal }).then(() => {
+        // callback logic
+      })
+
+      onWatcherCleanup(() => {
+        // abort stale request
+        controller.abort()
+      })
+    }
+  }
+}
+```
+
+</div>
+
+Note that `onWatcherCleanup` is only supported in Vue 3.5+ and must be called during the synchronous execution of a `watchEffect` effect function or `watch` callback function: you cannot call it after an `await` statement in an async function.
+
+Alternatively, an `onCleanup` function is also passed to watcher callbacks as the 3rd argument<span class="composition-api">, and to the `watchEffect` effect function as the first argument</span>:
+
+<div class="composition-api">
+
+```js
+watch(id, (newId, oldId, onCleanup) => {
+  // ...
+  onCleanup(() => {
+    // cleanup logic
+  })
+})
+
+watchEffect((onCleanup) => {
+  // ...
+  onCleanup(() => {
+    // cleanup logic
+  })
+})
+```
+
+</div>
+<div class="options-api">
+
+```js
+export default {
+  watch: {
+    id(newId, oldId, onCleanup) {
+      // ...
+      onCleanup(() => {
+        // cleanup logic
+      })
+    }
+  }
+}
+```
+
+</div>
+
+This works in versions before 3.5. In addition, `onCleanup` passed via function argument is bound to the watcher instance so it is not subject to the synchronously constraint of `onWatcherCleanup`.
+
 ## توقيت تنفيذ الدالة المعالجة {#callback-flush-timing}
 
 لما تُعدل حالة تفاعلية، فإنها قد تُشغل كل من تحديثات مكونات Vue والدوال المراقِبة المُنشأة من قبلك.
 
-افتراضيا، تُشغل الدوال المراقِبة المُنشأة من قبل المستخدم **قبل** تحديثات مكونات Vue. هذا يعني أنه إذا حاولت الوصول إلى DOM داخل دالة مراقبة، فإن DOM سيكون عبارة عن حالة قبل أن تقوم Vue بتطبيق أي تحديثات.
+Similar to component updates, user-created watcher callbacks are batched to avoid duplicate invocations. For example, we probably don't want a watcher to fire a thousand times if we synchronously push a thousand items into an array being watched.
 
-إذا كنت ترغب في الوصول إلى DOM في دالة مراقبة **بعد** تحديث Vue، فيجب عليك تحديد خيار `flush: 'post'`:
+By default, a watcher's callback is called **after** parent component updates (if any), and **before** the owner component's DOM updates. This means if you attempt to access the owner component's own DOM inside a watcher callback, the DOM will be in a pre-update state.
+
+### Post Watchers {#post-watchers}
+
+If you want to access the owner component's DOM in a watcher callback **after** Vue has updated it, you need to specify the `flush: 'post'` option:
 
 <div class="options-api">
 
-```js
+```js{6}
 export default {
   // ...
   watch: {
@@ -341,7 +506,7 @@ export default {
 
 <div class="composition-api">
 
-```js
+```js{2,6}
 watch(source, callback, {
   flush: 'post'
 })
@@ -362,6 +527,54 @@ watchPostEffect(() => {
 ```
 
 </div>
+
+### Sync Watchers {#sync-watchers}
+
+It's also possible to create a watcher that fires synchronously, before any Vue-managed updates:
+
+<div class="options-api">
+
+```js{6}
+export default {
+  // ...
+  watch: {
+    key: {
+      handler() {},
+      flush: 'sync'
+    }
+  }
+}
+```
+
+</div>
+
+<div class="composition-api">
+
+```js{2,6}
+watch(source, callback, {
+  flush: 'sync'
+})
+
+watchEffect(callback, {
+  flush: 'sync'
+})
+```
+
+Sync `watchEffect()` also has a convenience alias, `watchSyncEffect()`:
+
+```js
+import { watchSyncEffect } from 'vue'
+
+watchSyncEffect(() => {
+  /* executed synchronously upon reactive data change */
+})
+```
+
+</div>
+
+:::warning Use with Caution
+Sync watchers do not have batching and triggers every time a reactive mutation is detected. It's ok to use them to watch simple boolean values, but avoid using them on data sources that might be synchronously mutated many times, e.g. arrays.
+:::
 
 <div class="options-api">
 

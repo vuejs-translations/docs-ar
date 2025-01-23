@@ -14,7 +14,7 @@ outline: deep
 
 ```vue-html
 <!-- قالب <MyButton> -->
-<button>انقر الزر</button>
+<button>انقر هنا</button>
 ```
 
 و يستخدم المكون الأب هذا المكون بهذا الشكل:
@@ -26,7 +26,7 @@ outline: deep
 الـDOM النهائي المصيَّر سيكون:
 
 ```html
-<button class="large">انقر الزر</button>
+<button class="large">انقر هنا</button>
 ```
 
 هنا، لم يصرح `<MyButton>` بـ `class` كخاصية مقبولة.  بالتالي،  تُعامل `class` كسمة مستترة وتضاف تلقائيًا إلى العنصر الجذري لـ `<MyButton>`.
@@ -37,13 +37,13 @@ outline: deep
 
 ```vue-html
 <!-- قالب <MyButton> -->
-<button class="btn">انقر الزر</button>
+<button class="btn">انقر هنا</button>
 ```
 
 ثم سيصيّر الـDOM النهائي كالتالي:
 
 ```html
-<button class="btn large">انقر الزر</button>
+<button class="btn large">انقر هنا</button>
 ```
 
 ###  توريث مستمعي الأحداث `v-on` {#v-on-listener-inheritance}
@@ -112,7 +112,7 @@ defineOptions({
 
 ```vue-html
 <div class="btn-wrapper">
-  <button class="btn">انقر الزر</button>
+  <button class="btn">انقر هنا</button>
 </div>
 ```
 
@@ -120,7 +120,7 @@ defineOptions({
 
 ```vue-html{2}
 <div class="btn-wrapper">
-  <button class="btn" v-bind="$attrs">انقر الزر</button>
+  <button class="btn" v-bind="$attrs">انقر هنا</button>
 </div>
 ```
 

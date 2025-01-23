@@ -80,6 +80,10 @@ import ListStagger from './transition-demos/ListStagger.vue'
 
 [المثال الكامل](/examples/#list-transition)
 
+### Custom TransitionGroup classes {#custom-transitiongroup-classes}
+
+You can also specify custom transition classes for the moving element by passing the `moveClass` prop to `<TransitionGroup>`, just like [custom transition classes on `<Transition>`](/guide/built-ins/transition.html#custom-transition-classes).
+
 ## تَعاقُب انتقالات القائمة {#staggering-list-transitions}
 
 من خلال التواصل مع انتقالات جافاسكريبت من خلال سمات البيانات ، من الممكن أيضًا إحداث تَعاقُب إنتقالات في القائمة. أولاً ، نعرض مؤشر العنصر كسمة بيانات في عنصر DOM:
@@ -102,7 +106,7 @@ import ListStagger from './transition-demos/ListStagger.vue'
 </TransitionGroup>
 ```
 
-بعد ذلك ، في خطافات JavaScript ، نقوم بتحريك العنصر بتأخيره بناءً على سمة البيانات. هذا المثال يستخدم  [مكتبة GreenSock](https://greensock.com/) لأداء التحريكات:
+Then, in JavaScript hooks, we animate the element with a delay based on the data attribute. This example is using the [GSAP library](https://gsap.com/) to perform the animation:
 
 ```js{5}
 function onEnter(el, done) {

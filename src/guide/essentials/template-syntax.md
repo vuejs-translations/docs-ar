@@ -64,6 +64,22 @@ Vue تستخدم صيغة القالب المستند على الـHTML التي
 
 > فيما يلي من الدليل، سنستخدم الصيغة المختصرة في أمثلة الشيفرة، لأنها هي الأكثر استخدامًا من طرف مطوري Vue.
 
+### Same-name Shorthand {#same-name-shorthand}
+
+- Only supported in 3.4+
+
+If the attribute has the same name with the JavaScript value being bound, the syntax can be further shortened to omit the attribute value:
+
+```vue-html
+<!-- same as :id="id" -->
+<div :id></div>
+
+<!-- this also works -->
+<div v-bind:id></div>
+```
+
+This is similar to the property shorthand syntax when declaring objects in JavaScript. Note this is a feature that is only available in Vue 3.4 and above.
+
 ### السمات المنطقية {#boolean-attributes}
 
 [السمات المنطقية](https://html.spec.whatwg.org/multipage/common-microsyntaxes.html#boolean-attributes) هي السمات التي يمكن أن تشير إلى قيم صحيحة/خاطئة من خلال وجودها على عنصر. على سبيل المثال، [`disabled`](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/disabled) هي أحد أكثر السمات المنطقية استخدامًا.
@@ -85,7 +101,8 @@ Vue تستخدم صيغة القالب المستند على الـHTML التي
 ```js
 const objectOfAttrs = {
   id: 'container',
-  class: 'wrapper'
+  class: 'wrapper',
+  style: 'background-color:green'
 }
 ```
 
@@ -224,8 +241,8 @@ data() {
 ```html
 <a v-on:[eventName]="doSomething"> ... </a>
 
-<!-- اختصار -->
-<a @[eventName]="doSomething">
+  <!-- اختصار -->
+<a @[eventName]="doSomething"> ... </a>
 ```
 
 في هذا المثال، عندما تكون قيمة `eventName` هي `"focus"`، فإن `v-on:[eventName]` سيكون مطابقا لـ`v-on:focus`.

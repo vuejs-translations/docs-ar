@@ -1,12 +1,23 @@
 # المُوجِّهات المخصصة {#custom-directives}
 
 <script setup>
-const vFocus = {
+const vHighlight = {
   mounted: el => {
-    el.focus()
+    el.classList.add('is-highlight')
   }
 }
 </script>
+
+<style>
+  .vt-doc p.is-highlight {
+    margin-bottom: 0;
+}
+
+.is-highlight {
+  background-color: yellow;
+  color: black;
+}
+</style>
 
 ## مقدمة {#introduction}
 
@@ -14,7 +25,96 @@ const vFocus = {
 
 لقد أدرجنا شكلين من أشكال إعادة استخدام الشيفرة في Vue: [المكونات](/guide/essentials/component-basics) و [composables](./composables). المكونات هي البنية الرئيسية ، في حين أن composables متميزة في إعادة استخدام منطق حالة المكون. الموجهات المخصصة ، بدورها، تهدف في الغالب إلى إعادة استخدام منطق يتضمن وصول متدني المستوى إلى الـDOM  على عناصر عادية.
 
-مُوجهة مخصصة تُعرَّف ككائن يحتوي على مراحل حياة مشابهة لما تحتويه المكونات. تتلقى دوال مراحل الحياة  العنصر الذي عُينت الموجهة عليه. هذا مثال على موجهة تركز على  إدخال عندما يُدرج العنصر في DOM بواسطة Vue:
+A custom directive is defined as an object containing lifecycle hooks similar to those of a component. The hooks receive the element the directive is bound to. Here is an example of a directive that adds a class to an element when it is inserted into the DOM by Vue:
+
+<div class="composition-api">
+
+```vue
+<script setup>
+// enables v-highlight in templates
+const vHighlight = {
+  mounted: (el) => {
+    el.classList.add('is-highlight')
+  }
+}
+</script>
+
+<template>
+  <p v-highlight>This sentence is important!</p>
+</template>
+```
+
+</div>
+
+<div class="options-api">
+
+```js
+const highlight = {
+  mounted: (el) => el.classList.add('is-highlight')
+}
+
+export default {
+  directives: {
+    // enables v-highlight in template
+    highlight
+  }
+}
+```
+
+```vue-html
+<p v-highlight>This sentence is important!</p>
+```
+
+</div>
+
+<div class="demo">
+  <p v-highlight>This sentence is important!</p>
+</div>
+
+<div class="composition-api">
+
+In `<script setup>`, any camelCase variable that starts with the `v` prefix can be used as a custom directive. In the example above, `vHighlight` can be used in the template as `v-highlight`.
+
+If you are not using `<script setup>`, custom directives can be registered using the `directives` option:
+
+```js
+export default {
+  setup() {
+    /*...*/
+  },
+  directives: {
+    // enables v-highlight in template
+    highlight: {
+      /* ... */
+    }
+  }
+}
+```
+
+</div>
+
+<div class="options-api">
+
+Similar to components, custom directives must be registered so that they can be used in templates. In the example above, we are using local registration via the `directives` option.
+
+</div>
+
+It is also common to globally register custom directives at the app level:
+
+```js
+const app = createApp({})
+
+// make v-highlight usable in all components
+app.directive('highlight', {
+  /* ... */
+})
+```
+
+## When to use custom directives {#when-to-use}
+
+Custom directives should only be used when the desired functionality can only be achieved via direct DOM manipulation.
+
+A common example of this is a `v-focus` custom directive that brings an element into focus.
 
 <div class="composition-api">
 
@@ -54,54 +154,9 @@ export default {
 
 </div>
 
-<div class="demo">
-  <input v-focus placeholder="هذا العنصر سيركز عليه" />
-</div>
+This directive is more useful than the `autofocus` attribute because it works not just on page load - it also works when the element is dynamically inserted by Vue!
 
-في حالة عدم النقر في أي مكان آخر على الصفحة ، يجب أن يكون الإدخال أعلاه مركزًا عليه تلقائيًا. هذه الموجهة أكثر فائدة من السمة `autofocus` لأنها تعمل ليس فقط عند تحميل الصفحة - بل تعمل أيضًا عند إدراج العنصر بشكل ديناميكي من قبل Vue.
-
-<div class="composition-api">
-
-في `<script setup>` ، يمكن استخدام أي متغير camelCase يبدأ بالبادئة `v` كموجهة مخصصة. في المثال أعلاه ، يمكن استخدام `vFocus` في القالب كـ `v-focus`.
-
-في حالة عدم استخدام `<script setup>` ، يمكن تسجيل الموجهات المخصصة باستخدام خيار `directives`:
-
-```js
-export default {
-  setup() {
-    /*...*/
-  },
-  directives: {
-    //تمكين v-focus في القوالب
-    focus: {
-      /* ... */
-    }
-  }
-}
-```
-
-</div>
-
-<div class="options-api">
-
-مثل المكونات ، يجب تسجيل الموجهات المخصصة حتى يمكن استخدامها في القوالب. في المثال أعلاه ، نستخدم التسجيل المحلي عبر خيار `directives`.
-
-</div>
-
-من الشائع أيضًا تسجيل الموجهات المخصصة على مستوى التطبيق بشكل عام:
-
-```js
-const app = createApp({})
-
-// جعل v-focus متاحًا في جميع المكونات
-app.directive('focus', {
-  /* ... */
-})
-```
-
-:::tip ملاحظة
-يجب استخدام الموجهات المخصصة فقط عندما يمكن الوصول إلى الوظائف المطلوبة فقط عن طريق التحكم المباشر في DOM. يجب تفضيل القوالب التصريحية باستخدام الموجهات المدمجة مثل `v-bind` عند الإمكان لأنها أكثر كفاءة و ملاءمة للتصيير من جانب الخادم.
-:::
+Declarative templating with built-in directives such as `v-bind` is recommended when possible because they are more efficient and server-rendering friendly.
 
 ## خطافات الموجهة {#directive-hooks}
 
@@ -109,25 +164,25 @@ app.directive('focus', {
 
 ```js
 const myDirective = {
-  //تستدعى قبل تطبيق سمات 
-  // العنصر المرتبطة أو مستمعي الحدث
-  created(el, binding, vnode, prevVnode) {
-    // انظر أدناه للحصول على تفاصيل الوسيط
+  // called before bound element's attributes
+  // or event listeners are applied
+  created(el, binding, vnode) {
+    // see below for details on arguments
   },
-  // تستدعى مباشرة قبل إدراج العنصر في DOM.
-  beforeMount(el, binding, vnode, prevVnode) {},
-  // تستدعى عندما يوصَّل المكون 
-  // الأب وجميع أبنائه المرتبطين بالعنصر.
-  mounted(el, binding, vnode, prevVnode) {},
-  // تستدعى قبل تحديث المكون الأب
+  // called right before the element is inserted into the DOM.
+  beforeMount(el, binding, vnode) {},
+  // called when the bound element's parent component
+  // and all its children are mounted.
+  mounted(el, binding, vnode) {},
+  // called before the parent component is updated
   beforeUpdate(el, binding, vnode, prevVnode) {},
   // تستدعى بعد تحديث 
   // المكون الأب وجميع أبنائه
   updated(el, binding, vnode, prevVnode) {},
-  // تستدعى قبل فصل المكون الأب
-  beforeUnmount(el, binding, vnode, prevVnode) {},
-  // تستدعى عند فصل المكون الأب
-  unmounted(el, binding, vnode, prevVnode) {}
+  // called before the parent component is unmounted
+  beforeUnmount(el, binding, vnode) {},
+  // called when the parent component is unmounted
+  unmounted(el, binding, vnode) {}
 }
 ```
 
@@ -146,8 +201,8 @@ const myDirective = {
   - `instance`:  نسخة المكون حيث تستخدم الموجهة.
   - `dir`: كائن تعريف الموجهة.
 
-- `vnode`: VNode الأساسي يمثل العنصر المرتبط.
-- `prevNode`: VNode يمثل العنصر المرتبط من التصيير السابق. متاح فقط في `beforeUpdate` و `updated`.
+- `vnode`: the underlying VNode representing the bound element.
+- `prevVnode`: the VNode representing the bound element from the previous render. Only available in the `beforeUpdate` and `updated` hooks.
 
 كمثال، لنعتبر استخدام الموجهة التالي:
 
@@ -210,6 +265,10 @@ app.directive('demo', (el, binding) => {
 
 ## الاستخدام على المكونات {#usage-on-components}
 
+:::warning Not recommended
+Using custom directives on components is not recommended. Unexpected behaviour may occur when a component has multiple root nodes.
+:::
+
 عند استخدامها على المكونات، ستطبق الموجهات المخصصة دائمًا على العنصر الجذري للمكون، مثل [السمات المستترة](/guide/components/attrs).
 
 ```vue-html
@@ -224,4 +283,4 @@ app.directive('demo', (el, binding) => {
 </div>
 ```
 
-تجدر الملاحظة أن المكونات قد تحتوي على أكثر من عنصر جذري. عند تطبيقها على مكون متعدد الأجزاء، سيتجاهل المصرف الموجهة وسيطلق تحذير. على عكس السمات، لا يمكن تمرير الموجهات إلى عنصر مختلف باستخدام `v-bind="$attrs"`. عمومًا، **لا** ينصح باستخدام الموجهات المخصصة على المكونات.
+Note that components can potentially have more than one root node. When applied to a multi-root component, a directive will be ignored and a warning will be thrown. Unlike attributes, directives can't be passed to a different element with `v-bind="$attrs"`.

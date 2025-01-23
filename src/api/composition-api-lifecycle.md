@@ -206,6 +206,10 @@
 
   يستقبل الخطاف ثلاثة وسيطات: الخطأ، نسخة المكون التي أحدثت الخطأ، وسلسلة معلومات تحدد نوع مصدر الخطأ.
 
+  :::tip
+  In production, the 3rd argument (`info`) will be a shortened code instead of the full information string. You can find the code to string mapping in the [Production Error Code Reference](/error-reference/#runtime-errors).
+  :::
+  
    يمكنك تعديل حالة المكون في `()errorCaptured` لعرض حالة الخطأ للمستخدم. ومع ذلك، من المهم أن حالة الخطأ لا يجب أن تصيّر المحتوى الأصلي الذي تسبب في الخطأ؛ وإلا سيُلقى المكون في حلقة تصيير لا نهائية.
 
   يمكن للخطاف أن يرجع `false` لمنع الخطأ من الانتشار أكثر. انظر إلى تفاصيل انتشار الخطأ أدناه.

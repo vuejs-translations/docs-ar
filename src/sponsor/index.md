@@ -7,6 +7,10 @@ sponsors: false
 
 <script setup>
 import SponsorsGroup from '@theme/components/SponsorsGroup.vue'
+import { load, data } from '@theme/components/sponsors'
+import { onMounted } from 'vue'
+
+onMounted(load)
 </script>
 
 # كن أحد رعاة Vue.js {#become-a-vue-js-sponsor}
@@ -18,11 +22,11 @@ Vue.js هو مشروع مفتوح المصدر مرخص من معهد ماسات
 
 يمكن القيام بالرعاية عبر [رعاة GitHub](https://github.com/sponsors/yyx990803) أو [OpenCollective](https://opencollective.com/vuejs). يمكن الحصول على الفواتير عبر نظام الدفع الخاص بـ GitHub. يتم قبول كل من الرعاية الشهرية المتكررة والتبرعات لمرة واحدة. الرعاية المتكررة مخولة لمواضع الشعار كما هو محدد في [مستويات الرعاية](#tier-benefits).
 
-إذا كانت لديك أسئلة بخصوص المستويات أو لوجستيات الدفع أو بيانات تعرض الراعي ، فيرجى التواصل مع [sponsor@vuejs.org](mailto:sponsor@vuejs.org).
+إذا كانت لديك أسئلة بخصوص المستويات أو لوجستيات الدفع أو بيانات تعرض الراعي ، فيرجى التواصل مع [sponsor@vuejs.org](mailto:sponsor@vuejs.org?subject=Vue.js%20sponsorship%20inquiry).
 
 ## رعاية Vue كعمل تجاري {#sponsoring-vue-as-a-business}
 
-تمنحك رعاية Vue عرضًا رائعًا لأكثر من **1.7 مليون** من مطوري Vue حول العالم من خلال موقعنا على الويب ومشروع GitHub READMEs. بالإضافة إلى ذلك ، يعمل دعم OSS على تحسين سمعة علامتك التجارية ، والتي تعد من الأصول المهمة لأي شركة تتفاعل مع المطورين.
+Sponsoring Vue gives you great exposure to over **2 million** Vue developers around the world through our website and GitHub project READMEs. This not only directly generates leads, but also improves your brand recognition as a business that cares about Open Source. This is an intangible but extremely important asset for companies building products for developers, as it improves your conversion rate.
 
 إذا كنت تستخدم Vue لبناء منتج مدر للإيرادات ، فمن المنطقي من الناحية التجارية رعاية تطوير Vue: **يضمن أن يظل المشروع الذي يعتمد عليه منتجك في حالة جيدة ويتم صيانته بنشاط.** التعرض وصورة العلامة التجارية الإيجابية في مجتمع Vue يسهل أيضًا جذب مطوري Vue وتوظيفهم.
 
@@ -37,7 +41,7 @@ Vue.js هو مشروع مفتوح المصدر مرخص من معهد ماسات
 ## مزايا الطبقة {#tier-benefits}
 
 - **العالمية الخاصة**:
-  - يقتصر على راع واحد عالميًا (محجوز حاليًا).
+  - Limited to **one** sponsor globally. <span v-if="!data?.special">Currently vacant. [Get in touch](mailto:sponsor@vuejs.org?subject=Vue.js%20special%20sponsor%20inquiry)!</span><span v-else>(Currently filled)</span>
   - وضع شعار حصري فوق الجزء المرئي من الصفحة على الصفحة الأولى من [vuejs.org](/).
   - وضع الشعار الأبرز في جميع المواقع من الطبقات أدناه.
 - **البلاتينيوم (2000 دولار أمريكي / شهريا)**:

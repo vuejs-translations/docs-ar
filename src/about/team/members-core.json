@@ -111,30 +111,24 @@
   {
     "name": "Jinjiang",
     "title": "Developer",
+    "company": "Bit",
+    "companyLink": "https://bit.dev",
     "projects": [
+      {
+        "label": "vuejs-translations",
+        "url": "https://github.com/vuejs-translations"
+      },
       {
         "label": "cn.vuejs.org",
         "url": "https://cn.vuejs.org"
-      },
-      {
-        "label": "vue-a11y-utils",
-        "url": "https://github.com/jinjiang/vue-a11y-utils"
-      },
-      {
-        "label": "vue-mark-display",
-        "url": "https://github.com/jinjiang/vue-mark-display"
-      },
-      {
-        "label": "mark2slides",
-        "url": "https://github.com/jinjiang/mark2slides"
-      },
-      {
-        "label": "vue-keyboard-over",
-        "url": "https://github.com/jinjiang/vue-keyboard-over"
       }
     ],
     "location": "Singapore",
     "languages": ["Chinese", "English"],
+    "website": {
+      "label": "jinjiang.me",
+      "url": "http://jinjiang.me"
+    },
     "socials": {
       "github": "jinjiang",
       "twitter": "zhaojinjiang"
@@ -172,34 +166,6 @@
     "socials": {
       "github": "kazupon",
       "twitter": "kazu_pon"
-    },
-    "sponsor": true
-  },
-  {
-    "name": "Rahul Kadyan",
-    "title": "Software Engineer",
-    "company": "Grammarly",
-    "companyLink": "https://grammarly.com/",
-    "projects": [
-      {
-        "label": "vuejs/core",
-        "url": "https://github.com/vuejs/core"
-      },
-      { "label": "VueDX", "url": "https://github.com/vuedx" },
-      {
-        "label": "rollup-plugin-vue",
-        "url": "https://github.com/vuejs/rollup-plugin-vue"
-      }
-    ],
-    "location": "Bangalore, India",
-    "languages": ["Hindi", "English"],
-    "socials": {
-      "github": "znck",
-      "twitter": "znck0"
-    },
-    "website": {
-      "label": "https://znck.me",
-      "url": "https://znck.me"
     },
     "sponsor": true
   },
@@ -278,9 +244,9 @@
   },
   {
     "name": "GU Yiling",
-    "title": "Senior web developer",
-    "company": "Baidu, inc.",
-    "companyLink": "https://www.baidu.com/",
+    "title": "Staff Software Engineer",
+    "company": "Kong Inc.",
+    "companyLink": "https://konghq.com/",
     "projects": [
       {
         "label": "vue",
@@ -291,19 +257,11 @@
         "url": "https://cn.vuejs.org"
       },
       {
-        "label": "Justineo/vue-awesome",
-        "url": "https://github.com/Justineo/vue-awesome"
-      },
-      {
-        "label": "Justineo/vue-awesome",
-        "url": "https://github.com/Justineo/vue-awesome"
-      },
-      {
-        "label": "ecomfe/vue-echarts",
+        "label": "vue-echarts",
         "url": "https://github.com/ecomfe/vue-echarts"
       },
       {
-        "label": "ecomfe/veui",
+        "label": "veui",
         "url": "https://github.com/ecomfe/veui"
       }
     ],
@@ -326,7 +284,7 @@
       },
       {
         "label": "vuequery",
-        "url": "https://github.com/vuequery"
+        "url": "https://github.com/phanan/vuequery"
       },
       {
         "label": "vue-google-signin-button",
@@ -344,7 +302,7 @@
   },
   {
     "name": "Natalia Tepluhina",
-    "title": "Staff Frontend Engineer",
+    "title": "Principal Engineer",
     "company": "GitLab",
     "companyLink": "https://gitlab.com/",
     "projects": [
@@ -444,22 +402,6 @@
     "sponsor": true
   },
   {
-    "name": "HcySunYang",
-    "title": "Developer",
-    "projects": [
-      {
-        "label": "vuejs/core",
-        "url": "https://github.com/vuejs/core"
-      }
-    ],
-    "location": "Beijing, China",
-    "languages": ["Chinese", "English"],
-    "socials": {
-      "github": "HcySunYang",
-      "twitter": "HcySunYang"
-    }
-  },
-  {
     "name": "Johnson Chu",
     "title": "Developer",
     "projects": [
@@ -511,6 +453,35 @@
     "socials": {
       "github": "brc-dd",
       "twitter": "_brc_dd"
+    },
+    "sponsor": true
+  },
+  {
+    "name": "Kevin Deng 三咲智子",
+    "title": "Open Sourceror",
+    "projects": [
+      {
+        "label": "vuejs/core",
+        "url": "https://github.com/vuejs/core"
+      },
+      {
+        "label": "vuejs/core-vapor",
+        "url": "https://github.com/vuejs/core-vapor"
+      },
+      {
+        "label": "Vue Macros",
+        "url": "https://github.com/vue-macros/vue-macros"
+      },
+      {
+        "label": "VueUse",
+        "url": "https://github.com/vueuse/vueuse"
+      }
+    ],
+    "location": ["Hangzhou", "Singapore"],
+    "languages": ["English", "Chinese"],
+    "socials": {
+      "github": "sxzz",
+      "twitter": "sanxiaozhizi"
     },
     "sponsor": true
   }

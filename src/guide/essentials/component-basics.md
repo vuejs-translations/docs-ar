@@ -6,7 +6,7 @@
 
 <!-- https://www.figma.com/file/qa7WHDQRWuEZNRs7iZRZSI/components -->
 
-هذا مشابه جدًا لطريقة تداخل عناصر HTML الأصلية، ولكن Vue تنفذ نموذج المكون الخاص بها الذي يسمح لنا بتغليف المحتوى والوظائف المخصصة في كل مكون. كما أن Vue تتكامل بشكل جيد مع مكونات الويب الأصلية. إذا كنت مهتمًا بالعلاقة بين مكونات Vue ومكونات الويب الأصلية، يمكنك [الاطلاع على المزيد هنا](/guide/extras/web-components).
+This is very similar to how we nest native HTML elements, but Vue implements its own component model that allows us to encapsulate custom content and logic in each component. Vue also plays nicely with native Web Components. If you are curious about the relationship between Vue Components and native Web Components, [read more here](/guide/extras/web-components).
 
 
 
@@ -300,7 +300,7 @@ const posts = ref([
 
 </div>
 
-تجدر الإشارة إلى أن `v-bind` يستخدم لتمرير قيم الخاصية الديناميكية. هذا مفيد بشكل خاص عندما لا تعرف المحتوى الذي ستقوم بتصييره بدقة مسبقًا.
+Notice how [`v-bind` syntax](/api/built-in-directives#v-bind) (`:title="post.title"`) is used to pass dynamic prop values. This is especially useful when you don't know the exact content you're going to render ahead of time.
 
 هذا كل ما تحتاج إلى معرفته حول الخاصيات إلى حد الآن، ولكن بمجرد انتهاءك من قراءة هذه الصفحة وفهم محتواها، ننصحك بالعودة لاحقًا لقراءة الدليل الكامل على [الخاصيات](/guide/components/props).
 
@@ -470,7 +470,8 @@ export default {
 
 يمكن بلوغ ذلك باستخدام العنصر المخصص `<slot>`  الخاص بـVue:
 
-```vue{4}
+```vue{5}
+<!-- AlertBox.vue -->
 <template>
   <div class="alert-box">
     <strong>هذا خطأ بهدف العرض</strong>

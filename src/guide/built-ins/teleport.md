@@ -168,7 +168,7 @@ const open = ref(false)
 </Teleport>
 ```
 
-حيث يمكن تحديث حالة `isMobile` بشكل ديناميكي عن طريق تتبع تغييرات استعلامات الوسائط.
+حيث يمكن تحديث حالة `isMobile` بشكل ديناميكي.
 
 ## مكونات Teleport على نفس العنصر {#multiple-teleports-on-the-same-target}
 
@@ -194,6 +194,19 @@ const open = ref(false)
   <div>B</div>
 </div>
 ```
+
+## Deferred Teleport <sup class="vt-badge" data-text="3.5+" /> {#deferred-teleport}
+
+In Vue 3.5 and above, we can use the `defer` prop to defer the target resolving of a Teleport until other parts of the application have mounted. This allows the Teleport to target a container element that is rendered by Vue, but in a later part of the component tree:
+
+```vue-html
+<Teleport defer to="#late-div">...</Teleport>
+
+<!-- somewhere later in the template -->
+<div id="late-div"></div>
+```
+
+Note that the target element must be rendered in the same mount / update tick with the Teleport - i.e. if the `<div>` is only mounted a second later, the Teleport will still report an error. The defer works similarly to the `mounted` lifecycle hook.
 
 ---
 

@@ -1,3 +1,7 @@
+<script setup>
+  import { VTCodeGroup, VTCodeGroupTab } from '@vue/theme'
+</script>
+
 # الأدوات {#tooling}
 
 ## التجربة عبر النت {#try-it-online}
@@ -21,7 +25,40 @@
 
 للبدء مع Vite + Vue، قم بتشغيل الأمر التالي:
 
-<div class="language-sh"><pre><code><span class="line"><span style="color:var(--vt-c-green);">$</span> <span style="color:#A6ACCD;">npm create vue@latest</span></span></code></pre></div>
+<VTCodeGroup>
+  <VTCodeGroupTab label="npm">
+
+  ```sh
+  $ npm create vue@latest
+  ```
+
+  </VTCodeGroupTab>
+  <VTCodeGroupTab label="pnpm">
+  
+  ```sh
+  $ pnpm create vue@latest
+  ```
+
+  </VTCodeGroupTab>
+  <VTCodeGroupTab label="yarn">
+  
+  ```sh
+  # For Yarn Modern (v2+)
+  $ yarn create vue@latest
+  
+  # For Yarn ^v4.11
+  $ yarn dlx create-vue@latest
+  ```
+
+  </VTCodeGroupTab>
+  <VTCodeGroupTab label="bun">
+  
+  ```sh
+  $ bun create vue@latest
+  ```
+
+  </VTCodeGroupTab>
+</VTCodeGroup>
 
 هذا الأمر سيقوم بتثبيت وتنفيذ [create-vue](https://github.com/vuejs/create-vue), وهي الأداة الرسمية لتهيئة مشاريع Vue.
 
@@ -53,10 +90,10 @@
 
 ## دعم المحررات {#ide-support}
 
- إعداد المحرر الموصى به هو [VSCode](https://code.visualstudio.com/) + إضافة [Vue Language Features (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.volar) . توفر الإضافة ابراز الصيغة ودعم TypeScript والتحسس الذكي لتعبيرات القالب وخاصيات المكون.
+- The recommended IDE setup is [VS Code](https://code.visualstudio.com/) + the [Vue - Official extension](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (previously Volar). The extension provides syntax highlighting, TypeScript support, and intellisense for template expressions and component props.
 
-  :::tip ملاحظة
-  Volar يحل محل [Vetur](https://marketplace.visualstudio.com/items?itemName=octref.vetur)، الإضافة الرسمية السابقة لـ VSCode لـ Vue 2. إذا كنت تستخدم Vetur حاليًا، تأكد من تعطيلها في مشاريع Vue 3.
+  :::tip
+  Vue - Official replaces [Vetur](https://marketplace.visualstudio.com/items?itemName=octref.vetur), our previous official VS Code extension for Vue 2. If you have Vetur currently installed, make sure to disable it in Vue 3 projects.
   :::
 
 - [محرر WebStorm](https://www.jetbrains.com/webstorm/) يوفر أيضًا دعمًا رائعًا مدمجًا للمكونات أحادية الملف.
@@ -71,23 +108,20 @@
 
 ## أدوات التطوير و التحكم في المتصفح {#browser-devtools}
 
-<VueSchoolLink href="https://vueschool.io/lessons/using-vue-dev-tools-with-vuejs-3" title="Free Vue.js Devtools Lesson"/>
-
 تتيح لك إضافة أدوات Vue للتطوير في المتصفح  تصفح شجرة مكونات تطبيق Vue وفحص حالة المكونات الفردية وتتبع أحداث إدارة الحالة وتحليل أداء التطبيق.
 
-![devtools screenshot](https://raw.githubusercontent.com/vuejs/devtools/main/media/screenshot-shadow.png)
+![devtools screenshot](./images/devtools.png)
 
 - [التوثيق](https://devtools.vuejs.org/)
 - [إضافة كروم](https://chrome.google.com/webstore/detail/vuejs-devtools/nhdogjmejiglipccpnnnanhbledajbpd)
-- [إضافة فايرفوكس](https://addons.mozilla.org/en-US/firefox/addon/vue-js-devtools/)
-- [إضاف إيدج](https://microsoftedge.microsoft.com/addons/detail/vuejs-devtools/olofadcdnkkjdfgjcmjaadnlehnnihnl)
+- [Vite Plugin](https://devtools.vuejs.org/guide/vite-plugin)
 - [تطبيق إلكترون مستقل](https://devtools.vuejs.org/guide/installation.html#standalone)
 
 ## TypeScript {#typescript}
 
 الصفحة الرئيسية: [استخدام Vue مع TypeScript](/guide/typescript/overview).
 
-- [Volar](https://github.com/johnsoncodehk/volar) توفر التحقق من النوع للمكونات أحادية الملف باستخدام تكتيل `<"script lang="ts>`، بما في ذلك تعبيرات القالب والتحقق من صحة الخاصيات بين المكونات.
+- [Vue - Official extension](https://github.com/vuejs/language-tools) توفر التحقق من النوع للمكونات أحادية الملف باستخدام تكتيل `<"script lang="ts>`، بما في ذلك تعبيرات القالب والتحقق من صحة الخاصيات بين المكونات.
 
 - استخدم [`vue-tsc`](https://github.com/vuejs/language-tools/tree/master/packages/vue-tsc) لتنفيذ نفس التحقق من النوع من خلال سطر الأوامر أو لإنشاء ملفات `d.ts` للمكونات أحادية الملف.
 
@@ -117,7 +151,7 @@
 
 ## تنسيق الشيفرة {#formatting}
 
-- إضافة [Volar](https://github.com/johnsoncodehk/volar) لـVSCode توفر تنسيق لمكونات Vue أحادية الملف.
+- إضافة [Vue - Official](https://github.com/vuejs/language-tools) لـVSCode توفر تنسيق لمكونات Vue أحادية الملف.
 
 - كبديل آخر، يوفر [Prettier](https://prettier.io/) دعمًا مدمجًا لتنسيق مكونات Vue أحادية الملف.
 
@@ -157,11 +191,10 @@
 
 ## حقول تجارب أخرى {#other-online-playgrounds}
 
-- [ حقل تجارب مكتبة VueUse](https://play.vueuse.org)
-- [Vue + Vite على مستوى موقع Repl.it](https://replit.com/@templates/VueJS-with-Vite)
-- [Vue على موقع CodeSandbox](https://codesandbox.io/s/vue-3)
-- [Vue على موقع  Codepen](https://codepen.io/pen/editor/vue)
-- [Vue على موقع  Components.studio](https://components.studio/create/vue3)
-- [Vue على موقع  WebComponents.dev](https://webcomponents.dev/create/cevue)
+- [VueUse Playground](https://play.vueuse.org)
+- [Vue + Vite on Repl.it](https://replit.com/@templates/VueJS-with-Vite)
+- [Vue on CodeSandbox](https://codesandbox.io/p/devbox/github/codesandbox/sandbox-templates/tree/main/vue-vite)
+- [Vue on Codepen](https://codepen.io/pen/editor/vue)
+- [Vue on WebComponents.dev](https://webcomponents.dev/create/cevue)
 
 <!-- TODO ## Backend Framework Integrations -->

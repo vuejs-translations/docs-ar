@@ -25,7 +25,7 @@ const vnode = h(
 )
 ```
 
-`()h` هي اختصار لـ **hyperscript** - والذي يعني "JavaScript الذي ينتج HTML (لغة ترميز النص الفائق)". هذا الاسم موروث من الاصطلاحات المشتركة بين العديد من تنفيذات DOM الافتراضية. يمكن أن يكون الاسم الأكثر وصفًا هو `()createVnode` ، ولكن الاسم الأقصر يساعد عندما تضطر إلى استدعاء هذه الدالة عدة مرات في دالة التصيير.
+`()h` هي اختصار لـ **hyperscript** - والذي يعني "JavaScript الذي ينتج HTML (لغة ترميز النص الفائق)". هذا الاسم موروث من الاصطلاحات المشتركة بين العديد من تنفيذات DOM الافتراضية. يمكن أن يكون الاسم الأكثر وصفًا هو `()createVNode` ، ولكن الاسم الأقصر يساعد عندما تضطر إلى استدعاء هذه الدالة عدة مرات في دالة التصيير.
 
 دالة `()h` مصممة لتكون مرنة للغاية:
 
@@ -239,13 +239,23 @@ const vnode = <div id={dynamicId}>السلام عليكم, {userName}</div>
 
 توفر تعريفات النوع في Vue أيضًا استنباط النوع لاستخدام TSX. عند استخدام TSX ، تأكد من تحديد `"jsx": "preserve"` في `tsconfig.json` حتى يترك TypeScript بناء صيغة JSX سليمًا لتصريف JSX في Vue من أجل معالجته.
 
-### استنباط الأنواع في JSX {#jsx-type-inference}
+Similar to the transform, Vue's JSX also needs different type definitions.
 
-بشكل مماثل للتحويل ، تحتاج JSX في Vue أيضًا إلى تعريفات أنواع مختلفة. حاليًا ، تقوم أنواع Vue بتسجيل أنواع Vue JSX تلقائيًا على المستوى العام. هذا يعني أن TSX سيعمل من دون أي تكوين عندما تكون أنواع Vue متاحة.
+Starting in Vue 3.4, Vue no longer implicitly registers the global `JSX` namespace. To instruct TypeScript to use Vue's JSX type definitions, make sure to include the following in your `tsconfig.json`:
 
-أنواع JSX العامة قد تتسبب في تعارض عند استخدامها مع مكتبات أخرى تحتاج أيضًا إلى استنباط أنواع JSX ، ولا سيما React. ابتداءً من 3.3 ، تدعم Vue تحديد مساحة الأسماء JSX عبر خيار [jsxImportSource](https://www.typescriptlang.org/tsconfig#jsxImportSource) في TypeScript. نعتزم إزالة تسجيل مساحة الأسماء JSX العامة الافتراضية في 3.4.
+```json
+{
+  "compilerOptions": {
+    "jsx": "preserve",
+    "jsxImportSource": "vue"
+    // ...
+  }
+}
+```
 
-لمستخدمي TSX ، من المقترح تعيين [jsxImportSource](https://www.typescriptlang.org/tsconfig#jsxImportSource) إلى `'vue'` في `tsconfig.json` بعد الترقية إلى 3.3 ، أو الاختيار في كل ملف مع `/* jsxImportSource vue@ */`. سيتيح لك هذا الاختيار في السلوك الجديد الآن والترقية بسهولة عند إصدار 3.4.
+You can also opt-in per file by adding a `/* @jsxImportSource vue */` comment at the top of the file.
+
+If there is code that depends on the presence of the global `JSX` namespace,  you can retain the exact pre-3.4 global behavior by explicitly importing or referencing `vue/jsx` in your project, which registers the global `JSX` namespace.
 
 إذا كانت هناك شيفرة تعتمد على وجود مساحة الأسماء العامة `JSX` ، فيمكنك الاحتفاظ بالسلوك العام الدقيق قبل 3.4 عن طريق الإشارة إلى `vue/jsx` بشكل صريح ، والذي يسجل مساحة الأسماء العامة `JSX`.
 
@@ -357,7 +367,7 @@ h(
       /* ... */
     }
   },
-  'انقر على الزر'
+  'انقر هنا'
 )
 ```
 
@@ -367,7 +377,7 @@ h(
     /* ... */
   }}
 >
-  انقر على الزر
+  انقر هنا
 </button>
 ```
 
@@ -567,7 +577,42 @@ h(MyComponent, null, {
 
 تمرير المنافذ كدوال يسمح لها بأن تُستدعى بشكل خامل من قبل المكون الإبن. هذا يؤدي إلى تتبع اعتمادات المنفذ من قبل المكون الإبن بدلاً من المكون الأب، مما يؤدي إلى تحديثات أكثر دقة وكفاءة.
 
-### المكونات المدمجة {#built-in-components}
+### Scoped Slots {#scoped-slots}
+
+To render a scoped slot in the parent component, a slot is passed to the child. Notice how the slot now has a parameter `text`. The slot will be called in the child component and the data from the child component will be passed up to the parent component.
+
+```js
+// parent component
+export default {
+  setup() {
+    return () => h(MyComp, null, {
+      default: ({ text }) => h('p', text)
+    })
+  }
+}
+```
+
+Remember to pass `null` so the slots will not be treated as props.
+
+```js
+// child component
+export default {
+  setup(props, { slots }) {
+    const text = ref('hi')
+    return () => h('div', null, slots.default({ text: text.value }))
+  }
+}
+```
+
+JSX equivalent:
+
+```jsx
+<MyComponent>{{
+  default: ({ text }) => <p>{ text }</p>  
+}}</MyComponent>
+```
+
+  ### المكونات المدمجة {#built-in-components}
 
 يجب استيراد [المكونات المدمجة](/api/built-in-components) مثل `<KeepAlive>`و `<Transition>`و  `<TransitionGroup>`و  ` <Teleport> `  و `<Suspense>` للاستخدام في دوال التصيير:
 
@@ -757,7 +802,7 @@ MyComponent.inheritAttrs = false
 
 ### إضافة النوع إلى المكونات الوظيفية <sup class="vt-badge ts" /> {#typing-functional-components}
 
-المكونات الوظيفية يمكن أن تضاف لها الأنواع بناءً على ما إذا كانت مسماة أو مجهولة الاسم. يدعم Volar أيضًا التحقق من النوع للمكونات الوظيفية المكتوبة بشكل صحيح عند استهلاكها في قوالب SFC.
+Functional Components can be typed based on whether they are named or anonymous. [Vue - Official extension](https://github.com/vuejs/language-tools) also supports type checking properly typed functional components when consuming them in SFC templates.
 
 **المكونات الوظيفية المسماة**
 

@@ -134,7 +134,7 @@ items.forEach((item, index) => {
 
 ## `v-for` مع كائن {#v-for-with-an-object}
 
-يمكنك أيضا استخدام `v-for` للمرور عبر خاصيات الكائن. سيكون ترتيب المرور على أساس نتيجة استدعاء الدالة `()Object.keys` على الكائن :
+يمكنك أيضا استخدام `v-for` للمرور عبر خاصيات الكائن. سيكون ترتيب المرور على أساس نتيجة استدعاء الدالة `()Object.values` على الكائن :
 
 <div class="composition-api">
 
@@ -223,10 +223,6 @@ data() {
 
 ## `v-for` مع  `v-if` {#v-for-with-v-if}
 
-:::warning ملاحظة
-لا يوصى باستخدام `v-if` و `v-for` على نفس العنصر بسبب الأولوية المضمنة لـ`v-if`. اطلع على [دليل الأسلوب](/style-guide/rules-essential#avoid-v-if-with-v-for) للحصول على التفاصيل.
-:::
-
 عندما يتواجدان على نفس العنصر ، فإن `v-if` لها أولوية أعلى من `v-for`. وهذا يعني أن شرط `v-if` لن يكون قادرا على الوصول إلى المتغيرات من نطاق `v-for`:
 
 ```vue-html
@@ -248,6 +244,16 @@ data() {
   </li>
 </template>
 ```
+
+:::warning Note
+It's **not** recommended to use `v-if` and `v-for` on the same element due to implicit precedence.
+
+There are two common cases where this can be tempting:
+
+- To filter items in a list (e.g. `v-for="user in users" v-if="user.isActive"`). In these cases, replace `users` with a new computed property that returns your filtered list (e.g. `activeUsers`).
+
+- To avoid rendering a list if it should be hidden (e.g. `v-for="user in users" v-if="shouldShowUsers"`). In these cases, move the `v-if` to a container element (e.g. `ul`, `ol`).
+:::
 
 ## الحفاظ على الحالة مع `key` {#maintaining-state-with-key}
 
@@ -275,7 +281,7 @@ data() {
 `key` هنا هو سمة خاصة تربط مع `v-bind`.  لا ينبغي الخلط بينها وبين متغير الخاصية المفتاحية عند [استخدام `v-for` مع كائن](#v-for-with-an-object).
 :::
 
-[يُوصى](/style-guide/rules-essential#use-keyed-v-for) بتوفير سمة `key` مع `v-for` في كل الأحوال الممكنة ، ما لم يكن المحتوى DOM المصيَّر بسيطًا (أي يحتوي على عناصر مكونات أو عناصر DOM ذات حالة) ، أو إذا كنت تعتمد على السلوك الافتراضي قصدا لتحسين الأداء.
+يُوصى بتوفير سمة `key` مع `v-for` في كل الأحوال الممكنة ، ما لم يكن المحتوى DOM المصيَّر بسيطًا (أي يحتوي على عناصر مكونات أو عناصر DOM ذات حالة) ، أو إذا كنت تعتمد على السلوك الافتراضي قصدا لتحسين الأداء.
 
 الربط بـ `key` يتوقع قيمًا أولية - أي سلاسل نصية وأرقام. لا تستخدم الكائنات كمفاتيح `v-for`. لمزيد من المعلومات حول سمة `key` ، يرجى الاطلاع على [وثائق واجهة برمجة التطبيقات `key`](/api/built-in-special-attributes#key).
 

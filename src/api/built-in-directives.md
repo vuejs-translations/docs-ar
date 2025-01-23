@@ -257,7 +257,9 @@
 
 تقوم بربط سمة واحدة أو أكثر بشكل ديناميكي، أو خاصية مكون بعبارة.
 
-- **اختصار:** `:` أو `.` (عند استخدام المعدل `.prop` )
+- **Shorthand:**
+  - `:` or `.` (when using `.prop` modifier)
+  - Omitting value (when attribute and bound value has the same name, requires 3.4+)
 
 - **تتوقع قيم من نوع:** `any (with argument) | Object (without argument)`
 
@@ -266,8 +268,8 @@
 - **المعدلات**
 
   - `camel.` - تحويل اسم السمة بتنسيق kebab-case إلى camelCase.
-  - `.prop` - إجبار ربط ليُعين كخاصية DOM. <sup class="vt-badge">3.2+</sup>
-  - `.attr` - إجبار ربط ليُعين كسمة DOM. <sup class="vt-badge">3.2+</sup>
+  - `.prop` - إجبار ربط ليُعين كخاصية DOM (3.2+).
+  - `.attr` - إجبار ربط ليُعين كسمة DOM (3.2+).
 
 - **الاستخدام**
 
@@ -291,7 +293,10 @@
   <!-- اختصار -->
   <img :src="imageSrc" />
 
-  <!-- اسم سمة ديناميكي مختصر -->
+  <!-- same-name shorthand (3.4+), expands to :src="src" -->
+  <img :src />
+
+  <!-- shorthand dynamic attribute name -->
   <button :[key]="value"></button>
 
   <!-- مع التجميع النصي السطري -->
@@ -463,7 +468,9 @@
   - [صيغة ربط البيانات - الاقحامات](/guide/essentials/template-syntax#text-interpolation)
   - [v-memo](#v-memo)
 
-## v-memo <sup class="vt-badge" data-text="3.2+" /> {#v-memo}
+## v-memo {#v-memo}
+
+- Only supported in 3.2+
 
 - **تتوقع قيمة من نوع:** `any[]`
 

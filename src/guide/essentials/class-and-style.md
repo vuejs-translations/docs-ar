@@ -183,7 +183,7 @@ data() {
 لكن قد يكون هذا طويلا نوعا ما إذا كان لديك أصناف شرطية متعددة. لهذا السبب، يمكنك أيضًا استخدام صيغة الكائن داخل صيغة المصفوفة :
 
 ```vue-html
-<div :class="[{ active: isActive }, errorClass]"></div>
+<div :class="[{ [activeClass]: isActive }, errorClass]"></div>
 ```
 
 ### مع المكونات {#with-components}
@@ -290,7 +290,7 @@ data() {
 ```js
 const styleObject = reactive({
   color: 'red',
-  fontSize: '13px'
+  fontSize: '30px'
 })
 ```
 

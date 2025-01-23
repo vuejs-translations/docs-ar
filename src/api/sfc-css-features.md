@@ -153,7 +153,27 @@ useCssModule()
 useCssModule('classes')
 ```
 
-## دالة `v-bind()` في الـCSS {#v-bind-in-css}
+- **Example**
+
+```vue
+<script setup lang="ts">
+import { useCssModule } from 'vue'
+
+const classes = useCssModule()
+</script>
+
+<template>
+  <p :class="classes.red">red</p>
+</template>
+
+<style module>
+.red {
+  color: red;
+}
+</style>
+```
+
+  ## دالة `v-bind()` في الـCSS {#v-bind-in-css}
 
 عناصر `<style>` في المكونات أحادية الملف تدعم ربط قيم الـCSS بحالة المكون الديناميكية باستخدام دالة `v-bind` الـخاصة بالـCSS:
 
@@ -183,9 +203,10 @@ export default {
 
 ```vue
 <script setup>
-const theme = {
-  color: 'red'
-}
+import { ref } from 'vue'
+const theme = ref({
+    color: 'red',
+})
 </script>
 
 <template>

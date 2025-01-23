@@ -11,9 +11,11 @@ pnpm i
 pnpm run dev
 ```
 
-يحتاج هذا المشروع إلى نسخة Node.js `v14.0.0` فما فوق، وذلك لاستخدامه ميزات Javascript الجديدة، مثل التسلسل الإختياري (optional chaining).
+This project requires Node.js to be `v18` or higher. And it is recommended to enable corepack:
 
-تصفح توثيق VitePress حول [إمتدادات ماركداون](https://vitepress.vuejs.org/guide/markdown.html) المدعومة، [وإمكانية استخدام تراكيب Vue داخل ماركداون](https://vitepress.vuejs.org/guide/using-vue.html).
+```bash
+corepack enable
+```
 
 ## دليل المساهمة في الترجمة العربية
 

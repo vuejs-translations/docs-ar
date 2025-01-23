@@ -27,7 +27,7 @@
 إذا كنت تستخدم إعدادًا مخصصًا ، فتأكد من:
 
 1. ينتقل `vue` إلى `vue.runtime.esm-bundler.js`.
-2. تهيئة [أعلام ميزة وقت التصريف](https://github.com/vuejs/core/tree/main/packages/vue#bundler-build-feature-flags) بشكل صحيح.
+2. تهيئة [شارات التصريف](/api/compile-time-flags) بشكل صحيح.
 3. <code>process.env<wbr>.NODE_ENV</code> يستبدل بـ `"production"` أثناء البناء.
 
 مراجع إضافية:
