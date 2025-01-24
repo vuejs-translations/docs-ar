@@ -62,16 +62,6 @@ const props = defineProps<Props>()
 
 #### Syntax Limitations {#syntax-limitations}
 
-```vue
-<script setup lang="ts">
-import type { Props } from './foo'
-
-const props = defineProps<Props>()
-</script>
-```
-
-#### محدوديات الصيغة {#syntax-limitations}
-
 في النسخة 3.2 وأقل، كان الوسيط النوعي لـ `()defineProps` محدودًا بالنوع الحرفي أو مرجع إلى واجهة محلية.
 
 حُل هذا القيد في الإصدار 3.3. تدعم أحدث إصدارات Vue الإشارة إلى الأنواع المستوردة ومجموعة محدودة من الأنواع المعقدة في موضع وسيط النوع. ومع ذلك، لأن تحويل النوع إلى زمن التشغيل لا يزال يعتمد على AST، فإن بعض الأنواع المعقدة التي تتطلب تحليل النوع الفعلي ، على سبيل المثال الأنواع الشرطية، لا تُدعم. يمكنك استخدام الأنواع الشرطية لنوع خاصية واحدة ، ولكن ليس كائن الخاصيات بأكمله.
@@ -417,8 +407,6 @@ onMounted(() => {
 To get the right DOM interface you can check pages like [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#technical_summary).
 
 ## تحديد نوع مراجع القالب للمكون {#typing-component-template-refs}
-
-## Typing Component Template Refs {#typing-component-template-refs}
 
 With Vue 3.5 and `@vue/language-tools` 2.1 (powering both the IDE language service and `vue-tsc`), the type of refs created by `useTemplateRef()` in SFCs can be **automatically inferred** for static refs based on what element or component the matching `ref` attribute is used on.
 

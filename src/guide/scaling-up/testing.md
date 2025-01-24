@@ -280,20 +280,6 @@ describe('increment', () => {
 
 #### الاستظهار في الوضع غير الرسومي {#visibility-in-headless-mode}
 
-عند تشغيل الاختبارات الشاملة في الدورات المستمرة للدمج والتسليم، تشغل في المتصفحات بدون واجهة رسومية (أي، لا يُفتح متصفح مرئي للمستخدم لمشاهدته). وهي ميزة هامة لإطارات الاختبارات الشاملة الحديثة هي القدرة على رؤية لقطات و / أو مقاطع فيديو للتطبيق أثناء الاختبار، مما يوفر بعض الإطلاع على سبب حدوث الأخطاء. تاريخيًا، كان من الصعب الحفاظ على عمليات الدمج هذه.
-
-### التوصية {#recommendation-2}
-
-- [cypress](https://www.cypress.io/)
-
-  إجمالا، نعتقد أن Cypress يوفر أفضل حل للاختبارات الشاملة مع ميزات مثل واجهة رسومية ثرية بالمعلومات، وممتازة في التصحيح، والتأكيدات المدمجة والمحاكيات، والقدرة على التحمل، والتوازي، واللقطات. كما ذكرنا أعلاه، فإنه يوفر أيضًا دعمًا ل[اختبار المكونات](https://docs.cypress.io/guides/component-testing/introduction). ومع ذلك، فإنه يدعم فقط المتصفحات المستندة على Chromium و Firefox.
-
-### خيارات أخرى {#other-options-2}
-
-- [Playwright](https://playwright.dev/)  هو أيضًا حل ممتاز للاختبارات الشاملة مع نطاق أوسع من دعم المتصفحات (بشكل رئيسي WebKit). انظر [لماذا Playwright](https://playwright.dev/docs/why-playwright) لمزيد من التفاصيل.
-
-- [Nightwatch](https://nightwatchjs.org/)  هو حل للاختبارات الشاملة مبني على [Selenium WebDriver](https://www.npmjs.com/package/selenium-webdriver). وهذا يعطيه نطاقًا أوسع في دعم المتصفحات.
-
 When end-to-end (E2E) tests are run in continuous integration/deployment pipelines, they are often run in headless browsers (i.e., no visible browser is opened for the user to watch). A critical feature of modern E2E testing frameworks is the ability to see snapshots and/or videos of the application during testing, providing some insight into why errors are happening. Historically, it was tedious to maintain these integrations.
 
 ### Recommendation {#recommendation-2}

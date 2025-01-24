@@ -154,9 +154,6 @@ import { VTCodeGroup, VTCodeGroupTab } from '@vue/theme'
   </VTCodeGroupTab>
 </VTCodeGroup>
 
-  </VTCodeGroupTab>
-</VTCodeGroup>
-
 بعد تنفيذ هاته الأوامر ستحصل على مشروعك الأول في Vue،  ما ستلاحظه هو أن المكونات المولدة مكتوبة باستخدام [الواجهة التركيبية](/guide/introduction#composition-api) و `<script setup>`، بدلاً من [واجهة الخيارات](/guide/introduction#options-api). إليك بعض الإرشادات الإضافية :
 
 - محرر النصوص الموصى به هو [Visual Studio Code](https://code.visualstudio.com/) + [إضافة Volar ](https://marketplace.visualstudio.com/items?itemName=Vue.volar). أما إذا كنت تستخدم محررات أخرى، فاطلع على [قسم دعم المحررات](/guide/scaling-up/tooling#ide-support).
