@@ -11,7 +11,7 @@
 - **النوع**
 
   ```ts
-  function onMounted(callback: () => void): void
+  function onMounted(callback: () => void, target?: ComponentInternalInstance | null): void
   ```
 
 - **التفاصيل**
@@ -53,7 +53,7 @@
 - **النوع**
 
   ```ts
-  function onUpdated(callback: () => void): void
+  function onUpdated(callback: () => void, target?: ComponentInternalInstance | null): void
   ```
 
 - **التفاصيل**
@@ -96,7 +96,7 @@
 - **النوع**
 
   ```ts
-  function onUnmounted(callback: () => void): void
+  function onUnmounted(callback: () => void, target?: ComponentInternalInstance | null): void
   ```
 
 - **التفاصيل**
@@ -135,7 +135,7 @@
 - **النوع**
 
   ```ts
-  function onBeforeMount(callback: () => void): void
+  function onBeforeMount(callback: () => void, target?: ComponentInternalInstance | null): void
   ```
 
 - **التفاصيل**
@@ -151,7 +151,7 @@
 - **النوع**
 
   ```ts
-  function onBeforeUpdate(callback: () => void): void
+  function onBeforeUpdate(callback: () => void, target?: ComponentInternalInstance | null): void
   ```
 
 - **التفاصيل**
@@ -167,7 +167,7 @@
 - **النوع**
 
   ```ts
-  function onBeforeUnmount(callback: () => void): void
+  function onBeforeUnmount(callback: () => void, target?: ComponentInternalInstance | null): void
   ```
 
 - **التفاصيل**
@@ -282,7 +282,7 @@
 - **النوع**
 
   ```ts
-  function onActivated(callback: () => void): void
+  function onActivated(callback: () => void, target?: ComponentInternalInstance | null): void
   ```
 
 - **اطلع أيضا على** [دليل - دورة حياة النسخة المخزنة](/guide/built-ins/keep-alive#lifecycle-of-cached-instance)
@@ -296,7 +296,7 @@
 - **النوع**
 
   ```ts
-  function onDeactivated(callback: () => void): void
+  function onDeactivated(callback: () => void, target?: ComponentInternalInstance | null): void
   ```
 
 - **اطلع أيضا على** [دليل - دورة حياة النسخة المخزنة](/guide/built-ins/keep-alive#lifecycle-of-cached-instance)
