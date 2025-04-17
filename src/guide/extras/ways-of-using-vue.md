@@ -53,7 +53,7 @@
 
 على الرغم من أن Vue مصممة أساسا لبناء تطبيقات الويب ، إلا أنها ليست محدودة بالمعنى الواضح في المتصفح فقط. يمكنك:
 
-- Build desktop apps with [Electron](https://www.electronjs.org/)
+- Build desktop apps with [Electron](https://www.electronjs.org/) or [Wails](https://wails.io)
 - Build mobile apps with [Ionic Vue](https://ionicframework.com/docs/vue/overview)
 - Build desktop and mobile apps from the same codebase with [Quasar](https://quasar.dev/) or [Tauri](https://tauri.app)
 - Build 3D WebGL experiences with [TresJS](https://tresjs.org/)
