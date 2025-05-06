@@ -68,7 +68,7 @@ Vue تستخدم صيغة القالب المستند على الـHTML التي
 
 - Only supported in 3.4+
 
-If the attribute has the same name with the JavaScript value being bound, the syntax can be further shortened to omit the attribute value:
+If the attribute has the same name as the variable name of the JavaScript value being bound, the syntax can be further shortened to omit the attribute value:
 
 ```vue-html
 <!-- same as :id="id" -->
