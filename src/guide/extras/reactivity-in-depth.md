@@ -402,7 +402,7 @@ export function useMachine(options) {
 
 لقد قامت العديد من الإطارات الأخرى بتقديم أوليات تفاعلية مماثلة للمراجع من الواجهة التركيبية في Vue، تحت مصطلح "الإشارات":
 
-- [Solid Signals](https://www.solidjs.com/docs/latest/api#createsignal)
+- [Solid Signals](https://docs.solidjs.com/concepts/signals)
 - [Angular Signals](https://angular.dev/guide/signals)
 - [Preact Signals](https://preactjs.com/guide/v10/signals/)
 - [Qwik Signals](https://qwik.builder.io/docs/components/state/#usesignal)
