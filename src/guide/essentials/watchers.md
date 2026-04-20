@@ -217,11 +217,12 @@ watch(
 
 </div>
 
-In Vue 3.5+, the `deep` option can also be a number indicating the max traversal depth - i.e. how many levels should Vue traverse an object's nested properties.
+في Vue 3.5 وما فوق، يمكن أن يكون خيار `deep` أيضًا رقمًا يحدد أقصى عمق للتفحص (max traversal depth) — أي عدد المستويات التي يجب أن يجتازها Vue داخل خصائص الكائن المتداخلة.
 
-:::warning Use with Caution
-Deep watch requires traversing all nested properties in the watched object, and can be expensive when used on large data structures. Use it only when necessary and beware of the performance implications.
+:::warning تحذير
+المراقبة العميقة (deep watch) تتطلب المرور على جميع الخصائص المتداخلة داخل الكائن المُراقَب، وقد تكون مكلفة من ناحية الأداء عند استخدامها مع هياكل بيانات كبيرة. استخدمها فقط عند الضرورة وكن على دراية بتأثيرها على الأداء.
 :::
+
 
 ## الدوال المُراقِبة الفورية {#eager-watchers}
 
@@ -263,11 +264,13 @@ watch(source, (newValue, oldValue) => {
 
 </div>
 
-## Once Watchers {#once-watchers}
+## المراقبة لمرة واحدة {#once-watchers}
 
-- Only supported in 3.4+
+- مدعومة فقط في الإصدار 3.4 وما فوق
 
-Watcher's callback will execute whenever the watched source changes. If you want the callback to trigger only once when the source changes, use the `once: true` option.
+يتم تنفيذ دالة الـ callback الخاصة بالـ watcher كلما تغيّر المصدر المُراقَب.  
+إذا كنت تريد تشغيل الـ callback مرة واحدة فقط عند أول تغيير في المصدر، استخدم الخيار `once: true`.
+
 
 <div class="options-api">
 
@@ -355,9 +358,10 @@ watchEffect(async () => {
 
 </div>
 
-## Side Effect Cleanup {#side-effect-cleanup}
+## تنظيف التأثيرات الجانبية {#side-effect-cleanup}
 
-Sometimes we may perform side effects, e.g. asynchronous requests, in a watcher:
+في بعض الأحيان قد نقوم بتنفيذ تأثيرات جانبية (side effects)، مثل الطلبات غير المتزامنة (asynchronous requests)، داخل الـ watcher:
+
 
 <div class="composition-api">
 
@@ -386,9 +390,11 @@ export default {
 
 </div>
 
-But what if `id` changes before the request completes? When the previous request completes, it will still fire the callback with an ID value that is already stale. Ideally, we want to be able to cancel the stale request when `id` changes to a new value.
+لكن ماذا لو تغيّر `id` قبل اكتمال الطلب؟ عند انتهاء الطلب السابق، سيقوم بتشغيل الـ callback باستخدام قيمة `id` أصبحت قديمة بالفعل (stale).  
+في الحالة المثالية، نريد إلغاء الطلب القديم عندما يتغير `id` إلى قيمة جديدة.
 
-We can use the [`onWatcherCleanup()`](/api/reactivity-core#onwatchercleanup) <sup class="vt-badge" data-text="3.5+" /> API to register a cleanup function that will be called when the watcher is invalidated and is about to re-run:
+يمكننا استخدام واجهة [`onWatcherCleanup()`](/api/reactivity-core#onwatchercleanup) <sup class="vt-badge" data-text="3.5+" /> لتسجيل دالة تنظيف (cleanup function)، والتي سيتم استدعاؤها عندما يتم إبطال الـ watcher وقبل إعادة تشغيله:
+
 
 <div class="composition-api">
 
