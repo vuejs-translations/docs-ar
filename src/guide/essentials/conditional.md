@@ -70,11 +70,14 @@ const awesome = ref(true)
 </div>
 ```
 
-Similar to `v-else`, a `v-else-if` element must immediately follow a `v-if` or a `v-else-if` element.
+مشابهة لـ `v-else`، يجب أن يأتي عنصر `v-else-if` مباشرة بعد عنصر `v-if` أو عنصر `v-else-if`.
 
 ## `v-if` على `<template>` {#v-if-on-template}
 
-Because `v-if` is a directive, it has to be attached to a single element. But what if we want to toggle more than one element? In this case we can use `v-if` on a `<template>` element, which serves as an invisible wrapper. The final rendered result will not include the `<template>` element.
+بما أن `v-if` عبارة عن توجيه (directive)، فيجب ربطه بعنصر واحد فقط. ولكن ماذا لو أردنا إظهار أو إخفاء أكثر من عنصر؟
+
+في هذه الحالة يمكننا استخدام `v-if` على عنصر `<template>`، والذي يعمل كغلاف غير مرئي (invisible wrapper). النتيجة النهائية التي يتم عرضها لن تتضمن عنصر `<template>`.
+
 
 ```vue-html
 <template v-if="ok">
@@ -110,8 +113,9 @@ Because `v-if` is a directive, it has to be attached to a single element. But wh
 
 ## `v-if` مع `v-for` {#v-if-with-v-for}
 
-When `v-if` and `v-for` are both used on the same element, `v-if` will be evaluated first. See the [list rendering guide](list#v-for-with-v-if) for details.
+عندما يتم استخدام `v-if` و `v-for` على نفس العنصر، سيتم تقييم `v-if` أولًا. راجع [دليل عرض القوائم](list#v-for-with-v-if) لمزيد من التفاصيل.
 
-::: warning Note
-It's **not** recommended to use `v-if` and `v-for` on the same element due to implicit precedence. Refer to [list rendering guide](list#v-for-with-v-if) for details.
+::: warning ملاحظة
+لا يُنصح باستخدام `v-if` و `v-for` على نفس العنصر بسبب أولوية التنفيذ غير المباشرة. راجع [دليل عرض القوائم](list#v-for-with-v-if) لمزيد من التفاصيل.
 :::
+
