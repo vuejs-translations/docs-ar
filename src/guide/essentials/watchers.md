@@ -100,7 +100,7 @@ watch(question, async (newQuestion) => {
 
 ### أنواع مصادر الدالة المُراقبة {#watch-source-types}
 
-`watch`'s first argument can be different types of reactive "sources": it can be a ref (including computed refs), a reactive object, a [getter function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/get#description), or an array of multiple sources:
+يمكن أن تكون الوسيطة الأولى في `watch` أنواعًا مختلفة من "المصادر" التفاعلية (reactive sources): يمكن أن تكون `ref` (بما في ذلك المراجع المحسوبة)، أو كائن تفاعلي (reactive object)، أو [دالة getter](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/get#description)، أو مصفوفة تحتوي على عدة مصادر.
 
 ```js
 const x = ref(0)
@@ -190,7 +190,8 @@ watch(obj, (newValue, oldValue) => {
 obj.count++
 ```
 
-This should be differentiated with a getter that returns a reactive object - in the latter case, the callback will only fire if the getter returns a different object:
+يجب التمييز بين هذا وبين دالة getter التي تُرجع كائنًا تفاعليًا (reactive object) — في هذه الحالة الأخيرة، لن يتم تشغيل الـ callback إلا إذا أعادت دالة الـ getter كائنًا مختلفًا.
+
 
 ```js
 watch(
