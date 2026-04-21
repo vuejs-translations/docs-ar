@@ -116,7 +116,9 @@ data() {
 
 </div>
 
-A method handler automatically receives the native DOM Event object that triggers it - in the example above, we are able to access the element dispatching the event via `event.target`.
+دالة المعالجة (method handler) تستقبل تلقائيًا كائن حدث الـ DOM الأصلي (native DOM Event) الذي يقوم بتشغيلها.  
+في المثال أعلاه، يمكننا الوصول إلى العنصر الذي أطلق الحدث من خلال `event.target`.
+
 
 <div class="composition-api">
 

@@ -128,7 +128,13 @@ const publishedBooksMessage = computed(() => {
 
 [اختبرها في حقل التجارب](https://play.vuejs.org/#eNp9Us1q20AQfpVhL3LAlkrbk3BUEgqFQm6ll24Pa2lsKbV2l52VSxA6NU0eI8eE3AK55E2kt8msrSSQv9vO3zff98224sDaeNOgSMWccldZD4S+sZnUVW2N89CCQ5X7aoNTyE1tG48FdLB0poaIJyOppc6NJg+q8aVxsP84MWmlBtCqxhSi76bU8NVgNA3JhTF/KIVf4Q0Q/WwQPsIMDoqN0jlv+NZUxdg6lj9x+VBRlb9S+8y1HyXC0Ql5dCfMCeC31N1eIJckoJ6oO1w+8LXNYl1RicVhIHOERGqFTP+hdzLZg/0MtiIcu+L0KDHeso/XqFe+hAw+wBeIhrP+bvgfAUsdTvtL5hDWz5OdrWwoBx5ru1YeOQKY22w4H06BB2/7Gxj+9df9VX/ZX8yT4D83kFU6a9s3iHYdg4eOsOURWUzF7nKzWtn4mIzm224lyLFAUqQ7USHHJwyxFKX3ltIkoWUefsQxxcatEn7FrtG+qjFGqmcLZ/4SOgaWYrzAFiPh5AbdzKEu0KF7D/NZ6wvcANuxfaK7B/XE7oo=)
 
-Here we have declared a computed property `publishedBooksMessage`. The `computed()` function expects to be passed a [getter function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/get#description), and the returned value is a **computed ref**. Similar to normal refs, you can access the computed result as `publishedBooksMessage.value`. Computed refs are also auto-unwrapped in templates so you can reference them without `.value` in template expressions.
+لقد قمنا هنا بتعريف خاصية محسوبة باسم `publishedBooksMessage`.  
+دالة `computed()` تتوقع تمرير [دالة getter](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/get#description) إليها، والقيمة المُعادة تكون **مرجعًا محسوبًا (computed ref)**.
+
+وبشكل مشابه للمراجع العادية (refs)، يمكنك الوصول إلى النتيجة باستخدام `publishedBooksMessage.value`.
+
+كما يتم فك التفاف (auto-unwrapped) المراجع المحسوبة تلقائيًا داخل القوالب (templates)، لذلك يمكنك استخدامها مباشرة بدون الحاجة إلى `.value` داخل تعبيرات القالب.
+
 
 خاصية محسوبة  تتبع تلقائيًا إعتمادياتها التفاعلية. يعرف Vue أن حساب `publishedBooksMessage` يعتمد على `author.books`، لذلك سيقوم بتحديث أي ربط يعتمد على `publishedBooksMessage` عند تغيير `author.books`.
 
@@ -257,19 +263,19 @@ const fullName = computed({
 
 </div>
 
-## Getting the Previous Value {#previous}
+## الحصول على القيمة السابقة {#previous}
 
-- Only supported in 3.4+
+- مدعومة فقط في الإصدار 3.4 وما فوق
+
 
 <p class="options-api">
-In case you need it, you can get the previous value returned by the computed property accessing
-the second argument of the getter:
+في حال احتجت إلى ذلك، يمكنك الحصول على القيمة السابقة التي أرجعتها الخاصية المحسوبة من خلال الوصول إلى الوسيط الثاني في دالة الـ getter:
 </p>
 
 <p class="composition-api">
-In case you need it, you can get the previous value returned by the computed property accessing
-the first argument of the getter:
+في حال احتجت إلى ذلك، يمكنك الحصول على القيمة السابقة التي أرجعتها الخاصية المحسوبة من خلال الوصول إلى الوسيط الأول في دالة الـ getter:
 </p>
+
 
 <div class="options-api">
 
@@ -282,7 +288,7 @@ export default {
   },
   computed: {
     // This computed will return the value of count when it's less or equal to 3.
-    // When count is >=4, the last value that fulfilled our condition will be returned
+    // عندما يكون count >= 4، يُرجع آخر قيمة حققت الشرط
     // instead until count is less or equal to 3
     alwaysSmall(_, previous) {
       if (this.count <= 3) {
@@ -305,7 +311,7 @@ import { ref, computed } from 'vue'
 const count = ref(2)
 
 // This computed will return the value of count when it's less or equal to 3.
-// When count is >=4, the last value that fulfilled our condition will be returned
+// عندما يكون count >= 4، يُرجع آخر قيمة حققت الشرط
 // instead until count is less or equal to 3
 const alwaysSmall = computed((previous) => {
   if (count.value <= 3) {
@@ -318,7 +324,8 @@ const alwaysSmall = computed((previous) => {
 ```
 </div>
 
-In case you're using a writable computed:
+في حال كنت تستخدم خاصية محسوبة قابلة للكتابة (writable computed):
+
 
 <div class="options-api">
 
@@ -377,7 +384,13 @@ const alwaysSmall = computed({
 
 ### يجب أن تكون الدوال المحصلة خالية من التأثيرات الجانبية {#getters-should-be-side-effect-free}
 
-It is important to remember that computed getter functions should only perform pure computation and be free of side effects. For example, **don't mutate other state, make async requests, or mutate the DOM inside a computed getter!** Think of a computed property as declaratively describing how to derive a value based on other values - its only responsibility should be computing and returning that value. Later in the guide we will discuss how we can perform side effects in reaction to state changes with [watchers](./watchers).
+من المهم تذكّر أن دوال الـ computed getter يجب أن تقوم فقط بحسابات نقية (pure computation) وأن تكون خالية من أي تأثيرات جانبية (side effects).  
+على سبيل المثال، **لا تقم بتعديل حالة أخرى (state)، أو تنفيذ طلبات غير متزامنة (async)، أو التلاعب بالـ DOM داخل computed getter!**
+
+فكّر في الخاصية المحسوبة على أنها طريقة وصفية (declarative) لاشتقاق قيمة اعتمادًا على قيم أخرى — ومسؤوليتها الوحيدة هي حساب تلك القيمة وإرجاعها.
+
+لاحقًا في هذا الدليل، سنناقش كيف يمكن تنفيذ التأثيرات الجانبية استجابةً لتغيّرات الحالة باستخدام [watchers](./watchers).
+
 
 ### تجنب تعيين القيمة المحسوبة {#avoid-mutating-computed-value}
 
