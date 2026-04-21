@@ -144,7 +144,7 @@ watch(obj.count, (count) => {
 watch(
   () => obj.count,
   (count) => {
-    console.log(`Count is: ${count}`)
+    console.log(`العداد: ${count}`)
   }
 )
 ```
@@ -279,7 +279,7 @@ export default {
   watch: {
     source: {
       handler(newValue, oldValue) {
-        // when `source` changes, triggers only once
+        // عند تغيّر `source`، يُشغَّل مرة واحدة فقط
       },
       once: true
     }
@@ -295,7 +295,7 @@ export default {
 watch(
   source,
   (newValue, oldValue) => {
-    // when `source` changes, triggers only once
+    // عند تغيّر `source`، يُشغَّل مرة واحدة فقط
   },
   { once: true }
 )
@@ -342,7 +342,7 @@ watchEffect(async () => {
 
 يمكنك التحقق من [هذا المثال](/examples/#fetching-data) لـ `()watchEffect` و كيفية تحميل البيانات التفاعلية داخل دالتها المعالجة.
 
-بالنسبة للأمثلة مثل هذه، مع اعتمادية واحدة فقط، فإن فائدة `()watchEffect` غير ملموسة نسبيا. ولكن hلدوال المُراقِبة التي لديها عدة اعتماديات، فإن استخدام `()watchEffect` يزيل قائمة الاعتماديات المضافة يدويًا. بالإضافة إلى ذلك، إذا كنت بحاجة إلى مراقبة عدة خاصيات في سلسلة بيانات متداخلة، فقد تثبت الدالة `()watchEffect`  فعاليتها مقارنة بالدالة المُراقِبة العميقة، حيث سيتم تتبع الخاصيات المستخدمة فقط في الدالة المعالجة، بدلاً من تتبعها جميعا بشكل تكراري .
+بالنسبة للأمثلة مثل هذه، مع اعتمادية واحدة فقط، فإن فائدة `()watchEffect` غير ملموسة نسبيا. ولكن للدوال المُراقِبة التي لديها عدة اعتماديات، فإن استخدام `()watchEffect` يزيل قائمة الاعتماديات المضافة يدويًا. بالإضافة إلى ذلك، إذا كنت بحاجة إلى مراقبة عدة خاصيات في سلسلة بيانات متداخلة، فقد تثبت الدالة `()watchEffect`  فعاليتها مقارنة بالدالة المُراقِبة العميقة، حيث سيتم تتبع الخاصيات المستخدمة فقط في الدالة المعالجة، بدلاً من تتبعها جميعا بشكل تكراري .
 
 :::tip ملاحظة
 `()watchEffect` يتتبع الاعتماديات فقط خلال تنفيذها **المتزامن**. عند استخدامه مع دالة مُعالِجة غير متزامنة، وحدها الخاصيات التي يتم الوصول إليها قبل النبضة الأولى لـ`await` ستُتبَّع .
@@ -368,7 +368,7 @@ watchEffect(async () => {
 ```js
 watch(id, (newId) => {
   fetch(`/api/${newId}`).then(() => {
-    // callback logic
+    // منطق الـ callback
   })
 })
 ```
@@ -381,7 +381,7 @@ export default {
   watch: {
     id(newId) {
       fetch(`/api/${newId}`).then(() => {
-        // callback logic
+        // منطق الـ callback
       })
     }
   }
@@ -405,11 +405,11 @@ watch(id, (newId) => {
   const controller = new AbortController()
 
   fetch(`/api/${newId}`, { signal: controller.signal }).then(() => {
-    // callback logic
+    // منطق الـ callback
   })
 
   onWatcherCleanup(() => {
-    // abort stale request
+    // إلغاء الطلب القديم
     controller.abort()
   })
 })
@@ -427,11 +427,11 @@ export default {
       const controller = new AbortController()
 
       fetch(`/api/${newId}`, { signal: controller.signal }).then(() => {
-        // callback logic
+        // منطق الـ callback
       })
 
       onWatcherCleanup(() => {
-        // abort stale request
+        // إلغاء الطلب القديم
         controller.abort()
       })
     }
@@ -441,9 +441,9 @@ export default {
 
 </div>
 
-Note that `onWatcherCleanup` is only supported in Vue 3.5+ and must be called during the synchronous execution of a `watchEffect` effect function or `watch` callback function: you cannot call it after an `await` statement in an async function.
+لاحظ أن `onWatcherCleanup` مدعومة فقط في Vue 3.5+ ويجب استدعاؤها أثناء التنفيذ المتزامن (synchronous execution) لدالة تأثير `watchEffect` أو دالة الـ callback في `watch`: لا يمكنك استدعاؤها بعد جملة `await` في دالة غير متزامنة (async).
 
-Alternatively, an `onCleanup` function is also passed to watcher callbacks as the 3rd argument<span class="composition-api">, and to the `watchEffect` effect function as the first argument</span>:
+بدلاً من ذلك، تُمرَّر أيضًا دالة `onCleanup` إلى دوال الـ callback للمراقب كالوسيط الثالث<span class="composition-api">، وإلى دالة تأثير `watchEffect` كأول وسيط</span>:
 
 <div class="composition-api">
 
@@ -451,14 +451,14 @@ Alternatively, an `onCleanup` function is also passed to watcher callbacks as th
 watch(id, (newId, oldId, onCleanup) => {
   // ...
   onCleanup(() => {
-    // cleanup logic
+    // منطق التنظيف
   })
 })
 
 watchEffect((onCleanup) => {
   // ...
   onCleanup(() => {
-    // cleanup logic
+    // منطق التنظيف
   })
 })
 ```
@@ -472,7 +472,7 @@ export default {
     id(newId, oldId, onCleanup) {
       // ...
       onCleanup(() => {
-        // cleanup logic
+        // منطق التنظيف
       })
     }
   }
@@ -481,19 +481,19 @@ export default {
 
 </div>
 
-This works in versions before 3.5. In addition, `onCleanup` passed via function argument is bound to the watcher instance so it is not subject to the synchronously constraint of `onWatcherCleanup`.
+يعمل هذا في الإصدارات السابقة لـ 3.5. بالإضافة إلى ذلك، الـ `onCleanup` الممرَّرة عبر وسيط الدالة مرتبطة بنسخة المراقب (watcher) وليست خاضعة لقيد التزامن (synchronous constraint) الخاص بـ `onWatcherCleanup`.
 
 ## توقيت تنفيذ الدالة المعالجة {#callback-flush-timing}
 
 لما تُعدل حالة تفاعلية، فإنها قد تُشغل كل من تحديثات مكونات Vue والدوال المراقِبة المُنشأة من قبلك.
 
-Similar to component updates, user-created watcher callbacks are batched to avoid duplicate invocations. For example, we probably don't want a watcher to fire a thousand times if we synchronously push a thousand items into an array being watched.
+بمثل تحديثات المكون، تُجمَّع دوال الـ callback للمراقبين التي أنشأها المستخدم لتجنب استدعاءات مكررة. على سبيل المثال، قد لا نريد أن يُنفَّذ المراقب ألف مرة إذا دفعنا ألف عنصر بشكل متزامن إلى مصفوفة يتم مراقبتها.
 
-By default, a watcher's callback is called **after** parent component updates (if any), and **before** the owner component's DOM updates. This means if you attempt to access the owner component's own DOM inside a watcher callback, the DOM will be in a pre-update state.
+افتراضيًا، تُستدعى دالة الـ callback للمراقب **بعد** تحديثات المكون الأب (إن وُجدت)، و**قبل** تحديثات DOM للمكون المالك. هذا يعني أنه إذا حاولت الوصول إلى DOM المكون المالك نفسه داخل callback المراقب، فسيكون الـ DOM في حالة ما قبل التحديث (pre-update state).
 
-### Post Watchers {#post-watchers}
+### مراقبون بعد التحديث (post watchers) {#post-watchers}
 
-If you want to access the owner component's DOM in a watcher callback **after** Vue has updated it, you need to specify the `flush: 'post'` option:
+إذا أردت الوصول إلى DOM المكون المالك داخل callback المراقب **بعد** أن تُحدِّثه Vue، فستحتاج إلى تحديد الخيار `flush: 'post'`:
 
 <div class="options-api">
 
@@ -535,9 +535,9 @@ watchPostEffect(() => {
 
 </div>
 
-### Sync Watchers {#sync-watchers}
+### مراقبون متزامنون (sync watchers) {#sync-watchers}
 
-It's also possible to create a watcher that fires synchronously, before any Vue-managed updates:
+من الممكن أيضًا إنشاء مراقب يُنفَّذ بشكل متزامن، قبل أي تحديثات تديرها Vue:
 
 <div class="options-api">
 
@@ -567,20 +567,20 @@ watchEffect(callback, {
 })
 ```
 
-Sync `watchEffect()` also has a convenience alias, `watchSyncEffect()`:
+لدى استدعاء `watchEffect()` المتزامن أيضًا اسم بديل مريح، وهو `watchSyncEffect()`:
 
 ```js
 import { watchSyncEffect } from 'vue'
 
 watchSyncEffect(() => {
-  /* executed synchronously upon reactive data change */
+  /* يُنفَّذ بشكل متزامن عند تغيّر البيانات التفاعلية */
 })
 ```
 
 </div>
 
-:::warning Use with Caution
-Sync watchers do not have batching and triggers every time a reactive mutation is detected. It's ok to use them to watch simple boolean values, but avoid using them on data sources that might be synchronously mutated many times, e.g. arrays.
+:::warning استخدم بحذر
+لا تمتلك المراقبات المتزامنة (sync watchers) تجميعًا (batching) وتُطلَق في كل مرة يُكتشف فيها تحوّر تفاعلي (reactive mutation). يمكن استخدامها لمراقبة قيم منطقية بسيطة، لكن تجنب استخدامها على مصادر بيانات قد تُعدَّل بشكل متزامن عدة مرات، مثل المصفوفات.
 :::
 
 <div class="options-api">

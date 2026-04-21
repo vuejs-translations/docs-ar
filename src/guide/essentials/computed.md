@@ -288,7 +288,7 @@ export default {
   },
   computed: {
     // This computed will return the value of count when it's less or equal to 3.
-    // When count is >=4, the last value that fulfilled our condition will be returned
+    // عندما يكون count >= 4، يُرجع آخر قيمة حققت الشرط
     // instead until count is less or equal to 3
     alwaysSmall(_, previous) {
       if (this.count <= 3) {
@@ -311,7 +311,7 @@ import { ref, computed } from 'vue'
 const count = ref(2)
 
 // This computed will return the value of count when it's less or equal to 3.
-// When count is >=4, the last value that fulfilled our condition will be returned
+// عندما يكون count >= 4، يُرجع آخر قيمة حققت الشرط
 // instead until count is less or equal to 3
 const alwaysSmall = computed((previous) => {
   if (count.value <= 3) {
