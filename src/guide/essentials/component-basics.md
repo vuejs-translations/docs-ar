@@ -6,7 +6,7 @@
 
 <!-- https://www.figma.com/file/qa7WHDQRWuEZNRs7iZRZSI/components -->
 
-This is very similar to how we nest native HTML elements, but Vue implements its own component model that allows us to encapsulate custom content and logic in each component. Vue also plays nicely with native Web Components. If you are curious about the relationship between Vue Components and native Web Components, [read more here](/guide/extras/web-components).
+هذا قريب جدًا من طريقة تداخل عناصر HTML الأصلية، لكن Vue تطبّق نموذج مكونات خاصًا يسمح بتغليف المحتوى والمنطق المخصص في كل مكون. كما تتعامل Vue بسلاسة مع مكونات الويب الأصلية (native Web Components). إذا رغبت في معرفة العلاقة بين مكونات Vue ومكونات الويب الأصلية، [اقرأ المزيد هنا](/guide/extras/web-components).
 
 
 

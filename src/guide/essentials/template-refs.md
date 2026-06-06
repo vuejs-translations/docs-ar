@@ -6,20 +6,19 @@
 <input ref="input">
 ```
 
-`ref` هو سمة خاصة، مماثلة لسمة `key` التي تم مناقشتها في محور `v-for`. يسمح لنا بالحصول على مرجع مباشر لعنصر DOM محدد أو نسخة مكون ابن بعد وصله. قد يكون هذا مفيدًا عندما تريد، على سبيل المثال، التركيز برمجيًا على عنصر إدخال  على مكون موصول بالـDOM أو تهيئة مكتبة طرف ثالث على عنصر معين.
-`ref` هو سمة خاصة، مماثلة لسمة `key` التي تم مناقشتها في محور `v-for`. يسمح لنا بالحصول على مرجع مباشر لعنصر DOM محدد أو نسخة مكون ابن بعد وصله. قد يكون هذا مفيدًا عندما تريد، على سبيل المثال، التركيز برمجيًا على عنصر إدخال  على مكون موصول بالـDOM أو تهيئة مكتبة طرف ثالث على عنصر معين.
+`ref` هو سمة خاصة، مماثلة لسمة `key` التي تم مناقشتها في محور `v-for`. يسمح لنا بالحصول على مرجع مباشر لعنصر DOM محدد أو نسخة مكون ابن بعد وصله. قد يكون هذا مفيدًا عندما تريد، على سبيل المثال، التركيز برمجيًا على عنصر إدخال على مكون موصول بالـ DOM أو تهيئة مكتبة طرف ثالث على عنصر معين.
 
 ## الوصول إلى المراجع {#accessing-the-refs}
 
 <div class="composition-api">
 
-To obtain the reference with Composition API, we can use the [`useTemplateRef()`](/api/composition-api-helpers#usetemplateref) <sup class="vt-badge" data-text="3.5+" /> helper:
+للحصول على المرجع باستخدام الواجهة التركيبية (Composition API)، يمكننا استخدام الدالة المساعدة [`useTemplateRef()`](/api/composition-api-helpers#usetemplateref) <sup class="vt-badge" data-text="3.5+" />:
 
 ```vue
 <script setup>
 import { useTemplateRef, onMounted } from 'vue'
 
-// the first argument must match the ref value in the template
+// يجب أن يطابق الوسيط الأول قيمة `ref` في القالب
 const input = useTemplateRef('my-input')
 
 onMounted(() => {
@@ -32,12 +31,12 @@ onMounted(() => {
 </template>
 ```
 
-When using TypeScript, Vue's IDE support and `vue-tsc` will automatically infer the type of `input.value` based on what element or component the matching `ref` attribute is used on.
+عند استخدام TypeScript، يستنتج دعم Vue في المحرّر و`vue-tsc` تلقائيًا نوع `input.value` حسب العنصر أو المكون الذي تُستخدم عليه سمة `ref` المطابقة.
 
 <details>
-<summary>Usage before 3.5</summary>
+<summary>الاستخدام قبل الإصدار 3.5</summary>
 
-In versions before 3.5 where `useTemplateRef()` was not introduced, we need to declare a ref with a name that matches the template ref attribute's value:
+في الإصدارات السابقة لـ 3.5 حيث لم تُعرَف `useTemplateRef()` بعد، نحتاج إلى التصريح بمرجع (`ref`) اسمه يطابق قيمة سمة مرجع القالب في القالب:
 
 ```vue
 <script setup>
@@ -93,7 +92,7 @@ export default {
 
 </div>
 
-Note that you can only access the ref **after the component is mounted.** If you try to access <span class="options-api">`$refs.input`</span><span class="composition-api">`input`</span> in a template expression, it will be <span class="options-api">`undefined`</span><span class="composition-api">`null`</span> on the first render. This is because the element doesn't exist until after the first render!
+لاحظ أنه يمكنك الوصول إلى المرجع فقط **بعد وصل المكون (mount).** إذا حاولت الوصول إلى <span class="options-api">`$refs.input`</span><span class="composition-api">`input`</span> في تعبير القالب، ستكون القيمة <span class="options-api">`undefined`</span><span class="composition-api">`null`</span> في التصيير الأول. ذلك لأن العنصر لا يوجد حتى بعد التصيير الأول!
 
 <div class="composition-api">
 
@@ -115,7 +114,7 @@ watchEffect(() => {
 
 ## المراجع داخل حلقات `v-for` {#refs-inside-v-for}
 
-> Requires v3.5 or above
+> يتطلب الإصدار 3.5 أو أحدث
 
 <div class="composition-api">
 
@@ -143,12 +142,12 @@ onMounted(() => console.log(itemRefs.value))
 </template>
 ```
 
-[Try it in the Playground](https://play.vuejs.org/#eNp9UsluwjAQ/ZWRLwQpDepyQoDUIg6t1EWUW91DFAZq6tiWF4oU5d87dtgqVRyyzLw3b+aN3bB7Y4ptQDZkI1dZYTw49MFMuBK10dZDAxZXOQSHC6yNLD3OY6zVsw7K4xJaWFldQ49UelxxVWnlPEhBr3GszT6uc7jJ4fazf4KFx5p0HFH+Kme9CLle4h6bZFkfxhNouAIoJVqfHQSKbSkDFnVpMhEpovC481NNVcr3SaWlZzTovJErCqgydaMIYBRk+tKfFLC9Wmk75iyqg1DJBWfRxT7pONvTAZom2YC23QsMpOg0B0l0NDh2YjnzjpyvxLrYOK1o3ckLZ5WujSBHr8YL2gxnw85lxEop9c9TynkbMD/kqy+svv/Jb9wu5jh7s+jQbpGzI+ZLu0byEuHZ+wvt6Ays9TJIYl8A5+i0DHHGjvYQ1JLGPuOlaR/TpRFqvXCzHR2BO5iKg0Zmm/ic0W2ZXrB+Gve2uEt1dJKs/QXbwePE)
+[اختبرها في حقل التجارب](https://play.vuejs.org/#eNp9UsluwjAQ/ZWRLwQpDepyQoDUIg6t1EWUW91DFAZq6tiWF4oU5d87dtgqVRyyzLw3b+aN3bB7Y4ptQDZkI1dZYTw49MFMuBK10dZDAxZXOQSHC6yNLD3OY6zVsw7K4xJaWFldQ49UelxxVWnlPEhBr3GszT6uc7jJ4fazf4KFx5p0HFH+Kme9CLle4h6bZFkfxhNouAIoJVqfHQSKbSkDFnVpMhEpovC481NNVcr3SaWlZzTovJErCqgydaMIYBRk+tKfFLC9Wmk75iyqg1DJBWfRxT7pONvTAZom2YC23QsMpOg0B0l0NDh2YjnzjpyvxLrYOK1o3ckLZ5WujSBHr8YL2gxnw85lxEop9c9TynkbMD/kqy+svv/Jb9wu5jh7s+jQbpGzI+ZLu0byEuHZ+wvt6Ays9TJIYl8A5+i0DHHGjvYQ1JLGPuOlaR/TpRFqvXCzHR2BO5iKg0Zmm/ic0W2ZXrB+Gve2uEt1dJKs/QXbwePE)
 
 <details>
-<summary>Usage before 3.5</summary>
+<summary>الاستخدام قبل الإصدار 3.5</summary>
 
-In versions before 3.5 where `useTemplateRef()` was not introduced, we need to declare a ref with a name that matches the template ref attribute's value. The ref should also contain an array value:
+في الإصدارات السابقة لـ 3.5 حيث لم تُعرَف `useTemplateRef()` بعد، نحتاج إلى التصريح بمرجع (`ref`) اسمه يطابق قيمة سمة مرجع القالب في القالب. يجب أن يحمل المرجع أيضًا قيمة مصفوفة:
 
 ```vue
 <script setup>
@@ -236,7 +235,7 @@ import Child from './Child.vue'
 const childRef = useTemplateRef('child')
 
 onMounted(() => {
-  // childRef.value will hold an instance of <Child />
+  // childRef.value سيحتوي على نسخة من <Child />
 })
 </script>
 
@@ -246,7 +245,7 @@ onMounted(() => {
 ```
 
 <details>
-<summary>Usage before 3.5</summary>
+<summary>الاستخدام قبل الإصدار 3.5</summary>
 
 ```vue
 <script setup>
@@ -314,9 +313,9 @@ defineExpose({
 
 عندما يحصل المكون الأب على نسخة من هذا المكون عبر مراجع القالب، سيكون المكون المسترجع على الشكل `{ a: number, b: number }` (المراجع تُفك تلقائياً مثل المكونات العادية).
 
-Note that defineExpose must be called before any await operation. Otherwise, properties and methods exposed after the await operation will not be accessible. 
+تنبّه إلى أنه يجب استدعاء `defineExpose` قبل أي عملية `await`. وإلا فلن يمكن الوصول إلى الخصائص والدوال المعرّفة بعد عملية الـ `await`.
 
-See also: [Typing Component Template Refs](/guide/typescript/composition-api#typing-component-template-refs) <sup class="vt-badge ts" />
+اطلع أيضًا على: [إضافة الأنواع لمراجع مكونات القالب](/guide/typescript/composition-api#typing-component-template-refs) <sup class="vt-badge ts" />
 
 </div>
 <div class="options-api">

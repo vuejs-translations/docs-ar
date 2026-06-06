@@ -64,21 +64,21 @@ Vue تستخدم صيغة القالب المستند على الـHTML التي
 
 > فيما يلي من الدليل، سنستخدم الصيغة المختصرة في أمثلة الشيفرة، لأنها هي الأكثر استخدامًا من طرف مطوري Vue.
 
-### Same-name Shorthand {#same-name-shorthand}
+### اختصار الاسم المطابق (same-name shorthand) {#same-name-shorthand}
 
-- Only supported in 3.4+
+- مدعوم فقط في الإصدار 3.4 وما فوق
 
-If the attribute has the same name as the variable name of the JavaScript value being bound, the syntax can be further shortened to omit the attribute value:
+إذا كانت السمة تحمل نفس اسم المتغير في JavaScript للقيمة المربوطة، يمكن اختصار الصياغة أكثر بحذف قيمة السمة:
 
 ```vue-html
-<!-- same as :id="id" -->
+<!-- نفس :id="id" -->
 <div :id></div>
 
-<!-- this also works -->
+<!-- هذا يعمل أيضًا -->
 <div v-bind:id></div>
 ```
 
-This is similar to the property shorthand syntax when declaring objects in JavaScript. Note this is a feature that is only available in Vue 3.4 and above.
+هذا يشبه اختصار الخاصية (property shorthand) عند التصريح بكائنات في JavaScript. هذه ميزة متوفرة فقط في Vue 3.4 وما فوق.
 
 ### السمات المنطقية {#boolean-attributes}
 

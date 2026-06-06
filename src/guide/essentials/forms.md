@@ -442,7 +442,11 @@ export default {
 <input v-model.number="age" />
 ```
 
-If the value cannot be parsed with `parseFloat()`, then the original (string) value is used instead. In particular, if the input is empty (for instance after the user clearing the input field), an empty string is returned. This behavior differs from the [DOM property `valueAsNumber`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLInputElement#valueasnumber). 
+إذا تعذّر تحليل القيمة باستخدام `parseFloat()`، فسيتم استخدام القيمة الأصلية (كنص) بدلًا من ذلك.  
+وبشكل خاص، إذا كان الإدخال فارغًا (مثل حالة قيام المستخدم بمسح حقل الإدخال)، فسيتم إرجاع سلسلة نصية فارغة.
+
+هذا السلوك يختلف عن خاصية الـ DOM `valueAsNumber` الخاصة بـ [HTMLInputElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLInputElement#valueasnumber).
+
 
 المُعدِّل `number` يُطبَّق تلقائيًا إذا كان الإدخال لديه السمة `type="number"` .
 
