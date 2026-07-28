@@ -310,6 +310,7 @@ const myRef = ref()
 <Child v-model="myRef"></Child>
 ```
 
+Also, when using `withDefaults` with `defineProps`, default values for mutable reference types (like arrays or objects) should be wrapped in functions in `defineModel` to avoid accidental modification and external side effects.
 :::
 
 ### Modifiers and Transformers {#modifiers-and-transformers}
