@@ -1,5 +1,5 @@
 
-# الأسئلة الأكثر تكرارا {#frequently-asked-questions}
+# الأسئلة الأكثر تكرارا {#frequently-asked- questions}
 
 ## من يُدير فيُو؟ {#who-maintains-vue}
 
